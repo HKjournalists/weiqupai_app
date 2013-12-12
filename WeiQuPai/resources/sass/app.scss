@@ -1,0 +1,31 @@
+
+@import 'sencha-touch/cupertino';
+@import 'sencha-touch/cupertino/all';
+
+.item-row{
+}
+.item-row img{
+	border-radius: 5px;
+	float:left;
+	width:60px;
+}
+.item-row h2{
+	font-weight:bold;
+	padding-bottom:3px;
+}
+.item-info{
+    font-size: 70%;
+    margin-left: 70px;
+    color: #333;
+    min-height: 50px;
+}
+.item-info p{
+	margin:4px 0;
+}
+
+.index-ad{
+	height: 80px;
+}
+.index-ad .index-ad-item{
+	background-size: 100% auto;
+}

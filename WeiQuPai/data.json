@@ -1,0 +1,58 @@
+[
+			{
+				id: 1,
+				name: 'iphone 5S土豪金',
+				price: 1250,
+				sold_num: 120,
+				attention: 1500,
+				pic_url: 'pic/5s.jpg'	
+			},
+			{
+				id: 2,
+				name: 'iphone 5S土豪金',
+				price: 1250,
+				sold_num: 120,
+				attention: 1500,
+				pic_url: 'pic/5s.jpg'
+			},
+			{
+				id: 3,
+				name: 'iphone 5S土豪金',
+				price: 1250,
+				sold_num: 120,
+				attention: 1500,
+				pic_url: 'pic/5s.jpg'	
+			},
+			{
+				id: 4,
+				name: 'iphone 5S土豪金',
+				price: 1250,
+				sold_num: 120,
+				attention: 1500,
+				pic_url: 'pic/5s.jpg'	
+			},
+			{
+				id: 5,
+				name: 'iphone 5S土豪金',
+				price: 1250,
+				sold_num: 120,
+				attention: 1500,
+				pic_url: 'pic/5s.jpg'	
+			},
+			{
+				id: 6,
+				name: 'iphone 5S高级黑',
+				price: 1250,
+				sold_num: 120,
+				attention: 1500,
+				pic_url: 'pic/5s.jpg'	
+			},{
+				id: 7,
+				name: 'iphone 5S东北银',
+				price: 1250,
+				sold_num: 120,
+				attention: 1500,
+				pic_url: 'pic/5s.jpg'	
+			},
+
+		]
