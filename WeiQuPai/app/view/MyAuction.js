@@ -1,6 +1,6 @@
-Ext.define('WeiQuPai.view.Auction', {
+Ext.define('WeiQuPai.view.MyAuction', {
 	extend: 'Ext.Panel',
-	xtype: 'auction',
+	xtype: 'myauction',
 	require: [
 		//'WeiQuPai.view.ItemList',
 	],
@@ -8,7 +8,7 @@ Ext.define('WeiQuPai.view.Auction', {
 	config: {
 		items:[
 			{
-				html: '这里是在拍的页面'
+				html: '已拍的内容'
 			}
 		]
 	}

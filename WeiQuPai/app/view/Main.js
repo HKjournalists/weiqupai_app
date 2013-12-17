@@ -4,9 +4,9 @@ Ext.define('WeiQuPai.view.Main', {
     requires: [
         'Ext.tab.Panel',
         'WeiQuPai.view.Today',
-        'WeiQuPai.view.Auction',
-        'WeiQuPai.view.My',
-        'WeiQuPai.view.Setting'
+        'WeiQuPai.view.MyAuction',
+        'WeiQuPai.view.Circle',
+        'WeiQuPai.view.My'
     ],
     config: {
         useTitleForBackButtonText: true,
@@ -24,18 +24,18 @@ Ext.define('WeiQuPai.view.Main', {
                         iconCls: 'home',
                         xtype: 'today'
                     },  {
-                        title: '在拍',
+                        title: '已拍',
                         iconCls: 'list',
-                        xtype: 'auction'
+                        xtype: 'myauction'
+                    },  {
+                        title: '拍圈',
+                        iconCls: 'circle',
+                        xtype: 'circle'
                     },  {
                         title: '我的',
                         iconCls: 'user',
                         xtype: 'my'
-                    },  {
-                        title: '设置',
-                        iconCls: 'settings',
-                        xtype: 'setting'
-                    }          
+                    }      
                 ]
 
             }
