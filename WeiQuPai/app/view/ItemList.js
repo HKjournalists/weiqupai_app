@@ -4,7 +4,6 @@ Ext.define('WeiQuPai.view.ItemList', {
 	config: {
 		emtpyText: '没有可用的商品',
 		store: 'Item',
-		//scrollable: false,
                 disableSelection : true,
 		itemTpl: ['<div class="item-row">',
                 '<img src="http://localhost:8080/WeiQuPai/{pic_url}" />',
@@ -16,7 +15,6 @@ Ext.define('WeiQuPai.view.ItemList', {
         items: [
         	{
         		xtype: 'indexad',
-        		docked: 'top',
         		scrollDock: 'top',
         		height: '80px'
         	}

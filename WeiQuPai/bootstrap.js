@@ -746,12 +746,13 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.controller.Today": [],
   "WeiQuPai.model.Item": [],
   "WeiQuPai.store.Item": [],
-  "WeiQuPai.view.Auction": [],
+  "WeiQuPai.view.Circle": [],
   "WeiQuPai.view.IndexAd": [],
   "WeiQuPai.view.ItemDetail": [],
   "WeiQuPai.view.ItemList": [],
   "WeiQuPai.view.Main": [],
   "WeiQuPai.view.My": [],
+  "WeiQuPai.view.MyAuction": [],
   "WeiQuPai.view.Setting": [],
   "WeiQuPai.view.Today": []
 });
@@ -1694,8 +1695,8 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.controller.Today": [],
   "WeiQuPai.model.Item": [],
   "WeiQuPai.store.Item": [],
-  "WeiQuPai.view.Auction": [
-    "widget.auction"
+  "WeiQuPai.view.Circle": [
+    "widget.circle"
   ],
   "WeiQuPai.view.IndexAd": [
     "widget.indexad"
@@ -1711,6 +1712,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.My": [
     "widget.my"
+  ],
+  "WeiQuPai.view.MyAuction": [
+    "widget.myauction"
   ],
   "WeiQuPai.view.Setting": [
     "widget.setting"

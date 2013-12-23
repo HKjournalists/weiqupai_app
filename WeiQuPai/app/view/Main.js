@@ -9,7 +9,6 @@ Ext.define('WeiQuPai.view.Main', {
         'WeiQuPai.view.My'
     ],
     config: {
-        useTitleForBackButtonText: true,
         items: [
             {
                 title: '今日',

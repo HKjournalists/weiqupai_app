@@ -2,6 +2,11 @@
 @import 'sencha-touch/cupertino';
 @import 'sencha-touch/cupertino/all';
 
+//disclosure的右箭头
+.x-list .x-list-item-tpl .x-list-disclosure{
+	top:center;
+}
+
 .item-row{
 }
 .item-row img{
@@ -28,4 +33,73 @@
 }
 .index-ad .index-ad-item{
 	background-size: 100% auto;
+}
+
+.myauction-item-row{
+	margin-top:10px;
+	overflow:auto;
+}
+.myauction-item-row .myauction-item-pic{
+	float:left;
+	width:165px;
+	margin-right:20px;
+}
+.myauction-item-row img{
+	display:block;
+	width:155px;
+	height:155px;
+	border-radius: 5px;
+	border:1px solid #ccc;
+}
+.myauction-item-pic p{
+	padding:10px 0;
+	text-align:center;
+}
+.myauction-item-info{
+	margin-left:190px;
+}
+.myauction-item-info h2{
+	font-weight:bold;
+	font-size:1.2em;
+}
+.myauction-item-info .f36{
+	font-size:1.2em;
+}
+.myauction-item-info p{
+	line-height:1.5;
+}
+
+//已拍详情
+.auction-info{
+	padding:.7em 1em;
+	line-height:1.5;
+}
+.auction-info  h2{
+	font-size:1.2em;
+}
+.auction-info p{
+	color:#666;
+}
+.auction-user-row{
+	overflow:auto;
+}
+.auction-user-row img{
+	float:left;
+	width:60px;
+	height:60px;
+}
+.auction-user-row h2{
+	font-size:1.2em;
+}
+.auction-user-row .auction-user-info{
+	margin-left:75px;
+}
+.auction-user-info p{
+	margin-top:20px;
+}
+.auction-user-info .up_area{
+	float:right;
+}
+.auction-user-item.x-list-item-first.x-list-item.x-list-header-wrap.x-list-item-tpl{
+	border-top:0;
 }
