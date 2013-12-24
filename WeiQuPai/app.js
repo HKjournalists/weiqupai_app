@@ -10,6 +10,12 @@
     will need to resolve manually.
 */
 
+//一些配置
+var config = {
+    host: 'http://192.168.1.102:8080/WeiQuPai/'
+};
+
+
 Ext.application({
     name: 'WeiQuPai',
 

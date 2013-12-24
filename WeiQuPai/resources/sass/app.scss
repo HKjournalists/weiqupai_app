@@ -2,12 +2,20 @@
 @import 'sencha-touch/cupertino';
 @import 'sencha-touch/cupertino/all';
 
+html,body{
+	//font-size:12px;
+}
 //disclosure的右箭头
 .x-list .x-list-item-tpl .x-list-disclosure{
 	top:center;
 }
 
+//隐藏一些不用的组件,如back button
+div.x-button.hidden{
+	display:none !important;
+}
 .item-row{
+	overflow:auto;
 }
 .item-row img{
 	border-radius: 5px;
@@ -19,7 +27,6 @@
 	padding-bottom:3px;
 }
 .item-info{
-    font-size: 70%;
     margin-left: 70px;
     color: #333;
     min-height: 50px;
@@ -35,37 +42,37 @@
 	background-size: 100% auto;
 }
 
-.myauction-item-row{
+.myauction-row{
 	margin-top:10px;
 	overflow:auto;
 }
-.myauction-item-row .myauction-item-pic{
+.myauction-row .myauction-pic{
 	float:left;
-	width:165px;
-	margin-right:20px;
+	width:88px;
 }
-.myauction-item-row img{
+.myauction-row img{
 	display:block;
-	width:155px;
-	height:155px;
+	width:78px;
+	height:78px;
 	border-radius: 5px;
 	border:1px solid #ccc;
 }
-.myauction-item-pic p{
+.myauction-pic p{
 	padding:10px 0;
 	text-align:center;
+	font-size:0.75em;
 }
-.myauction-item-info{
-	margin-left:190px;
+.myauction-info{
+	margin-left:90px;
 }
-.myauction-item-info h2{
+.myauction-info h2{
 	font-weight:bold;
-	font-size:1.2em;
+	font-size:1.125em;
 }
-.myauction-item-info .f36{
-	font-size:1.2em;
+.myauction-info .fbig{
+	font-size:1.125em;
 }
-.myauction-item-info p{
+.myauction-info p{
 	line-height:1.5;
 }
 
@@ -75,7 +82,7 @@
 	line-height:1.5;
 }
 .auction-info  h2{
-	font-size:1.2em;
+	font-size:1.125em;
 }
 .auction-info p{
 	color:#666;
@@ -89,7 +96,7 @@
 	height:60px;
 }
 .auction-user-row h2{
-	font-size:1.2em;
+	font-size:1.125em;
 }
 .auction-user-row .auction-user-info{
 	margin-left:75px;
@@ -102,4 +109,43 @@
 }
 .auction-user-item.x-list-item-first.x-list-item.x-list-header-wrap.x-list-item-tpl{
 	border-top:0;
+}
+
+
+//晒单的列表
+.showorder-row{
+	overflow:auto;	
+}
+
+.showorder-row .avatar{
+	float:left;
+	width:40px;
+	height:40px;
+}
+.showorder-row .showorder-info{
+	margin-left:60px;
+	line-height:1.5;
+}
+.showorder-row h2{
+	font-size:1.125em;
+	margin-bottom:10px;
+}
+.showorder-row .time{
+	float:right;
+	font-weight:normal;
+	font-size:0.8em;
+}
+.showorder-row .pic-list{
+	margin-bottom:10px;
+}
+.showorder-row .pic-list img{
+	width:66px;
+	height:66px;
+	border:1px solid #ccc;
+	border-radius:5px;
+	display:inline-block;
+	margin-right:16px;
+}
+.showorder-row .up_area{
+	float:right;
 }

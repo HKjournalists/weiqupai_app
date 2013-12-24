@@ -6,7 +6,7 @@ Ext.define('WeiQuPai.view.ItemList', {
 		store: 'Item',
                 disableSelection : true,
 		itemTpl: ['<div class="item-row">',
-                '<img src="http://localhost:8080/WeiQuPai/{pic_url}" />',
+                '<img src="' + config.host + '{pic_url}" />',
                 '<div class="item-info">',
                 '<h2>{name}</h2>',
                 '<p>现价 {price} / <span class="market-price">市场价 {price}</span></p>',

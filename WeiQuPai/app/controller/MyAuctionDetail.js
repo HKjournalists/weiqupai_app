@@ -4,10 +4,10 @@ Ext.define('WeiQuPai.controller.MyAuctionDetail', {
     config: {
         refs: {
             main: 'main',
-            funcList : '#funcList'
+            textList : 'myauctiontextlist'
         },
         control: {
-           funcList : {
+           textList : {
                 itemtap: 'showDetail'
            } 
         }

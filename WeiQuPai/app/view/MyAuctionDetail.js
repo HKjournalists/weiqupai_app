@@ -1,7 +1,7 @@
 Ext.define('WeiQuPai.view.MyAuctionDetail', {
 	extend: 'Ext.dataview.List',
 	xtype: 'myauctiondetail',
-	requires: ['WeiQuPai.view.Shop', 'WeiQuPai.view.Shipment', 'WeiQuPai.view.ShowOrder'],
+	requires: ['WeiQuPai.view.MyAuctionTextList', 'WeiQuPai.view.Shop', 'WeiQuPai.view.Shipment', 'WeiQuPai.view.ShowOrder', 'WeiQuPai.view.BottomBar'],
 	config: {
 		title: '已拍详情',
 		emtpyText: '没有可用的数据',
@@ -9,7 +9,7 @@ Ext.define('WeiQuPai.view.MyAuctionDetail', {
         disableSelection : true,
         itemCls: 'auction-user-item',
 		itemTpl: ['<div class="auction-user-row">',
-                '<img src="http://localhost:8080/WeiQuPai/{pic_url}" />',
+                '<img src="' + config.host + '{pic_url}" />',
                 '<div class="auction-user-info">',
                 '<h2>{name}</h2>',
                 '<p><span class="up_area">赞 100 评论 500</span>2012-12-12</p>',
@@ -22,26 +22,10 @@ Ext.define('WeiQuPai.view.MyAuctionDetail', {
 				scrollDock: 'top',
 			},
 			{
-				id: 'funcList',
-				xtype: 'list',
-				scrollDock: 'top',
-				onItemDisclosure: true,
-				disableSelection: true,
-				scrollable : false,
-				store: {
-					fields: ['title'],
-					data: [
-						{title: '北京商贸有限公司', id: 'shop'},
-						{title: '查看物流', id: 'shipment'},
-						{title: '查看晒单', id: 'showorder'}
-					]
-				},
-				itemTpl : '{title}',
-				listeners: {
-				    painted: function() {
-				        this.setHeight(this.itemsCount*this.getItemHeight() + 10);
-				    }
-				}
+				xtype: 'myauctiontextlist'
+			},
+			{
+				xtype: 'bottombar'
 			}
 		],
 	}

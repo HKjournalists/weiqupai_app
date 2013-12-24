@@ -16,7 +16,6 @@ Ext.define('WeiQuPai.controller.Today', {
     //called when the Application is launched, remove if not needed
     showDetail: function(list, index, dataItem, record, e){
         var detailView = {
-            title: '拍品介绍',
             xtype: 'itemdetail'
         };
         this.getMain().push(detailView);
