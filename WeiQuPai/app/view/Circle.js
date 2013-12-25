@@ -1,14 +1,18 @@
 Ext.define('WeiQuPai.view.Circle', {
-	extend: 'Ext.Panel',
+	extend: 'Ext.Container',
 	xtype: 'circle',
-	require: [
-		//'WeiQuPai.view.ItemList',
-	],
-
+	requires: [
+		'WeiQuPai.view.CircleList', 'WeiQuPai.view.CircleAd'
+		],
 	config: {
+		layout: 'vbox',
 		items:[
 			{
-				html: '拍圈'
+				html: '这里是拍圈页面'
+			},
+			{
+				flex: 1,
+				xtype: 'circlelist'
 			}
 		]
 	}
