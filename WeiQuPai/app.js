@@ -12,7 +12,8 @@
 
 //一些配置
 var config = {
-    host: 'http://192.168.1.102:8080/WeiQuPai/'
+    //host: 'http://192.168.1.102:8080/WeiQuPai/'
+    host: 'http://10.129.165.2:8080/WeiQuPai/'
 };
 
 
