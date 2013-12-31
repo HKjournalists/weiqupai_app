@@ -7,12 +7,13 @@ Ext.define('WeiQuPai.view.MyAuctionDetail', {
 		emtpyText: '没有可用的数据',
 		store: 'Item',
         disableSelection : true,
+        pressedCls : '',
         itemCls: 'auction-user-item',
 		itemTpl: ['<div class="auction-user-row">',
-                '<img src="' + config.host + '{pic_url}" />',
-                '<div class="auction-user-info">',
-                '<h2>{name}</h2>',
-                '<p><span class="up_area">赞 100 评论 500</span>2012-12-12</p>',
+                '<img src="' + WeiQuPai.Config.host + 'pic/avatar.jpg" class="avatar"/>',
+                '<div class="info">',
+                '<h3>{name}</h3>',
+                '<p><span class="up-area"><span class="up">100</span><span class="comment">500</span></span><span class="time">2012-12-12</span></p>',
                 '</div>'].join(''),
 		items:[
 			{
@@ -27,6 +28,6 @@ Ext.define('WeiQuPai.view.MyAuctionDetail', {
 			{
 				xtype: 'bottombar'
 			}
-		],
+		]
 	}
 });

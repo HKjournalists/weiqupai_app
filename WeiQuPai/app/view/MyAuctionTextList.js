@@ -6,6 +6,7 @@ Ext.define('WeiQuPai.view.MyAuctionTextList', {
 		onItemDisclosure: true,
 		disableSelection: true,
 		scrollable : false,
+		height: "134px",
 		store: {
 			fields: ['title'],
 			data: [
@@ -14,14 +15,6 @@ Ext.define('WeiQuPai.view.MyAuctionTextList', {
 				{title: '查看晒单', id: 'showorder'}
 			]
 		},
-		itemTpl : '{title}',
-		listeners: {
-		    painted: function() {
-		    }
-		}
-	},
-	initialize: function(){
-		this.callParent();
-        this.setHeight(this.itemsCount*this.getItemHeight() + 10);
+		itemTpl : '{title}'
 	}
 });

@@ -15,16 +15,15 @@ Ext.define('WeiQuPai.view.IndexAd', {
 		for(var i=0; i<data.length; i++){
 			var item = {
 				xtype: 'image',
-				src: config.host + data[i],
+				src: WeiQuPai.Config.host + data[i],
 				cls: 'index-ad-item'
 			}
 			this.add(item);
 		}
 		return;
 		var self = this;
-		var len = data.length;
 		setInterval(function(){
-			if(self.getActiveIndex() == len - 1){
+			if(self.getActiveIndex() == self.getMaxItemIndex()){
 				self.setActiveItem(0);
 				return;
 			}

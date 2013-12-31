@@ -1,5 +1,5 @@
 Ext.define('WeiQuPai.view.Shop', {
-	extend: 'Ext.Panel',
+	extend: 'Ext.Container',
 	xtype: 'shop',
 	require: [
 	],
