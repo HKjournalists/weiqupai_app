@@ -10,16 +10,22 @@
     will need to resolve manually.
 */
 
+//一些配置
+var config = {
+    //host: 'http://192.168.1.102:8080/WeiQuPai/'
+    host: 'http://10.129.169.176:8080/WeiQuPai/'
+};
+
 
 Ext.application({
     name: 'WeiQuPai',
 
     requires: [
-        'Ext.MessageBox','WeiQuPai.Config'
+        'Ext.MessageBox'
     ],
 
     controllers: [
-        'Main', 'Today', 'MyAuction', 'MyAuctionDetail','ItemDetail','DetailPicShow'
+        'Main', 'Today', 'MyAuction', 'MyAuctionDetail'
     ],
     views: [
         'Main'

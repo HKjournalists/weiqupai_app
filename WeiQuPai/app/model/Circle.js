@@ -3,12 +3,14 @@ Ext.define("WeiQuPai.model.Circle", {
 
 	config: {
 		fields:[
-			{name: 'id', type: 'int'},
 			{name: 'name', type: 'string'},
-			{name: 'price', type: 'float'},
-			{name: 'sold_num', type: 'int'},
-			{name: 'attention', type: 'int'},
-			{name: 'pic_url', type: 'string'}
-		]		
+			{name: 'user_icon', type: 'string'},
+			{name: 'class', type: 'string'},
+			{name: 'action', type: 'string'},
+			{name: 'action_class', type: 'int'},
+			{name: 'content', type: 'string'},
+			{name: 'pic'},
+			{name: 'time', type: 'string'},
+		]
 	}
 });

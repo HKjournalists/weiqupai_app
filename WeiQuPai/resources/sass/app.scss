@@ -228,6 +228,41 @@ div.x-button.hidden{
 	margin-top:4px;
 }
 
+//拍圈的列表
+.circle-row{
+	overflow:auto;	
+}
+.circle-row .circle-left-pic{
+	float:left;
+	width:44px;
+}
+.circle-row .user-icon-small{
+	float:left;
+	width:40px;
+	height:40px;
+}
+.circle-row .time{
+	float:right;
+	font-weight:normal;
+	font-size:0.8em;
+}
+.circle-row .pic{
+	width: 40px;
+	height: 40px;
+}
+.circle-row h2{
+	font-weight:bold;
+	padding-bottom:3px;
+}
+.circle-info{
+    margin-left: 70px;
+    color: #333;
+    min-height: 50px;
+}
+.circle-info p{
+	margin:4px 0;
+}
+
 .up{
 	background:url(../images/up.png) no-repeat left center;
 	background-size:14px 14px;
