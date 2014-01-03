@@ -1,14 +1,14 @@
 Ext.define('WeiQuPai.view.ItemDetail', {
 	extend: 'Ext.dataview.List',
 	xtype: 'itemdetail',
-	requires: ['Ext.Img', 'WeiQuPai.view.Shop', 'WeiQuPai.view.BottomBar', 'WeiQuPai.view.ItemDetailTextList', 'WeiQuPai.view.ItemDetailInfo'],
+	requires: ['Ext.Img', 'WeiQuPai.view.Shop', 'WeiQuPai.view.BottomBar', 'WeiQuPai.view.ItemDetailTextList',
+	 'WeiQuPai.view.ItemDetailInfo', 'WeiQuPai.view.DetailPicShow', 'WeiQuPai.view.Pay'],
 	config: {
 		title: '拍品详情',
 		emtpyText: '没有可用的数据',
 		store: 'Item',
         disableSelection : true,
         pressedCls : '',
-        //itemCls: 'comment-row-container',
 		itemTpl: ['<div class="comment-row">',
                 '<img src="' + WeiQuPai.Config.host + 'pic/avatar.jpg" class="avatar"/>',
                 '<div class="info">',
@@ -18,36 +18,39 @@ Ext.define('WeiQuPai.view.ItemDetail', {
                 '</div>'].join(''),
 		items:[
 			{
-				xtype: 'carousel',
+				xtype: 'detailpicshow',
 				scrollDock: 'top',
-				height: 240,
-				config:{
-					cls: 'item-detail-pic',
-					indicator: false
-				}
 			},
 			{
-				xtype: 'itemdetailtextlist'
+				xtype: 'panel',
+				scrollDock: 'top',
+				html: '<h2><span class="market-price">市场价￥66</span><span class="price">￥55.00</span>Suit椅</h2>',
+				cls : 'item-detail-info'
+			},
+			{
+				xtype: 'itemdetailtextlist',
+				scrollDock: 'top'
 			},
 			{
 				xtype: 'bottombar'
 			}
 		]
 	},
-
-	initialize : function(){
-		var itemPic = this.down('carousel');
-		console.log(itemPic);
-		var data = [
-			'pic/banner1.jpg',
-			'pic/banner2.jpg'
-		];
-		for(var i=0; i<data.length; i++){
-			var item = {
-				xtype: 'image',
-				src: WeiQuPai.Config.host + data[i]
-			};
-			itemPic.add(item);
+	initialize: function(){
+		//在bottombar上加入下单的按钮
+		var paiBtn = {
+			xtype: 'button',
+			text: '我要拍',
+			action: 'pay'
 		}
+		var commentBtn = {
+			xtype: 'button',
+			text: '写评论',
+			action: 'comment'
+		}
+		this.down('bottombar').insert(2, paiBtn);
+		this.down('bottombar').insert(3, {xtype:'spacer'});
+		this.down('bottombar').insert(4, commentBtn);
+		this.down('bottombar').insert(5, {xtype:'spacer'});
 	}
 });
