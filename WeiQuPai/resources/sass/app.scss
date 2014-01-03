@@ -2,141 +2,157 @@
 @import 'sencha-touch/cupertino';
 @import 'sencha-touch/cupertino/all';
 
-html,body{
-	//font-size:12px;
+$big-font: 1.1em;
+$default-font: 1em;
+$normal-font: 0.9em;
+$small-font: 0.8em;
+$tiny-font: 0.6em;
+$text-color: #333;
+$gray-color: #666;
+$red-color: #d22270;
+$bar-color: #0eb8b7;
+
+//标题栏背影
+.x-toolbar.x-docked-top{
+	border-bottom:0;
+	border-radius:0;
+	background-color:$bar-color;
 }
 //disclosure的右箭头
 .x-list .x-list-item-tpl .x-list-disclosure{
 	top:center;
 }
 
+//列表的最上边框去掉
+.x-list .x-list-item.x-list-header-wrap.x-list-item-tpl{
+	border-top:0;
+}
+
+h2{
+	font-size: $big-font;
+	font-weight:bold;
+	color:#000;
+}
+h3{
+	font-size:$default-font;
+	font-weight:bold;
+	color:#000;
+}
 //隐藏一些不用的组件,如back button
 div.x-button.hidden{
 	display:none !important;
 }
-.item-row{
-	overflow:auto;
+
+
+
+
+.today-item-row{
+	line-height:1.5;
 }
-.item-row img{
-	border-radius: 5px;
-	float:left;
-	width:60px;
+.today-item-row .item-img{
+	text-align:center;
 }
-.item-row h2{
-	font-weight:bold;
-	padding-bottom:3px;
+.today-item-row img{
+	width:240px;
+	height:240px;
+	padding:25px;
 }
-.item-info{
-    margin-left: 70px;
-    color: #333;
-    min-height: 50px;
+.today-item-row h2{
+	line-height:1.5;
 }
-.item-info p{
-	margin:4px 0;
+.today-item-row .time{
+	float:right;
+	margin-top:.4em;
+	font-size:$tiny-font;
+	color:$gray-color;
+	background:#e4e8e9;
+	border-radius:20px;
+	padding:.2em 1em;
+}
+.today-item-row .price{
+	font-size:$default-font;
+	color:$red-color;
+}
+.today-item-row .market-price{
+	text-decoration:line-through;
+	color:$gray-color;
+	font-size:$small-font;
 }
 
 .index-ad{
-	height: 80px;
+	height: 75px;
+	border-bottom:1px solid $bar-color;
 }
 .index-ad .index-ad-item{
 	background-size: 100% auto;
 }
 
+//评论列表
+.comment-row{
+	
+}
+//已拍
 .myauction-row{
 	margin-top:10px;
 	overflow:auto;
 }
-.myauction-row .myauction-pic{
-	float:left;
-	width:88px;
-}
 .myauction-row img{
+	float:left;
 	display:block;
 	width:78px;
 	height:78px;
 	border-radius: 5px;
 	border:1px solid #ccc;
 }
-.myauction-pic p{
-	padding:10px 0;
-	text-align:center;
-	font-size:0.75em;
-}
 .myauction-info{
 	margin-left:90px;
+	color:$text-color;
 }
-.myauction-info h2{
-	font-weight:bold;
-	font-size:1.125em;
-}
+
 .myauction-info .fbig{
-	font-size:1.125em;
+	font-size:$big-font;
 }
 .myauction-info p{
 	line-height:1.5;
+	font-size:$normal-font;
 }
 
 //已拍详情
 .auction-info{
 	padding:.7em 1em;
 	line-height:1.5;
-}
-.auction-info  h2{
-	font-size:1.125em;
-}
-.auction-info p{
-	color:#666;
-}
-.auction-user-row{
-	overflow:auto;
-}
-.auction-user-row img{
-	float:left;
-	width:60px;
-	height:60px;
-}
-.auction-user-row h2{
-	font-size:1.125em;
-}
-.auction-user-row .auction-user-info{
-	margin-left:75px;
-}
-.auction-user-info p{
-	margin-top:20px;
-}
-.auction-user-info .up_area{
-	float:right;
-}
-.auction-user-item.x-list-item-first.x-list-item.x-list-header-wrap.x-list-item-tpl{
-	border-top:0;
+	color:$gray-color;
+	border-bottom: 1px solid #dbdbe0;
 }
 
+.auction-user-info p{
+	margin-top:1.2em;
+}
 
 //晒单的列表
-.showorder-row{
+.showorder-row, .comment-row, .auction-user-row{
 	overflow:auto;	
 }
 
-.showorder-row .avatar{
+.avatar, .showorder-row .avatar, .comment-row .avatar, .auction-user-row .avatar{
 	float:left;
 	width:40px;
 	height:40px;
 }
-.showorder-row .showorder-info{
+.show-order-row h3, .comment-row h3, .auction-user-row h3{
+	margin-bottom:.5em;
+}
+.show-order-row .content, .comment-row .content, .auction-user-row .content{
+	margin-bottom:.5em;
+}
+.showorder-row .info, .comment-row .info, .auction-user-row .info{
 	margin-left:60px;
 	line-height:1.5;
-}
-.showorder-row h2{
-	font-size:1.125em;
-	margin-bottom:10px;
-}
-.showorder-row .time{
-	float:right;
-	font-weight:normal;
-	font-size:0.8em;
+	font-size:$normal-font;
+	color:$text-color;
 }
 .showorder-row .pic-list{
-	margin-bottom:10px;
+	margin:1em 0;
 }
 .showorder-row .pic-list img{
 	width:66px;
@@ -144,10 +160,21 @@ div.x-button.hidden{
 	border:1px solid #ccc;
 	border-radius:5px;
 	display:inline-block;
-	margin-right:16px;
+	margin-right:10px;
 }
-.showorder-row .up_area{
+
+.time{
+	margin-top:.4em;
+	font-size:$tiny-font;
+	color:$gray-color;
+	background:#e4e8e9;
+	border-radius:20px;
+	padding:.2em 1em;
+}
+//赞和评论
+.up-area{
 	float:right;
+<<<<<<< HEAD
 }
 
 //拍圈的列表
@@ -183,4 +210,20 @@ div.x-button.hidden{
 }
 .circle-info p{
 	margin:4px 0;
+=======
+	font-size:$small-font;
+	margin-top:4px;
+}
+
+.up{
+	background:url(../images/up.png) no-repeat left center;
+	background-size:14px 14px;
+	padding-left:20px;
+	margin-right:18px;
+}
+.comment{
+	background:url(../images/comment.png) no-repeat left center;
+	background-size:14px 14px;
+	padding-left:20px;
+>>>>>>> 150a5a3cebdd65d9a03cef36ff4fa1fa916532fd
 }

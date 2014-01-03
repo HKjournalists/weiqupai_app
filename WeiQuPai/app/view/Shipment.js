@@ -1,5 +1,5 @@
 Ext.define('WeiQuPai.view.Shipment', {
-	extend: 'Ext.Panel',
+	extend: 'Ext.Container',
 	xtype: 'shipment',
 	require: [
 	],

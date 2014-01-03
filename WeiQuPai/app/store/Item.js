@@ -6,7 +6,7 @@ Ext.define('WeiQuPai.store.Item', {
 		model: 'WeiQuPai.model.Item',
 		proxy: {
 			type: 'ajax',
-			url: config.host + 'data.json',
+			url: WeiQuPai.Config.host + 'data.json',
 			reader: 'json'
 		}
 	}

@@ -19,11 +19,15 @@ Ext.define('WeiQuPai.controller.Main', {
     
 
     back: function(){
-        this.getMain().pop();
+        var prev = this.getMain().pop();
+        //如果是tabpanel要重置一下title
+        if(prev.isXType('tabpanel')){
+            this.getMain().getNavigationBar().setTitle(prev.getActiveItem().title);
+        }
     },
 
     changeTitle: function(tabPanel, tab, oldTab){
-        this.getMain().getNavigationBar().setTitle(tab.getInitialConfig().title);
+        this.getMain().getNavigationBar().setTitle(tab.title);
     },
 
     launch: function(){
