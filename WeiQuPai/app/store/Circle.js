@@ -6,7 +6,7 @@ Ext.define('WeiQuPai.store.Circle', {
 		model: 'WeiQuPai.model.Circle',
 		proxy: {
 			type: 'ajax',
-			url: 'http://localhost:8080/WeiQuPai/data.json',
+			url: config.host + 'circle.json',
 			reader: 'json'
 		}
 	}

@@ -742,14 +742,19 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.viewport.WindowsPhone": [
     "Ext.viewport.WP"
   ],
+  "WeiQuPai.Config": [],
   "WeiQuPai.controller.Main": [],
   "WeiQuPai.controller.MyAuction": [],
   "WeiQuPai.controller.MyAuctionDetail": [],
   "WeiQuPai.controller.Today": [],
+  "WeiQuPai.model.Circle": [],
   "WeiQuPai.model.Item": [],
+  "WeiQuPai.store.Circle": [],
   "WeiQuPai.store.Item": [],
   "WeiQuPai.view.BottomBar": [],
   "WeiQuPai.view.Circle": [],
+  "WeiQuPai.view.CircleAd": [],
+  "WeiQuPai.view.CircleList": [],
   "WeiQuPai.view.IndexAd": [],
   "WeiQuPai.view.ItemDetail": [],
   "WeiQuPai.view.ItemList": [],
@@ -1699,17 +1704,26 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.viewport.Ios": [],
   "Ext.viewport.Viewport": [],
   "Ext.viewport.WindowsPhone": [],
+  "WeiQuPai.Config": [],
   "WeiQuPai.controller.Main": [],
   "WeiQuPai.controller.MyAuction": [],
   "WeiQuPai.controller.MyAuctionDetail": [],
   "WeiQuPai.controller.Today": [],
+  "WeiQuPai.model.Circle": [],
   "WeiQuPai.model.Item": [],
+  "WeiQuPai.store.Circle": [],
   "WeiQuPai.store.Item": [],
   "WeiQuPai.view.BottomBar": [
     "widget.bottombar"
   ],
   "WeiQuPai.view.Circle": [
     "widget.circle"
+  ],
+  "WeiQuPai.view.CircleAd": [
+    "widget.circlead"
+  ],
+  "WeiQuPai.view.CircleList": [
+    "widget.circlelist"
   ],
   "WeiQuPai.view.IndexAd": [
     "widget.indexad"
