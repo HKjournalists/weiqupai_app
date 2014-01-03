@@ -174,7 +174,8 @@ div.x-button.hidden{
 //赞和评论
 .up-area{
 	float:right;
-<<<<<<< HEAD
+	font-size:$small-font;
+	margin-top:4px;
 }
 
 //拍圈的列表
@@ -210,9 +211,6 @@ div.x-button.hidden{
 }
 .circle-info p{
 	margin:4px 0;
-=======
-	font-size:$small-font;
-	margin-top:4px;
 }
 
 .up{
@@ -225,5 +223,4 @@ div.x-button.hidden{
 	background:url(../images/comment.png) no-repeat left center;
 	background-size:14px 14px;
 	padding-left:20px;
->>>>>>> 150a5a3cebdd65d9a03cef36ff4fa1fa916532fd
 }

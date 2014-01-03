@@ -10,15 +10,6 @@
     will need to resolve manually.
 */
 
-<<<<<<< HEAD
-//一些配置
-var config = {
-    host: 'http://10.129.166.66:8080/WeiQuPai/'
-    //host: 'http://10.129.169.176:8080/WeiQuPai/'
-};
-=======
->>>>>>> 150a5a3cebdd65d9a03cef36ff4fa1fa916532fd
-
 
 Ext.application({
     name: 'WeiQuPai',
