@@ -15,7 +15,7 @@ Ext.define('WeiQuPai.view.CircleAd', {
 		for(var i=0; i<data.length; i++){
 			var item = {
 				xtype: 'image',
-				src: 'http://localhost:8080/WeiQuPai/' + data[i],
+				src: WeiQuPai.Config.host + data[i],
 				cls: 'index-ad-item'
 			}
 			this.add(item);
