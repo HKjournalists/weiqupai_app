@@ -30,6 +30,14 @@ Ext.define('WeiQuPai.view.ShowOrder', {
 			{
 				xtype: 'bottombar'
 			}
-		],
+		], 
+		listeners: {
+			itemtap: function(list, index, dataItem, record, e){
+				if(e.target.className == 'avatar'){
+					this.fireEvent('avatartap', this, index, record);
+					e.stopEvent();
+				}
+			}
+		}
 	}
 });

@@ -19,7 +19,7 @@ Ext.application({
     ],
 
     controllers: [
-        'Main', 'Today', 'MyAuction', 'MyAuctionDetail','ItemDetail','DetailPicShow','Circle'
+        'Main', 'Today', 'MyAuction', 'MyAuctionDetail','ItemDetail','DetailPicShow','Pay', 'ShowOrder', 'Circle'
     ],
     views: [
         'Main'

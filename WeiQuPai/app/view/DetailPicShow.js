@@ -46,7 +46,9 @@ Ext.define('WeiQuPai.view.DetailPicShow', {
 		var prev = this.down('button[action=detail-pic-prev]');
 		var next = this.down('button[action=detail-pic-next]');
 		prev.disable();
-		com.on('activeitemchange', function(){
+		com.on('activeitemchange', function(container, newCard, oldCard){
+			//返回的时候也会触发这个事件，加这个防止报错
+			if(!container.rendered) return;
             if(this.getActiveIndex() == 0){
                 prev.disable();
             }else{
