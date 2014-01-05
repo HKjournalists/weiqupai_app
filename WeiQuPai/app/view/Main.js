@@ -9,6 +9,10 @@ Ext.define('WeiQuPai.view.Main', {
         'WeiQuPai.view.My'
     ],
     config: {
+        layout : {
+            type: 'card',
+            animation: 'cover'
+        },
         items: [
             {
                 title: '今日',

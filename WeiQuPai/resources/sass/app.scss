@@ -20,9 +20,43 @@ $border-color: #dbdbe0;
 	border-radius:0;
 	background-color:$bar-color;
 }
-//disclosure的右箭头
+
+//disclosure右键头居中
 .x-list .x-list-item-tpl .x-list-disclosure{
-	top:center;
+	
+}
+
+//自定义的disclosure项目
+.w-disclosure-item{
+	color: #000;
+	font-weight: 400;
+	border-bottom: 1px solid $border-color;
+	padding:.7em 1em;
+	line-height:1.5;
+}
+.w-disclosure-content{
+	color:$gray-color;
+	margin-right:.2em;
+}
+//disclosure的右箭头
+.w-disclosure{
+	-webkit-box-pack:center;
+	-moz-box-pack:center;
+	box-pack:center;
+}
+.w-disclosure-item-pressed{
+	background-color:#ddd;	
+}
+.w-disclosure-inner{
+	display:inline;
+}
+.w-disclosure-inner:after{
+	content: '!';
+	font-family: 'iOS7';
+	color: #ccc;
+	font-size: 14px;
+	text-align: center;
+	background-color: transparent;
 }
 
 //列表的最上边框去掉
@@ -293,7 +327,14 @@ div.x-button.hidden{
 .pay-item-info .price-area{
 	margin-top:1.5em;
 	color: $gray-color;
+	font-size:$small-font;
 }
 .pay-item-info .price-area .total-pay{
-	margin-left:4em;
+	margin-left:2em;
+}
+
+//收货信息列表
+.w-list-consignee{
+	line-height:1.5;
+	color:$gray-color;
 }

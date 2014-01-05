@@ -10,7 +10,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
         },
         control: {
            textList : {
-                itemtap: 'showDetail'
+                itemsingletap: 'showDetail'
            },
            pai: {
                 tap: 'showPayView'
