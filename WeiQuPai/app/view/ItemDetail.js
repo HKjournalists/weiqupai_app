@@ -2,7 +2,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 	extend: 'Ext.dataview.List',
 	xtype: 'itemdetail',
 	requires: ['Ext.Img', 'WeiQuPai.view.Shop', 'WeiQuPai.view.BottomBar', 'WeiQuPai.view.ItemDetailTextList',
-	 'WeiQuPai.view.ItemDetailInfo', 'WeiQuPai.view.DetailPicShow', 'WeiQuPai.view.Pay'],
+	 'WeiQuPai.view.ItemDetailInfo', 'WeiQuPai.view.DetailPicShow', 'WeiQuPai.view.Order'],
 	config: {
 		title: '拍品详情',
 		emtpyText: '没有可用的数据',
@@ -41,7 +41,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 		var paiBtn = {
 			xtype: 'button',
 			text: '我要拍',
-			action: 'pay'
+			action: 'order'
 		}
 		var commentBtn = {
 			xtype: 'button',

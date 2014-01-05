@@ -20,6 +20,9 @@ $border-color: #dbdbe0;
 	border-radius:0;
 	background-color:$bar-color;
 }
+.x-msgbox-title.x-toolbar.x-docked-top{
+	background-color:transparent;
+}
 
 //disclosure右键头居中
 .x-list .x-list-item-tpl .x-list-disclosure{
@@ -311,25 +314,25 @@ div.x-button.hidden{
 }
 
 //支付页面
-.pay-item-info{
+.order-item-info{
 	padding:.7em 1em;
 	border-bottom:1px solid $border-color;
 }
-.pay-item-info img{
+.order-item-info img{
 	float:left;
 	width:66px;
 	height:66px;
 	border: 1px solid $border-color;	
 }
-.pay-item-info .info{
+.order-item-info .info{
 	margin-left:76px;
 }
-.pay-item-info .price-area{
+.order-item-info .price-area{
 	margin-top:1.5em;
 	color: $gray-color;
 	font-size:$small-font;
 }
-.pay-item-info .price-area .total-pay{
+.order-item-info .price-area .total-pay{
 	margin-left:2em;
 }
 

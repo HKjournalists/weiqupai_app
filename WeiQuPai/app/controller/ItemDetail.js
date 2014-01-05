@@ -5,7 +5,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
         refs: {
             main: 'main',
             textList : 'itemdetailtextlist',
-            pai: 'button[action=pay]',
+            pai: 'button[action=order]',
             commentBtn: 'button[action=commment]'         
         },
         control: {
@@ -30,7 +30,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
 
     showPayView: function(){
         var payView = {
-            xtype: 'pay'
+            xtype: 'order'
         }
         this.getMain().push(payView);
     },
