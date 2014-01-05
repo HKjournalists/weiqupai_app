@@ -4,15 +4,12 @@ Ext.define('WeiQuPai.controller.Circle', {
     config: {
         refs: {
             circlelist : 'circlelist',
-            main : 'main',
-            usericon : 'circlelist[user_class=user]'
+            main : 'main'
         },
         control: {
            circlelist : {
-                itemtap: 'showCircleDetail'
-           },
-           usericon : {
-                tap: 'showUser'
+                itemtap: 'showCircleDetail',
+                avatartap: 'showUser'
            }
         }
     },
@@ -54,7 +51,7 @@ Ext.define('WeiQuPai.controller.Circle', {
         this.getMain().push(detailView);
     },
 
-    showUser: function(list, index, dataItem, record, e) {
-        alert('hello');
+    showUser: function(list, index, record) {
+        console.log(record);
     }
 });

@@ -1,6 +1,6 @@
 var circletpl = new Ext.XTemplate(
         '<div class="circle-row">',
-        '<img class="user-icon-small" user_class="{user_class}" src="' + WeiQuPai.Config.host + '{user_icon}" />',
+        '<img class="avatar" user_class="{user_class}" src="' + WeiQuPai.Config.host + '{user_icon}" />',
         '<div class="circle-info">',
         '<h2>{name}</h2>',
         '{action}',
@@ -26,12 +26,20 @@ Ext.define('WeiQuPai.view.CircleList', {
                 store: 'Circle',
                 disableSelection : true,
                 itemTpl: circletpl,
-        items: [
-                {
-                        xtype: 'circlead',
-                        scrollDock: 'top',
-                        height: '80px'
+                items: [
+                        {
+                                xtype: 'circlead',
+                                scrollDock: 'top',
+                                height: '80px'
+                        }
+                ], 
+                listeners: {
+                        itemtap: function(list, index, dataItem, record, e){
+                                if(e.target.className == 'avatar'){
+                                        this.fireEvent('avatartap', this, index, record);
+                                        e.stopEvent();
+                                }
+                        }
                 }
-        ]
         }
 });
