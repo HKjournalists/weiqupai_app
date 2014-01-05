@@ -5,7 +5,7 @@ Ext.define("WeiQuPai.model.Circle", {
 		fields:[
 			{name: 'name', type: 'string'},
 			{name: 'user_icon', type: 'string'},
-			{name: 'class', type: 'string'},
+			{name: 'user_class', type: 'string'},
 			{name: 'action', type: 'string'},
 			{name: 'action_class', type: 'int'},
 			{name: 'content', type: 'string'},
