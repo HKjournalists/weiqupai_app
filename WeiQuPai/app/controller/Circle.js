@@ -16,7 +16,7 @@ Ext.define('WeiQuPai.controller.Circle', {
     
     //called when the Application is launched, remove if not needed
     showCircleDetail: function(list, index, dataItem, record, e){
-        console.log('showCircleDetail');return;
+        console.log('showCircleDetail');
         var action_class = record.get('action_class');
         var ori_id = record.get('ori_id');
         switch(action_class) {
