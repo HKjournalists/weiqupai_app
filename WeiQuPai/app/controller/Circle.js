@@ -54,5 +54,10 @@ Ext.define('WeiQuPai.controller.Circle', {
 
     showUser: function(list, index, record) {
         console.log('showUser');
+        var detailView = {
+            xtype: 'showuser',
+            record: record
+        }
+        this.getMain().push(detailView);
     }
 });

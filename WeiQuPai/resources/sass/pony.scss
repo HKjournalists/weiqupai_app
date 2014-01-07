@@ -1,3 +1,26 @@
 .pony {
 	color:#000;
 }
+.user-show-top{
+	width: 640px;
+	height: 452px;
+	background-image: url(pic/ubg.jpg);
+	background-repeat: no-repeat;
+}
+.user-show-avatar-div{
+	position: relative;
+	top: 310px;
+	left: 30px;
+}
+.user-show-avatar-img{
+	width: 142px;
+	height: 142px;
+	float: left;
+}
+.user-show-name{
+	position: relative;
+	top: 400px;
+	left: 50px;
+	font-size: 20px;
+	color: white;
+}
