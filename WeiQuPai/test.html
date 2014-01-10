@@ -5,37 +5,48 @@
     <title>微趣拍</title>
     <style type="text/css">
     	.user-show-top{
-    		width: 640px;
-    		height: 452px;
-    		background-image: url(pic/ubg.jpg);
-    		background-repeat: no-repeat;
+    		position: relative;
+    	}
+    	.user-show-bg{
+    		position: relative;
+    		width: 320px;
+    		height: 211px;
+    	}
+    	.user-show-bg img{
+    		width: 320px;
+    		height: 211px;
     	}
     	.user-show-avatar-div{
     		position: relative;
-    		top: 310px;
-    		left: 30px;
+    		bottom: 60px;
+    		left: 15px;
+    		vertical-align: bottom;
     	}
     	.user-show-avatar-img{
-    		width: 142px;
-    		height: 142px;
-    		float: left;
+    		width: 71px;
+    		height: 71px;
+    		vertical-align: middle;
+    		border-style: solid;
+    		border-width: 2px;
+    		border-color: white;
     	}
     	.user-show-name{
-    		position: relative;
-    		top: 400px;
-    		left: 50px;
-    		font-size: 20px;
+    		font-size: 10px;
     		color: white;
+    		padding-left: 5px;
     	}
     </style>
 </head>
 <body>
 	<div class="user-show-top">
+		<div class="user-show-bg">
+			<img src="pic/ubg.jpg">
+		</div>
 		<div class="user-show-avatar-div">
 			<img src="pic/pony.jpg" class="user-show-avatar-img" />
-		</div>
-		<div class="user-show-name">
-			Pony
+			<span class="user-show-name">
+				Pony
+			</span>
 		</div>
 	</div>
 </body>

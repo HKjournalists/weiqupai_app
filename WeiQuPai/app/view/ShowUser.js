@@ -9,12 +9,14 @@ Ext.define('WeiQuPai.view.ShowUser', {
 		items: [
 			{
 				xtype: 'panel',
+				centered: true,
 				html: 	['<div class="user-show-top">',
-						'<div class="user-show-avatar-div">',
-						'<img src="pic/pony.jpg" class="user-show-avatar-img" />',
+						'<div class="user-show-bg">',
+						'<img src="pic/ubg.jpg">',
 						'</div>',
-						'<div class="user-show-name">',
-						'Pony',
+						'<div class="user-show-avatar">',
+						'<img src="pic/pony.jpg" />',
+						'<span class="user-show-name">Pony</span>',
 						'</div>',
 						'</div>'].join('')
 			},
@@ -55,6 +57,7 @@ Ext.define('WeiQuPai.view.ShowUser', {
 		]
 	}, 
 	initialize: function(){
+		this.up('main').getNavigationBar().hide();
 		this.setRecord(Ext.create('WeiQuPai.model.Order'));
 		this.down('bottombar').insert(2, {xtype: 'button', text: '去支付', action: 'pay'});
 		this.down('bottombar').insert(3, {xtype: 'spacer'});

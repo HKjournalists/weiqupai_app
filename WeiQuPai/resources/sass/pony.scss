@@ -2,25 +2,33 @@
 	color:#000;
 }
 .user-show-top{
-	width: 640px;
-	height: 452px;
-	background-image: url(pic/ubg.jpg);
-	background-repeat: no-repeat;
-}
-.user-show-avatar-div{
 	position: relative;
-	top: 310px;
-	left: 30px;
 }
-.user-show-avatar-img{
-	width: 142px;
-	height: 142px;
-	float: left;
-}
-.user-show-name{
+.user-show-bg{
 	position: relative;
-	top: 400px;
-	left: 50px;
+	width: 320px;
+	height: 211px;
+}
+.user-show-bg img{
+	width: 320px;
+	height: 211px;
+}
+.user-show-avatar{
+	position: relative;
+	bottom: 60px;
+	left: 15px;
+	vertical-align: bottom;
+}
+.user-show-avatar img{
+	width: 71px;
+	height: 71px;
+	vertical-align: middle;
+	border-style: solid;
+	border-width: 2px;
+	border-color: white;
+}
+.user-show-avatar span{
 	font-size: 20px;
 	color: white;
+	padding-left: 10px;
 }
