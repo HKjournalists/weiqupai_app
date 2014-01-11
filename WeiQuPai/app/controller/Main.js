@@ -20,10 +20,14 @@ Ext.define('WeiQuPai.controller.Main', {
 
     back: function(){
         var prev = this.getMain().pop();
+        console.log(prev.getXTypes());
         //如果是tabpanel要重置一下title
         console.log(prev.getXTypes());
         if(prev.isXType('tabpanel')){
             this.getMain().getNavigationBar().setTitle(prev.getActiveItem().title);
+        }
+        if(prev.isXType('circle')){
+            this.getMain().getNavigationBar().show();
         }
     },
 
