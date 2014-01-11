@@ -3,7 +3,7 @@ Ext.define('WeiQuPai.controller.Circle', {
     
     config: {
         refs: {
-            circlelist : 'circlelist',
+            circlelist : 'circle',
             main : 'main'
         },
         control: {
@@ -16,7 +16,6 @@ Ext.define('WeiQuPai.controller.Circle', {
     
     //called when the Application is launched, remove if not needed
     showCircleDetail: function(list, index, dataItem, record, e){
-        console.log('showCircleDetail');
         var action_class = record.get('action_class');
         var ori_id = record.get('ori_id');
         switch(action_class) {
@@ -47,17 +46,16 @@ Ext.define('WeiQuPai.controller.Circle', {
         }
         var detailView = {
             xtype: target_type,
-            record: record
+            //record: record
         };
         this.getMain().push(detailView);
     },
 
     showUser: function(list, index, record) {
         this.getMain().getNavigationBar().hide();
-        console.log('showUser');
         var detailView = {
             xtype: 'showuser',
-            record: record
+            //record: record
         }
         this.getMain().push(detailView);
     }

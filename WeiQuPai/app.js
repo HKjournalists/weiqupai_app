@@ -19,13 +19,13 @@ Ext.application({
     ],
 
     controllers: [
-        'Main', 'Today', 'MyAuction', 'MyAuctionDetail','ItemDetail','DetailPicShow','Pay', 'ShowOrder', 'Circle'
+        'Main', 'Today', 'MyAuction', 'MyAuctionDetail','ItemDetail','DetailPicShow','Pay', 'ShowOrder', 'Circle', 'ShowUser'
     ],
     views: [
         'Main'
     ],
     stores: [
-        'Item','Circle'
+        'Item','Circle', 'ShowUser'
     ],
     icon: {
         '57': 'resources/icons/Icon.png',
