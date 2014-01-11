@@ -6,6 +6,9 @@ Ext.define('WeiQuPai.view.ShowUser', {
 	config: {
 		scrollable: true,
 		title: '订单详情',
+		//refs: {
+		//	main: 'main'
+		//},
 		items: [
 			{
 				xtype: 'panel',
@@ -57,7 +60,7 @@ Ext.define('WeiQuPai.view.ShowUser', {
 		]
 	}, 
 	initialize: function(){
-		this.up('main').getNavigationBar().hide();
+		console.log(this.up('circle'));
 		this.setRecord(Ext.create('WeiQuPai.model.Order'));
 		this.down('bottombar').insert(2, {xtype: 'button', text: '去支付', action: 'pay'});
 		this.down('bottombar').insert(3, {xtype: 'spacer'});

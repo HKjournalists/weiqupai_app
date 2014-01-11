@@ -53,6 +53,7 @@ Ext.define('WeiQuPai.controller.Circle', {
     },
 
     showUser: function(list, index, record) {
+        this.getMain().getNavigationBar().hide();
         console.log('showUser');
         var detailView = {
             xtype: 'showuser',
