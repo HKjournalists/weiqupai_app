@@ -8,11 +8,23 @@ Ext.define('WeiQuPai.view.Shop', {
 		title: '商户详情',
 		items:[
 			{
-				html: '商户信息的页面'
+				xtype: 'container',
+				itemId: 'shop-detail',
+				cls: 'shop-detail'
 			},
 			{
 				xtype: 'bottombar'
 			}
 		]
+	},
+	initialize: function(){
+		html = '这里是商店的页面';
+		var linkButton = {
+			xtype: 'button',
+			text: '点击访问商家网站',
+			action: 'jumpUrl'
+		};
+		this.down('#shop-detail').setHtml(html);
+		this.down('#shop-detail').add(linkButton);
 	}
 });

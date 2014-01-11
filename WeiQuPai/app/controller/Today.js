@@ -3,7 +3,7 @@ Ext.define('WeiQuPai.controller.Today', {
     
     config: {
         refs: {
-            itemlist : 'itemlist',
+            itemlist : 'today',
             main: 'main'
         },
         control: {
