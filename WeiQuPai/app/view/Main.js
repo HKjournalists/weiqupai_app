@@ -13,14 +13,14 @@ Ext.define('WeiQuPai.view.Main', {
             type: 'card',
             animation: 'cover'
         },
+        navigationBar: false,
         items: [
             {
-                title: '今日',
                 xtype: 'tabpanel',
                 tabBarPosition: 'bottom',
                 layout: {
                     type: 'card',
-                    animation: false
+                    //animation: false
                 },
                 items: [{
                         title: '今日',

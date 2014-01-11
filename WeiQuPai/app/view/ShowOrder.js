@@ -3,7 +3,6 @@ Ext.define('WeiQuPai.view.ShowOrder', {
 	xtype: 'showorder',
 
 	config: {
-		title: '晒单',
 		emtpyText: '没有可用的数据',
 		store: 'Item',
         disableSelection : true,
@@ -21,6 +20,11 @@ Ext.define('WeiQuPai.view.ShowOrder', {
                 '<p><span class="up-area"><span class="up">100</span><span class="comment">500</span></span><span class="time">2012-12-12</span></p>',
                 '</div>'].join(''),
 		items:[
+			{
+        		xtype: 'titlebar',
+        		title: '晒单',
+        		docked: 'top'
+        	},
 			{
 				xtype: 'panel',
 				cls: 'auction-info',

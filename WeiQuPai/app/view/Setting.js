@@ -8,7 +8,9 @@ Ext.define('WeiQuPai.view.Setting', {
 	config: {
 		items:[
 			{
-				html: '设置的内容'
+				xtype: 'titlebar',
+				title: '我的设置',
+				docked: 'top'
 			}
 		]
 	}

@@ -3,7 +3,6 @@ Ext.define('WeiQuPai.view.MyAuctionDetail', {
 	xtype: 'myauctiondetail',
 	requires: ['WeiQuPai.view.MyAuctionTextList', 'WeiQuPai.view.Shop', 'WeiQuPai.view.Shipment', 'WeiQuPai.view.ShowOrder', 'WeiQuPai.view.BottomBar'],
 	config: {
-		title: '已拍详情',
 		emtpyText: '没有可用的数据',
 		store: 'Item',
         disableSelection : true,
@@ -16,6 +15,11 @@ Ext.define('WeiQuPai.view.MyAuctionDetail', {
                 '<p><span class="up-area"><span class="up">100</span><span class="comment">500</span></span><span class="time">2012-12-12</span></p>',
                 '</div>'].join(''),
 		items:[
+			{
+				xtype: 'titlebar',
+				title: '已拍详情',
+				docked: 'top'
+			},
 			{
 				xtype: 'panel',
 				cls: 'auction-info',

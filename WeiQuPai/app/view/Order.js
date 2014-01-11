@@ -5,8 +5,12 @@ Ext.define('WeiQuPai.view.Order', {
 		'WeiQuPai.view.ConsigneeList', 'WeiQuPai.model.Order'],
 	config: {
 		scrollable: true,
-		title: '订单详情',
 		items: [
+			{
+				xtype: 'titlebar',
+				title: '订单详情',
+				docked: 'top'
+			},
 			{
 				xtype: 'panel',
 				html: ['<div class="order-item-info">',

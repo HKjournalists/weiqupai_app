@@ -8,7 +8,16 @@ Ext.define('WeiQuPai.view.My', {
 	config: {
 		items:[
 			{
-				html: '这里是我的页面'
+				xtype: 'titlebar',
+				title: '我的',
+				docked: 'top'
+			},
+			{
+				xtype: 'button',
+				title: 'test',
+				handler: function(){
+					console.log('button tapped');
+				}
 			}
 		]
 	}

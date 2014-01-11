@@ -16,5 +16,12 @@ Ext.define('WeiQuPai.view.MyAuction', {
                     '<p>北京市创新商贸有限公司',
                 '</div>'].join(''),
         //onItemDisclosure : true
+        items: [
+            {
+                xtype: 'titlebar',
+                title: '已拍',
+                docked: 'top'
+            }
+        ]
     }
 });

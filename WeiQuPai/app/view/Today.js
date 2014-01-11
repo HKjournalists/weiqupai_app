@@ -13,9 +13,16 @@ Ext.define('WeiQuPai.view.Today', {
             '<h2><span class="time">起拍时间11:00</span>{name}</h2>',
             '<p><span class="market-price">市场价 {price}</span> / <span class="price">￥{price}</span></p>'].join(''),
             //'<p>已拍 {sold_num}  关注 {attention}</p>'].join(''),
-        items: [{
-            xtype: 'indexad',
-        	scrollDock: 'top'
-        }]
+        items: [
+        	{
+        		xtype: 'titlebar',
+        		title: '今日',
+        		docked: 'top'
+        	},
+	        {
+	            xtype: 'indexad',
+	        	scrollDock: 'top'
+	        }
+        ]
 	}
 });

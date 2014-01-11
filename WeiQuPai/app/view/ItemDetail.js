@@ -18,6 +18,11 @@ Ext.define('WeiQuPai.view.ItemDetail', {
                 '</div>'].join(''),
 		items:[
 			{
+				xtype: 'titlebar',
+				title: '拍品详情',
+				docked: 'top'
+			},
+			{
 				xtype: 'detailpicshow',
 				scrollDock: 'top',
 			},
