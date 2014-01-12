@@ -22,11 +22,14 @@ Ext.define('WeiQuPai.view.Shop', {
 		]
 	},
 	initialize: function(){
-		html = '这里是商店的页面';
+		var html = '这里是商店的页面';
+		var url = 'http://www.baidu.com';
 		var linkButton = {
 			xtype: 'button',
 			text: '点击访问商家网站',
-			action: 'jumpUrl'
+			action: 'jumpUrl',
+			cls: 'shop-link-btn',
+			url : url,
 		};
 		this.down('#shop-detail').setHtml(html);
 		this.down('#shop-detail').add(linkButton);

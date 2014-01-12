@@ -20,7 +20,7 @@ Ext.define('WeiQuPai.view.Main', {
                 tabBarPosition: 'bottom',
                 layout: {
                     type: 'card',
-                    //animation: false
+                    animation: false
                 },
                 items: [{
                         title: '今日',
@@ -43,5 +43,11 @@ Ext.define('WeiQuPai.view.Main', {
 
             }
         ]
+    },
+
+    //重写push方法，修复多次点击会重复push的问题
+    push: function(){
+        if(this.isAnimating) return;
+        this.callParent(arguments);
     }
 });

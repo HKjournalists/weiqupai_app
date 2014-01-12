@@ -343,7 +343,13 @@ div.x-button.hidden{
 }
 
 //商户详情页面
-.shop-detail{
+.shop-detail, .item-detail{
 	padding:.7em 1em;
 	line-height:1.5;
+}
+.shop-link-btn{
+	margin-top:2em;
+}
+.comment-input, .comment-button{
+	margin:.7em 1em;
 }

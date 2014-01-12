@@ -14,6 +14,7 @@ Ext.define('WeiQuPai.controller.MyAuction', {
     },
     
     showDetail: function(list, index, dataItem, record, e){
+        if(this.getMain().getActiveItem().xtype == 'myauctiondetail') return;
         var detailView = {
             xtype: 'myauctiondetail',
             titleTpl: '{name}',
