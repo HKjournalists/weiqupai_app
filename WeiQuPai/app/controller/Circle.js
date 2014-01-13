@@ -16,8 +16,14 @@ Ext.define('WeiQuPai.controller.Circle', {
     
     //called when the Application is launched, remove if not needed
     showCircleDetail: function(list, index, dataItem, record, e){
+
+        if(e.target.className == 'avatar'){
+            this.getCirclelist().fireEvent('avatartap', this, index, record);
+            return false;
+        };
+
         var action_class = record.get('action_class');
-        var ori_id = record.get('ori_id');
+        var trans_id = record.get('trans_id');
         switch(action_class) {
             //晒单
             case 1:
@@ -46,8 +52,10 @@ Ext.define('WeiQuPai.controller.Circle', {
         }
         var detailView = {
             xtype: target_type,
+            trans_id: record.data.trans_id,
             //record: record
         };
+        console.log(detailView.trans_id);
         this.getMain().push(detailView);
     },
 
@@ -55,8 +63,10 @@ Ext.define('WeiQuPai.controller.Circle', {
         this.getMain().getNavigationBar().hide();
         var detailView = {
             xtype: 'showuser',
+            trans_id: record.data.trans_id,
             //record: record
         }
+        //console.log(detailView.trans_id);
         this.getMain().push(detailView);
     }
 });

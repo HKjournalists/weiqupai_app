@@ -2,11 +2,12 @@ Ext.define('WeiQuPai.store.ShowUser', {
 	extend: 'Ext.data.Store',
 	requires: ['WeiQuPai.model.ShowUser'],
 	config:{
-		autoLoad: true,
+		//autoLoad: true,
+		file_name: 'showuser',
 		model: 'WeiQuPai.model.ShowUser',
 		proxy: {
 			type: 'ajax',
-			url: WeiQuPai.Config.host + 'showuser.json',
+			url: '',
 			reader: 'json'
 		}
 	}

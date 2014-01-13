@@ -3,8 +3,10 @@ Ext.define('WeiQuPai.controller.ShowUser', {
     
     config: {
         refs: {
+        	showuser: 'showuser',
+        	main: 'main',
         },
         control: {
-        }
+        },
     },
 });

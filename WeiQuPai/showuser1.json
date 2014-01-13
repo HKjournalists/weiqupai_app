@@ -1,14 +1,13 @@
 [
-	name: 'pony',
+{
+	user_name: 'pony',
+	user_bg: 'pic/ubg.jpg',
 	user_icon: 'pic/pony.jpg',
 	user_class: 'user',
-	content: [
+	messages: [
 		{
 			id: 1,
-			ori_id: 1,
-			name: 'pony',
-			user_icon: 'pic/pony.jpg',
-			user_class: 'user',
+			trans_id: 1,
 			action: '刚刚发表了一个晒单',
 			action_class: 1,
 			content: 'iPhone 5s的分辨率是多少，很多小白都不清楚呢',
@@ -21,10 +20,7 @@
 		},
 		{
 			id: 2,
-			ori_id: 1,
-			name: 'pony',
-			user_icon: 'pic/pony.jpg',
-			user_class: 'user',
+			trans_id: 1,
 			action: '刚刚对iPhone 5S土豪金发表了一条评论',
 			action_class: 2,
 			content: '苹果版Adobe CS5 Mac的序列号文件和使用说明苹果版Adobe CS5 Mac的序列号文件可以激活所有的Adobe CS5苹果版软件，使用起来也非常的方便，只要简单的在苹果系统上面运行一下，然后输入序列号就可以了。只是单独的使用序列号，是不能让Adobe Photoshop CS5软件在Mac系统上长期使用的，让Adobe Photoshop CS5 Mac序列号能够长期使用的方法，还需要一个小程序的配合使用。',
@@ -32,10 +28,7 @@
 		},
 		{
 			id: 3,
-			ori_id: 1,
-			name: 'pony',
-			user_icon: 'pic/pony.jpg',
-			user_class: 'user',
+			trans_id: 1,
 			action: '刚刚拍下了iPhone 5s',
 			action_class: 3,
 			content: '',
@@ -43,14 +36,12 @@
 		},
 		{
 			id: 4,
-			ori_id: 1,
-			name: 'pony',
-			user_icon: 'pic/pony.jpg',
-			user_class: 'user',
+			trans_id: 1,
 			action: '刚刚关注了iPhone 5s',
 			action_class: 4,
 			content: '',
 			time:'2113-11-29 11:35'
 		}
 	]
+}
 ]

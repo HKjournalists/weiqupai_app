@@ -40,17 +40,7 @@ Ext.define('WeiQuPai.view.Circle', {
 				scrollDock: 'top',
 				height: '80px'
 			}
-		], 
-		listeners: {
-			itemtap: {
-				order: 'before',
-				fn: function(list, index, dataItem, record, e){
-					if(e.target.className == 'avatar'){
-						this.fireEvent('avatartap', this, index, record);
-						return false;
-					}
-				}
-			}
-		}
-	}
+		]
+	},
+	
 });

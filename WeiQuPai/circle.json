@@ -1,7 +1,7 @@
 [
 	{
 		id: 1,
-		ori_id: 1,
+		trans_id: 1,
 		name: '微趣拍',
 		user_icon: 'pic/vqupai_logo.png',
 		user_class: 'vqupai',
@@ -12,7 +12,7 @@
 	},
 	{
 		id: 2,
-		ori_id: 1,
+		trans_id: 1,
 		name: 'pony',
 		user_icon: 'pic/pony.jpg',
 		user_class: 'user',
@@ -28,7 +28,7 @@
 	},
 	{
 		id: 3,
-		ori_id: 1,
+		trans_id: 2,
 		name: 'pony',
 		user_icon: 'pic/pony.jpg',
 		user_class: 'user',
@@ -39,7 +39,7 @@
 	},
 	{
 		id: 4,
-		ori_id: 1,
+		trans_id: 3,
 		name: 'pony',
 		user_icon: 'pic/pony.jpg',
 		user_class: 'user',
@@ -50,7 +50,7 @@
 	},
 	{
 		id: 5,
-		ori_id: 1,
+		trans_id: 1,
 		name: 'pony',
 		user_icon: 'pic/pony.jpg',
 		user_class: 'user',
@@ -61,7 +61,7 @@
 	},
 	{
 		id: 6,
-		ori_id: 1,
+		trans_id: 1,
 		name: '苹果中国',
 		user_icon: 'pic/apple.jpg',
 		user_class: 'compony',

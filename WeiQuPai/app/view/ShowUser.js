@@ -1,8 +1,7 @@
 var showusertpl = new Ext.XTemplate(
+	'<tpl for="messages"',
 	'<div class="circle-row">',
 	'<div class="circle-info">',
-	'<h2>{name}</h2>',
-	'{action}',
 	'<tpl if="action_class == 1">',
 	'<p>',
 	'<tpl for="pic">',
@@ -12,7 +11,8 @@ var showusertpl = new Ext.XTemplate(
 	'</tpl>',
 	'<p>{content}</p>',
 	'<p class="time">{time}</p>',
-	'</div>'
+	'</div>',
+	'</tpl>'
 );
 
 Ext.define('WeiQuPai.view.ShowUser', {
@@ -45,8 +45,12 @@ Ext.define('WeiQuPai.view.ShowUser', {
 		]
 	}, 
 	initialize: function(){
-		//this.down('bottombar').insert(2, {xtype: 'button', text: '去支付', action: 'pay'});
-		//this.down('bottombar').insert(3, {xtype: 'spacer'});
+		var myStore = this.getStore()
+		var url = WeiQuPai.Config.host + 'showuser' + this.trans_id + '.json';
+		//console.log(url);
+		myStore.getProxy().setUrl(url);
+		myStore.load();
+		console.log(myStore.getCount());
 	}
 
 });
