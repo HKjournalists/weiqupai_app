@@ -9,12 +9,28 @@ Ext.define('WeiQuPai.controller.Main', {
         },
         control: {
            backButton:{
-                tap : 'back'
+                tap : 'goBack'
+           },
+           main: {
+                initialize: 'initMain',
            }
         }
     },
     
-    back: function(){
+    isAnimating : false,
+
+    goBack: function(){
+        if(this.getMain().isAnimating) return;
         this.getMain().pop();
+    },
+
+    initMain : function(me){
+        var ani = me.getLayout().getAnimation();
+        ani.getInAnimation().on('animationstart', function(){
+            me.isAnimating = true;
+        });
+        ani.on('animationend', function(){
+            me.isAnimating = false;
+        });
     }
 });

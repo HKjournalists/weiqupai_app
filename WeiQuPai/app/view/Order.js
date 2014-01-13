@@ -67,17 +67,17 @@ Ext.define('WeiQuPai.view.Order', {
 	}, 
 
 	addShipment: function(){
-        var shipmentListView = this.createOverlay('WeiQuPai.view.ShipmentList');
+        var shipmentListView = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShipmentList');
         this.selectFirst('shipment', shipmentListView.down('list'));
 	},
 
 	addPayment: function(){
-		var paymentListView = this.createOverlay('WeiQuPai.view.PaymentList');
+		var paymentListView = WeiQuPai.Util.createOverlay('WeiQuPai.view.PaymentList');
         this.selectFirst('payment', paymentListView.down('list'));
 	},
 
 	addDeliveryTime: function(){
-		var deliveryTimeView = this.createOverlay('WeiQuPai.view.DeliveryTimeList');
+		var deliveryTimeView = WeiQuPai.Util.createOverlay('WeiQuPai.view.DeliveryTimeList');
         this.selectFirst('deliverytime', deliveryTimeView.down('list'));
 	},
 
@@ -88,27 +88,5 @@ Ext.define('WeiQuPai.view.Order', {
         var title = list.getItemAt(0).getRecord().get('title');
         this.getRecord().set(itemId, title);
         this.down('disclosureitem[itemId=' + itemId + ']').setContent(title);
-	},
-
-	createOverlay: function(com){
-		var cmp = Ext.create(com, {
-			bottom: 0,
-            left:0,
-            hidden: true,
-            height: '50%',
-            width: '100%',
-            showAnimation:{
-                type: 'slideIn',
-                direction: 'up'
-            },
-            hideAnimation:{
-            	type: 'slideOut',
-            	direction: 'down'
-            },
-            modal: true,
-            hideOnMaskTap: true
-        });
-       	Ext.Viewport.add(cmp);
-       	return cmp;
 	}
 });

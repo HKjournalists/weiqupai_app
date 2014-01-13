@@ -1,8 +1,10 @@
 Ext.define('WeiQuPai.view.ItemDetail', {
 	extend: 'Ext.dataview.List',
 	xtype: 'itemdetail',
-	requires: ['Ext.Img', 'WeiQuPai.view.Shop', 'WeiQuPai.view.BottomBar', 'WeiQuPai.view.ItemDetailTextList',
-	 'WeiQuPai.view.ItemDetailInfo', 'WeiQuPai.view.DetailPicShow', 'WeiQuPai.view.Order'],
+	requires: [
+		'WeiQuPai.view.Shop', 'WeiQuPai.view.BottomBar', 'WeiQuPai.view.ItemDetailTextList',
+		'WeiQuPai.view.ItemDetailInfo', 'WeiQuPai.view.DetailPicShow', 'WeiQuPai.view.Order', 'WeiQuPai.view.InputComment'
+	],
 	config: {
 		title: '拍品详情',
 		emtpyText: '没有可用的数据',
@@ -39,20 +41,41 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 			{
 				xtype: 'bottombar'
 			}
-		]
+		], 
+
+		listeners: {
+			itemtap: {
+				order: 'before',
+				fn: function(list, index, dataItem, record, e){
+					if(e.target.className == 'avatar'){
+						this.fireEvent('avatartap', this, index, record);
+						return false;
+					}
+					if(e.target.className == 'up'){
+						this.fireEvent('uptap', this, index, record);
+						return false;
+					}
+					if(e.target.className == 'comment'){
+						this.fireEvent('commenttap', this, index, record);
+						return false;
+					}
+				}
+			}
+		}
 	},
 	initialize: function(){
+		this.callParent(arguments);
 		//在bottombar上加入下单的按钮
 		var paiBtn = {
 			xtype: 'button',
 			text: '我要拍',
 			action: 'order'
-		}
+		};
 		var commentBtn = {
 			xtype: 'button',
 			text: '写评论',
 			action: 'comment'
-		}
+		};
 		this.down('bottombar').insert(2, paiBtn);
 		this.down('bottombar').insert(3, {xtype:'spacer'});
 		this.down('bottombar').insert(4, commentBtn);

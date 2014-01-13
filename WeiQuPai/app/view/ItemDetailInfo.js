@@ -6,7 +6,6 @@ Ext.define('WeiQuPai.view.ItemDetailInfo', {
 		title: '拍品详情',
 		emtpyText: '没有可用的数据',
 		store: 'Item',
-		html: '<p>这里是拍品的详细描述</p>',
 		items: [
 			{
 				xtype: 'titlebar',
@@ -14,7 +13,12 @@ Ext.define('WeiQuPai.view.ItemDetailInfo', {
 				docked: 'top'
 			},
 			{
-			xtype: 'bottombar'
+				xtype: 'bottombar'
+			},
+			{
+				xtype: 'container',
+				cls: 'item-detail',
+				html: '这是测试的内容'				
 			}
 		]
 	}

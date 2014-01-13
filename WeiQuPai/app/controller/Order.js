@@ -109,6 +109,5 @@ Ext.define('WeiQuPai.controller.Order', {
 
     submitOrder: function(){
         Ext.Msg.alert('发生错误', '还没有选择收货地址');
-        console.log(this.getOrderView().getRecord().getData());
     }
 });

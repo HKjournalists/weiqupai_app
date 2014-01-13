@@ -1,7 +1,6 @@
 Ext.define('WeiQuPai.view.CircleAd', {
 	extend: 'Ext.carousel.Carousel',
 	xtype: 'circlead',
-	requires:['Ext.Img'],
 	config: {
 		direction: 'horizontal',
 		cls: 'index-ad'

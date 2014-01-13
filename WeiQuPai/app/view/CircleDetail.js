@@ -1,7 +1,7 @@
 Ext.define('WeiQuPai.view.CircleDetail', {
 	extend: 'Ext.dataview.List',
 	xtype: 'circledetail',
-	requires: ['Ext.Img', 'WeiQuPai.view.Shop', 'WeiQuPai.view.BottomBar', 'WeiQuPai.view.ItemDetailTextList',
+	requires: ['WeiQuPai.view.Shop', 'WeiQuPai.view.BottomBar', 'WeiQuPai.view.ItemDetailTextList',
 	 'WeiQuPai.view.ItemDetailInfo', 'WeiQuPai.view.DetailPicShow', 'WeiQuPai.view.Pay'],
 	config: {
 		title: '拍品详情',
