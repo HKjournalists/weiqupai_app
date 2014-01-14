@@ -45,12 +45,13 @@ Ext.define('WeiQuPai.view.ShowUser', {
 		]
 	}, 
 	initialize: function(){
-		var myStore = this.getStore()
 		var url = WeiQuPai.Config.host + 'showuser' + this.trans_id + '.json';
-		//console.log(url);
-		myStore.getProxy().setUrl(url);
-		myStore.load();
-		console.log(myStore.getCount());
+		this.getStore().getProxy().setUrl(url);
+		this.getStore().load();
+		var myStore = this.getStore();
+		console.log(myStore.data);	
+	},
+	updatedata: function(){
 	}
 
 });

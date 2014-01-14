@@ -8,6 +8,7 @@ Ext.define('WeiQuPai.store.ShowUser', {
 		proxy: {
 			type: 'ajax',
 			url: '',
+			//url: WeiQuPai.Config.host + 'showuser1.json',
 			reader: 'json'
 		}
 	}

@@ -55,7 +55,7 @@ Ext.define('WeiQuPai.controller.Circle', {
             trans_id: record.data.trans_id,
             //record: record
         };
-        console.log(detailView.trans_id);
+        //console.log(detailView.trans_id);
         this.getMain().push(detailView);
     },
 
