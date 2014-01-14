@@ -1,5 +1,4 @@
 var showusertpl = new Ext.XTemplate(
-	'<tpl for="messages"',
 	'<div class="circle-row">',
 	'<div class="circle-info">',
 	'<tpl if="action_class == 1">',
@@ -11,17 +10,16 @@ var showusertpl = new Ext.XTemplate(
 	'</tpl>',
 	'<p>{content}</p>',
 	'<p class="time">{time}</p>',
-	'</div>',
-	'</tpl>'
+	'</div>'
 );
 
 Ext.define('WeiQuPai.view.ShowUser', {
 	extend: 'Ext.dataview.List',
 	xtype: 'showuser',
-	requires: [],
+	requires: ['WeiQuPai.model.User'],
 	config: {
 		emtpyText: '没有动态信息',
-		store: 'ShowUser',
+		//store: 'ShowUser',
 		disableSelection : true,
 		itemTpl: showusertpl,
 		items: [
@@ -29,15 +27,16 @@ Ext.define('WeiQuPai.view.ShowUser', {
 				xtype: 'panel',
 				//centered: true,
 				scrollDock: 'top',
-				html: 	['<div class="user-show-top">',
+				itemId: 'user-info',
+				tpl: 	new Ext.XTemplate('<div class="user-show-top">',
 						'<div class="user-show-bg">',
-						'<img src="pic/ubg.jpg">',
+						'<img src="{user_bg}">',
 						'</div>',
 						'<div class="user-show-avatar">',
-						'<img src="pic/pony.jpg" />',
-						'<span class="user-show-name">Pony</span>',
+						'<img src="{user_icon}" />',
+						'<span class="user-show-name">{user_name}</span>',
 						'</div>',
-						'</div>'].join('')
+						'</div>')
 			},
 			{
 				xtype: 'bottombar'
@@ -45,13 +44,14 @@ Ext.define('WeiQuPai.view.ShowUser', {
 		]
 	}, 
 	initialize: function(){
-		var url = WeiQuPai.Config.host + 'showuser' + this.trans_id + '.json';
-		this.getStore().getProxy().setUrl(url);
-		this.getStore().load();
-		var myStore = this.getStore();
-		console.log(myStore.data);	
-	},
-	updatedata: function(){
+		var me = this;
+		var model = Ext.ModelManager.getModel('WeiQuPai.model.User');
+		model.load(10, {
+			callback: function(user){
+				me.setStore(user.messages());
+				me.down('#user-info').setRecord(user);
+			}
+		});
 	}
 
 });
