@@ -25,7 +25,7 @@ Ext.application({
         'Main'
     ],
     stores: [
-        'Item','Circle', 'ShowUser'
+        'Item','Circle', 'ShowUserInfo', 'ShowUserMessage'
     ],
     icon: {
         '57': 'resources/icons/Icon.png',
