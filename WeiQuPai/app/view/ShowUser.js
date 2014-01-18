@@ -1,17 +1,3 @@
-var showusermessagetpl = new Ext.XTemplate(
-	'<div class="circle-row">',
-	'<div class="circle-info">',
-	'<tpl if="action_class == 1">',
-	'<p>',
-	'<tpl for="pic">',
-	'<img class="pic" src="' + WeiQuPai.Config.host + '{url}" />',
-	'</tpl>',
-	'</p>',
-	'</tpl>',
-	'<p>{content}</p>',
-	'<p class="time">{time}</p>',
-	'</div>'
-);
 var showuserinfotpl = new Ext.XTemplate(
 	'<div class="user-show-top">',
 	'<div class="user-show-bg">',
@@ -23,6 +9,20 @@ var showuserinfotpl = new Ext.XTemplate(
 	'</div>',
 	'</div>'
 );
+var showusermessagetpl = new Ext.XTemplate(
+	'<div class="comment-row">',
+	'<tpl if="action_class == 1">',
+	'<p>',
+	'<tpl for="pic">',
+	'<img class="show-order-pic-small" src="' + WeiQuPai.Config.host + '{url}" />',
+	'</tpl>',
+	'</p>',
+	'</tpl>',
+	'<p>{content}</p>',
+    '<p><span class="up-area"><span class="up">100</span><span class="comment">500</span></span><span class="time">{time}</span></p>',
+	'</div>'
+);
+
 
 Ext.define('WeiQuPai.view.ShowUser', {
 	extend: 'Ext.dataview.List',

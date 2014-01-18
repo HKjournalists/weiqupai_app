@@ -1,5 +1,5 @@
 var circletpl = new Ext.XTemplate(
-	'<div class="circle-row">',
+	'<div class="showorder-row">',
 	'<img class="avatar" user_class="{user_class}" src="' + WeiQuPai.Config.host + '{user_icon}" />',
 	'<div class="circle-info">',
 	'<h2>{name}</h2>',
@@ -7,7 +7,7 @@ var circletpl = new Ext.XTemplate(
 	'<tpl if="action_class == 1">',
 	'<p>',
 	'<tpl for="pic">',
-	'<img class="pic" src="' + WeiQuPai.Config.host + '{url}" />',
+	'<img class="show-order-pic-small" src="' + WeiQuPai.Config.host + '{url}" />',
 	'</tpl>',
 	'</p>',
 	'</tpl>',
@@ -20,7 +20,7 @@ Ext.define('WeiQuPai.view.Circle', {
 	extend: 'Ext.dataview.List',
 	xtype: 'circle',
 	requires: [
-		'WeiQuPai.view.CircleAd', 'WeiQuPai.view.CircleDetail', 'WeiQuPai.view.ShowUser'
+		'WeiQuPai.view.CircleAd', 'WeiQuPai.view.CircleDetail', 'WeiQuPai.view.ShowUser', 'WeiQuPai.view.CompanyMessage', 'WeiQuPai.view.SiteMessage'
 		],
 	//requires: ['WeiQuPai.store.Circle'],
 

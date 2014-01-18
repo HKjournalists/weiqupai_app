@@ -1,5 +1,16 @@
 [
 	{
+		id: 6,
+		trans_id: 1,
+		name: '苹果中国',
+		user_icon: 'pic/apple.jpg',
+		user_class: 'compony',
+		action: '刚刚发布了一个新的活动信息',
+		action_class: 5,
+		content: '苹果中国将于2014年1月30日举办特惠活动，届时多款苹果产品将有很大力度的优惠，敬请期待！',
+		time:'2113-11-29 11:35'
+	},
+	{
 		id: 1,
 		trans_id: 1,
 		name: '微趣拍',
@@ -57,17 +68,6 @@
 		action: '刚刚关注了iPhone 5s',
 		action_class: 4,
 		content: '',
-		time:'2113-11-29 11:35'
-	},
-	{
-		id: 6,
-		trans_id: 1,
-		name: '苹果中国',
-		user_icon: 'pic/apple.jpg',
-		user_class: 'compony',
-		action: '刚刚发布了一个新的活动信息',
-		action_class: 5,
-		content: '苹果中国将于2014年1月30日举办特惠活动，届时多款苹果产品将有很大力度的优惠，敬请期待！',
 		time:'2113-11-29 11:35'
 	},
 ]
