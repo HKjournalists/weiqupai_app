@@ -19,7 +19,7 @@ var showusermessagetpl = new Ext.XTemplate(
 	'</p>',
 	'</tpl>',
 	'<p>{content}</p>',
-    '<p><span class="up-area"><span class="up">100</span><span class="comment">500</span></span><span class="time">{time}</span></p>',
+    '<p><span class="up-area"><span class="up">{ups}</span><span class="comment">{comments}</span></span><span class="time">{time}</span></p>',
 	'</div>'
 );
 
@@ -27,9 +27,7 @@ var showusermessagetpl = new Ext.XTemplate(
 Ext.define('WeiQuPai.view.ShowUser', {
 	extend: 'Ext.dataview.List',
 	xtype: 'showuser',
-	//requires: ['WeiQuPai.view.ShowUserInfo', 'WeiQuPai.view.ShowUserMessage'],
 	config: {
-		id: 'showuser',
 		emtpyText: '没有用户信息',
 		store: 'ShowUserMessage',
 		disableSelection : true,
@@ -37,17 +35,34 @@ Ext.define('WeiQuPai.view.ShowUser', {
 		items: [
 			{
 				xtype: 'panel',
-				//centered: true,
 				scrollDock: 'top',
 				itemId: 'user-info',
-				//tpl: showuserinfotpl
 			},
 			{
 				xtype: 'bottombar'
 			}
-		]
-	}, 
+		],
+
+		listeners: {
+			itemtap: {
+				order: 'before',
+				fn: function(list, index, dataItem, record, e){
+					if(e.target.className == 'up'){
+						console.log('ff');
+						this.fireEvent('uptap', this, index, record);
+						return false;
+					}
+					if(e.target.className == 'comment'){
+						this.fireEvent('commenttap', this, index, record);
+						return false;
+					}
+				}
+			}
+		}
+	},
+
 	initialize: function(){
+		this.callParent(arguments);
 		var me = this;
 		var getStore = Ext.data.StoreManager.lookup('ShowUserInfo');
 		getStore.load(function(records, operation, success){
