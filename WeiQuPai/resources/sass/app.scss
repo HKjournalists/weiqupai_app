@@ -29,6 +29,17 @@ $border-color: #dbdbe0;
 	
 }
 
+//list paging的样式
+.x-list-paging{
+	padding:1em 0;
+}
+pullrefresh样式
+.x-list-pullrefresh-message, .x-list-pullrefresh-updated{
+	line-height:1.5;
+}
+.x-list-pullrefresh-arrow{
+	background:transparent;
+}
 //自定义的disclosure项目
 .w-disclosure-item{
 	color: #000;
@@ -37,12 +48,18 @@ $border-color: #dbdbe0;
 	padding:.7em 1em;
 	line-height:1.5;
 }
+.w-disclosure-item-single{
+	border-top: 1px solid $border-color;
+	margin-top:1em;
+}
 .w-disclosure-content{
 	color:$gray-color;
 	margin-right:.2em;
 }
 //disclosure的右箭头
 .w-disclosure{
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
 	-webkit-box-pack:center;
 	-moz-box-pack:center;
 	box-pack:center;
@@ -317,4 +334,68 @@ div.x-button.hidden{
 }
 .comment-input, .comment-button{
 	margin:.7em 1em;
+}
+
+//我的
+.w-myinfo img{
+	float:left;
+	width:68px;
+	height:68px;
+	margin-right:1em;
+}
+.w-myinfo p{
+	color:$gray-color;
+}
+.w-my-button{
+	background-repeat:no-repeat;
+	background-size:60px 60px;
+	width:60px;
+	padding-top:60px;
+	line-height:1.5;
+	font-size:$small-font;
+	margin:1em 0 0 1em;
+	text-align:center;
+}
+.w-my-button-friend{
+	background-image:url(../images/icon-friend.png);
+}
+.w-my-button-account{
+	background-image:url(../images/icon-account.png);
+}
+.w-my-button-order{
+	background-image:url(../images/icon-order.png);
+}
+.w-my-button-consignee{
+	background-image:url(../images/icon-consignee.png);
+}
+.w-my-button-prop{
+	background-image:url(../images/icon-prop.png);
+}
+.w-my-button-coupon{
+	background-image:url(../images/icon-coupon.png);
+}
+.w-my-button-setting{
+	background-image:url(../images/icon-setting.png);
+}
+
+//好友列表
+.w-user-list-item, .w-prop-list-item, .w-coupon-list-item{
+	display:-webkit-box;
+}
+
+.w-user-list-item img, .w-prop-list-item img, .w-coupon-list-item img{
+	width:40px;
+	height:40px;
+	margin-right:1em;
+}
+.w-coupon-list-item img{
+	width:60px;
+}
+.w-user-list-item p, .w-prop-list-item p, .w-coupon-list-item p{
+	line-height:40px;
+	-webkit-box-flex:1;
+}
+.w-content{
+	margin:1em;
+	line-height:1.5;
 }

@@ -2,9 +2,26 @@ Ext.define('WeiQuPai.view.Today', {
 	extend: 'Ext.dataview.List',
 	xtype: 'today',
 	requires: [
-		'WeiQuPai.view.IndexAd', 'WeiQuPai.view.ItemDetail'
+		'WeiQuPai.view.IndexAd', 'WeiQuPai.view.ItemDetail', 'Ext.plugin.ListPaging', 'Ext.plugin.PullRefresh'
 	],
 	config:{
+		plugins: [
+			{
+				xclass: 'Ext.plugin.PullRefresh',
+				lastUpdatedText: '上次刷新：',
+				lastUpdatedDateFormat: 'H点i分',
+				loadingText: '加载中...',
+				pullText: '下拉刷新',
+				releaseText: '释放立即刷新',
+				loadedText: '下拉刷新'
+			},
+			{
+				xclass: 'Ext.plugin.ListPaging',
+				autoPaging: true,
+				loadMoreText: '加载中...',
+				noMoreRecordsText: '亲，没有更多数据了'
+			}
+		],
 		emtpyText: '没有可用的商品',
 		store: 'Item',
         itemCls: 'today-item-row',

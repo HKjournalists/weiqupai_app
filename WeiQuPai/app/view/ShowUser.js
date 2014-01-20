@@ -46,7 +46,7 @@ Ext.define('WeiQuPai.view.ShowUser', {
 				xtype: 'bottombar'
 			}
 		]
-	}, 
+	},
 	initialize: function(){
 		var me = this;
 		var getStore = Ext.data.StoreManager.lookup('ShowUserInfo');

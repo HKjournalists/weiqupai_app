@@ -1,16 +1,35 @@
 Ext.define('WeiQuPai.view.Setting', {
-	extend: 'Ext.Panel',
+	extend: 'Ext.Container',
 	xtype: 'setting',
-	require: [
-		//'WeiQuPai.view.ItemList',
+	requires: [
+		'WeiQuPai.view.DisclosureItem', 'WeiQuPai.view.About'
 	],
 
 	config: {
 		items:[
 			{
 				xtype: 'titlebar',
-				title: '我的设置',
+				title: '设置',
 				docked: 'top'
+			},
+			{
+				xtype: 'disclosureitem',
+				title: '新消息通知',
+				itemId: 'newMessage'	
+			},
+			{
+				xtype: 'disclosureitem',
+				title: '隐私',
+				itemId: 'private'	
+			},
+			{
+				xtype: 'disclosureitem',
+				title: '关于微趣拍',
+				itemId: 'about',
+				cls: 'w-disclosure-item w-disclosure-item-single'
+			},
+			{
+				xtype: 'bottombar'
 			}
 		]
 	}
