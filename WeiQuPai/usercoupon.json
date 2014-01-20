@@ -1,0 +1,12 @@
+[
+	{
+		name: '100元拍券',
+		icon: 'resources/images/icon-small-coupon100.png',
+		num: 10
+	},
+	{
+		name: '5元拍券',
+		icon: 'resources/images/icon-small-coupon5.png',
+		num: 5
+	}
+]
