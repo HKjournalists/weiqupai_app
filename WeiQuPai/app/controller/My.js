@@ -40,7 +40,7 @@ Ext.define('WeiQuPai.controller.My', {
     },
 
     showConsignee: function(){
-        var view = Ext.create('WeiQuPai.view.ConsigneeList');
+        var view = Ext.create('WeiQuPai.view.MyConsignee');
         this.getMain().push(view);
     },
 

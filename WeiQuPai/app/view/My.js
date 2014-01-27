@@ -3,7 +3,7 @@ Ext.define('WeiQuPai.view.My', {
 	xtype: 'my',
 	requires: [
 		'WeiQuPai.view.IconButton', 'WeiQuPai.view.MyFriend', 'WeiQuPai.view.Setting', 'WeiQuPai.view.MyProp', 'WeiQuPai.view.MyCoupon',
-		'WeiQuPai.view.MyAccount'
+		'WeiQuPai.view.MyAccount', 'WeiQuPai.view.MyConsignee'
 	],
 
 	config: {
@@ -54,12 +54,6 @@ Ext.define('WeiQuPai.view.My', {
 				xtype: 'container',
 				layout: 'hbox',
 				items:[
-					{
-						xtype: 'iconbutton',
-						icon: 'order',
-						text: '历史订单',
-						action: 'order'
-					},
 					{
 						xtype: 'iconbutton',
 						icon: 'consignee',

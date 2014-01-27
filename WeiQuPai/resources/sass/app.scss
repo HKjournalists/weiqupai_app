@@ -20,6 +20,10 @@ $border-color: #dbdbe0;
 	border-radius:0;
 	background-color:$bar-color;
 }
+.x-toolbar .x-title{
+	font-size:$big-font;
+	font-weight:bold;
+}
 .x-msgbox-title.x-toolbar.x-docked-top{
 	background-color:transparent;
 }
@@ -378,21 +382,53 @@ div.x-button.hidden{
 	background-image:url(../images/icon-setting.png);
 }
 
-//好友列表
-.w-user-list-item, .w-prop-list-item, .w-coupon-list-item{
+//带图标和普通文字的列表
+.w-icon-list-item, .w-list-item{
 	display:-webkit-box;
+	background:#fff;
+	padding:10px 1em;
 }
-
-.w-user-list-item img, .w-prop-list-item img, .w-coupon-list-item img{
+.w-icon-list-item img{
 	width:40px;
 	height:40px;
 	margin-right:1em;
 }
-.w-coupon-list-item img{
+.x-list .x-list-item.w-icon-list-item-container .x-innerhtml, .x-list .x-list-item.w-list-item-container .x-innerhtml{
+	padding:0;
+}
+.w-icon-list-item-container .button-area, .w-list-item-container .button-area{
+	position:absolute;
+	right:0;
+	top:0;
+	z-index:-1;
+	display:-webkit-box;
+	height:100%;
+}
+.x-item-pressed .w-icon-list-item, .x-item-pressed .w-list-item{
+	background:#ddd;
+}
+.swipe-button-delete{
+	padding:0 1em;
+	background:#ff3b30;
+	color:white;
+	display:-webkit-box;
+	-webkit-box-align:center;
+}
+.swipe-button-default{
+	padding:0 1em;
+	background:#8bcf92;
+	color:white;
+	display:-webkit-box;
+	-webkit-box-align:center;
+}
+.coupon-list-item img{
 	width:60px;
 }
-.w-user-list-item p, .w-prop-list-item p, .w-coupon-list-item p{
+.w-icon-list-item p{
 	line-height:40px;
+	-webkit-box-flex:1;
+}
+.w-list-item p{
 	-webkit-box-flex:1;
 }
 .w-content{

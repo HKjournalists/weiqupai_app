@@ -4,9 +4,9 @@ Ext.define('WeiQuPai.view.MyCoupon', {
 	config: {
 		store: 'UserCoupon',
 		disableSelection: true,
-		itemCls: 'w-coupon-list-item',
+		itemCls: 'w-icon-list-item-container',
 		itemTpl: new Ext.XTemplate(
-			'<div class="w-coupon-list-item">',
+			'<div class="w-icon-list-item w-coupon-list-item">',
 			'<img src="{icon}">',
 			'<p>{name} X {num}</p>',
 			'</div>'

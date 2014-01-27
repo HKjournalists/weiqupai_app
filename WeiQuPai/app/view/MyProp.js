@@ -4,9 +4,9 @@ Ext.define('WeiQuPai.view.MyProp', {
 	config: {
 		store: 'UserProp',
 		disableSelection: true,
-		itemCls: 'w-prop-list-item',
+		itemCls: 'w-icon-list-item-container',
 		itemTpl: new Ext.XTemplate(
-			'<div class="w-user-list-item">',
+			'<div class="w-icon-list-item">',
 			'<img src="{icon}">',
 			'<p>{name} X {num}</p>',
 			'</div>'
