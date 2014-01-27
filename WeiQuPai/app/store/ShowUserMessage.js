@@ -7,7 +7,7 @@ Ext.define('WeiQuPai.store.ShowUserMessage', {
 		proxy: {
 			type: 'ajax',
 			//url: '',
-			url: WeiQuPai.Config.host + 'message.json',
+			url: WeiQuPai.Config.host + 'showusermessage.json',
 			reader: 'json'
 		}
 	}
