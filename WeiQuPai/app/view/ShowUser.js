@@ -10,16 +10,16 @@ var showuserinfotpl = new Ext.XTemplate(
 	'</div>'
 );
 var showusermessagetpl = new Ext.XTemplate(
-	'<div class="comment-row">',
+	'<div class="user-row">',
 	'<tpl if="action_class == 1">',
-	'<p>',
+	'<div class="pic-list">',
 	'<tpl for="pic">',
-	'<img class="show-order-pic-small" src="' + WeiQuPai.Config.host + '{url}" />',
+	'<img src="' + WeiQuPai.Config.host + '{url}" />',
 	'</tpl>',
-	'</p>',
+	'</div>',
 	'</tpl>',
 	'<p>{content}</p>',
-    '<p><span class="up-area"><span class="up">{ups}</span><span class="comment">{comments}</span></span><span class="time">{time}</span></p>',
+    '<p class="time-area"><span class="up-area"><span class="up">{ups}</span><span class="comment">{comments}</span></span><span class="time">{time}</span></p>',
 	'</div>'
 );
 
@@ -48,7 +48,6 @@ Ext.define('WeiQuPai.view.ShowUser', {
 				order: 'before',
 				fn: function(list, index, dataItem, record, e){
 					if(e.target.className == 'up'){
-						console.log('ff');
 						this.fireEvent('uptap', this, index, record);
 						return false;
 					}

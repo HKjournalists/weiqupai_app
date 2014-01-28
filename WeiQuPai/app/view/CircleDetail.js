@@ -9,12 +9,12 @@ Ext.define('WeiQuPai.view.CircleDetail', {
 		store: 'Item',
         disableSelection : true,
         pressedCls : '',
-		itemTpl: ['<div class="comment-row">',
+		itemTpl: ['<div class="user-row">',
                 '<img src="' + WeiQuPai.Config.host + 'pic/avatar.jpg" class="avatar"/>',
                 '<div class="info">',
                 '<h3>{name}</h3>',
                 '<p>iphone5S分辨率是多少？很多小白现在还不知道, iPhone,iphone5S分辨率是多少？</p>',
-                '<p><span class="up-area"><span class="up">100</span><span class="comment">500</span></span><span class="time">2012-12-12</span></p>',
+                '<p class="time-area"><span class="up-area"><span class="up">100</span><span class="comment">500</span></span><span class="time">2012-12-12</span></p>',
                 '</div>'].join(''),
 		items:[
 			{

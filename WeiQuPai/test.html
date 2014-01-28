@@ -1,53 +1,44 @@
 <!DOCTYPE HTML>
 <html manifest="" lang="en-US">
-<head>
-    <meta charset="UTF-8">
-    <title>微趣拍</title>
-    <style type="text/css">
-    	.user-show-top{
-    		position: relative;
-    	}
-    	.user-show-bg{
-    		position: relative;
-    		width: 320px;
-    		height: 211px;
-    	}
-    	.user-show-bg img{
-    		width: 320px;
-    		height: 211px;
-    	}
-    	.user-show-avatar-div{
-    		position: relative;
-    		bottom: 60px;
-    		left: 15px;
-    		vertical-align: bottom;
-    	}
-    	.user-show-avatar-img{
-    		width: 71px;
-    		height: 71px;
-    		vertical-align: middle;
-    		border-style: solid;
-    		border-width: 2px;
-    		border-color: white;
-    	}
-    	.user-show-name{
-    		font-size: 10px;
-    		color: white;
-    		padding-left: 5px;
-    	}
-    </style>
+<meta charset="UTF-8">
+<title>微趣拍</title>
+<style type="text/css">
+	.parent{
+		display:flex;
+		background:#c9f;
+		align-items:center;
+		flex-direction:row;
+	}
+	.child{
+		background:#fcc;
+		height:100px;
+		flex:1;
+	}
+	.item{
+		background:#9cc;
+	}
+	/*
+	.child:nth-child(1){
+		height:100px;
+	}
+	.child:nth-child(2){
+		height:150px;
+	}
+	.child:nth-child(3){
+		height:200px;
+	}
+	*/
+</style>
 </head>
 <body>
-	<div class="user-show-top">
-		<div class="user-show-bg">
-			<img src="pic/ubg.jpg">
-		</div>
-		<div class="user-show-avatar-div">
-			<img src="pic/pony.jpg" class="user-show-avatar-img" />
-			<span class="user-show-name">
-				Pony
-			</span>
-		</div>
-	</div>
+<div class="parent">
+	<div class="child">test</div>
+	<div class="item"><input></div>
+</div>
+
+<div style="display: flex; ">
+	<div style="height: 80px; flex: 1; ">加我好友啊</div>
+	<div style="background: #6cf; "><input></div>
+</div>
 </body>
 </html>

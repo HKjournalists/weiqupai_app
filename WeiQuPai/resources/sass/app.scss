@@ -28,10 +28,6 @@ $border-color: #dbdbe0;
 	background-color:transparent;
 }
 
-//disclosure右键头居中
-.x-list .x-list-item-tpl .x-list-disclosure{
-	
-}
 
 //list paging的样式
 .x-list-paging{
@@ -82,7 +78,10 @@ pullrefresh样式
 	text-align: center;
 	background-color: transparent;
 }
-
+.w-disclosure-title.x-container > .x-inner{
+	-webkit-box-orient: horizontal !important;
+	-webkit-box-align: center;
+}
 //列表的最上边框去掉
 .x-list .x-list-item.x-list-header-wrap.x-list-item-tpl{
 	border-top:0;
@@ -239,31 +238,33 @@ div.x-button.hidden{
 }
 
 //晒单的列表
-.showorder-row, .comment-row, .auction-user-row{
+.showorder-row, .comment-row, .auction-user-row, .circle-row{
 	overflow:auto;	
 }
-
-.avatar, .showorder-row .avatar, .comment-row .avatar, .auction-user-row .avatar{
+.show-order-row h3, .comment-row h3, .auction-user-row h3, .circle-row h3{
+	margin-bottom:.5em;
+}
+.avatar{
 	float:left;
 	width:40px;
 	height:40px;
 }
-.show-order-row h3, .comment-row h3, .auction-user-row h3{
-	margin-bottom:.5em;
+//拍圈的个人页面，没有头像
+.user-row{
+	line-height:1.5;
+	font-size:$normal-font;
+	color:$text-color;
 }
-.show-order-row .content, .comment-row .content, .auction-user-row .content{
-	margin-bottom:.5em;
-}
-.showorder-row .info, .comment-row .info, .auction-user-row .info{
+.show-order-row .info, .comment-row .info, .auction-user-row .info, .circle-row .info{
 	margin-left:60px;
 	line-height:1.5;
 	font-size:$normal-font;
 	color:$text-color;
 }
-.showorder-row .pic-list{
+.pic-list{
 	margin:1em 0;
 }
-.showorder-row .pic-list img{
+.pic-list img{
 	width:66px;
 	height:66px;
 	border:1px solid #ccc;
@@ -285,6 +286,9 @@ div.x-button.hidden{
 	float:right;
 	font-size:$small-font;
 	margin-top:4px;
+}
+.time-area{
+	margin-top:.5em;
 }
 
 .up{
@@ -320,12 +324,6 @@ div.x-button.hidden{
 }
 .order-item-info .price-area .total-pay{
 	margin-left:2em;
-}
-
-//收货信息列表
-.w-list-consignee{
-	line-height:1.5;
-	color:$gray-color;
 }
 
 //商户详情页面
@@ -431,7 +429,17 @@ div.x-button.hidden{
 .w-list-item p{
 	-webkit-box-flex:1;
 }
+.content, .w-icon-list-item .content, .w-list-item .content{
+	line-height:1.5;
+	color:$text-color;
+}
 .w-content{
 	margin:1em;
 	line-height:1.5;
+	font-size:$normal-font;
+}
+
+//toggle状态的按钮
+.w-toggle-field{
+	min-height:0;
 }

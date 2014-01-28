@@ -1,7 +1,7 @@
 var sitemessagetpl = new Ext.XTemplate(
-	'<div class="comment-row">',
+	'<div class="user-row">',
 	'<p>{content}</p>',
-    '<p><span class="time">{time}</span></p>',
+    '<p class="time-area"><span class="time">{time}</span></p>',
 	'</div>'
 );
 

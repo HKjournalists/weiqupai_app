@@ -1,18 +1,18 @@
 var circletpl = new Ext.XTemplate(
-	'<div class="showorder-row">',
+	'<div class="circle-row">',
 	'<img class="avatar" user_class="{user_class}" src="' + WeiQuPai.Config.host + '{user_icon}" />',
-	'<div class="circle-info">',
-	'<h2>{name}</h2>',
-	'{action}',
+	'<div class="info">',
+	'<h3>{name}</h3>',
+	'<p>{action}</p>',
 	'<tpl if="action_class == 1">',
-	'<p>',
+	'<div class="pic-list">',
 	'<tpl for="pic">',
-	'<img class="show-order-pic-small" src="' + WeiQuPai.Config.host + '{url}" />',
+	'<img src="' + WeiQuPai.Config.host + '{url}" />',
 	'</tpl>',
-	'</p>',
+	'</div>',
 	'</tpl>',
 	'<p>{content}</p>',
-	'<p class="time">{time}</p>',
+	'<p class="time-area"><span class="time">{time}</span></p>',
 	'</div>'
 );
 
@@ -27,6 +27,7 @@ Ext.define('WeiQuPai.view.Circle', {
 	config: {
 		emtpyText: '没有拍圈信息',
 		store: 'Circle',
+        itemCls: 'showorder-user-item',
 		disableSelection : true,
 		itemTpl: circletpl,
 		items: [

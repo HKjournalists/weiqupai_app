@@ -36,7 +36,6 @@ Ext.define('WeiQuPai.view.SwipeButtonList', {
     },
 
 	onTouchStart: function(list, index, dataItem, record, e){
-		console.log('start');
 		this.currentItem = dataItem.element.dom;
         this.mouseX = e.pageX;
 		this.mouseY = e.pageY;
@@ -75,6 +74,7 @@ Ext.define('WeiQuPai.view.SwipeButtonList', {
 		this.un('itemtouchmove', this.onTouchMove);
 		this.un('itemtouchend', this.onTouchEnd);
 		if(!this.canMove) return;
+		this.canMove = false;
 		//保证swipe动画的完成
 		var domItem = Ext.DomQuery.selectNode(this.itemSelector, this.currentItem);
 		var buttons = Ext.DomQuery.selectNode('.button-area', this.currentItem);

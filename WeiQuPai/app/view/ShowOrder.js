@@ -6,7 +6,6 @@ Ext.define('WeiQuPai.view.ShowOrder', {
 		emtpyText: '没有可用的数据',
 		store: 'Item',
         disableSelection : true,
-        itemCls: 'showorder-user-item'	,
 		itemTpl: ['<div class="showorder-row">',
                 '<img src="' + WeiQuPai.Config.host + 'pic/avatar.jpg" class="avatar"/>',
                 '<div class="info">',
@@ -17,7 +16,7 @@ Ext.define('WeiQuPai.view.ShowOrder', {
                 	'<img src="' + WeiQuPai.Config.host + '{pic_url}" />',
                 '</div>',
                 '<p>这里是描述么这里是描述么这里是描述么这里是描述么这里是描述么这里是描述么这里是描述么这里是描述么这里是描述么</p>',
-                '<p><span class="up-area"><span class="up">100</span><span class="comment">500</span></span><span class="time">2012-12-12</span></p>',
+                '<p class="time-area"><span class="up-area"><span class="up">100</span><span class="comment">500</span></span><span class="time">2012-12-12</span></p>',
                 '</div>'].join(''),
 		items:[
 			{

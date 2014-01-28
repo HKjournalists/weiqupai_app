@@ -2,11 +2,10 @@ Ext.define('WeiQuPai.view.MyConsignee', {
     extend: 'WeiQuPai.view.SwipeButtonList',
     xtype: 'myconsignee',
     config:{
-        cls: 'w-list-consignee',
         title: '收货信息',
         itemTpl: new Ext.XTemplate(
             '<div class="w-list-item">',
-            '<div class="info">',
+            '<div class="content">',
             '<p>收货人：{name}</p>',
             '<p>电话：{mobile}</p>',
             '<p>地址：{province}{city}{address}</p>',

@@ -2,10 +2,9 @@ Ext.define('WeiQuPai.view.ConsigneeList', {
     extend: 'Ext.dataview.List',
     xtype: 'consigneelist',
     config:{
-        cls: 'w-list-consignee',
         title: '收货信息',
         itemTpl: new Ext.XTemplate(
-            '<div class="info">',
+            '<div class="content">',
             '<p>收货人：{name}</p>',
             '<p>电话：{mobile}</p>',
             '<p>地址：{province}{city}{address}</p>',

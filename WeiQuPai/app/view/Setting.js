@@ -2,7 +2,7 @@ Ext.define('WeiQuPai.view.Setting', {
 	extend: 'Ext.Container',
 	xtype: 'setting',
 	requires: [
-		'WeiQuPai.view.DisclosureItem', 'WeiQuPai.view.About'
+		'WeiQuPai.view.DisclosureItem', 'WeiQuPai.view.About', 'WeiQuPai.view.Private'
 	],
 
 	config: {

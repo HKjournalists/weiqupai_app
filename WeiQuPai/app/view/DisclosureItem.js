@@ -9,33 +9,36 @@ Ext.define("WeiQuPai.view.DisclosureItem", {
 		content: '',
 		titleStyle: 'bold',//[bold, normal]
 		cls: 'w-disclosure-item',
-
-		listeners: {
-			element: 'element',
-			touchstart: 'doTouchStart',
-			touchend: 'doTouchEnd',
-			touchmove: 'doTouchEnd'
-		}
+		disclosureItem: true,
 	},
 	titleNode: null,
 	detailNode : null,
-	discloureNode : null,
+	disclosureNode : null,
 
 	pressedTimer: null,
 	pressDelay:  100,
 
 	beforeInitialize: function(){
-		this.titleNode = Ext.create('Ext.Panel', {
+		this.titleNode = Ext.create('Ext.Container', {
 			cls: 'w-disclosure-title'
 		});
-		this.detailNode = Ext.create('Ext.Panel', {
+		this.detailNode = Ext.create('Ext.Container', {
 			cls: 'w-disclosure-content'
 		});
 
-		this.discloureNode = Ext.create('Ext.Panel', {
-			baseCls: 'w-disclosure',
-			docked: 'right'
-		});
+		if(this.config.disclosureItem){
+			this.disclosureNode = Ext.create('Ext.Container', {
+				baseCls: 'w-disclosure',
+				docked: 'right'
+			});
+			//只有需要disclosure的条目才需要touch效果
+			this.addListener({	
+				element: 'element',
+				touchstart: 'doTouchStart',
+				touchend: 'doTouchEnd',
+				touchmove: 'doTouchEnd'
+			});
+		}
 		if(this.config.contentPosition == 'right'){
 			this.setLayout('hbox');
 			this.detailNode.setDocked('right');
@@ -49,7 +52,7 @@ Ext.define("WeiQuPai.view.DisclosureItem", {
 	initialize: function(){
 		this.add(this.titleNode);
 		//顺序很重要，discolsure一定要先加
-		this.add(this.discloureNode);
+		this.disclosureNode && this.add(this.disclosureNode);
 		this.add(this.detailNode);
 		this.relayEvents(this.element, ['tap', 'singletap', 'doubletap', 'swipe', 'taphold'])
 	},

@@ -6,8 +6,6 @@ Ext.define('WeiQuPai.view.MyAuctionDetail', {
 		emtpyText: '没有可用的数据',
 		store: 'Item',
         disableSelection : true,
-        pressedCls : '',
-        itemCls: 'auction-user-item',
 		itemTpl: ['<div class="auction-user-row">',
                 '<img src="' + WeiQuPai.Config.host + 'pic/avatar.jpg" class="avatar"/>',
                 '<div class="info">',
