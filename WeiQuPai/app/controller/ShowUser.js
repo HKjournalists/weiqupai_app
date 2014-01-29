@@ -3,7 +3,7 @@ Ext.define('WeiQuPai.controller.ShowUser', {
     config: {
         refs: {
             main: 'main',
-            showuser: 'showuser',      
+            showuser: 'showuser'   
         },
         control: {
            commentBtn: {
@@ -13,7 +13,7 @@ Ext.define('WeiQuPai.controller.ShowUser', {
                 avatartap: 'doAvatarTap',
                 uptap: 'doUpTap',
                 commenttap: 'doCommentTap'
-           },
+           }
         }
     },
 

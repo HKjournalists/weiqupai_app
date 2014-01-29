@@ -33,7 +33,7 @@ Ext.define('WeiQuPai.controller.Order', {
                 itemtap: 'selectPayment'
            },
            deliveryTimeList: {
-                itemtap: 'selectDeliveryTime',
+                itemtap: 'selectDeliveryTime'
            },
            consigneePanel: {
                 tap: 'showConsigneeList'

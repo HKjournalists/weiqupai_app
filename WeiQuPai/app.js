@@ -23,7 +23,7 @@ Ext.application({
         'Shop', 'CompanyMessage', 'My', 'Setting', 'MyFriend', 'MyConsignee', 'Private'
     ],
     views: [
-        'Main'
+        'Main', 'Login', 'Register'
     ],
     stores: [
         'Item','Circle', 'ShowUserInfo', 'ShowUserMessage', 'CompanyMessage', 'SiteMessage', 'UserFriend', 'UserProp', 'UserCoupon'

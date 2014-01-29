@@ -20,7 +20,7 @@ Ext.define('WeiQuPai.controller.DetailPicShow', {
                     var car = this.getCarousel();
                     car.next();
                 }
-           },
+           }
         }
     }
 });

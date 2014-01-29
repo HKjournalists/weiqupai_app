@@ -42,6 +42,6 @@ Ext.define('WeiQuPai.view.Circle', {
 				height: '80px'
 			}
 		]
-	},
+	}
 	
 });

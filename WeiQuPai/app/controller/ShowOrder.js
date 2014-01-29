@@ -4,11 +4,11 @@ Ext.define('WeiQuPai.controller.ShowOrder', {
     config: {
         refs: {
             main: 'main',
-            list: 'showorder',
+            list: 'showorder'
         },
         control: {
             list: {
-                avatartap: 'showUserView',
+                avatartap: 'showUserView'
             }
         }
     },

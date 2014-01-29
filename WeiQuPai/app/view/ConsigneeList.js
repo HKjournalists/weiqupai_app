@@ -31,7 +31,7 @@ Ext.define('WeiQuPai.view.ConsigneeList', {
                 mobile: '15120003859',
                 email: 'iceshi@qq.com',
                 zip: '100010'
-            },
+            }
         ],
         items: [
             {

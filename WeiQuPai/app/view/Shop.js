@@ -29,7 +29,7 @@ Ext.define('WeiQuPai.view.Shop', {
 			text: '点击访问商家网站',
 			action: 'jumpUrl',
 			cls: 'shop-link-btn',
-			url : url,
+			url : url
 		};
 		this.down('#shop-detail').setHtml(html);
 		this.down('#shop-detail').add(linkButton);

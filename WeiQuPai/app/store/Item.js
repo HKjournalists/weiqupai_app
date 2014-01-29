@@ -13,8 +13,7 @@ Ext.define('WeiQuPai.store.Item', {
 				rootProperty: 'records'
 			},
 			startParam: false,
-			limitParam: false,
-		},
-
+			limitParam: false
+		}
 	}
 });

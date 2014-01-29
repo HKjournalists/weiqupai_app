@@ -36,7 +36,7 @@ Ext.define('WeiQuPai.view.ShowUser', {
 			{
 				xtype: 'panel',
 				scrollDock: 'top',
-				itemId: 'user-info',
+				itemId: 'user-info'
 			},
 			{
 				xtype: 'bottombar'

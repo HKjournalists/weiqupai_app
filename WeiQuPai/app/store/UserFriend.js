@@ -12,7 +12,6 @@ Ext.define('WeiQuPai.store.UserFriend', {
 			pageParam: false,
 			startParam: false,
 			limitParam: false
-		},
-
+		}
 	}
 });

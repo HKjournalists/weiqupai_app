@@ -26,7 +26,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 			},
 			{
 				xtype: 'detailpicshow',
-				scrollDock: 'top',
+				scrollDock: 'top'
 			},
 			{
 				xtype: 'panel',

@@ -19,7 +19,7 @@ Ext.define('WeiQuPai.view.CircleDetail', {
 		items:[
 			{
 				xtype: 'detailpicshow',
-				scrollDock: 'top',
+				scrollDock: 'top'
 			},
 			{
 				xtype: 'panel',

@@ -12,7 +12,7 @@ Ext.define('WeiQuPai.controller.Main', {
                 tap : 'goBack'
            },
            main: {
-                initialize: 'initMain',
+                initialize: 'initMain'
            }
         }
     },

@@ -9,7 +9,7 @@ Ext.define("WeiQuPai.view.DisclosureItem", {
 		content: '',
 		titleStyle: 'bold',//[bold, normal]
 		cls: 'w-disclosure-item',
-		disclosureItem: true,
+		disclosureItem: true
 	},
 	titleNode: null,
 	detailNode : null,

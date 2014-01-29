@@ -12,7 +12,6 @@ Ext.define('WeiQuPai.store.UserCoupon', {
 			pageParam: false,
 			startParam: false,
 			limitParam: false
-		},
-
+		}
 	}
 });

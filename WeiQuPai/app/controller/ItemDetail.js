@@ -6,7 +6,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
             textList : 'itemdetailtextlist',
             pai: 'button[action=order]',
             commentBtn: 'button[action=comment]',
-            commentList: 'itemdetail',      
+            commentList: 'itemdetail'
         },
         control: {
            textList : {

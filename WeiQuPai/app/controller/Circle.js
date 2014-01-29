@@ -52,7 +52,7 @@ Ext.define('WeiQuPai.controller.Circle', {
         }
         var detailView = {
             xtype: target_type,
-            trans_id: record.data.trans_id,
+            trans_id: record.data.trans_id
             //record: record
         };
         //console.log(detailView.trans_id);
@@ -63,7 +63,7 @@ Ext.define('WeiQuPai.controller.Circle', {
         this.getMain().getNavigationBar().hide();
         var detailView = {
             xtype: 'showuser',
-            trans_id: record.data.trans_id,
+            trans_id: record.data.trans_id
             //record: record
         }
         //console.log(detailView.trans_id);

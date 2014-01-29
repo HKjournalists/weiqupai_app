@@ -21,5 +21,5 @@ Ext.define('WeiQuPai.controller.Setting', {
     showPrivate: function(){
         var view = Ext.create('WeiQuPai.view.Private');
         this.getMain().push(view);
-    },
+    }
 });

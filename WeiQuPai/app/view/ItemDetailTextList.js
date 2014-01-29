@@ -11,7 +11,7 @@ Ext.define('WeiQuPai.view.ItemDetailTextList', {
 			fields: ['title'],
 			data: [
 				{title: '拍品详情', id: 'itemdetailinfo'},
-				{title: '商家介绍', id: 'shop'},
+				{title: '商家介绍', id: 'shop'}
 			]
 		},
 		itemTpl : '{title}'

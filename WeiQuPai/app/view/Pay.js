@@ -5,6 +5,5 @@ Ext.define('WeiQuPai.view.Pay', {
 		scrollable: true,
 		title: '支付',
 		html: '支付的页面'
-	}, 
-	
+	}
 });

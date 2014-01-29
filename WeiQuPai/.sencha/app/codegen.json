@@ -38,6 +38,9 @@
     },
     "{controllerFileName}.js.tpl.merge": {
       "7cd8d1cf12515ca525732931d6b775e3f7924ad9": "eJx1j0EKwyAQRfeeYnYmIMk+XZXSbe8gOjaCGSWxbSB49xoTQij0L8ZR3p8/3ufYaDSWsOKL8hRH7xyODzngFKTC1Py8Ji5gYZCFc0TSHfB7niFDaG4HyEUhSsl2Y5/dblo1opnO9wNdlcTR7sH/UXYylNK2SuZ8DZ8eCWKPcA3BWSWj9QR2AidfpHrUIi8x+DeCNUA+AiFq1GXGhnRg8rHaqvy1+rTCFspSfWFfyCxXmA\u003d\u003d"
+    },
+    "{formFileName}.js.tpl.merge": {
+      "9502f3b14cc89647cc0b6d8dd845342687ee4777": "eJyFUk1vgzAMvfdXWJWqgIqybkegu/U6TdoRcaBt0kYKAYHpOiH++5zwobIizYfE8cuzXxwf7sjPQiojPNZmZfmR5aLjNyW+eWuszwJoV0Am7ijMOQR2IIosqpx/ZkZoFjj0jj+lILB1TjdE3XIqjFSXcEhjDRVqd3moMAGTo1DkdQhJu5lC1m6ZbkTNpRL6XMMePNmYE6rCkOdi/kOV0UgreLesgkogcZI0gDKr0PJ7Eq9LrdBjAfMDUBTeRbTF/S2uhbngNYLtVi1l72VVIInnCIlKx4Qh86NFAinhZVNfvRZsC0KQyY5k9T2UySv5OjsKbQ9vKXQLabrVU4iyNpWxWzQHO9+bde4h3aaLsdS2R/t1D67fZ9znF/eKnz9vtGkU3CS4pAu3hvex1jkdmwsO4heS9Z+SsdKxQSzMQhGkoSX8qznmChfwRhHq5rPK/yiYTunorPo4fcYvHPjIwg\u003d\u003d"
     }
   },
   "targets": {
@@ -290,6 +293,28 @@
         "controllerFileName": "Today",
         "name": "Today",
         "controllerNamespace": "WeiQuPai.controller"
+      }
+    },
+    "app/view/Login.js": {
+      "source": "{formFileName}.js.tpl.merge",
+      "version": "9502f3b14cc89647cc0b6d8dd845342687ee4777",
+      "parameters": {
+        "appName": "WeiQuPai",
+        "xtype": "login",
+        "name": "Login",
+        "fields": "uname:text:Uname,password:text:Password,login:button:Login",
+        "formFileName": "Login"
+      }
+    },
+    "app/view/Register.js": {
+      "source": "{formFileName}.js.tpl.merge",
+      "version": "9502f3b14cc89647cc0b6d8dd845342687ee4777",
+      "parameters": {
+        "appName": "WeiQuPai",
+        "xtype": "register",
+        "name": "Register",
+        "fields": "uname:text:Uname,password:text:Password,cfpasssword:text:Cfpasssword",
+        "formFileName": "Register"
       }
     }
   }

@@ -18,6 +18,6 @@ Ext.define('WeiQuPai.view.About', {
 				xtype: 'bottombar'
 			}
 		]
-	}, 
+	}
 	
 });

@@ -19,7 +19,7 @@ Ext.define('WeiQuPai.view.MyFriend', {
 			{
 				xtype: 'bottombar'
 			}
-		], 
+		]
 	},
 
 	initialize: function(){

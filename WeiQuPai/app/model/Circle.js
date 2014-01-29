@@ -11,7 +11,7 @@ Ext.define("WeiQuPai.model.Circle", {
 			{name: 'action_class', type: 'int'},
 			{name: 'content', type: 'string'},
 			{name: 'pic'},
-			{name: 'time', type: 'string'},
+			{name: 'time', type: 'string'}
 		]
 	}
 });

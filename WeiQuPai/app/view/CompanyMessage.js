@@ -9,7 +9,7 @@ var companymessagetpl = new Ext.XTemplate(
 Ext.define('WeiQuPai.view.CompanyMessage', {
 	extend: 'Ext.dataview.List',
 	requires: [
-		'WeiQuPai.view.CompanyTitleText',
+		'WeiQuPai.view.CompanyTitleText'
 		],
 	xtype: 'companymessage',
 	config: {
@@ -28,7 +28,7 @@ Ext.define('WeiQuPai.view.CompanyMessage', {
 				xtype: 'companytitletext',
 				//centered: true,
 				scrollDock: 'top',
-				itemId: 'company-title',
+				itemId: 'company-title'
 				//tpl: showuserinfotpl
 			},
 			{
