@@ -508,10 +508,14 @@ h3{
 	background:$bar-color;
 	border:0;
 }
-.w-main-tab .x-tab .x-button-label, .w-main-tab .x-tab .x-button-icon:before{
+.w-main-tab .x-tab .x-button-label{
 	color:#000;
+	line-height:2em;
 }
-.w-main-tab .x-tab.x-tab-active .x-button-label, .w-main-tab .x-tab.x-tab-active .x-button-icon:before{
+.w-main-tab .x-tab .x-button-icon{
+	height:1.8em;
+}
+.w-main-tab .x-tab.x-tab-active .x-button-label{
 	color:#fff;
 }
 .x-button-normal .x-button-label, .x-button-icon{
@@ -519,4 +523,37 @@ h3{
 }
 .x-button.x-button-back:before{
 	color:#000;
+}
+.tab-today{
+	background:url(../images/icon-tab-today.png) no-repeat center bottom;
+	background-size:21px 21px;
+}
+.tab-myauction{
+	background:url(../images/icon-tab-myauction.png) no-repeat center bottom;
+	background-size:23px 18px;
+}
+.tab-circle{
+	background:url(../images/icon-tab-circle.png) no-repeat center bottom;
+	background-size:23px 23px;
+}
+.tab-my{
+	background:url(../images/icon-tab-my.png) no-repeat center bottom;
+	background-size:21px 20px;
+}
+
+.w-main-tab .x-tab.x-tab-active .tab-today{
+	background:url(../images/icon-tab-today-on.png) no-repeat center bottom;
+	background-size:21px 21px;
+}
+.w-main-tab .x-tab.x-tab-active .tab-myauction{
+	background:url(../images/icon-tab-myauction-on.png) no-repeat center bottom;
+	background-size:23px 18px;
+}
+.w-main-tab .x-tab.x-tab-active .tab-circle{
+	background:url(../images/icon-tab-circle-on.png) no-repeat center bottom;
+	background-size:23px 23px;
+}
+.w-main-tab .x-tab.x-tab-active .tab-my{
+	background:url(../images/icon-tab-my-on.png) no-repeat center bottom;
+	background-size:21px 20px;
 }

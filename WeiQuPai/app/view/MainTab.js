@@ -17,19 +17,19 @@ Ext.define('WeiQuPai.view.MainTab', {
         },
         items: [{
                 title: '今日',
-                iconCls: 'home',
+                iconCls: 'tab-today',
                 xtype: 'today'
             },  {
                 title: '已拍',
-                iconCls: 'list',
+                iconCls: 'tab-myauction',
                 xtype: 'myauction'
             },  {
                 title: '拍圈',
-                iconCls: 'circle',
+                iconCls: 'tab-circle',
                 xtype: 'circle'
             },  {
                 title: '我的',
-                iconCls: 'user',
+                iconCls: 'tab-my',
                 xtype: 'my'
             }      
         ]
