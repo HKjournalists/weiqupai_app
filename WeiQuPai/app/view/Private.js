@@ -46,6 +46,6 @@ Ext.define('WeiQuPai.view.Private', {
 	initialize: function(){
 		this.callParent(arguments);
 		this.down('#validateOnAddFriend').setValue(1);
-		//this.down('#canBeSearched').setValue(1);
+		this.down('#canBeSearched').setValue(1);
 	}
 });
