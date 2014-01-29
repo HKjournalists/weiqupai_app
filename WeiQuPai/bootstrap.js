@@ -18,7 +18,7 @@ Ext.Loader.addClassPathMappings({
   "Ext.device.sqlite.SQLTransaction": "../touch/src/device/sqlite/Sencha.js",
   "Ext.draw.engine.SvgContext.Gradient": "../touch/src/draw/engine/SvgContext.js",
   "WeiQuPai": "app",
-  "WeiQuPai.view.MyFriend": "app/view/IconListExamle.js"
+  "WeiQuPai.view.IconListExample": "app/view/IconListExamle.js"
 });
 Ext.ClassManager.addNameAlternateMappings({
   "Ext.AbstractComponent": [],
@@ -749,6 +749,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.controller.CompanyMessage": [],
   "WeiQuPai.controller.DetailPicShow": [],
   "WeiQuPai.controller.ItemDetail": [],
+  "WeiQuPai.controller.Login": [],
   "WeiQuPai.controller.Main": [],
   "WeiQuPai.controller.My": [],
   "WeiQuPai.controller.MyAuction": [],
@@ -758,6 +759,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.controller.Order": [],
   "WeiQuPai.controller.Pay": [],
   "WeiQuPai.controller.Private": [],
+  "WeiQuPai.controller.Register": [],
   "WeiQuPai.controller.Setting": [],
   "WeiQuPai.controller.Shop": [],
   "WeiQuPai.controller.ShowOrder": [],
@@ -791,6 +793,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.DetailPicShow": [],
   "WeiQuPai.view.DisclosureItem": [],
   "WeiQuPai.view.IconButton": [],
+  "WeiQuPai.view.IconListExample": [],
   "WeiQuPai.view.IndexAd": [],
   "WeiQuPai.view.InputComment": [],
   "WeiQuPai.view.ItemDetail": [],
@@ -798,6 +801,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.ItemDetailTextList": [],
   "WeiQuPai.view.Login": [],
   "WeiQuPai.view.Main": [],
+  "WeiQuPai.view.MainTab": [],
   "WeiQuPai.view.My": [],
   "WeiQuPai.view.MyAccount": [],
   "WeiQuPai.view.MyAuction": [],
@@ -811,6 +815,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.Pay": [],
   "WeiQuPai.view.PaymentList": [],
   "WeiQuPai.view.Private": [],
+  "WeiQuPai.view.Register": [],
   "WeiQuPai.view.Setting": [],
   "WeiQuPai.view.Shipment": [],
   "WeiQuPai.view.ShipmentList": [],
@@ -1762,6 +1767,7 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.controller.CompanyMessage": [],
   "WeiQuPai.controller.DetailPicShow": [],
   "WeiQuPai.controller.ItemDetail": [],
+  "WeiQuPai.controller.Login": [],
   "WeiQuPai.controller.Main": [],
   "WeiQuPai.controller.My": [],
   "WeiQuPai.controller.MyAuction": [],
@@ -1771,6 +1777,7 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.controller.Order": [],
   "WeiQuPai.controller.Pay": [],
   "WeiQuPai.controller.Private": [],
+  "WeiQuPai.controller.Register": [],
   "WeiQuPai.controller.Setting": [],
   "WeiQuPai.controller.Shop": [],
   "WeiQuPai.controller.ShowOrder": [],
@@ -1828,6 +1835,9 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.IconButton": [
     "widget.iconbutton"
   ],
+  "WeiQuPai.view.IconListExample": [
+    "widget.iconlistexample"
+  ],
   "WeiQuPai.view.IndexAd": [
     "widget.indexad"
   ],
@@ -1849,6 +1859,9 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.Main": [
     "widget.main"
   ],
+  "WeiQuPai.view.MainTab": [
+    "widget.maintab"
+  ],
   "WeiQuPai.view.My": [
     "widget.my"
   ],
@@ -1868,13 +1881,13 @@ Ext.ClassManager.addNameAliasMappings({
     "widget.myconsignee"
   ],
   "WeiQuPai.view.MyCoupon": [
-    "widget.myfriend"
+    "widget.mycoupon"
   ],
   "WeiQuPai.view.MyFriend": [
     "widget.myfriend"
   ],
   "WeiQuPai.view.MyProp": [
-    "widget.myfriend"
+    "widget.myprop"
   ],
   "WeiQuPai.view.Order": [
     "widget.order"
@@ -1887,6 +1900,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.Private": [
     "widget.private"
+  ],
+  "WeiQuPai.view.Register": [
+    "widget.register"
   ],
   "WeiQuPai.view.Setting": [
     "widget.setting"

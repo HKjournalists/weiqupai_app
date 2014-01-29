@@ -1,6 +1,6 @@
-Ext.define('WeiQuPai.view.MyFriend', {
+Ext.define('WeiQuPai.view.IconListExample', {
 	extend: 'Ext.dataview.List',
-	xtype: 'myfriend',
+	xtype: 'iconlistexample',
 	config: {
 		store: 'UserFriend',
 		disableSelection: true,

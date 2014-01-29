@@ -3,10 +3,10 @@ Ext.define('WeiQuPai.view.BottomBar', {
     xtype: 'bottombar',
     config: {
         docked: 'bottom',
+        cls: 'w-toolbar',
         items: [
             {
                 xtype: 'button',
-                text: '返回',
                 cls: 'x-button-back',
                 action: 'back'
 

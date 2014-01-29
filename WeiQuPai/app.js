@@ -20,7 +20,7 @@ Ext.application({
 
     controllers: [
         'Main', 'Today', 'MyAuction', 'MyAuctionDetail','ItemDetail','DetailPicShow','Order', 'ShowOrder', 'Circle', 'ShowUser',
-        'Shop', 'CompanyMessage', 'My', 'Setting', 'MyFriend', 'MyConsignee', 'Private'
+        'Shop', 'CompanyMessage', 'My', 'Setting', 'MyFriend', 'MyConsignee', 'Private', 'Login', 'Register'
     ],
     views: [
         'Main', 'Login', 'Register'

@@ -13,6 +13,8 @@ $gray-color: #666;
 $red-color: #d22270;
 $bar-color: #0eb8b7;
 $border-color: #dbdbe0;
+$button-color: #0eb8b7;
+
 $ios7-blue: #157efb;
 $ios7-red: #fc3e39;
 $ios7-green: #53d769;
@@ -99,10 +101,6 @@ h3{
 	font-size:$default-font;
 	font-weight:bold;
 	color:#000;
-}
-//隐藏一些不用的组件,如back button
-div.x-button.hidden{
-	display:none !important;
 }
 
 //前进的按钮没有，要重新定义
@@ -445,4 +443,63 @@ div.x-button.hidden{
 //toggle状态的按钮
 .w-toggle-field{
 	min-height:0;
+}
+
+//输入框和按钮
+.w-input-text{
+	border:1px solid #ccc;
+	border-radius:5px;
+}
+.w-input-text .x-input-el{
+	padding:.7em;
+}
+.x-input-el.w-icon-user{
+	background:url(../images/icon-user.png) no-repeat .7em center;
+	background-size:14px 14px;
+	padding-left:36px;
+}
+.x-input-el.w-icon-password{
+	background:url(../images/icon-password.png) no-repeat .7em center;
+	background-size:10px 18px;
+	padding-left:36px;
+}
+.w-button, .w-button-small{
+	border-radius:5px;
+	background-color:$button-color;
+	height:auto;
+	border:none;
+}
+.w-button-small{
+	border-radius:3px;
+}
+.w-button .x-button-label, .w-button-small .x-button-label{
+	padding:.7em 1em;
+	color:#fff;
+	font-weight:bold;
+}
+.w-button-small .x-button-label{
+	padding:.3em 1em;
+	font-size:$small-font;
+	font-weight:normal;
+}
+.w-logo{
+	background:url(../images/logo219.png) no-repeat center center;
+	background-size:110px 110px;
+	margin:20px 0;
+	height:110px;
+}
+.w-fieldset{
+	margin:1em;
+}
+.w-fieldset .x-form-fieldset-inner{
+	border-radius:5px;
+}
+.w-fieldset .w-disclosure-item:last-child{
+	border-bottom:0;
+}
+.w-container, .w-margin{
+	margin:1em;
+}
+.w-toolbar{
+	padding:0 .7em;
 }

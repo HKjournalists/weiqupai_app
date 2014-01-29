@@ -1,5 +1,6 @@
 Ext.define('WeiQuPai.view.MyFriend', {
 	extend: 'WeiQuPai.view.SwipeButtonList',
+	requires: ['WeiQuPai.view.SwipeButtonList'],
 	xtype: 'myfriend',
 	config: {
 		store: 'UserFriend',
@@ -23,6 +24,7 @@ Ext.define('WeiQuPai.view.MyFriend', {
 	},
 
 	initialize: function(){
+		console.log(1);
 		this.callParent(arguments);
 		this.getStore().load();
 	}

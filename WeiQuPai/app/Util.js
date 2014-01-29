@@ -1,6 +1,5 @@
 Ext.define("WeiQuPai.Util", {
 	singleton: true,
-   
     createOverlay : function(com, conf){
     	var config = {
             bottom: 0,
@@ -23,5 +22,9 @@ Ext.define("WeiQuPai.Util", {
         var cmp = Ext.create(com, Ext.merge(config, conf));
         Ext.Viewport.add(cmp);
         return cmp;
+    }, 
+
+    isLogin: function(bool){
+        return bool;
     }
 })
