@@ -6,7 +6,7 @@ Ext.define('WeiQuPai.view.ShowOrder', {
 		emtpyText: '没有可用的数据',
 		store: 'Item',
         disableSelection : true,
-		itemTpl: ['<div class="showorder-row">',
+		itemTpl: ['<div class="show-order-row">',
                 '<img src="' + WeiQuPai.Config.host + 'pic/avatar.jpg" class="avatar"/>',
                 '<div class="info">',
                 '<h3>{name}</h3>',
