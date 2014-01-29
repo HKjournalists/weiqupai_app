@@ -10,6 +10,7 @@ Ext.define('WeiQuPai.view.MainTab', {
     ],
     config: {
         tabBarPosition: 'bottom',
+        cls: 'w-main-tab',
         layout: {
             type: 'card',
             animation: false
