@@ -9,7 +9,7 @@ Ext.define('WeiQuPai.view.Main', {
             type: 'card',
             animation: 'cover'
         },
-        navigationBar: false,
+        navigationBar: false
     },
 
     isAnimating: false,

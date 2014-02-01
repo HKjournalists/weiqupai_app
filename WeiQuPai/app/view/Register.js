@@ -45,7 +45,10 @@ Ext.define('WeiQuPai.view.Register', {
                 items: [
                     {
                         xtype: 'button',
-                        cls: 'x-button-back',
+                        text: '返回',
+                        iconAlign: 'top',
+                        cls: 'w-tab-button',
+                        iconCls: 'tab-back',
                         action: 'back'
                     }
                 ]

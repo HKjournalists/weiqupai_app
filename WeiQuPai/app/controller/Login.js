@@ -30,7 +30,17 @@ Ext.define('WeiQuPai.controller.Login', {
     },
     
     doLogin: function(btn){
-        Ext.Msg.alert(null, '登录');
+        Ext.device.Camera.capture({
+            success: function(image) {
+                console.log(image);
+            },
+            quality: 75,
+            width: 200,
+            height: 200,
+            destination: 'data',
+            //source: 'camera'
+        });
+        //Ext.Msg.alert(null, '登录');
     },
 
     showRegister: function(){

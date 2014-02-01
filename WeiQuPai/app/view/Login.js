@@ -9,11 +9,13 @@ Ext.define('WeiQuPai.view.Login', {
                 title: '登录',
                 docked: 'top'
             },
+            /*
             {
                 xtype: 'container',
                 cls: 'w-logo'
 
             },
+            */
             {
                 name: 'uname',
                 xtype: 'textfield',
@@ -55,9 +57,7 @@ Ext.define('WeiQuPai.view.Login', {
             {
                 xtype: 'container',
                 cls: 'w-container',
-                layout: {
-                    type: 'hbox',
-                },
+                layout: 'hbox',
                 items: [
                     {
                         xtype: 'button',

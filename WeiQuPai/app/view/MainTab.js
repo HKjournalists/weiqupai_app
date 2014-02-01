@@ -15,22 +15,30 @@ Ext.define('WeiQuPai.view.MainTab', {
             type: 'card',
             animation: false
         },
-        items: [{
+        items: [
+            {
                 title: '今日',
                 iconCls: 'tab-today',
-                xtype: 'today'
-            },  {
+                xtype: 'today',
+                flex: 1
+            },
+            {
                 title: '已拍',
                 iconCls: 'tab-myauction',
-                xtype: 'myauction'
-            },  {
+                xtype: 'myauction',
+                flex: 1
+            },
+            {
                 title: '拍圈',
                 iconCls: 'tab-circle',
-                xtype: 'circle'
-            },  {
+                xtype: 'circle',
+                flex: 1
+            },
+            {
                 title: '我的',
                 iconCls: 'tab-my',
-                xtype: 'my'
+                xtype: 'my',
+                flex: 1
             }      
         ]
     }

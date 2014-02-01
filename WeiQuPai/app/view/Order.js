@@ -59,7 +59,7 @@ Ext.define('WeiQuPai.view.Order', {
 	}, 
 	initialize: function(){
 		this.setRecord(Ext.create('WeiQuPai.model.Order'));
-		this.down('bottombar').insert(2, {xtype: 'button', text: '去支付', action: 'pay'});
+		this.down('bottombar').insert(2, {xtype: 'button', text: '去支付', action: 'pay', cls: 'w-toolbar-button', iconCls: 'icon-pay'});
 		this.down('bottombar').insert(3, {xtype: 'spacer'});
 		this.addShipment();
 		this.addPayment();

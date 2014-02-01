@@ -4,7 +4,7 @@ Ext.define('WeiQuPai.controller.Register', {
     config: {
         refs: {
             regForm: 'register',
-            register: 'register button[action=register]',
+            register: 'register button[action=register]'
         },
         control: {
             register:{

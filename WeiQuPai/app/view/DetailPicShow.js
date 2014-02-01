@@ -11,21 +11,12 @@ Ext.define('WeiQuPai.view.DetailPicShow', {
 		},
 		items: [
 			{
-				xtype: 'button',
-				ui: 'back',
-				action: 'detail-pic-prev'
-			},
-			{
 				xtype: 'carousel',
 				flex: 1,
 				direction : 'horizontal',
+				directionLock: true,
 				cls : 'item-detail-pic',
-				indicator: false
-			},
-			{
-				xtype: 'button',
-				ui: 'forward',
-				action: 'detail-pic-next'
+				//indicator: false
 			}
 		]
 	},
@@ -43,6 +34,7 @@ Ext.define('WeiQuPai.view.DetailPicShow', {
 			}
 			com.add(item);
 		}
+		/*
 		var prev = this.down('button[action=detail-pic-prev]');
 		var next = this.down('button[action=detail-pic-next]');
 		prev.disable();
@@ -60,5 +52,6 @@ Ext.define('WeiQuPai.view.DetailPicShow', {
                 next.enable();
             }
         });
+*/
 	}
 });
