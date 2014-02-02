@@ -52,6 +52,6 @@ Ext.define('WeiQuPai.controller.Main', {
         var tab = this.getMain().down(btn.config.action);
         main = this.getMain().down('maintab');
         main.setActiveItem(tab);
-        this.getMain().setActiveItem(main);
+        this.getMain().pop(main);
     }
 });

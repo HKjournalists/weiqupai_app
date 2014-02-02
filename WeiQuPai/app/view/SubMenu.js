@@ -6,12 +6,14 @@ Ext.define('WeiQuPai.view.SubMenu', {
         cls: 'submenu',
         modal: {xtype: 'mask', transparent: true},
         hideOnMaskTap: true,
+        /*
         showAnimation: {
             type: 'pop'
         },
         hideAnimation: {
             type: 'popOut'
         },
+        */
         items: [
             {
                 xtype: 'button',

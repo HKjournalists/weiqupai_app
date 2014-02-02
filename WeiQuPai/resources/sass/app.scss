@@ -585,7 +585,7 @@ h3{
 	background:url(../images/icon-tab-back.png) no-repeat center bottom;
 	background-size:26px 20px;
 	height:1.9em;
-	width:1.5em;
+	width:1.8em;
 }
 .tab-menu{
 	background:url(../images/icon-tab-menu.png) no-repeat center bottom;
@@ -596,42 +596,41 @@ h3{
 //子菜单样式
 .submenu{
 	background:url(../images/submenu-border.png) no-repeat;
-	background-size:95px 134px;
-	width:105px;
-	height:134px;
-	padding:0 18px 0 8px;
+	background-size:127px 180px;
+	width:127px;
+	height:180px;
+	padding:0 18px;
 }
 .submenu .menu-button{
-	height:32px;
-	line-height:32px;
+	height:2.65em;
 	border:0;
 	border-radius:0;
 	border-bottom:1px solid #b2b2b2;
-	padding:0 0 0 20px;
+	padding:0 0 0 24px;
 }
 .submenu .menu-button:last-child{
 	border:0;
 }
 .submenu .menu-button .x-button-label{
-	font-size:.8em;
+	font-size:1em;
 	text-align:left;
 	color:#666;
 }
 .submenu .today{
 	background:url(../images/submenu-01.png) no-repeat left center;
-	background-size:14px 14px;
+	background-size:18px 18px;
 }
 .submenu .myauction{
 	background:url(../images/submenu-02.png) no-repeat left center;
-	background-size:15px 12px;
+	background-size:21px 18px;
 }
 .submenu .circle{
 	background:url(../images/submenu-03.png) no-repeat left center;
-	background-size:15px 15px;
+	background-size:18px 18px;
 }
 .submenu .my{
 	background:url(../images/submenu-04.png) no-repeat left center;
-	background-size:12px 12px;;
+	background-size:18px 18px;;
 }
 
 //一些按钮的图标
