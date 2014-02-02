@@ -316,6 +316,28 @@
         "fields": "uname:text:Uname,password:text:Password,cfpasssword:text:Cfpasssword",
         "formFileName": "Register"
       }
+    },
+    "app/controller/Login.js": {
+      "source": "{controllerFileName}.js.tpl.merge",
+      "version": "7cd8d1cf12515ca525732931d6b775e3f7924ad9",
+      "parameters": {
+        "appName": "WeiQuPai",
+        "controllerName": "Login",
+        "controllerFileName": "Login",
+        "name": "Login",
+        "controllerNamespace": "WeiQuPai.controller"
+      }
+    },
+    "app/controller/Register.js": {
+      "source": "{controllerFileName}.js.tpl.merge",
+      "version": "7cd8d1cf12515ca525732931d6b775e3f7924ad9",
+      "parameters": {
+        "appName": "WeiQuPai",
+        "controllerName": "Register",
+        "controllerFileName": "Register",
+        "name": "Register",
+        "controllerNamespace": "WeiQuPai.controller"
+      }
     }
   }
 }

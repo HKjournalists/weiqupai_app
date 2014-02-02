@@ -16,7 +16,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
                 tap: 'showOrderView'
            },
            commentBtn: {
-                tap: 'showCommentInput'
+                tap: WeiQuPai.Util.showCommentForm
            },
            commentList: {
                 avatartap: 'doAvatarTap',
@@ -41,15 +41,6 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
             xtype: 'order'
         }
         this.getMain().push(payView);
-    },
-
-    showCommentInput: function(btn){
-        var config = {
-            centered: true,
-            height: 190
-        };
-        var comment = WeiQuPai.Util.createOverlay('WeiQuPai.view.InputComment', config);
-        comment.show();
     },
 
     doPublishComment: function(form){

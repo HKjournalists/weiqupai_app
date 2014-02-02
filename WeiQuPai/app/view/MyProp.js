@@ -1,6 +1,6 @@
 Ext.define('WeiQuPai.view.MyProp', {
 	extend: 'Ext.dataview.List',
-	xtype: 'myfriend',
+	xtype: 'myprop',
 	config: {
 		store: 'UserProp',
 		disableSelection: true,

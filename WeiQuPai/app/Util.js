@@ -1,6 +1,6 @@
 Ext.define("WeiQuPai.Util", {
-	singleton: true,
-   
+    singleton: true,
+    requires: ['WeiQuPai.view.InputComment'],
     createOverlay : function(com, conf){
     	var config = {
             bottom: 0,
@@ -23,5 +23,17 @@ Ext.define("WeiQuPai.Util", {
         var cmp = Ext.create(com, Ext.merge(config, conf));
         Ext.Viewport.add(cmp);
         return cmp;
+    }, 
+
+    showCommentForm: function(){
+        var config = {
+            centered: true,
+            height: 200
+        };
+        var comment = WeiQuPai.Util.createOverlay('WeiQuPai.view.InputComment', config);
+        comment.show();
+    },
+    isLogin: function(bool){
+        return bool;
     }
 })

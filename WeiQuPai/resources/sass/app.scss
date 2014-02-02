@@ -13,11 +13,22 @@ $gray-color: #666;
 $red-color: #d22270;
 $bar-color: #0eb8b7;
 $border-color: #dbdbe0;
+$button-color: #0eb8b7;
+
+//tabbar的文字暗色
+$tab-text-dark: #85f7f6;
+//tabbar的文字亮色
+$tab-text-light: #fff;
+//titlebar的文字色
+$title-text-color: #d5fafa;
+//按钮的文字色
+$button-text-color: #fff;
+
 $ios7-blue: #157efb;
 $ios7-red: #fc3e39;
 $ios7-green: #53d769;
 
-//标题栏背影
+//标题栏样式
 .x-toolbar.x-docked-top{
 	border-bottom:0;
 	border-radius:0;
@@ -26,11 +37,15 @@ $ios7-green: #53d769;
 .x-toolbar .x-title{
 	font-size:$big-font;
 	font-weight:bold;
+	color: $title-text-color;
+	text-shadow:0 1px rgba(0,0,0,.2);
 }
 .x-msgbox-title.x-toolbar.x-docked-top{
 	background-color:transparent;
 }
-
+.x-msgbox .x-msgbox-title .x-title{
+	color:#000;
+}
 
 //list paging的样式
 .x-list-paging{
@@ -100,10 +115,6 @@ h3{
 	font-weight:bold;
 	color:#000;
 }
-//隐藏一些不用的组件,如back button
-div.x-button.hidden{
-	display:none !important;
-}
 
 //前进的按钮没有，要重新定义
 .x-button.x-button-forward {
@@ -171,8 +182,9 @@ div.x-button.hidden{
 
 //商品详情图片列表
 .item-detail-pic-container{
-	padding:10px 5px;
+	padding:.65em 1em;
 }
+/*
 .item-detail-pic-container .x-button{
 	height:270px;
 	padding:0 10px;
@@ -180,6 +192,7 @@ div.x-button.hidden{
 .item-detail-pic-container .x-item-disabled{
 	opacity:0.6;
 }
+*/
 .item-detail-pic{
 	width:240px;
 	height:270px;
@@ -241,7 +254,7 @@ div.x-button.hidden{
 }
 
 //晒单的列表
-.showorder-row, .comment-row, .auction-user-row, .circle-row{
+.show-order-row, .comment-row, .auction-user-row, .circle-row{
 	overflow:auto;	
 }
 .show-order-row h3, .comment-row h3, .auction-user-row h3, .circle-row h3{
@@ -337,9 +350,6 @@ div.x-button.hidden{
 .shop-link-btn{
 	margin-top:2em;
 }
-.comment-input, .comment-button{
-	margin:.7em 1em;
-}
 
 //我的
 .w-myinfo img{
@@ -405,6 +415,10 @@ div.x-button.hidden{
 	display:-webkit-box;
 	height:100%;
 }
+.w-coupon-list-item img{
+	width:60px;
+	height:40px;
+}
 .x-item-pressed .w-icon-list-item, .x-item-pressed .w-list-item{
 	background:#ddd;
 }
@@ -445,4 +459,196 @@ div.x-button.hidden{
 //toggle状态的按钮
 .w-toggle-field{
 	min-height:0;
+}
+
+//输入框和按钮
+.w-input-text{
+	border:1px solid #ccc;
+	border-radius:5px;
+}
+.w-input-text .x-input-el{
+	padding:.7em;
+}
+.x-input-el.w-icon-user{
+	background:url(../images/icon-user.png) no-repeat .7em center;
+	background-size:14px 14px;
+	padding-left:36px;
+}
+.x-input-el.w-icon-password{
+	background:url(../images/icon-password.png) no-repeat .7em center;
+	background-size:10px 18px;
+	padding-left:36px;
+}
+.w-button, .w-button-small{
+	border-radius:5px;
+	background-color:$button-color;
+	height:auto;
+	border:none;
+}
+.w-button-small{
+	border-radius:3px;
+}
+.w-button .x-button-label, .w-button-small .x-button-label{
+	padding:.7em 1em;
+	color:$button-text-color;
+	font-weight:bold;
+	text-shadow: 0 1px #0ba1a0;
+}
+.w-button-small .x-button-label{
+	padding:.3em 1em;
+	font-size:$small-font;
+	font-weight:normal;
+}
+.w-logo{
+	background:url(../images/logo219.png) no-repeat center center;
+	background-size:110px 110px;
+	margin:20px 0;
+	height:110px;
+}
+.w-fieldset{
+	margin:1em;
+}
+.w-fieldset .x-form-fieldset-inner{
+	border-radius:5px;
+}
+.w-fieldset .w-disclosure-item:last-child{
+	border-bottom:0;
+}
+.w-container, .w-margin{
+	margin:1em;
+}
+.w-toolbar{
+	padding:0 .7em;
+	background:$bar-color;
+}
+.w-main-tab .x-tabbar{
+	background:$bar-color;
+	border:0;
+}
+.w-main-tab .x-tabbar .x-tab{
+	flex: 1;
+	-webkit-box-flex: 1;
+}
+.w-main-tab .x-tab .x-button-label{
+	color: $tab-text-dark;
+	line-height: 2em;
+}
+.w-main-tab .x-tab .x-button-icon{
+	height:1.8em;
+}
+.w-main-tab .x-tab.x-tab-active .x-button-label{
+	color: $tab-text-light;
+}
+.tab-today{
+	background:url(../images/icon-tab-today.png) no-repeat center bottom;
+	background-size:21px 21px;
+}
+.tab-myauction{
+	background:url(../images/icon-tab-myauction.png) no-repeat center bottom;
+	background-size:23px 21px;
+}
+.tab-circle{
+	background:url(../images/icon-tab-circle.png) no-repeat center bottom;
+	background-size:20px 21px;
+}
+.tab-my{
+	background:url(../images/icon-tab-my.png) no-repeat center bottom;
+	background-size:22px 20px;
+}
+
+.w-main-tab .x-tab.x-tab-active .tab-today{
+	background:url(../images/icon-tab-today-on.png) no-repeat center bottom;
+	background-size:21px 21px;
+}
+.w-main-tab .x-tab.x-tab-active .tab-myauction{
+	background:url(../images/icon-tab-myauction-on.png) no-repeat center bottom;
+	background-size:23px 21px;
+}
+.w-main-tab .x-tab.x-tab-active .tab-circle{
+	background:url(../images/icon-tab-circle-on.png) no-repeat center bottom;
+	background-size:20px 21px;
+}
+.w-main-tab .x-tab.x-tab-active .tab-my{
+	background:url(../images/icon-tab-my-on.png) no-repeat center bottom;
+	background-size:22px 21px;
+}
+
+.w-tab-button.x-button{
+	height:2.9em;
+}
+.w-tab-button .x-button-label{
+	color: $button-text-color;
+	font-size:.65em;
+}
+
+.tab-back{
+	background:url(../images/icon-tab-back.png) no-repeat center bottom;
+	background-size:26px 20px;
+	height:1.9em;
+	width:1.5em;
+}
+.tab-menu{
+	background:url(../images/icon-tab-menu.png) no-repeat center bottom;
+	background-size:23px 20px;
+	height:1.9em;
+	width:1.5em;
+}
+//子菜单样式
+.submenu{
+	background:url(../images/submenu-border.png) no-repeat;
+	background-size:95px 134px;
+	width:105px;
+	height:134px;
+	padding:0 18px 0 8px;
+}
+.submenu .menu-button{
+	height:32px;
+	line-height:32px;
+	border:0;
+	border-radius:0;
+	border-bottom:1px solid #b2b2b2;
+	padding:0 0 0 20px;
+}
+.submenu .menu-button:last-child{
+	border:0;
+}
+.submenu .menu-button .x-button-label{
+	font-size:.8em;
+	text-align:left;
+	color:#666;
+}
+.submenu .today{
+	background:url(../images/submenu-01.png) no-repeat left center;
+	background-size:14px 14px;
+}
+.submenu .myauction{
+	background:url(../images/submenu-02.png) no-repeat left center;
+	background-size:15px 12px;
+}
+.submenu .circle{
+	background:url(../images/submenu-03.png) no-repeat left center;
+	background-size:15px 15px;
+}
+.submenu .my{
+	background:url(../images/submenu-04.png) no-repeat left center;
+	background-size:12px 12px;;
+}
+
+//一些按钮的图标
+.w-toolbar-button .x-button-label{
+	font-size:.75em;
+	color: $button-text-color;
+
+}
+.icon-write{
+	background:url(../images/icon-write.png) no-repeat left center;
+	background-size:11px 14px;
+}
+.icon-pay{
+	background:url(../images/icon-pay.png) no-repeat left center;
+	background-size:22px 15px;
+}
+.icon-pai{
+	background:url(../images/icon-pai.png) no-repeat left center;
+	background-size:20px 16px;
 }

@@ -9,13 +9,13 @@ Ext.define('WeiQuPai.view.InputComment', {
 				name: 'comment',
 				maxRows: 4,
 				placeHolder: '评论',
-				cls: 'comment-input'
+				cls: 'w-input-text w-margin'
 			},
 			{
 				xtype: 'button', 
 				action: 'publishComment',
 				text: '发送评论',
-				cls: 'comment-button'
+				cls: 'w-button w-margin'
 			}
 		]
 	}, 

@@ -1,6 +1,6 @@
 Ext.define('WeiQuPai.view.MyCoupon', {
 	extend: 'Ext.dataview.List',
-	xtype: 'myfriend',
+	xtype: 'mycoupon',
 	config: {
 		store: 'UserCoupon',
 		disableSelection: true,

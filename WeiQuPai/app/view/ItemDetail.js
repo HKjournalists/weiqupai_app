@@ -69,11 +69,15 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 		var paiBtn = {
 			xtype: 'button',
 			text: '我要拍',
+			cls: 'w-toolbar-button',
+			iconCls: 'icon-pai',
 			action: 'order'
 		};
 		var commentBtn = {
 			xtype: 'button',
 			text: '写评论',
+			cls: 'w-toolbar-button',
+			iconCls: 'icon-write',
 			action: 'comment'
 		};
 		this.down('bottombar').insert(2, paiBtn);

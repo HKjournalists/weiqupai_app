@@ -3,7 +3,8 @@ Ext.define('WeiQuPai.view.IndexAd', {
 	xtype: 'indexad',
 	config: {
 		direction: 'horizontal',
-		cls: 'index-ad'
+		cls: 'index-ad',
+		directionLock: true
 	},
 	initialize : function(){
 		var data = [

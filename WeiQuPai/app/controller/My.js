@@ -6,7 +6,6 @@ Ext.define('WeiQuPai.controller.My', {
     		main: 'main',
     		friendBtn: 'iconbutton[action=friend]',
     		accountBtn: 'iconbutton[action=account]',
-    		orderBtn: 'iconbutton[action=order]',
     		consigneeBtn: 'iconbutton[action=consignee]',
     		propBtn: 'iconbutton[action=prop]',
     		couponBtn: 'iconbutton[action=coupon]',
@@ -31,11 +30,6 @@ Ext.define('WeiQuPai.controller.My', {
 
     showAccount: function(){
         var view = Ext.create('WeiQuPai.view.MyAccount');
-        this.getMain().push(view);
-    },
-
-    showOrder: function(){
-        var view = Ext.create('WeiQuPai.view.MyAuction');
         this.getMain().push(view);
     },
 

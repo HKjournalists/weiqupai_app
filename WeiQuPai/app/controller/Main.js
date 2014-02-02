@@ -3,34 +3,55 @@ Ext.define('WeiQuPai.controller.Main', {
     
     config: {
         refs: {
-            tab: 'tabpanel',
             main: 'main',
-            backButton: 'bottombar button[action=back]'
+            backButton: 'button[action=back]',
+            menuButton: 'button[action=menu]',
+            submenuToday: 'button[action=today]',
+            submenuMyauction: 'button[action=myauction]',
+            submenuCircle: 'button[action=circle]',
+            submenuMy: 'button[action=my]',
+
         },
         control: {
            backButton:{
                 tap : 'goBack'
            },
-           main: {
-                initialize: 'initMain'
+           menuButton:{
+                tap : 'showMenu'
+           },
+           submenuToday:{
+                tap: 'showMainTab'
+           },
+           submenuMyauction:{
+                tap: 'showMainTab'
+           },
+           submenuCircle:{
+                tap: 'showMainTab'
+           },
+           submenuMy:{
+                tap: 'showMainTab'
            }
         }
     },
-    
-    isAnimating : false,
+   
+    menu: null,
 
     goBack: function(){
-        if(this.getMain().isAnimating) return;
         this.getMain().pop();
     },
 
-    initMain : function(me){
-        var ani = me.getLayout().getAnimation();
-        ani.getInAnimation().on('animationstart', function(){
-            me.isAnimating = true;
-        });
-        ani.on('animationend', function(){
-            me.isAnimating = false;
-        });
+    showMenu: function(btn){
+        if(!this.menu){
+            this.menu = Ext.create('WeiQuPai.view.SubMenu');
+        }
+        this.menu.showBy(btn);
+    },
+
+    showMainTab: function(btn){
+        this.menu.hide();
+        var tab = this.getMain().down(btn.config.action);
+        main = this.getMain().down('maintab');
+        main.setActiveItem(tab);
+        this.getMain().setActiveItem(main);
     }
 });
