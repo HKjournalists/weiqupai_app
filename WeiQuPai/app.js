@@ -69,18 +69,18 @@ Ext.application({
     initMsgBox: function(){
         var MB = Ext.MessageBox;
         Ext.apply(Ext.MessageBox, {
-            OK    : {text: '确定',     itemId: 'ok',  ui: 'action'},
-            YES   : {text: '是',    itemId: 'yes', ui: 'action'},
-            NO    : {text: '否',     itemId: 'no'},
+            OK    : {text: '确定', itemId: 'ok',  ui: 'action'},
+            YES   : {text: '是', itemId: 'yes', ui: 'action'},
+            NO    : {text: '否', itemId: 'no'},
             CANCEL: {text: '取消', itemId: 'cancel'},
             OKCANCEL: [
                 {text: '取消', itemId: 'cancel'},
-                {text: '确定',     itemId: 'ok',  ui : 'action'}
+                {text: '确定', itemId: 'ok',  ui : 'action'}
             ],
             YESNOCANCEL: [
                 {text: '取消', itemId: 'cancel'},
-                {text: '否',     itemId: 'no'},
-                {text: '是',    itemId: 'yes', ui: 'action'}
+                {text: '否', itemId: 'no'},
+                {text: '是', itemId: 'yes', ui: 'action'}
             ],
             YESNO: [
                 {text: '否',  itemId: 'no'},

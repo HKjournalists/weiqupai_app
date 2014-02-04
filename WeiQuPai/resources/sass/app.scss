@@ -554,6 +554,13 @@ h3{
 .w-button.x-item-disabled .x-button-label, .w-button-small.x-item-disabled .x-button-label{
 	opacity: .6;
 }
+.w-button-logout{
+	background-color:$ios7-red;
+	margin:1em;
+}
+.w-button-logout .x-button-label{
+	text-shadow: 0 1px #da2924;	
+}
 .w-logo{
 	background:url(../images/logo219.png) no-repeat center center;
 	background-size:110px 110px;

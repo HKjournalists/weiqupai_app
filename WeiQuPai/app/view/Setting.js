@@ -29,6 +29,12 @@ Ext.define('WeiQuPai.view.Setting', {
 				cls: 'w-disclosure-item w-disclosure-item-single'
 			},
 			{
+				xtype: 'button',
+				text: '退出登录',
+				cls: 'w-button w-button-logout',
+				action: 'logout'
+			},
+			{
 				xtype: 'bottombar'
 			}
 		]

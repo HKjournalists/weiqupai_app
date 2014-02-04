@@ -103,5 +103,14 @@ Ext.define("WeiQuPai.Util", {
     logout: function(callback){
         WeiQuPai.Cache.remove('currentUser');
         callback && callback();
+    },
+
+
+    showTab: function(tab){
+        var main = Ext.Viewport.down('main');
+        mainTab = main.down('maintab');
+        mainTab.setActiveItem(tab);
+        main.pop(mainTab);
     }
+
 })

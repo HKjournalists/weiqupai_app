@@ -8,6 +8,7 @@ Ext.define('WeiQuPai.controller.Login', {
             goMain: 'button[action=gomain]',
             qqlogin: 'disclosureitem[itemId=qqlogin]',
             weibologin: 'disclosureitem[itemId=weibologin]',
+            logout: 'button[action=logout]',
             main: 'main'
         },
         control: {
@@ -22,6 +23,9 @@ Ext.define('WeiQuPai.controller.Login', {
             },
             weibologin: {
                 tap: 'doWeiboLogin'
+            },
+            logout: {
+                tap: 'doLogout'
             }
         }
     },
@@ -50,6 +54,10 @@ Ext.define('WeiQuPai.controller.Login', {
 
     doWeiboLogin: function(){
         Ext.Msg.alert(null, '微博登录');
+    },
+    
+    doLogout: function(){
+        WeiQuPai.Util.logout();
+        WeiQuPai.Util.showTab('today'); 
     }
-        
 });
