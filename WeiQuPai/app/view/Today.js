@@ -1,9 +1,7 @@
 Ext.define('WeiQuPai.view.Today', {
 	extend: 'Ext.dataview.List',
 	xtype: 'today',
-	requires: [
-		'WeiQuPai.view.IndexAd', 'WeiQuPai.view.ItemDetail', 'Ext.plugin.ListPaging', 'Ext.plugin.PullRefresh'
-	],
+	requires: ['WeiQuPai.view.IndexAd', 'WeiQuPai.view.ItemDetail', 'Ext.plugin.ListPaging', 'Ext.plugin.PullRefresh'],
 	config:{
 		plugins: [
 			{
@@ -22,14 +20,15 @@ Ext.define('WeiQuPai.view.Today', {
 				noMoreRecordsText: '亲，没有更多数据了'
 			}
 		],
-		emtpyText: '没有可用的商品',
+		emtpyText: '还没有拍卖的宝贝～',
 		store: 'Item',
         itemCls: 'today-item-row',
         disableSelection : true,
-        itemTpl: ['<p class="item-img"><img src="' + WeiQuPai.Config.host + '{pic_url}" /></p>',
+        itemTpl: new Ext.XTemplate(
+        	'<p class="item-img"><img src="' + WeiQuPai.Config.host + '{pic_url}" /></p>',
             '<h2><span class="time">起拍时间11:00</span>{name}</h2>',
-            '<p><span class="market-price">市场价 {price}</span> / <span class="price">￥{price}</span></p>'].join(''),
-            //'<p>已拍 {sold_num}  关注 {attention}</p>'].join(''),
+            '<p><span class="market-price">市场价 {price}</span> / <span class="price">￥{price}</span></p>'
+        ),
         items: [
         	{
         		xtype: 'titlebar',
@@ -41,5 +40,14 @@ Ext.define('WeiQuPai.view.Today', {
 	        	scrollDock: 'top'
 	        }
         ]
-	}
+	},
+	initialize: function(){
+		this.callParent(arguments);
+ 		var me = this;
+        this.getStore().load(function(data, operation, success){
+            if(!success){
+                me.setEmptyText('网络不给力哦～');
+            }
+        });
+   	}
 });

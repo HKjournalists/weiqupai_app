@@ -15,22 +15,13 @@ Ext.define('WeiQuPai.view.My', {
 				docked: 'top'
 			},
 			{
-				xtype: 'container',
-				itemId: 'myInfo',
-				cls: 'w-disclosure-item',
-				items:[
-					{
-						xtype:'container',
-						cls: 'w-myinfo',
-						html: '<img src="resources/images/icon-avatar.png"/><h2>Pony</h2><p>生命是一场不一样的旅行</p>'
-
-					},
-					{
-						xtype: 'container',
-						baseCls: 'w-disclosure',
-						docked: 'right'
-					}
-				]
+				xtype: 'disclosureitem',
+				title: {
+					xtype:'container',
+					itemId: 'myInfo',
+					cls: 'w-myinfo',
+					tpl: '<img src="{avatar}"/><h2>{nick}</h2><p>{sign}</p>'
+				}
 			},
 			{
 				xtype: 'container',
@@ -86,6 +77,26 @@ Ext.define('WeiQuPai.view.My', {
 					}
 				]
 			}
-		]
-	}
+		],
+
+		listeners: {
+			'activate': 'loadData'
+		}
+	},
+
+	loadData: function(){
+        if(!WeiQuPai.Util.isLogin()){
+        	Ext.each(this.getInnerItems(), function(cmp){
+        		cmp.hide();
+        	});
+            this.add(Ext.create('WeiQuPai.view.LoginTip'));
+            return false;
+        }
+        var loginTip = this.down('logintip');
+        loginTip && this.remove(loginTip)
+        this.down('#myInfo').setData(WeiQuPai.Cache.get('currentUser'));;
+		Ext.each(this.getInnerItems(), function(cmp){
+    		cmp.show();
+    	});        
+    }
 });

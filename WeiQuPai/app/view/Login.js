@@ -35,7 +35,8 @@ Ext.define('WeiQuPai.view.Login', {
                 xtype: 'button',
                 text: '登录',
                 cls: 'w-button w-margin',
-                action: 'login'             
+                action: 'login',
+                disabled: true             
             },
             {
                 xtype: 'fieldset',
@@ -64,21 +65,22 @@ Ext.define('WeiQuPai.view.Login', {
                         text: '没有帐号？注册',
                         cls: 'w-button',
                         action: 'goregister',
-                        flex: 2
-                    },
-                    {
-                        xtype: 'spacer',
-                        width: '1em'
-                    },
-                    {
-                        xtype: 'button',
-                        text: '逛逛',
-                        cls: 'w-button',
-                        action: 'gomain',
                         flex: 1
                     }
                 ]
+            },
+            {
+                xtype: 'bottombar'
             }
         ]        
+    },
+    initialize: function(){
+        this.down('textfield').on('keyup', this.setButtonState, this);
+        this.down('passwordfield').on('keyup', this.setButtonState, this);
+    },
+
+    setButtonState: function(){
+        var disabled = this.down('textfield').getValue().length == 0 || this.down('passwordfield').getValue().length == 0 
+        this.down('button[action=login]').setDisabled(disabled);
     }
 });

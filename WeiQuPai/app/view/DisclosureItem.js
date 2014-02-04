@@ -62,10 +62,14 @@ Ext.define("WeiQuPai.view.DisclosureItem", {
 	},
 
 	setTitle: function(title){
-		if(this.config.titleStyle == 'bold'){
-			title = '<h2>' + title + '</h2>';
+		if(Ext.isString(title)){
+			if(this.config.titleStyle == 'bold'){
+				title = '<h2>' + title + '</h2>';
+			}
+			this.titleNode.setHtml(title);
+		}else{
+			this.titleNode.add(title);
 		}
-		this.titleNode.setHtml(title);
 	},
 
 	doTouchStart: function(){

@@ -1,0 +1,37 @@
+{
+	total: 0,
+	records: [
+		{
+			id: 1,
+			item_title: 'iphone 5S土豪金',
+			price: 1250,
+			defeated: 40,
+			pic_url: 'pic/5s.jpg',
+			ctime: '2013-12-21'
+		},
+		{
+			id: 2,
+			item_title: '爱国者移动电源',
+			price: 223,
+			defeated: 56,
+			pic_url: 'pic/5s.jpg',
+			ctime: '2013-12-21'
+		},
+		{
+			id: 3,
+			item_title: '小米盒子',
+			price: 260,
+			defeated: 90,
+			pic_url: 'pic/5s.jpg',
+			ctime: '2013-12-21'
+		},
+		{
+			id: 4,
+			item_title: '小米手机3',
+			price: 1088,
+			defeated: 88,
+			pic_url: 'pic/5s.jpg',
+			ctime: '2013-12-21'
+		}
+	]
+}

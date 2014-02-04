@@ -22,25 +22,21 @@ Ext.define('WeiQuPai.controller.Login', {
             },
             weibologin: {
                 tap: 'doWeiboLogin'
-            },
-            goMain: {
-                tap: 'goMain'
             }
         }
     },
     
     doLogin: function(btn){
-        Ext.device.Camera.capture({
-            success: function(image) {
-                console.log(image);
-            },
-            quality: 75,
-            width: 200,
-            height: 200,
-            destination: 'data',
-            //source: 'camera'
+        var form = this.getLoginForm();
+        var data = form.getValues();
+        WeiQuPai.Util.login(data.uname, data.pass, function(success){
+            var main = Ext.Viewport.down('main');
+            var preView = main.getPreviousItem();
+            if(preView.isXType('tabpanel')){
+                preView.getActiveItem().fireEvent('activate');
+            }
+            main.pop();
         });
-        //Ext.Msg.alert(null, '登录');
     },
 
     showRegister: function(){
@@ -54,11 +50,6 @@ Ext.define('WeiQuPai.controller.Login', {
 
     doWeiboLogin: function(){
         Ext.Msg.alert(null, '微博登录');
-    },
-
-    goMain: function(){
-        var main = Ext.create('WeiQuPai.view.MainTab');
-        this.getMain().push(main);
     }
         
 });

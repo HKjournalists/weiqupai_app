@@ -2,7 +2,8 @@ Ext.define('WeiQuPai.store.Item', {
 	extend: 'Ext.data.Store',
 	requires: ['WeiQuPai.model.Item'],
 	config:{
-		autoLoad: true,
+		storeId: 'Item',
+		autoLoad: false,
 		model: 'WeiQuPai.model.Item',
 		pageSize: 5,
 		proxy: {

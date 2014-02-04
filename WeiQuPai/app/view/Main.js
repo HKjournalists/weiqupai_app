@@ -29,11 +29,7 @@ Ext.define('WeiQuPai.view.Main', {
     initialize: function(){
         this.callParent(arguments);
         this.addAnimation();
-        if(WeiQuPai.Util.isLogin(false)){
-            this.add(Ext.create('WeiQuPai.view.MainTab'));
-            return;
-        }
-        this.add(Ext.create('WeiQuPai.view.Login'));
+        this.add(Ext.create('WeiQuPai.view.MainTab'));
     },
 
     addAnimation: function(){

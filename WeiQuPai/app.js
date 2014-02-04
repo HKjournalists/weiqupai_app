@@ -15,18 +15,16 @@ Ext.application({
     name: 'WeiQuPai',
 
     requires: [
-        'Ext.MessageBox','WeiQuPai.Config', 'WeiQuPai.Util'
+        'Ext.MessageBox','WeiQuPai.Config', 'WeiQuPai.Util', 'WeiQuPai.Cache'
     ],
 
     controllers: [
         'Main', 'Today', 'MyAuction', 'MyAuctionDetail','ItemDetail','DetailPicShow','Order', 'ShowOrder', 'Circle', 'ShowUser',
         'Shop', 'CompanyMessage', 'My', 'Setting', 'MyFriend', 'MyConsignee', 'Private', 'Login', 'Register'
     ],
-    views: [
-        'Main', 'Login', 'Register'
-    ],
+    views: ['Main'],
     stores: [
-        'Item','Circle', 'ShowUserInfo', 'ShowUserMessage', 'CompanyMessage', 'SiteMessage', 'UserFriend', 'UserProp', 'UserCoupon'
+        'Item','MyAuction', 'Circle', 'ShowUserInfo', 'ShowUserMessage', 'CompanyMessage', 'SiteMessage', 'UserFriend', 'UserProp', 'UserCoupon'
     ],
     icon: {
         '57': 'resources/icons/icon.png',
@@ -50,8 +48,8 @@ Ext.application({
     launch: function() {
         // Destroy the #appLoadingIndicator element
         Ext.fly('appLoadingIndicator').destroy();
+        this.initMsgBox();
 
-        // Initialize the main view
         Ext.Viewport.add(Ext.create('WeiQuPai.view.Main'));
     },
 
@@ -65,5 +63,29 @@ Ext.application({
                 }
             }
         );
+    }, 
+
+    //修改messagebox的文字
+    initMsgBox: function(){
+        var MB = Ext.MessageBox;
+        Ext.apply(Ext.MessageBox, {
+            OK    : {text: '确定',     itemId: 'ok',  ui: 'action'},
+            YES   : {text: '是',    itemId: 'yes', ui: 'action'},
+            NO    : {text: '否',     itemId: 'no'},
+            CANCEL: {text: '取消', itemId: 'cancel'},
+            OKCANCEL: [
+                {text: '取消', itemId: 'cancel'},
+                {text: '确定',     itemId: 'ok',  ui : 'action'}
+            ],
+            YESNOCANCEL: [
+                {text: '取消', itemId: 'cancel'},
+                {text: '否',     itemId: 'no'},
+                {text: '是',    itemId: 'yes', ui: 'action'}
+            ],
+            YESNO: [
+                {text: '否',  itemId: 'no'},
+                {text: '是', itemId: 'yes', ui: 'action'}
+            ]
+        });
     }
 });

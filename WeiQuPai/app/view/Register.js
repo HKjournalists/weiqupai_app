@@ -15,7 +15,7 @@ Ext.define('WeiQuPai.view.Register', {
                 xtype: 'textfield',
                 cls: 'w-input-text w-margin',
                 inputCls: 'w-icon-user',
-                placeHolder: '填写用户名/手机'
+                placeHolder: '填写用户名'
 
             },
             {
@@ -26,7 +26,7 @@ Ext.define('WeiQuPai.view.Register', {
                 placeHolder: '填写密码'
             },
             {
-                name: 'password',
+                name: 'password2',
                 xtype: 'passwordfield',
                 cls: 'w-input-text w-margin',
                 inputCls: 'w-icon-password',
@@ -36,23 +36,25 @@ Ext.define('WeiQuPai.view.Register', {
                 xtype: 'button',
                 text: '注册',
                 cls: 'w-button w-margin',
-                action: 'register'
+                action: 'register',
+                disabled: true
             },
             {
-                xtype: 'toolbar',
-                docked: 'bottom',
-                cls: 'w-toolbar',
-                items: [
-                    {
-                        xtype: 'button',
-                        text: '返回',
-                        iconAlign: 'top',
-                        cls: 'w-tab-button',
-                        iconCls: 'tab-back',
-                        action: 'back'
-                    }
-                ]
+                xtype: 'bottombar'
             }
         ]        
+    },
+
+    initialize: function(){
+        this.down('textfield[name=uname]').on('keyup', this.setButtonState, this);
+        this.down('passwordfield[name=password]').on('keyup', this.setButtonState, this);
+        this.down('passwordfield[name=password2]').on('keyup', this.setButtonState, this);
+    },
+
+    setButtonState: function(){
+        var disabled = this.down('textfield[name=uname]').getValue().length == 0
+        || this.down('passwordfield[name=password]').getValue().length == 0
+        || this.down('passwordfield[name=password2]').getValue().length == 0;
+        this.down('button[action=register]').setDisabled(disabled);
     }
 });

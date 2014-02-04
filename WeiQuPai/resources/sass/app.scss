@@ -47,6 +47,49 @@ $ios7-green: #53d769;
 	color:#000;
 }
 
+//loadmask样式
+.x-mask .x-mask-inner{
+	background:rgba(0,0,0,0.25);
+}
+.x-mask .x-mask-inner .x-mask-message{
+	color:#333;
+}
+.x-loading-spinner > span.x-loading-top {
+  background-color: rgba(170, 170, 170, 0.99);
+}
+.x-loading-spinner > span.x-loading-top::after {
+  background-color: rgba(170, 170, 170, 0.9);
+}
+.x-loading-spinner > span.x-loading-left::before {
+  background-color: rgba(170, 170, 170, 0.8);
+}
+.x-loading-spinner > span.x-loading-left {
+  background-color: rgba(170, 170, 170, 0.7);
+}
+.x-loading-spinner > span.x-loading-left::after {
+  background-color: rgba(170, 170, 170, 0.6);
+}
+.x-loading-spinner > span.x-loading-bottom::before {
+  background-color: rgba(170, 170, 170, 0.5);
+}
+.x-loading-spinner > span.x-loading-bottom {
+  background-color: rgba(170, 170, 170, 0.4);
+}
+.x-loading-spinner > span.x-loading-bottom::after {
+  background-color: rgba(170, 170, 170, 0.35);
+}
+.x-loading-spinner > span.x-loading-right::before {
+  background-color: rgba(170, 170, 170, 0.3);
+}
+.x-loading-spinner > span.x-loading-right {
+  background-color: rgba(170, 170, 170, 0.25);
+}
+.x-loading-spinner > span.x-loading-right::after {
+  background-color: rgba(170, 170, 170, 0.2);
+}
+.x-loading-spinner > span.x-loading-top::before {
+  background-color: rgba(170, 170, 170, 0.15);
+}
 //list paging的样式
 .x-list-paging{
 	padding:1em 0;
@@ -69,6 +112,11 @@ pullrefresh样式
 .w-disclosure-item-single{
 	border-top: 1px solid $border-color;
 	margin-top:1em;
+}
+
+.w-disclosure-title{
+	flex: 1;
+	-webkit-box-flex: 1;
 }
 .w-disclosure-content{
 	color:$gray-color;
@@ -352,6 +400,10 @@ h3{
 }
 
 //我的
+.w-myinfo{
+	-webkit-box-flex: 1;
+	flex: 1;
+}
 .w-myinfo img{
 	float:left;
 	width:68px;
@@ -498,6 +550,9 @@ h3{
 	padding:.3em 1em;
 	font-size:$small-font;
 	font-weight:normal;
+}
+.w-button.x-item-disabled .x-button-label, .w-button-small.x-item-disabled .x-button-label{
+	opacity: .6;
 }
 .w-logo{
 	background:url(../images/logo219.png) no-repeat center center;
