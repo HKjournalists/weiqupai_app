@@ -89,7 +89,7 @@ Ext.define('WeiQuPai.view.My', {
         	Ext.each(this.getInnerItems(), function(cmp){
         		cmp.hide();
         	});
-            this.add(Ext.create('WeiQuPai.view.LoginTip'));
+            !this.down('logintip') && this.add(Ext.create('WeiQuPai.view.LoginTip'));
             return false;
         }
         var loginTip = this.down('logintip');

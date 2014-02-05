@@ -30,7 +30,7 @@ Ext.define('WeiQuPai.view.MyAuction', {
     },
     loadData: function(){
         if(!WeiQuPai.Util.isLogin()){
-            this.add(Ext.create('WeiQuPai.view.LoginTip'));
+            !this.down('logintip') && this.add(Ext.create('WeiQuPai.view.LoginTip'));
             return false;
         }
         var loginTip = this.down('logintip');
