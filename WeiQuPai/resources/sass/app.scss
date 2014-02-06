@@ -52,7 +52,7 @@ $ios7-green: #53d769;
 	background:rgba(0,0,0,0.25);
 }
 .x-mask .x-mask-inner .x-mask-message{
-	color:#333;
+	color:#fff;
 }
 .x-loading-spinner > span.x-loading-top {
   background-color: rgba(170, 170, 170, 0.99);
@@ -211,7 +211,7 @@ h3{
 	padding:.2em 1em;
 }
 .today-item-row .price{
-	font-size:$default-font;
+	font-size:$big-font;
 	color:$red-color;
 }
 .today-item-row .market-price{
@@ -263,6 +263,21 @@ h3{
 	float:right;
 	clear:right;
 }
+.item-detail-desc{
+	border-bottom: 1px solid $border-color;
+	padding:1em;
+	line-height:1.5;
+	font-size:$normal-font;
+}
+//展开和收起的按钮
+.show-more, .hide-more{
+	border-radius: 7px;
+	background:$bar-color;
+	font-size:.75em;
+	color: #fff;
+	margin-left: 1em;
+	padding:.1em .5em;
+}
 //已拍
 .myauction-row{
 	margin-top:10px;
@@ -282,7 +297,7 @@ h3{
 }
 
 .myauction-info .fbig{
-	font-size:$big-font;
+	font-size:1.2em;
 }
 .myauction-info p{
 	line-height:1.5;
@@ -467,9 +482,21 @@ h3{
 	display:-webkit-box;
 	height:100%;
 }
-.w-coupon-list-item img{
-	width:60px;
+.w-coupon-list-item .coupon-icon{
+	width:5em;
 	height:40px;
+	line-height:40px;
+	font-size:1em;
+	text-align:center;
+	background:#8bcf92;
+	border-radius: 5px;
+	display:block;
+	margin-right:1em;
+	color:#fff;
+}
+.w-coupon-list-item .coupon-icon .value{
+	font-size:1.5em;
+	margin-right:.1em;
 }
 .x-item-pressed .w-icon-list-item, .x-item-pressed .w-list-item{
 	background:#ddd;
@@ -637,6 +664,8 @@ h3{
 
 .w-tab-button.x-button{
 	height:2.9em;
+	margin:0;
+	padding:0;
 }
 .w-tab-button .x-button-label{
 	color: $button-text-color;
@@ -662,6 +691,7 @@ h3{
 	width:127px;
 	height:180px;
 	padding:0 18px;
+	//margin-left:5px;
 }
 .submenu .menu-button{
 	height:2.65em;
@@ -696,6 +726,9 @@ h3{
 }
 
 //一些按钮的图标
+.w-toolbar-button{
+	margin:0;
+}
 .w-toolbar-button .x-button-label{
 	font-size:.75em;
 	color: $button-text-color;
@@ -712,4 +745,8 @@ h3{
 .icon-pai{
 	background:url(../images/icon-pai.png) no-repeat left center;
 	background-size:20px 16px;
+}
+.icon-share{
+	background:url(../images/icon-share.png) no-repeat left center;
+	background-size:16px 16px;
 }

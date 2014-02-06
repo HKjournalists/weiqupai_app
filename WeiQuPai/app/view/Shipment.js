@@ -7,7 +7,7 @@ Ext.define('WeiQuPai.view.Shipment', {
 			{
 				xtype: 'titlebar', 
 				title: '物流详情',
-				docked: 'top',
+				docked: 'top'
 			},
 			{
 				xtype: 'container',

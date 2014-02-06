@@ -743,6 +743,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.viewport.WindowsPhone": [
     "Ext.viewport.WP"
   ],
+  "WeiQuPai.Cache": [],
   "WeiQuPai.Config": [],
   "WeiQuPai.Util": [],
   "WeiQuPai.controller.Circle": [],
@@ -765,16 +766,21 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.controller.ShowOrder": [],
   "WeiQuPai.controller.ShowUser": [],
   "WeiQuPai.controller.Today": [],
+  "WeiQuPai.model.AuctionComment": [],
   "WeiQuPai.model.Circle": [],
   "WeiQuPai.model.CompanyMessage": [],
   "WeiQuPai.model.Item": [],
+  "WeiQuPai.model.MyAuction": [],
   "WeiQuPai.model.Order": [],
   "WeiQuPai.model.ShowUserInfo": [],
   "WeiQuPai.model.ShowUserMessage": [],
   "WeiQuPai.model.SiteMessage": [],
+  "WeiQuPai.model.User": [],
+  "WeiQuPai.store.AuctionComment": [],
   "WeiQuPai.store.Circle": [],
   "WeiQuPai.store.CompanyMessage": [],
   "WeiQuPai.store.Item": [],
+  "WeiQuPai.store.MyAuction": [],
   "WeiQuPai.store.ShowUserInfo": [],
   "WeiQuPai.store.ShowUserMessage": [],
   "WeiQuPai.store.SiteMessage": [],
@@ -785,7 +791,6 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.BottomBar": [],
   "WeiQuPai.view.Circle": [],
   "WeiQuPai.view.CircleAd": [],
-  "WeiQuPai.view.CircleDetail": [],
   "WeiQuPai.view.CompanyMessage": [],
   "WeiQuPai.view.CompanyTitleText": [],
   "WeiQuPai.view.ConsigneeList": [],
@@ -797,9 +802,8 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.IndexAd": [],
   "WeiQuPai.view.InputComment": [],
   "WeiQuPai.view.ItemDetail": [],
-  "WeiQuPai.view.ItemDetailInfo": [],
-  "WeiQuPai.view.ItemDetailTextList": [],
   "WeiQuPai.view.Login": [],
+  "WeiQuPai.view.LoginTip": [],
   "WeiQuPai.view.Main": [],
   "WeiQuPai.view.MainTab": [],
   "WeiQuPai.view.My": [],
@@ -823,6 +827,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.ShowOrder": [],
   "WeiQuPai.view.ShowUser": [],
   "WeiQuPai.view.SiteMessage": [],
+  "WeiQuPai.view.SubMenu": [],
   "WeiQuPai.view.SwipeButtonList": [],
   "WeiQuPai.view.Today": []
 });
@@ -1761,6 +1766,7 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.viewport.Ios": [],
   "Ext.viewport.Viewport": [],
   "Ext.viewport.WindowsPhone": [],
+  "WeiQuPai.Cache": [],
   "WeiQuPai.Config": [],
   "WeiQuPai.Util": [],
   "WeiQuPai.controller.Circle": [],
@@ -1783,16 +1789,21 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.controller.ShowOrder": [],
   "WeiQuPai.controller.ShowUser": [],
   "WeiQuPai.controller.Today": [],
+  "WeiQuPai.model.AuctionComment": [],
   "WeiQuPai.model.Circle": [],
   "WeiQuPai.model.CompanyMessage": [],
   "WeiQuPai.model.Item": [],
+  "WeiQuPai.model.MyAuction": [],
   "WeiQuPai.model.Order": [],
   "WeiQuPai.model.ShowUserInfo": [],
   "WeiQuPai.model.ShowUserMessage": [],
   "WeiQuPai.model.SiteMessage": [],
+  "WeiQuPai.model.User": [],
+  "WeiQuPai.store.AuctionComment": [],
   "WeiQuPai.store.Circle": [],
   "WeiQuPai.store.CompanyMessage": [],
   "WeiQuPai.store.Item": [],
+  "WeiQuPai.store.MyAuction": [],
   "WeiQuPai.store.ShowUserInfo": [],
   "WeiQuPai.store.ShowUserMessage": [],
   "WeiQuPai.store.SiteMessage": [],
@@ -1810,9 +1821,6 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.CircleAd": [
     "widget.circlead"
-  ],
-  "WeiQuPai.view.CircleDetail": [
-    "widget.circledetail"
   ],
   "WeiQuPai.view.CompanyMessage": [
     "widget.companymessage"
@@ -1847,14 +1855,11 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.ItemDetail": [
     "widget.itemdetail"
   ],
-  "WeiQuPai.view.ItemDetailInfo": [
-    "widget.itemdetailinfo"
-  ],
-  "WeiQuPai.view.ItemDetailTextList": [
-    "widget.itemdetailtextlist"
-  ],
   "WeiQuPai.view.Login": [
     "widget.login"
+  ],
+  "WeiQuPai.view.LoginTip": [
+    "widget.logintip"
   ],
   "WeiQuPai.view.Main": [
     "widget.main"
@@ -1924,6 +1929,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.SiteMessage": [
     "widget.sitemessage"
+  ],
+  "WeiQuPai.view.SubMenu": [
+    "widget.submenu"
   ],
   "WeiQuPai.view.SwipeButtonList": [
     "widget.swipebuttonlist"

@@ -1,0 +1,55 @@
+{
+	total: 10,
+	records: [
+		{
+			id: 1,
+			uid: 10,
+			nick: '小白',
+			avatar: 'pic/avatar.jpg',
+			time: '2013-10-12',
+			up_num: 120,
+			comment_num: 12,
+			content: '这里是评论内容'
+		},
+		{
+			id: 2,
+			uid: 12,
+			nick: '今天是个好日子',
+			avatar: 'pic/avatar.jpg',
+			time: '2013-11-12',
+			up_num: 12000,
+			comment_num: 112,
+			content: '顶楼上'
+		},
+		{
+			id: 3,
+			uid: 123,
+			nick: '生命的意义',
+			avatar: 'pic/avatar.jpg',
+			time: '2014-1-22',
+			up_num: 123,
+			comment_num: 213,
+			content: '过年了给大家发红包啊'
+		},
+		{
+			id: 4,
+			uid: 120,
+			nick: '苍老师',
+			avatar: 'pic/avatar.jpg',
+			time: '2014-2-5',
+			up_num: 56,
+			comment_num: 39,
+			content: '如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？'
+		},
+		{	
+			id: 5,
+			uid: 1123,
+			nick: '旅行者',
+			avatar: 'pic/avatar.jpg',
+			time: '2014-1-23',
+			up_num: 305,
+			comment_num: 450,
+			content: '这东西可以买么'
+		}
+	]
+}

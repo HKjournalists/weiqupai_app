@@ -20,7 +20,7 @@ Ext.define('WeiQuPai.view.Circle', {
 	extend: 'Ext.dataview.List',
 	xtype: 'circle',
 	requires: [
-		'WeiQuPai.view.CircleAd', 'WeiQuPai.view.CircleDetail', 'WeiQuPai.view.ShowUser', 'WeiQuPai.view.CompanyMessage', 'WeiQuPai.view.SiteMessage'
+		'WeiQuPai.view.CircleAd', 'WeiQuPai.view.ShowUser', 'WeiQuPai.view.CompanyMessage', 'WeiQuPai.view.SiteMessage'
 		],
 	//requires: ['WeiQuPai.store.Circle'],
 

@@ -3,14 +3,16 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
     config: {
         refs: {
             main: 'main',
-            textList : 'itemdetailtextlist',
+            shopInfo : 'disclosureitem[itemId=shopInfo]',
             pai: 'button[action=order]',
             commentBtn: 'button[action=comment]',
-            commentList: 'itemdetail'
+            commentList: 'itemdetail',
+            commentForm: 'commentform',
+            descContainer: 'itemdetail container[itemId=itemDesc]'
         },
         control: {
-           textList : {
-                itemtap: 'showDetail'
+           shopInfo : {
+                tap: 'showShop'
            },
            pai: {
                 tap: 'showOrderView'
@@ -23,17 +25,18 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
                 uptap: 'doUpTap',
                 commenttap: 'doCommentTap'
            },
-           'commentform': {
+           commentForm: {
                 publishComment: 'doPublishComment'
+           }, 
+           descContainer: {
+                toggleDesc: 'toggleDesc'
            }
         }
     },
     
-    showDetail: function(list, index, dataItem, record, e){
-        var detailView = {
-            xtype: record.getId()
-        };
-        this.getMain().push(detailView);
+    showShop: function(){
+        var shopView = Ext.create('WeiQuPai.view.Shop');
+        this.getMain().push(shopView);
     },
 
     showOrderView: function(){
@@ -57,6 +60,20 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
 
     doCommentTap: function(index, record){
         console.log('commenttap');
-    }
+    },
 
+    toggleDesc: function(){
+        var desc = this.getDescContainer();
+        var data = desc.getData();
+        if(desc.toggleState == 'short'){
+            desc.toggleState = 'long';
+            data.description = desc.rawContent;
+            data.button = '<span class="hide-more">收起</span>';
+        }else{
+            desc.toggleState = 'short';
+            data.description = desc.rawContent.substr(0, 30) + "...";
+            data.button = '<span class="show-more">展开</span>';
+        }
+        desc.setData(data);
+    }
 });

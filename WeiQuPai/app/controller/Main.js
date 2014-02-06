@@ -9,8 +9,7 @@ Ext.define('WeiQuPai.controller.Main', {
             submenuToday: 'button[action=today]',
             submenuMyauction: 'button[action=myauction]',
             submenuCircle: 'button[action=circle]',
-            submenuMy: 'button[action=my]',
-
+            submenuMy: 'button[action=my]'
         },
         control: {
            backButton:{
