@@ -19,7 +19,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
             '<div class="info">',
             '<h3>{nick}</h3>',
             '<p>{content}</p>',
-            '<p><span class="up-area"><span class="up">{up_num}</span><span class="comment">{comment_num}</span></span><span class="time">{time}</span></p>',
+            '<div class="flex"><div class="time">{time}</div><div class="up">{up_num}</div><div class="comment">{comment_num}</div></div></div>',
             '</div>'
         ),
 		items:[
@@ -110,7 +110,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 		//给详细内容的收起加事件
 		this.down('#itemDesc').on('tap', function(){
 			this.fireEvent('toggleDesc');
-		}, null, {element: 'element', 'delegate': 'span'});
+		}, null, {element: 'element'});
 		//加载数据
 		this.loadData(this.config.param_id);
 	},
@@ -138,7 +138,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 		data.button = '';
 		if(desc.rawContent.length > 30){
 			data.description = desc.rawContent.substr(0, 30) + "...";
-			data.button = '<span class="show-more">展开</span>';
+			data.button = '<span class="show-more"></span>';
 		}
 		this.down('#itemDesc').setData(data);
 	}

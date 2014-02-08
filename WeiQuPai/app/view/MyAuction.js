@@ -9,7 +9,7 @@ Ext.define('WeiQuPai.view.MyAuction', {
 		itemTpl: new Ext.XTemplate(
                 '<div class="myauction-row">',
                 '<img src="' + WeiQuPai.Config.host + '{pic_url}" />',
-                '<div class="myauction-info">',
+                '<div class="info">',
                     '<h2>{item_title}</h2>',
                     '<p>成交价 <span class="fbig">{price}</span>',
                     '<p>此价格击败了<span class="fbig">{defeated}%</span>的拍友</p>',

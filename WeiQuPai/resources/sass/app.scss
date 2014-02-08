@@ -6,7 +6,7 @@
 $big-font: 1.1em;
 $default-font: 1em;
 $normal-font: 0.9em;
-$small-font: 0.8em;
+$small-font: 0.75em;
 $tiny-font: 0.6em;
 $text-color: #333;
 $gray-color: #666;
@@ -271,37 +271,32 @@ h3{
 }
 //展开和收起的按钮
 .show-more, .hide-more{
-	border-radius: 7px;
-	background:$bar-color;
-	font-size:.75em;
-	color: #fff;
-	margin-left: 1em;
-	padding:.1em .5em;
+	width:14px;
+	height:14px;
+	display:inline-block;
+	vertical-align:text-bottom;
 }
-//已拍
-.myauction-row{
-	margin-top:10px;
-	overflow:auto;
+.show-more{
+	background:url(../images/icon-arrow-down.png);
+	background-size:14px 14px;
 }
+.hide-more{
+	background:url(../images/icon-arrow-up.png);
+	background-size:14px 14px;
+}
+
+//已拍列表的图片
 .myauction-row img{
-	float:left;
 	display:block;
 	width:78px;
 	height:78px;
 	border-radius: 5px;
 	border:1px solid #ccc;
-}
-.myauction-info{
-	margin-left:90px;
-	color:$text-color;
+	margin-right:1em;
 }
 
-.myauction-info .fbig{
+.myauction-row .fbig{
 	font-size:1.2em;
-}
-.myauction-info p{
-	line-height:1.5;
-	font-size:$normal-font;
 }
 
 //已拍详情
@@ -317,28 +312,26 @@ h3{
 }
 
 //晒单的列表
-.show-order-row, .comment-row, .auction-user-row, .circle-row{
-	overflow:auto;	
+.show-order-row, .comment-row, .auction-user-row, .circle-row, .user-row, .myauction-row{
+	display:flex;
+	display:-webkit-box;
+
 }
 .show-order-row h3, .comment-row h3, .auction-user-row h3, .circle-row h3{
 	margin-bottom:.5em;
 }
 .avatar{
-	float:left;
 	width:40px;
 	height:40px;
+	margin-right:.7em;
+	display:block;
 }
-//拍圈的个人页面，没有头像
-.user-row{
+.show-order-row .info, .comment-row .info, .auction-user-row .info, .circle-row .info, .user-row .info, .myauction-row .info{
 	line-height:1.5;
 	font-size:$normal-font;
 	color:$text-color;
-}
-.show-order-row .info, .comment-row .info, .auction-user-row .info, .circle-row .info{
-	margin-left:60px;
-	line-height:1.5;
-	font-size:$normal-font;
-	color:$text-color;
+	flex: 1;
+	-webkit-box-flex: 1;
 }
 .pic-list{
 	margin:1em 0;
@@ -352,49 +345,69 @@ h3{
 	margin-right:10px;
 }
 
-.time{
-	margin-top:.4em;
-	font-size:$tiny-font;
-	color:$gray-color;
-	background:#e4e8e9;
-	border-radius:20px;
-	padding:.2em 1em;
+.reply{
+	background:#f9f9f7;
+	padding:.3em;
+	margin-top:.7em;
 }
-//赞和评论
-.up-area{
-	float:right;
-	font-size:$small-font;
-	margin-top:4px;
+.uname{
+	color:#567091;
+	font-weight:bold;
 }
-.time-area{
+//flex容器
+.flex{
+	display:-webkit-box;
+	display:flex;
 	margin-top:.5em;
+	-webkit-box-align:center;
+	align-items: center;
 }
 
+.time{
+	font-size:$small-font;
+	color:$gray-color;
+	//background:#e4e8e9;
+	//border-radius:20px;
+	//padding:.2em 1em;
+	flex: 1;
+	-webkit-box-flex: 1;
+}
+
+//赞和评论
 .up{
+	font-size:$small-font;
 	background:url(../images/up.png) no-repeat left center;
 	background-size:14px 14px;
 	padding-left:20px;
-	margin-right:18px;
+	width:60px;
 }
 .comment{
+	font-size:$small-font;
 	background:url(../images/comment.png) no-repeat left center;
 	background-size:14px 14px;
 	padding-left:20px;
+	width:60px;
 }
+
 
 //支付页面
 .order-item-info{
 	padding:.7em 1em;
 	border-bottom:1px solid $border-color;
+	display:-webkit-box;
+	display:flex;
+}
+.order-item-info .info{
+	-webkit-box-flex: 1;
+	flex: 1;
 }
 .order-item-info img{
-	float:left;
+	display:block;
 	width:66px;
 	height:66px;
 	border: 1px solid $border-color;	
-}
-.order-item-info .info{
-	margin-left:76px;
+	border-radius: 5px;
+	margin-right:1em;
 }
 .order-item-info .price-area{
 	margin-top:1.5em;
@@ -419,11 +432,18 @@ h3{
 	-webkit-box-flex: 1;
 	flex: 1;
 }
+.w-myinfo .x-innerhtml{
+	display:-webkit-box;
+	display:flex;
+}
 .w-myinfo img{
-	float:left;
 	width:68px;
 	height:68px;
 	margin-right:1em;
+}
+.w-myinfo .info{
+	-webkit-box-flex: 1;
+	flex: 1;
 }
 .w-myinfo p{
 	color:$gray-color;
@@ -463,6 +483,7 @@ h3{
 //带图标和普通文字的列表
 .w-icon-list-item, .w-list-item{
 	display:-webkit-box;
+	display:flex;
 	background:#fff;
 	padding:10px 1em;
 }
@@ -480,6 +501,7 @@ h3{
 	top:0;
 	z-index:-1;
 	display:-webkit-box;
+	display:flex;
 	height:100%;
 }
 .w-coupon-list-item .coupon-icon{
@@ -506,14 +528,18 @@ h3{
 	background:#ff3b30;
 	color:white;
 	display:-webkit-box;
+	display:flex;
 	-webkit-box-align:center;
+	align-items: center;
 }
 .swipe-button-default{
 	padding:0 1em;
 	background:#8bcf92;
 	color:white;
 	display:-webkit-box;
+	display:flex;
 	-webkit-box-align:center;
+	align-items: center;
 }
 .coupon-list-item img{
 	width:60px;
@@ -521,9 +547,11 @@ h3{
 .w-icon-list-item p{
 	line-height:40px;
 	-webkit-box-flex:1;
+	flex:1;
 }
 .w-list-item p{
 	-webkit-box-flex:1;
+	flex: 1;
 }
 .content, .w-icon-list-item .content, .w-list-item .content{
 	line-height:1.5;
@@ -728,6 +756,7 @@ h3{
 //一些按钮的图标
 .w-toolbar-button{
 	margin:0;
+	padding:0 4px;
 }
 .w-toolbar-button .x-button-label{
 	font-size:.75em;

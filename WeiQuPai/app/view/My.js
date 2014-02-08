@@ -20,7 +20,7 @@ Ext.define('WeiQuPai.view.My', {
 					xtype:'container',
 					itemId: 'myInfo',
 					cls: 'w-myinfo',
-					tpl: '<img src="{avatar}"/><h2>{nick}</h2><p>{sign}</p>'
+					tpl: '<img src="{avatar}"/><div class="info"><h2>{nick}</h2><p>{sign}</p></div>'
 				}
 			},
 			{

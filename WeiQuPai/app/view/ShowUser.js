@@ -19,7 +19,7 @@ var showusermessagetpl = new Ext.XTemplate(
 	'</div>',
 	'</tpl>',
 	'<p>{content}</p>',
-    '<p class="time-area"><span class="up-area"><span class="up">{ups}</span><span class="comment">{comments}</span></span><span class="time">{time}</span></p>',
+    '<div class="flex"><div class="time">{time}</div><div class="up">{ups}</div><div class="comment">{comments}</div></div>',
 	'</div>'
 );
 

@@ -6,7 +6,8 @@ Ext.define('WeiQuPai.view.ShowOrder', {
 		emtpyText: '没有可用的数据',
 		store: 'Item',
         disableSelection : true,
-		itemTpl: ['<div class="show-order-row">',
+		itemTpl: new Ext.XTemplate(
+			'<div class="show-order-row">',
                 '<img src="' + WeiQuPai.Config.host + 'pic/avatar.jpg" class="avatar"/>',
                 '<div class="info">',
                 '<h3>{name}</h3>',
@@ -16,8 +17,9 @@ Ext.define('WeiQuPai.view.ShowOrder', {
                 	'<img src="' + WeiQuPai.Config.host + '{pic_url}" />',
                 '</div>',
                 '<p>这里是描述么这里是描述么这里是描述么这里是描述么这里是描述么这里是描述么这里是描述么这里是描述么这里是描述么</p>',
-                '<p class="time-area"><span class="up-area"><span class="up">100</span><span class="comment">500</span></span><span class="time">2012-12-12</span></p>',
-                '</div>'].join(''),
+                '<div class="flex"><div class="time">{time}</div><div class="up">100</div><div class="comment">500</div></div>',
+            '</div>'
+        ),
 		items:[
 			{
         		xtype: 'titlebar',

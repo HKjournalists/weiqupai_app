@@ -3,15 +3,24 @@ Ext.define('WeiQuPai.view.MyAuctionDetail', {
 	xtype: 'myauctiondetail',
 	requires: ['WeiQuPai.view.MyAuctionTextList', 'WeiQuPai.view.Shop', 'WeiQuPai.view.Shipment', 'WeiQuPai.view.ShowOrder', 'WeiQuPai.view.BottomBar'],
 	config: {
-		emtpyText: '没有可用的数据',
+		loadinText: '加载中...',
 		store: 'Item',
         disableSelection : true,
-		itemTpl: ['<div class="auction-user-row">',
+		itemTpl: new Ext.XTemplate(
+			'<div class="auction-user-row">',
                 '<img src="' + WeiQuPai.Config.host + 'pic/avatar.jpg" class="avatar"/>',
                 '<div class="info">',
                 '<h3>{name}</h3>',
-                '<p><span class="up-area"><span class="up">100</span><span class="comment">500</span></span><span class="time">2012-12-12</span></p>',
-                '</div>'].join(''),
+                '<div class="flex"><div class="time">30分钟前</div><div class="up">100</div><div class="comment">500</div></div>',
+                '<div class="reply">',
+                	'<div><span class="uname">天天</span>：是谁说的？</div>',
+                	'<div><span class="uname">天天</span>：故事还没完呢？</div>',
+                	'<div><span class="uname">天天</span>：你们还没放假吗？</div>',
+                	'<div><span class="uname">天天</span>：明天晚上来我家吃吧。</div>',
+                	'<div><span class="uname">天天</span>：好用不？好用明天我也拍一个</div>',
+                '</div>',
+            '</div>'
+        ),
 		items:[
 			{
 				xtype: 'titlebar',

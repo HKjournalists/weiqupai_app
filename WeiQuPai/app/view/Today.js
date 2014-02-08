@@ -20,7 +20,8 @@ Ext.define('WeiQuPai.view.Today', {
 				noMoreRecordsText: '亲，没有更多数据了'
 			}
 		],
-		emtpyText: '还没有拍卖的宝贝～',
+
+		loadingText: '加载中...',
 		store: 'Item',
         itemCls: 'today-item-row',
         disableSelection : true,
@@ -46,7 +47,7 @@ Ext.define('WeiQuPai.view.Today', {
  		var me = this;
         this.getStore().load(function(data, operation, success){
             if(!success){
-                me.setEmptyText('网络不给力哦～');
+                Ext.Msg.alert(null, '网络不给力哦～');
             }
         });
    	}

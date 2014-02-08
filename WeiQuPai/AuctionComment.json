@@ -6,7 +6,7 @@
 			uid: 10,
 			nick: '小白',
 			avatar: 'pic/avatar.jpg',
-			time: '2013-10-12',
+			time: '3天前',
 			up_num: 120,
 			comment_num: 12,
 			content: '这里是评论内容'
@@ -16,7 +16,7 @@
 			uid: 12,
 			nick: '今天是个好日子',
 			avatar: 'pic/avatar.jpg',
-			time: '2013-11-12',
+			time: '4小时前',
 			up_num: 12000,
 			comment_num: 112,
 			content: '顶楼上'
@@ -26,7 +26,7 @@
 			uid: 123,
 			nick: '生命的意义',
 			avatar: 'pic/avatar.jpg',
-			time: '2014-1-22',
+			time: '2天前',
 			up_num: 123,
 			comment_num: 213,
 			content: '过年了给大家发红包啊'
@@ -36,7 +36,7 @@
 			uid: 120,
 			nick: '苍老师',
 			avatar: 'pic/avatar.jpg',
-			time: '2014-2-5',
+			time: '15分钟前',
 			up_num: 56,
 			comment_num: 39,
 			content: '如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？如果评论太长会怎么样？'
@@ -46,7 +46,7 @@
 			uid: 1123,
 			nick: '旅行者',
 			avatar: 'pic/avatar.jpg',
-			time: '2014-1-23',
+			time: '刚刚',
 			up_num: 305,
 			comment_num: 450,
 			content: '这东西可以买么'
