@@ -12,10 +12,29 @@ Ext.define('WeiQuPai.view.InputComment', {
 				cls: 'w-input-text w-margin'
 			},
 			{
-				xtype: 'button', 
-				action: 'publishComment',
-				text: '发送评论',
-				cls: 'w-button w-margin'
+				xtype: 'container',
+				cls: 'w-margin',
+				layout: 'hbox',
+				items: [
+					{
+						xtype: 'button', 
+						action: 'publishComment',
+						text: '发送评论',
+						cls: 'w-button',
+						flex: 2
+					},
+					{
+						xtype: 'spacer',
+						width: '1em'
+					},
+					{
+						xtype: 'button', 
+						action: 'closeComment',
+						text: '取消',
+						cls: 'w-button',
+						flex: 1
+					}
+				]
 			}
 		]
 	}, 
@@ -25,6 +44,9 @@ Ext.define('WeiQuPai.view.InputComment', {
 		this.down('button[action=publishComment]').on('tap', function(){
 			me.fireEvent('publishComment', me);
 		});
+		this.down('button[action=closeComment]').on('tap', function(){
+			me.hide();
+		})
 	}
 	
 });

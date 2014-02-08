@@ -1,14 +1,14 @@
-Ext.define('WeiQuPai.store.Item', {
+Ext.define('WeiQuPai.store.AuctionComment', {
 	extend: 'Ext.data.Store',
-	requires: ['WeiQuPai.model.Item'],
+	requires: ['WeiQuPai.model.AuctionComment'],
 	config:{
-		storeId: 'Item',
+		storeId: 'AuctionComment',
 		autoLoad: false,
-		model: 'WeiQuPai.model.Item',
+		model: 'WeiQuPai.model.AuctionComment',
 		pageSize: 5,
 		proxy: {
 			type: 'ajax',
-			url: WeiQuPai.Config.host + 'itemlist.json',
+			url: WeiQuPai.Config.host + 'AuctionComment.json',
 			reader: {
 				type: 'json',
 				rootProperty: 'records'

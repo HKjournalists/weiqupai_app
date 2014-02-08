@@ -2,7 +2,7 @@ Ext.define('WeiQuPai.view.Private', {
 	extend: 'Ext.Container',
 	xtype: 'private',
 	requires: [
-		'WeiQuPai.view.DisclosureItem', 'Ext.field.Toggle'
+		'WeiQuPai.view.DisclosureItem', 'Ext.field.Toggle', 'WeiQuPai.view.FeedShowOption'
 	],
 
 	config: {
@@ -47,5 +47,17 @@ Ext.define('WeiQuPai.view.Private', {
 		this.callParent(arguments);
 		this.down('#validateOnAddFriend').setValue(1);
 		this.down('#canBeSearched').setValue(1);
-	}
+		this.addFeedShowOption();
+	},
+
+
+	addFeedShowOption: function(){
+        var optionList = WeiQuPai.Util.createOverlay('WeiQuPai.view.FeedShowOption', {height:130});
+        var list = optionList.down('list');
+        if(list.getSelectionCount() == 0){
+            list.select(0);
+        }
+        var title = list.getItemAt(0).getRecord().get('title');
+        this.down('#showFeedFor').setContent(title);
+	},
 });

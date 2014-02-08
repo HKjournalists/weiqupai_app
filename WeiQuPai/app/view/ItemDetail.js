@@ -2,22 +2,26 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 	extend: 'Ext.dataview.List',
 	xtype: 'itemdetail',
 	requires: [
-		'WeiQuPai.view.Shop', 'WeiQuPai.view.BottomBar', 'WeiQuPai.view.ItemDetailTextList',
-		'WeiQuPai.view.ItemDetailInfo', 'WeiQuPai.view.DetailPicShow', 'WeiQuPai.view.Order', 'WeiQuPai.view.InputComment'
+		'WeiQuPai.view.Shop', 'WeiQuPai.view.BottomBar', 'WeiQuPai.view.DisclosureItem',
+		'WeiQuPai.view.DetailPicShow', 'WeiQuPai.view.Order', 'WeiQuPai.view.InputComment',
+		'WeiQuPai.model.Item'
 	],
 	config: {
 		title: '拍品详情',
-		emtpyText: '没有可用的数据',
-		store: 'Item',
+		emtpyText: '还没有人评论',
+		store: 'AuctionComment',
         disableSelection : true,
+        loadingText: '加载中...',
         pressedCls : '',
-		itemTpl: ['<div class="comment-row">',
-                '<img src="' + WeiQuPai.Config.host + 'pic/avatar.jpg" class="avatar"/>',
-                '<div class="info">',
-                '<h3>{name}</h3>',
-                '<p>iphone5S分辨率是多少？很多小白现在还不知道, iPhone,iphone5S分辨率是多少？</p>',
-                '<p><span class="up-area"><span class="up">100</span><span class="comment">500</span></span><span class="time">2012-12-12</span></p>',
-                '</div>'].join(''),
+		itemTpl: new Ext.XTemplate(
+			'<div class="comment-row">',
+            '<img src="' + WeiQuPai.Config.host + '{avatar}" class="avatar"/>',
+            '<div class="info">',
+            '<h3>{nick}</h3>',
+            '<p>{content}</p>',
+            '<p><span class="up-area"><span class="up">{up_num}</span><span class="comment">{comment_num}</span></span><span class="time">{time}</span></p>',
+            '</div>'
+        ),
 		items:[
 			{
 				xtype: 'titlebar',
@@ -29,15 +33,26 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 				scrollDock: 'top'
 			},
 			{
-				xtype: 'panel',
+				xtype: 'container',
 				scrollDock: 'top',
-				html: '<h2><span class="market-price">市场价￥66</span><span class="price">￥55.00</span>Suit椅</h2>',
+				itemId: 'itemTitle',
+				tpl: '<h2><span class="market-price">市场价￥{market_price}</span><span class="price">￥{price}</span>{name}</h2>',
 				cls : 'item-detail-info'
 			},
 			{
-				xtype: 'itemdetailtextlist',
+				xtype: 'disclosureitem',
+				title: '商家介绍',
+				titleStyle: 'normal',
+				itemId: 'shopInfo',
 				scrollDock: 'top'
 			},
+			{
+				xtype: 'container',
+				cls: 'item-detail-desc',
+				itemId: 'itemDesc',
+				tpl: '{description}{button}',
+				scrollDock: 'top',
+		},
 			{
 				xtype: 'bottombar'
 			}
@@ -68,21 +83,63 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 		//在bottombar上加入下单的按钮
 		var paiBtn = {
 			xtype: 'button',
-			text: '我要拍',
+			text: '我拍',
 			cls: 'w-toolbar-button',
 			iconCls: 'icon-pai',
 			action: 'order'
 		};
 		var commentBtn = {
 			xtype: 'button',
-			text: '写评论',
+			text: '评论',
 			cls: 'w-toolbar-button',
 			iconCls: 'icon-write',
 			action: 'comment'
 		};
-		this.down('bottombar').insert(2, paiBtn);
-		this.down('bottombar').insert(3, {xtype:'spacer'});
-		this.down('bottombar').insert(4, commentBtn);
-		this.down('bottombar').insert(5, {xtype:'spacer'});
+		var shareButton = {
+			xtype: 'button',
+			text: '分享',
+			cls: 'w-toolbar-button',
+			iconCls: 'icon-share',
+			action: 'share'
+		};
+		
+		this.down('bottombar #buttonContainer').add(paiBtn);
+		this.down('bottombar #buttonContainer').add(commentBtn);
+		this.down('bottombar #buttonContainer').add(shareButton);
+
+		//给详细内容的收起加事件
+		this.down('#itemDesc').on('tap', function(){
+			this.fireEvent('toggleDesc');
+		}, null, {element: 'element', 'delegate': 'span'});
+		//加载数据
+		this.loadData(this.config.param_id);
+	},
+
+	loadData: function(id){
+		var item = WeiQuPai.model.Item;
+		item.load(id, {
+			scope: this,
+			success: function(res, operation){
+				this.setContent(res.data);
+			},
+			failure: function(res, operation){
+				Ext.Msg.alert(null, '加载失败');	
+			}
+		});
+		this.getStore().load();
+	},
+
+	setContent: function(data){
+		this.down('detailpicshow').setPicData(data.pic_url);
+		this.down('#itemTitle').setData(data);
+		var desc = this.down('#itemDesc');
+		desc.rawContent = data.description;
+		desc.toggleState = 'short';
+		data.button = '';
+		if(desc.rawContent.length > 30){
+			data.description = desc.rawContent.substr(0, 30) + "...";
+			data.button = '<span class="show-more">展开</span>';
+		}
+		this.down('#itemDesc').setData(data);
 	}
 });

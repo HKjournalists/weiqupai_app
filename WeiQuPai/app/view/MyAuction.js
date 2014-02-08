@@ -30,13 +30,15 @@ Ext.define('WeiQuPai.view.MyAuction', {
     },
     loadData: function(){
         if(!WeiQuPai.Util.isLogin()){
+            this.getStore().removeAll();
+            this.hasLoadedStore = false;
             !this.down('logintip') && this.add(Ext.create('WeiQuPai.view.LoginTip'));
             return false;
         }
         var loginTip = this.down('logintip');
         loginTip && this.remove(loginTip);
+        if(this.hasLoadedStore) return;
         var store = this.getStore();
-        if(store.isLoaded()) return;
         //加载数据
         var me = this;
         store.load(function(data, operation, success){

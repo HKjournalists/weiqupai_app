@@ -4,6 +4,7 @@ Ext.define('WeiQuPai.view.BottomBar', {
     requires: ['WeiQuPai.view.SubMenu'],
     config: {
         docked: 'bottom',
+        layout: 'hbox',
         cls: 'w-toolbar',
         items: [
             {
@@ -16,7 +17,15 @@ Ext.define('WeiQuPai.view.BottomBar', {
 
             },
             {
-                xtype: 'spacer'
+                xtype: 'container',
+                layout: {
+                    type: 'hbox',
+                    pack: 'center',
+                    align: 'center'
+                },
+                itemId: 'buttonContainer',
+                flex: 1,
+
             },
             {
                 xtype: 'button',

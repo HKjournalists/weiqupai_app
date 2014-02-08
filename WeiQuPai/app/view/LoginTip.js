@@ -14,7 +14,7 @@ Ext.define('WeiQuPai.view.LoginTip', {
                 text: '登录',
                 cls: 'w-button',
                 action: 'toLoginPage'             
-            },
+            }
         ]        
     },
 

@@ -1,0 +1,23 @@
+{
+	total: 10,
+	records: [
+		{
+			name: 'iphone 5S土豪金',
+			price: 1250,
+			market_price: 1500,
+			pic_url: 'pic/5s.jpg'	
+		},
+		{
+			name: '小米盒子2',
+			price: 260,
+			market_price: 320,
+			pic_url: 'pic/5s.jpg'
+		},
+		{
+			name: '罗技游戏鼠标',
+			price: 988,
+			market_price: 1368,
+			pic_url: 'pic/5s.jpg'	
+		}
+	]
+}
