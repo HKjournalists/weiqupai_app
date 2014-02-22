@@ -5,16 +5,15 @@ Ext.define('WeiQuPai.store.Item', {
 		storeId: 'Item',
 		autoLoad: false,
 		model: 'WeiQuPai.model.Item',
-		pageSize: 5,
 		proxy: {
 			type: 'ajax',
-			url: WeiQuPai.Config.host + 'itemlist.json',
+			url: WeiQuPai.Config.apiUrl + '?r=app/today',
 			reader: {
 				type: 'json',
-				rootProperty: 'records'
 			},
 			startParam: false,
-			limitParam: false
+			limitParam: false,
+			pageParam: false
 		}
 	}
 });

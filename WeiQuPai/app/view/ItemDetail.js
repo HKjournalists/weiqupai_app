@@ -7,19 +7,32 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 		'WeiQuPai.model.Item'
 	],
 	config: {
+		paramId: null,
+
 		title: '拍品详情',
 		emtpyText: '还没有人评论',
 		store: 'AuctionComment',
+		loadingText: null,
         disableSelection : true,
-        loadingText: '加载中...',
         pressedCls : '',
 		itemTpl: new Ext.XTemplate(
 			'<div class="comment-row">',
-            '<img src="' + WeiQuPai.Config.host + '{avatar}" class="avatar"/>',
+			'<tpl if="avatar">',
+			'<img src="' + WeiQuPai.Config.host + '{avatar}" class="avatar"/>',
+			'<tpl else>',
+			'<img class="avatar"/>',
+			'</tpl>',
             '<div class="info">',
             '<h3>{nick}</h3>',
             '<p>{content}</p>',
-            '<div class="flex"><div class="time">{time}</div><div class="up">{up_num}</div><div class="comment">{comment_num}</div></div></div>',
+            '<div class="flex"><div class="time">{ctime}</div><div class="up">{up_num}</div><div class="comment">{reply_num}</div></div>',
+            '<tpl if="replies">',
+	            '<div class="reply">',
+	            	'<tpl for="replies">',
+	            	'<div><span class="uname">{uname}</span>：{content}</div>',
+	            	'</tpl>',
+	            '</div>',
+            '</tpl>',
             '</div>'
         ),
 		items:[
@@ -36,7 +49,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 				xtype: 'container',
 				scrollDock: 'top',
 				itemId: 'itemTitle',
-				tpl: '<h2><span class="market-price">市场价￥{market_price}</span><span class="price">￥{price}</span>{name}</h2>',
+				tpl: '<h2><span class="market-price">市场价￥{mprice}</span><span class="price">￥{curr_price}</span>{title}</h2>',
 				cls : 'item-detail-info'
 			},
 			{
@@ -112,7 +125,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 			this.fireEvent('toggleDesc');
 		}, null, {element: 'element'});
 		//加载数据
-		this.loadData(this.config.param_id);
+		this.loadData(this.config.paramId);
 	},
 
 	loadData: function(id){
@@ -123,10 +136,23 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 				this.setContent(res.data);
 			},
 			failure: function(res, operation){
-				Ext.Msg.alert(null, '加载失败');	
+				Ext.Msg.alert(null, '数据加载失败');	
 			}
 		});
-		this.getStore().load();
+		var me = this;
+		var store = this.getStore();
+		store.getProxy().setExtraParam('auction_id', id);
+		store.load(function(records){
+			if(records.length == 0){
+				var c = Ext.create('Ext.Container', {
+					scrollDock: 'top',
+					html: '还没有人评论该商品.',
+					cls: 'w-content',
+					itemId: 'empty_comment'
+				});
+				me.add(c);
+			}
+		});
 	},
 
 	setContent: function(data){

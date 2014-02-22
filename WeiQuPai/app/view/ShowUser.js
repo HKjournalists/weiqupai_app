@@ -34,7 +34,7 @@ Ext.define('WeiQuPai.view.ShowUser', {
 		itemTpl: showusermessagetpl,
 		items: [
 			{
-				xtype: 'panel',
+				xtype: 'container',
 				scrollDock: 'top',
 				itemId: 'user-info'
 			},

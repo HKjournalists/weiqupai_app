@@ -33,16 +33,17 @@ Ext.application({
         '144': 'resources/icons/icon~ipad@2x.png'
     },
 
+
     isIconPrecomposed: true,
 
     startupImage: {
-        '320x460': 'resources/startup/640x1096.jpg',
-        '640x920': 'resources/startup/640x1096.png',
-        '640x1096': 'resources/startup/640x1096.png',
-        '768x1004': 'resources/startup/768x1004.png',
-        '748x1024': 'resources/startup/748x1024.png',
-        '1536x2008': 'resources/startup/1536x2008.png',
-        '1496x2048': 'resources/startup/1496x2048.png'
+        '320x460': 'resources/loading/Default.png', // Non-retina iPhone, iPod touch, and all Android devices
+        '640x920': 'resources/loading/Default@2x.png', // Retina iPhone and iPod touch
+        '640x1136': 'resources/loading/Default-568h@2x.png', // iPhone 5 and iPod touch (fifth generation)
+        '768x1004': 'resources/startup/Default-Portrait~ipad.png', //  Non-retina iPad (first and second generation) in portrait orientation
+        '748x1024': 'resources/loading/Default-Landscape~ipad.png', //  Non-retina iPad (first and second generation) in landscape orientation
+        '1536x2008': 'resources/startup/Default-Portrait@2x~ipad.png', // : Retina iPad (third generation) in portrait orientation
+        '1496x2048': 'resources/startup/Default-Landscape@2x~ipad.png' // : Retina iPad (third generation) in landscape orientation
     },
 
     launch: function() {

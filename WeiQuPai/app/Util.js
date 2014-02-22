@@ -30,8 +30,17 @@ Ext.define("WeiQuPai.Util", {
             centered: true,
             height: 200
         };
-        var comment = WeiQuPai.Util.createOverlay('WeiQuPai.view.InputComment', config);
-        comment.show();
+        if(!this.commentForm){
+            this.commentForm = WeiQuPai.Util.createOverlay('WeiQuPai.view.InputComment', config);
+        }
+        this.commentForm.show();
+    },
+
+    mask: function(msg){
+        Ext.Viewport.setMasked({xtype: 'loadmask', message: msg});
+    },
+    unmask: function(){
+        Ext.Viewport.unmask();
     },
 
     isLogin: function(){
@@ -64,7 +73,7 @@ Ext.define("WeiQuPai.Util", {
             },
             failure: function(rsp){
                 Ext.Viewport.unmask();
-                Ext.msg.Alert(null, '网络不给力');
+                Ext.Msg.Alert(null, '网络不给力');
             }
         });
     },

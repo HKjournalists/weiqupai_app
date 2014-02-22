@@ -4,6 +4,7 @@ Ext.define('WeiQuPai.view.Order', {
 	requires: ['WeiQuPai.view.DisclosureItem', 'WeiQuPai.view.PaymentList', 'WeiQuPai.view.ShipmentList', 'WeiQuPai.view.DeliveryTimeList',
 		'WeiQuPai.view.ConsigneeList', 'WeiQuPai.model.Order'],
 	config: {
+		paramId : null,
 		scrollable: true,
 		items: [
 			{
@@ -12,14 +13,18 @@ Ext.define('WeiQuPai.view.Order', {
 				docked: 'top'
 			},
 			{
-				xtype: 'panel',
-				html: ['<div class="order-item-info">',
-					'<img src="' + WeiQuPai.Config.host + 'pic/5s.jpg" class="avatar"/>',
-					'<div class="info">',
-					'<h2>Suit椅</h2>',
-					'<div class="price-area">',
-					'<span class="price">现价￥55.00</span><span class="total-pay">订单合计 ￥65.00</span>',
-					'</div>'].join('')
+				xtype: 'container',
+				itemId: 'itemInfo',
+				tpl: new Ext.XTemplate(
+					'<div class="order-item-info">',
+						'<img src="' + WeiQuPai.Config.host + '{pic_url}"/>',
+						'<div class="info">',
+							'<h2>{title}</h2>',
+							'<div class="price-area"><p>现价￥{price}</p>',
+							'<p>订单合计 ￥{total_pay}</p></div>',
+						'</div>',
+					'</div>'
+				),
 			},
 			{
 				xtype: 'disclosureitem',
@@ -58,13 +63,29 @@ Ext.define('WeiQuPai.view.Order', {
 		]
 	}, 
 	initialize: function(){
-		this.setRecord(Ext.create('WeiQuPai.model.Order'));
+		var order = Ext.create('WeiQuPai.model.Order');
+		order.set('item_id', this.config.paramId);
+		this.setRecord(order);
 		var payBtn = {xtype: 'button', text: '去支付', action: 'pay', cls: 'w-toolbar-button', iconCls: 'icon-pay'};
 		this.down('bottombar #buttonContainer').add(payBtn);
 		this.addShipment();
 		this.addPayment();
 		this.addDeliveryTime();
 	}, 
+
+	applyParamId: function(id){
+		var item = WeiQuPai.model.Item;
+		item.load(id, {
+			scope: this,
+			success: function(res, operation){
+				res.data.total_pay = 125;
+				this.down('#itemInfo').setData(res.data);
+			},
+			failure: function(res, operation){
+				Ext.Msg.alert(null, '加载失败');	
+			}
+		});
+	},
 
 	addShipment: function(){
         var shipmentListView = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShipmentList');

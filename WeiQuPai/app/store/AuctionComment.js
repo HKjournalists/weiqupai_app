@@ -8,7 +8,7 @@ Ext.define('WeiQuPai.store.AuctionComment', {
 		pageSize: 5,
 		proxy: {
 			type: 'ajax',
-			url: WeiQuPai.Config.host + 'AuctionComment.json',
+			url: WeiQuPai.Config.apiUrl + '?r=app/comment',
 			reader: {
 				type: 'json',
 				rootProperty: 'records'

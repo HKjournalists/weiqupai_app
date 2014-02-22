@@ -13,10 +13,10 @@ Ext.define('WeiQuPai.controller.Today', {
         }
     },
     
-    //called when the Application is launched, remove if not needed
     showDetail: function(list, index, dataItem, record, e){
         var detailView = {
-            xtype: 'itemdetail'
+            xtype: 'itemdetail',
+            paramId: record.get('id')
         };
         this.getMain().push(detailView);
     }

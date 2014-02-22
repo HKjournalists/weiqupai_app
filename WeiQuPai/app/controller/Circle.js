@@ -14,14 +14,7 @@ Ext.define('WeiQuPai.controller.Circle', {
         }
     },
     
-    //called when the Application is launched, remove if not needed
     showCircleDetail: function(list, index, dataItem, record, e){
-        var user_class = record.get('user_class');
-        if((e.target.className == 'avatar') && (user_class == 'user')){
-            this.getCirclelist().fireEvent('avatartap', this, index, record);
-            return false;
-        };
-
         var action_class = record.get('action_class');
         var trans_id = record.get('trans_id');
         switch(action_class) {
@@ -53,20 +46,15 @@ Ext.define('WeiQuPai.controller.Circle', {
         var detailView = {
             xtype: target_type,
             trans_id: record.data.trans_id
-            //record: record
         };
-        //console.log(detailView.trans_id);
         this.getMain().push(detailView);
     },
 
     showUser: function(list, index, record) {
-        this.getMain().getNavigationBar().hide();
-        var detailView = {
-            xtype: 'showuser',
-            trans_id: record.data.trans_id
-            //record: record
-        }
-        //console.log(detailView.trans_id);
-        this.getMain().push(detailView);
+        var feedType = record.get('feed_type');
+        var view = Ext.create('WeiQuPai.view.ShowUser', {
+            paramId: record.get('uid')        
+        });
+        this.getMain().push(view);
     }
 });

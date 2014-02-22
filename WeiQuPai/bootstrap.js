@@ -797,6 +797,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.DeliveryTimeList": [],
   "WeiQuPai.view.DetailPicShow": [],
   "WeiQuPai.view.DisclosureItem": [],
+  "WeiQuPai.view.FeedShowOption": [],
   "WeiQuPai.view.IconButton": [],
   "WeiQuPai.view.IconListExample": [],
   "WeiQuPai.view.IndexAd": [],
@@ -815,6 +816,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.MyCoupon": [],
   "WeiQuPai.view.MyFriend": [],
   "WeiQuPai.view.MyProp": [],
+  "WeiQuPai.view.NewMessage": [],
   "WeiQuPai.view.Order": [],
   "WeiQuPai.view.Pay": [],
   "WeiQuPai.view.PaymentList": [],
@@ -1840,6 +1842,9 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.DisclosureItem": [
     "widget.disclosureitem"
   ],
+  "WeiQuPai.view.FeedShowOption": [
+    "widget.feedshowoption"
+  ],
   "WeiQuPai.view.IconButton": [
     "widget.iconbutton"
   ],
@@ -1893,6 +1898,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.MyProp": [
     "widget.myprop"
+  ],
+  "WeiQuPai.view.NewMessage": [
+    "widget.newmessage"
   ],
   "WeiQuPai.view.Order": [
     "widget.order"

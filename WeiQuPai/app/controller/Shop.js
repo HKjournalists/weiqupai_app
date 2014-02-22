@@ -15,6 +15,6 @@ Ext.define('WeiQuPai.controller.Shop', {
     },
     
     jumpUrl: function(btn){
-        Ext.Msg.alert(btn.url);
+        window.open(btn.url, '_system');
     }
 });

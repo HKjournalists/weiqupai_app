@@ -11,9 +11,10 @@ $tiny-font: 0.6em;
 $text-color: #333;
 $gray-color: #666;
 $red-color: #d22270;
-$bar-color: #0eb8b7;
+$bar-color: #3aa0d8;
 $border-color: #dbdbe0;
-$button-color: #0eb8b7;
+$button-color: #3aa0d8;
+$bg-color: #f0f2f6;
 
 //tabbar的文字暗色
 $tab-text-dark: #85f7f6;
@@ -28,6 +29,9 @@ $ios7-blue: #157efb;
 $ios7-red: #fc3e39;
 $ios7-green: #53d769;
 
+.x-layout-card-item{
+	background-color:$bg-color;
+}
 //标题栏样式
 .x-toolbar.x-docked-top{
 	border-bottom:0;
@@ -48,6 +52,10 @@ $ios7-green: #53d769;
 }
 
 //loadmask样式
+.x-mask .x-loading-spinner-outer{
+	min-width:4em;
+	height:4em;
+}
 .x-mask .x-mask-inner{
 	background:rgba(0,0,0,0.25);
 }
@@ -194,9 +202,11 @@ h3{
 	text-align:center;
 }
 .today-item-row img{
-	width:240px;
-	height:240px;
-	padding:25px;
+	width:290px;
+	height:290px;
+	padding:3px;
+	border:1px solid #c1c2c7;
+	box-shadow:1px 1px 6px #c1c2c7; 
 }
 .today-item-row h2{
 	line-height:1.5;
@@ -325,6 +335,14 @@ h3{
 	height:40px;
 	margin-right:.7em;
 	display:block;
+	background:url(../images/icon-avatar.png) no-repeat;
+	background-size:40px 40px;
+}
+.action{
+	margin-left:.5em;
+	color:#666;
+	font-weight:normal;
+	font-size:$normal-font;
 }
 .show-order-row .info, .comment-row .info, .auction-user-row .info, .circle-row .info, .user-row .info, .myauction-row .info{
 	line-height:1.5;
@@ -334,7 +352,7 @@ h3{
 	-webkit-box-flex: 1;
 }
 .pic-list{
-	margin:1em 0;
+	margin-top:.5em;
 }
 .pic-list img{
 	width:66px;
@@ -374,19 +392,22 @@ h3{
 }
 
 //赞和评论
-.up{
+.up, .comment{
 	font-size:$small-font;
-	background:url(../images/up.png) no-repeat left center;
-	background-size:14px 14px;
-	padding-left:20px;
-	width:60px;
+	padding:2px 10px 2px 24px;
+	border:1px solid #e0e0e0;
+	border-radius:4px;
+	width:4em;
+	color:#b8b8b8;
+}
+.up{
+	background:url(../images/icon-up.png) no-repeat 10px center;
+	background-size:11px 9px;
 }
 .comment{
-	font-size:$small-font;
-	background:url(../images/comment.png) no-repeat left center;
-	background-size:14px 14px;
-	padding-left:20px;
-	width:60px;
+	background:url(../images/icon-comment.png) no-repeat 10px center;
+	background-size:10px 9px;
+	margin-left:10px;
 }
 
 
@@ -410,12 +431,9 @@ h3{
 	margin-right:1em;
 }
 .order-item-info .price-area{
-	margin-top:1.5em;
+	margin-top:.7em;
 	color: $gray-color;
-	font-size:$small-font;
-}
-.order-item-info .price-area .total-pay{
-	margin-left:2em;
+	font-size:1em;
 }
 
 //商户详情页面
