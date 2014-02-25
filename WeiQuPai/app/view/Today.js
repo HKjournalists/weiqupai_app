@@ -1,7 +1,7 @@
 Ext.define('WeiQuPai.view.Today', {
 	extend: 'Ext.dataview.List',
 	xtype: 'today',
-	requires: ['WeiQuPai.view.IndexAd', 'WeiQuPai.view.ItemDetail', 'Ext.plugin.ListPaging', 'Ext.plugin.PullRefresh'],
+	requires: ['WeiQuPai.view.Banner', 'WeiQuPai.view.ItemDetail', 'Ext.plugin.ListPaging', 'Ext.plugin.PullRefresh'],
 	config:{
 		plugins: [
 			{
@@ -14,8 +14,8 @@ Ext.define('WeiQuPai.view.Today', {
 				loadedText: '下拉刷新'
 			},
 		],
-
-		store: 'Item',
+		loadingText: null,
+		store: 'Auction',
         itemCls: 'today-item-row',
         disableSelection : true,
         itemTpl: new Ext.XTemplate(
@@ -30,7 +30,7 @@ Ext.define('WeiQuPai.view.Today', {
         		docked: 'top'
         	},
 	        {
-	            xtype: 'indexad',
+	            xtype: 'banner',
 	        	scrollDock: 'top'
 	        }
         ]

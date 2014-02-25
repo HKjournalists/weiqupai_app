@@ -2,10 +2,10 @@ Ext.define('WeiQuPai.store.UserCoupon', {
 	extend: 'Ext.data.Store',
 	config:{
 		autoLoad: false,
-		fields: ['name', 'value', 'num'],
+		fields: ['id', 'coupon_info', 'coupon_id', 'num'],
 		proxy: {
 			type: 'ajax',
-			url: WeiQuPai.Config.host + 'usercoupon.json',
+			url: WeiQuPai.Config.host + '/?r=app/usercoupon',
 			reader: {
 				type: 'json'
 			},

@@ -5,29 +5,30 @@ Ext.define('WeiQuPai.controller.Order', {
         refs: {
             main: 'main',
             orderView: 'order',
-            shipmentPanel: 'disclosureitem[itemId=shipment]',
-            shipmentList: 'shipmentlist list',
             paymentPanel: 'disclosureitem[itemId=payment]',
             paymentList: 'paymentlist list',
             deliveryTimePanel: 'disclosureitem[itemId=deliverytime]',
             deliveryTimeList: 'deliverytimelist list',
             propPanel: 'disclosureitem[itemId=prop]',
+            couponPanel: 'disclosureitem[itemId=coupon]',
             consigneePanel: 'disclosureitem[itemId=consignee]',
-            consigneeList: 'consigneelist',
+            consigneeList: 'myconsignee',
+            propList: 'myprop',
+            couponList: 'mycoupon',
             payButton: 'button[action=pay]'
         },
         control: {
            paymentPanel: {
                 tap: 'showPaymentList'
            }, 
-           shipmentPanel: {
-                tap: 'showShipmentList'
+           couponPanel: {
+                tap: 'showCouponList'
+           },
+           propPanel: {
+                tap: 'showPropList'
            },
            deliveryTimePanel: {
                 tap: 'showDeliveryTimeList'
-           },
-           shipmentList: {
-                itemtap: 'selectShipment'
            },
            paymentList: {
                 itemtap: 'selectPayment'
@@ -38,8 +39,14 @@ Ext.define('WeiQuPai.controller.Order', {
            consigneePanel: {
                 tap: 'showConsigneeList'
            },
-           consigneelist: {
+           consigneeList: {
                 itemtap: 'selectConsignee'
+           },
+           propList: {
+                itemtap: 'selectProp'
+           },
+           couponList: {
+                itemtap: 'selectCoupon'
            },
            payButton: {
                 tap: 'submitOrder'
@@ -47,9 +54,18 @@ Ext.define('WeiQuPai.controller.Order', {
         }
     },
     
+    consigneeTpl : new Ext.XTemplate(
+        '<div class="content">',
+            '<p>收货人：{name}</p>',
+            '<p>电话：{mobile}</p>',
+            '<p>地址：{province}{city}{address}</p>',
+            '<p>邮编：{zip}</p>',
+        '</div>'
+    ),
+
     showConsigneeList: function(){
-        var view = Ext.create('WeiQuPai.view.ConsigneeList');
-        var selected = this.getOrderView().getRecord().get('consignee');
+        var view = Ext.create('WeiQuPai.view.MyConsignee');
+        var selected = this.getOrderView().getRecord().get('consignee_id');
         if(selected){
             var idx = view.getStore().indexOfId(selected);
             view.select(idx);
@@ -64,50 +80,97 @@ Ext.define('WeiQuPai.controller.Order', {
        this.getPaymentList().up('paymentlist').show();
     }, 
 
-    showShipmentList: function(){
-        this.getShipmentList().up('shipmentlist').show();
+    showCouponList: function(){
+        var view = Ext.create('WeiQuPai.view.MyCoupon');
+        view.setDisableSelection(false);
+        var selected = this.getOrderView().getRecord().get('coupon');
+        if(selected){
+            var idx = view.getStore().findExact('coupon_id', selected);
+            view.select(idx);
+        }
+        this.getMain().push(view);
     },
 
     showPropList : function(){
-
+        var view = Ext.create('WeiQuPai.view.MyProp');
+        view.setDisableSelection(false);
+        var selected = this.getOrderView().getRecord().get('prop');
+        if(selected){
+            var idx = view.getStore().findExact('prop_id', selected);
+            view.select(idx);
+        }
+        this.getMain().push(view);
     },
-    showCouponList: function(){
 
-    },
+    //选择使用道具
     selectProp: function(list, index, dataItem, record, e){
+        this.getMain().pop();
+        this.getOrderView().getRecord().set('prop', record.get('prop_id'));
+        this.getPropPanel().setContent(record.get('prop_info').name);
     },
+
+    //选择使用拍券
     selectCoupon: function(list, index, dataItem, record, e){
+        this.getMain().pop();
+        var order = this.getOrderView().getRecord();
+        order.set('coupon', record.get('coupon_id'))
+        order.set('total_pay', total_pay);;
+        this.getCouponPanel().setContent(record.get('coupon_info').name);
+        var curr_price = parseFloat(order.get('price'));
+        var total_pay = Math.max(0, curr_price - parseFloat(record.get('coupon_info').value));
+        var itemInfo = this.getOrderView().down('#itemInfo');
+        var data = itemInfo.getData();
+        data.total_pay = total_pay;
+        itemInfo.setData(data);
     },
 
     //选择收货人
     selectConsignee: function(list, index, dataItem,record, e){
         this.getMain().pop();
-        this.getOrderView().getRecord().set('consignee', record.get('id'));
-        var html = list.getItemTpl().apply(record.getData());
+        this.getOrderView().getRecord().set('consignee_id', record.get('id'));
+        var html = this.consigneeTpl.apply(record.getData());
         this.getConsigneePanel().setContent(html);
     },
+
+    //选择发货时间
     selectDeliveryTime: function(list, index, dataItem, record, e){
-        this.getOrderView().getRecord().set('deliveryTime', record.get('title'));
-        var time = record.get('title'); 
+        this.getOrderView().getRecord().set('delivery_time', record.get('title'));
+        var time = record.get('title');
         this.getDeliveryTimePanel().setContent(time);
         this.getDeliveryTimeList().up('deliverytimelist').hide();
     },
 
     selectPayment: function(list, index, dataItem, record, e){
         this.getOrderView().getRecord().set('payment', record.get('title'));
-        var shipment = record.get('title'); 
-        this.getPaymentPanel().setContent(shipment);
+        var payment = record.get('title'); 
+        this.getPaymentPanel().setContent(payment);
         this.getPaymentList().up('paymentlist').hide();
     },
 
-    selectShipment: function(list, index, dataItem, record, e){
-        this.getOrderView().getRecord().set('shipment', record.get('title'));
-        var shipment = record.get('title'); 
-        this.getShipmentPanel().setContent(shipment);
-        this.getShipmentList().up('shipmentlist').hide();
-    },
-
     submitOrder: function(){
-        Ext.Msg.alert('发生错误', '还没有选择收货地址');
+        var order = this.getOrderView().getRecord();
+        if(!order.get('consignee_id')){
+            Ext.Msg.alert(null, '还没有选择收货地址');
+            return false;
+        }
+        WeiQuPai.Util.mask();
+        Ext.Ajax.request({
+            url: order.getProxy().getUrl(),
+            method: 'post',
+            params: WeiQuPai.Util.filterNull(order.data),
+            success: function(rsp){
+                WeiQuPai.Util.unmask();
+                rsp = Ext.decode(rsp.responseText);
+                if(!rsp.success){
+                    Ext.Msg.alert(null, rsp.msg);
+                    return;
+                }
+                Ext.Msg.alert(null, '订单提交成功');
+            },
+            failure: function(rsp){
+                WeiQuPai.Util.unmask();
+                Ext.msg.Alert(null, '数据提交失败');
+            }
+        });
     }
 });

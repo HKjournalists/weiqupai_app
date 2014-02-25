@@ -1,13 +1,12 @@
-Ext.define('WeiQuPai.store.Item', {
+Ext.define('WeiQuPai.store.Banner', {
 	extend: 'Ext.data.Store',
-	requires: ['WeiQuPai.model.Item'],
 	config:{
-		storeId: 'Item',
+		fields: ['pic_url', 'link'],
+		storeId: 'Banner',
 		autoLoad: false,
-		model: 'WeiQuPai.model.Item',
 		proxy: {
 			type: 'ajax',
-			url: WeiQuPai.Config.apiUrl + '?r=app/today',
+			url: WeiQuPai.Config.apiUrl + '/?r=app/banner',
 			reader: {
 				type: 'json',
 			},

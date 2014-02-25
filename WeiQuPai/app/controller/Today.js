@@ -14,10 +14,8 @@ Ext.define('WeiQuPai.controller.Today', {
     },
     
     showDetail: function(list, index, dataItem, record, e){
-        var detailView = {
-            xtype: 'itemdetail',
-            paramId: record.get('id')
-        };
+        var detailView = Ext.create('WeiQuPai.view.ItemDetail');
+        detailView.setParam(record.data);
         this.getMain().push(detailView);
     }
 });

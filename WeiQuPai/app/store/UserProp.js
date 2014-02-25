@@ -2,10 +2,10 @@ Ext.define('WeiQuPai.store.UserProp', {
 	extend: 'Ext.data.Store',
 	config:{
 		autoLoad: false,
-		fields: ['name', 'icon', 'num'],
+		fields: ['id', 'prop_info', 'prop_id', 'num'],
 		proxy: {
 			type: 'ajax',
-			url: WeiQuPai.Config.host + 'userprop.json',
+			url: WeiQuPai.Config.host + '/?r=app/userprop',
 			reader: {
 				type: 'json'
 			},

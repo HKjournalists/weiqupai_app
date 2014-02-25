@@ -48,72 +48,80 @@ Ext.define("WeiQuPai.Util", {
     },
 
     login: function(uname, password, callback){
-        Ext.Viewport.setMasked({
-            xtype: 'loadmask',
-            message: '正在登录...'
-        });
+        WeiQuPai.Util.mask();
         Ext.Ajax.request({
-            url: 'login.json',
+            url: WeiQuPai.Config.apiUrl + '/?r=app/login',
             method: 'post',
             params: {
                 uname: uname,
                 password: password
             },
             success: function(rsp){
-                setTimeout(function(){
-                Ext.Viewport.unmask();
+                WeiQuPai.Util.unmask();
                 rsp = Ext.decode(rsp.responseText);
-                if(rsp.code != 0){
-                    Ext.Msg.alert(null, '用户名或密码错误');
+                if(rsp.code && rsp.code > 0){
+                    Ext.Msg.alert(null, rsp.msg);
                     return;
                 }
                 WeiQuPai.Cache.set('currentUser', rsp);
                 callback && callback();
-                }, 1000);
             },
             failure: function(rsp){
-                Ext.Viewport.unmask();
-                Ext.Msg.Alert(null, '网络不给力');
+                WeiQuPai.Util.unmask();
+                Ext.Msg.Alert(null, '登录失败，请重试');
             }
         });
     },
 
     register: function(uname, password, callback){
-        Ext.Viewport.setMasked({
-            xtype: 'loadmask',
-            message: '正在提交...'
-        });
+        WeiQuPai.Util.mask();
         Ext.Ajax.request({
-            url: 'reg.json',
+            url: WeiQuPai.Config.apiUrl + '/?r=app/join',
             method: 'post',
             params: {
                 uname: uname,
                 password: password
             },
             success: function(rsp){
-                setTimeout(function(){
-                Ext.Viewport.unmask();
+                WeiQuPai.Util.unmask();
                 rsp = Ext.decode(rsp.responseText);
-                if(rsp.code != 0){
-                    Ext.Msg.alert(null, '注册失败, 请重试');
+                if(rsp.code > 0){
+                    Ext.Msg.alert(null, rsp.msg);
                     return;
                 }
                 WeiQuPai.Cache.set('currentUser', rsp);
                 callback && callback();
-                }, 1000);
             },
             failure: function(rsp){
-                Ext.Viewport.unmask();
-                Ext.msg.Alert(null, '网络不给力');
+                WeiQuPai.Util.unmask();
+                Ext.msg.Alert(null, '注册失败, 请重试');
             }
         });
     },
 
     logout: function(callback){
-        WeiQuPai.Cache.remove('currentUser');
+        var user = WeiQuPai.Cache.get('currentUser');
+        if(user){
+            Ext.Ajax.request({
+                url: WeiQuPai.Config.apiUrl + '/?r=app/logout&token=' + user.token,
+                method: 'get'
+            });
+            WeiQuPai.Cache.remove('currentUser');
+
+        }
         callback && callback();
     },
 
+    //过滤对象的空值
+    filterNull: function(obj){
+        var res = {};
+        for(k in obj){
+            if(obj.hasOwnProperty(k) && obj[k] != null){
+                res[k] = obj[k];
+            }
+        }
+        return res;
+    },
 
     showTab: function(tab){
         var main = Ext.Viewport.down('main');

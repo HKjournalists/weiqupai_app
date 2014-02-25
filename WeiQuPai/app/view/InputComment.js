@@ -19,11 +19,10 @@ Ext.define('WeiQuPai.view.InputComment', {
 				items: [
 					{
 						xtype: 'button', 
-						action: 'publishComment',
-						text: '发送评论',
+						action: 'closeComment',
+						text: '取消',
 						cls: 'w-button',
-						disabled: true,
-						flex: 2
+						flex: 1
 					},
 					{
 						xtype: 'spacer',
@@ -31,10 +30,11 @@ Ext.define('WeiQuPai.view.InputComment', {
 					},
 					{
 						xtype: 'button', 
-						action: 'closeComment',
-						text: '取消',
+						action: 'publishComment',
+						text: '发送评论',
 						cls: 'w-button',
-						flex: 1
+						disabled: true,
+						flex: 2
 					},
 					{
 						xtype: 'hiddenfield',
@@ -43,6 +43,10 @@ Ext.define('WeiQuPai.view.InputComment', {
 					{
 						xtype: 'hiddenfield',
 						name: 'reply_id'
+					},
+					{
+						xtype: 'hiddenfield',
+						name: 'item_id'
 					}
 				]
 			}

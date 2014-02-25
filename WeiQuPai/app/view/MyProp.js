@@ -7,8 +7,8 @@ Ext.define('WeiQuPai.view.MyProp', {
 		itemCls: 'w-icon-list-item-container',
 		itemTpl: new Ext.XTemplate(
 			'<div class="w-icon-list-item">',
-			'<img src="{icon}">',
-			'<p>{name} X {num}</p>',
+			'<img src="{prop_info.pic_url}">',
+			'<p>{prop_info.name} X {num}</p>',
 			'</div>'
 		),
 		items:[
@@ -25,6 +25,10 @@ Ext.define('WeiQuPai.view.MyProp', {
 
 	initialize: function(){
 		this.callParent(arguments);
-		this.getStore().load();
+		this.getStore().load(function(data, operation, success){
+            if(!success){
+                Ext.Msg.alert(null, '数据加载失败');
+            }
+        });
 	}
 });

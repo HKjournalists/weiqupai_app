@@ -2,9 +2,9 @@ Ext.define('WeiQuPai.view.Order', {
 	extend: 'Ext.Container',
 	xtype: 'order',
 	requires: ['WeiQuPai.view.DisclosureItem', 'WeiQuPai.view.PaymentList', 'WeiQuPai.view.ShipmentList', 'WeiQuPai.view.DeliveryTimeList',
-		'WeiQuPai.view.ConsigneeList', 'WeiQuPai.model.Order'],
+		'WeiQuPai.view.ConsigneeList', 'WeiQuPai.model.Order', 'WeiQuPai.view.MyCoupon', 'WeiQuPai.view.MyProp'],
 	config: {
-		paramId : null,
+		auctionData: null,
 		scrollable: true,
 		items: [
 			{
@@ -17,10 +17,10 @@ Ext.define('WeiQuPai.view.Order', {
 				itemId: 'itemInfo',
 				tpl: new Ext.XTemplate(
 					'<div class="order-item-info">',
-						'<img src="' + WeiQuPai.Config.host + '{pic_url}"/>',
+						'<img src="' + WeiQuPai.Config.host + '{pic_cover}"/>',
 						'<div class="info">',
 							'<h2>{title}</h2>',
-							'<div class="price-area"><p>现价￥{price}</p>',
+							'<div class="price-area"><p>现价￥{curr_price}</p>',
 							'<p>订单合计 ￥{total_pay}</p></div>',
 						'</div>',
 					'</div>'
@@ -35,20 +35,20 @@ Ext.define('WeiQuPai.view.Order', {
 			},
 			{
 				xtype: 'disclosureitem',
-				itemId: 'shipment',
-				title: '配送方式',
-				content: ''
-			},
-			{
-				xtype: 'disclosureitem',
-				itemId: 'deliverytime',
+				itemId: 'delivery_time',
 				title: '配送时间',
 				content: ''
 			},
 			{
 				xtype: 'disclosureitem',
 				itemId: 'prop',
-				title: '优惠信息',
+				title: '使用道具',
+				content: ''
+			},
+			{
+				xtype: 'disclosureitem',
+				itemId: 'coupon',
+				title: '使用拍券',
 				content: ''
 			},
 			{
@@ -64,32 +64,20 @@ Ext.define('WeiQuPai.view.Order', {
 	}, 
 	initialize: function(){
 		var order = Ext.create('WeiQuPai.model.Order');
-		order.set('item_id', this.config.paramId);
 		this.setRecord(order);
 		var payBtn = {xtype: 'button', text: '去支付', action: 'pay', cls: 'w-toolbar-button', iconCls: 'icon-pay'};
 		this.down('bottombar #buttonContainer').add(payBtn);
-		this.addShipment();
 		this.addPayment();
 		this.addDeliveryTime();
 	}, 
 
-	applyParamId: function(id){
-		var item = WeiQuPai.model.Item;
-		item.load(id, {
-			scope: this,
-			success: function(res, operation){
-				res.data.total_pay = 125;
-				this.down('#itemInfo').setData(res.data);
-			},
-			failure: function(res, operation){
-				Ext.Msg.alert(null, '加载失败');	
-			}
-		});
-	},
-
-	addShipment: function(){
-        var shipmentListView = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShipmentList');
-        this.selectFirst('shipment', shipmentListView.down('list'));
+	applyAuctionData: function(data){
+		data.total_pay = data.curr_price;
+		this.getRecord().set('price', data.curr_price);
+		this.getRecord().set('item_id', data.item_id);
+		this.getRecord().set('auction_id', data.id);
+		this.getRecord().set('total_pay', data.curr_price)
+		this.down('#itemInfo').setData(data);
 	},
 
 	addPayment: function(){
@@ -99,7 +87,7 @@ Ext.define('WeiQuPai.view.Order', {
 
 	addDeliveryTime: function(){
 		var deliveryTimeView = WeiQuPai.Util.createOverlay('WeiQuPai.view.DeliveryTimeList');
-        this.selectFirst('deliverytime', deliveryTimeView.down('list'));
+        this.selectFirst('delivery_time', deliveryTimeView.down('list'));
 	},
 
 	selectFirst: function(itemId, list){

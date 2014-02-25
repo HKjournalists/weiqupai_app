@@ -2,27 +2,29 @@ Ext.define('WeiQuPai.view.Banner', {
 	extend: 'Ext.carousel.Carousel',
 	xtype: 'banner',
 	config: {
+		paramType: 'index',
 		direction: 'horizontal',
 		cls: 'banner',
 		directionLock: true
 	},
 	initialize : function(){
-		var store = Ext.getStore('Ad');
+		var store = Ext.getStore('Banner');
+		store.getProxy().setExtraParam('type', this.getParamType());
 		store.load(this.initData, this);
 	},
 
 	initData: function(records, operation, success){
-		console.log(records);return;
-		/*
-		data = records.getData();
-		for(var i=0; i<data.length; i++){
-			var item = {
-				xtype: 'image',
-				src: WeiQuPai.Config.host + data[i],
-				cls: 'index-ad-item'
-			}
-			this.add(item);
+		if(!success){
+			this.destory();
 		}
+		for(var i=0; i<records.length; i++){
+			var img = Ext.create('Ext.Img', {
+				src: WeiQuPai.Config.host + records[i].get('pic_url'),
+				cls: 'banner-item'
+			});
+			this.add(img);
+		}
+		return;
 		var self = this;
 		setInterval(function(){
 			if(self.getActiveIndex() == self.getMaxItemIndex()){
@@ -31,6 +33,5 @@ Ext.define('WeiQuPai.view.Banner', {
 			}
 			self.next();
 		}, 2000);
-*/
 	}
 });

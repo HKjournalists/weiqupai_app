@@ -230,30 +230,21 @@ h3{
 	font-size:$small-font;
 }
 
-.index-ad{
+//广告条
+.banner{
 	height: 75px;
-	border-bottom:1px solid $bar-color;
 }
-.index-ad .index-ad-item{
-	background-size: 100% auto;
-}
-
 //商品详情图片列表
 .item-detail-pic-container{
 	padding:.65em 1em;
 }
-/*
-.item-detail-pic-container .x-button{
-	height:270px;
-	padding:0 10px;
-}
-.item-detail-pic-container .x-item-disabled{
-	opacity:0.6;
-}
-*/
+
 .item-detail-pic{
-	width:240px;
-	height:270px;
+	width:290px;
+	height:290px;
+	padding:3px;
+	border:1px solid #c1c2c7;
+	box-shadow:1px 1px 6px #c1c2c7; 
 }
 .item-detail-info{
 	padding:.7em 1em 1.2em;

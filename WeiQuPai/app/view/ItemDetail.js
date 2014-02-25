@@ -4,10 +4,10 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 	requires: [
 		'WeiQuPai.view.Shop', 'WeiQuPai.view.BottomBar', 'WeiQuPai.view.DisclosureItem',
 		'WeiQuPai.view.DetailPicShow', 'WeiQuPai.view.Order', 'WeiQuPai.view.InputComment',
-		'WeiQuPai.model.Item'
+		'WeiQuPai.model.Auction'
 	],
 	config: {
-		paramId: null,
+		param: null,
 
 		title: '拍品详情',
 		emtpyText: '还没有人评论',
@@ -76,15 +76,15 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 				order: 'before',
 				fn: function(list, index, dataItem, record, e){
 					if(e.target.className == 'avatar'){
-						this.fireEvent('avatartap', this, index, record);
+						this.fireEvent('avatartap', index, record);
 						return false;
 					}
 					if(e.target.className == 'up'){
-						this.fireEvent('uptap', this, index, record);
+						this.fireEvent('uptap', index, record);
 						return false;
 					}
 					if(e.target.className == 'comment'){
-						this.fireEvent('commenttap', this, index, record);
+						this.fireEvent('commenttap', index, record);
 						return false;
 					}
 				}
@@ -124,25 +124,36 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 		this.down('#itemDesc').on('tap', function(){
 			this.fireEvent('toggleDesc');
 		}, null, {element: 'element'});
+	},
+
+	//接收参数时调用数据
+	applyParam: function(data){
 		//加载数据
-		this.loadData(this.config.paramId);
+		this.loadData(data.id);
+		return data;
 	},
 
 	loadData: function(id){
-		var item = WeiQuPai.model.Item;
-		item.load(id, {
+		var auction = WeiQuPai.model.Auction;
+		auction.load(id, {
 			scope: this,
-			success: function(res, operation){
-				this.setContent(res.data);
+			success: function(record, operation){
+				this.setContent(record.data);
 			},
-			failure: function(res, operation){
+			failure: function(record, operation){
 				Ext.Msg.alert(null, '数据加载失败');	
 			}
 		});
 		var me = this;
 		var store = this.getStore();
+		//先清一下数据，防止别的商品的评论先出现
+		store.removeAll();
 		store.getProxy().setExtraParam('auction_id', id);
-		store.load(function(records){
+		store.load(function(records, operation, success){
+			if(!success){
+				Ext.Msg.alert(null, '评论加载失败');
+				return;
+			}
 			if(records.length == 0){
 				var c = Ext.create('Ext.Container', {
 					scrollDock: 'top',
@@ -156,6 +167,8 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 	},
 
 	setContent: function(data){
+		//保存数据，为后面使用
+		this.setData(data);
 		this.down('detailpicshow').setPicData(data.pic_url);
 		this.down('#itemTitle').setData(data);
 		var desc = this.down('#itemDesc');

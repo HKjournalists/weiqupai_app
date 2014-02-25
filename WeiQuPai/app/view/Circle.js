@@ -7,7 +7,7 @@ Ext.define('WeiQuPai.view.Circle', {
 	extend: 'Ext.dataview.List',
 	xtype: 'circle',
 	requires: [
-		'WeiQuPai.view.CircleAd', 'WeiQuPai.view.ShowUser', 'WeiQuPai.view.CompanyMessage', 'WeiQuPai.view.SiteMessage'
+		'WeiQuPai.view.Banner', 'WeiQuPai.view.ShowUser', 'WeiQuPai.view.CompanyMessage', 'WeiQuPai.view.SiteMessage'
 	],
 	config: {
 		emtpyText: '没有拍圈信息',
@@ -37,9 +37,8 @@ Ext.define('WeiQuPai.view.Circle', {
 				docked: 'top'
 			},
 			{
-				xtype: 'circlead',
-				scrollDock: 'top',
-				height: '80px'
+				xtype: 'banner',
+				scrollDock: 'top'
 			}
 		], 
 
