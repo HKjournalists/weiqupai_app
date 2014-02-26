@@ -8,6 +8,6 @@ Ext.define("WeiQuPai.model.Order", {
 			type: 'ajax',
 			url: WeiQuPai.Config.apiUrl + '/?r=app/order',
 			reader: 'json'
-		},
+		}
 	}
 });

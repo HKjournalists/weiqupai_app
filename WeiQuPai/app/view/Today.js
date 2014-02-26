@@ -12,7 +12,7 @@ Ext.define('WeiQuPai.view.Today', {
 				pullText: '下拉刷新',
 				releaseText: '释放立即刷新',
 				loadedText: '下拉刷新'
-			},
+			}
 		],
 		loadingText: null,
 		store: 'Auction',

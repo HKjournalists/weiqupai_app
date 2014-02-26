@@ -9,7 +9,7 @@ Ext.define('WeiQuPai.store.Auction', {
 			type: 'ajax',
 			url: WeiQuPai.Config.apiUrl + '/?r=app/today',
 			reader: {
-				type: 'json',
+				type: 'json'
 			},
 			startParam: false,
 			limitParam: false,

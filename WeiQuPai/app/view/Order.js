@@ -24,7 +24,7 @@ Ext.define('WeiQuPai.view.Order', {
 							'<p>订单合计 ￥{total_pay}</p></div>',
 						'</div>',
 					'</div>'
-				),
+				)
 			},
 			{
 				xtype: 'disclosureitem',

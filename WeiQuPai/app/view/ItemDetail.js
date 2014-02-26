@@ -64,8 +64,8 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 				cls: 'item-detail-desc',
 				itemId: 'itemDesc',
 				tpl: '{description}{button}',
-				scrollDock: 'top',
-		},
+				scrollDock: 'top'
+			},
 			{
 				xtype: 'bottombar'
 			}

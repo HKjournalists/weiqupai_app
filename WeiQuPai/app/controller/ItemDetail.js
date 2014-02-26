@@ -111,7 +111,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
         var id = record.get('id');
         Ext.Ajax.request({
             url: WeiQuPai.Config.apiUrl + '/?r=app/comment/up&id=' + id,
-            method: 'get',
+            method: 'get'
         });
         //异步请求的同时，给数量加1
         record.set('up_num', parseInt(record.get('up_num')) + 1);

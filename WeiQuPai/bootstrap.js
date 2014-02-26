@@ -766,31 +766,34 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.controller.ShowOrder": [],
   "WeiQuPai.controller.ShowUser": [],
   "WeiQuPai.controller.Today": [],
+  "WeiQuPai.model.Auction": [],
   "WeiQuPai.model.AuctionComment": [],
   "WeiQuPai.model.Circle": [],
   "WeiQuPai.model.CompanyMessage": [],
-  "WeiQuPai.model.Item": [],
   "WeiQuPai.model.MyAuction": [],
   "WeiQuPai.model.Order": [],
   "WeiQuPai.model.ShowUserInfo": [],
   "WeiQuPai.model.ShowUserMessage": [],
   "WeiQuPai.model.SiteMessage": [],
   "WeiQuPai.model.User": [],
+  "WeiQuPai.model.UserConsignee": [],
+  "WeiQuPai.store.Auction": [],
   "WeiQuPai.store.AuctionComment": [],
+  "WeiQuPai.store.Banner": [],
   "WeiQuPai.store.Circle": [],
   "WeiQuPai.store.CompanyMessage": [],
-  "WeiQuPai.store.Item": [],
   "WeiQuPai.store.MyAuction": [],
   "WeiQuPai.store.ShowUserInfo": [],
   "WeiQuPai.store.ShowUserMessage": [],
   "WeiQuPai.store.SiteMessage": [],
+  "WeiQuPai.store.UserConsignee": [],
   "WeiQuPai.store.UserCoupon": [],
   "WeiQuPai.store.UserFriend": [],
   "WeiQuPai.store.UserProp": [],
   "WeiQuPai.view.About": [],
+  "WeiQuPai.view.Banner": [],
   "WeiQuPai.view.BottomBar": [],
   "WeiQuPai.view.Circle": [],
-  "WeiQuPai.view.CircleAd": [],
   "WeiQuPai.view.CompanyMessage": [],
   "WeiQuPai.view.CompanyTitleText": [],
   "WeiQuPai.view.ConsigneeList": [],
@@ -800,7 +803,6 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.FeedShowOption": [],
   "WeiQuPai.view.IconButton": [],
   "WeiQuPai.view.IconListExample": [],
-  "WeiQuPai.view.IndexAd": [],
   "WeiQuPai.view.InputComment": [],
   "WeiQuPai.view.ItemDetail": [],
   "WeiQuPai.view.Login": [],
@@ -1791,38 +1793,41 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.controller.ShowOrder": [],
   "WeiQuPai.controller.ShowUser": [],
   "WeiQuPai.controller.Today": [],
+  "WeiQuPai.model.Auction": [],
   "WeiQuPai.model.AuctionComment": [],
   "WeiQuPai.model.Circle": [],
   "WeiQuPai.model.CompanyMessage": [],
-  "WeiQuPai.model.Item": [],
   "WeiQuPai.model.MyAuction": [],
   "WeiQuPai.model.Order": [],
   "WeiQuPai.model.ShowUserInfo": [],
   "WeiQuPai.model.ShowUserMessage": [],
   "WeiQuPai.model.SiteMessage": [],
   "WeiQuPai.model.User": [],
+  "WeiQuPai.model.UserConsignee": [],
+  "WeiQuPai.store.Auction": [],
   "WeiQuPai.store.AuctionComment": [],
+  "WeiQuPai.store.Banner": [],
   "WeiQuPai.store.Circle": [],
   "WeiQuPai.store.CompanyMessage": [],
-  "WeiQuPai.store.Item": [],
   "WeiQuPai.store.MyAuction": [],
   "WeiQuPai.store.ShowUserInfo": [],
   "WeiQuPai.store.ShowUserMessage": [],
   "WeiQuPai.store.SiteMessage": [],
+  "WeiQuPai.store.UserConsignee": [],
   "WeiQuPai.store.UserCoupon": [],
   "WeiQuPai.store.UserFriend": [],
   "WeiQuPai.store.UserProp": [],
   "WeiQuPai.view.About": [
     "widget.pay"
   ],
+  "WeiQuPai.view.Banner": [
+    "widget.banner"
+  ],
   "WeiQuPai.view.BottomBar": [
     "widget.bottombar"
   ],
   "WeiQuPai.view.Circle": [
     "widget.circle"
-  ],
-  "WeiQuPai.view.CircleAd": [
-    "widget.circlead"
   ],
   "WeiQuPai.view.CompanyMessage": [
     "widget.companymessage"
@@ -1850,9 +1855,6 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.IconListExample": [
     "widget.iconlistexample"
-  ],
-  "WeiQuPai.view.IndexAd": [
-    "widget.indexad"
   ],
   "WeiQuPai.view.InputComment": [
     "widget.commentform"

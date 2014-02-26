@@ -59,5 +59,5 @@ Ext.define('WeiQuPai.view.Private', {
         }
         var title = list.getItemAt(0).getRecord().get('title');
         this.down('#showFeedFor').setContent(title);
-	},
+	}
 });

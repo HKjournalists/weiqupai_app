@@ -7,7 +7,7 @@ Ext.define('WeiQuPai.controller.Private', {
     		toggleAddFriend: 'togglefield[itemId=validateOnAddFriend]',
             toggleSearch: 'togglefield[itemId=canBeSearched]',
             showFeedFor: 'disclosureitem[itemId=showFeedFor]',
-            feedOption: 'feedshowoption list',
+            feedOption: 'feedshowoption list'
     	},
         control: {
         	toggleAddFriend: {change:'doToggleAddFriend'}, 
@@ -33,5 +33,5 @@ Ext.define('WeiQuPai.controller.Private', {
         var option = record.get('title'); 
         this.getShowFeedFor().setContent(option);
         this.getFeedOption().up('feedshowoption').hide();
-    },
+    }
 });

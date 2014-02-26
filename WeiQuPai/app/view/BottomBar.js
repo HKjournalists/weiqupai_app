@@ -24,7 +24,7 @@ Ext.define('WeiQuPai.view.BottomBar', {
                     align: 'center'
                 },
                 itemId: 'buttonContainer',
-                flex: 1,
+                flex: 1
 
             },
             {

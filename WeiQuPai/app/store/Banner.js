@@ -8,7 +8,7 @@ Ext.define('WeiQuPai.store.Banner', {
 			type: 'ajax',
 			url: WeiQuPai.Config.apiUrl + '/?r=app/banner',
 			reader: {
-				type: 'json',
+				type: 'json'
 			},
 			startParam: false,
 			limitParam: false,

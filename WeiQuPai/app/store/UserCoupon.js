@@ -5,7 +5,7 @@ Ext.define('WeiQuPai.store.UserCoupon', {
 		fields: ['id', 'coupon_info', 'coupon_id', 'num'],
 		proxy: {
 			type: 'ajax',
-			url: WeiQuPai.Config.host + '/?r=app/usercoupon',
+			url: WeiQuPai.Config.host + '/?r=app/userCoupon',
 			reader: {
 				type: 'json'
 			},
