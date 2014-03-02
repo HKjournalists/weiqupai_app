@@ -10,6 +10,7 @@ Ext.define('WeiQuPai.controller.My', {
     		propBtn: 'iconbutton[action=prop]',
     		couponBtn: 'iconbutton[action=coupon]',
     		settingBtn: 'iconbutton[action=setting]',
+            profile: 'disclosureitem[itemId=profile]',
     		my: 'my'
     	},
         control: {
@@ -19,7 +20,8 @@ Ext.define('WeiQuPai.controller.My', {
         	consigneeBtn: {tap: 'showConsignee'}, 
         	propBtn: {tap: 'showProp'}, 
         	couponBtn: {tap: 'showCoupon'},
-        	settingBtn: {tap: 'showSetting'}
+        	settingBtn: {tap: 'showSetting'},
+            profile: {tap: 'showProfile'}
         }
     },
 
@@ -50,6 +52,11 @@ Ext.define('WeiQuPai.controller.My', {
 
     showSetting: function(){
         var view = Ext.create('WeiQuPai.view.Setting');
+        this.getMain().push(view);
+    },
+
+    showProfile: function(){
+        var view = Ext.create('WeiQuPai.view.Profile');
         this.getMain().push(view);
     }
 });

@@ -3,12 +3,11 @@ Ext.define('WeiQuPai.view.MyAuction', {
 	xtype: 'myauction',
 	requires:['WeiQuPai.store.MyAuction', 'WeiQuPai.view.MyAuctionDetail', 'WeiQuPai.view.LoginTip'],
 	config: {
-		emptyText: '您还没有拍到任何宝贝',
         disableSelection : true,
         store: 'MyAuction',
 		itemTpl: new Ext.XTemplate(
                 '<div class="myauction-row">',
-                '<img src="' + WeiQuPai.Config.host + '{pic_url}" />',
+                '<img src="' + WeiQuPai.Config.host + '{pic_cover}" />',
                 '<div class="info">',
                     '<h2>{item_title}</h2>',
                     '<p>成交价 <span class="fbig">{price}</span>',
@@ -17,11 +16,6 @@ Ext.define('WeiQuPai.view.MyAuction', {
                 '</div>'
                 ),
         items: [
-            {
-                xtype: 'titlebar',
-                title: '已拍',
-                docked: 'top'
-            }
         ],
 
         listeners: {
@@ -29,7 +23,8 @@ Ext.define('WeiQuPai.view.MyAuction', {
         }
     },
     loadData: function(){
-        if(!WeiQuPai.Util.isLogin()){
+        var user = WeiQuPai.Cache.get('currentUser');
+        if(!user){
             this.getStore().removeAll();
             this.hasLoadedStore = false;
             !this.down('logintip') && this.add(Ext.create('WeiQuPai.view.LoginTip'));
@@ -41,9 +36,10 @@ Ext.define('WeiQuPai.view.MyAuction', {
         var store = this.getStore();
         //加载数据
         var me = this;
+        store.getProxy().setExtraParam('token', user.token);
         store.load(function(data, operation, success){
             if(!success){
-                me.setEmptyText('网络不给力哦～');
+                Ext.Msg.alert(null, '数据加载失败');
             }
         });
     }

@@ -15,7 +15,9 @@ Ext.define('WeiQuPai.view.IconListExample', {
 			{
 				xtype: 'titlebar',
 				title: '我的好友',
-				docked: 'top'
+				docked: 'top',
+				docked: 'top',
+				cls: 'w-title'
 			},
 			{
 				xtype: 'bottombar'

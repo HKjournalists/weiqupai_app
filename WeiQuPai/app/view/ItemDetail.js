@@ -3,8 +3,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 	xtype: 'itemdetail',
 	requires: [
 		'WeiQuPai.view.Shop', 'WeiQuPai.view.BottomBar', 'WeiQuPai.view.DisclosureItem',
-		'WeiQuPai.view.DetailPicShow', 'WeiQuPai.view.Order', 'WeiQuPai.view.InputComment',
-		'WeiQuPai.model.Auction'
+		'WeiQuPai.view.DetailPicShow', 'WeiQuPai.view.Order', 'WeiQuPai.model.Auction'
 	],
 	config: {
 		param: null,
@@ -36,11 +35,6 @@ Ext.define('WeiQuPai.view.ItemDetail', {
             '</div>'
         ),
 		items:[
-			{
-				xtype: 'titlebar',
-				title: '拍品详情',
-				docked: 'top'
-			},
 			{
 				xtype: 'detailpicshow',
 				scrollDock: 'top'
@@ -155,11 +149,8 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 				return;
 			}
 			if(records.length == 0){
-				var c = Ext.create('Ext.Container', {
+				var c = WeiQuPai.Util.msgbox('还没有人评论该商品', {
 					scrollDock: 'top',
-					html: '还没有人评论该商品.',
-					cls: 'w-content',
-					itemId: 'empty_comment'
 				});
 				me.add(c);
 			}

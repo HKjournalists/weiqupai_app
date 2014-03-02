@@ -23,8 +23,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
                 tap: function(){
                     var auctionId = this.getPageView().getData().id;
                     var itemId = this.getPageView().getData().item_id;
-                    WeiQuPai.Util.showCommentForm();
-                    var form = this.getCommentForm();
+                    var form = WeiQuPai.Util.showCommentForm();
                     form.down('hiddenfield[name=auction_id]').setValue(auctionId);
                     form.down('hiddenfield[name=item_id]').setValue(itemId);
                     form.down('button[action=publishComment]').setText('发表评论');
@@ -91,7 +90,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
                 list.setScrollToTopOnRefresh(false);
                 list.getStore().load(function(){
                     WeiQuPai.Util.unmask();
-                    list.down('#empty_comment') && list.down('#empty_comment').destroy();
+                    list.down('#msgbox') && list.down('#msgbox').destroy();
                     list.setScrollToTopOnRefresh(true);
                 });
             },
@@ -122,8 +121,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
         var replyId = record.get('id');
         var auctionId = this.getPageView().getData().id;
         var itemId  = this.getPageView().getData().item_id;
-        WeiQuPai.Util.showCommentForm();
-        var form = this.getCommentForm();
+        var form = WeiQuPai.Util.showCommentForm();
         form.down('hiddenfield[name=auction_id]').setValue(auctionId);
         form.down('hiddenfield[name=item_id]').setValue(itemId);
         form.down('hiddenfield[name=reply_id]').setValue(replyId);

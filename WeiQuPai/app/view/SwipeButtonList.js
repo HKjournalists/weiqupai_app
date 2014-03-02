@@ -2,6 +2,7 @@ Ext.define('WeiQuPai.view.SwipeButtonList', {
 	extend: 'Ext.dataview.List',
 	xtype: 'swipebuttonlist',
 	config: {
+		loadingText: null,
 		itemCls: 'w-icon-list-item-container',
 		disableSelection: true
 	},
@@ -87,11 +88,18 @@ Ext.define('WeiQuPai.view.SwipeButtonList', {
 			var self = this;
 			this.un('itemtouchstart', this.onTouchStart);
 			this.on('itemtouchstart', this.restoreState, this, {single: true});
+			//禁用一次itemtap事件,防止其它点周事件受到影响
+			this.onBefore('itemtap', function(e){
+				return false;
+			}, this, {single: true});
 		}
 	},
 
 	beforeTouchStart: function(list, index, dataItem ,record, e){
 		if(e.getTarget('.button-area')){
+			//点了按钮要清除之前的restoreState的状态
+			this.un('itemtouchstart', this.restoreState);
+			this.on('itemtouchstart', this.onTouchStart);
 			return false;
 		}
 	}, 

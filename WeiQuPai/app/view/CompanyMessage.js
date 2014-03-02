@@ -20,11 +20,6 @@ Ext.define('WeiQuPai.view.CompanyMessage', {
 		itemTpl: companymessagetpl,
 		items: [
 			{
-        		xtype: 'titlebar',
-        		title: '商家动态',
-        		docked: 'top'
-        	},
-			{
 				xtype: 'companytitletext',
 				//centered: true,
 				scrollDock: 'top',

@@ -7,7 +7,7 @@ Ext.define('WeiQuPai.controller.Order', {
             orderView: 'order',
             paymentPanel: 'disclosureitem[itemId=payment]',
             paymentList: 'paymentlist list',
-            deliveryTimePanel: 'disclosureitem[itemId=deliverytime]',
+            deliveryTimePanel: 'disclosureitem[itemId=delivery_time]',
             deliveryTimeList: 'deliverytimelist list',
             propPanel: 'disclosureitem[itemId=prop]',
             couponPanel: 'disclosureitem[itemId=coupon]',
@@ -39,37 +39,15 @@ Ext.define('WeiQuPai.controller.Order', {
            consigneePanel: {
                 tap: 'showConsigneeList'
            },
-           consigneeList: {
-                itemtap: 'selectConsignee'
-           },
-           propList: {
-                itemtap: 'selectProp'
-           },
-           couponList: {
-                itemtap: 'selectCoupon'
-           },
            payButton: {
                 tap: 'submitOrder'
            }
         }
     },
-    
-    consigneeTpl : new Ext.XTemplate(
-        '<div class="content">',
-            '<p>收货人：{name}</p>',
-            '<p>电话：{mobile}</p>',
-            '<p>地址：{province}{city}{address}</p>',
-            '<p>邮编：{zip}</p>',
-        '</div>'
-    ),
 
     showConsigneeList: function(){
         var view = Ext.create('WeiQuPai.view.MyConsignee');
-        var selected = this.getOrderView().getRecord().get('consignee_id');
-        if(selected){
-            var idx = view.getStore().indexOfId(selected);
-            view.select(idx);
-        }
+        view.on('itemtap', this.selectConsignee, this);
         this.getMain().push(view);
     },
     showDeliveryTimeList: function(){
@@ -82,23 +60,13 @@ Ext.define('WeiQuPai.controller.Order', {
 
     showCouponList: function(){
         var view = Ext.create('WeiQuPai.view.MyCoupon');
-        view.setDisableSelection(false);
-        var selected = this.getOrderView().getRecord().get('coupon');
-        if(selected){
-            var idx = view.getStore().findExact('coupon_id', selected);
-            view.select(idx);
-        }
+        view.on('itemtap', this.selectCoupon, this);
         this.getMain().push(view);
     },
 
     showPropList : function(){
         var view = Ext.create('WeiQuPai.view.MyProp');
-        view.setDisableSelection(false);
-        var selected = this.getOrderView().getRecord().get('prop');
-        if(selected){
-            var idx = view.getStore().findExact('prop_id', selected);
-            view.select(idx);
-        }
+        view.on('itemtap', this.selectProp, this);
         this.getMain().push(view);
     },
 
@@ -128,7 +96,7 @@ Ext.define('WeiQuPai.controller.Order', {
     selectConsignee: function(list, index, dataItem,record, e){
         this.getMain().pop();
         this.getOrderView().getRecord().set('consignee_id', record.get('id'));
-        var html = this.consigneeTpl.apply(record.getData());
+        var html = this.getOrderView().consigneeTpl.apply(record.getData());
         this.getConsigneePanel().setContent(html);
     },
 

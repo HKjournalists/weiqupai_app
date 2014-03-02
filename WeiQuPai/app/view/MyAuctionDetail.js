@@ -23,11 +23,6 @@ Ext.define('WeiQuPai.view.MyAuctionDetail', {
         ),
 		items:[
 			{
-				xtype: 'titlebar',
-				title: '已拍详情',
-				docked: 'top'
-			},
-			{
 				xtype: 'panel',
 				cls: 'auction-info',
 				html: '<h2>Iphone 5S土豪金</h2><p>您的成交价格<span class="price">￥55.00</span></p>',

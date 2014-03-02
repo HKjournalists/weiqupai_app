@@ -17,11 +17,6 @@ Ext.define('WeiQuPai.view.SiteMessage', {
 		itemTpl: sitemessagetpl,
 		items: [
 			{
-        		xtype: 'titlebar',
-        		title: '微趣拍动态',
-        		docked: 'top'
-        	},
-			{
 				xtype: 'bottombar'
 			}
 		]

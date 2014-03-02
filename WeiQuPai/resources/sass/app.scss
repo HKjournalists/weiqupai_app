@@ -33,7 +33,7 @@ $ios7-green: #53d769;
 	background-color:$bg-color;
 }
 //标题栏样式
-.x-toolbar.x-docked-top{
+.x-toolbar.x-docked-top.w-title{
 	border-bottom:0;
 	border-radius:0;
 	background-color:$bar-color;
@@ -116,6 +116,7 @@ pullrefresh样式
 	border-bottom: 1px solid $border-color;
 	padding:.7em 1em;
 	line-height:1.5;
+	background:#fff;
 }
 .w-disclosure-item-single{
 	border-top: 1px solid $border-color;
@@ -446,9 +447,11 @@ h3{
 	display:flex;
 }
 .w-myinfo img{
-	width:68px;
-	height:68px;
+	width:70px;
+	height:70px;
 	margin-right:1em;
+	background:url(../images/icon-big-avatar.png);
+	background-size:70px 70px;
 }
 .w-myinfo .info{
 	-webkit-box-flex: 1;
@@ -499,7 +502,7 @@ h3{
 .w-icon-list-item img{
 	width:40px;
 	height:40px;
-	margin-right:1em;
+	margin-right:.7em;
 }
 .x-list .x-list-item.w-icon-list-item-container .x-innerhtml, .x-list .x-list-item.w-list-item-container .x-innerhtml{
 	padding:0;
@@ -532,6 +535,7 @@ h3{
 .x-item-pressed .w-icon-list-item, .x-item-pressed .w-list-item{
 	background:#ddd;
 }
+
 .swipe-button-delete{
 	padding:0 1em;
 	background:#ff3b30;
@@ -565,6 +569,8 @@ h3{
 .content, .w-icon-list-item .content, .w-list-item .content{
 	line-height:1.5;
 	color:$text-color;
+	-webkit-flex:1;
+	flex:1;
 }
 .w-content{
 	margin:1em;
@@ -625,6 +631,7 @@ h3{
 .w-button-logout .x-button-label{
 	text-shadow: 0 1px #da2924;	
 }
+
 .w-logo{
 	background:url(../images/logo219.png) no-repeat center center;
 	background-size:110px 110px;
@@ -788,3 +795,42 @@ h3{
 	background:url(../images/icon-share.png) no-repeat left center;
 	background-size:16px 16px;
 }
+
+//虚边框的按钮
+.w-box-button{
+	border:2px dashed #ccc;
+	background:transparent;
+	border-radius:4px;
+	min-height:42px;
+	margin:4px;
+}
+.w-box-button .x-button-label{
+	color:#ccc;
+	text-shadow:1px 1px 3px #eee;
+}
+.w-input-fullwidth{
+	padding:.2em 0 .2em 1.5em;
+}
+.w-fieldset{
+	margin:1em 0 0 0;
+}
+
+.is-default{
+	width:1em;
+	background:#8bcf92;
+	color:white;
+	display:-webkit-box;
+	display:flex;
+	-webkit-box-align:center;
+	align-items: center;
+}
+.big-avatar{
+	width:70px;
+	height:70px;
+	background:url(../images/icon-big-avatar.png);
+	background-size:70px 70px;
+
+ }
+ .camera-layer{
+ 	background:rgba(0,0,0,.3);
+ }

@@ -1,7 +1,9 @@
 Ext.define("WeiQuPai.Util", {
     singleton: true,
-    requires: ['WeiQuPai.view.InputComment'],
+    requires: ['WeiQuPai.view.InputComment', 'WeiQuPai.view.CameraLayer'],
     createOverlay : function(com, conf){
+        var cmp = Ext.Viewport.down(com);
+        if(cmp) return cmp;
     	var config = {
             bottom: 0,
             left:0,
@@ -20,20 +22,29 @@ Ext.define("WeiQuPai.Util", {
             hideOnMaskTap: true
     	};
 
-        var cmp = Ext.create(com, Ext.merge(config, conf));
+        cmp = Ext.create(com, Ext.merge(config, conf));
         Ext.Viewport.add(cmp);
         return cmp;
     }, 
 
+    //显示评论表单
     showCommentForm: function(){
-        var config = {
-            centered: true,
-            height: 200
-        };
         if(!this.commentForm){
+            var config = {height: 200};
             this.commentForm = WeiQuPai.Util.createOverlay('WeiQuPai.view.InputComment', config);
         }
-        this.commentForm.show();
+        this.commentForm.show(); 
+        return this.commentForm;
+    },
+
+    //显示相机菜单
+    showCameraLayer: function(){
+        if(!this.cameraLayer){
+            var config = {height: 200};
+            this.cameraLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.CameraLayer', config);
+        }
+        this.cameraLayer.show();
+        return this.cameraLayer;
     },
 
     mask: function(msg){
@@ -112,6 +123,28 @@ Ext.define("WeiQuPai.Util", {
         callback && callback();
     },
 
+    //更新用户设置
+    updateSetting: function(field, value){
+        var user = WeiQuPai.Cache.get('currentUser');
+        if(!user) return;
+        if(user[field] == value) return;
+        Ext.Ajax.request({
+            url: WeiQuPai.Config.apiUrl + '/?r=app/userSetting&token=' + user.token,
+            params:{f: field, flag: value},
+            method: 'get',
+            success: function(rsp){
+                rsp = Ext.decode(rsp.responseText);
+                if(rsp.code > 0){
+                    Ext.Msg.alert(null, rsp.msg);
+                    return;
+                }
+                //更新本地的用户设置缓存
+                user[field] = value; 
+                WeiQuPai.Cache.set('currentUser', user);
+            }
+        });
+    },
+
     //过滤对象的空值
     filterNull: function(obj){
         var res = {};
@@ -121,6 +154,17 @@ Ext.define("WeiQuPai.Util", {
             }
         }
         return res;
+    },
+
+    //生成一个展现提示信息的容器
+    msgbox: function(html, cfg){
+        var config = {
+            cls: 'w-content',
+            html: html,
+            itemId: 'msgbox'
+        };
+        config = Ext.merge(config, cfg);
+        return Ext.create('Ext.Container', config);
     },
 
     showTab: function(tab){

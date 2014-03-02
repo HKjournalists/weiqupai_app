@@ -2,10 +2,10 @@ Ext.define('WeiQuPai.store.UserFriend', {
 	extend: 'Ext.data.Store',
 	config:{
 		autoLoad: false,
-		fields: ['name', 'avatar'],
+		fields: ['id', 'nick', 'avatar'],
 		proxy: {
 			type: 'ajax',
-			url: WeiQuPai.Config.host + 'userfriend.json',
+			url: WeiQuPai.Config.apiUrl + '/?r=app/userFriend',
 			reader: {
 				type: 'json'
 			},

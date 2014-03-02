@@ -7,7 +7,8 @@ Ext.define('WeiQuPai.view.Login', {
             {
                 xtype: 'titlebar',
                 title: '登录',
-                docked: 'top'
+                docked: 'top',
+                cls: 'w-title'
             },
             /*
             {
@@ -21,7 +22,8 @@ Ext.define('WeiQuPai.view.Login', {
                 xtype: 'textfield',
                 cls: 'w-input-text w-margin',
                 inputCls: 'w-icon-user',
-                placeHolder: '填写用户名/手机'
+                placeHolder: '填写用户名/手机',
+                autoComplete: false
 
             },
             {
@@ -29,7 +31,8 @@ Ext.define('WeiQuPai.view.Login', {
                 xtype: 'passwordfield',
                 cls: 'w-input-text w-margin',
                 inputCls: 'w-icon-password',
-                placeHolder: '填写密码'
+                placeHolder: '填写密码',
+                autoComplete: false
             },
             {
                 xtype: 'button',

@@ -5,11 +5,6 @@ Ext.define('WeiQuPai.view.Shipment', {
 	config: {
 		items:[
 			{
-				xtype: 'titlebar', 
-				title: '物流详情',
-				docked: 'top'
-			},
-			{
 				xtype: 'container',
 				cls: 'w-content',
 				html: '订单已经到达知春里站'

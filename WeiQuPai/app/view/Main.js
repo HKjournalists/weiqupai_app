@@ -17,12 +17,17 @@ Ext.define('WeiQuPai.view.Main', {
     //重写push/pop方法，修复多次点击会重复push/pop的问题
     push: function(){
         if(this.isAnimating) return;
-        this.callParent(arguments);
+        return this.callParent(arguments);
     },
 
     pop: function(){
         if(this.isAnimating) return;
-        this.callParent(arguments);
+        prev = this.callParent(arguments);
+        //pop不能触发tab里view的activate事件，需要手动触发一下
+        if(prev.isXType('maintab')){
+            prev.getActiveItem().fireEvent('activate');
+        }
+        return prev;
     },
 
     //初始化navigation,设置动画执行的标识

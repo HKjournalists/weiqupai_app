@@ -8,11 +8,6 @@ Ext.define('WeiQuPai.view.Order', {
 		scrollable: true,
 		items: [
 			{
-				xtype: 'titlebar',
-				title: '订单详情',
-				docked: 'top'
-			},
-			{
 				xtype: 'container',
 				itemId: 'itemInfo',
 				tpl: new Ext.XTemplate(
@@ -62,13 +57,39 @@ Ext.define('WeiQuPai.view.Order', {
 			}
 		]
 	}, 
+
+    
+    consigneeTpl : new Ext.XTemplate(
+        '<div class="content">',
+            '<p>收货人：{name}</p>',
+            '<p>电话：{mobile}</p>',
+            '<p>地址：{province}{city}{address}</p>',
+            '<p>邮编：{zip}</p>',
+        '</div>'
+    ),
+
 	initialize: function(){
+		var user = WeiQuPai.Cache.get('currentUser');
+		if(!user) return;
 		var order = Ext.create('WeiQuPai.model.Order');
 		this.setRecord(order);
 		var payBtn = {xtype: 'button', text: '去支付', action: 'pay', cls: 'w-toolbar-button', iconCls: 'icon-pay'};
 		this.down('bottombar #buttonContainer').add(payBtn);
 		this.addPayment();
 		this.addDeliveryTime();
+
+		//加载默认收货地址
+		var consignee = Ext.getStore('UserConsignee');
+		consignee.getProxy().setExtraParam('token', user.token);
+		consignee.load(function(records, operation, success){
+			if(!success) return;
+			var dft = consignee.findRecord('is_default', 1, 0, null, null, true);
+			if(dft){
+				this.getRecord().set('consignee_id', dft.get('id'));
+        		var html = this.consigneeTpl.apply(dft.getData());
+        		this.down('#consignee').setContent(html);
+			}
+		}, this);
 	}, 
 
 	applyAuctionData: function(data){

@@ -8,7 +8,7 @@ Ext.define('WeiQuPai.store.MyAuction', {
 		pageSize: 10,
 		proxy: {
 			type: 'ajax',
-			url: WeiQuPai.Config.host + '/?r=app/myAuction',
+			url: WeiQuPai.Config.host + '/?r=app/userAuction',
 			reader: {
 				type: 'json'
 			},

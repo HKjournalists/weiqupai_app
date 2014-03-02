@@ -8,11 +8,6 @@ Ext.define('WeiQuPai.view.MyAccount', {
 	config: {
 		items:[
 			{
-				xtype: 'titlebar',
-				title: '帐号绑定',
-				docked: 'top'
-			},
-			{
 				xtype: 'disclosureitem',
 				title: '新浪微博',
 				itemId: 'weibo'	

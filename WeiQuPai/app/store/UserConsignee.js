@@ -7,7 +7,7 @@ Ext.define('WeiQuPai.store.UserConsignee', {
 		model: 'WeiQuPai.model.UserConsignee',
 		proxy: {
 			type: 'ajax',
-			url: WeiQuPai.Config.host + '/?r=app/userconsignee',
+			url: WeiQuPai.Config.apiUrl + '/?r=app/userConsignee',
 			reader: {
 				type: 'json'
 			},

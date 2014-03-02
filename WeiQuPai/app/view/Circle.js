@@ -32,11 +32,6 @@ Ext.define('WeiQuPai.view.Circle', {
 		),
 		items: [
 			{
-				xtype: 'titlebar',
-				title: '拍圈',
-				docked: 'top'
-			},
-			{
 				xtype: 'banner',
 				scrollDock: 'top'
 			}

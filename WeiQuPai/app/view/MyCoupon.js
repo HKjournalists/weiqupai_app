@@ -13,11 +13,6 @@ Ext.define('WeiQuPai.view.MyCoupon', {
 		),
 		items:[
 			{
-				xtype: 'titlebar',
-				title: '我的拍券',
-				docked: 'top'
-			},
-			{
 				xtype: 'bottombar'
 			}
 		]
@@ -25,7 +20,11 @@ Ext.define('WeiQuPai.view.MyCoupon', {
 
 	initialize: function(){
 		this.callParent(arguments);
-		this.getStore().load(function(data, operation, success){
+		var user = WeiQuPai.Cache.get('currentUser');
+		if(!user) return;
+		var store = this.getStore();
+		store.getProxy().setExtraParam('token', user.token);
+		store.load(function(data, operation, success){
             if(!success){
                 Ext.Msg.alert(null, '数据加载失败');
             }

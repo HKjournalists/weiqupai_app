@@ -24,11 +24,6 @@ Ext.define('WeiQuPai.view.Today', {
             '<p><span class="market-price">市场价 {mprice}</span> / <span class="price">￥{curr_price}</span></p>'
         ),
         items: [
-        	{
-        		xtype: 'titlebar',
-        		title: '今日',
-        		docked: 'top'
-        	},
 	        {
 	            xtype: 'banner',
 	        	scrollDock: 'top'

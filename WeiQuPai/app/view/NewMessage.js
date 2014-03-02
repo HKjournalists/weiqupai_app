@@ -8,18 +8,13 @@ Ext.define('WeiQuPai.view.NewMessage', {
 	config: {
 		items:[
 			{
-				xtype: 'titlebar',
-				title: '新消息通知',
-				docked: 'top'
-			},
-			{
 				xtype: 'disclosureitem',
 				title: '允许推送新品信息',
 				disclosureItem: false,
 				content: {
 					xtype: 'togglefield',
 					cls: 'w-toggle-field',
-					itemId: 'pushNewItem'
+					itemId: 'notifyNewItem'
 				}
 			},
 			{
@@ -29,7 +24,7 @@ Ext.define('WeiQuPai.view.NewMessage', {
 				content: {
 					xtype: 'togglefield',
 					cls: 'w-toggle-field',
-					itemId: 'pushFeeds'
+					itemId: 'notifyFeed'
 				}
 			},
 			{
@@ -39,7 +34,7 @@ Ext.define('WeiQuPai.view.NewMessage', {
 				content: {
 					xtype: 'togglefield',
 					cls: 'w-toggle-field',
-					itemId: 'pushNewPrice'
+					itemId: 'notifyItemPrice'
 				}
 			},
 			{
@@ -49,9 +44,12 @@ Ext.define('WeiQuPai.view.NewMessage', {
 	}, 
 
 	initialize: function(){
+		var user = WeiQuPai.Cache.get('currentUser');
+		if(!user) return;
+
 		this.callParent(arguments);
-		this.down('#pushNewItem').setValue(1);
-		this.down('#pushFeeds').setValue(1);
-		this.down('#pushNewPrice').setValue(1);
+		this.down('#notifyNewItem').setValue(user.notify_new_item);
+		this.down('#notifyFeed').setValue(user.notify_feed);
+		this.down('#notifyItemPrice').setValue(user.notify_item_price);
 	}
 });

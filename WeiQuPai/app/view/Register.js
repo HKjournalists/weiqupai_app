@@ -6,16 +6,12 @@ Ext.define('WeiQuPai.view.Register', {
         
         items: [
             {
-                xtype: 'titlebar',
-                title: '注册',
-                docked: 'top'
-            },
-            {
                 name: 'uname',
                 xtype: 'textfield',
                 cls: 'w-input-text w-margin',
                 inputCls: 'w-icon-user',
-                placeHolder: '填写用户名'
+                placeHolder: '填写用户名',
+                autoComplete: false
 
             },
             {
@@ -23,14 +19,16 @@ Ext.define('WeiQuPai.view.Register', {
                 xtype: 'passwordfield',
                 cls: 'w-input-text w-margin',
                 inputCls: 'w-icon-password',
-                placeHolder: '填写密码'
+                placeHolder: '填写密码',
+                autoComplete: false
             },
             {
                 name: 'password2',
                 xtype: 'passwordfield',
                 cls: 'w-input-text w-margin',
                 inputCls: 'w-icon-password',
-                placeHolder: '重复输入密码'
+                placeHolder: '重复输入密码',
+                autoComplete: false
             },
             {
                 xtype: 'button',

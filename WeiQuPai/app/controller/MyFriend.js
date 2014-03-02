@@ -14,6 +14,20 @@ Ext.define('WeiQuPai.controller.MyFriend', {
     },
 
     doItemDelete: function(list, index, dataItem, record, e){
-        console.log(index + ', delete');
-    }
+        var user = WeiQuPai.Cache.get('currentUser');
+        WeiQuPai.Util.mask();
+        Ext.Ajax.request({
+            url: WeiQuPai.Config.apiUrl + '/?r=app/userFriend/del&token=' + user.token,
+            params: {uid: record.get('id')},
+            method: 'get',
+            success: function(rsp){
+                WeiQuPai.Util.unmask();
+                list.getStore().remove(record);
+            },
+            failure: function(rsp){
+                WeiQuPai.Util.unmask();
+                Ext.msg.Alert(null, '删除失败, 请重试');
+            }
+        });
+    },
 });

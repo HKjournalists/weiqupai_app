@@ -3,19 +3,15 @@ Ext.define('WeiQuPai.view.My', {
 	xtype: 'my',
 	requires: [
 		'WeiQuPai.view.IconButton', 'WeiQuPai.view.MyFriend', 'WeiQuPai.view.Setting', 'WeiQuPai.view.MyProp', 'WeiQuPai.view.MyCoupon',
-		'WeiQuPai.view.MyAccount', 'WeiQuPai.view.MyConsignee'
+		'WeiQuPai.view.MyAccount', 'WeiQuPai.view.MyConsignee', 'WeiQuPai.view.Profile'
 	],
 
 	config: {
 		scrollable: true,
 		items:[
 			{
-				xtype: 'titlebar',
-				title: '我的',
-				docked: 'top'
-			},
-			{
 				xtype: 'disclosureitem',
+				itemId: 'profile',
 				title: {
 					xtype:'container',
 					itemId: 'myInfo',

@@ -6,17 +6,12 @@ Ext.define('WeiQuPai.view.MyFriend', {
 		store: 'UserFriend',
 		itemTpl: new Ext.XTemplate(
 			'<div class="w-icon-list-item">',
-			'<img src="{avatar}">',
-			'<p>{name}</p>',
+			'<img src="{avatar}" class="avatar">',
+			'<p>{nick}</p>',
 			'</div>',
 			'<div class="button-area"><div class="swipe-button-delete">删除</div></div>'
 		),
 		items:[
-			{
-				xtype: 'titlebar',
-				title: '我的好友',
-				docked: 'top'
-			},
 			{
 				xtype: 'bottombar'
 			}
@@ -24,8 +19,15 @@ Ext.define('WeiQuPai.view.MyFriend', {
 	},
 
 	initialize: function(){
-		console.log(1);
+		var user = WeiQuPai.Cache.get('currentUser');
+		if(!user) return;
 		this.callParent(arguments);
-		this.getStore().load();
+		var store = this.getStore();
+		store.getProxy().setExtraParam('token', user.token);
+		this.getStore().load(function(data, operation, success){
+            if(!success){
+                Ext.Msg.alert(null, '数据加载失败');
+            }
+		});
 	}
 });
