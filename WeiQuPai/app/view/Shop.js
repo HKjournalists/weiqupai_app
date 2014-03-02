@@ -7,6 +7,12 @@ Ext.define('WeiQuPai.view.Shop', {
 	config: {
 		items:[
 			{
+                xtype: 'titlebar',
+                title: '商家信息',
+                docked: 'top',
+                cls: 'w-title'
+            },
+			{
 				xtype: 'container',
 				itemId: 'shop-detail',
 				cls: 'shop-detail'

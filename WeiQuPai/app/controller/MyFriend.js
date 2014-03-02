@@ -26,7 +26,7 @@ Ext.define('WeiQuPai.controller.MyFriend', {
             },
             failure: function(rsp){
                 WeiQuPai.Util.unmask();
-                Ext.msg.Alert(null, '删除失败, 请重试');
+                Ext.Msg.alert(null, '删除失败, 请重试');
             }
         });
     },

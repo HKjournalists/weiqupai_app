@@ -35,10 +35,6 @@ Ext.define('WeiQuPai.controller.Login', {
         var data = form.getValues();
         WeiQuPai.Util.login(data.uname, data.password, function(success){
             var main = Ext.Viewport.down('main');
-            var preView = main.getPreviousItem();
-            if(preView.isXType('tabpanel')){
-                preView.getActiveItem().fireEvent('activate');
-            }
             main.pop();
         });
     },

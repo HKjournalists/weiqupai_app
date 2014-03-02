@@ -8,6 +8,12 @@ Ext.define('WeiQuPai.view.NewMessage', {
 	config: {
 		items:[
 			{
+                xtype: 'titlebar',
+                title: '新消息通知',
+                docked: 'top',
+                cls: 'w-title'
+            },
+			{
 				xtype: 'disclosureitem',
 				title: '允许推送新品信息',
 				disclosureItem: false,

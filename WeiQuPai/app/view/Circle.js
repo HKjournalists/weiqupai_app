@@ -32,6 +32,12 @@ Ext.define('WeiQuPai.view.Circle', {
 		),
 		items: [
 			{
+                xtype: 'titlebar',
+                title: '关于微趣拍',
+                docked: 'top',
+                cls: 'w-title'
+            },
+			{
 				xtype: 'banner',
 				scrollDock: 'top'
 			}

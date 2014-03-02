@@ -7,8 +7,14 @@ Ext.define('WeiQuPai.view.AddConsigneeForm', {
     config: {
         items: [
             {
+                xtype: 'titlebar',
+                title: '添加收货地址',
+                docked: 'top',
+                cls: 'w-title'
+            },
+            {
                 xtype: 'fieldset',
-                cls: 'w-fieldset',
+                cls: 'w-fieldset-full',
                 items: [
                     {
                         name: 'name',
@@ -21,7 +27,7 @@ Ext.define('WeiQuPai.view.AddConsigneeForm', {
             },
             {
                 xtype: 'fieldset',
-                cls: 'w-fieldset',
+                cls: 'w-fieldset-full',
                 items: [
                     {
                         name: 'province',
@@ -58,7 +64,7 @@ Ext.define('WeiQuPai.view.AddConsigneeForm', {
             },
             {
                 xtype: 'fieldset',
-                cls: 'w-fieldset',
+                cls: 'w-fieldset-full',
                 items: [
                     {
                         name: 'mobile',

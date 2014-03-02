@@ -13,6 +13,12 @@ Ext.define('WeiQuPai.view.MyCoupon', {
 		),
 		items:[
 			{
+                xtype: 'titlebar',
+                title: '我的拍券',
+                docked: 'top',
+                cls: 'w-title'
+            },
+			{
 				xtype: 'bottombar'
 			}
 		]

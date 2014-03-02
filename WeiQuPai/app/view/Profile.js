@@ -7,6 +7,12 @@ Ext.define('WeiQuPai.view.Profile', {
 		scrollable: true,
 		items:[
 			{
+                xtype: 'titlebar',
+                title: '个人信息',
+                docked: 'top',
+                cls: 'w-title'
+            },
+			{
 				xtype: 'disclosureitem',
 				title: '头像',
 				itemId: 'avatar',
@@ -68,16 +74,22 @@ Ext.define('WeiQuPai.view.Profile', {
 		this.setContent(user);
     },
 
-    setContent: function(data){
-    	img = '<img class="big-avatar"' + (data.avatar ? ' src="' + data.avatar + '"' : '')  + '/>';
+    setAvatar: function(url){
+    	absurl = WeiQuPai.Config.host + url;
+    	img = '<img class="big-avatar"' + (url ? ' src="' + absurl + '"' : '')  + '/>';
     	this.down('#avatar').setContent(img);
+    	WeiQuPai.Util.updateProfile({avatar: url});
+    },
 
+    setContent: function(data){
+    	this.setAvatar(data.avatar);
     	this.addGenderList(data.gender);
 
     	var fields = ['nick', 'real_name', 'email', 'phone', 'sign'];
     	var self = this;
     	Ext.each(fields, function(f){
-    		self.down('#' + f).setContent(data[f]);
+    		var value = Ext.String.htmlEncode(data[f]);
+    		self.down('#' + f).setContent(value);
     	});
     },
 

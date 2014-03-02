@@ -10,13 +10,19 @@ Ext.define('WeiQuPai.view.My', {
 		scrollable: true,
 		items:[
 			{
+                xtype: 'titlebar',
+                title: '我的',
+                docked: 'top',
+                cls: 'w-title'
+            },
+			{
 				xtype: 'disclosureitem',
 				itemId: 'profile',
 				title: {
 					xtype:'container',
 					itemId: 'myInfo',
 					cls: 'w-myinfo',
-					tpl: '<img src="{avatar}"/><div class="info"><h2>{nick}</h2><p>{sign}</p></div>'
+					tpl: '<img src="' + WeiQuPai.Config.host + '{avatar}"/><div class="info"><h2>{nick:htmlEncode}</h2><p>{sign:htmlEncode}</p></div>'
 				}
 			},
 			{

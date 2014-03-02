@@ -35,6 +35,12 @@ Ext.define('WeiQuPai.view.ConsigneeList', {
         ],
         items: [
             {
+                xtype: 'titlebar',
+                title: '收货信息',
+                docked: 'top',
+                cls: 'w-title'
+            },
+            {
                 xtype: 'bottombar'
             }
         ]

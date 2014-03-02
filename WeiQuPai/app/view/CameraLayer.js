@@ -3,6 +3,10 @@ Ext.define('WeiQuPai.view.CameraLayer', {
 	requires: ['Ext.device.Camera'],
 	xtype: 'cameralayer',
 	config: {
+		picWidth: 140,
+		picHeight: 140,	
+		callback: null,
+		
 		cls: 'camera-layer',
 		items: [
 			{

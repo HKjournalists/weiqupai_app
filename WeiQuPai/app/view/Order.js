@@ -8,6 +8,12 @@ Ext.define('WeiQuPai.view.Order', {
 		scrollable: true,
 		items: [
 			{
+                xtype: 'titlebar',
+                title: '订单提交',
+                docked: 'top',
+                cls: 'w-title'
+            },
+			{
 				xtype: 'container',
 				itemId: 'itemInfo',
 				tpl: new Ext.XTemplate(

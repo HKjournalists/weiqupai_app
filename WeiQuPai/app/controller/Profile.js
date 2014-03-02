@@ -53,7 +53,10 @@ Ext.define('WeiQuPai.controller.Profile', {
     },
 
     showCameraLayer: function(){
-        WeiQuPai.Util.showCameraLayer();
+        var self = this;
+        WeiQuPai.Util.showCameraLayer(140, 140, function(url){
+            self.getProfileView().setAvatar(url);
+        });
     },
 
     showGenderList: function(){
@@ -82,17 +85,6 @@ Ext.define('WeiQuPai.controller.Profile', {
         var id = record.get('id');
         list.up('genderlist').hide();
         this.getGender().setContent(title);
-        Ext.Ajax.request({
-            url: WeiQuPai.Config.apiUrl + '/?r=app/profile/update&token=' + user.token,
-            params:{'gender': id},
-            method: 'post',
-            success: function(rsp){
-                rsp = Ext.decode(rsp.responseText);
-                if(rsp.code > 0){
-                    Ext.Msg.alert(null, rsp.msg);
-                    return;
-                }
-            }
-        });
+        WeiQuPai.Util.updateProfile({gender: id});
     }
 });

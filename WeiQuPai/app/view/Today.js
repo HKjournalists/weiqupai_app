@@ -21,9 +21,15 @@ Ext.define('WeiQuPai.view.Today', {
         itemTpl: new Ext.XTemplate(
         	'<p class="item-img"><img src="' + WeiQuPai.Config.host + '{pic_cover}" /></p>',
             '<h2><span class="time">{status_text}</span>{title}</h2>',
-            '<p><span class="market-price">市场价 {mprice}</span> / <span class="price">￥{curr_price}</span></p>'
+            '<p><span class="market-price">原价 {oprice}</span> / <span class="price">￥{curr_price}</span></p>'
         ),
         items: [
+        	{
+                xtype: 'titlebar',
+                title: '今日',
+                docked: 'top',
+                cls: 'w-title'
+            },
 	        {
 	            xtype: 'banner',
 	        	scrollDock: 'top'

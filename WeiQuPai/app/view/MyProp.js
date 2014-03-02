@@ -13,6 +13,12 @@ Ext.define('WeiQuPai.view.MyProp', {
 		),
 		items:[
 			{
+                xtype: 'titlebar',
+                title: '我的道具',
+                docked: 'top',
+                cls: 'w-title'
+            },
+			{
 				xtype: 'bottombar'
 			}
 		]

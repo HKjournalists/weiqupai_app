@@ -8,6 +8,12 @@ Ext.define('WeiQuPai.view.Private', {
 	config: {
 		items:[
 			{
+                xtype: 'titlebar',
+                title: '隐私',
+                docked: 'top',
+                cls: 'w-title'
+            },
+			{
 				xtype: 'disclosureitem',
 				title: '加我好友需要验证',
 				disclosureItem: false,

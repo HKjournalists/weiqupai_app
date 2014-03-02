@@ -3,6 +3,7 @@ Ext.define('WeiQuPai.view.MyAuction', {
 	xtype: 'myauction',
 	requires:['WeiQuPai.store.MyAuction', 'WeiQuPai.view.MyAuctionDetail', 'WeiQuPai.view.LoginTip'],
 	config: {
+        loadingText: null,
         disableSelection : true,
         store: 'MyAuction',
 		itemTpl: new Ext.XTemplate(
@@ -16,6 +17,12 @@ Ext.define('WeiQuPai.view.MyAuction', {
                 '</div>'
                 ),
         items: [
+            {
+                xtype: 'titlebar',
+                title: '已拍',
+                docked: 'top',
+                cls: 'w-title'
+            }
         ],
 
         listeners: {

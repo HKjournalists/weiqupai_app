@@ -13,6 +13,12 @@ Ext.define('WeiQuPai.view.MyFriend', {
 		),
 		items:[
 			{
+                xtype: 'titlebar',
+                title: '我的好友',
+                docked: 'top',
+                cls: 'w-title'
+            },
+			{
 				xtype: 'bottombar'
 			}
 		]

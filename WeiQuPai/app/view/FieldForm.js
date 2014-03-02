@@ -8,6 +8,12 @@ Ext.define('WeiQuPai.view.FieldForm', {
         value: null,
         items: [
             {
+                xtype: 'titlebar',
+                title: '',
+                docked: 'top',
+                cls: 'w-title'
+            },
+            {
                 xtype: 'fieldset',
                 cls: 'w-fieldset',
                 items: [
@@ -40,6 +46,7 @@ Ext.define('WeiQuPai.view.FieldForm', {
 
     applyTitle: function(title){
         this.down('textfield').setPlaceHolder(title);
+        this.down('titlebar').setTitle(title);
         return title;
     },
 
@@ -68,26 +75,16 @@ Ext.define('WeiQuPai.view.FieldForm', {
             Ext.Viewport.down('main').pop();
             return;
         }
+        var form = this;
         WeiQuPai.Util.mask();
-        this.submit({
-            url: WeiQuPai.Config.apiUrl + '/?r=app/profile/update&token=' + user.token,
-            method: 'post',
-            success: function(form, result){
-                WeiQuPai.Util.unmask();
-                if(result && result.success){
-                    form.reset();
-                    var preview = Ext.Viewport.down('main').pop();
-                    preview.down('#' + field).setContent(value);
-                    //保存到本地缓存
-                    user[field] = value;
-                    WeiQuPai.Cache.set('currentUser', user);
-                }
-            },
-            failure: function(form, result){
-                WeiQuPai.Util.unmask();
-                var msg = result && result.msg || '数据提交失败，请重试';
-                Ext.Msg.alert(null, msg);
-            }
-        });
+        WeiQuPai.Util.updateProfile(this.getValues(), function(){
+            WeiQuPai.Util.unmask();
+            form.reset();
+            var preview = Ext.Viewport.down('main').pop();
+            preview.down('#' + field).setContent(value);
+            //保存到本地缓存
+            user[field] = value;
+            WeiQuPai.Cache.set('currentUser', user);
+        })
     }
 });

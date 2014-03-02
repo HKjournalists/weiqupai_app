@@ -2,8 +2,6 @@ Ext.define("WeiQuPai.Util", {
     singleton: true,
     requires: ['WeiQuPai.view.InputComment', 'WeiQuPai.view.CameraLayer'],
     createOverlay : function(com, conf){
-        var cmp = Ext.Viewport.down(com);
-        if(cmp) return cmp;
     	var config = {
             bottom: 0,
             left:0,
@@ -37,10 +35,15 @@ Ext.define("WeiQuPai.Util", {
         return this.commentForm;
     },
 
-    //显示相机菜单
-    showCameraLayer: function(){
+    /**
+     * 显示相机菜单
+     * 
+     * @param int picWidth 要获取的图片宽度
+     * @Param int picHeight 要获取的图片高度
+     */
+    showCameraLayer: function(picWidth,picHeight, callback){
         if(!this.cameraLayer){
-            var config = {height: 200};
+            var config = {height: 200, picWidth: picWidth, picHeight: picHeight, callback: callback};
             this.cameraLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.CameraLayer', config);
         }
         this.cameraLayer.show();
@@ -141,6 +144,41 @@ Ext.define("WeiQuPai.Util", {
                 //更新本地的用户设置缓存
                 user[field] = value; 
                 WeiQuPai.Cache.set('currentUser', user);
+            }
+        });
+    },
+
+    updateProfile: function(data, callback){
+        var user = WeiQuPai.Cache.get('currentUser');
+        if(!user) return;
+        //检查属性是否有变化
+        var changed = false;
+        for(f in data){
+            if(user[f] != data[f]){
+                changed = true;
+                break;
+            }
+        }
+        if(!changed) return;
+
+        Ext.Ajax.request({
+            url: WeiQuPai.Config.apiUrl + '/?r=app/profile/update&token=' + user.token,
+            params: data,
+            method: 'post',
+            success: function(rsp){
+                rsp = Ext.decode(rsp.responseText);
+                if(rsp.code > 0){
+                    Ext.Msg.alert(null, rsp.msg);
+                    return;
+                }
+                //更新本地的用户设置缓存
+                user = Ext.merge(user, data);
+                WeiQuPai.Cache.set('currentUser', user);
+                callback && callback();
+            },
+            failure: function(rsp){
+                WeiQuPai.Util.unmask();
+                Ext.Msg.alert(null, '数据提交失败，请检查网络');
             }
         });
     },

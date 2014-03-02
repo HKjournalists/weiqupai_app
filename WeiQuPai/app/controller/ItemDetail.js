@@ -21,7 +21,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
            },
            commentBtn: {
                 tap: function(){
-                    var auctionId = this.getPageView().getData().id;
+                    var auctionId = this.getPageView().auctionData.id;
                     var itemId = this.getPageView().getData().item_id;
                     var form = WeiQuPai.Util.showCommentForm();
                     form.down('hiddenfield[name=auction_id]').setValue(auctionId);
@@ -54,7 +54,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
     showOrderView: function(){
         WeiQuPai.Util.mask();
         var auction = WeiQuPai.model.Auction;
-        auction.load(this.getPageView().getData().id, {
+        auction.load(this.getPageView().auctionData.id, {
             success: function(record, operation, success){
                 WeiQuPai.Util.unmask();
                 if(record.get('status') != 2){
@@ -77,7 +77,6 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
     doPublishComment: function(form){
         this.getCommentForm().hide();
         var user = WeiQuPai.Cache.get('currentUser');
-        user = {'token' : 123};
         var self = this;
         WeiQuPai.Util.mask();
         form.submit({
@@ -107,9 +106,11 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
     },
 
     doUpTap: function(index, record){
+        var user = WeiQuPai.Cache.get('currentUser');
+        if(!user) return;
         var id = record.get('id');
         Ext.Ajax.request({
-            url: WeiQuPai.Config.apiUrl + '/?r=app/comment/up&id=' + id,
+            url: WeiQuPai.Config.apiUrl + '/?r=app/comment/up&token=' + user.token + '&id=' + id,
             method: 'get'
         });
         //异步请求的同时，给数量加1

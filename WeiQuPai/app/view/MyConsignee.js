@@ -8,9 +8,9 @@ Ext.define('WeiQuPai.view.MyConsignee', {
         itemTpl: new Ext.XTemplate(
             '<div class="w-list-item">',
                 '<div class="content">',
-                    '<p>收货人：{name}</p>',
-                    '<p>电话：{mobile}</p>',
-                    '<p>地址：{province}{city}{address}</p>',
+                    '<p>收货人：{name:htmlEncode}</p>',
+                    '<p>电话：{mobile:htmlEncode}</p>',
+                    '<p>地址：{province}{city}{address:htmlEncode}</p>',
                     '<p>邮编：{zip}</p>',
                 '</div>',
                 '<tpl if="is_default==1">',
@@ -26,6 +26,12 @@ Ext.define('WeiQuPai.view.MyConsignee', {
         ),
        
         items: [
+            {
+                xtype: 'titlebar',
+                title: '收货地址',
+                docked: 'top',
+                cls: 'w-title'
+            },
             {
                 xtype: 'button',
                 scrollDock: 'bottom',

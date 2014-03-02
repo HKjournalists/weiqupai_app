@@ -7,9 +7,6 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 	],
 	config: {
 		param: null,
-
-		title: '拍品详情',
-		emtpyText: '还没有人评论',
 		store: 'AuctionComment',
 		loadingText: null,
         disableSelection : true,
@@ -22,19 +19,25 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 			'<img class="avatar"/>',
 			'</tpl>',
             '<div class="info">',
-            '<h3>{nick}</h3>',
-            '<p>{content}</p>',
+            '<h3>{nick:htmlEncode}</h3>',
+            '<p>{content:htmlEncode}</p>',
             '<div class="flex"><div class="time">{ctime}</div><div class="up">{up_num}</div><div class="comment">{reply_num}</div></div>',
             '<tpl if="replies">',
 	            '<div class="reply">',
 	            	'<tpl for="replies">',
-	            	'<div><span class="uname">{uname}</span>：{content}</div>',
+	            	'<div><span class="uname">{nick:htmlEncode}</span>：{content:htmlEncode}</div>',
 	            	'</tpl>',
 	            '</div>',
             '</tpl>',
             '</div>'
         ),
 		items:[
+			{
+                xtype: 'titlebar',
+                title: '拍品详情',
+                docked: 'top',
+                cls: 'w-title'
+            },
 			{
 				xtype: 'detailpicshow',
 				scrollDock: 'top'
@@ -43,7 +46,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 				xtype: 'container',
 				scrollDock: 'top',
 				itemId: 'itemTitle',
-				tpl: '<h2><span class="market-price">市场价￥{mprice}</span><span class="price">￥{curr_price}</span>{title}</h2>',
+				tpl: '<h2><span class="market-price">原价￥{oprice}</span><span class="price">￥{curr_price}</span>{title}</h2>',
 				cls : 'item-detail-info'
 			},
 			{
@@ -159,7 +162,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 
 	setContent: function(data){
 		//保存数据，为后面使用
-		this.setData(data);
+		this.auctionData = data;
 		this.down('detailpicshow').setPicData(data.pic_url);
 		this.down('#itemTitle').setData(data);
 		var desc = this.down('#itemDesc');

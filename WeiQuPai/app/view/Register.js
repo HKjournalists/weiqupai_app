@@ -6,6 +6,12 @@ Ext.define('WeiQuPai.view.Register', {
         
         items: [
             {
+                xtype: 'titlebar',
+                title: '注册',
+                docked: 'top',
+                cls: 'w-title'
+            },
+            {
                 name: 'uname',
                 xtype: 'textfield',
                 cls: 'w-input-text w-margin',

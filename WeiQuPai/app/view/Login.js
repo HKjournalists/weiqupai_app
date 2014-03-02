@@ -10,13 +10,6 @@ Ext.define('WeiQuPai.view.Login', {
                 docked: 'top',
                 cls: 'w-title'
             },
-            /*
-            {
-                xtype: 'container',
-                cls: 'w-logo'
-
-            },
-            */
             {
                 name: 'uname',
                 xtype: 'textfield',
