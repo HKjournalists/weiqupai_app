@@ -1,77 +1,99 @@
-var showuserinfotpl = new Ext.XTemplate(
-	'<div class="user-show-top">',
-	'<div class="user-show-bg">',
-	'<img src="{user_bg}">',
-	'</div>',
-	'<div class="user-show-avatar">',
-	'<img src="{user_icon}" />',
-	'<span class="user-show-name">{user_name}</span>',
-	'</div>',
-	'</div>'
-);
-var showusermessagetpl = new Ext.XTemplate(
-	'<div class="user-row">',
-	'<tpl if="action_class == 1">',
-	'<div class="pic-list">',
-	'<tpl for="pic">',
-	'<img src="' + WeiQuPai.Config.host + '{url}" />',
-	'</tpl>',
-	'</div>',
-	'</tpl>',
-	'<p>{content}</p>',
-    '<div class="flex"><div class="time">{time}</div><div class="up">{ups}</div><div class="comment">{comments}</div></div>',
-	'</div>'
-);
-
-
 Ext.define('WeiQuPai.view.ShowUser', {
 	extend: 'Ext.dataview.List',
 	xtype: 'showuser',
 	config: {
-		emtpyText: '没有用户信息',
-		store: 'ShowUserMessage',
+		plugins: [
+			{
+				type: 'scrollpaging',
+		        autoPaging: true,
+			},
+			{
+				type: 'pullrefresh',
+				lastUpdatedText: '上次刷新：',
+				lastUpdatedDateFormat: 'H点i分',
+				loadingText: '加载中...',
+				pullText: '下拉刷新',
+				releaseText: '释放立即刷新',
+				loadedText: '下拉刷新'
+			}
+		],
+		loadingText: null,
+		pressedCls: '',
+		param: null,
+		store: 'UserFeed',
 		disableSelection : true,
-		itemTpl: showusermessagetpl,
+		itemTpl: new Ext.XTemplate(
+			'<div class="user-row"><div class="info">',
+				'<tpl if="feed_type==0">',
+					'<p>{content:htmlEncode}</p>',
+				'<tpl elseif="feed_type==1">',
+					'<tpl if="content"><p>{content:htmlEncode}</p></tpl>',
+					'<div class="pic-list">',
+					'<tpl for="json_data.pic_list"><img src="' + WeiQuPai.Config.host + '{.}" /></tpl>',
+					'</div>',
+				'</tpl>',
+			    '<div class="flex"><span class="time">{ctime}</span></div>',
+			'</div></div>'
+		),
 		items: [
 			{
 				xtype: 'container',
 				scrollDock: 'top',
-				itemId: 'user-info'
+				itemId: 'user-info',
+				tpl: new Ext.XTemplate(
+					'<div class="user-show-top">',
+						'<div class="user-show-bg">',
+							'<img <tpl if="circle_bg">src="' + WeiQuPai.Config.host + '{circle_bg}"</tpl>/>',
+						'</div>',
+						'<div class="user-show-avatar">',
+							'<img <tpl if="avatar">src="' + WeiQuPai.Config.host + '{avatar}"</tpl>/>',
+							'<span class="user-show-name">{nick:htmlEncode}</span>',
+						'</div>',
+					'</div>'
+				)
 			},
 			{
 				xtype: 'bottombar'
 			}
-		],
-
-		listeners: {
-			itemtap: {
-				order: 'before',
-				fn: function(list, index, dataItem, record, e){
-					if(e.target.className == 'up'){
-						this.fireEvent('uptap', this, index, record);
-						return false;
-					}
-					if(e.target.className == 'comment'){
-						this.fireEvent('commenttap', this, index, record);
-						return false;
-					}
-				}
-			}
-		}
+		]
 	},
 
 	initialize: function(){
 		this.callParent(arguments);
-		var me = this;
-		var getStore = Ext.data.StoreManager.lookup('ShowUserInfo');
-		getStore.load(function(records, operation, success){
-			if(success){
-				var html = showuserinfotpl.applyTemplate(getStore.getAt(0).getData());
-				me.down('#user-info').setHtml(html);
+		this.down('#user-info').on('tap', function(){
+			this.fireEvent('bgtap', this.getParam());
+		}, this, {element: 'element'});
+	},
+
+	applyParam: function(uid){
+		var profile = WeiQuPai.model.Profile;
+		profile.getProxy().setUrl(WeiQuPai.Config.apiUrl + '/?r=app/user');
+		profile.load(uid, {
+			scope: this,
+			success: function(record, operation){
+				this.down('#user-info').setRecord(record);
+			},
+			failure: function(record, operation){
+				Ext.Msg.alert(null, '数据加载失败');	
 			}
 		});
-		var message = Ext.data.StoreManager.lookup('ShowUserMessage');
-		message.load();
+		var me = this;
+		var store = this.getStore();
+		store.removeAll();
+		store.getProxy().setUrl(WeiQuPai.Config.apiUrl + '/?r=app/circle/userFeed');
+		store.getProxy().setExtraParam('uid', uid);
+		store.load(function(records, operation, success){
+			if(!success){
+				Ext.Msg.alert(null, '数据加载失败');
+				return;
+			}
+			if(records.length == 0){
+				var c = WeiQuPai.Util.msgbox('这个人很懒，什么都没有留下.', {
+					scrollDock: 'top',
+				});
+				me.add(c);
+			}
+		});
+		return uid;
 	}
-
 });

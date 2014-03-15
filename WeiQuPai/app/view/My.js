@@ -22,7 +22,12 @@ Ext.define('WeiQuPai.view.My', {
 					xtype:'container',
 					itemId: 'myInfo',
 					cls: 'w-myinfo',
-					tpl: '<img src="' + WeiQuPai.Config.host + '{avatar}"/><div class="info"><h2>{nick:htmlEncode}</h2><p>{sign:htmlEncode}</p></div>'
+					tpl: new Ext.XTemplate(
+						'<img <tpl if="avatar">src="' + WeiQuPai.Config.host + '{avatar}"</tpl>/>',
+						'<div class="info"><h2>{nick:htmlEncode}</h2>',
+						'<p>{sign:htmlEncode}</p>',
+						'</div>'
+					)
 				}
 			},
 			{

@@ -21,8 +21,9 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
            },
            commentBtn: {
                 tap: function(){
+                    if(!WeiQuPai.Util.checkLogin()) return false;
                     var auctionId = this.getPageView().auctionData.id;
-                    var itemId = this.getPageView().getData().item_id;
+                    var itemId = this.getPageView().getParam().item_id;
                     var form = WeiQuPai.Util.showCommentForm();
                     form.down('hiddenfield[name=auction_id]').setValue(auctionId);
                     form.down('hiddenfield[name=item_id]').setValue(itemId);
@@ -52,6 +53,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
     },
 
     showOrderView: function(){
+        if(!WeiQuPai.Util.checkLogin()) return;
         WeiQuPai.Util.mask();
         var auction = WeiQuPai.model.Auction;
         auction.load(this.getPageView().auctionData.id, {
@@ -102,13 +104,28 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
     },
 
     doAvatarTap: function(index, record){
-        console.log('avatartap');
+        var user = WeiQuPai.Util.checkLogin();
+        if(!user) return;
+        var uid = record.get('uid');
+        if(user.id == uid || WeiQuPai.Util.isFriend(uid)){
+            WeiQuPai.Util.forward('showuser', {param: uid});
+        }else{
+            if(!this.addFriendLayer){
+                var config = {height: 120};
+                this.addFriendLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.AddFriendButtonLayer', config);
+            }
+            this.addFriendLayer.setUid(uid);
+            this.addFriendLayer.show();
+        }
     },
 
     doUpTap: function(index, record){
-        var user = WeiQuPai.Cache.get('currentUser');
+        var user = WeiQuPai.Util.checkLogin();
         if(!user) return;
         var id = record.get('id');
+        //赞过的不允许再赞
+        if(!WeiQuPai.Util.cacheUp(id)) return;
+
         Ext.Ajax.request({
             url: WeiQuPai.Config.apiUrl + '/?r=app/comment/up&token=' + user.token + '&id=' + id,
             method: 'get'
@@ -119,6 +136,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
 
     //点回复按钮
     doCommentTap: function(index, record){
+        if(!WeiQuPai.Util.checkLogin()) return;
         var replyId = record.get('id');
         var auctionId = this.getPageView().getData().id;
         var itemId  = this.getPageView().getData().item_id;

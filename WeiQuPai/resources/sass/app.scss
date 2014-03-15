@@ -100,15 +100,30 @@ $ios7-green: #53d769;
 }
 //list paging的样式
 .x-list-paging{
-	padding:1em 0;
+	padding:10px 0;
+	height:40px;
 }
-pullrefresh样式
+//pullrefresh样式
 .x-list-pullrefresh-message, .x-list-pullrefresh-updated{
 	line-height:1.5;
+	text-align:left;
 }
 .x-list-pullrefresh-arrow{
-	background:transparent;
+	display:none;
 }
+.x-list-pullrefresh .x-loading-spinner{
+	visibility:hidden;
+	display:block;
+	font-size:20px;
+}
+.x-list-pullrefresh-loading .x-loading-spinner{
+	visibility:visible;
+}
+.x-list-pullrefresh-wrap{
+	margin-left:10px;
+	width:auto;
+}
+
 //自定义的disclosure项目
 .w-disclosure-item{
 	color: #000;
@@ -325,16 +340,29 @@ h3{
 .avatar{
 	width:40px;
 	height:40px;
-	margin-right:.7em;
+	margin-right:10px;
 	display:block;
 	background:url(../images/icon-avatar.png) no-repeat;
 	background-size:40px 40px;
 }
+.icon-newfriend{
+	background:url(../images/icon-newfriend.png) no-repeat left center;
+	background-size:40px 40px;
+	padding-left:50px;
+	height:40px;
+	line-height:40px;
+}
+.action-title{
+	margin-bottom:.5em;
+}
 .action{
 	margin-left:.5em;
-	color:#666;
+	color:#808080;
 	font-weight:normal;
 	font-size:$normal-font;
+}
+.circle-time{
+	margin-bottom:.7em;
 }
 .show-order-row .info, .comment-row .info, .auction-user-row .info, .circle-row .info, .user-row .info, .myauction-row .info{
 	line-height:1.5;
@@ -355,10 +383,12 @@ h3{
 	margin-right:10px;
 }
 
-.reply{
+.reply,.zan{
 	background:#f9f9f7;
 	padding:.3em;
-	margin-top:.7em;
+}
+.bt{
+	border-top:1px solid $border-color;
 }
 .uname{
 	color:#567091;
@@ -381,6 +411,7 @@ h3{
 	//padding:.2em 1em;
 	flex: 1;
 	-webkit-box-flex: 1;
+	display:block;
 }
 
 //赞和评论
@@ -402,6 +433,35 @@ h3{
 	margin-left:10px;
 }
 
+.small-btn, .zan-btn, .reply-btn, .cancel-zan-btn{
+	font-size:$small-font;
+	padding:2px 10px;
+	border:1px solid #e0e0e0;
+	border-radius:4px;
+	color:#b8b8b8;
+	text-align:center;
+	min-width:5em;
+	margin-left:10px;
+}
+.icon-up{
+	background:url(../images/icon-up.png) no-repeat left center;
+	background-size:11px 9px;
+	width:14px;
+	height:9px;
+	//vertical-align:middle;
+	display:inline-block;
+}
+.icon-comment{
+	background:url(../images/icon-comment.png) no-repeat left center;
+	background-size:10px 9px;
+	width:14px;
+	height:9px;
+	//vertical-align:middle;;
+	display:inline-block;
+}
+.delete-post-btn{
+	color:#567091;
+}
 
 //支付页面
 .order-item-info{
@@ -831,6 +891,27 @@ h3{
 	background-size:70px 70px;
 
  }
- .camera-layer{
+ .camera-layer, .delete-button-layer, .button-layer{
  	background:rgba(0,0,0,.3);
+ }
+ .w-button-red{
+	background-color:$ios7-red;
+ }
+ .w-button-gray{
+ 	background-color:#ccc;
+ }
+ .accept-btn{
+ 	font-size:$small-font;
+	padding:0 10px;
+	border-radius:4px;
+	color:#fff;
+	text-align:center;
+	background:#1fcc31;
+	line-height:40px;
+	height:40px;
+ }
+ .accept-text{
+ 	line-height: 40px;
+	font-size: .8em;
+	color: #666;
  }

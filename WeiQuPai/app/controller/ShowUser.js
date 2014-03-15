@@ -3,30 +3,30 @@ Ext.define('WeiQuPai.controller.ShowUser', {
     config: {
         refs: {
             main: 'main',
-            showuser: 'showuser'   
+            showUser: 'showuser'   
         },
         control: {
-           commentBtn: {
-                tap: 'showCommentInput'
-           },
-           showuser: {
-                avatartap: 'doAvatarTap',
-                uptap: 'doUpTap',
-                commenttap: 'doCommentTap'
-           }
+            showUser: {
+                bgtap: 'showCameraLayer'
+            }
         }
     },
 
-    doUpTap: function(index, record){
-        console.log(this.config.refs.commentList);
+
+    showCameraLayer: function(uid){
+        var user = WeiQuPai.Cache.get('currentUser');
+        if(!user || user.id != uid) return;
+        //只有点自己的才能换封面
+        var self = this;
+        WeiQuPai.Util.showCameraLayer(640, 400, function(url){
+            self.setCircleBg(url);
+        });
     },
 
-    doCommentTap: function(index, record){
-        var tg = {
-            xtype: 'circle'
-        };
-        //this.getMain().push(tg);
-        console.log('commenttap');
+    //更换背影
+    setCircleBg: function(url){
+        var record = this.getShowUser().down('#user-info').getRecord();
+        record.set('circle_bg', url);
+        WeiQuPai.Util.updateProfile({circle_bg: url});
     }
-
 });

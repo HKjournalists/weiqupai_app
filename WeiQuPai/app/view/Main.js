@@ -2,7 +2,8 @@ Ext.define('WeiQuPai.view.Main', {
     extend: 'Ext.navigation.View',
     xtype: 'main',
     requires: [
-        'WeiQuPai.view.MainTab', 'WeiQuPai.view.Login', 'WeiQuPai.view.Register'
+        'WeiQuPai.view.MainTab', 'WeiQuPai.view.Login', 'WeiQuPai.view.Register',
+        'Ext.plugin.ScrollPaging', 'Ext.plugin.PullRefresh'
     ],
     config: {
         layout : {

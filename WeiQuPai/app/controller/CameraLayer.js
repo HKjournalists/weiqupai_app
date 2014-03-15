@@ -4,9 +4,9 @@ Ext.define('WeiQuPai.controller.CameraLayer', {
     config: {
         refs: {
             main: 'main',
-            camera: 'button[action=camera]',
-            album: 'button[action=album]',
-            cancel: 'button[action=cancel]',
+            camera: 'cameralayer button[action=camera]',
+            album: 'cameralayer button[action=album]',
+            cancel: 'cameralayer button[action=cancel]',
             cameraLayer: 'cameralayer'
         },
         control: {

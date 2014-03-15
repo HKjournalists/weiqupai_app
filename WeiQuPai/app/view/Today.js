@@ -1,11 +1,11 @@
 Ext.define('WeiQuPai.view.Today', {
 	extend: 'Ext.dataview.List',
 	xtype: 'today',
-	requires: ['WeiQuPai.view.Banner', 'WeiQuPai.view.ItemDetail', 'Ext.plugin.ListPaging', 'Ext.plugin.PullRefresh'],
+	requires: ['WeiQuPai.view.Banner', 'WeiQuPai.view.ItemDetail'],
 	config:{
 		plugins: [
 			{
-				xclass: 'Ext.plugin.PullRefresh',
+				type: 'pullrefresh',
 				lastUpdatedText: '上次刷新：',
 				lastUpdatedDateFormat: 'H点i分',
 				loadingText: '加载中...',

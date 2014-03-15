@@ -19,20 +19,17 @@ Ext.define('WeiQuPai.controller.Register', {
         }
         var data = this.getRegForm().getValues();
         WeiQuPai.Util.register(data.uname, data.password, function(){
-            var main = Ext.Viewport.down('main');
-            var maintab = main.down('maintab');
-            maintab.setActiveItem('today');
-            main.pop(maintab);
+            WeiQuPai.Util.showTab('my');
         });
     }, 
 
     checkForm: function(){
         var d = this.getRegForm().getValues();
         var msg = null;
-        if(d.uname.length < 6){
+        if(d.uname.trim().length < 6){
             msg = '用户名不能少于6个字符';
         }
-        else if(d.password.length < 6 || d.password2 < 6){
+        else if(d.password.trim().length < 6 || d.password2.trim().length < 6){
             msg = '密码不能少于6位';
         }
         else if(d.password != d.password2){

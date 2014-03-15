@@ -116,16 +116,20 @@ Ext.define('WeiQuPai.controller.Order', {
     },
 
     submitOrder: function(){
+        var user = WeiQuPai.Cache.get('currentUser');
+        if(!user) return;
         var order = this.getOrderView().getRecord();
         if(!order.get('consignee_id')){
             Ext.Msg.alert(null, '还没有选择收货地址');
             return false;
         }
+        var param = WeiQuPai.Util.filterNull(order.data);
+        param.token = user.token;
         WeiQuPai.Util.mask();
         Ext.Ajax.request({
             url: order.getProxy().getUrl(),
             method: 'post',
-            params: WeiQuPai.Util.filterNull(order.data),
+            params: param,
             success: function(rsp){
                 WeiQuPai.Util.unmask();
                 rsp = Ext.decode(rsp.responseText);

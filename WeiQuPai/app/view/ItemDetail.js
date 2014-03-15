@@ -6,6 +6,12 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 		'WeiQuPai.view.DetailPicShow', 'WeiQuPai.view.Order', 'WeiQuPai.model.Auction'
 	],
 	config: {
+		plugins: [
+			{
+				type: 'scrollpaging',
+		        autoPaging: true,
+			}
+		],
 		param: null,
 		store: 'AuctionComment',
 		loadingText: null,

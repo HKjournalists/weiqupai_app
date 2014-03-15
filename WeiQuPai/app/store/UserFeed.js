@@ -1,13 +1,13 @@
-Ext.define('WeiQuPai.store.Circle', {
+Ext.define('WeiQuPai.store.UserFeed', {
 	extend: 'Ext.data.Store',
 	requires: ['WeiQuPai.model.Circle'],
 	config:{
-		storeId: 'Circle',
+		storeId: 'UserFeed',
 		autoLoad: false,
 		model: 'WeiQuPai.model.Circle',
 		proxy: {
 			type: 'ajax',
-			url: WeiQuPai.Config.host + '/?r=app/circle',
+			url: WeiQuPai.Config.host + '/?r=app/circle/userFeed',
 			reader: 'json',
 			startParam: false,
 			limitParam: false

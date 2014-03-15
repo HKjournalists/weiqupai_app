@@ -1,6 +1,6 @@
 Ext.define("WeiQuPai.Util", {
     singleton: true,
-    requires: ['WeiQuPai.view.InputComment', 'WeiQuPai.view.CameraLayer'],
+    requires: ['WeiQuPai.view.InputComment', 'WeiQuPai.view.CirclePost', 'WeiQuPai.view.CircleReply', 'WeiQuPai.view.CameraLayer'],
     createOverlay : function(com, conf){
     	var config = {
             bottom: 0,
@@ -35,6 +35,27 @@ Ext.define("WeiQuPai.Util", {
         return this.commentForm;
     },
 
+    //拍圈发表回复
+    showCircleReply: function(){
+        if(!this.circleReply){
+            var config = {height: 200};
+            this.circleReply = WeiQuPai.Util.createOverlay('WeiQuPai.view.CircleReply', config);
+        }
+        this.circleReply.show(); 
+        return this.circleReply;
+    },
+    
+    //拍圈发表动态
+    showCirclePost: function(){
+        if(!this.circlePost){
+            var config = {height: 200};
+            this.circlePost = WeiQuPai.Util.createOverlay('WeiQuPai.view.CirclePost', config);
+        }
+        this.circlePost.show(); 
+        return this.circlePost;
+    },
+    
+
     /**
      * 显示相机菜单
      * 
@@ -61,6 +82,21 @@ Ext.define("WeiQuPai.Util", {
         return WeiQuPai.Cache.get('currentUser') != null;
     },
 
+    //检查用户是否登录，如果未登录，跳到登录页面
+    checkLogin: function(){
+        var user = WeiQuPai.Cache.get('currentUser');
+        if(!user){
+            WeiQuPai.Util.jumpLogin();
+            return false;
+        }
+        return user;
+    },
+
+    //跳到登录页
+    jumpLogin: function(){
+        Ext.Viewport.down('main').push(Ext.create('WeiQuPai.view.Login'));
+    },
+
     login: function(uname, password, callback){
         WeiQuPai.Util.mask();
         Ext.Ajax.request({
@@ -77,7 +113,12 @@ Ext.define("WeiQuPai.Util", {
                     Ext.Msg.alert(null, rsp.msg);
                     return;
                 }
-                WeiQuPai.Cache.set('currentUser', rsp);
+                WeiQuPai.Cache.set('currentUser', rsp.user);
+                if(rsp.friends) WeiQuPai.Cache.set('friends', rsp.friends);
+                //登录后拍圈要清空并刷新
+                var circle = Ext.Viewport.down('circle');
+                circle.setForceReload(true);
+
                 callback && callback();
             },
             failure: function(rsp){
@@ -121,9 +162,20 @@ Ext.define("WeiQuPai.Util", {
                 method: 'get'
             });
             WeiQuPai.Cache.remove('currentUser');
+            WeiQuPai.Cache.remove('friends');
+            //退出登录后拍圈要清空并刷新
+            var circle = Ext.Viewport.down('circle');
+            circle.setForceReload(true);
 
         }
         callback && callback();
+    },
+
+    //是否是好友
+    isFriend: function(uid){
+        var friends = WeiQuPai.Cache.get('friends') || [];
+        if(friends.length == 0) return false;
+        return friends.indexOf(uid) != -1;
     },
 
     //更新用户设置
@@ -210,6 +262,24 @@ Ext.define("WeiQuPai.Util", {
         mainTab = main.down('maintab');
         mainTab.setActiveItem(tab);
         main.pop(mainTab);
+    },
+
+    //保存up过的id,如果已经保存过，返回false, cache列表最多保存100个
+    cacheUp: function(id){
+        var upId = WeiQuPai.Cache.get('upId') || [];
+        if(upId.indexOf(id)) return false;
+        upId.push(id);
+        if(upId.length > 100){
+            upId.shift();
+        }
+        WeiQuPai.Cache.set('upId', upId);
+    }, 
+
+    //转到某个视图，并带参数
+    forward: function(xtype, config){
+        var view = Ext.merge({xtype: xtype}, config);
+        var main = Ext.Viewport.down('main');
+        main.push(view);
     }
 
 })

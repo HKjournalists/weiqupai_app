@@ -15,16 +15,6 @@ Ext.define('WeiQuPai.view.Private', {
             },
 			{
 				xtype: 'disclosureitem',
-				title: '加我好友需要验证',
-				disclosureItem: false,
-				content: {
-					xtype: 'togglefield',
-					cls: 'w-toggle-field',
-					itemId: 'addFriendAuth'
-				}
-			},
-			{
-				xtype: 'disclosureitem',
 				title: '可以通过搜索找到我',
 				disclosureItem: false,
 				content: {
@@ -48,7 +38,6 @@ Ext.define('WeiQuPai.view.Private', {
 		user = WeiQuPai.Cache.get('currentUser');
 		if(!user) return;	
 		this.callParent(arguments);
-		this.down('#addFriendAuth').setValue(user.add_friend_auth);
 		this.down('#canBeSearched').setValue(user.can_be_searched);
 		this.addFeedShowOption(user.feed_visible);
 	},

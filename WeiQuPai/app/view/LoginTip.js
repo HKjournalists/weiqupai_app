@@ -19,10 +19,6 @@ Ext.define('WeiQuPai.view.LoginTip', {
     },
 
     initialize: function(){
-        this.down('button[action=toLoginPage]').on('tap', this.toLoginPage);
-    },
-
-    toLoginPage: function(){
-        this.up('main').push(Ext.create('WeiQuPai.view.Login'));
+        this.down('button[action=toLoginPage]').on('tap', WeiQuPai.Util.jumpLogin);
     }
 });

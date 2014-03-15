@@ -3,7 +3,7 @@ Ext.define("WeiQuPai.model.Profile", {
 
 	config: {
 		fields:[
-			'id', 'uname', 'score', 'level', 'friend_num', 'nick', 'avatar', 'real_name', 'sign', 'gender', 'email', 'phone', 'is_svip', 'type'
+			'id', 'uname', 'score', 'level', 'friend_num', 'nick', 'avatar', 'circle_bg', 'real_name', 'sign', 'gender', 'email', 'phone', 'is_svip', 'type'
 		],	
 
 		proxy: {
