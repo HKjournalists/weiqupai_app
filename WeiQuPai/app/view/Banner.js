@@ -14,8 +14,9 @@ Ext.define('WeiQuPai.view.Banner', {
 	},
 
 	initData: function(records, operation, success){
-		if(!success){
-			this.destory();
+		if(!success || records.length == 0){
+			this.hide();
+			return;
 		}
 		for(var i=0; i<records.length; i++){
 			var img = Ext.create('Ext.Img', {
@@ -24,7 +25,6 @@ Ext.define('WeiQuPai.view.Banner', {
 			});
 			this.add(img);
 		}
-		return;
 		var self = this;
 		setInterval(function(){
 			if(self.getActiveIndex() == self.getMaxItemIndex()){

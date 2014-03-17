@@ -4,7 +4,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
         refs: {
             main: 'main',
             shopInfo : 'disclosureitem[itemId=shopInfo]',
-            paiBtn: 'button[action=order]',
+            paiBtn: 'container[itemId=paiBtn]',
             commentBtn: 'button[action=comment]',
             shareBtn: 'button[action=share]',
             pageView: 'itemdetail',
@@ -17,7 +17,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
                 tap: 'showShop'
            },
            paiBtn: {
-                tap: 'showOrderView'
+                pai: 'showOrderView'
            },
            commentBtn: {
                 tap: function(){
@@ -151,7 +151,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
     toggleDesc: function(){
         var desc = this.getDescContainer();
         var data = desc.getData();
-        if(desc.rawContent.length <= 30) return;
+        if(!desc.rawContent || desc.rawContent.length <= 30) return;
         if(desc.toggleState == 'short'){
             desc.toggleState = 'long';
             data.description = desc.rawContent;
@@ -167,4 +167,5 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
     doShare: function(){
         Ext.Msg.alert(null, '分享!');
     }
+
 });

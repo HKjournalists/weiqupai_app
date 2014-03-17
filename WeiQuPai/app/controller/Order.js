@@ -15,7 +15,7 @@ Ext.define('WeiQuPai.controller.Order', {
             consigneeList: 'myconsignee',
             propList: 'myprop',
             couponList: 'mycoupon',
-            payButton: 'button[action=pay]'
+            submitButton: 'button[action=submitOrder]'
         },
         control: {
            paymentPanel: {
@@ -39,7 +39,7 @@ Ext.define('WeiQuPai.controller.Order', {
            consigneePanel: {
                 tap: 'showConsigneeList'
            },
-           payButton: {
+           submitButton: {
                 tap: 'submitOrder'
            }
         }
@@ -123,6 +123,7 @@ Ext.define('WeiQuPai.controller.Order', {
             Ext.Msg.alert(null, '还没有选择收货地址');
             return false;
         }
+        var itemData = this.getOrderView().down('#itemInfo').getData();
         var param = WeiQuPai.Util.filterNull(order.data);
         param.token = user.token;
         WeiQuPai.Util.mask();
@@ -137,11 +138,12 @@ Ext.define('WeiQuPai.controller.Order', {
                     Ext.Msg.alert(null, rsp.msg);
                     return;
                 }
-                Ext.Msg.alert(null, '订单提交成功');
+                var data = Ext.merge({title:itemData.title, pic_cover: itemData.pic_cover}, rsp);
+                WeiQuPai.Util.forward('ordersuccess', {orderData:data});
             },
             failure: function(rsp){
                 WeiQuPai.Util.unmask();
-                Ext.msg.Alert(null, '数据提交失败');
+                Ext.Msg.alert(null, '数据提交失败');
             }
         });
     }

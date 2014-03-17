@@ -1,8 +1,10 @@
 Ext.define('WeiQuPai.view.Order', {
 	extend: 'Ext.Container',
 	xtype: 'order',
-	requires: ['WeiQuPai.view.DisclosureItem', 'WeiQuPai.view.PaymentList', 'WeiQuPai.view.ShipmentList', 'WeiQuPai.view.DeliveryTimeList',
-		'WeiQuPai.view.ConsigneeList', 'WeiQuPai.model.Order', 'WeiQuPai.view.MyCoupon', 'WeiQuPai.view.MyProp'],
+	requires: [
+		'WeiQuPai.view.DisclosureItem', 'WeiQuPai.view.PaymentList', 'WeiQuPai.view.ShipmentList', 'WeiQuPai.view.DeliveryTimeList',
+		'WeiQuPai.view.ConsigneeList', 'WeiQuPai.model.Order', 'WeiQuPai.view.MyCoupon', 'WeiQuPai.view.MyProp', 'WeiQuPai.view.OrderSuccess'
+	],
 	config: {
 		auctionData: null,
 		scrollable: true,
@@ -79,8 +81,8 @@ Ext.define('WeiQuPai.view.Order', {
 		if(!user) return;
 		var order = Ext.create('WeiQuPai.model.Order');
 		this.setRecord(order);
-		var payBtn = {xtype: 'button', text: '去支付', action: 'pay', cls: 'w-toolbar-button', iconCls: 'icon-pay'};
-		this.down('bottombar #buttonContainer').add(payBtn);
+		var submitBtn = {xtype: 'button', text: '提交订单', action: 'submitOrder', cls: 'w-toolbar-button', iconCls:'icon-submit'};
+		this.down('bottombar #buttonContainer').add(submitBtn);
 		this.addPayment();
 		this.addDeliveryTime();
 

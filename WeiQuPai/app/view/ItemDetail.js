@@ -52,7 +52,21 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 				xtype: 'container',
 				scrollDock: 'top',
 				itemId: 'itemTitle',
-				tpl: '<h2><span class="market-price">原价￥{oprice}</span><span class="price">￥{curr_price}</span>{title}</h2>',
+				tpl: new Ext.XTemplate(
+					'<h2><span class="market-price">原价￥{oprice}</span><span class="price">{curr_price:this.formatPrice}</span>{title}</h2>',
+					{
+						formatPrice: function(curr_price){
+							curr_price = curr_price || "0";
+							var numbers = curr_price.split("");
+							var res = [];
+							Ext.Array.each(numbers, function(n){
+								n = n == '.' ? 'dot' : n;
+								res.push('<span class="n n' + n + '"></span>');
+							});
+							return res.join("");
+						}
+					}
+				),
 				cls : 'item-detail-info'
 			},
 			{
@@ -94,16 +108,10 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 			}
 		}
 	},
+
 	initialize: function(){
 		this.callParent(arguments);
 		//在bottombar上加入下单的按钮
-		var paiBtn = {
-			xtype: 'button',
-			text: '我拍',
-			cls: 'w-toolbar-button',
-			iconCls: 'icon-pai',
-			action: 'order'
-		};
 		var commentBtn = {
 			xtype: 'button',
 			text: '评论',
@@ -119,14 +127,23 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 			action: 'share'
 		};
 		
-		this.down('bottombar #buttonContainer').add(paiBtn);
+		var paiBtn = {
+			xtype: 'container',
+			itemId: 'paiBtn',
+			cls: 'w-button-pai',
+			html: '<div class="mask" id="paiMask"></div>'
+		};
 		this.down('bottombar #buttonContainer').add(commentBtn);
+		this.down('bottombar #buttonContainer').add(paiBtn);
 		this.down('bottombar #buttonContainer').add(shareButton);
-
 		//给详细内容的收起加事件
 		this.down('#itemDesc').on('tap', function(){
 			this.fireEvent('toggleDesc');
 		}, null, {element: 'element'});
+		this.down('#paiBtn').on('tap', function(){
+			this.fireEvent('pai');
+		}, null, {element: 'element'});
+		this.down('#paiBtn').on('painted', this.setButtonState, this);
 	},
 
 	//接收参数时调用数据
@@ -175,10 +192,23 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 		desc.rawContent = data.description;
 		desc.toggleState = 'short';
 		data.button = '';
-		if(desc.rawContent.length > 30){
+		if(desc.rawContent && desc.rawContent.length > 30){
 			data.description = desc.rawContent.substr(0, 30) + "...";
 			data.button = '<span class="show-more"></span>';
 		}
 		this.down('#itemDesc').setData(data);
+	},
+
+	setButtonState: function(){
+		var e = Ext.get('paiMask');
+		var totalHeight = 60;
+		var timer = setInterval(function(){
+			var height = e.getHeight();
+			if(height == totalHeight){
+				clearInterval(timer);
+				return;
+			}
+			e.setHeight(height + 1);
+		}, 400);
 	}
 });

@@ -8,20 +8,21 @@ $default-font: 1em;
 $normal-font: 0.9em;
 $small-font: 0.75em;
 $tiny-font: 0.6em;
-$text-color: #333;
+$text-color: #000;
 $gray-color: #666;
 $red-color: #d22270;
-$bar-color: #3aa0d8;
-$border-color: #dbdbe0;
-$button-color: #3aa0d8;
-$bg-color: #f0f2f6;
+$bar-color: #ccd6c2;
+$border-color: #cfd9c6;
+$button-color: #76888d;
+$bg-color: #fff;
+$tabbar-color:#5f7479;
 
 //tabbar的文字暗色
-$tab-text-dark: #85f7f6;
+$tab-text-dark: #fff;
 //tabbar的文字亮色
 $tab-text-light: #fff;
 //titlebar的文字色
-$title-text-color: #d5fafa;
+$title-text-color: #000;
 //按钮的文字色
 $button-text-color: #fff;
 
@@ -42,7 +43,7 @@ $ios7-green: #53d769;
 	font-size:$big-font;
 	font-weight:bold;
 	color: $title-text-color;
-	text-shadow:0 1px rgba(0,0,0,.2);
+	//text-shadow:0 1px rgba(0,0,0,.2);
 }
 .x-msgbox-title.x-toolbar.x-docked-top{
 	background-color:transparent;
@@ -279,6 +280,7 @@ h3{
 	color:$red-color;
 	float:right;
 	clear:right;
+	margin-top:2px;
 }
 .item-detail-desc{
 	border-bottom: 1px solid $border-color;
@@ -384,14 +386,14 @@ h3{
 }
 
 .reply,.zan{
-	background:#f9f9f7;
+	background:#f5f5f5;
 	padding:.3em;
 }
 .bt{
 	border-top:1px solid $border-color;
 }
 .uname{
-	color:#567091;
+	color:#5d7177;
 	font-weight:bold;
 }
 //flex容器
@@ -674,7 +676,6 @@ h3{
 	padding:.7em 1em;
 	color:$button-text-color;
 	font-weight:bold;
-	text-shadow: 0 1px #0ba1a0;
 }
 .w-button-small .x-button-label{
 	padding:.3em 1em;
@@ -712,10 +713,10 @@ h3{
 }
 .w-toolbar{
 	padding:0 .7em;
-	background:$bar-color;
+	background:$tabbar-color;
 }
 .w-main-tab .x-tabbar{
-	background:$bar-color;
+	background:$tabbar-color;
 	border:0;
 }
 .w-main-tab .x-tabbar .x-tab{
@@ -729,41 +730,44 @@ h3{
 .w-main-tab .x-tab .x-button-icon{
 	height:1.8em;
 }
+.w-main-tab .x-tab.x-tab-active{
+	background:transparent;
+}
 .w-main-tab .x-tab.x-tab-active .x-button-label{
 	color: $tab-text-light;
 }
 .tab-today{
 	background:url(../images/icon-tab-today.png) no-repeat center bottom;
-	background-size:21px 21px;
+	background-size:23px 23px;
 }
 .tab-myauction{
 	background:url(../images/icon-tab-myauction.png) no-repeat center bottom;
-	background-size:23px 21px;
+	background-size:23px 23px;
 }
 .tab-circle{
 	background:url(../images/icon-tab-circle.png) no-repeat center bottom;
-	background-size:20px 21px;
+	background-size:23px 23px;
 }
 .tab-my{
 	background:url(../images/icon-tab-my.png) no-repeat center bottom;
-	background-size:22px 20px;
+	background-size:23px 23px;
 }
 
 .w-main-tab .x-tab.x-tab-active .tab-today{
 	background:url(../images/icon-tab-today-on.png) no-repeat center bottom;
-	background-size:21px 21px;
+	background-size:23px 23px;
 }
 .w-main-tab .x-tab.x-tab-active .tab-myauction{
 	background:url(../images/icon-tab-myauction-on.png) no-repeat center bottom;
-	background-size:23px 21px;
+	background-size:23px 23px;
 }
 .w-main-tab .x-tab.x-tab-active .tab-circle{
 	background:url(../images/icon-tab-circle-on.png) no-repeat center bottom;
-	background-size:20px 21px;
+	background-size:23px 23px;
 }
 .w-main-tab .x-tab.x-tab-active .tab-my{
 	background:url(../images/icon-tab-my-on.png) no-repeat center bottom;
-	background-size:22px 21px;
+	background-size:23px 23px;
 }
 
 .w-tab-button.x-button{
@@ -791,11 +795,12 @@ h3{
 //子菜单样式
 .submenu{
 	background:url(../images/submenu-border.png) no-repeat;
+	//background-color:#d8e3cd;
 	background-size:127px 180px;
+	font-weight:bold;
 	width:127px;
 	height:180px;
 	padding:0 18px;
-	//margin-left:5px;
 }
 .submenu .menu-button{
 	height:2.65em;
@@ -813,20 +818,20 @@ h3{
 	color:#666;
 }
 .submenu .today{
-	background:url(../images/submenu-01.png) no-repeat left center;
-	background-size:18px 18px;
+	background:url(../images/submenu_01_on.png) no-repeat left center;
+	background-size:20px 20px;
 }
 .submenu .myauction{
-	background:url(../images/submenu-02.png) no-repeat left center;
-	background-size:21px 18px;
+	background:url(../images/submenu_02_on.png) no-repeat left center;
+	background-size:20px 20px;
 }
 .submenu .circle{
-	background:url(../images/submenu-03.png) no-repeat left center;
-	background-size:18px 18px;
+	background:url(../images/submenu_03_on.png) no-repeat left center;
+	background-size:20px 20px;
 }
 .submenu .my{
-	background:url(../images/submenu-04.png) no-repeat left center;
-	background-size:18px 18px;;
+	background:url(../images/submenu_04_on.png) no-repeat left center;
+	background-size:20px 20px;
 }
 
 //一些按钮的图标
@@ -840,22 +845,25 @@ h3{
 
 }
 .icon-write{
-	background:url(../images/icon-write.png) no-repeat left center;
-	background-size:11px 14px;
+	background:url(../images/bt-reg-on.png) no-repeat left center;
+	background-size:18px 18px;
 }
 .icon-pay{
-	background:url(../images/icon-pay.png) no-repeat left center;
-	background-size:22px 15px;
+	background:url(../images/bt-pay-on.png) no-repeat left center;
+	background-size:24px 24px;
 }
-.icon-pai{
-	background:url(../images/icon-pai.png) no-repeat left center;
-	background-size:20px 16px;
+.icon-submit{
+	background:url(../images/bt-submit-on.png) no-repeat left center;
+	background-size:24px 24px;
 }
 .icon-share{
-	background:url(../images/icon-share.png) no-repeat left center;
-	background-size:16px 16px;
+	background:url(../images/bt-share-on.png) no-repeat left center;
+	background-size:22px 22px;
 }
-
+.icon-address{
+	background:url(../images/bt-addadress-on.png) no-repeat left center;
+	background-size:24px 24px;
+}
 //虚边框的按钮
 .w-box-button{
 	border:2px dashed #ccc;
@@ -890,17 +898,17 @@ h3{
 	background:url(../images/icon-big-avatar.png);
 	background-size:70px 70px;
 
- }
- .camera-layer, .delete-button-layer, .button-layer{
+}
+.camera-layer, .delete-button-layer, .button-layer{
  	background:rgba(0,0,0,.3);
- }
- .w-button-red{
+}
+.w-button-red{
 	background-color:$ios7-red;
- }
- .w-button-gray{
+}
+.w-button-gray{
  	background-color:#ccc;
- }
- .accept-btn{
+}
+.accept-btn{
  	font-size:$small-font;
 	padding:0 10px;
 	border-radius:4px;
@@ -909,9 +917,81 @@ h3{
 	background:#1fcc31;
 	line-height:40px;
 	height:40px;
- }
- .accept-text{
+}
+.accept-text{
  	line-height: 40px;
 	font-size: .8em;
 	color: #666;
+}
+
+//订单成功页面的表格
+.order-info{
+ 	margin:1em;
+}
+.order-info .row{
+ 	-webkit-box-align:start;
+ 	align-items:flex-start;
+}
+.order-info .label{
+ 	width:5.5em;
+ 	min-width:5.5em;
+ 	color:#666;
+ 	display:block;
+}
+
+//拍品价格计时器样式
+.n{
+ 	margin-left:3px;
+ 	width:13px;
+ 	height:19px;
+ 	display:inline-block;
+}
+.n1{
+ 	background:url(../images/1.png) no-repeat left center / 13px 19px;
+}
+.n2{
+ 	background:url(../images/2.png) no-repeat left center / 13px 19px;
+}
+.n3{
+ 	background:url(../images/3.png) no-repeat left center / 13px 19px;
+}
+.n4{
+	background:url(../images/4.png) no-repeat left center / 13px 19px;
+}
+.n5{
+ 	background:url(../images/5.png) no-repeat left center / 13px 19px;
+}
+.n6{
+ 	background:url(../images/6.png) no-repeat left center / 13px 19px;
+}
+.n7{
+ 	background:url(../images/7.png) no-repeat left center / 13px 19px;
+}
+.n8{
+ 	background:url(../images/8.png) no-repeat left center / 13px 19px;
+}
+.n9{
+ 	background:url(../images/9.png) no-repeat left center / 13px 19px;
+}
+.n0{
+ 	background:url(../images/0.png) no-repeat left center / 13px 19px;
  }
+.ndot{
+ 	background:url(../images/dot.png) no-repeat left bottom / 3px 4px;
+ 	width:3px;
+}
+.w-toolbar .w-button-pai{
+	margin-top:-10px;
+	width:57px;
+	height:60px;
+	background:url(../images/bt-pai-1.png) no-repeat left top / 57px 60px;
+}
+.w-toolbar .w-button-pai .mask{
+	width:57px;
+	height:0px;
+	overflow:hidden;
+	background:url(../images/bt-pai-0.png) no-repeat left top / 57px 60px;
+}
+.w-toolbar{
+	overflow:visible;
+}
