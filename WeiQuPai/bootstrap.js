@@ -797,7 +797,6 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.Circle": [],
   "WeiQuPai.view.CirclePost": [],
   "WeiQuPai.view.CircleReply": [],
-  "WeiQuPai.view.ConsigneeList": [],
   "WeiQuPai.view.DeleteButtonLayer": [],
   "WeiQuPai.view.DeliveryTimeList": [],
   "WeiQuPai.view.DetailPicShow": [],
@@ -1849,9 +1848,6 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.CircleReply": [
     "widget.circlereply"
-  ],
-  "WeiQuPai.view.ConsigneeList": [
-    "widget.consigneelist"
   ],
   "WeiQuPai.view.DeleteButtonLayer": [
     "widget.deletebuttonlayer"
