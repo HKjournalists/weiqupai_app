@@ -84,11 +84,13 @@ Ext.define('WeiQuPai.view.My', {
 					}
 				]
 			}
-		],
+		]
+	},
 
-		listeners: {
-			'activate': 'loadData'
-		}
+	initialize: function(){
+		this.loginTip = Ext.create('WeiQuPai.view.LoginTip');
+		this.add(this.loginTip);
+		this.on('activate', this.loadData, this);
 	},
 
 	loadData: function(){
@@ -96,12 +98,12 @@ Ext.define('WeiQuPai.view.My', {
         	Ext.each(this.getInnerItems(), function(cmp){
         		cmp.hide();
         	});
-            !this.down('logintip') && this.add(Ext.create('WeiQuPai.view.LoginTip'));
+        	this.loginTip.show();
             return false;
         }
-        var loginTip = this.down('logintip');
-        loginTip && this.remove(loginTip)
-        this.down('#myInfo').setData(WeiQuPai.Cache.get('currentUser'));;
+        this.loginTip.hide();
+
+        this.down('#myInfo').setData(WeiQuPai.Cache.get('currentUser'));
 		Ext.each(this.getInnerItems(), function(cmp){
     		cmp.show();
     	});        

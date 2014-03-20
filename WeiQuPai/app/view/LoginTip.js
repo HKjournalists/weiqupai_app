@@ -3,6 +3,7 @@ Ext.define('WeiQuPai.view.LoginTip', {
     xtype: 'logintip',
     config: {
         centered: true,
+        hidden: true,
         items: [
             {
                 xtype: 'container',

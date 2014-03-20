@@ -644,6 +644,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.plugin.BufferedList": [],
   "Ext.plugin.ListPaging": [],
   "Ext.plugin.PullRefresh": [],
+  "Ext.plugin.ScrollPaging": [],
   "Ext.plugin.SortableList": [],
   "Ext.scroll.Indicator": [
     "Ext.util.Indicator"
@@ -748,7 +749,6 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.Util": [],
   "WeiQuPai.controller.CameraLayer": [],
   "WeiQuPai.controller.Circle": [],
-  "WeiQuPai.controller.CompanyMessage": [],
   "WeiQuPai.controller.DetailPicShow": [],
   "WeiQuPai.controller.ItemDetail": [],
   "WeiQuPai.controller.Login": [],
@@ -758,6 +758,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.controller.MyAuctionDetail": [],
   "WeiQuPai.controller.MyConsignee": [],
   "WeiQuPai.controller.MyFriend": [],
+  "WeiQuPai.controller.NewFriend": [],
   "WeiQuPai.controller.NewMessage": [],
   "WeiQuPai.controller.Order": [],
   "WeiQuPai.controller.Pay": [],
@@ -772,36 +773,32 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.model.Auction": [],
   "WeiQuPai.model.AuctionComment": [],
   "WeiQuPai.model.Circle": [],
-  "WeiQuPai.model.CompanyMessage": [],
   "WeiQuPai.model.MyAuction": [],
   "WeiQuPai.model.Order": [],
   "WeiQuPai.model.Profile": [],
-  "WeiQuPai.model.ShowUserInfo": [],
-  "WeiQuPai.model.ShowUserMessage": [],
-  "WeiQuPai.model.SiteMessage": [],
   "WeiQuPai.model.UserConsignee": [],
   "WeiQuPai.store.Auction": [],
   "WeiQuPai.store.AuctionComment": [],
   "WeiQuPai.store.Banner": [],
   "WeiQuPai.store.Circle": [],
-  "WeiQuPai.store.CompanyMessage": [],
+  "WeiQuPai.store.FriendRequest": [],
   "WeiQuPai.store.MyAuction": [],
-  "WeiQuPai.store.ShowUserInfo": [],
-  "WeiQuPai.store.ShowUserMessage": [],
-  "WeiQuPai.store.SiteMessage": [],
   "WeiQuPai.store.UserConsignee": [],
   "WeiQuPai.store.UserCoupon": [],
+  "WeiQuPai.store.UserFeed": [],
   "WeiQuPai.store.UserFriend": [],
   "WeiQuPai.store.UserProp": [],
   "WeiQuPai.view.About": [],
   "WeiQuPai.view.AddConsigneeForm": [],
+  "WeiQuPai.view.AddFriendButtonLayer": [],
   "WeiQuPai.view.Banner": [],
   "WeiQuPai.view.BottomBar": [],
   "WeiQuPai.view.CameraLayer": [],
   "WeiQuPai.view.Circle": [],
-  "WeiQuPai.view.CompanyMessage": [],
-  "WeiQuPai.view.CompanyTitleText": [],
+  "WeiQuPai.view.CirclePost": [],
+  "WeiQuPai.view.CircleReply": [],
   "WeiQuPai.view.ConsigneeList": [],
+  "WeiQuPai.view.DeleteButtonLayer": [],
   "WeiQuPai.view.DeliveryTimeList": [],
   "WeiQuPai.view.DetailPicShow": [],
   "WeiQuPai.view.DisclosureItem": [],
@@ -825,8 +822,10 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.MyCoupon": [],
   "WeiQuPai.view.MyFriend": [],
   "WeiQuPai.view.MyProp": [],
+  "WeiQuPai.view.NewFriend": [],
   "WeiQuPai.view.NewMessage": [],
   "WeiQuPai.view.Order": [],
+  "WeiQuPai.view.OrderSuccess": [],
   "WeiQuPai.view.Pay": [],
   "WeiQuPai.view.PaymentList": [],
   "WeiQuPai.view.Private": [],
@@ -838,7 +837,6 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.Shop": [],
   "WeiQuPai.view.ShowOrder": [],
   "WeiQuPai.view.ShowUser": [],
-  "WeiQuPai.view.SiteMessage": [],
   "WeiQuPai.view.SubMenu": [],
   "WeiQuPai.view.SwipeButtonList": [],
   "WeiQuPai.view.Today": []
@@ -1669,6 +1667,9 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.plugin.PullRefresh": [
     "plugin.pullrefresh"
   ],
+  "Ext.plugin.ScrollPaging": [
+    "plugin.scrollpaging"
+  ],
   "Ext.plugin.SortableList": [
     "plugin.sortablelist"
   ],
@@ -1783,7 +1784,6 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.Util": [],
   "WeiQuPai.controller.CameraLayer": [],
   "WeiQuPai.controller.Circle": [],
-  "WeiQuPai.controller.CompanyMessage": [],
   "WeiQuPai.controller.DetailPicShow": [],
   "WeiQuPai.controller.ItemDetail": [],
   "WeiQuPai.controller.Login": [],
@@ -1793,6 +1793,7 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.controller.MyAuctionDetail": [],
   "WeiQuPai.controller.MyConsignee": [],
   "WeiQuPai.controller.MyFriend": [],
+  "WeiQuPai.controller.NewFriend": [],
   "WeiQuPai.controller.NewMessage": [],
   "WeiQuPai.controller.Order": [],
   "WeiQuPai.controller.Pay": [],
@@ -1807,25 +1808,19 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.model.Auction": [],
   "WeiQuPai.model.AuctionComment": [],
   "WeiQuPai.model.Circle": [],
-  "WeiQuPai.model.CompanyMessage": [],
   "WeiQuPai.model.MyAuction": [],
   "WeiQuPai.model.Order": [],
   "WeiQuPai.model.Profile": [],
-  "WeiQuPai.model.ShowUserInfo": [],
-  "WeiQuPai.model.ShowUserMessage": [],
-  "WeiQuPai.model.SiteMessage": [],
   "WeiQuPai.model.UserConsignee": [],
   "WeiQuPai.store.Auction": [],
   "WeiQuPai.store.AuctionComment": [],
   "WeiQuPai.store.Banner": [],
   "WeiQuPai.store.Circle": [],
-  "WeiQuPai.store.CompanyMessage": [],
+  "WeiQuPai.store.FriendRequest": [],
   "WeiQuPai.store.MyAuction": [],
-  "WeiQuPai.store.ShowUserInfo": [],
-  "WeiQuPai.store.ShowUserMessage": [],
-  "WeiQuPai.store.SiteMessage": [],
   "WeiQuPai.store.UserConsignee": [],
   "WeiQuPai.store.UserCoupon": [],
+  "WeiQuPai.store.UserFeed": [],
   "WeiQuPai.store.UserFriend": [],
   "WeiQuPai.store.UserProp": [],
   "WeiQuPai.view.About": [
@@ -1833,6 +1828,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.AddConsigneeForm": [
     "widget.addconsigneeform"
+  ],
+  "WeiQuPai.view.AddFriendButtonLayer": [
+    "widget.addfriendbuttonlayer"
   ],
   "WeiQuPai.view.Banner": [
     "widget.banner"
@@ -1846,14 +1844,17 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.Circle": [
     "widget.circle"
   ],
-  "WeiQuPai.view.CompanyMessage": [
-    "widget.companymessage"
+  "WeiQuPai.view.CirclePost": [
+    "widget.circlepost"
   ],
-  "WeiQuPai.view.CompanyTitleText": [
-    "widget.companytitletext"
+  "WeiQuPai.view.CircleReply": [
+    "widget.circlereply"
   ],
   "WeiQuPai.view.ConsigneeList": [
     "widget.consigneelist"
+  ],
+  "WeiQuPai.view.DeleteButtonLayer": [
+    "widget.deletebuttonlayer"
   ],
   "WeiQuPai.view.DeliveryTimeList": [
     "widget.deliverytimelist"
@@ -1924,11 +1925,17 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.MyProp": [
     "widget.myprop"
   ],
+  "WeiQuPai.view.NewFriend": [
+    "widget.newfriend"
+  ],
   "WeiQuPai.view.NewMessage": [
     "widget.newmessage"
   ],
   "WeiQuPai.view.Order": [
     "widget.order"
+  ],
+  "WeiQuPai.view.OrderSuccess": [
+    "widget.ordersuccess"
   ],
   "WeiQuPai.view.Pay": [
     "widget.pay"
@@ -1962,9 +1969,6 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.ShowUser": [
     "widget.showuser"
-  ],
-  "WeiQuPai.view.SiteMessage": [
-    "widget.sitemessage"
   ],
   "WeiQuPai.view.SubMenu": [
     "widget.submenu"

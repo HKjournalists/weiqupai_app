@@ -123,7 +123,7 @@ Ext.define('WeiQuPai.view.Circle', {
 			this.getStore().removeAll();
 			this.setForceReload(false);
 			var user = WeiQuPai.Cache.get('currentUser');
-			user && this.getStore().getProxy().setExtraParam('token', user.token);
+			this.getStore().getProxy().setExtraParam('token', user && user.token || null);
 			this.getStore().load();
 		}
 	},

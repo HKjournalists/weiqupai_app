@@ -5,7 +5,7 @@ Ext.define('WeiQuPai.store.AuctionComment', {
 		storeId: 'AuctionComment',
 		autoLoad: false,
 		model: 'WeiQuPai.model.AuctionComment',
-		pageSize: 5,
+		pageSize: 10,
 		proxy: {
 			type: 'ajax',
 			url: WeiQuPai.Config.apiUrl + '/?r=app/comment',

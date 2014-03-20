@@ -42,8 +42,13 @@ Ext.define('WeiQuPai.view.MyConsignee', {
         this.callParent(arguments);
         var btn = {xtype: 'button', iconCls:'icon-address', cls: 'w-toolbar-button', text: '添加收货信息', action: 'showAdd'};
         this.down('bottombar #buttonContainer').add(btn);
-        user = WeiQuPai.Cache.get('currentUser');
-        if(this.getStore().isLoaded()) return;
+
+        user = WeiQuPai.Util.checkLogin();
+        if(!user) return;
+
+        this.msgbox = WeiQuPai.Util.msgbox('您还没有添加收货信息.');
+        this.add(this.msgbox);
+
         this.getStore().getProxy().setExtraParam('token', user.token);
         this.getStore().load(function(records, operation, success){
             if(!success){
@@ -51,7 +56,11 @@ Ext.define('WeiQuPai.view.MyConsignee', {
                 return;
             }
             if(records.length == 0){
-                this.add(WeiQuPai.Util.msgbox('您还没有添加收货信息'));
+                this.msgbox.show(); 
+            }
+            if(!WeiQuPai.Util.invalidToken(records[0].raw)){
+                store.removeAll();
+                return false;
             }
         }, this);
     }

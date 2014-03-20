@@ -230,10 +230,10 @@ Ext.define('Ext.plugin.ScrollPaging', {
     onStoreLoad: function(store, records, success) {
         var loadCmp  = this.getLoadMoreCmp();
         var scroller = this.getScroller();
-
+        var pageSize = this.getList().getStore().getPageSize();
         this.setLoading(false);
 
-        if (records.length == 0) {
+        if (records.length < pageSize) {
             this.setIsFullyLoaded(true);
             scroller.on({
                 scrollend: function(){

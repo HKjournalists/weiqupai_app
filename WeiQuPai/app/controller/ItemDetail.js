@@ -23,7 +23,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
                 tap: function(){
                     if(!WeiQuPai.Util.checkLogin()) return false;
                     var auctionId = this.getPageView().auctionData.id;
-                    var itemId = this.getPageView().getParam().item_id;
+                    var itemId = this.getPageView().auctionData.item_id;
                     var form = WeiQuPai.Util.showCommentForm();
                     form.down('hiddenfield[name=auction_id]').setValue(auctionId);
                     form.down('hiddenfield[name=item_id]').setValue(itemId);
@@ -48,17 +48,20 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
     },
     
     showShop: function(){
-        var shopView = Ext.create('WeiQuPai.view.Shop');
+        var shopView = Ext.create('WeiQuPai.view.Shop', {data: this.getPageView().auctionData.shop});
         this.getMain().push(shopView);
     },
 
     showOrderView: function(){
-        if(!WeiQuPai.Util.checkLogin()) return;
+        var user = WeiQuPai.Util.checkLogin();
+        if(!user)return;
         WeiQuPai.Util.mask();
         var auction = WeiQuPai.model.Auction;
+        auction.getProxy().setExtraParam('token', user.token);
         auction.load(this.getPageView().auctionData.id, {
-            success: function(record, operation, success){
+            success: function(record, operation){
                 WeiQuPai.Util.unmask();
+                if(!WeiQuPai.Util.invalidToken(record.raw)) return false;
                 if(record.get('status') != 2){
                     msgArr = ['拍卖还未开始', '拍卖正在结算中，请稍等几分钟', null, '对不起，拍卖已结束'];
                     msg = msgArr[record.get('status')];
@@ -87,16 +90,14 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
             success: function(form, result){
                 //评论提交成功后重置表单
                 form.reset();
+                WeiQuPai.Util.unmask();
                 var list = self.getPageView();
-                list.setScrollToTopOnRefresh(false);
-                list.getStore().load(function(){
-                    WeiQuPai.Util.unmask();
-                    list.down('#msgbox') && list.down('#msgbox').destroy();
-                    list.setScrollToTopOnRefresh(true);
-                });
+                list.getStore().add(result.commentList);
+                list.updateAllListItems();
             },
             failure: function(form, result){
                 WeiQuPai.Util.unmask();
+                if(!WeiQuPai.Util.invalidToken(result)) return false;
                 var msg = result && result.msg || '评论提交失败，请重试';
                 Ext.Msg.alert(null, msg);
             }
@@ -128,7 +129,11 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
 
         Ext.Ajax.request({
             url: WeiQuPai.Config.apiUrl + '/?r=app/comment/up&token=' + user.token + '&id=' + id,
-            method: 'get'
+            method: 'get',
+            success: function(rsp){
+                rsp = Ext.decode(rsp);
+                if(!WeiQuPai.Util.invalidToken(rsp)) return false;
+            }
         });
         //异步请求的同时，给数量加1
         record.set('up_num', parseInt(record.get('up_num')) + 1);
@@ -138,8 +143,8 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
     doCommentTap: function(index, record){
         if(!WeiQuPai.Util.checkLogin()) return;
         var replyId = record.get('id');
-        var auctionId = this.getPageView().getData().id;
-        var itemId  = this.getPageView().getData().item_id;
+        var auctionId = this.getPageView().auctionData.id;
+        var itemId  = this.getPageView().auctionData.item_id;
         var form = WeiQuPai.Util.showCommentForm();
         form.down('hiddenfield[name=auction_id]').setValue(auctionId);
         form.down('hiddenfield[name=item_id]').setValue(itemId);

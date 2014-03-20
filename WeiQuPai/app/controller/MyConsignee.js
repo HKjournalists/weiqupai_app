@@ -34,7 +34,13 @@ Ext.define('WeiQuPai.controller.MyConsignee', {
             method: 'get',
             success: function(rsp){
                 WeiQuPai.Util.unmask();
+                rsp = Ext.decode(rsp.responseText);
+                if(!WeiQuPai.Util.invalidToken(rsp)) return false;
+
                 list.getStore().remove(record);
+                if(list.getStore().getCount() == 0){
+                    list.msgbox.show();
+                }
             },
             failure: function(rsp){
                 WeiQuPai.Util.unmask();
@@ -52,6 +58,9 @@ Ext.define('WeiQuPai.controller.MyConsignee', {
             method: 'get',
             success: function(rsp){
                 WeiQuPai.Util.unmask();
+                rsp = Ext.decode(rsp.responseText);
+                if(!WeiQuPai.Util.invalidToken(rsp)) return false;
+
                 var oldRecord = list.getStore().findRecord('is_default', 1, 0, null, null, true);
                 if(oldRecord) oldRecord.set('is_default', 0);
                 record.set('is_default', 1);
@@ -78,10 +87,13 @@ Ext.define('WeiQuPai.controller.MyConsignee', {
             method: 'post',
             success: function(form, result){
                 WeiQuPai.Util.unmask();
+                if(!WeiQuPai.Util.invalidToken(result)) return false;
+
                 if(result && result.success){
                     var data = form.getValues();
                     form.reset();
                     var preview = self.getMain().pop();
+                    preview.msgbox.hide();
                     data.id = result.id;
                     data.is_default = result.is_default;
                     preview.getStore().addData(data);

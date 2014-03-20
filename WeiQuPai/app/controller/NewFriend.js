@@ -22,6 +22,8 @@ Ext.define('WeiQuPai.controller.NewFriend', {
             params: {id: record.get('id'), token: user.token},
             method: 'get',
             success: function(rsp){
+                rsp = Ext.decode(rsp.responseText);
+                if(!WeiQuPai.Util.invalidToken(rsp)) return false;
                 list.getStore().remove(record);
             },
             failure: function(rsp){
@@ -38,6 +40,7 @@ Ext.define('WeiQuPai.controller.NewFriend', {
             method: 'get',
             success: function(rsp){
                 rsp = Ext.decode(rsp.responseText);
+                if(!WeiQuPai.Util.invalidToken(rsp)) return false;
                 if(rsp.code > 0){
                     Ext.Msg.alert(null, rsp.msg);
                     return;

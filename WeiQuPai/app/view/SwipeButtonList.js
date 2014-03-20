@@ -1,3 +1,13 @@
+/**
+ *  带滑动删除按钮的列表，IOS7风格的, 不需要disclosure箭头去掉w-discloure一行 
+ *
+ *	<div class="w-icon-list-item">',
+ *	'<img src="' + WeiQuPai.Config.host + '{avatar}" class="avatar">',
+ *	'<p>{nick}</p>',
+ *  '<div class="w-disclosure"><div class="w-disclosure-inner"></div></div>'
+ *	'</div>',
+ *	'<div class="button-area"><div class="swipe-button-delete">删除</div></div>'<div class="w-user-list-item">',
+ */
 Ext.define('WeiQuPai.view.SwipeButtonList', {
 	extend: 'Ext.dataview.List',
 	xtype: 'swipebuttonlist',

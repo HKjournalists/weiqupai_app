@@ -29,7 +29,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
             '<p>{content:htmlEncode}</p>',
             '<div class="flex"><div class="time">{ctime}</div><div class="up">{up_num}</div><div class="comment">{reply_num}</div></div>',
             '<tpl if="replies">',
-	            '<div class="reply">',
+	            '<div class="reply" style="margin-top:10px">',
 	            	'<tpl for="replies">',
 	            	'<div><span class="uname">{nick:htmlEncode}</span>：{content:htmlEncode}</div>',
 	            	'</tpl>',
@@ -74,7 +74,8 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 				title: '商家介绍',
 				titleStyle: 'normal',
 				itemId: 'shopInfo',
-				scrollDock: 'top'
+				scrollDock: 'top',
+				hidden: true
 			},
 			{
 				xtype: 'container',
@@ -117,21 +118,24 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 			text: '评论',
 			cls: 'w-toolbar-button',
 			iconCls: 'icon-write',
-			action: 'comment'
+			action: 'comment',
+			disabled: true
 		};
 		var shareButton = {
 			xtype: 'button',
 			text: '分享',
 			cls: 'w-toolbar-button',
 			iconCls: 'icon-share',
-			action: 'share'
+			action: 'share',
+			disabled: true
 		};
 		
 		var paiBtn = {
 			xtype: 'container',
 			itemId: 'paiBtn',
 			cls: 'w-button-pai',
-			html: '<div class="mask" id="paiMask"></div>'
+			html: '<div class="mask" id="paiMask"></div>',
+			disabled: true
 		};
 		this.down('bottombar #buttonContainer').add(commentBtn);
 		this.down('bottombar #buttonContainer').add(paiBtn);
@@ -141,9 +145,12 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 			this.fireEvent('toggleDesc');
 		}, null, {element: 'element'});
 		this.down('#paiBtn').on('tap', function(){
+			if(this.getDisabled()) return;
 			this.fireEvent('pai');
 		}, null, {element: 'element'});
-		this.down('#paiBtn').on('painted', this.setButtonState, this);
+		//没有评论显示的信息
+		this.msgbox = WeiQuPai.Util.msgbox('还没有人评论该商品.');
+		this.add(this.msgbox);
 	},
 
 	//接收参数时调用数据
@@ -155,6 +162,8 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 
 	loadData: function(id){
 		var auction = WeiQuPai.model.Auction;
+		//这里不需要登录
+		auction.getProxy().setExtraParam('token', null);
 		auction.load(id, {
 			scope: this,
 			success: function(record, operation){
@@ -164,23 +173,22 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 				Ext.Msg.alert(null, '数据加载失败');	
 			}
 		});
-		var me = this;
+		this.msgbox.hide();
 		var store = this.getStore();
 		//先清一下数据，防止别的商品的评论先出现
 		store.removeAll();
 		store.getProxy().setExtraParam('auction_id', id);
-		store.load(function(records, operation, success){
+		store.loadPage(1, function(records, operation, success){
 			if(!success){
 				Ext.Msg.alert(null, '评论加载失败');
 				return;
 			}
 			if(records.length == 0){
-				var c = WeiQuPai.Util.msgbox('还没有人评论该商品', {
-					scrollDock: 'top',
-				});
-				me.add(c);
+				this.msgbox.show();
 			}
-		});
+			this.down('button[action=comment]').setDisabled(false);
+			this.down('button[action=share]').setDisabled(false);
+		}, this);
 	},
 
 	setContent: function(data){
@@ -197,18 +205,35 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 			data.button = '<span class="show-more"></span>';
 		}
 		this.down('#itemDesc').setData(data);
+		//如果商家没有描述就不显示商家介绍
+		if(this.auctionData.shop.description){
+			this.down('#shopInfo').show();
+		}
+		this.setButtonState();
 	},
 
+	//设置拍的按钮状态，每隔10秒检查一次
 	setButtonState: function(){
+		this.down('#paiBtn').setDisabled(false);
 		var e = Ext.get('paiMask');
 		var totalHeight = 60;
-		var timer = setInterval(function(){
-			var height = e.getHeight();
-			if(height == totalHeight){
-				clearInterval(timer);
-				return;
-			}
-			e.setHeight(height + 1);
-		}, 400);
+		//结算中的时候就不允许拍了
+		if(this.auctionData.status == 1){
+			e.setHeight(totalHeight);
+			return;
+		}
+		var me = this;
+		var startTime = this.auctionData.round_start_time;
+		var duration = this.auctionData.time_interval * 60;
+		var elapsedTime = Math.min(new Date - startTime, duration);
+		var height = Math.ceil(totalHeight * elapsedTime / duration);
+		e.setHeight(height);
+		if(elapsedTime == duration){
+			//this.down('#paiBtn').setDisabled(true);
+			return;
+		}
+		setTimeout(function(){
+			me.setButtonState();
+		}, 100000);
 	}
 });

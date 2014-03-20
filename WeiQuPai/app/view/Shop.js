@@ -15,24 +15,26 @@ Ext.define('WeiQuPai.view.Shop', {
 			{
 				xtype: 'container',
 				itemId: 'shop-detail',
-				cls: 'shop-detail'
+				cls: 'w-content',
+				margin:'16px'
+			},
+			{
+				xtype: 'button',
+				text: '点击访问商家网站',
+				action: 'jumpUrl',
+				cls: 'w-margin w-button',
 			},
 			{
 				xtype: 'bottombar'
 			}
 		]
 	},
+
+	applyData: function(data){
+		this.down('#shop-detail').setHtml(data.description);
+
+	},
+
 	initialize: function(){
-		var html = '这里是商店的页面';
-		var url = 'http://www.baidu.com';
-		var linkButton = {
-			xtype: 'button',
-			text: '点击访问商家网站',
-			action: 'jumpUrl',
-			cls: 'shop-link-btn w-button',
-			url : url
-		};
-		this.down('#shop-detail').setHtml(html);
-		this.down('#shop-detail').add(linkButton);
 	}
 });

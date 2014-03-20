@@ -50,7 +50,7 @@ Ext.define('WeiQuPai.view.NewMessage', {
 	}, 
 
 	initialize: function(){
-		var user = WeiQuPai.Cache.get('currentUser');
+		var user = WeiQuPai.Util.checkLogin();
 		if(!user) return;
 
 		this.callParent(arguments);

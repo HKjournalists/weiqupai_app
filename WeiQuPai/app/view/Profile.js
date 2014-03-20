@@ -69,7 +69,7 @@ Ext.define('WeiQuPai.view.Profile', {
 	},
 
 	initialize: function(){
-		var user = WeiQuPai.Cache.get('currentUser');
+		var user = WeiQuPai.Util.checkLogin();
 		if(!user) return;
 		this.setContent(user);
     },

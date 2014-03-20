@@ -35,7 +35,7 @@ Ext.define('WeiQuPai.view.Private', {
 	}, 
 
 	initialize: function(){
-		user = WeiQuPai.Cache.get('currentUser');
+		var user = WeiQuPai.Util.checkLogin();
 		if(!user) return;	
 		this.callParent(arguments);
 		this.down('#canBeSearched').setValue(user.can_be_searched);

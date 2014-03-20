@@ -116,7 +116,7 @@ Ext.define('WeiQuPai.controller.Order', {
     },
 
     submitOrder: function(){
-        var user = WeiQuPai.Cache.get('currentUser');
+        var user = WeiQuPai.Util.checkLogin();
         if(!user) return;
         var order = this.getOrderView().getRecord();
         if(!order.get('consignee_id')){
@@ -134,6 +134,7 @@ Ext.define('WeiQuPai.controller.Order', {
             success: function(rsp){
                 WeiQuPai.Util.unmask();
                 rsp = Ext.decode(rsp.responseText);
+                if(!WeiQuPai.Util.invalidToken(rsp)) return false;
                 if(!rsp.success){
                     Ext.Msg.alert(null, rsp.msg);
                     return;

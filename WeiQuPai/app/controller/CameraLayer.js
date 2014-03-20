@@ -48,6 +48,7 @@ Ext.define('WeiQuPai.controller.CameraLayer', {
             success: function(rsp){
                 WeiQuPai.Util.unmask();
                 rsp = Ext.decode(rsp.responseText);
+                if(!WeiQuPai.Util.invalidToken(rsp)) return false;
                 if(rsp.code && rsp.code > 0){
                     Ext.Msg.alert(null, rsp.msg);
                     return;

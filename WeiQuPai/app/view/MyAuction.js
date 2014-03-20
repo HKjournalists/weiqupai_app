@@ -23,31 +23,47 @@ Ext.define('WeiQuPai.view.MyAuction', {
                 docked: 'top',
                 cls: 'w-title'
             }
-        ],
+        ]
 
-        listeners: {
-            'activate' : 'loadData'
-        }
     },
+
+    initialize: function(){
+        this.callParent(arguments);
+
+        this.msgbox = WeiQuPai.Util.msgbox('您还没有拍到任何宝贝');
+        this.add(this.msgbox);
+
+        this.loginTip = Ext.create('WeiQuPai.view.LoginTip');
+        this.add(this.loginTip);
+
+        this.on('activate', this.loadData, this);
+    },
+
     loadData: function(){
         var user = WeiQuPai.Cache.get('currentUser');
         if(!user){
             this.getStore().removeAll();
-            this.hasLoadedStore = false;
-            !this.down('logintip') && this.add(Ext.create('WeiQuPai.view.LoginTip'));
+            this.loginTip.show();
             return false;
         }
-        var loginTip = this.down('logintip');
-        loginTip && this.remove(loginTip);
-        if(this.hasLoadedStore) return;
+        this.loginTip.hide();
         var store = this.getStore();
         //加载数据
-        var me = this;
         store.getProxy().setExtraParam('token', user.token);
-        store.load(function(data, operation, success){
+        store.load(function(records, operation, success){
             if(!success){
                 Ext.Msg.alert(null, '数据加载失败');
+                return false;
             }
-        });
+            if(records.length == 0){
+                this.msgbox.show();
+                return;
+            }
+            //登录超时
+            if(!WeiQuPai.Util.invalidToken(records[0].raw)){
+                store.removeAll();
+                return false;
+            }
+        }, this);
     }
 });

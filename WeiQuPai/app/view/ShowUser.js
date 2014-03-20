@@ -63,6 +63,9 @@ Ext.define('WeiQuPai.view.ShowUser', {
 		this.down('#user-info').on('tap', function(){
 			this.fireEvent('bgtap', this.getParam());
 		}, this, {element: 'element'});
+
+		this.msgbox = WeiQuPai.Util.msgbox('这个人很懒，什么都没有留下.');
+		this.add(this.msgbox);
 	},
 
 	applyParam: function(uid){
@@ -85,15 +88,12 @@ Ext.define('WeiQuPai.view.ShowUser', {
 		store.load(function(records, operation, success){
 			if(!success){
 				Ext.Msg.alert(null, '数据加载失败');
-				return;
+				return false;
 			}
 			if(records.length == 0){
-				var c = WeiQuPai.Util.msgbox('这个人很懒，什么都没有留下.', {
-					scrollDock: 'top',
-				});
-				me.add(c);
+				this.msgbox.show();
 			}
-		});
+		}, this);
 		return uid;
 	}
 });

@@ -103,7 +103,7 @@
 	 * This is the location of your certificate.
 	 * This is required when you are developing for Android or you are developing on Windows.
 	 */
-	"certificatePath":"./vqupai.p12",
+	"certificatePath":"./vqupai_dist.p12",
 
 	/**
 	 * @cfg {String} certificateAlias

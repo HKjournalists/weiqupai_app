@@ -11,15 +11,9 @@ Ext.define('WeiQuPai.controller.Circle', {
         control: {
             pageView : {
                 avatartap: function(list, index, record){
-                    var uid = record.get('uid');
-                    if(!WeiQuPai.Util.isLogin()) return;
-                    if(WeiQuPai.Util.isFriend(uid)){
-                        this.showUser(list, index, record, 0);
-                    }else{
-                        this.showAddFriendLayer(list, index, record, record.get('uid'));
-                    }
+                    this.onUserTap(list, index, record, 0);
                 },
-                usertap: 'showAddFriendLayer',
+                usertap: 'onUserTap',
                 replytap: 'showReplyForm',
                 deletereply: 'showDeleteReply',
                 deletepost: 'doDeletePost',
@@ -38,9 +32,20 @@ Ext.define('WeiQuPai.controller.Circle', {
         }
     },
     
+    onUserTap: function(list, index, record, uid){
+        var uid = uid || record.get('uid');
+        var user = WeiQuPai.Util.checkLogin();
+        if(!user) return;
+        if(uid == user.id || WeiQuPai.Util.isFriend(uid)){
+            this.showUser(list, index, record, uid);
+        }else{
+            this.showAddFriendLayer(list, index, record, uid);
+        }
+    },
+
     showAddFriendLayer: function(list, index, record, uid){
         if(!this.addFriendLayer){
-            var config = {height: 120};
+            var config = {height: 130};
             this.addFriendLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.AddFriendButtonLayer', config);
         }
         this.addFriendLayer.setUid(uid);
@@ -48,7 +53,6 @@ Ext.define('WeiQuPai.controller.Circle', {
     },
 
     showUser: function(list, index, record, uid) {
-        uid = uid || record.get('uid');
         WeiQuPai.Util.forward('showuser', {param: uid})
     },
 
@@ -69,7 +73,7 @@ Ext.define('WeiQuPai.controller.Circle', {
 
     //删除动态
     doDeletePost: function(list, index, record){
-        var user = WeiQuPai.Cache.get('currentUser');
+        var user = WeiQuPai.Util.checkLogin();
         if(!user) return;
         var func = function(buttonId){
             if(buttonId != 'yes') return;
@@ -80,6 +84,7 @@ Ext.define('WeiQuPai.controller.Circle', {
                 params: {'id': feed_id},
                 success: function(rsp){
                     rsp = Ext.decode(rsp.responseText);
+                    if(!WeiQuPai.Util.invalidToken(rsp)) return false;
                     if(rsp.code > 0){
                         Ext.Msg.alert(null, rsp.msg);
                         return;
@@ -95,7 +100,8 @@ Ext.define('WeiQuPai.controller.Circle', {
     //发表动态
     doPublishPost: function(form){
         form.hide();
-        var user = WeiQuPai.Cache.get('currentUser');
+        var user = WeiQuPai.Util.checkLogin();
+        if(!user) return;
         var self = this;
         WeiQuPai.Util.mask();
         var data = form.getValues();
@@ -104,6 +110,7 @@ Ext.define('WeiQuPai.controller.Circle', {
             method: 'post',
             success: function(form, result){
                 WeiQuPai.Util.unmask();
+                if(!WeiQuPai.Util.invalidToken(result)) return false;
                 form.reset();
                 data = Ext.merge(data, result);
                 data.uid = user.id;
@@ -133,6 +140,7 @@ Ext.define('WeiQuPai.controller.Circle', {
             method: 'post',
             success: function(form, result){
                 WeiQuPai.Util.unmask();
+                if(!WeiQuPai.Util.invalidToken(result)) return false;
                 form.reset();
                 data.id = result.id;
                 data.uid = user.id;
@@ -177,6 +185,7 @@ Ext.define('WeiQuPai.controller.Circle', {
             success: function(rsp){
                 WeiQuPai.Util.unmask();
                 rsp = Ext.decode(rsp.responseText);
+                if(!WeiQuPai.Util.invalidToken(rsp)) return false;
                 if(rsp.code > 0){
                     Ext.Msg.alert(null, rsp.msg);
                     return;
@@ -194,7 +203,7 @@ Ext.define('WeiQuPai.controller.Circle', {
 
     //赞
     doZan: function(list, index, record){
-        var user = WeiQuPai.Cache.get('currentUser');
+        var user = WeiQuPai.Util.checkLogin();
         if(!user) return;
         var feed_id = record.get('id');
         Ext.Ajax.request({
@@ -203,6 +212,7 @@ Ext.define('WeiQuPai.controller.Circle', {
             params: {id: feed_id},
             success: function(rsp){
                 rsp = Ext.decode(rsp.responseText);
+                if(!WeiQuPai.Util.invalidToken(rsp)) return false;
                 if(rsp.code > 0){
                     Ext.Msg.alert(null, rsp.msg);
                     return;
@@ -216,7 +226,7 @@ Ext.define('WeiQuPai.controller.Circle', {
 
     //取消赞
     doCancelZan: function(list, index, record){
-        var user = WeiQuPai.Cache.get('currentUser');
+        var user = WeiQuPai.Util.checkLogin();
         if(!user) return;
         Ext.Ajax.request({
             url: WeiQuPai.Config.apiUrl + '/?r=app/circle/cancelZan&token=' + user.token,
@@ -224,6 +234,7 @@ Ext.define('WeiQuPai.controller.Circle', {
             params: {'id': record.get('id')},
             success: function(rsp){
                 rsp = Ext.decode(rsp.responseText);
+                if(!WeiQuPai.Util.invalidToken(rsp)) return false;
                 if(rsp.code > 0){
                     Ext.Msg.alert(null, rsp.msg);
                     return;

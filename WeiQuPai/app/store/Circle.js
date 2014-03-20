@@ -5,6 +5,7 @@ Ext.define('WeiQuPai.store.Circle', {
 		storeId: 'Circle',
 		autoLoad: false,
 		model: 'WeiQuPai.model.Circle',
+		pageSize: 10,
 		proxy: {
 			type: 'ajax',
 			url: WeiQuPai.Config.host + '/?r=app/circle',

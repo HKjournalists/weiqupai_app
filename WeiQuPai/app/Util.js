@@ -97,6 +97,17 @@ Ext.define("WeiQuPai.Util", {
         Ext.Viewport.down('main').push(Ext.create('WeiQuPai.view.Login'));
     },
 
+    //检查server端返回的是否是401[invalid token],如果是，提醒用户登录
+    invalidToken: function(obj){
+        if(obj && obj.code && obj.code == 401){
+            Ext.Msg.alert(null, '由于您长时间未登录，您需要重新登录', function(){
+                WeiQuPai.Util.forward('login');
+            });
+            return false;
+        }
+        return true;
+    },
+
     login: function(uname, password, callback){
         WeiQuPai.Util.mask();
         Ext.Ajax.request({
@@ -180,7 +191,7 @@ Ext.define("WeiQuPai.Util", {
 
     //更新用户设置
     updateSetting: function(field, value){
-        var user = WeiQuPai.Cache.get('currentUser');
+        var user = WeiQuPai.Util.checkLogin();
         if(!user) return;
         if(user[field] == value) return;
         Ext.Ajax.request({
@@ -189,6 +200,7 @@ Ext.define("WeiQuPai.Util", {
             method: 'get',
             success: function(rsp){
                 rsp = Ext.decode(rsp.responseText);
+                if(!WeiQuPai.Util.invalidToken(rsp)) return false;
                 if(rsp.code > 0){
                     Ext.Msg.alert(null, rsp.msg);
                     return;
@@ -201,7 +213,7 @@ Ext.define("WeiQuPai.Util", {
     },
 
     updateProfile: function(data, callback){
-        var user = WeiQuPai.Cache.get('currentUser');
+        var user = WeiQuPai.Util.checkLogin();
         if(!user) return;
         //检查属性是否有变化
         var changed = false;
@@ -219,6 +231,7 @@ Ext.define("WeiQuPai.Util", {
             method: 'post',
             success: function(rsp){
                 rsp = Ext.decode(rsp.responseText);
+                if(!WeiQuPai.Util.invalidToken(rsp)) return false;
                 if(rsp.code > 0){
                     Ext.Msg.alert(null, rsp.msg);
                     return;
@@ -251,7 +264,9 @@ Ext.define("WeiQuPai.Util", {
         var config = {
             cls: 'w-content',
             html: html,
-            itemId: 'msgbox'
+            itemId: 'msgbox',
+            scrollDock: 'top',
+            hidden: true
         };
         config = Ext.merge(config, cfg);
         return Ext.create('Ext.Container', config);
@@ -267,12 +282,13 @@ Ext.define("WeiQuPai.Util", {
     //保存up过的id,如果已经保存过，返回false, cache列表最多保存100个
     cacheUp: function(id){
         var upId = WeiQuPai.Cache.get('upId') || [];
-        if(upId.indexOf(id)) return false;
+        if(upId.indexOf(id) != -1) return false;
         upId.push(id);
         if(upId.length > 100){
             upId.shift();
         }
         WeiQuPai.Cache.set('upId', upId);
+        return true;
     }, 
 
     //转到某个视图，并带参数

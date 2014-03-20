@@ -3,7 +3,7 @@ Ext.define('WeiQuPai.view.Order', {
 	xtype: 'order',
 	requires: [
 		'WeiQuPai.view.DisclosureItem', 'WeiQuPai.view.PaymentList', 'WeiQuPai.view.ShipmentList', 'WeiQuPai.view.DeliveryTimeList',
-		'WeiQuPai.view.ConsigneeList', 'WeiQuPai.model.Order', 'WeiQuPai.view.MyCoupon', 'WeiQuPai.view.MyProp', 'WeiQuPai.view.OrderSuccess'
+		'WeiQuPai.model.Order', 'WeiQuPai.view.MyCoupon', 'WeiQuPai.view.MyProp', 'WeiQuPai.view.OrderSuccess'
 	],
 	config: {
 		auctionData: null,

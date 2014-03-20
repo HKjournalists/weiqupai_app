@@ -40,6 +40,8 @@ Ext.define('WeiQuPai.view.Today', {
 		this.callParent(arguments);
  		var me = this;
  		WeiQuPai.Util.mask();
+ 		var user = WeiQuPai.Cache.get('currentUser');
+		user &&	this.getStore().getProxy().setExtraParam('token', user.token);
         this.getStore().load(function(data, operation, success){
         	WeiQuPai.Util.unmask();
             if(!success){

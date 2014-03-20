@@ -6,7 +6,7 @@ Ext.define('WeiQuPai.view.NewFriend', {
 		store: 'FriendRequest',
 		itemTpl: new Ext.XTemplate(
 			'<div class="w-icon-list-item">',
-			'<img src="{avatar}" class="avatar">',
+			'<img src="' + WeiQuPai.Config.host + '{avatar}" class="avatar">',
 			'<p>{nick}</p>',
 			'<tpl if="status==0">',
 				'<span class="accept-btn">接受</span>',
@@ -30,24 +30,30 @@ Ext.define('WeiQuPai.view.NewFriend', {
 	},
 
 	initialize: function(){
-		var user = WeiQuPai.Cache.get('currentUser');
-		if(!user) return;
 		this.callParent(arguments);
+
+		var user = WeiQuPai.Util.checkLogin();
+		if(!user) return;
+
+		this.msgbox = WeiQuPai.Util.msgbox('还没有推荐的朋友');
+		this.add(this.msgbox);
+
 		var store = this.getStore();
 		store.getProxy().setExtraParam('token', user.token);
-		var me = this;
-		this.getStore().load(function(data, operation, success){
+		store.load(function(records, operation, success){
             if(!success){
                 Ext.Msg.alert(null, '数据加载失败');
-                return;
+                return false;
             }
-            if(data.length == 0){
-            	var c = WeiQuPai.Util.msgbox('还没有推荐的朋友', {
-					scrollDock: 'top',
-				});
-				me.add(c);
+            if(records.length == 0){
+            	this.msgbox.show();	
             }
-		});
+            if(!WeiQuPai.Util.invalidToken(records[0].raw)){
+            	store.removeAll();
+            	return false;
+            }
+		}, this);
+
 		this.onBefore('itemtap', function(list, index, dataItem, record, e){
 			if(e.target.className == 'accept-btn'){
 				this.fireEvent('itemaccept', list, index, dataItem, record, e);

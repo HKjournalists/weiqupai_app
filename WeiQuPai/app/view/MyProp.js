@@ -26,14 +26,27 @@ Ext.define('WeiQuPai.view.MyProp', {
 
 	initialize: function(){
 		this.callParent(arguments);
-		var user = WeiQuPai.Cache.get('currentUser');
+		var user = WeiQuPai.Util.checkLogin();
 		if(!user) return;
+
+		this.msgbox = WeiQuPai.Util.msgbox('您还没有任何可使用的道具');
+		this.add(this.msgbox);
+
 		var store = this.getStore();
 		store.getProxy().setExtraParam('token', user.token);
-		store.load(function(data, operation, success){
+		store.load(function(records, operation, success){
             if(!success){
                 Ext.Msg.alert(null, '数据加载失败');
+                return false;
             }
-        });
+            if(records.length == 0){
+            	this.msgbox.show();
+            	return;
+            }
+            if(!WeiQuPai.Util.invalidToken(records[0].raw)){
+            	store.removeAll();
+            	return false;
+            }
+        }, this);
 	}
 });
