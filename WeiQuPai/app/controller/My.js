@@ -5,6 +5,7 @@ Ext.define('WeiQuPai.controller.My', {
     	refs: {
     		main: 'main',
     		friendBtn: 'iconbutton[action=friend]',
+            feedBtn: 'iconbutton[action=feed]',
     		accountBtn: 'iconbutton[action=account]',
     		consigneeBtn: 'iconbutton[action=consignee]',
     		propBtn: 'iconbutton[action=prop]',
@@ -21,13 +22,20 @@ Ext.define('WeiQuPai.controller.My', {
         	propBtn: {tap: 'showProp'}, 
         	couponBtn: {tap: 'showCoupon'},
         	settingBtn: {tap: 'showSetting'},
-            profile: {tap: 'showProfile'}
+            profile: {tap: 'showProfile'},
+            feedBtn: {tap: 'showFeed'},
         }
     },
 
     showFriend: function(){
     	var view = Ext.create('WeiQuPai.view.MyFriend');
     	this.getMain().push(view);
+    },
+
+    showFeed: function(){
+        var user = WeiQuPai.Util.checkLogin();
+        if(!user) return;
+        WeiQuPai.Util.forward('showuser', {param: user.id})
     },
 
     showAccount: function(){

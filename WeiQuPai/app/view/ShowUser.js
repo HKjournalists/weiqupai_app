@@ -92,6 +92,7 @@ Ext.define('WeiQuPai.view.ShowUser', {
 			}
 			if(records.length == 0){
 				this.msgbox.show();
+				return;
 			}
 		}, this);
 		return uid;

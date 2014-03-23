@@ -150,6 +150,8 @@ Ext.define('WeiQuPai.controller.Circle', {
                 var replies = record.get('replies') || [];
                 replies.push(data);
                 record.set('replies', replies);
+                //刷新view
+                list.updateAllListItems();
             },
             failure: function(form, result){
                 WeiQuPai.Util.unmask();
@@ -178,6 +180,7 @@ Ext.define('WeiQuPai.controller.Circle', {
         var self = this;
         this.deleteLayer.hide();
         WeiQuPai.Util.mask();
+        var list = this.getPageView();
         Ext.Ajax.request({
             url: WeiQuPai.Config.apiUrl + '/?r=app/circle/deleteReply&token=' + user.token,
             method: 'get',
@@ -197,6 +200,7 @@ Ext.define('WeiQuPai.controller.Circle', {
                     }
                 }
                 record.set('replies', replies);
+                list.updateAllListItems();
             }
         });
     },
@@ -220,6 +224,7 @@ Ext.define('WeiQuPai.controller.Circle', {
                 var zan = record.get('zan') || [];
                 zan.push({'id': rsp.id, 'uid': user.id, 'nick': user.nick});
                 record.set('zan', zan);
+                list.updateAllListItems();
             }
         });
     },
@@ -247,6 +252,7 @@ Ext.define('WeiQuPai.controller.Circle', {
                 }
                 if(zan.length == 0) zan = null;
                 record.set('zan', zan);
+                list.updateAllListItems();
             }
         });
     }

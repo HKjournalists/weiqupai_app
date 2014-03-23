@@ -134,7 +134,7 @@ Ext.define("WeiQuPai.Util", {
             },
             failure: function(rsp){
                 WeiQuPai.Util.unmask();
-                Ext.Msg.Alert(null, '登录失败，请重试');
+                Ext.Msg.alert(null, '登录失败，请重试');
             }
         });
     },
@@ -172,8 +172,10 @@ Ext.define("WeiQuPai.Util", {
                 url: WeiQuPai.Config.apiUrl + '/?r=app/logout&token=' + user.token,
                 method: 'get'
             });
+            //删除用户相关的cache
             WeiQuPai.Cache.remove('currentUser');
             WeiQuPai.Cache.remove('friends');
+            WeiQuPai.Cache.remove('upId');
             //退出登录后拍圈要清空并刷新
             var circle = Ext.Viewport.down('circle');
             circle.setForceReload(true);

@@ -47,6 +47,7 @@ Ext.define('WeiQuPai.view.NewFriend', {
             }
             if(records.length == 0){
             	this.msgbox.show();	
+            	return false;
             }
             if(!WeiQuPai.Util.invalidToken(records[0].raw)){
             	store.removeAll();

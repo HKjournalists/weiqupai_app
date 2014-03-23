@@ -42,6 +42,12 @@ Ext.define('WeiQuPai.view.My', {
 					},
 					{
 						xtype: 'iconbutton',
+						icon: 'feed',
+						text: '我的动态',
+						action: 'feed'
+					},
+					{
+						xtype: 'iconbutton',
 						icon: 'account',
 						text: '帐号绑定',
 						action: 'account'

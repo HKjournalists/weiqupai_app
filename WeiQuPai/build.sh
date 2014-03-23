@@ -22,7 +22,6 @@ else
 	cp Config.js.production app/Config.js
 	REMOTE_DIR="/alidata/www/m.vqupai.com/webroot/m/"
 fi
-cat app/Config.js
 sencha app build native
 if [ "$BUILD_TYPE" == "all" ] || [ "$BUILD_TYPE" == "pkg" ];then
 	mv $BUILD_DIR/native-package-mobile/WeiQuPai/packager.json $BUILD_DIR/native-package-mobile/WeiQuPai/Payload
