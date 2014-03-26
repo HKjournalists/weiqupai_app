@@ -28,7 +28,18 @@ Ext.define('WeiQuPai.view.Today', {
                 xtype: 'titlebar',
                 title: '今日',
                 docked: 'top',
-                cls: 'w-title'
+                cls: 'w-title',
+                items: [
+                	{
+                		xtype: 'button',
+                		text: '支付',
+                		listeners: {
+                			tap: function(){
+                				WeiQuPai.Util.forward('pay');
+                			}
+                		}
+                	}
+                ]
             },
 	        {
 	            xtype: 'banner',
@@ -39,14 +50,14 @@ Ext.define('WeiQuPai.view.Today', {
 	initialize: function(){
 		this.callParent(arguments);
  		var me = this;
- 		WeiQuPai.Util.mask();
+        this.setMasked({xtype: 'simpleloadmask'});
  		var user = WeiQuPai.Cache.get('currentUser');
 		user &&	this.getStore().getProxy().setExtraParam('token', user.token);
         this.getStore().load(function(data, operation, success){
-        	WeiQuPai.Util.unmask();
+        	this.unmask();
             if(!success){
                 Ext.Msg.alert(null, '数据加载失败');
             }
-        });
+        }, this);
    	}
 });

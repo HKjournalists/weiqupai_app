@@ -27,7 +27,6 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
                     var form = WeiQuPai.Util.showCommentForm();
                     form.down('hiddenfield[name=auction_id]').setValue(auctionId);
                     form.down('hiddenfield[name=item_id]').setValue(itemId);
-                    form.down('button[action=publishComment]').setText('发表评论');
                 }
            },
            shareBtn: {
@@ -80,7 +79,6 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
     },
 
     doPublishComment: function(form){
-        this.getCommentForm().hide();
         var user = WeiQuPai.Cache.get('currentUser');
         var self = this;
         WeiQuPai.Util.mask();
@@ -90,6 +88,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
             success: function(form, result){
                 //评论提交成功后重置表单
                 form.reset();
+                form.hide();
                 WeiQuPai.Util.unmask();
                 var list = self.getPageView();
                 list.getStore().add(result.commentList);
@@ -97,7 +96,11 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
             },
             failure: function(form, result){
                 WeiQuPai.Util.unmask();
-                if(!WeiQuPai.Util.invalidToken(result)) return false;
+                if(!WeiQuPai.Util.invalidToken(result)){
+                    form.reset();
+                    form.hide();
+                    return false;
+                }
                 var msg = result && result.msg || '评论提交失败，请重试';
                 Ext.Msg.alert(null, msg);
             }
@@ -149,7 +152,6 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
         form.down('hiddenfield[name=auction_id]').setValue(auctionId);
         form.down('hiddenfield[name=item_id]').setValue(itemId);
         form.down('hiddenfield[name=reply_id]').setValue(replyId);
-        form.down('button[action=publishComment]').setText('回复');
     },
 
     //商品描述的展开和收起

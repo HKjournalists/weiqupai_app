@@ -220,16 +220,18 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 		//结算中的时候就不允许拍了
 		if(this.auctionData.status == 1){
 			e.setHeight(totalHeight);
+			this.down('#paiBtn').setDisabled(true);
 			return;
 		}
 		var me = this;
 		var startTime = this.auctionData.round_start_time;
+		var now = +new Date / 1000;
 		var duration = this.auctionData.time_interval * 60;
-		var elapsedTime = Math.min(new Date - startTime, duration);
+		var elapsedTime = Math.min(now - startTime, duration);
 		var height = Math.ceil(totalHeight * elapsedTime / duration);
 		e.setHeight(height);
 		if(elapsedTime == duration){
-			//this.down('#paiBtn').setDisabled(true);
+			this.down('#paiBtn').setDisabled(true);
 			return;
 		}
 		setTimeout(function(){

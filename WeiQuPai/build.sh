@@ -3,17 +3,20 @@ BUILD_ENV=test
 BUILD_TYPE=all
 SERVER=root@115.28.134.105
 APP_NAME=vqupai.ipa
-BUILD_DIR=../build
+BUILD_DIR=cordova/
 REMOTE_DIR="/alidata/www/m.vqupai.com/webroot/m/"
 PACKAGE_DIR="/alidata/www/vqupai/adhoc/"
 if [ "$1" != "" ];then
 	BUILD_ENV=$1
 fi
 if [ "$2" != "" ];then
-	BIULD_TYPE=$2
+	BUILD_TYPE=$2
+fi
+if [ "$1" == "pub" ];then
+	scp $BUILD_DIR/vqupai.ipa $SERVER:$PACKAGE_DIR
+	exit 0
 fi
 echo "starting build $BUILD_ENV $BUILD_TYPE"
-rm -rf $BUILD_DIR/*
 mv app/Config.js app/Config.js.bak
 if [ "$BUILD_ENV" == "test" ];then
 	cp Config.js.test app/Config.js
@@ -35,7 +38,7 @@ fi
 
 if [ "$BUILD_TYPE" == "all" ] || [ "$BUILD_TYPE" == "web" ];then
 	echo "scp to remote => $SERVER:$REMOTE_DIR"
-	scp -r $BUILD_DIR/native/WeiQuPai/* $SERVER:$REMOTE_DIR
+	scp -r $BUILD_DIR/www/* $SERVER:$REMOTE_DIR
 fi
 
 #clean the temp file

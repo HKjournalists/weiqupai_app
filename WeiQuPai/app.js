@@ -15,7 +15,7 @@ Ext.application({
     name: 'WeiQuPai',
 
     requires: [
-        'Ext.MessageBox','WeiQuPai.Config', 'WeiQuPai.Util', 'WeiQuPai.Cache'
+        'Ext.MessageBox','WeiQuPai.Config', 'WeiQuPai.Util', 'WeiQuPai.Cache', 'WeiQuPai.SimpleLoadMask'
     ],
 
     controllers: [
@@ -52,14 +52,17 @@ Ext.application({
         // Destroy the #appLoadingIndicator element
         Ext.fly('appLoadingIndicator').destroy();
         this.initMsgBox();
-
+        //fix ios7 statusbar overlay
+        if(Ext.os.is.ios && Ext.os.version.major >= 7){
+            document.body.className = 'ios7';
+        }
         Ext.Viewport.add(Ext.create('WeiQuPai.view.Main'));
     },
 
     onUpdated: function() {
         Ext.Msg.confirm(
-            "Application Update",
-            "This application has just successfully been updated to the latest version. Reload now?",
+            "微趣拍更新",
+            "微趣拍应用程序已经更新到最新版本，是否重新加载？",
             function(buttonId) {
                 if (buttonId === 'yes') {
                     window.location.reload();

@@ -28,30 +28,33 @@ Ext.define("WeiQuPai.Util", {
     //显示评论表单
     showCommentForm: function(){
         if(!this.commentForm){
-            var config = {height: 200};
+            var config = {height: 48, showAnimation: false, hideAnimation: false};
             this.commentForm = WeiQuPai.Util.createOverlay('WeiQuPai.view.InputComment', config);
         }
-        this.commentForm.show(); 
+        this.commentForm.show();
+        this.commentForm.down('textfield').focus();
         return this.commentForm;
     },
 
     //拍圈发表回复
     showCircleReply: function(){
         if(!this.circleReply){
-            var config = {height: 200};
+            var config = {height: 48, showAnimation: false, hideAnimation: false};
             this.circleReply = WeiQuPai.Util.createOverlay('WeiQuPai.view.CircleReply', config);
         }
-        this.circleReply.show(); 
+        this.circleReply.show();
+        this.circleReply.down('textfield').focus();
         return this.circleReply;
     },
     
     //拍圈发表动态
     showCirclePost: function(){
         if(!this.circlePost){
-            var config = {height: 200};
+            var config = {height: 48, showAnimation: false, hideAnimation: false};
             this.circlePost = WeiQuPai.Util.createOverlay('WeiQuPai.view.CirclePost', config);
         }
-        this.circlePost.show(); 
+        this.circlePost.show();
+        this.circlePost.down('textfield').focus();
         return this.circlePost;
     },
     

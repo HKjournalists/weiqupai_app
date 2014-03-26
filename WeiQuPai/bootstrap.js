@@ -746,6 +746,7 @@ Ext.ClassManager.addNameAlternateMappings({
   ],
   "WeiQuPai.Cache": [],
   "WeiQuPai.Config": [],
+  "WeiQuPai.SimpleLoadMask": [],
   "WeiQuPai.Util": [],
   "WeiQuPai.controller.CameraLayer": [],
   "WeiQuPai.controller.Circle": [],
@@ -806,6 +807,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.GenderList": [],
   "WeiQuPai.view.IconButton": [],
   "WeiQuPai.view.IconListExample": [],
+  "WeiQuPai.view.Iframe": [],
   "WeiQuPai.view.InputComment": [],
   "WeiQuPai.view.ItemDetail": [],
   "WeiQuPai.view.Login": [],
@@ -1780,6 +1782,9 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.viewport.WindowsPhone": [],
   "WeiQuPai.Cache": [],
   "WeiQuPai.Config": [],
+  "WeiQuPai.SimpleLoadMask": [
+    "widget.simpleloadmask"
+  ],
   "WeiQuPai.Util": [],
   "WeiQuPai.controller.CameraLayer": [],
   "WeiQuPai.controller.Circle": [],
@@ -1875,6 +1880,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.IconListExample": [
     "widget.iconlistexample"
+  ],
+  "WeiQuPai.view.Iframe": [
+    "widget.iframe"
   ],
   "WeiQuPai.view.InputComment": [
     "widget.commentform"

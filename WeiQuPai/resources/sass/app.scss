@@ -26,10 +26,20 @@ $title-text-color: #000;
 //按钮的文字色
 $button-text-color: #fff;
 
+$text-button-color:#5f7479;
 $ios7-blue: #157efb;
 $ios7-red: #fc3e39;
 $ios7-green: #53d769;
 
+//ios7的titlebar样式，解决statusbar的问题
+.ios7 .x-toolbar.x-docked-top.w-title{
+	height:56px;
+	padding-top:10px;
+}
+//默认背影
+html, body{
+	background-color:#f2fceb;
+}
 .x-layout-card-item{
 	background-color:$bg-color;
 }
@@ -60,10 +70,7 @@ $ios7-green: #53d769;
 .x-mask .x-mask-inner{
 	background:rgba(0,0,0,0.25);
 }
-.x-mask .x-mask-inner .x-mask-message{
-	color:#fff;
-}
-.x-loading-spinner > span.x-loading-top {
+.x-loading-spinner > span.x-loading-top{
   background-color: rgba(170, 170, 170, 0.99);
 }
 .x-loading-spinner > span.x-loading-top::after {
@@ -647,6 +654,17 @@ h3{
 .w-input-text .x-input-el{
 	padding:.7em;
 }
+//发表信息的样式
+.w-input-comment{
+	margin:.5em 0 .5em .5em;
+}
+.w-input-comment.x-field{
+	min-height:0;
+}
+.w-input-comment .x-input-el.x-input-text{
+	padding:.4em;
+	min-height:0;
+}
 .x-input-el.w-icon-user{
 	background:url(../images/icon-user.png) no-repeat .7em center;
 	background-size:14px 14px;
@@ -686,7 +704,18 @@ h3{
 .w-button-logout .x-button-label{
 	text-shadow: 0 1px #da2924;	
 }
-
+.w-button-text{
+	border:none;
+	background:transparent;
+	padding:0;
+}
+.w-button-text.x-item-disabled{
+	opacity:.5;
+}
+.w-button-text .x-button-label{
+	padding:.4em;
+	color:$text-button-color;
+}
 .w-logo{
 	background:url(../images/logo219.png) no-repeat center center;
 	background-size:110px 110px;
@@ -989,4 +1018,13 @@ h3{
 }
 .w-toolbar{
 	overflow:visible;
+}
+
+//自定义的loadingmask
+.w-loading-mask, .w-loading-mask .x-mask-inner{
+	background:transparent;
+	font-size:.8em;
+}
+.w-loading-mask .x-loading-spinner{
+	font-size:2.2em;
 }

@@ -6,6 +6,7 @@
 Ext.define('WeiQuPai.view.OrderSuccess', {
 	extend: 'Ext.Container',
 	xtype: 'ordersuccess',
+	requires: ['WeiQuPai.view.Pay'],
 	config: {
 		orderData: null,
 		scrollable: true,
@@ -59,8 +60,8 @@ Ext.define('WeiQuPai.view.OrderSuccess', {
 	},
 
 	payBtnTap: function(){
-		Ext.Msg.alert(null, '亲，这个功能还没实现');return;
 		var payment = this.getOrderData().payment;
-		WeiQuPai.Util.forward('pay', {payment:payment});
+		var orderId = this.getOrderData().id;
+		WeiQuPai.Util.forward('pay', {orderId:orderId, payment:payment});
 	}
 });
