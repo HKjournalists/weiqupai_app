@@ -4,11 +4,11 @@ Ext.define('WeiQuPai.view.ShowUser', {
 	config: {
 		plugins: [
 			{
-				type: 'scrollpaging',
+				type: 'wlistpaging',
 		        autoPaging: true,
 			},
 			{
-				type: 'pullrefresh',
+				type: 'wpullrefresh',
 				lastUpdatedText: '上次刷新：',
 				lastUpdatedDateFormat: 'H点i分',
 				loadingText: '加载中...',

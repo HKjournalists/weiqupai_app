@@ -7,15 +7,20 @@ Ext.define('WeiQuPai.view.MyAuction', {
         disableSelection : true,
         store: 'MyAuction',
 		itemTpl: new Ext.XTemplate(
-                '<div class="myauction-row">',
-                '<img src="' + WeiQuPai.Config.host + '{pic_cover}" />',
-                '<div class="info">',
-                    '<h2>{item_title}</h2>',
-                    '<p>成交价 <span class="fbig">{price}</span>',
-                    '<p>此价格击败了<span class="fbig">{defeated}%</span>的拍友</p>',
-                    '<p>{ctime}</p>',
-                '</div>'
-                ),
+            '<div class="myauction-row">',
+            '<img src="' + WeiQuPai.Config.host + '{pic_cover}" />',
+            '<div class="info">',
+                '<h2>{title}</h2>',
+                '<p>成交价<span class="fbig">￥{price}</span>',
+                '<tpl if="rank != -1">',
+                '<p>此价格击败了<span class="fbig">{rank}%</span>的拍友</p>',
+                '</tpl>',
+                '<p>{ctime}</p>',
+            '</div>',
+            '<tpl if="status == 0">',
+            '<div class="pay-btn-wrap"><div class="pay-btn">去支付</div></div>',
+            '</tpl>'
+        ),
         items: [
             {
                 xtype: 'titlebar',
@@ -37,12 +42,20 @@ Ext.define('WeiQuPai.view.MyAuction', {
         this.add(this.loginTip);
 
         this.on('activate', this.loadData, this);
+
+        this.onBefore('itemtap', function(list, index, dataItem, record, e){
+            if(e.target.className == 'pay-btn'){
+                this.fireEvent('gopay', list, index, dataItem, record, e);
+                return false;
+            }
+        }, this);
     },
 
     loadData: function(){
         var user = WeiQuPai.Cache.get('currentUser');
         if(!user){
             this.getStore().removeAll();
+            this.msgbox.hide();
             this.loginTip.show();
             return false;
         }

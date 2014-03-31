@@ -128,7 +128,8 @@ Ext.define("WeiQuPai.Util", {
                     return;
                 }
                 WeiQuPai.Cache.set('currentUser', rsp.user);
-                if(rsp.friends) WeiQuPai.Cache.set('friends', rsp.friends);
+                WeiQuPai.Cache.set('friends', rsp.friends);
+                WeiQuPai.Cache.set('auctions', rsp.auctions);
                 //登录后拍圈要清空并刷新
                 var circle = Ext.Viewport.down('circle');
                 circle.setForceReload(true);
@@ -301,6 +302,11 @@ Ext.define("WeiQuPai.Util", {
         var view = Ext.merge({xtype: xtype}, config);
         var main = Ext.Viewport.down('main');
         main.push(view);
-    }
+    },
 
+    //是否已拍过该商品
+    hasAuction: function(auctionId){
+        var auctions = WeiQuPai.Cache.get('auctions');
+        return auctions && auctions.indexOf(auctionId) != -1;
+    }
 })

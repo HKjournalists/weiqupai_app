@@ -116,7 +116,7 @@
     <target name="-before-cordova-build"/>
     <target name="-cordova-build">
         <x-shell reloadprofile="true" dir="${app.cordova.dir}">
-            cordova build ${cordova.platforms.clean}
+            cordova build --release ${cordova.platforms.clean}
         </x-shell>
     </target>
     <target name="-after-cordova-build"/>

@@ -119,6 +119,10 @@ Ext.define('WeiQuPai.controller.Order', {
         var user = WeiQuPai.Util.checkLogin();
         if(!user) return;
         var order = this.getOrderView().getRecord();
+        if(WeiQuPai.Util.hasAuction(order.get('auction_id'))){
+            Ext.Msg.alert(null, '您已经拍过该商品');
+            return;
+        }
         if(!order.get('consignee_id')){
             Ext.Msg.alert(null, '还没有选择收货地址');
             return false;
@@ -128,7 +132,7 @@ Ext.define('WeiQuPai.controller.Order', {
         param.token = user.token;
         WeiQuPai.Util.mask();
         Ext.Ajax.request({
-            url: order.getProxy().getUrl(),
+            url: order.getProxy().getApi().create,
             method: 'post',
             params: param,
             success: function(rsp){
@@ -139,6 +143,11 @@ Ext.define('WeiQuPai.controller.Order', {
                     Ext.Msg.alert(null, rsp.msg);
                     return;
                 }
+                //将拍过的商品保存到cache中
+                var auctions = WeiQuPai.Cache.get('auctions') || [];
+                auctions.push(order.get('auction_id'));
+                WeiQuPai.Cache.set('auctions', auctions);
+
                 var data = Ext.merge({title:itemData.title, pic_cover: itemData.pic_cover}, rsp);
                 WeiQuPai.Util.forward('ordersuccess', {orderData:data});
             },

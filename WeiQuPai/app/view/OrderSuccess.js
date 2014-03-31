@@ -32,7 +32,7 @@ Ext.define('WeiQuPai.view.OrderSuccess', {
 					'<div class="order-info">',
 						'<div class="flex row"><span class="label">订单号</span>{id}</div>',
 						'<div class="flex row"><span class="label">收货人</span>{consignee_info.name:htmlEncode}</div>',
-						'<div class="flex row"><span class="label">电话</span>{consignee_info.tel:htmlEncode}</div>',
+						'<div class="flex row"><span class="label">电话</span>{consignee_info.mobile:htmlEncode}</div>',
 						'<div class="flex row"><span class="label">地址</span>{consignee_info.province}{consignee_info.city}{consignee_info.address:htmlEncode}</div>',
 						'<div class="flex row"><span class="label">邮编</span>{consignee_info.zip:htmlEncode}</div>',
 						'<div class="flex row"><span class="label">配送时间</span>{delivery_time}</div>',

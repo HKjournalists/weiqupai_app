@@ -31,6 +31,10 @@ Ext.define('WeiQuPai.view.CircleReply', {
 			{
 				xtype: 'hiddenfield',
 				name: 'to_uid'
+			},
+			{
+				xtype: 'hiddenfield',
+				name: 'to_nick'
 			}
 		]
 	}, 

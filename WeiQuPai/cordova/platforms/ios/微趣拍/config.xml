@@ -16,11 +16,16 @@
     <preference name="PageLength" value="0" />
     <preference name="PaginationBreakingMode" value="page" />
     <preference name="PaginationMode" value="unpaginated" />
+    <preference name="wechatappid" value="wxc0d1e67c6159b69e" />
     <feature name="LocalStorage">
         <param name="ios-package" value="CDVLocalStorage" />
     </feature>
     <feature name="Camera">
         <param name="ios-package" value="CDVCamera" />
+    </feature>
+    <feature name="Wechat">
+        <param name="ios-package" value="CDVWechat" />
+        <param name="onload" value="true" />
     </feature>
     <name>微趣拍</name>
     <description>

@@ -4,19 +4,28 @@ Ext.define('WeiQuPai.controller.MyAuctionDetail', {
     config: {
         refs: {
             main: 'main',
-            textList : 'myauctiontextlist'
+            pageView: 'myauctiondetail',
+            payBtn: 'myauctiondetail button[action=pay]',
+            showBtn: 'myauctiondetail button[action=showOrder]'
         },
         control: {
-           textList : {
-                itemtap: 'showDetail'
-           } 
+            payBtn: {
+                tap: 'doPay'
+            },
+            showBtn: {
+                tap: 'doShowOrder'
+            }
         }
     },
-    
-    showDetail: function(list, index, dataItem, record, e){
-        var detailView = {
-            xtype: record.getId()
-        };
-        this.getMain().push(detailView);
+
+    doPay: function(){
+        var data = this.getPageView().getRecord().data;
+        var payment = data.payment;
+        var orderId = data.id;
+        WeiQuPai.Util.forward('pay', {orderId:orderId, payment:payment});
+    },
+
+    doShowOrder: function(){
+        Ext.Msg.alert(null, '秀！');
     }
 });

@@ -266,7 +266,6 @@ Ext.define('Ext.plugin.PullRefresh', {
             length = newRecords.length,
             toInsert = [],
             newRecord, oldRecord, i;
-
         for (i = 0; i < length; i++) {
             newRecord = newRecords[i];
             oldRecord = oldRecords.getByKey(newRecord.getId());

@@ -1,11 +1,12 @@
 #!/bin/bash
 BUILD_ENV=test
-BUILD_TYPE=all
+BUILD_TYPE=local
 SERVER=root@115.28.134.105
 APP_NAME=vqupai.ipa
 BUILD_DIR=cordova/
 REMOTE_DIR="/alidata/www/m.vqupai.com/webroot/m/"
 PACKAGE_DIR="/alidata/www/vqupai/adhoc/"
+ANDROID_DIR="cordova/platforms/android/ant-build"
 if [ "$1" != "" ];then
 	BUILD_ENV=$1
 fi
@@ -13,7 +14,8 @@ if [ "$2" != "" ];then
 	BUILD_TYPE=$2
 fi
 if [ "$1" == "pub" ];then
-	scp $BUILD_DIR/vqupai.ipa $SERVER:$PACKAGE_DIR
+	scp ../build/vqupai.ipa $SERVER:$PACKAGE_DIR
+	scp $ANDROID_DIR/android-release.apk $SERVER:${PACKAGE_DIR}vqupai.apk
 	exit 0
 fi
 echo "starting build $BUILD_ENV $BUILD_TYPE"

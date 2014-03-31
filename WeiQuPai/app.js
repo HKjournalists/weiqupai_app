@@ -15,7 +15,8 @@ Ext.application({
     name: 'WeiQuPai',
 
     requires: [
-        'Ext.MessageBox','WeiQuPai.Config', 'WeiQuPai.Util', 'WeiQuPai.Cache', 'WeiQuPai.SimpleLoadMask'
+        'Ext.MessageBox','WeiQuPai.Config', 'WeiQuPai.Util', 'WeiQuPai.Cache', 'WeiQuPai.plugin.ListPaging', 
+        'WeiQuPai.plugin.PullRefresh', 'WeiQuPai.plugin.LoadMask'
     ],
 
     controllers: [

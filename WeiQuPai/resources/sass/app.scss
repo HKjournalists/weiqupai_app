@@ -320,28 +320,15 @@ h3{
 	border:1px solid #ccc;
 	margin-right:1em;
 }
-
 .myauction-row .fbig{
 	font-size:1.2em;
-}
-
-//已拍详情
-.auction-info{
-	padding:.7em 1em;
-	line-height:1.5;
-	color:$gray-color;
-	border-bottom: 1px solid $border-color;
-}
-
-.auction-user-info p{
-	margin-top:1.2em;
+	color:$red-color;
 }
 
 //晒单的列表
 .show-order-row, .comment-row, .auction-user-row, .circle-row, .user-row, .myauction-row{
-	display:flex;
 	display:-webkit-box;
-
+	display:flex;
 }
 .show-order-row h3, .comment-row h3, .auction-user-row h3, .circle-row h3{
 	margin-bottom:.5em;
@@ -931,7 +918,7 @@ h3{
 .w-button-gray{
  	background-color:#ccc;
 }
-.accept-btn{
+.accept-btn, .pay-btn{
  	font-size:$small-font;
 	padding:0 10px;
 	border-radius:4px;
@@ -948,6 +935,16 @@ h3{
 	color: #666;
 }
 
+.pay-btn-wrap{
+	height:78px;
+	display:-webkit-box;
+	display:flex;
+	align-items:center;
+	-webkit-box-align:center;
+}
+.pay-btn{
+	display:block;
+}
 //订单成功页面的表格
 .order-info{
  	margin:1em;
@@ -971,50 +968,63 @@ h3{
  	display:inline-block;
 }
 .n1{
- 	background:url(../images/1.png) no-repeat left center / 13px 19px;
+ 	background:url(../images/1.png) no-repeat left center;
+ 	background-size:13px 19px;
 }
 .n2{
- 	background:url(../images/2.png) no-repeat left center / 13px 19px;
+ 	background:url(../images/2.png) no-repeat left center;
+ 	background-size:13px 19px;
 }
 .n3{
- 	background:url(../images/3.png) no-repeat left center / 13px 19px;
+ 	background:url(../images/3.png) no-repeat left center;
+ 	background-size:13px 19px;
 }
 .n4{
-	background:url(../images/4.png) no-repeat left center / 13px 19px;
+	background:url(../images/4.png) no-repeat left center;
+	background-size:13px 19px;
 }
 .n5{
- 	background:url(../images/5.png) no-repeat left center / 13px 19px;
+ 	background:url(../images/5.png) no-repeat left center;
+ 	background-size:13px 19px;
 }
 .n6{
- 	background:url(../images/6.png) no-repeat left center / 13px 19px;
+ 	background:url(../images/6.png) no-repeat left center;
+ 	background-size:13px 19px;
 }
 .n7{
- 	background:url(../images/7.png) no-repeat left center / 13px 19px;
+ 	background:url(../images/7.png) no-repeat left center;
+ 	background-size:13px 19px;
 }
 .n8{
- 	background:url(../images/8.png) no-repeat left center / 13px 19px;
+ 	background:url(../images/8.png) no-repeat left center;
+ 	background-size:13px 19px;
 }
 .n9{
- 	background:url(../images/9.png) no-repeat left center / 13px 19px;
+ 	background:url(../images/9.png) no-repeat left center;
+ 	background-size:13px 19px;
 }
 .n0{
- 	background:url(../images/0.png) no-repeat left center / 13px 19px;
- }
+ 	background:url(../images/0.png) no-repeat left center;
+ 	background-size:13px 19px;
+}
 .ndot{
- 	background:url(../images/dot.png) no-repeat left bottom / 3px 4px;
+ 	background:url(../images/dot.png) no-repeat left bottom;
+ 	background-size:3px 4px;
  	width:3px;
 }
 .w-toolbar .w-button-pai{
 	margin-top:-10px;
 	width:57px;
 	height:60px;
-	background:url(../images/bt-pai-1.png) no-repeat left top / 57px 60px;
+	background:url(../images/bt-pai-1.png) no-repeat left top;
+	background-size:57px 60px;
 }
 .w-toolbar .w-button-pai .mask{
 	width:57px;
 	height:0px;
 	overflow:hidden;
-	background:url(../images/bt-pai-0.png) no-repeat left top / 57px 60px;
+	background:url(../images/bt-pai-0.png) no-repeat left top;
+	background-size:57px 60px;
 }
 .w-toolbar{
 	overflow:visible;
@@ -1027,4 +1037,48 @@ h3{
 }
 .w-loading-mask .x-loading-spinner{
 	font-size:2.2em;
+}
+//分享
+.share-layer{
+	background:rgba(230,230,230, 1);
+	padding:0 1em;
+}
+.share-title{
+	text-align:center;
+	padding:12px;
+}
+.w-share-button{
+	border:0;
+	background:transparent;
+	height:auto;
+}
+.w-share-button.x-item-disabled{
+	-webkit-opactiy:.4;
+	opacity:.4;
+}
+.w-share-button .x-button-label{
+	color:#000;
+	font-size:.8em;
+	padding:4px;
+}
+.w-share-button .x-button-icon{
+	width:30px;
+	height:30px;
+}
+.x-button-icon.weibo{
+	background:url(../images/icon-weibo.png) no-repeat center center;
+	background-size:30px 30px;
+}
+.x-button-icon.weixin{
+	background:url(../images/icon-weixin.png) no-repeat center center;
+	background-size:30px 30px;
+}
+.x-button-icon.pyquan{
+	background:url(../images/icon-pyquan.png) no-repeat center center;
+	background-size:30px 30px;
+}
+.w-cancel{
+	border-radius:0;
+	border-top:1px solid #5f7479;
+	margin:12px 0;
 }

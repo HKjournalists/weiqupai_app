@@ -8,17 +8,25 @@ Ext.define('WeiQuPai.controller.MyAuction', {
         },
         control: {
            itemlist : {
-                itemtap: 'showDetail'
+                itemtap: 'showDetail',
+                gopay: 'goPay',
            } 
         }
     },
     
     showDetail: function(list, index, dataItem, record, e){
-        if(this.getMain().getActiveItem().xtype == 'myauctiondetail') return;
         var detailView = {
             xtype: 'myauctiondetail',
-            titleTpl: '{name}'
+            record: record
         };
         this.getMain().push(detailView);
+    },
+
+    goPay: function(list, index, dataItem ,record, e){
+        var payView = Ext.create('WeiQuPai.view.Pay', {
+            orderId: record.get('id'),
+            payment: reecord.get('payment')
+        });
+        this.getMain().push(payView);
     }
 });

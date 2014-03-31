@@ -3,7 +3,7 @@ Ext.define('WeiQuPai.view.Pay', {
 	requires: ['WeiQuPai.view.Iframe'],
 	xtype: 'pay',
 	config: {
-		orderId: 5,
+		orderId: null,
 		payment: '支付宝',
 		items: [
 			{
@@ -23,13 +23,11 @@ Ext.define('WeiQuPai.view.Pay', {
 	}, 
 
 	initialize: function(){
-		//去掉返回的按钮
-		this.down('button[action=back]').hide();
 		this.on('painted', this.loadIframe, this);
 	},
 
 	loadIframe: function(){
-        this.setMasked({xtype: 'simpleloadmask'});
+        this.setMasked({xtype: 'wloadmask'});
 		var payIframe = this.down('#payIframe').element.query('iframe')[0];
 		var me = this;
 		payIframe.onload = function(){

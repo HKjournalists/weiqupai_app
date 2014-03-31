@@ -54,10 +54,15 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
     showOrderView: function(){
         var user = WeiQuPai.Util.checkLogin();
         if(!user)return;
+        var auctionId = this.getPageView().auctionData.id;
+        if(WeiQuPai.Util.hasAuction(auctionId)){
+            Ext.Msg.alert(null, '您已经拍过该商品');
+            return;
+        }
         WeiQuPai.Util.mask();
         var auction = WeiQuPai.model.Auction;
         auction.getProxy().setExtraParam('token', user.token);
-        auction.load(this.getPageView().auctionData.id, {
+        auction.load(auctionId, {
             success: function(record, operation){
                 WeiQuPai.Util.unmask();
                 if(!WeiQuPai.Util.invalidToken(record.raw)) return false;
@@ -172,7 +177,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
     },
 
     doShare: function(){
-        Ext.Msg.alert(null, '分享!');
+        this.getPageView().shareLayer.show();
     }
 
 });

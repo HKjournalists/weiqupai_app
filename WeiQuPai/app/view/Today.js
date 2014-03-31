@@ -5,7 +5,7 @@ Ext.define('WeiQuPai.view.Today', {
 	config:{
 		plugins: [
 			{
-				type: 'pullrefresh',
+				type: 'wpullrefresh',
 				lastUpdatedText: '上次刷新：',
 				lastUpdatedDateFormat: 'H点i分',
 				loadingText: '加载中...',
@@ -21,25 +21,23 @@ Ext.define('WeiQuPai.view.Today', {
         itemTpl: new Ext.XTemplate(
         	'<p class="item-img"><img src="' + WeiQuPai.Config.host + '{pic_cover}" /></p>',
             '<h2><span class="time">{status_text}</span>{title}</h2>',
-            '<p><span class="market-price">原价 {oprice}</span> / <span class="price">￥{curr_price}</span></p>'
+            '<p><span class="market-price">原价 {oprice}</span> / <span class="price">{[this.getPrice(values)]}</span></p>',
+            {
+            	getPrice: function(values){
+            		var auctions = WeiQuPai.Cache.get('auctions');
+            		if(auctions && auctions.indexOf(values.id) != -1){
+            			return '已拍';
+            		}
+            		return '￥' + values.curr_price;
+            	}
+            }
         ),
         items: [
         	{
                 xtype: 'titlebar',
                 title: '今日',
                 docked: 'top',
-                cls: 'w-title',
-                items: [
-                	{
-                		xtype: 'button',
-                		text: '支付',
-                		listeners: {
-                			tap: function(){
-                				WeiQuPai.Util.forward('pay');
-                			}
-                		}
-                	}
-                ]
+                cls: 'w-title'
             },
 	        {
 	            xtype: 'banner',
@@ -49,8 +47,9 @@ Ext.define('WeiQuPai.view.Today', {
 	},
 	initialize: function(){
 		this.callParent(arguments);
+		this.on('activate', this.updateBanner, this);
  		var me = this;
-        this.setMasked({xtype: 'simpleloadmask'});
+        this.setMasked({xtype: 'wloadmask'});
  		var user = WeiQuPai.Cache.get('currentUser');
 		user &&	this.getStore().getProxy().setExtraParam('token', user.token);
         this.getStore().load(function(data, operation, success){
@@ -59,5 +58,9 @@ Ext.define('WeiQuPai.view.Today', {
                 Ext.Msg.alert(null, '数据加载失败');
             }
         }, this);
+   	}, 
+
+   	updateBanner: function(){
+   		this.down('banner').updateBanner();
    	}
 });

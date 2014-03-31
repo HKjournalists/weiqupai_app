@@ -6,11 +6,13 @@
 	objectVersion = 46;
 	objects = {
 /* Begin PBXBuildFile section */
+		117BB047A3FD44119F745E3F /* CDVWechat.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C18AF085F1F44E4B6EEBC60 /* CDVWechat.m */; };
 		18E6B61018E0783B00631906 /* Icon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E6B60C18E0783B00631906 /* Icon~ipad.png */; };
 		18E6B61118E0783B00631906 /* Icon~ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E6B60D18E0783B00631906 /* Icon~ipad@2x.png */; };
 		18E6B61818E0789000631906 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E6B61218E0789000631906 /* Default-568h@2x.png */; };
 		18E6B61C18E0789000631906 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E6B61618E0789000631906 /* Default.png */; };
 		18E6B61D18E0789000631906 /* Default~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E6B61718E0789000631906 /* Default~ipad.png */; };
+		18F0144718E9B1180089C0D2 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F0144418E9B1180089C0D2 /* libWeChatSDK.a */; };
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
@@ -52,6 +54,9 @@
 		18E6B61218E0789000631906 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		18E6B61618E0789000631906 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		18E6B61718E0789000631906 /* Default~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~ipad.png"; sourceTree = "<group>"; };
+		18F0144418E9B1180089C0D2 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		18F0144518E9B1180089C0D2 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		18F0144618E9B1180089C0D2 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		1D3623240D0F684500981E51 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* 微趣拍.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "微趣拍.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,7 +79,9 @@
 		7CE480EAA2D040D684EDFB7B /* CDVJpegHeaderWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVJpegHeaderWriter.m; path = org.apache.cordova.camera/CDVJpegHeaderWriter.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* 微趣拍-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "微趣拍-Info.plist"; path = "../微趣拍-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		95963B588F71477D84FC3A16 /* CDVCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVCamera.m; path = org.apache.cordova.camera/CDVCamera.m; sourceTree = "<group>"; };
+		9C18AF085F1F44E4B6EEBC60 /* CDVWechat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVWechat.m; path = xu.li.cordova.wechat/CDVWechat.m; sourceTree = "<group>"; };
 		B803D6F47E8F434AB223D8C6 /* ImageIO.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		C59F6656FFCA4D8C8133CADC /* CDVWechat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVWechat.h; path = xu.li.cordova.wechat/CDVWechat.h; sourceTree = "<group>"; };
 		E98A7230C2BC436EB9BB8AB4 /* CDVCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVCamera.h; path = org.apache.cordova.camera/CDVCamera.h; sourceTree = "<group>"; };
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
@@ -85,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18F0144718E9B1180089C0D2 /* libWeChatSDK.a in Frameworks */,
 				5B1594DD16A7569C00FEF299 /* AssetsLibrary.framework in Frameworks */,
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -110,6 +118,16 @@
 			path = "微趣拍/Classes";
 			sourceTree = SOURCE_ROOT;
 		};
+		18F0144318E9B1180089C0D2 /* wechatlib */ = {
+			isa = PBXGroup;
+			children = (
+				18F0144418E9B1180089C0D2 /* libWeChatSDK.a */,
+				18F0144518E9B1180089C0D2 /* WXApi.h */,
+				18F0144618E9B1180089C0D2 /* WXApiObject.h */,
+			);
+			path = wechatlib;
+			sourceTree = "<group>";
+		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +139,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				18F0144318E9B1180089C0D2 /* wechatlib */,
 				EB87FDF41871DAF40020F90C /* config.xml */,
 				EB87FDF31871DA8E0020F90C /* www */,
 				301BF52D109A57CC0062928A /* CordovaLib.xcodeproj */,
@@ -183,6 +202,8 @@
 				E98A7230C2BC436EB9BB8AB4 /* CDVCamera.h */,
 				737CA4F611DE401A8B5CCC27 /* CDVJpegHeaderWriter.h */,
 				3CE4AB9739FC4D3F812A8FC6 /* CDVExif.h */,
+				9C18AF085F1F44E4B6EEBC60 /* CDVWechat.m */,
+				C59F6656FFCA4D8C8133CADC /* CDVWechat.h */,
 			);
 			name = Plugins;
 			path = "微趣拍/Plugins";
@@ -322,6 +343,7 @@
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
 				B3FF180385D54C60B3E995B5 /* CDVCamera.m in Sources */,
 				39048E168C734F6188AA1253 /* CDVJpegHeaderWriter.m in Sources */,
+				117BB047A3FD44119F745E3F /* CDVWechat.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,6 +372,10 @@
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "微趣拍/微趣拍-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/wechatlib",
+				);
 				OTHER_LDFLAGS = (
 					"-weak_framework",
 					CoreFoundation,
@@ -374,6 +400,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "微趣拍/微趣拍-Prefix.pch";
@@ -381,6 +408,10 @@
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "微趣拍/微趣拍-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/wechatlib",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-weak_framework",

@@ -3,7 +3,6 @@ Ext.define('WeiQuPai.view.ShowOrder', {
 	xtype: 'showorder',
 
 	config: {
-		emtpyText: '没有可用的数据',
 		store: 'Item',
         disableSelection : true,
 		itemTpl: new Ext.XTemplate(
@@ -24,7 +23,7 @@ Ext.define('WeiQuPai.view.ShowOrder', {
 			{
 				xtype: 'panel',
 				cls: 'auction-info',
-				html: '<h2>Iphone 5S土豪金</h2><p>您的成交价格<span class="price">￥55.00</span></p>',
+				html: '<h2>{title}</h2><p>您的成交价格<span class="price">￥{price}</span></p>',
 				scrollDock: 'top'
 			},
 			{
@@ -39,5 +38,9 @@ Ext.define('WeiQuPai.view.ShowOrder', {
 				}
 			}
 		}
+	},
+
+	initialize: function(){
+		this.callParent(arguments);
 	}
 });

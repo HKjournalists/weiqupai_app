@@ -746,7 +746,6 @@ Ext.ClassManager.addNameAlternateMappings({
   ],
   "WeiQuPai.Cache": [],
   "WeiQuPai.Config": [],
-  "WeiQuPai.SimpleLoadMask": [],
   "WeiQuPai.Util": [],
   "WeiQuPai.controller.CameraLayer": [],
   "WeiQuPai.controller.Circle": [],
@@ -774,10 +773,12 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.model.Auction": [],
   "WeiQuPai.model.AuctionComment": [],
   "WeiQuPai.model.Circle": [],
-  "WeiQuPai.model.MyAuction": [],
   "WeiQuPai.model.Order": [],
   "WeiQuPai.model.Profile": [],
   "WeiQuPai.model.UserConsignee": [],
+  "WeiQuPai.plugin.ListPaging": [],
+  "WeiQuPai.plugin.LoadMask": [],
+  "WeiQuPai.plugin.PullRefresh": [],
   "WeiQuPai.store.Auction": [],
   "WeiQuPai.store.AuctionComment": [],
   "WeiQuPai.store.Banner": [],
@@ -833,6 +834,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.Profile": [],
   "WeiQuPai.view.Register": [],
   "WeiQuPai.view.Setting": [],
+  "WeiQuPai.view.ShareLayer": [],
   "WeiQuPai.view.Shipment": [],
   "WeiQuPai.view.ShipmentList": [],
   "WeiQuPai.view.Shop": [],
@@ -1782,9 +1784,6 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.viewport.WindowsPhone": [],
   "WeiQuPai.Cache": [],
   "WeiQuPai.Config": [],
-  "WeiQuPai.SimpleLoadMask": [
-    "widget.simpleloadmask"
-  ],
   "WeiQuPai.Util": [],
   "WeiQuPai.controller.CameraLayer": [],
   "WeiQuPai.controller.Circle": [],
@@ -1812,10 +1811,18 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.model.Auction": [],
   "WeiQuPai.model.AuctionComment": [],
   "WeiQuPai.model.Circle": [],
-  "WeiQuPai.model.MyAuction": [],
   "WeiQuPai.model.Order": [],
   "WeiQuPai.model.Profile": [],
   "WeiQuPai.model.UserConsignee": [],
+  "WeiQuPai.plugin.ListPaging": [
+    "plugin.wlistpaging"
+  ],
+  "WeiQuPai.plugin.LoadMask": [
+    "widget.wloadmask"
+  ],
+  "WeiQuPai.plugin.PullRefresh": [
+    "plugin.wpullrefresh"
+  ],
   "WeiQuPai.store.Auction": [],
   "WeiQuPai.store.AuctionComment": [],
   "WeiQuPai.store.Banner": [],
@@ -1958,6 +1965,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.Setting": [
     "widget.setting"
+  ],
+  "WeiQuPai.view.ShareLayer": [
+    "widget.sharelayer"
   ],
   "WeiQuPai.view.Shipment": [
     "widget.shipment"

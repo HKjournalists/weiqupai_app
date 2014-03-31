@@ -63,7 +63,7 @@ Ext.define('WeiQuPai.controller.Circle', {
         var form = WeiQuPai.Util.showCircleReply();
         form.down('hiddenfield[name=feed_id]').setValue(record.get('id'));
         form.down('hiddenfield[name=to_uid]').setValue(toUid);
-        form.down('textareafield').setPlaceHolder(placeHolder);
+        form.down('hiddenfield[name=to_nick]').setValue(toNick);
     },
 
     //显示发表动态的表单
@@ -145,6 +145,8 @@ Ext.define('WeiQuPai.controller.Circle', {
                 data.id = result.id;
                 data.uid = user.id;
                 data.nick = user.nick;
+                data.to_uid = data.to_uid;
+                data.to_nick = data.to_nick;
                 var list = self.getPageView();
                 var record = list.getStore().getById(data.feed_id);
                 var replies = record.get('replies') || [];

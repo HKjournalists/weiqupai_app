@@ -3,12 +3,13 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 	xtype: 'itemdetail',
 	requires: [
 		'WeiQuPai.view.Shop', 'WeiQuPai.view.BottomBar', 'WeiQuPai.view.DisclosureItem',
-		'WeiQuPai.view.DetailPicShow', 'WeiQuPai.view.Order', 'WeiQuPai.model.Auction'
+		'WeiQuPai.view.DetailPicShow', 'WeiQuPai.view.Order', 'WeiQuPai.model.Auction',
+		'WeiQuPai.view.ShareLayer'
 	],
 	config: {
 		plugins: [
 			{
-				type: 'scrollpaging',
+				type: 'wlistpaging',
 		        autoPaging: true,
 			}
 		],
@@ -150,6 +151,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 		}, null, {element: 'element'});
 		//没有评论显示的信息
 		this.msgbox = WeiQuPai.Util.msgbox('还没有人评论该商品.');
+		this.shareLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer', {height:160});
 		this.add(this.msgbox);
 	},
 
@@ -157,6 +159,8 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 	applyParam: function(data){
 		//加载数据
 		this.loadData(data.id);
+		//添加数据到分享功能
+		this.shareLayer.setShareData(data);
 		return data;
 	},
 
@@ -212,15 +216,14 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 		this.setButtonState();
 	},
 
-	//设置拍的按钮状态，每隔10秒检查一次
+	//设置拍的按钮状态，每隔30秒检查一次
 	setButtonState: function(){
 		this.down('#paiBtn').setDisabled(false);
 		var e = Ext.get('paiMask');
-		var totalHeight = 60;
+		var totalHeight = 32;
 		//结算中的时候就不允许拍了
 		if(this.auctionData.status == 1){
 			e.setHeight(totalHeight);
-			this.down('#paiBtn').setDisabled(true);
 			return;
 		}
 		var me = this;
@@ -228,14 +231,13 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 		var now = +new Date / 1000;
 		var duration = this.auctionData.time_interval * 60;
 		var elapsedTime = Math.min(now - startTime, duration);
-		var height = Math.ceil(totalHeight * elapsedTime / duration);
+		var height = 15 + Math.ceil(totalHeight * elapsedTime / duration);
 		e.setHeight(height);
 		if(elapsedTime == duration){
-			this.down('#paiBtn').setDisabled(true);
 			return;
 		}
 		setTimeout(function(){
 			me.setButtonState();
-		}, 100000);
+		}, 5000);
 	}
 });

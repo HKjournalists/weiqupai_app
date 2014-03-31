@@ -27,12 +27,20 @@ module.exports = [
         "clobbers": [
             "CameraPopoverHandle"
         ]
+    },
+    {
+        "file": "plugins/xu.li.cordova.wechat/www/wechat.js",
+        "id": "xu.li.cordova.wechat.Wechat",
+        "clobbers": [
+            "Wechat"
+        ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
-    "org.apache.cordova.camera": "0.2.8"
+    "org.apache.cordova.camera": "0.2.8",
+    "xu.li.cordova.wechat": "0.4"
 }
 // BOTTOM OF METADATA
 });
