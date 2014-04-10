@@ -749,7 +749,6 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.Util": [],
   "WeiQuPai.controller.CameraLayer": [],
   "WeiQuPai.controller.Circle": [],
-  "WeiQuPai.controller.DetailPicShow": [],
   "WeiQuPai.controller.ItemDetail": [],
   "WeiQuPai.controller.Login": [],
   "WeiQuPai.controller.Main": [],
@@ -809,6 +808,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.IconButton": [],
   "WeiQuPai.view.IconListExample": [],
   "WeiQuPai.view.Iframe": [],
+  "WeiQuPai.view.ImageViewer": [],
   "WeiQuPai.view.InputComment": [],
   "WeiQuPai.view.ItemDetail": [],
   "WeiQuPai.view.Login": [],
@@ -842,7 +842,8 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.ShowUser": [],
   "WeiQuPai.view.SubMenu": [],
   "WeiQuPai.view.SwipeButtonList": [],
-  "WeiQuPai.view.Today": []
+  "WeiQuPai.view.Today": [],
+  "WeiQuPai.view.WeiboShare": []
 });
 Ext.ClassManager.addNameAliasMappings({
   "Ext.AbstractComponent": [],
@@ -1787,7 +1788,6 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.Util": [],
   "WeiQuPai.controller.CameraLayer": [],
   "WeiQuPai.controller.Circle": [],
-  "WeiQuPai.controller.DetailPicShow": [],
   "WeiQuPai.controller.ItemDetail": [],
   "WeiQuPai.controller.Login": [],
   "WeiQuPai.controller.Main": [],
@@ -1891,6 +1891,9 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.Iframe": [
     "widget.iframe"
   ],
+  "WeiQuPai.view.ImageViewer": [
+    "widget.imageviewer"
+  ],
   "WeiQuPai.view.InputComment": [
     "widget.commentform"
   ],
@@ -1992,5 +1995,8 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.Today": [
     "widget.today"
+  ],
+  "WeiQuPai.view.WeiboShare": [
+    "widget.weiboshare"
   ]
 });

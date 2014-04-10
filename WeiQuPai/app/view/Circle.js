@@ -115,9 +115,13 @@ Ext.define('WeiQuPai.view.Circle', {
 			action: 'publishPost'
 		};
 		this.down('titlebar').add(btn);
+		this.replyForm = WeiQuPai.Util.createOverlay('WeiQuPai.view.CircleReply', {height: 48, showAnimation: false, hideAnimation: false});
+		this.postForm = WeiQuPai.Util.createOverlay('WeiQuPai.view.CirclePost', {height: 48, showAnimation: false, hideAnimation: false});
 	},
 
 	loadData: function(){
+		//每次都重刷广告
+		this.down('banner').updateBanner();
 		//强制刷新只做一次
 		if(this.getForceReload()){
 			this.getStore().removeAll();

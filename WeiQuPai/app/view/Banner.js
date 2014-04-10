@@ -33,6 +33,7 @@ Ext.define('WeiQuPai.view.Banner', {
 			});
 			this.add(img);
 		}
+		this.setActiveItem(0);
 		var self = this;
 		this.timer = setInterval(function(){
 			if(self.getActiveIndex() == self.getMaxItemIndex()){

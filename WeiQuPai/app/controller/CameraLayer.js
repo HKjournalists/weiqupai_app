@@ -58,7 +58,7 @@ Ext.define('WeiQuPai.controller.CameraLayer', {
             },
             failure: function(rsp){
                 WeiQuPai.Util.unmask();
-                Ext.Msg.Alert(null, '图片上传失败，请重试');
+                Ext.Msg.alert(null, '图片上传失败，请重试');
             },
             scope: this
         });

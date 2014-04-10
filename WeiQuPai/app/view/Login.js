@@ -15,7 +15,7 @@ Ext.define('WeiQuPai.view.Login', {
                 xtype: 'textfield',
                 cls: 'w-input-text w-margin',
                 inputCls: 'w-icon-user',
-                placeHolder: '填写用户名/手机',
+                placeHolder: '用户名/手机/邮箱',
                 autoComplete: false
 
             },
@@ -34,6 +34,7 @@ Ext.define('WeiQuPai.view.Login', {
                 action: 'login',
                 disabled: true             
             },
+            /*
             {
                 xtype: 'fieldset',
                 cls: 'w-fieldset',
@@ -51,6 +52,7 @@ Ext.define('WeiQuPai.view.Login', {
 
                 ]
             },
+        */
             {
                 xtype: 'container',
                 cls: 'w-container',

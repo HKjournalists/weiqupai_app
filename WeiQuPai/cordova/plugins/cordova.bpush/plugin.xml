@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:rim="http://www.blackberry.com/ns/widgets"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="cordova.bpush"
+    version="0.1">
+    <name>BPush</name>
+    <description>A cordova plugin, a JS version of Baidu push SDK</description>
+    <license>MIT</license>
+    <keywords>cordova,baidu push,bpush</keywords>
+    <repo>https://github.com/xu-li/cordova-plugin-bpush.git</repo>
+    <issue>https://github.com/xu-li/cordova-plugin-bpush/issues</issue>
+
+    <js-module src="www/bpush.js" name="BPush">
+        <clobbers target="BPush" />
+    </js-module>
+
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="BPush">
+                <param name="ios-package" value="CDVBPush"/>
+            </feature>
+        </config-file>
+        <header-file src="src/ios/CDVBPush.h" />
+        <source-file src="src/ios/CDVBPush.m" />
+    </platform>
+
+    <!-- android -->
+    <!--
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="Wechat">
+                <param name="android-package" value="xu.li.cordova.wechat.Wechat"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/Wechat.java" target-dir="src/xu/li/cordova/wechat" />
+    </platform>
+    -->
+</plugin>

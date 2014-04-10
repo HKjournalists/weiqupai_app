@@ -48,6 +48,10 @@ Ext.define('WeiQuPai.view.InputComment', {
 	        var disabled = this.down('textfield').getValue().length == 0;
 	        this.down('button[action=publish]').setDisabled(disabled);
 		}, this);
+
+		this.element.dom.addEventListener('submit', function(e){
+			e.preventDefault();
+		}, this);
 	}
 	
 });

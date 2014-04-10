@@ -24,9 +24,11 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
                     if(!WeiQuPai.Util.checkLogin()) return false;
                     var auctionId = this.getPageView().auctionData.id;
                     var itemId = this.getPageView().auctionData.item_id;
-                    var form = WeiQuPai.Util.showCommentForm();
+                    var form = this.getPageView().commentForm;
                     form.down('hiddenfield[name=auction_id]').setValue(auctionId);
                     form.down('hiddenfield[name=item_id]').setValue(itemId);
+                    form.show();
+                    form.down('textfield').focus();
                 }
            },
            shareBtn: {
@@ -153,10 +155,12 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
         var replyId = record.get('id');
         var auctionId = this.getPageView().auctionData.id;
         var itemId  = this.getPageView().auctionData.item_id;
-        var form = WeiQuPai.Util.showCommentForm();
+        var form = this.getPageView().commentForm;
         form.down('hiddenfield[name=auction_id]').setValue(auctionId);
         form.down('hiddenfield[name=item_id]').setValue(itemId);
         form.down('hiddenfield[name=reply_id]').setValue(replyId);
+        form.show();
+        form.down('textfield').focus();
     },
 
     //商品描述的展开和收起

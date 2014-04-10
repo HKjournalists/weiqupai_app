@@ -23,6 +23,9 @@
     <feature name="Camera">
         <param name="ios-package" value="CDVCamera" />
     </feature>
+    <feature name="BPush">
+        <param name="ios-package" value="CDVBPush" />
+    </feature>
     <feature name="Wechat">
         <param name="ios-package" value="CDVWechat" />
         <param name="onload" value="true" />

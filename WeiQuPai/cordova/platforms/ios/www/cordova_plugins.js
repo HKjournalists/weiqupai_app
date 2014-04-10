@@ -34,13 +34,21 @@ module.exports = [
         "clobbers": [
             "Wechat"
         ]
+    },
+    {
+        "file": "plugins/cordova.bpush/www/bpush.js",
+        "id": "cordova.bpush.BPush",
+        "clobbers": [
+            "BPush"
+        ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
     "org.apache.cordova.camera": "0.2.8",
-    "xu.li.cordova.wechat": "0.4"
+    "xu.li.cordova.wechat": "0.4",
+    "cordova.bpush": "0.1"
 }
 // BOTTOM OF METADATA
 });

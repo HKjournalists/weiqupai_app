@@ -18,7 +18,7 @@ Ext.define('WeiQuPai.controller.Register', {
             return false;
         }
         var data = this.getRegForm().getValues();
-        WeiQuPai.Util.register(data.uname, data.password, function(){
+        WeiQuPai.Util.register(data, function(){
             WeiQuPai.Util.showTab('my');
         });
     }, 

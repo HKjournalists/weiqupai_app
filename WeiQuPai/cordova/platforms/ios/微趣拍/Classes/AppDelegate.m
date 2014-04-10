@@ -27,7 +27,7 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
-
+#import "CDVBPush.h"
 #import <Cordova/CDVPlugin.h>
 
 @implementation AppDelegate
@@ -88,7 +88,21 @@
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
 
+    [[self.viewController getCommandInstance:@"bpush"] setup:launchOptions];
+    
     return YES;
+}
+
+//向服务商注册device token
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [[self.viewController getCommandInstance:@"bpush"] registerDeviceToken:deviceToken];
+}
+
+
+//处理接收消息的函数
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    //NSLog(@"Receive Notify: %@", [userInfo JSONString]);
+    [[self.viewController getCommandInstance:@"bpush" ] handleNotification:userInfo];
 }
 
 // this happens while we are running ( in the background, or from within our own app )

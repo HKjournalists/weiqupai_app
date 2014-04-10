@@ -24,6 +24,7 @@
         "config.xml": {
             "/*": {
                 "<feature name=\"Camera\"><param name=\"ios-package\" value=\"CDVCamera\" /></feature>": 1,
+                "<feature name=\"BPush\"><param name=\"ios-package\" value=\"CDVBPush\" /></feature>": 1,
                 "<feature name=\"Wechat\"><param name=\"ios-package\" value=\"CDVWechat\" /><param name=\"onload\" value=\"true\" /></feature>": 1
             }
         }
@@ -33,6 +34,9 @@
             "PACKAGE_NAME": "com.vqupai.app"
         },
         "xu.li.cordova.wechat": {
+            "PACKAGE_NAME": "com.vqupai.app"
+        },
+        "cordova.bpush": {
             "PACKAGE_NAME": "com.vqupai.app"
         }
     },

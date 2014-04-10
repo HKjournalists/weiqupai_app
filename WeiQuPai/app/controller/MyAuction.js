@@ -25,7 +25,7 @@ Ext.define('WeiQuPai.controller.MyAuction', {
     goPay: function(list, index, dataItem ,record, e){
         var payView = Ext.create('WeiQuPai.view.Pay', {
             orderId: record.get('id'),
-            payment: reecord.get('payment')
+            payment: record.get('payment')
         });
         this.getMain().push(payView);
     }

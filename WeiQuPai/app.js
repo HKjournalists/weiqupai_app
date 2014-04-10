@@ -20,7 +20,7 @@ Ext.application({
     ],
 
     controllers: [
-        'Main', 'Today', 'MyAuction', 'MyAuctionDetail','ItemDetail','DetailPicShow','Order', 'ShowOrder', 'Circle', 'ShowUser',
+        'Main', 'Today', 'MyAuction', 'MyAuctionDetail','ItemDetail','Order', 'ShowOrder', 'Circle', 'ShowUser',
         'Shop', 'My', 'Setting', 'MyFriend', 'MyConsignee', 'Private', 'NewMessage', 'Login', 'Register', 'Profile', 'CameraLayer',
         'NewFriend'
     ],
@@ -57,6 +57,7 @@ Ext.application({
         if(Ext.os.is.ios && Ext.os.version.major >= 7){
             document.body.className = 'ios7';
         }
+        Ext.os.is.ios && WeiQuPai.Util.bindPush();
         Ext.Viewport.add(Ext.create('WeiQuPai.view.Main'));
     },
 

@@ -21,9 +21,9 @@ Ext.define('WeiQuPai.view.Today', {
         itemTpl: new Ext.XTemplate(
         	'<p class="item-img"><img src="' + WeiQuPai.Config.host + '{pic_cover}" /></p>',
             '<h2><span class="time">{status_text}</span>{title}</h2>',
-            '<p><span class="market-price">原价 {oprice}</span> / <span class="price">{[this.getPrice(values)]}</span></p>',
+            '<p><span class="market-price">原价 {oprice}</span> / <span class="price">{[this.displayPrice(values)]}</span></p>',
             {
-            	getPrice: function(values){
+            	displayPrice: function(values){
             		var auctions = WeiQuPai.Cache.get('auctions');
             		if(auctions && auctions.indexOf(values.id) != -1){
             			return '已拍';

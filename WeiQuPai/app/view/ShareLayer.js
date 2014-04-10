@@ -5,6 +5,7 @@
 Ext.define('WeiQuPai.view.ShareLayer', {
     extend: 'Ext.Container',
     xtype: 'sharelayer',
+    requires: ['WeiQuPai.view.WeiboShare'],
     config: {
         shareData: null,
         cls: 'share-layer',
@@ -73,7 +74,8 @@ Ext.define('WeiQuPai.view.ShareLayer', {
     },
 
     shareWeibo: function(){
-
+        this.hide();
+        WeiQuPai.Util.forward('weiboshare', {data: this.getShareData()});
     },
 
     shareWeixin: function(){

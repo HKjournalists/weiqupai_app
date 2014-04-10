@@ -54,10 +54,14 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 				scrollDock: 'top',
 				itemId: 'itemTitle',
 				tpl: new Ext.XTemplate(
-					'<h2><span class="market-price">原价￥{oprice}</span><span class="price">{curr_price:this.formatPrice}</span>{title}</h2>',
+					'<h2><span class="market-price">原价￥{oprice}</span><span class="price">{[this.formatPrice(values)]}</span>{title}</h2>',
 					{
-						formatPrice: function(curr_price){
-							curr_price = curr_price || "0";
+						formatPrice: function(values){
+							var auctions = WeiQuPai.Cache.get('auctions');
+		            		if(auctions && auctions.indexOf(values.id) != -1){
+		            			return '已拍';
+		            		}
+							curr_price = values.curr_price || "0";
 							var numbers = curr_price.split("");
 							var res = [];
 							Ext.Array.each(numbers, function(n){
@@ -152,6 +156,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 		//没有评论显示的信息
 		this.msgbox = WeiQuPai.Util.msgbox('还没有人评论该商品.');
 		this.shareLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer', {height:160});
+		this.commentForm = WeiQuPai.Util.createOverlay('WeiQuPai.view.InputComment', {height: 48, showAnimation: false, hideAnimation: false});
 		this.add(this.msgbox);
 	},
 
@@ -218,6 +223,8 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 
 	//设置拍的按钮状态，每隔30秒检查一次
 	setButtonState: function(){
+		//如果view已经销毁就不做处理了
+		if(this.getHidden()) return;
 		this.down('#paiBtn').setDisabled(false);
 		var e = Ext.get('paiMask');
 		var totalHeight = 32;
@@ -238,6 +245,6 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 		}
 		setTimeout(function(){
 			me.setButtonState();
-		}, 5000);
+		}, 30000);
 	}
 });

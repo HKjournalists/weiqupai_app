@@ -25,40 +25,6 @@ Ext.define("WeiQuPai.Util", {
         return cmp;
     }, 
 
-    //显示评论表单
-    showCommentForm: function(){
-        if(!this.commentForm){
-            var config = {height: 48, showAnimation: false, hideAnimation: false};
-            this.commentForm = WeiQuPai.Util.createOverlay('WeiQuPai.view.InputComment', config);
-        }
-        this.commentForm.show();
-        this.commentForm.down('textfield').focus();
-        return this.commentForm;
-    },
-
-    //拍圈发表回复
-    showCircleReply: function(){
-        if(!this.circleReply){
-            var config = {height: 48, showAnimation: false, hideAnimation: false};
-            this.circleReply = WeiQuPai.Util.createOverlay('WeiQuPai.view.CircleReply', config);
-        }
-        this.circleReply.show();
-        this.circleReply.down('textfield').focus();
-        return this.circleReply;
-    },
-    
-    //拍圈发表动态
-    showCirclePost: function(){
-        if(!this.circlePost){
-            var config = {height: 48, showAnimation: false, hideAnimation: false};
-            this.circlePost = WeiQuPai.Util.createOverlay('WeiQuPai.view.CirclePost', config);
-        }
-        this.circlePost.show();
-        this.circlePost.down('textfield').focus();
-        return this.circlePost;
-    },
-    
-
     /**
      * 显示相机菜单
      * 
@@ -67,9 +33,12 @@ Ext.define("WeiQuPai.Util", {
      */
     showCameraLayer: function(picWidth,picHeight, callback){
         if(!this.cameraLayer){
-            var config = {height: 200, picWidth: picWidth, picHeight: picHeight, callback: callback};
+            var config = {height: 200};
             this.cameraLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.CameraLayer', config);
         }
+        this.cameraLayer.setPicWidth(picWidth);
+        this.cameraLayer.setPicHeight(picHeight);
+        this.cameraLayer.setCallback(callback);
         this.cameraLayer.show();
         return this.cameraLayer;
     },
@@ -143,15 +112,12 @@ Ext.define("WeiQuPai.Util", {
         });
     },
 
-    register: function(uname, password, callback){
+    register: function(data, callback){
         WeiQuPai.Util.mask();
         Ext.Ajax.request({
             url: WeiQuPai.Config.apiUrl + '/?r=app/join',
             method: 'post',
-            params: {
-                uname: uname,
-                password: password
-            },
+            params: data,
             success: function(rsp){
                 WeiQuPai.Util.unmask();
                 rsp = Ext.decode(rsp.responseText);
@@ -180,6 +146,7 @@ Ext.define("WeiQuPai.Util", {
             WeiQuPai.Cache.remove('currentUser');
             WeiQuPai.Cache.remove('friends');
             WeiQuPai.Cache.remove('upId');
+            WeiQuPai.Cache.remove('auctions');
             //退出登录后拍圈要清空并刷新
             var circle = Ext.Viewport.down('circle');
             circle.setForceReload(true);
@@ -308,5 +275,30 @@ Ext.define("WeiQuPai.Util", {
     hasAuction: function(auctionId){
         var auctions = WeiQuPai.Cache.get('auctions');
         return auctions && auctions.indexOf(auctionId) != -1;
+    },
+
+    //绑定推送消息，并将deviceToken,userId等信息回传给server
+    bindPush: function(){
+        //如果用户已经绑定过不用再绑了
+        var user = WeiQuPai.Cache.get('currentUser');
+        if(user && user.pushUserId) return;
+        BPush.bindChannel(function(data){
+            //绑定成功，但用户未登录，不需要回传
+            if(!user) return;
+            Ext.Ajax.request({
+                url: WeiQuPai.Config.apiUrl + '/?r=app/bindPush/&token=' + user.token,
+                params: data,
+                method: 'post',
+                success: function(rsp){
+                    rsp = Ext.decode(rsp.responseText);
+                    if(rsp.code > 0){
+                        return;
+                    }
+                    //更新本地对应的缓存数据
+                    user = Ext.merge(user, data);
+                    WeiQuPai.Cache.set('currentUser', user);
+                }
+            });
+        });
     }
 })

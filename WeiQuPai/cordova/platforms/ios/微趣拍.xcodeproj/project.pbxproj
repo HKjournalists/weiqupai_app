@@ -13,6 +13,24 @@
 		18E6B61C18E0789000631906 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E6B61618E0789000631906 /* Default.png */; };
 		18E6B61D18E0789000631906 /* Default~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E6B61718E0789000631906 /* Default~ipad.png */; };
 		18F0144718E9B1180089C0D2 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F0144418E9B1180089C0D2 /* libWeChatSDK.a */; };
+		18F014C618ED1BC90089C0D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F014C518ED1BC90089C0D2 /* Foundation.framework */; };
+		18F014C818ED1BDF0089C0D2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F014C718ED1BDF0089C0D2 /* libz.dylib */; };
+		18F014CA18ED1C220089C0D2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F014C918ED1C220089C0D2 /* CoreTelephony.framework */; };
+		18F014CC18ED1C2C0089C0D2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F014CB18ED1C2C0089C0D2 /* SystemConfiguration.framework */; };
+		18F014D218EF143A0089C0D2 /* CDVBPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F014D118EF143A0089C0D2 /* CDVBPush.m */; };
+		18F014D518EF1ABB0089C0D2 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 18F014D418EF1ABB0089C0D2 /* config.xml */; };
+		18F014E518EF22200089C0D2 /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F014D818EF22200089C0D2 /* libBPush.a */; };
+		18F014E618EF22200089C0D2 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F014DB18EF22200089C0D2 /* Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		18F014E718EF22200089C0D2 /* GzipCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F014DE18EF22200089C0D2 /* GzipCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		18F014E818EF22200089C0D2 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F014E018EF22200089C0D2 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		18F014E918EF22200089C0D2 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F014E218EF22200089C0D2 /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		18F014EA18EF22200089C0D2 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F014E418EF22200089C0D2 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		18F014F218EF32CC0089C0D2 /* BPushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18F014F118EF32CC0089C0D2 /* BPushConfig.plist */; };
+		18F014F918EFF9810089C0D2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F014F818EFF9810089C0D2 /* XCTest.framework */; };
+		18F014FA18EFF9810089C0D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F014C518ED1BC90089C0D2 /* Foundation.framework */; };
+		18F014FC18EFF9820089C0D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F014FB18EFF9810089C0D2 /* UIKit.framework */; };
+		18F0150218EFF9820089C0D2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18F0150018EFF9820089C0D2 /* InfoPlist.strings */; };
+		18F0150418EFF9820089C0D2 /* ____Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F0150318EFF9820089C0D2 /* ____Tests.m */; };
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
@@ -32,6 +50,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		18F0150618EFF9820089C0D2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1D6058900D05DD3D006BFB54;
+			remoteInfo = "微趣拍";
+		};
 		301BF534109A57CC0062928A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 301BF52D109A57CC0062928A /* CordovaLib.xcodeproj */;
@@ -57,6 +82,34 @@
 		18F0144418E9B1180089C0D2 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		18F0144518E9B1180089C0D2 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		18F0144618E9B1180089C0D2 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		18F014C518ED1BC90089C0D2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		18F014C718ED1BDF0089C0D2 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		18F014C918ED1C220089C0D2 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		18F014CB18ED1C2C0089C0D2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		18F014D018EF143A0089C0D2 /* CDVBPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVBPush.h; sourceTree = "<group>"; };
+		18F014D118EF143A0089C0D2 /* CDVBPush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVBPush.m; sourceTree = "<group>"; };
+		18F014D418EF1ABB0089C0D2 /* config.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = config.xml; path = "微趣拍/config.xml"; sourceTree = "<group>"; };
+		18F014D718EF22200089C0D2 /* BPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPush.h; sourceTree = "<group>"; };
+		18F014D818EF22200089C0D2 /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBPush.a; sourceTree = "<group>"; };
+		18F014DA18EF22200089C0D2 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		18F014DB18EF22200089C0D2 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		18F014DC18EF22200089C0D2 /* Base64Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Defines.h; sourceTree = "<group>"; };
+		18F014DD18EF22200089C0D2 /* GzipCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GzipCompressor.h; sourceTree = "<group>"; };
+		18F014DE18EF22200089C0D2 /* GzipCompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GzipCompressor.m; sourceTree = "<group>"; };
+		18F014DF18EF22200089C0D2 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		18F014E018EF22200089C0D2 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		18F014E118EF22200089C0D2 /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
+		18F014E218EF22200089C0D2 /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
+		18F014E318EF22200089C0D2 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		18F014E418EF22200089C0D2 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		18F014F118EF32CC0089C0D2 /* BPushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = BPushConfig.plist; path = "微趣拍/BPushConfig.plist"; sourceTree = "<group>"; };
+		18F014F718EFF9810089C0D2 /* 微趣拍 Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "微趣拍 Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		18F014F818EFF9810089C0D2 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		18F014FB18EFF9810089C0D2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		18F014FF18EFF9820089C0D2 /* 微趣拍 Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "微趣拍 Tests-Info.plist"; sourceTree = "<group>"; };
+		18F0150118EFF9820089C0D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		18F0150318EFF9820089C0D2 /* ____Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "____Tests.m"; sourceTree = "<group>"; };
+		18F0150518EFF9820089C0D2 /* 微趣拍 Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "微趣拍 Tests-Prefix.pch"; sourceTree = "<group>"; };
 		1D3623240D0F684500981E51 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* 微趣拍.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "微趣拍.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,20 +137,34 @@
 		C59F6656FFCA4D8C8133CADC /* CDVWechat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVWechat.h; path = xu.li.cordova.wechat/CDVWechat.h; sourceTree = "<group>"; };
 		E98A7230C2BC436EB9BB8AB4 /* CDVCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVCamera.h; path = org.apache.cordova.camera/CDVCamera.h; sourceTree = "<group>"; };
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
-		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		18F014F418EFF9810089C0D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18F014F918EFF9810089C0D2 /* XCTest.framework in Frameworks */,
+				18F014FC18EFF9820089C0D2 /* UIKit.framework in Frameworks */,
+				18F014FA18EFF9810089C0D2 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18F014CC18ED1C2C0089C0D2 /* SystemConfiguration.framework in Frameworks */,
+				18F014CA18ED1C220089C0D2 /* CoreTelephony.framework in Frameworks */,
+				18F014C818ED1BDF0089C0D2 /* libz.dylib in Frameworks */,
+				18F014C618ED1BC90089C0D2 /* Foundation.framework in Frameworks */,
 				18F0144718E9B1180089C0D2 /* libWeChatSDK.a in Frameworks */,
 				5B1594DD16A7569C00FEF299 /* AssetsLibrary.framework in Frameworks */,
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				305D5FD1115AB8F900A74A75 /* MobileCoreServices.framework in Frameworks */,
 				5AEE5B35173C68D80009041E /* CoreLocation.framework in Frameworks */,
+				18F014E518EF22200089C0D2 /* libBPush.a in Frameworks */,
 				FCB0DB33F2164EA888278A45 /* ImageIO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -128,10 +195,67 @@
 			path = wechatlib;
 			sourceTree = "<group>";
 		};
+		18F014CF18EF143A0089C0D2 /* cordova.bpush */ = {
+			isa = PBXGroup;
+			children = (
+				18F014D018EF143A0089C0D2 /* CDVBPush.h */,
+				18F014D118EF143A0089C0D2 /* CDVBPush.m */,
+			);
+			path = cordova.bpush;
+			sourceTree = "<group>";
+		};
+		18F014D618EF22200089C0D2 /* bpushlib */ = {
+			isa = PBXGroup;
+			children = (
+				18F014D718EF22200089C0D2 /* BPush.h */,
+				18F014D818EF22200089C0D2 /* libBPush.a */,
+				18F014D918EF22200089C0D2 /* opensource */,
+			);
+			path = bpushlib;
+			sourceTree = "<group>";
+		};
+		18F014D918EF22200089C0D2 /* opensource */ = {
+			isa = PBXGroup;
+			children = (
+				18F014DA18EF22200089C0D2 /* Base64.h */,
+				18F014DB18EF22200089C0D2 /* Base64.m */,
+				18F014DC18EF22200089C0D2 /* Base64Defines.h */,
+				18F014DD18EF22200089C0D2 /* GzipCompressor.h */,
+				18F014DE18EF22200089C0D2 /* GzipCompressor.m */,
+				18F014DF18EF22200089C0D2 /* JSONKit.h */,
+				18F014E018EF22200089C0D2 /* JSONKit.m */,
+				18F014E118EF22200089C0D2 /* OpenUDID.h */,
+				18F014E218EF22200089C0D2 /* OpenUDID.m */,
+				18F014E318EF22200089C0D2 /* Reachability.h */,
+				18F014E418EF22200089C0D2 /* Reachability.m */,
+			);
+			path = opensource;
+			sourceTree = "<group>";
+		};
+		18F014FD18EFF9820089C0D2 /* 微趣拍 Tests */ = {
+			isa = PBXGroup;
+			children = (
+				18F0150318EFF9820089C0D2 /* ____Tests.m */,
+				18F014FE18EFF9820089C0D2 /* Supporting Files */,
+			);
+			path = "微趣拍 Tests";
+			sourceTree = "<group>";
+		};
+		18F014FE18EFF9820089C0D2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				18F014FF18EFF9820089C0D2 /* 微趣拍 Tests-Info.plist */,
+				18F0150018EFF9820089C0D2 /* InfoPlist.strings */,
+				18F0150518EFF9820089C0D2 /* 微趣拍 Tests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* 微趣拍.app */,
+				18F014F718EFF9810089C0D2 /* 微趣拍 Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -139,14 +263,17 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				18F014F118EF32CC0089C0D2 /* BPushConfig.plist */,
+				18F014D418EF1ABB0089C0D2 /* config.xml */,
+				18F014D618EF22200089C0D2 /* bpushlib */,
 				18F0144318E9B1180089C0D2 /* wechatlib */,
-				EB87FDF41871DAF40020F90C /* config.xml */,
 				EB87FDF31871DA8E0020F90C /* www */,
 				301BF52D109A57CC0062928A /* CordovaLib.xcodeproj */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				307C750510C5A3420062BCA9 /* Plugins */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
+				18F014FD18EFF9820089C0D2 /* 微趣拍 Tests */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -177,11 +304,17 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				18F014CB18ED1C2C0089C0D2 /* SystemConfiguration.framework */,
+				18F014C918ED1C220089C0D2 /* CoreTelephony.framework */,
+				18F014C718ED1BDF0089C0D2 /* libz.dylib */,
+				18F014C518ED1BC90089C0D2 /* Foundation.framework */,
 				5AEE5B34173C68D80009041E /* CoreLocation.framework */,
 				5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				305D5FD0115AB8F900A74A75 /* MobileCoreServices.framework */,
 				B803D6F47E8F434AB223D8C6 /* ImageIO.framework */,
+				18F014F818EFF9810089C0D2 /* XCTest.framework */,
+				18F014FB18EFF9810089C0D2 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -197,6 +330,7 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				18F014CF18EF143A0089C0D2 /* cordova.bpush */,
 				95963B588F71477D84FC3A16 /* CDVCamera.m */,
 				7CE480EAA2D040D684EDFB7B /* CDVJpegHeaderWriter.m */,
 				E98A7230C2BC436EB9BB8AB4 /* CDVCamera.h */,
@@ -235,6 +369,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		18F014F618EFF9810089C0D2 /* 微趣拍 Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18F0150818EFF9820089C0D2 /* Build configuration list for PBXNativeTarget "微趣拍 Tests" */;
+			buildPhases = (
+				18F014F318EFF9810089C0D2 /* Sources */,
+				18F014F418EFF9810089C0D2 /* Frameworks */,
+				18F014F518EFF9810089C0D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				18F0150718EFF9820089C0D2 /* PBXTargetDependency */,
+			);
+			name = "微趣拍 Tests";
+			productName = "微趣拍 Tests";
+			productReference = 18F014F718EFF9810089C0D2 /* 微趣拍 Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		1D6058900D05DD3D006BFB54 /* 微趣拍 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "微趣拍" */;
@@ -261,6 +413,19 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 500;
+				TargetAttributes = {
+					18F014F618EFF9810089C0D2 = {
+						TestTargetID = 1D6058900D05DD3D006BFB54;
+					};
+					1D6058900D05DD3D006BFB54 = {
+						DevelopmentTeam = V2T4494DCG;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
+					};
+				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "微趣拍" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -269,6 +434,7 @@
 			knownRegions = (
 				English,
 				"zh-Hans",
+				en,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -281,6 +447,7 @@
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* 微趣拍 */,
+				18F014F618EFF9810089C0D2 /* 微趣拍 Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -296,6 +463,14 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		18F014F518EFF9810089C0D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18F0150218EFF9820089C0D2 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1D60588D0D05DD3D006BFB54 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -304,12 +479,14 @@
 				308D05381370CCF300D202BF /* icon.png in Resources */,
 				308D05391370CCF300D202BF /* icon@2x.png in Resources */,
 				18E6B61018E0783B00631906 /* Icon~ipad.png in Resources */,
+				18F014D518EF1ABB0089C0D2 /* config.xml in Resources */,
 				302D95F214D2391D003F00A1 /* MainViewController.xib in Resources */,
 				18E6B61C18E0789000631906 /* Default.png in Resources */,
 				18E6B61818E0789000631906 /* Default-568h@2x.png in Resources */,
 				18E6B61D18E0789000631906 /* Default~ipad.png in Resources */,
 				3088BBBF154F3926009F9C59 /* Default-Portrait@2x~ipad.png in Resources */,
 				3088BBC0154F3926009F9C59 /* Default-Portrait~ipad.png in Resources */,
+				18F014F218EF32CC0089C0D2 /* BPushConfig.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,22 +511,41 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		18F014F318EFF9810089C0D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18F0150418EFF9820089C0D2 /* ____Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18F014E618EF22200089C0D2 /* Base64.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				18F014E918EF22200089C0D2 /* OpenUDID.m in Sources */,
+				18F014D218EF143A0089C0D2 /* CDVBPush.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
+				18F014E818EF22200089C0D2 /* JSONKit.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
 				B3FF180385D54C60B3E995B5 /* CDVCamera.m in Sources */,
 				39048E168C734F6188AA1253 /* CDVJpegHeaderWriter.m in Sources */,
 				117BB047A3FD44119F745E3F /* CDVWechat.m in Sources */,
+				18F014EA18EF22200089C0D2 /* Reachability.m in Sources */,
+				18F014E718EF22200089C0D2 /* GzipCompressor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		18F0150718EFF9820089C0D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1D6058900D05DD3D006BFB54 /* 微趣拍 */;
+			targetProxy = 18F0150618EFF9820089C0D2 /* PBXContainerItemProxy */;
+		};
 		301BF551109A68C00062928A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CordovaLib;
@@ -357,12 +553,94 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		18F0150018EFF9820089C0D2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18F0150118EFF9820089C0D2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		18F0150918EFF9820089C0D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/微趣拍.app/微趣拍";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "微趣拍 Tests/微趣拍 Tests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "微趣拍 Tests/微趣拍 Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		18F0150A18EFF9820089C0D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/微趣拍.app/微趣拍";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "微趣拍 Tests/微趣拍 Tests-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "微趣拍 Tests/微趣拍 Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: SHI YANCAO (NS6526X49G)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -371,46 +649,11 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "微趣拍/微趣拍-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/wechatlib",
-				);
-				OTHER_LDFLAGS = (
-					"-weak_framework",
-					CoreFoundation,
-					"-weak_framework",
-					UIKit,
-					"-weak_framework",
-					AVFoundation,
-					"-weak_framework",
-					CoreMedia,
-					"-weak-lSystem",
-					"-force_load",
-					"\"$(BUILT_PRODUCTS_DIR)/libCordova.a\"",
-					"-ObjC",
-				);
-				PRODUCT_NAME = "微趣拍";
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Debug;
-		};
-		1D6058950D05DD3E006BFB54 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				COPY_PHASE_STRIP = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "微趣拍/微趣拍-Prefix.pch";
-				GCC_THUMB_SUPPORT = NO;
-				GCC_VERSION = "";
-				INFOPLIST_FILE = "微趣拍/微趣拍-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/wechatlib",
+					"$(PROJECT_DIR)/bpushlib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -428,7 +671,50 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "微趣拍";
+				PROVISIONING_PROFILE = "453225A7-2A9D-48DB-AFA6-84C0E3D97063";
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "armv7 armv7s";
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: SHI YANCAO (NS6526X49G)";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "微趣拍/微趣拍-Prefix.pch";
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = "";
+				INFOPLIST_FILE = "微趣拍/微趣拍-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/wechatlib",
+					"$(PROJECT_DIR)/bpushlib",
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-weak_framework",
+					CoreFoundation,
+					"-weak_framework",
+					UIKit,
+					"-weak_framework",
+					AVFoundation,
+					"-weak_framework",
+					CoreMedia,
+					"-weak-lSystem",
+					"-force_load",
+					"\"$(BUILT_PRODUCTS_DIR)/libCordova.a\"",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "微趣拍";
+				PROVISIONING_PROFILE = "453225A7-2A9D-48DB-AFA6-84C0E3D97063";
+				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Release;
 		};
@@ -529,6 +815,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		18F0150818EFF9820089C0D2 /* Build configuration list for PBXNativeTarget "微趣拍 Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18F0150918EFF9820089C0D2 /* Debug */,
+				18F0150A18EFF9820089C0D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "微趣拍" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

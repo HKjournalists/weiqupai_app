@@ -567,20 +567,32 @@ h3{
 	height:100%;
 }
 .w-coupon-list-item .coupon-icon{
-	width:5em;
+	width:43px;
 	height:40px;
-	line-height:40px;
 	font-size:1em;
-	text-align:center;
-	background:#8bcf92;
-	border-radius: 5px;
 	display:block;
 	margin-right:1em;
-	color:#fff;
+	background-position:left center;
+	background-repeat:no-repeat;
+	background-size:43px 26px;
 }
-.w-coupon-list-item .coupon-icon .value{
-	font-size:1.5em;
-	margin-right:.1em;
+.coupon-1{
+	background-image:url(../images/coupon1.png);
+}
+.coupon-5{
+	background-image:url(../images/coupon5.png);
+}
+.coupon-10{
+	background-image:url(../images/coupon10.png);
+}
+.coupon-20{
+	background-image:url(../images/coupon20.png);
+}
+.coupon-50{
+	background-image:url(../images/coupon50.png);
+}
+.coupon-100{
+	background-image:url(../images/coupon100.png);
 }
 .x-item-pressed .w-icon-list-item, .x-item-pressed .w-list-item{
 	background:#ddd;
@@ -1081,4 +1093,7 @@ h3{
 	border-radius:0;
 	border-top:1px solid #5f7479;
 	margin:12px 0;
+}
+.w-imageviewer .x-img.x-img-background{
+	background-size:contain;
 }
