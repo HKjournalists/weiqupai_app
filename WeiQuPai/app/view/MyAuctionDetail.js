@@ -31,9 +31,15 @@ Ext.define('WeiQuPai.view.MyAuctionDetail', {
 						'<div class="flex row"><span class="label">邮编</span>{consignee_info.zip:htmlEncode}</div>',
 						'<div class="flex row"><span class="label">配送时间</span>{delivery_time}</div>',
 						'<div class="flex row"><span class="label">支付方式</span>{payment}</div>',
+						'<div class="flex row"><span class="label">状态</span>{status:this.getStatusText}</div>',
 						'<tpl if="coupon"><div class="flex row"><span class="label">拍券</span>{coupon.name}</div></tpl>',
 						'<tpl if="prop"><div class="flex row"><span class="label">道具</span>{prop.name}</div></tpl>',
-					'</div>'
+					'</div>',
+					{
+						getStatusText: function(status){
+							return WeiQuPai.Config.orderStatusText[status];
+						}
+					}
 				)
 			},
 			{
@@ -57,7 +63,7 @@ Ext.define('WeiQuPai.view.MyAuctionDetail', {
 		var payBtn = Ext.create('Ext.Button', {text: '去支付', action: 'pay', cls: 'w-toolbar-button', iconCls: 'icon-pay'});
 		var showBtn = Ext.create('Ext.Button', {text: '晒单', action: 'showOrder', cls: 'w-toolbar-button', iconCls: 'icon-order', hidden:true});
 		this.down('bottombar #buttonContainer').add([payBtn, showBtn]);
-		if(this.getRecord().get('status') > 0){
+		if(this.getRecord().get('status') != WeiQuPai.Config.auctionStatus.STATUS_TOPAY){
 			payBtn.hide();
 		}
 

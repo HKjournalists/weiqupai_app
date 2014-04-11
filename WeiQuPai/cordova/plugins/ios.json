@@ -12,7 +12,7 @@
                 "false": 1
             },
             "CoreGraphics.framework": {
-                "false": 1
+                "false": 2
             },
             "AssetsLibrary.framework": {
                 "false": 1
@@ -25,7 +25,8 @@
             "/*": {
                 "<feature name=\"Camera\"><param name=\"ios-package\" value=\"CDVCamera\" /></feature>": 1,
                 "<feature name=\"BPush\"><param name=\"ios-package\" value=\"CDVBPush\" /></feature>": 1,
-                "<feature name=\"Wechat\"><param name=\"ios-package\" value=\"CDVWechat\" /><param name=\"onload\" value=\"true\" /></feature>": 1
+                "<feature name=\"Wechat\"><param name=\"ios-package\" value=\"CDVWechat\" /><param name=\"onload\" value=\"true\" /></feature>": 1,
+                "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>": 1
             }
         }
     },
@@ -37,6 +38,9 @@
             "PACKAGE_NAME": "com.vqupai.app"
         },
         "cordova.bpush": {
+            "PACKAGE_NAME": "com.vqupai.app"
+        },
+        "org.apache.cordova.inappbrowser": {
             "PACKAGE_NAME": "com.vqupai.app"
         }
     },

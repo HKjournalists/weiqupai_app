@@ -7,7 +7,8 @@
         "res/xml/config.xml": {
             "/*": {
                 "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>": 1,
-                "<feature name=\"Wechat\"><param name=\"android-package\" value=\"xu.li.cordova.wechat.Wechat\" /></feature>": 1
+                "<feature name=\"Wechat\"><param name=\"android-package\" value=\"xu.li.cordova.wechat.Wechat\" /></feature>": 1,
+                "<feature name=\"InAppBrowser\"><param name=\"android-package\" value=\"org.apache.cordova.inappbrowser.InAppBrowser\" /></feature>": 1
             }
         },
         "AndroidManifest.xml": {
@@ -21,6 +22,9 @@
             "PACKAGE_NAME": "com.vqupai.app"
         },
         "xu.li.cordova.wechat": {
+            "PACKAGE_NAME": "com.vqupai.app"
+        },
+        "org.apache.cordova.inappbrowser": {
             "PACKAGE_NAME": "com.vqupai.app"
         }
     },

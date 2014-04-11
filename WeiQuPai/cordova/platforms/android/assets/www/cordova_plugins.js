@@ -34,13 +34,21 @@ module.exports = [
         "clobbers": [
             "Wechat"
         ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.inappbrowser/www/inappbrowser.js",
+        "id": "org.apache.cordova.inappbrowser.inappbrowser",
+        "clobbers": [
+            "window.open"
+        ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
     "org.apache.cordova.camera": "0.2.8",
-    "xu.li.cordova.wechat": "0.4"
+    "xu.li.cordova.wechat": "0.4",
+    "org.apache.cordova.inappbrowser": "0.3.3"
 }
 // BOTTOM OF METADATA
 });

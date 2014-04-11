@@ -17,9 +17,14 @@ Ext.define('WeiQuPai.view.MyAuction', {
                 '</tpl>',
                 '<p>{ctime}</p>',
             '</div>',
-            '<tpl if="status == 0">',
+            '<tpl if="this.notPay(status)">',
             '<div class="pay-btn-wrap"><div class="pay-btn">去支付</div></div>',
-            '</tpl>'
+            '</tpl>',
+            {
+                notPay: function(status){
+                    return status == WeiQuPai.Config.auctionStatus.STATUS_TOPAY;
+                }
+            }
         ),
         items: [
             {

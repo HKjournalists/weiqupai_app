@@ -23,6 +23,7 @@ Ext.define('WeiQuPai.view.Shop', {
 				text: '点击访问商家网站',
 				action: 'jumpUrl',
 				cls: 'w-margin w-button',
+				hidden: true
 			},
 			{
 				xtype: 'bottombar'
@@ -32,9 +33,10 @@ Ext.define('WeiQuPai.view.Shop', {
 
 	applyData: function(data){
 		this.down('#shop-detail').setHtml(data.description);
-
-	},
-
-	initialize: function(){
+		data.href = "http://www.vqupai.com";
+		data.href && this.down('button').setHidden(false);
+		this.down('button').on('tap', function(){
+			window.open(data.href, '_system');
+		});
 	}
 });

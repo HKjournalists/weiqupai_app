@@ -33,8 +33,16 @@ Ext.define('WeiQuPai.view.CirclePost', {
 		}, this);
 
 		this.down('textfield').on('keyup', function(){
-	        var disabled = this.down('textfield').getValue().length == 0;
+	        var disabled = this.down('textfield').getValue().trim().length == 0;
 	        this.down('button[action=publish]').setDisabled(disabled);
+		}, this);
+
+		var me = this;
+		this.element.dom.addEventListener('submit', function(e){
+			e.preventDefault();
+			if(me.down('textfield').getValue().trim().length > 0){
+				me.fireEvent('publish', me);
+			}
 		}, this);
 	}
 	

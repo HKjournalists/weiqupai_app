@@ -40,7 +40,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
                 commenttap: 'doCommentTap'
            },
            commentForm: {
-                publishComment: 'doPublishComment'
+                publish: 'doPublishComment'
            }, 
            descContainer: {
                 toggleDesc: 'toggleDesc'
@@ -68,7 +68,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
             success: function(record, operation){
                 WeiQuPai.Util.unmask();
                 if(!WeiQuPai.Util.invalidToken(record.raw)) return false;
-                if(record.get('status') != 2){
+                if(record.get('status') != WeiQuPai.Config.auctionStatus.STATUS_ONLINE){
                     msgArr = ['拍卖还未开始', '拍卖正在结算中，请稍等几分钟', null, '对不起，拍卖已结束'];
                     msg = msgArr[record.get('status')];
                     Ext.Msg.alert(null, msg);

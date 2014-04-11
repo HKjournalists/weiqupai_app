@@ -51,7 +51,7 @@ Ext.define('WeiQuPai.view.Today', {
  		var me = this;
         this.setMasked({xtype: 'wloadmask'});
  		var user = WeiQuPai.Cache.get('currentUser');
-		user &&	this.getStore().getProxy().setExtraParam('token', user.token);
+		this.getStore().getProxy().setExtraParam('token', user && user.token || '');
         this.getStore().load(function(data, operation, success){
         	this.unmask();
             if(!success){

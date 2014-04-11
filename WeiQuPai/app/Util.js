@@ -99,6 +99,10 @@ Ext.define("WeiQuPai.Util", {
                 WeiQuPai.Cache.set('currentUser', rsp.user);
                 WeiQuPai.Cache.set('friends', rsp.friends);
                 WeiQuPai.Cache.set('auctions', rsp.auctions);
+
+                //注册之后绑定推送
+                WeiQuPai.Util.bindPush();
+
                 //登录后拍圈要清空并刷新
                 var circle = Ext.Viewport.down('circle');
                 circle.setForceReload(true);
@@ -126,6 +130,8 @@ Ext.define("WeiQuPai.Util", {
                     return;
                 }
                 WeiQuPai.Cache.set('currentUser', rsp);
+                //注册之后绑定推送
+                WeiQuPai.Util.bindPush();
                 callback && callback();
             },
             failure: function(rsp){
@@ -262,7 +268,7 @@ Ext.define("WeiQuPai.Util", {
         }
         WeiQuPai.Cache.set('upId', upId);
         return true;
-    }, 
+    },
 
     //转到某个视图，并带参数
     forward: function(xtype, config){
@@ -279,9 +285,8 @@ Ext.define("WeiQuPai.Util", {
 
     //绑定推送消息，并将deviceToken,userId等信息回传给server
     bindPush: function(){
-        //如果用户已经绑定过不用再绑了
+        if(!Ext.os.is.ios) return;
         var user = WeiQuPai.Cache.get('currentUser');
-        if(user && user.pushUserId) return;
         BPush.bindChannel(function(data){
             //绑定成功，但用户未登录，不需要回传
             if(!user) return;

@@ -42,6 +42,17 @@ Ext.define('WeiQuPai.view.Circle', {
 				'<div class="pic-list">',
 				'<tpl for="json_data.pic_list"><img src="' + WeiQuPai.Config.host + '{.}" /></tpl>',
 				'</div>',
+				'<div class="card" dataType="item">',
+					'<img src="' + WeiQuPai.Config.host + '{json_data.pic_cover}"/>',
+					'<span>{json_data.title}</span>',
+				'</div>',
+			'<tpl elseif="feed_type==2">',
+				'<div class="action-title"><span class="uname" uid="{uid}">{nick:htmlEncode}</span><span class="action">拍下了一个宝贝</span></div>',
+				'<p>我刚刚购买了{json_data.title:htmlEncode}</p>',
+				'<div class="card" dataType="item">',
+					'<img src="' + WeiQuPai.Config.host + '{json_data.pic_cover}"/>',
+					'<span>{json_data.title}</span>',
+				'</div>',
 			'</tpl>',
 			'<div class="flex circle-time"><span class="time">{ctime} <tpl if="this.isSelf(uid)"><span class="delete-post-btn">删除</span></tpl></span>',
 			'<tpl if="this.isLogin()">',
@@ -109,12 +120,14 @@ Ext.define('WeiQuPai.view.Circle', {
 		this.loadData();
 		this.on('activate', this.loadData, this);
 		this.onBefore('itemtap', this.bindEvent, this);
+		/*
 		var btn = {
 			xtype: 'button',
 			text: '发表',
 			action: 'publishPost'
 		};
 		this.down('titlebar').add(btn);
+		*/
 		this.replyForm = WeiQuPai.Util.createOverlay('WeiQuPai.view.CircleReply', {height: 48, showAnimation: false, hideAnimation: false});
 		this.postForm = WeiQuPai.Util.createOverlay('WeiQuPai.view.CirclePost', {height: 48, showAnimation: false, hideAnimation: false});
 	},
@@ -141,6 +154,13 @@ Ext.define('WeiQuPai.view.Circle', {
 		if(e.target.className == 'uname'){
 			var uid = e.target.getAttribute('uid');
 			this.fireEvent('usertap', this, index, record, uid);
+			return false;
+		}
+
+		//卡片点击
+		var card = Ext.get(e.target).up('.card');
+		if(card){
+			this.fireEvent('cardtap', this, index, record, card.getAttribute('dataType'));
 			return false;
 		}
 

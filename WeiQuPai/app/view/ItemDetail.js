@@ -164,8 +164,6 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 	applyParam: function(data){
 		//加载数据
 		this.loadData(data.id);
-		//添加数据到分享功能
-		this.shareLayer.setShareData(data);
 		return data;
 	},
 
@@ -177,6 +175,8 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 			scope: this,
 			success: function(record, operation){
 				this.setContent(record.data);
+				//添加数据到分享功能
+				this.shareLayer.setShareData(record.data);
 			},
 			failure: function(record, operation){
 				Ext.Msg.alert(null, '数据加载失败');	
@@ -228,8 +228,8 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 		this.down('#paiBtn').setDisabled(false);
 		var e = Ext.get('paiMask');
 		var totalHeight = 32;
-		//结算中的时候就不允许拍了
-		if(this.auctionData.status == 1){
+		//只有拍卖中的才可以拍卖
+		if(this.auctionData.status != WeiQuPai.Config.auctionStatus.STATUS_ONLINE){
 			e.setHeight(totalHeight);
 			return;
 		}

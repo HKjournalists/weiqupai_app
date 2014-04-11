@@ -10,6 +10,9 @@
     <feature name="Wechat">
         <param name="android-package" value="xu.li.cordova.wechat.Wechat" />
     </feature>
+    <feature name="InAppBrowser">
+        <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
+    </feature>
     <name>微趣拍</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.

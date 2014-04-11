@@ -18,7 +18,8 @@ Ext.define('WeiQuPai.controller.Circle', {
                 deletereply: 'showDeleteReply',
                 deletepost: 'doDeletePost',
                 zan: 'doZan',
-                cancelzan: 'doCancelZan'
+                cancelzan: 'doCancelZan',
+                cardtap: 'doCardTap',
             },
             circleReply: {
                 publish: 'doPublishReply',
@@ -261,5 +262,23 @@ Ext.define('WeiQuPai.controller.Circle', {
                 list.updateAllListItems();
             }
         });
+    },
+
+    //卡片点击
+    doCardTap: function(list, index, record, dataType){
+        var cardHandler = this['card_' + dataType];
+        cardHandler && cardHandler.call(this, record);
+    },
+
+    //进入商品详情
+    card_item: function(record){
+        //处理多次点击的问题
+        var main = Ext.Viewport.down('main');
+        if(main.isAnimating) return;
+        var param = {id: record.get('json_data').id};
+        console.log(param);
+        var view = Ext.create('WeiQuPai.view.ItemDetail');
+        view.setParam(param);
+        main.push(view);
     }
 });

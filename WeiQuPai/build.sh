@@ -16,6 +16,7 @@ fi
 if [ "$1" == "pub" ];then
 	scp ../build/vqupai.ipa $SERVER:$PACKAGE_DIR
 	scp $ANDROID_DIR/android-release.apk $SERVER:${PACKAGE_DIR}vqupai.apk
+	scp adhoc/* $SERVER:$PACKAGE_DIR/
 	exit 0
 fi
 echo "starting build $BUILD_ENV $BUILD_TYPE"
