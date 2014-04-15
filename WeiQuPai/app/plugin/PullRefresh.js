@@ -260,7 +260,10 @@ Ext.define('WeiQuPai.plugin.PullRefresh', {
      * timeline between the new and the old records.
      */
     onLatestFetched: function(operation) {
-        var store = this.getList().getStore(),
+        var store = this.getList().getStore();
+        store.removeAll();
+        store.add(operation.getRecords());
+        /*
             oldRecords = store.getData(),
             newRecords = operation.getRecords(),
             length = newRecords.length,
@@ -281,8 +284,9 @@ Ext.define('WeiQuPai.plugin.PullRefresh', {
 
         store.insert(0, toInsert);
         this.getList().updateAllListItems();
+        */
         this.setState("loaded");
-        this.fireEvent('latestfetched', this, toInsert);
+        //this.fireEvent('latestfetched', this, toInsert);
         if (this.getAutoSnapBack()) {
             this.snapBack();
         }

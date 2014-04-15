@@ -2,7 +2,8 @@ Ext.define('WeiQuPai.view.Setting', {
 	extend: 'Ext.Container',
 	xtype: 'setting',
 	requires: [
-		'WeiQuPai.view.DisclosureItem', 'WeiQuPai.view.About', 'WeiQuPai.view.Private', 'WeiQuPai.view.NewMessage'
+		'WeiQuPai.view.DisclosureItem', 'WeiQuPai.view.About', 'WeiQuPai.view.Private', 'WeiQuPai.view.NewMessage',
+		'WeiQuPai.view.ReturnAnnounce'
 	],
 
 	config: {
@@ -23,11 +24,18 @@ Ext.define('WeiQuPai.view.Setting', {
 				title: '隐私',
 				itemId: 'private'	
 			},
+
+			{
+				xtype: 'disclosureitem',
+				title: '退货说明',
+				itemId: 'return',
+				cls: 'w-disclosure-item w-disclosure-item-single'
+			},	
 			{
 				xtype: 'disclosureitem',
 				title: '关于微趣拍',
 				itemId: 'about',
-				cls: 'w-disclosure-item w-disclosure-item-single'
+				cls: 'w-disclosure-item'
 			},
 			{
 				xtype: 'button',

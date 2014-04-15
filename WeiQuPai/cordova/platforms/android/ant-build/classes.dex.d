@@ -23,6 +23,7 @@
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/ant-build/classes/org/apache/cordova/inappbrowser/InAppBrowser.class \
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/ant-build/classes/org/apache/cordova/inappbrowser/InAppBrowserDialog.class \
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/ant-build/classes/org/apache/cordova/inappbrowser/InAppChromeClient.class \
+/Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/ant-build/classes/org/apache/cordova/splashscreen/SplashScreen.class \
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/ant-build/classes/xu/li/cordova/wechat/Wechat$1.class \
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/ant-build/classes/xu/li/cordova/wechat/Wechat.class \
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/ant-build/dexedLibs/classes-11c08a7db0f5751117d91552142b0d23.jar \

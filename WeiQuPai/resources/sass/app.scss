@@ -38,7 +38,7 @@ $ios7-green: #53d769;
 }
 //默认背影
 html, body{
-	background-color:#f2fceb;
+	//background-color:#f2fceb;
 }
 .x-layout-card-item{
 	background-color:$bg-color;
@@ -1106,11 +1106,36 @@ h3{
 	margin-top:4px;
 }
 .card img{
-	width:25px;
-	height:25px;
+	width:40px;
+	height:40px;
 	margin-right:12px;
 }
 .card span{
+	display:block;
 	-webkit-box-flex:1;
 	flex:1;
+}
+.w-brand-info{
+	margin:1em;
+	line-height:1.5;
+	font-size:$normal-font;
+}
+.w-brand-info .brand-logo{
+	text-align:center;
+}
+.w-brand-info img{
+	border:1px solid #333;
+	padding:20px;
+}
+.shipment-progress{
+	margin-top:1em;
+}
+.shipment-progress li{
+	padding:.5em 0;
+	line-height:1.5;
+	border-bottom:1px solid #f5f5f5;
+}
+.shipment-progress p{
+	font-size:.8em;
+	color:gray;
 }

@@ -16,7 +16,6 @@ Ext.define('WeiQuPai.view.Shop', {
 				xtype: 'container',
 				itemId: 'shop-detail',
 				cls: 'w-content',
-				margin:'16px'
 			},
 			{
 				xtype: 'button',
@@ -33,10 +32,9 @@ Ext.define('WeiQuPai.view.Shop', {
 
 	applyData: function(data){
 		this.down('#shop-detail').setHtml(data.description);
-		data.href = "http://www.vqupai.com";
-		data.href && this.down('button').setHidden(false);
+		data.site && this.down('button').setHidden(false);
 		this.down('button').on('tap', function(){
-			window.open(data.href, '_system');
+			window.open(data.site, '_system');
 		});
 	}
 });

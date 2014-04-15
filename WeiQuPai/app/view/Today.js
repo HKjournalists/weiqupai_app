@@ -45,22 +45,28 @@ Ext.define('WeiQuPai.view.Today', {
 	        }
         ]
 	},
+
 	initialize: function(){
 		this.callParent(arguments);
+        this.loadData();
 		this.on('activate', this.updateBanner, this);
- 		var me = this;
+   	}, 
+
+    updateBanner: function(){
+        this.down('banner').updateBanner();
+    },
+
+   	loadData: function(){
+        var me = this;
         this.setMasked({xtype: 'wloadmask'});
- 		var user = WeiQuPai.Cache.get('currentUser');
-		this.getStore().getProxy().setExtraParam('token', user && user.token || '');
+        var user = WeiQuPai.Cache.get('currentUser');
+        this.getStore().getProxy().setExtraParam('token', user && user.token || '');
         this.getStore().load(function(data, operation, success){
-        	this.unmask();
+            this.unmask();
             if(!success){
                 Ext.Msg.alert(null, '数据加载失败');
             }
         }, this);
-   	}, 
-
-   	updateBanner: function(){
-   		this.down('banner').updateBanner();
+        
    	}
 });

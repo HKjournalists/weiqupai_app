@@ -46,6 +46,7 @@
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/resources \
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/plugins/org.apache.cordova.camera \
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/plugins/org.apache.cordova.inappbrowser \
+/Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/plugins/org.apache.cordova.splashscreen \
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/plugins/xu.li.cordova.wechat \
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/plugins/org.apache.cordova.camera/www \
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/plugins/org.apache.cordova.camera/www/Camera.js \
@@ -54,6 +55,8 @@
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/plugins/org.apache.cordova.camera/www/CameraPopoverOptions.js \
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/plugins/org.apache.cordova.inappbrowser/www \
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/plugins/org.apache.cordova.inappbrowser/www/inappbrowser.js \
+/Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/plugins/org.apache.cordova.splashscreen/www \
+/Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/plugins/org.apache.cordova.splashscreen/www/splashscreen.js \
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/plugins/xu.li.cordova.wechat/www \
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/plugins/xu.li.cordova.wechat/www/wechat.js \
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/resources/css \
@@ -127,9 +130,13 @@
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/resources/images/icon-weibo.png \
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/resources/images/icon-weixin.png \
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/resources/images/icon-write.png \
+/Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/resources/images/loading.png \
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/resources/images/logo219.png \
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/resources/images/quickmenu_off.png \
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/resources/images/quickmenu_on.png \
+/Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/resources/images/splash1.jpg \
+/Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/resources/images/splash2.jpg \
+/Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/resources/images/splash3.jpg \
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/resources/images/submenu-border.png \
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/resources/images/submenu_01_off.png \
 /Users/apple/weiqupai_app/WeiQuPai/cordova/platforms/android/assets/www/resources/images/submenu_01_on.png \

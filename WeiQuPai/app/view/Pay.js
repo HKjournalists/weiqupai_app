@@ -38,7 +38,5 @@ Ext.define('WeiQuPai.view.Pay', {
 
 	payIframeLoad: function(){
 		this.unmask();
-		var main = Ext.Viewport.down('main');
-        main.push(this);
 	}
 });

@@ -12,6 +12,7 @@ Ext.define('WeiQuPai.view.PaymentList', {
                         title: '支付宝',
                         id: 'alipay'
                     },
+                    /*
                     {
                         title: '财富通',
                         id: 'tenpay'
@@ -24,6 +25,7 @@ Ext.define('WeiQuPai.view.PaymentList', {
                         title: '快钱',
                         id: '99bill'
                     }
+                    */
                 ]
             }
         ]

@@ -276,7 +276,6 @@ Ext.define('WeiQuPai.controller.Circle', {
         var main = Ext.Viewport.down('main');
         if(main.isAnimating) return;
         var param = {id: record.get('json_data').id};
-        console.log(param);
         var view = Ext.create('WeiQuPai.view.ItemDetail');
         view.setParam(param);
         main.push(view);

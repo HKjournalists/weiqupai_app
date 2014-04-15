@@ -22,7 +22,7 @@ Ext.define('WeiQuPai.view.MyAuction', {
             '</tpl>',
             {
                 notPay: function(status){
-                    return status == WeiQuPai.Config.auctionStatus.STATUS_TOPAY;
+                    return status == WeiQuPai.Config.orderStatus.STATUS_TOPAY;
                 }
             }
         ),
@@ -65,6 +65,7 @@ Ext.define('WeiQuPai.view.MyAuction', {
             return false;
         }
         this.loginTip.hide();
+        this.msgbox.hide();
         var store = this.getStore();
         //加载数据
         store.getProxy().setExtraParam('token', user.token);

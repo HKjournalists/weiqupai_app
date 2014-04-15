@@ -773,6 +773,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.model.Circle": [],
   "WeiQuPai.model.Order": [],
   "WeiQuPai.model.Profile": [],
+  "WeiQuPai.model.Shipment": [],
   "WeiQuPai.model.UserConsignee": [],
   "WeiQuPai.plugin.ListPaging": [],
   "WeiQuPai.plugin.LoadMask": [],
@@ -793,6 +794,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.AddFriendButtonLayer": [],
   "WeiQuPai.view.Banner": [],
   "WeiQuPai.view.BottomBar": [],
+  "WeiQuPai.view.Brand": [],
   "WeiQuPai.view.CameraLayer": [],
   "WeiQuPai.view.Circle": [],
   "WeiQuPai.view.CirclePost": [],
@@ -832,6 +834,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.Private": [],
   "WeiQuPai.view.Profile": [],
   "WeiQuPai.view.Register": [],
+  "WeiQuPai.view.ReturnAnnounce": [],
   "WeiQuPai.view.Setting": [],
   "WeiQuPai.view.ShareLayer": [],
   "WeiQuPai.view.Shipment": [],
@@ -839,9 +842,12 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.Shop": [],
   "WeiQuPai.view.ShowOrder": [],
   "WeiQuPai.view.ShowUser": [],
+  "WeiQuPai.view.SplashScreen": [],
+  "WeiQuPai.view.StartupScreen": [],
   "WeiQuPai.view.SubMenu": [],
   "WeiQuPai.view.SwipeButtonList": [],
   "WeiQuPai.view.Today": [],
+  "WeiQuPai.view.WebPage": [],
   "WeiQuPai.view.WeiboShare": []
 });
 Ext.ClassManager.addNameAliasMappings({
@@ -1811,6 +1817,7 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.model.Circle": [],
   "WeiQuPai.model.Order": [],
   "WeiQuPai.model.Profile": [],
+  "WeiQuPai.model.Shipment": [],
   "WeiQuPai.model.UserConsignee": [],
   "WeiQuPai.plugin.ListPaging": [
     "plugin.wlistpaging"
@@ -1846,6 +1853,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.BottomBar": [
     "widget.bottombar"
+  ],
+  "WeiQuPai.view.Brand": [
+    "widget.brand"
   ],
   "WeiQuPai.view.CameraLayer": [
     "widget.cameralayer"
@@ -1964,6 +1974,9 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.Register": [
     "widget.register"
   ],
+  "WeiQuPai.view.ReturnAnnounce": [
+    "widget.about"
+  ],
   "WeiQuPai.view.Setting": [
     "widget.setting"
   ],
@@ -1985,6 +1998,12 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.ShowUser": [
     "widget.showuser"
   ],
+  "WeiQuPai.view.SplashScreen": [
+    "widget.splashscreen"
+  ],
+  "WeiQuPai.view.StartupScreen": [
+    "widget.startupscreen"
+  ],
   "WeiQuPai.view.SubMenu": [
     "widget.submenu"
   ],
@@ -1993,6 +2012,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.Today": [
     "widget.today"
+  ],
+  "WeiQuPai.view.WebPage": [
+    "widget.webpage"
   ],
   "WeiQuPai.view.WeiboShare": [
     "widget.weiboshare"

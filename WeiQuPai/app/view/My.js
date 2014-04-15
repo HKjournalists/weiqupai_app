@@ -48,22 +48,25 @@ Ext.define('WeiQuPai.view.My', {
 					},
 					{
 						xtype: 'iconbutton',
+						icon: 'consignee',
+						text: '收货地址',
+						action: 'consignee'
+					}
+					/*
+					{
+						xtype: 'iconbutton',
 						icon: 'account',
 						text: '帐号绑定',
 						action: 'account'
 					}
+					*/
 				]
 			},
 			{
 				xtype: 'container',
 				layout: 'hbox',
 				items:[
-					{
-						xtype: 'iconbutton',
-						icon: 'consignee',
-						text: '收货地址',
-						action: 'consignee'
-					},
+					
 					{
 						xtype: 'iconbutton',
 						icon: 'prop',
@@ -75,9 +78,16 @@ Ext.define('WeiQuPai.view.My', {
 						icon: 'coupon',
 						text: '我的拍券',
 						action: 'coupon'
+					},
+					{
+						xtype: 'iconbutton',
+						icon: 'setting',
+						text: '设置',
+						action: 'setting'
 					}
 				]
 			},
+			/*
 			{
 				xtype: 'container',
 				layout: 'hbox',
@@ -90,6 +100,7 @@ Ext.define('WeiQuPai.view.My', {
 					}
 				]
 			}
+			*/
 		]
 	},
 

@@ -42,6 +42,14 @@ Ext.define('WeiQuPai.view.Register', {
 
             },
             {
+                name: 'invite',
+                xtype: 'textfield',
+                cls: 'w-input-text w-margin',
+                placeHolder: '邀请人用户名',
+                autoComplete: false
+
+            },
+            {
                 xtype: 'button',
                 text: '注册',
                 cls: 'w-button w-margin',

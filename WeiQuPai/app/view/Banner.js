@@ -29,8 +29,10 @@ Ext.define('WeiQuPai.view.Banner', {
 		for(var i=0; i<records.length; i++){
 			var img = Ext.create('Ext.Img', {
 				src: WeiQuPai.Config.host + records[i].get('pic_url'),
-				cls: 'banner-item'
+				cls: 'banner-item',
+				data: records[i].data,
 			});
+			img.on('tap', this.doImageTap, this);
 			this.add(img);
 		}
 		this.setActiveItem(0);
@@ -42,5 +44,18 @@ Ext.define('WeiQuPai.view.Banner', {
 			}
 			self.next();
 		}, 5000);
+	},
+
+	doImageTap: function(img){
+		var data = img.getData();
+		if(!data.link) return;
+		if(data.type == 1){
+			window.open(data.link, '_system');
+		}else{
+			var view = Ext.create('WeiQuPai.view.WebPage');
+			view.setHref(data.link);
+			view.setTitle(data.title || '微趣拍');
+			Ext.Viewport.down('main').push(view);
+		}
 	}
 });

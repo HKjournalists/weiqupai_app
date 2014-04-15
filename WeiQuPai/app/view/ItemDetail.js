@@ -4,7 +4,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 	requires: [
 		'WeiQuPai.view.Shop', 'WeiQuPai.view.BottomBar', 'WeiQuPai.view.DisclosureItem',
 		'WeiQuPai.view.DetailPicShow', 'WeiQuPai.view.Order', 'WeiQuPai.model.Auction',
-		'WeiQuPai.view.ShareLayer'
+		'WeiQuPai.view.ShareLayer','WeiQuPai.view.Brand'
 	],
 	config: {
 		plugins: [
@@ -79,6 +79,14 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 				title: '商家介绍',
 				titleStyle: 'normal',
 				itemId: 'shopInfo',
+				scrollDock: 'top',
+				hidden: true
+			},
+			{
+				xtype: 'disclosureitem',
+				title: '品牌介绍',
+				titleStyle: 'normal',
+				itemId: 'brandInfo',
 				scrollDock: 'top',
 				hidden: true
 			},
@@ -214,9 +222,12 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 			data.button = '<span class="show-more"></span>';
 		}
 		this.down('#itemDesc').setData(data);
-		//如果商家没有描述就不显示商家介绍
-		if(this.auctionData.shop.description){
+
+		if(this.auctionData.shop){
 			this.down('#shopInfo').show();
+		}
+		if(this.auctionData.brand){
+			this.down('#brandInfo').show();
 		}
 		this.setButtonState();
 	},
@@ -230,7 +241,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 		var totalHeight = 32;
 		//只有拍卖中的才可以拍卖
 		if(this.auctionData.status != WeiQuPai.Config.auctionStatus.STATUS_ONLINE){
-			e.setHeight(totalHeight);
+			e.setHeight(15 + totalHeight);
 			return;
 		}
 		var me = this;

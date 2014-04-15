@@ -66,9 +66,9 @@ Ext.define('WeiQuPai.view.ShareLayer', {
 
     applyShareData: function(data){
         return {
-            title: data.title + "-" + data.curr_price + '元',
+            title: data.title + ' - 微趣拍',
             thumb: WeiQuPai.Config.host + data.pic_cover,
-            url: 'http://www.vqupai.com',
+            url: 'http://www.vqupai.com/mm/index.php?r=auction/show&id=' + data.id,
             description: '微趣拍'
         };
     },

@@ -31,6 +31,17 @@ Ext.define('WeiQuPai.view.ShowUser', {
 					'<div class="pic-list">',
 					'<tpl for="json_data.pic_list"><img src="' + WeiQuPai.Config.host + '{.}" /></tpl>',
 					'</div>',
+					'<div class="card" dataType="item">',
+						'<img src="' + WeiQuPai.Config.host + '{json_data.pic_cover}"/>',
+						'<span>{json_data.title:htmlEncode}</span>',
+					'</div>',
+				'<tpl elseif="feed_type==2">',
+					'<div class="action-title"><span class="uname" uid="{uid}">{nick:htmlEncode}</span><span class="action">拍下了一个宝贝</span></div>',
+					'<p>我刚刚购买了{json_data.title:htmlEncode}</p>',
+					'<div class="card" dataType="item">',
+						'<img src="' + WeiQuPai.Config.host + '{json_data.pic_cover}"/>',
+						'<span>{json_data.title:htmlEncode}</span>',
+					'</div>',
 				'</tpl>',
 			    '<div class="flex"><span class="time">{ctime}</span></div>',
 			'</div></div>'
@@ -63,9 +74,18 @@ Ext.define('WeiQuPai.view.ShowUser', {
 		this.down('#user-info').on('tap', function(){
 			this.fireEvent('bgtap', this.getParam());
 		}, this, {element: 'element'});
-
+		this.onBefore('itemtap', this.bindEvent, this);
 		this.msgbox = WeiQuPai.Util.msgbox('这个人很懒，什么都没有留下.');
 		this.add(this.msgbox);
+	},
+
+	bindEvent: function(list, index, dataItem, record, e){
+		//卡片点击
+		var card = Ext.get(e.target).up('.card');
+		if(card){
+			this.fireEvent('cardtap', this, index, record, card.getAttribute('dataType'));
+			return false;
+		}
 	},
 
 	applyParam: function(uid){

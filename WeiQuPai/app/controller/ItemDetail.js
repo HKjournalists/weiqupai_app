@@ -4,6 +4,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
         refs: {
             main: 'main',
             shopInfo : 'disclosureitem[itemId=shopInfo]',
+            brandInfo: 'disclosureitem[itemId=brandInfo]',
             paiBtn: 'container[itemId=paiBtn]',
             commentBtn: 'button[action=comment]',
             shareBtn: 'button[action=share]',
@@ -15,6 +16,9 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
         control: {
            shopInfo : {
                 tap: 'showShop'
+           },
+           brandInfo: {
+                tap: 'showBrand'
            },
            paiBtn: {
                 pai: 'showOrderView'
@@ -51,6 +55,11 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
     showShop: function(){
         var shopView = Ext.create('WeiQuPai.view.Shop', {data: this.getPageView().auctionData.shop});
         this.getMain().push(shopView);
+    },
+
+    showBrand: function(){
+        var brandView = Ext.create('WeiQuPai.view.Brand', {data: this.getPageView().auctionData.brand});
+        this.getMain().push(brandView);
     },
 
     showOrderView: function(){
@@ -98,6 +107,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
                 form.hide();
                 WeiQuPai.Util.unmask();
                 var list = self.getPageView();
+                list.msgbox.hide();
                 list.getStore().add(result.commentList);
                 list.updateAllListItems();
             },

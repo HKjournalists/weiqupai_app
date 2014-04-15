@@ -41,6 +41,13 @@ module.exports = [
         "clobbers": [
             "window.open"
         ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.splashscreen/www/splashscreen.js",
+        "id": "org.apache.cordova.splashscreen.SplashScreen",
+        "clobbers": [
+            "navigator.splashscreen"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -48,7 +55,8 @@ module.exports.metadata =
 {
     "org.apache.cordova.camera": "0.2.8",
     "xu.li.cordova.wechat": "0.4",
-    "org.apache.cordova.inappbrowser": "0.3.3"
+    "org.apache.cordova.inappbrowser": "0.3.3",
+    "org.apache.cordova.splashscreen": "0.2.7"
 }
 // BOTTOM OF METADATA
 });

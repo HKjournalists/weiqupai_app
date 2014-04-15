@@ -1,7 +1,9 @@
 Ext.define("WeiQuPai.Util", {
     singleton: true,
     requires: ['WeiQuPai.view.InputComment', 'WeiQuPai.view.CirclePost', 'WeiQuPai.view.CircleReply', 'WeiQuPai.view.CameraLayer'],
+    globalView: {},
     createOverlay : function(com, conf){
+        if(this.globalView[com]) return this.globalView[com];
     	var config = {
             bottom: 0,
             left:0,
@@ -22,6 +24,7 @@ Ext.define("WeiQuPai.Util", {
 
         cmp = Ext.create(com, Ext.merge(config, conf));
         Ext.Viewport.add(cmp);
+        this.globalView[com] = cmp;
         return cmp;
     }, 
 
@@ -305,5 +308,20 @@ Ext.define("WeiQuPai.Util", {
                 }
             });
         });
-    }
+    },
+
+    //加载服务器端的闪屏
+    loadSplash: function(callback){
+        Ext.Ajax.request({
+            url: WeiQuPai.Config.apiUrl + '/?r=app/splashScreen&ver=' + WeiQuPai.Config.version,
+            method: 'get',
+            success: function(rsp){
+                rsp = Ext.decode(rsp.responseText);
+                callback && callback(rsp);
+            },
+            failure: function(){
+                callback && callback();
+            }
+        });
+    },
 })
