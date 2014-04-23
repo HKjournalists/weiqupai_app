@@ -79,10 +79,12 @@ Ext.define('WeiQuPai.view.ShareLayer', {
     },
 
     shareWeixin: function(){
+        this.hide();
         this.shareWechat(Wechat.Scene.SESSION);
     },
 
     sharePyquan: function(){
+        this.hide();
         this.shareWechat(Wechat.Scene.TIMELINE);
     },
 
@@ -101,8 +103,6 @@ Ext.define('WeiQuPai.view.ShareLayer', {
             scene: scene
         }
         Wechat.share(data, function () {
-            //成功后关掉分享弹层
-            me.hide();
         }, function (reason) {
             //Ext.Msg.alert(null, "分享失败: " + reason);
         });

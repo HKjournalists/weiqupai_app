@@ -310,9 +310,9 @@ Ext.define('WeiQuPai.plugin.PullRefresh', {
             single: true,
             scope: this
         });
-
         this.setIsSnappingBack(true);
         scroller.scrollTo(null, 0, {duration: this.getSnappingAnimationDuration()});
+        this.onSnapBackEnd();
     },
 
     /**
@@ -339,7 +339,6 @@ Ext.define('WeiQuPai.plugin.PullRefresh', {
             if(this.getState() === "loaded" && !isSnappingBack) {
                 this.snapBack();
             }
-
             if (this.getState() !== "loading" && this.getState() !=="loaded") {
                 if (-y >= pullHeight + 10) {
                     this.setState("release");

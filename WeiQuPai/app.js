@@ -61,6 +61,9 @@ Ext.application({
         //上报版本号
         this.reportVersion();
 
+        //handle android back button
+        this.handelBackButton();
+
         this.initMsgBox();
 
         //fix ios7 statusbar overlay
@@ -120,6 +123,14 @@ Ext.application({
         setTimeout(function(){
             navigator.splashscreen && navigator.splashscreen.hide();
         }, 1000);
+    },
+
+    handelBackButton: function(){
+        if(!Ext.os.is.android) return;
+        document.addEventListener('backbutton', function(e){
+            var nav = Ext.Viewport.down('main');
+            nav.getInnerItems().length == 1 ? navigator.app.exitApp() : nav.pop();
+        }, false);
     },
 
     //修改messagebox的文字

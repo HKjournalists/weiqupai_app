@@ -32,6 +32,7 @@ Ext.define('WeiQuPai.view.Main', {
 
     //初始化navigation,设置动画执行的标识
     initialize: function(){
+        this.getLayout().setAnimation(Ext.os.is.iOS ? 'cover' : 'fade');
         this.callParent(arguments);
         this.addAnimation();
         this.add(Ext.create('WeiQuPai.view.MainTab'));

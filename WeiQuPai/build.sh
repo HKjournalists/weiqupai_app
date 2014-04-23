@@ -15,7 +15,7 @@ if [ "$2" != "" ];then
 fi
 if [ "$1" == "pub" ];then
 	scp ../build/vqupai.ipa $SERVER:$PACKAGE_DIR
-	scp $ANDROID_DIR/android-release.apk $SERVER:${PACKAGE_DIR}vqupai.apk
+	scp ../build/vqupai.apk $SERVER:$PACKAGE_DIR
 	scp adhoc/* $SERVER:$PACKAGE_DIR/
 	exit 0
 fi

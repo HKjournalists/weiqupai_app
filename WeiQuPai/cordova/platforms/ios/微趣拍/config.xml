@@ -46,4 +46,6 @@
     <content src="index.html" />
     <access origin="*" />
     <preference name="wechatappid" value="wxc0d1e67c6159b69e" />
+    <preference name="SplashScreen" value="splash" />
+    <preference name="SplashScreenDelay" value="4000" />
 </widget>

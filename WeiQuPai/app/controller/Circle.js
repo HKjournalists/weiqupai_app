@@ -59,6 +59,8 @@ Ext.define('WeiQuPai.controller.Circle', {
 
     //显示回复的表单
     showReplyForm: function(list, index, record, toUid, toNick){
+        var user = WeiQuPai.Util.checkLogin();
+        if(!user) return;
         toUid = toUid || 0;
         var placeHolder = toNick ? '回复' + toNick : '评论';
         var form = this.getPageView().replyForm;
@@ -71,6 +73,8 @@ Ext.define('WeiQuPai.controller.Circle', {
 
     //显示发表动态的表单
     showPublishForm: function(){
+        var user = WeiQuPai.Util.checkLogin();
+        if(!user) return;
         var form = this.getPageView().postForm;
         form.show();
         form.down('textfield').focus();
