@@ -20,6 +20,8 @@
 package com.vqupai.app;
 
 import android.os.Bundle;
+import com.baidu.android.pushservice.PushConstants;
+import com.baidu.android.pushservice.PushManager;
 import org.apache.cordova.*;
 
 public class MainActivity extends CordovaActivity 
@@ -29,9 +31,27 @@ public class MainActivity extends CordovaActivity
     {
         super.onCreate(savedInstanceState);
         super.init();
+        // 以apikey的方式登录，一般放在主Activity的onCreate中
+        PushManager.startWork(getApplicationContext(),
+                PushConstants.LOGIN_TYPE_API_KEY,
+                Utils.getMetaValue(MainActivity.this, "api_key"));
+
         // Set by <content src="index.html" /> in config.xml
         super.loadUrl(Config.getStartUrl());
         //super.loadUrl("file:///android_asset/www/index.html");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        PushManager.activityStarted(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        PushManager.activityStoped(this);
     }
 }
 

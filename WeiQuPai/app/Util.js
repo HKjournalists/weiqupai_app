@@ -288,7 +288,7 @@ Ext.define("WeiQuPai.Util", {
 
     //绑定推送消息，并将deviceToken,userId等信息回传给server
     bindPush: function(){
-        if(!Ext.os.is.ios) return;
+        //if(!Ext.os.is.ios) return;
         var user = WeiQuPai.Cache.get('currentUser');
         BPush.bindChannel(function(data){
             //绑定成功，但用户未登录，不需要回传

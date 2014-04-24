@@ -16,6 +16,9 @@
     <feature name="SplashScreen">
         <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
     </feature>
+    <feature name="BPush">
+        <param name="android-package" value="cordova.bpush.BPush" />
+    </feature>
     <name>微趣拍</name>
     <description>
         微趣拍

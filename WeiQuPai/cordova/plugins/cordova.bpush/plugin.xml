@@ -28,15 +28,15 @@
     </platform>
 
     <!-- android -->
-    <!--
+    
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="Wechat">
-                <param name="android-package" value="xu.li.cordova.wechat.Wechat"/>
+                <param name="android-package" value="cordova.bpush.BPush"/>
             </feature>
         </config-file>
 
-        <source-file src="src/android/Wechat.java" target-dir="src/xu/li/cordova/wechat" />
+        <source-file src="src/android/BPush.java" target-dir="src/cordova/bpush" />
     </platform>
-    -->
+    
 </plugin>

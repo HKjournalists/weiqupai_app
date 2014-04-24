@@ -48,6 +48,13 @@ module.exports = [
         "clobbers": [
             "navigator.splashscreen"
         ]
+    },
+    {
+        "file": "plugins/cordova.bpush/www/bpush.js",
+        "id": "cordova.bpush.BPush",
+        "clobbers": [
+            "BPush"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -56,7 +63,8 @@ module.exports.metadata =
     "org.apache.cordova.camera": "0.2.8",
     "xu.li.cordova.wechat": "0.4",
     "org.apache.cordova.inappbrowser": "0.3.3",
-    "org.apache.cordova.splashscreen": "0.2.7"
+    "org.apache.cordova.splashscreen": "0.2.7",
+    "cordova.bpush": "0.1"
 }
 // BOTTOM OF METADATA
 });

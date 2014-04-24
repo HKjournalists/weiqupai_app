@@ -1,5 +1,23 @@
+# view AndroidManifest.xml #generated:42
+-keep class com.baidu.android.pushservice.PushService { <init>(...); }
+
+# view AndroidManifest.xml #generated:24
+-keep class com.baidu.android.pushservice.PushServiceReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:32
+-keep class com.baidu.android.pushservice.RegistrationReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:15
+-keep class com.baidu.android.pushservice.richmedia.MediaListActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:13
+-keep class com.baidu.android.pushservice.richmedia.MediaViewActivity { <init>(...); }
+
 # view AndroidManifest.xml #generated:6
 -keep class com.vqupai.app.MainActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:17
+-keep class com.vqupai.app.PushMessageReceiver { <init>(...); }
 
 # view AndroidManifest.xml #generated:12
 -keep class com.vqupai.app.wxapi.WXEntryActivity { <init>(...); }
