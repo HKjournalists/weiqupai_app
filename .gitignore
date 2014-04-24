@@ -1,7 +1,7 @@
 WeiQuPai/resources/sass/.sass-cache
 build
 WeiQuPai/cordova/platforms/android/.idea
-WeiQuPai/cordova/platforms/android/ant-build/*
-WeiQuPai/cordova/platforms/android/ant-gen/*
-WeiQuPai/cordova/platforms/android/gen/*
-WeiQuPai/cordova/platforms/android/out/*
+WeiQuPai/cordova/platforms/android/ant-build/
+WeiQuPai/cordova/platforms/android/ant-gen/
+WeiQuPai/cordova/platforms/android/gen/
+WeiQuPai/cordova/platforms/android/out/
