@@ -18,6 +18,16 @@ Ext.define('WeiQuPai.view.OrderSuccess', {
                 cls: 'w-title'
             },
             {
+            	xtype: 'container',
+            	html: '请在30分钟内完成支付，不然订单会被取消哦',
+            	cls:'w-tip',
+            	docked:'top',
+            	itemId: 'tip',
+            	hideAnimation: {
+            		type: 'fadeOut'
+            	}
+            },
+            {
 				xtype: 'container',
 				itemId: 'orderInfo',
 				tpl: new Ext.XTemplate(
@@ -57,6 +67,14 @@ Ext.define('WeiQuPai.view.OrderSuccess', {
 		var payBtn = {xtype: 'button', text: '去支付', action: 'pay', cls: 'w-toolbar-button', iconCls: 'icon-pay'};
 		this.down('bottombar #buttonContainer').add(payBtn);
 		this.down('button[action=pay]').on('tap', this.payBtnTap, this);
+		this.hideTip();
+	},
+
+	hideTip: function(){
+		var me = this;
+		setTimeout(function(){
+			me.down('#tip').hide();
+		}, 30000);
 	},
 
 	payBtnTap: function(){

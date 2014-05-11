@@ -54,7 +54,13 @@ Ext.application({
         'resources/images/splash3.jpg' 
     ],
 
+    //是否第一次加载
+    firstLaunch: false,
+
     launch: function() {
+        var ver = WeiQuPai.Config.version;
+        var flag = WeiQuPai.Cache.get('appver');
+        this.firstLaunch = !flag || flag != ver;
 
         this.hideSplash();
 
@@ -62,7 +68,11 @@ Ext.application({
         this.reportVersion();
 
         //handle android back button
-        this.handelBackButton();
+        this.handleBackButton();
+
+        //暂停和恢复的时候
+        this.handleResume();
+        this.handlePause();
 
         this.initMsgBox();
 
@@ -71,14 +81,12 @@ Ext.application({
             document.body.className = 'ios7';
         }
 
-
         //bind push
         WeiQuPai.Util.bindPush();
 
         //startup screen
-        var ver = WeiQuPai.Config.version;
-        var flag = WeiQuPai.Cache.get('appver');
-        if(!flag || flag != ver){
+        if(this.firstLaunch){
+            this.firstLaunch = true;
             WeiQuPai.Cache.set('appver', ver);
             var view = Ext.create('WeiQuPai.view.StartupScreen'); 
             view.setPicData(this.startupScreen);
@@ -115,8 +123,13 @@ Ext.application({
     }, 
 
     reportVersion: function(){
+        var user = WeiQuPai.Cache.get('currentUser');
+        var uid = user && user.push_user_id || 0;
         var img = new Image;
-        img.src = "http://www.vqupai.com/ver/i.gif?ver=" + WeiQuPai.Config.version;
+        var src = "http://www.vqupai.com/ver/i.gif?ver=" + WeiQuPai.Config.version + '&market=' + WeiQuPai.Config.market;
+        if(uid) src += "&push_user_id=" + uid;
+        if(this.firstLaunch) src += "&first=1";
+        img.src = src;
     },
 
     hideSplash: function(){
@@ -125,11 +138,38 @@ Ext.application({
         }, 1000);
     },
 
-    handelBackButton: function(){
+    handleBackButton: function(){
         if(!Ext.os.is.android) return;
         document.addEventListener('backbutton', function(e){
+            if(WeiQuPai.lastView){
+                WeiQuPai.lastView.hide();
+                delete WeiQuPai.lastView;
+                return;
+            }
             var nav = Ext.Viewport.down('main');
             nav.getInnerItems().length == 1 ? navigator.app.exitApp() : nav.pop();
+        }, false);
+    },
+
+    handlePause: function(){
+        
+    },
+
+    handleResume: function(){
+        document.addEventListener('resume', function(e){
+            var mainTab = Ext.Viewport.down('maintab');
+            var main = Ext.Viewport.down('main');
+            //如果是在今日，就做软刷新处理
+            var today = mainTab.down('today');
+            var detail = main.down('itemdetail');
+            if(main.getActiveItem() == detail){
+                detail.softRefresh();
+                return;
+            }
+            if(mainTab.getActiveItem() == today){
+                today.softRefresh();
+                return;
+            }
         }, false);
     },
 

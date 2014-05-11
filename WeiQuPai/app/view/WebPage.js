@@ -36,7 +36,12 @@ Ext.define('WeiQuPai.view.WebPage', {
 		iframe.onload = function(){
 			me.iframeLoad();
 		};
+		var user = WeiQuPai.Cache.get('currentUser');
+		if(user){
+			href += (href.indexOf("?") == -1 ? '?' : '&')  + 'token=' + user.token;
+		}
 		iframe.src = href;
+		return href;
 	},
 
 	iframeLoad: function(){

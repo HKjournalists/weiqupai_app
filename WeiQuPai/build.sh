@@ -28,6 +28,10 @@ else
 	cp Config.js.production app/Config.js
 	REMOTE_DIR="/alidata/www/m.vqupai.com/webroot/m/"
 fi
+if [ "$BUILD_TYPE" != "market" ];then
+	sed -i '' "s/#MARKET#/vqupai/" app/Config.js
+fi
+
 sencha app build native
 if [ "$BUILD_TYPE" == "all" ] || [ "$BUILD_TYPE" == "pkg" ];then
 	mv $BUILD_DIR/native-package-mobile/WeiQuPai/packager.json $BUILD_DIR/native-package-mobile/WeiQuPai/Payload
@@ -37,6 +41,19 @@ if [ "$BUILD_TYPE" == "all" ] || [ "$BUILD_TYPE" == "pkg" ];then
 	mv $BUILD_DIR/native-package-mobile/WeiQuPai/$APP_NAME $BUILD_DIR/
 	echo "publish package => $PACKAGE_DIR"
 	scp $BUILD_DIR/vqupai.ipa $SERVER:$PACKAGE_DIR
+fi
+#android市场打包
+if [ "$BUILD_TYPE" == "market" ];then
+	cd cordova
+	cp www/app.js app.js
+	while read market; do
+		echo "build apk for market $market"
+		sed  "s/#MARKET#/$market/" app.js > www/app.js
+		cordova build android --release
+		mv platforms/android/ant-build/android-release.apk ../../build/$market.apk
+	done < ../market.conf
+	rm app.js
+	cd -
 fi
 
 if [ "$BUILD_TYPE" == "all" ] || [ "$BUILD_TYPE" == "web" ];then

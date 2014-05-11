@@ -28,5 +28,9 @@ Ext.define('WeiQuPai.view.CameraLayer', {
 				cls: 'w-button w-margin',
 			}
 		]
+	},
+
+	initialize: function(){
+		this.on('show', WeiQuPai.Util.saveLastView, this);
 	}
 });

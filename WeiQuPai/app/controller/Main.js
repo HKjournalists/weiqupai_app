@@ -43,6 +43,7 @@ Ext.define('WeiQuPai.controller.Main', {
         if(!this.menu){
             this.menu = Ext.create('WeiQuPai.view.SubMenu');
         }
+        WeiQuPai.lastView = this.menu;
         this.menu.showBy(btn);
     },
 

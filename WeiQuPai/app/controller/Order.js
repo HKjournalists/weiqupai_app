@@ -79,6 +79,11 @@ Ext.define('WeiQuPai.controller.Order', {
 
     //选择使用拍券
     selectCoupon: function(list, index, dataItem, record, e){
+        if(record.get('coupon_info').expired){
+            //Ext.Msg.alert(null, '该拍券已经过期，不能使用');
+            Ext.toast('该拍券已经过期，不能使用');
+            return;
+        }
         this.getMain().pop();
         var order = this.getOrderView().getRecord();
         order.set('coupon', record.get('coupon_id'))
@@ -140,7 +145,12 @@ Ext.define('WeiQuPai.controller.Order', {
                 rsp = Ext.decode(rsp.responseText);
                 if(!WeiQuPai.Util.invalidToken(rsp)) return false;
                 if(!rsp.success){
-                    Ext.Msg.alert(null, rsp.msg);
+                    //订单超时
+                    var func = function(){
+                        if(rsp.code != 309) return;
+                        Ext.Viewport.down('main').pop();
+                    }
+                    Ext.Msg.alert(null, rsp.msg, func);
                     return;
                 }
                 //将拍过的商品保存到cache中

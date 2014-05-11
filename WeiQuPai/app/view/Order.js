@@ -15,6 +15,16 @@ Ext.define('WeiQuPai.view.Order', {
                 docked: 'top',
                 cls: 'w-title'
             },
+            {
+            	xtype: 'container',
+            	html: '请在15分钟内提交订单，不然价格就变了哦',
+            	cls:'w-tip',
+            	docked:'top',
+            	itemId: 'tip',
+            	hideAnimation: {
+            		type: 'fadeOut'
+            	}
+            },
 			{
 				xtype: 'container',
 				itemId: 'itemInfo',
@@ -77,6 +87,7 @@ Ext.define('WeiQuPai.view.Order', {
     ),
 
 	initialize: function(){
+		this.hideTip();
 		var user = WeiQuPai.Cache.get('currentUser');
 		if(!user) return;
 		var order = Ext.create('WeiQuPai.model.Order');
@@ -99,6 +110,13 @@ Ext.define('WeiQuPai.view.Order', {
 			}
 		}, this);
 	}, 
+
+	hideTip: function(){
+		var me = this;
+		setTimeout(function(){
+			me.down('#tip').hide();
+		}, 30000);
+	},
 
 	applyAuctionData: function(data){
 		data.total_pay = data.curr_price;

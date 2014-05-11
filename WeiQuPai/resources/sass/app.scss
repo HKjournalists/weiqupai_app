@@ -235,22 +235,36 @@ h3{
 .today-item-row h2{
 	line-height:1.5;
 }
-.today-item-row .time{
-	float:right;
-	margin-top:.4em;
-	font-size:$tiny-font;
-	color:$gray-color;
+.today-item-row .status{
+	font-size:$small-font;
+	color:#f5f5f6;
 	background:#e4e8e9;
 	border-radius:20px;
 	padding:.2em 1em;
+}
+.today-item-row .not-start .status{
+	background:#bbc9ad;
+}
+.today-item-row .online .status{
+	background:#ca0936;
+}
+.today-item-row .finish .status{
+	background:#bfc7c9;
+}
+
+.today-item-row .price-container{
+	float:right;
 }
 .today-item-row .price{
 	font-size:$big-font;
 	color:$red-color;
 }
+.today-item-row .finish .price{
+	color:#a4acae;
+}
 .today-item-row .market-price{
 	text-decoration:line-through;
-	color:$gray-color;
+	color:#a4acae;
 	font-size:$small-font;
 }
 
@@ -270,25 +284,11 @@ h3{
 	border:1px solid #c1c2c7;
 	box-shadow:1px 1px 6px #c1c2c7; 
 }
-.item-detail-info{
+.item-detail-title{
 	padding:.7em 1em 1.2em;
 	border-bottom:1px solid $border-color;
 }
-.item-detail-info .market-price{
-	text-decoration:line-through;
-	color:$gray-color;
-	font-size:$tiny-font;
-	float:right;
-	clear:right;
-	
-}
-.item-detail-info .price{
-	font-size:$default-font;
-	color:$red-color;
-	float:right;
-	clear:right;
-	margin-top:2px;
-}
+
 .item-detail-desc{
 	border-bottom: 1px solid $border-color;
 	padding:1em;
@@ -510,13 +510,15 @@ h3{
 }
 .w-my-button{
 	background-repeat:no-repeat;
+	background-position:center top;
 	background-size:60px 60px;
 	width:60px;
 	padding-top:60px;
 	line-height:1.5;
 	font-size:$small-font;
-	margin:1em 0 0 1em;
+	margin:2em 0 0 0;
 	text-align:center;
+	color:#5f7479;
 }
 .w-my-button-friend{
 	background-image:url(../images/icon-friend.png);
@@ -1033,10 +1035,11 @@ h3{
 }
 .w-toolbar .w-button-pai .mask{
 	width:57px;
-	height:0px;
+	height:60px;
 	overflow:hidden;
 	background:url(../images/bt-pai-0.png) no-repeat left top;
 	background-size:57px 60px;
+	display:none;
 }
 .w-toolbar{
 	overflow:visible;
@@ -1138,4 +1141,73 @@ h3{
 .shipment-progress p{
 	font-size:.8em;
 	color:gray;
+}
+p.coupon-info{
+	line-height:1.5;
+}
+.expire_time{
+	display:block;
+	color:#666;
+	font-size:$small-font;
+}
+//拍品详情的倒计时
+.countdown-bar{
+	height:40px;
+	background:#f0f0f1;
+	display:-webkit-box;
+	display:flex;
+	-webkit-box-align:center;
+	align-items:center;
+	text-align:center;
+	//font-size:0.9em;
+}
+.countdown-bar .round, .countdown-bar .countdown, .countdown-bar .price{
+	-webkit-box-flex:1;
+	flex:1;
+	width:33.33%;
+}
+.countdown-bar .price{
+	line-height:0.8;
+}
+.countdown-bar .countdown{
+	color:#f5f5f6;
+	height:100%;
+	line-height:40px;
+}
+.countdown-bar .oprice{
+	color:#a4acae;
+	text-decoration:line-through;
+	font-size:$small-font;
+}
+.countdown-bar .curprice{
+	color:#ca0936;
+}
+.countdown-bar.not-start .round{
+	color:#99ad85;
+}
+.countdown-bar.not-start .countdown{
+	background:#bbc9ad;
+}
+.countdown-bar.online .round{
+	color:#ca0936;
+}
+.countdown-bar.online .countdown{
+	background:#ca0936;
+}
+.countdown-bar.finish .round{
+	color:#a4acae;
+}
+.countdown-bar.finish .countdown{
+	background:#bfc7c9;
+}
+.countdown-bar.finish .curprice{
+	color:#a4acae;
+}
+.w-tip{
+	background:#fff5cd;
+	color:#c60;
+	font-size:12px;
+	text-align:center;
+	height:30px;
+	line-height:30px;
 }

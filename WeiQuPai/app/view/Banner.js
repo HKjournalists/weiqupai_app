@@ -21,10 +21,8 @@ Ext.define('WeiQuPai.view.Banner', {
 			this.hide();
 			return;
 		}
-		if(this.timer){
-			clearInterval(this.timer);
-			this.timer = null;
-		}
+		this.show();
+		this.stopTimer();
 		this.removeAll(true);
 		for(var i=0; i<records.length; i++){
 			var img = Ext.create('Ext.Img', {
@@ -36,6 +34,10 @@ Ext.define('WeiQuPai.view.Banner', {
 			this.add(img);
 		}
 		this.setActiveItem(0);
+		this.startTimer();
+	},
+
+	startTimer: function(){
 		var self = this;
 		this.timer = setInterval(function(){
 			if(self.getActiveIndex() == self.getMaxItemIndex()){
@@ -44,6 +46,13 @@ Ext.define('WeiQuPai.view.Banner', {
 			}
 			self.next();
 		}, 5000);
+	},
+
+	stopTimer: function(){
+		if(this.timer){
+			clearInterval(this.timer);
+			this.timer = null;
+		}
 	},
 
 	doImageTap: function(img){

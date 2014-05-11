@@ -21,6 +21,7 @@ Ext.define('WeiQuPai.view.AddFriendButtonLayer', {
 	},
 
 	initialize: function(){
+		this.on('show', WeiQuPai.Util.saveLastView, this);
 		this.down('button[action=cancel]').on('tap', this.hide, this);
 		this.down('button[action=addFriend]').on('tap', this.doAddFriend, this);
 	}, 

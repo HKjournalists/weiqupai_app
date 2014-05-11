@@ -256,9 +256,12 @@ Ext.define("WeiQuPai.Util", {
 
     showTab: function(tab){
         var main = Ext.Viewport.down('main');
+        //防止重复触发activate事件
+        main.forceFireActive = false;
         mainTab = main.down('maintab');
         mainTab.setActiveItem(tab);
         main.pop(mainTab);
+        main.forceFireActive = true;
     },
 
     //保存up过的id,如果已经保存过，返回false, cache列表最多保存100个
@@ -288,7 +291,7 @@ Ext.define("WeiQuPai.Util", {
 
     //绑定推送消息，并将deviceToken,userId等信息回传给server
     bindPush: function(){
-        //if(!Ext.os.is.ios) return;
+        if(!window.BPush) return;
         var user = WeiQuPai.Cache.get('currentUser');
         BPush.bindChannel(function(data){
             //绑定成功，但用户未登录，不需要回传
@@ -324,4 +327,11 @@ Ext.define("WeiQuPai.Util", {
             }
         });
     },
+
+    //保存上一个视图，解决安卓下backbutton弹层不消失的问题
+    saveLastView: function(){
+        if(Ext.os.is.android){
+            WeiQuPai.lastView = this;
+        }
+    }
 })

@@ -41,5 +41,15 @@ Ext.define('WeiQuPai.view.MainTab', {
                 flex: 1
             }      
         ]
+    },
+
+    initialize: function(){
+        this.callParent(arguments);
+        this.on('hide', this.onHide, this);
+    },
+
+    onHide: function(){
+        this.down('today banner').stopTimer();
+        this.down('circle banner').stopTimer();
     }
 });

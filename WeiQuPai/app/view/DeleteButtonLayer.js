@@ -22,6 +22,7 @@ Ext.define('WeiQuPai.view.DeleteButtonLayer', {
 	},
 
 	initialize: function(){
+		this.on('show', WeiQuPai.Util.saveLastView, this);
 		this.down('button[action=cancel]').on('tap', this.hide, this);
 		this.down('button[action=delete]').on('tap', function(){
 			this.getDeleteAction().call(this.getScope() || this);

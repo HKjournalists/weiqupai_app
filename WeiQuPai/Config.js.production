@@ -5,7 +5,7 @@ Ext.define("WeiQuPai.Config", {
     apiUrl: 'http://m.vqupai.com',
 
     //app版本
-    version:"1.0",
+    version:"1.1",
     
     //订单状态
     orderStatusText : ['未付款', '处理中', '已发货', '已完成', '取消未付款', '取消已付款'],
@@ -22,5 +22,7 @@ Ext.define("WeiQuPai.Config", {
         STATUS_SETTLE : 1,
         STATUS_ONLINE : 2,
         STATUS_FINISH : 3
-    }
+    },
+    
+    market:'#MARKET#'
 })

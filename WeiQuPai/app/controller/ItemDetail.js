@@ -32,7 +32,6 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
                     form.down('hiddenfield[name=auction_id]').setValue(auctionId);
                     form.down('hiddenfield[name=item_id]').setValue(itemId);
                     form.show();
-                    form.down('textfield').focus();
                 }
            },
            shareBtn: {
@@ -71,14 +70,14 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
             return;
         }
         WeiQuPai.Util.mask();
-        var auction = WeiQuPai.model.Auction;
-        auction.getProxy().setExtraParam('token', user.token);
-        auction.load(auctionId, {
+        var reserve = WeiQuPai.model.Reserve;
+        reserve.getProxy().setExtraParam('token', user.token);
+        reserve.load(auctionId, {
             success: function(record, operation){
                 WeiQuPai.Util.unmask();
                 if(!WeiQuPai.Util.invalidToken(record.raw)) return false;
                 if(record.get('status') != WeiQuPai.Config.auctionStatus.STATUS_ONLINE){
-                    msgArr = ['拍卖还未开始', '拍卖正在结算中，请稍等几分钟', null, '对不起，拍卖已结束'];
+                    msgArr = ['拍卖还未开始', null, null, '对不起，拍卖已结束'];
                     msg = msgArr[record.get('status')];
                     Ext.Msg.alert(null, msg);
                     return;
@@ -170,7 +169,6 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
         form.down('hiddenfield[name=item_id]').setValue(itemId);
         form.down('hiddenfield[name=reply_id]').setValue(replyId);
         form.show();
-        form.down('textfield').focus();
     },
 
     //商品描述的展开和收起

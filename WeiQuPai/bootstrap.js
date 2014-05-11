@@ -773,6 +773,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.model.Circle": [],
   "WeiQuPai.model.Order": [],
   "WeiQuPai.model.Profile": [],
+  "WeiQuPai.model.Reserve": [],
   "WeiQuPai.model.Shipment": [],
   "WeiQuPai.model.UserConsignee": [],
   "WeiQuPai.plugin.ListPaging": [],
@@ -1817,6 +1818,7 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.model.Circle": [],
   "WeiQuPai.model.Order": [],
   "WeiQuPai.model.Profile": [],
+  "WeiQuPai.model.Reserve": [],
   "WeiQuPai.model.Shipment": [],
   "WeiQuPai.model.UserConsignee": [],
   "WeiQuPai.plugin.ListPaging": [

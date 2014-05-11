@@ -8,7 +8,8 @@ Ext.define('WeiQuPai.view.MyCoupon', {
 		itemTpl: new Ext.XTemplate(
 			'<div class="w-icon-list-item w-coupon-list-item">',
 			'<span class="coupon-icon coupon-{coupon_info.value}"></span>',
-			'<p>{coupon_info.name} X {num}</p>',
+			'<p class="coupon-info">{coupon_info.name} X {num} ',
+			'<span class="expire_time">过期时间 {coupon_info.expire_time} <tpl if="coupon_info.expired">[已过期]</tpl></span></p>',
 			'</div>'
 		),
 		items:[

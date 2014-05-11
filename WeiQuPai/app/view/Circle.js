@@ -117,8 +117,9 @@ Ext.define('WeiQuPai.view.Circle', {
 	initialize: function(){
 		this.callParent(arguments);
 		this.setForceReload(true);
-		this.loadData();
+		this.loadData(true);
 		this.on('activate', this.loadData, this);
+        this.on('hide', this.onHide, this);
 		this.onBefore('itemtap', this.bindEvent, this);
 		/*
 		var btn = {
@@ -132,9 +133,9 @@ Ext.define('WeiQuPai.view.Circle', {
 		this.postForm = WeiQuPai.Util.createOverlay('WeiQuPai.view.CirclePost', {height: 48, showAnimation: false, hideAnimation: false});
 	},
 
-	loadData: function(){
-		//每次都重刷广告
-		this.down('banner').updateBanner();
+	loadData: function(firstLoad){
+		//除了第一次每次都重刷广告
+		firstLoad !== true && this.down('banner').updateBanner();
 		//强制刷新只做一次
 		if(this.getForceReload()){
 			this.getStore().removeAll();
@@ -144,6 +145,10 @@ Ext.define('WeiQuPai.view.Circle', {
 			this.getStore().load();
 		}
 	},
+
+    onHide: function(){
+        this.down('banner').stopTimer();
+    },
 
 	bindEvent: function(list, index, dataItem, record, e){
 		var user = WeiQuPai.Cache.get('currentUser');

@@ -7,6 +7,7 @@ Ext.define('WeiQuPai.view.CirclePost', {
 			'type' : 'hbox',
 			'align' : 'center'
 		},
+		scrollable: false,
 		cls: 'input-comment',
 		items: [
 			{
@@ -28,6 +29,10 @@ Ext.define('WeiQuPai.view.CirclePost', {
 	}, 
 
 	initialize: function(){
+		this.on('show', WeiQuPai.Util.saveLastView, this);
+		this.on('show', function(){
+			this.down('textfield[name=content]').focus();
+		});
 		this.down('button[action=publish]').on('tap', function(){
 			this.fireEvent('publish', this);
 		}, this);

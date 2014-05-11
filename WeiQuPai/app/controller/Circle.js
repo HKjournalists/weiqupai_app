@@ -64,11 +64,11 @@ Ext.define('WeiQuPai.controller.Circle', {
         toUid = toUid || 0;
         var placeHolder = toNick ? '回复' + toNick : '评论';
         var form = this.getPageView().replyForm;
+        form.down('textfield[name=content]').setPlaceHolder(placeHolder);
         form.down('hiddenfield[name=feed_id]').setValue(record.get('id'));
         form.down('hiddenfield[name=to_uid]').setValue(toUid);
         form.down('hiddenfield[name=to_nick]').setValue(toNick);
         form.show();
-        form.down('textfield').focus();
     },
 
     //显示发表动态的表单
@@ -77,7 +77,6 @@ Ext.define('WeiQuPai.controller.Circle', {
         if(!user) return;
         var form = this.getPageView().postForm;
         form.show();
-        form.down('textfield').focus();
     },
 
     //删除动态

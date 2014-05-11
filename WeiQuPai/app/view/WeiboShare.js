@@ -26,7 +26,7 @@ Ext.define('WeiQuPai.view.WeiboShare', {
 	applyData: function(data){
 		return {
 			title: data.title,
-			url: data.url,
+			url: data.url + '&t=weibo',
 			pic: data.thumb,
 			searchPic : 'false',
 			appkey: '3289344208'

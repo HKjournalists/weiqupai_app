@@ -66,6 +66,8 @@ Ext.define('WeiQuPai.view.MyAuction', {
         }
         this.loginTip.hide();
         this.msgbox.hide();
+        //fix 出现loading的bug
+        this.setLoadingText(null);
         var store = this.getStore();
         //加载数据
         store.getProxy().setExtraParam('token', user.token);

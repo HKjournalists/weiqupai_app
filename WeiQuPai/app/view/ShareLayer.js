@@ -58,12 +58,13 @@ Ext.define('WeiQuPai.view.ShareLayer', {
     },
 
     initialize: function(){
+        this.on('show', WeiQuPai.Util.saveLastView, this);
         this.down('button[action=cancel]').on('tap', this.hide, this);
         this.down('button[action=weibo]').on('tap', this.shareWeibo, this);
         this.down('button[action=weixin]').on('tap', this.shareWeixin, this);
         this.down('button[action=pyquan]').on('tap', this.sharePyquan, this);
     },
-
+    
     applyShareData: function(data){
         return {
             title: data.title + ' - 微趣拍',
@@ -89,6 +90,7 @@ Ext.define('WeiQuPai.view.ShareLayer', {
     },
 
     shareWechat: function(scene){
+        var t = scene == Wechat.Scene.TIMELINE ? 'wxtimeline' : 'wxfriend';
         var me = this;
         var msg = this.getShareData();
         var data = {
@@ -97,7 +99,7 @@ Ext.define('WeiQuPai.view.ShareLayer', {
                 thumb: msg.thumb,
                 description: msg.description,
                 media: {
-                    webpageUrl: msg.url
+                    webpageUrl: msg.url +　'&t=' + t
                 }
             },
             scene: scene

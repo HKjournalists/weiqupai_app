@@ -9,11 +9,12 @@ Ext.define('WeiQuPai.view.ImageViewer', {
 		showAnimation: 'fadeIn',
 		hideAnimation: 'fadeOut',
 		hidden: true,
-		style:'background:#000'
+		style:'background:#000;z-index:1'
 	},
 
 	initialize: function(){
 		//Ext.Viewport.on('orientationchange', this.onOrientationChange, this);
+		this.on('show', WeiQuPai.Util.saveLastView, this);
 	},
 
 	applyPicData: function(data){
