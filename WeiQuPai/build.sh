@@ -29,7 +29,7 @@ else
 	REMOTE_DIR="/alidata/www/m.vqupai.com/webroot/m/"
 fi
 if [ "$BUILD_TYPE" != "market" ];then
-	sed -i '' "s/#MARKET#/vqupai/" app/Config.js
+	sed -i '' "s/#MARKET#/appstore/" app/Config.js
 fi
 
 sencha app build native

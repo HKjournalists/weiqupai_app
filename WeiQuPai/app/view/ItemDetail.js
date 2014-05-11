@@ -273,7 +273,6 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 			this.down('#brandInfo').show();
 		}
 		if(this.auctionData.status != WeiQuPai.Config.auctionStatus.STATUS_ONLINE){
-			console.log(this.auctionData.status);
 			Ext.get('paiBtnMask').setStyle('display', 'block');
 		}
 		//设置提示浮层

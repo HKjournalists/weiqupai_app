@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		117BB047A3FD44119F745E3F /* CDVWechat.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C18AF085F1F44E4B6EEBC60 /* CDVWechat.m */; };
 		1818D42018FDDE8000565F5A /* logo120.png in Resources */ = {isa = PBXBuildFile; fileRef = 1818D41F18FDDE8000565F5A /* logo120.png */; };

@@ -58,6 +58,8 @@ Ext.define('WeiQuPai.view.OrderSuccess', {
 		]
 	},
 
+	tipTimer: null,
+
 	applyOrderData: function(data){
 		this.down('#orderInfo').setData(data);
 		return data;
@@ -68,11 +70,12 @@ Ext.define('WeiQuPai.view.OrderSuccess', {
 		this.down('bottombar #buttonContainer').add(payBtn);
 		this.down('button[action=pay]').on('tap', this.payBtnTap, this);
 		this.hideTip();
+		this.on('destroy', this.onDestroy, this);
 	},
 
 	hideTip: function(){
 		var me = this;
-		setTimeout(function(){
+		this.tipTimer = setTimeout(function(){
 			me.down('#tip').hide();
 		}, 30000);
 	},
@@ -81,5 +84,12 @@ Ext.define('WeiQuPai.view.OrderSuccess', {
 		var payment = this.getOrderData().payment;
 		var orderId = this.getOrderData().id;
 		WeiQuPai.Util.forward('pay', {orderId:orderId, payment:payment});
+	},
+
+	onDestroy: function(){
+		if(this.tipTimer){
+			clearTimeout(this.tipTimer);
+			this.tipTimer = null;
+		}
 	}
 });

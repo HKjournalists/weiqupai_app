@@ -86,6 +86,8 @@ Ext.define('WeiQuPai.view.Order', {
         '</div>'
     ),
 
+    tipTimer: null,
+
 	initialize: function(){
 		this.hideTip();
 		var user = WeiQuPai.Cache.get('currentUser');
@@ -109,11 +111,12 @@ Ext.define('WeiQuPai.view.Order', {
         		this.down('#consignee').setContent(html);
 			}
 		}, this);
+		this.on('destroy', this.onDestroy, this);
 	}, 
 
 	hideTip: function(){
 		var me = this;
-		setTimeout(function(){
+		this.tipTimer = setTimeout(function(){
 			me.down('#tip').hide();
 		}, 30000);
 	},
@@ -144,5 +147,12 @@ Ext.define('WeiQuPai.view.Order', {
         var title = list.getItemAt(0).getRecord().get('title');
         this.getRecord().set(itemId, title);
         this.down('disclosureitem[itemId=' + itemId + ']').setContent(title);
+	},
+
+	onDestroy: function(){
+		if(this.tipTimer){
+			clearTimeout(this.tipTimer);
+			this.tipTimer = null;
+		}
 	}
 });
