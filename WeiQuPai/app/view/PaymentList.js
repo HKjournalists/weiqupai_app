@@ -12,20 +12,10 @@ Ext.define('WeiQuPai.view.PaymentList', {
                         title: '支付宝',
                         id: 'alipay'
                     },
-                    /*
                     {
-                        title: '财富通',
-                        id: 'tenpay'
-                    },
-                    {
-                        title: '招商银行',
-                        id: 'cmb'
-                    },
-                    {
-                        title: '快钱',
-                        id: '99bill'
+                        title: 'U付快捷支付',
+                        id: 'umpay'
                     }
-                    */
                 ]
             }
         ]

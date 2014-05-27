@@ -3,6 +3,7 @@ Ext.define("WeiQuPai.Config", {
     //保存基础url
     host: 'http://localhost',
     apiUrl: 'http://localhost',
+    updateUrl: 'http://t.vqupai.com/update',
 
     //app版本
     version:"1.1",
@@ -24,5 +25,5 @@ Ext.define("WeiQuPai.Config", {
         STATUS_FINISH : 3
     },
     
-    market:'vqupai'
+    market:'vqupai',
 })

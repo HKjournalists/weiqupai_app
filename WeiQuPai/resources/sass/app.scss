@@ -33,8 +33,8 @@ $ios7-green: #53d769;
 
 //ios7的titlebar样式，解决statusbar的问题
 .ios7 .x-toolbar.x-docked-top.w-title{
-	height:56px;
-	padding-top:10px;
+	box-sizing:content-box;
+	padding-top:20px;
 }
 //默认背影
 html, body{
@@ -64,11 +64,14 @@ html, body{
 
 //loadmask样式
 .x-mask .x-loading-spinner-outer{
-	min-width:4em;
-	height:4em;
+	min-width:3em;
+	height:3em;
 }
 .x-mask .x-mask-inner{
 	background:rgba(0,0,0,0.25);
+}
+.x-loading-spinner{
+	font-size:20px;
 }
 .x-loading-spinner > span.x-loading-top{
   background-color: rgba(170, 170, 170, 0.99);
@@ -1052,6 +1055,17 @@ h3{
 }
 .w-loading-mask .x-loading-spinner{
 	font-size:2.2em;
+}
+.w-toast{
+	background:rgba(0,0,0,.8);
+	max-width:90%;
+	min-width:10em;
+	line-height:1.5;
+	font-size:.8em;
+	color:#fff;
+	padding:.8em 1em;
+	border-radius:5px;
+	text-align:center;
 }
 //分享
 .share-layer{

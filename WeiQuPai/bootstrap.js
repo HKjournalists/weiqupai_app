@@ -779,6 +779,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.plugin.ListPaging": [],
   "WeiQuPai.plugin.LoadMask": [],
   "WeiQuPai.plugin.PullRefresh": [],
+  "WeiQuPai.plugin.Toast": [],
   "WeiQuPai.store.Auction": [],
   "WeiQuPai.store.AuctionComment": [],
   "WeiQuPai.store.Banner": [],
@@ -1829,6 +1830,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.plugin.PullRefresh": [
     "plugin.wpullrefresh"
+  ],
+  "WeiQuPai.plugin.Toast": [
+    "widget.toast"
   ],
   "WeiQuPai.store.Auction": [],
   "WeiQuPai.store.AuctionComment": [],

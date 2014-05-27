@@ -5,11 +5,11 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		117BB047A3FD44119F745E3F /* CDVWechat.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C18AF085F1F44E4B6EEBC60 /* CDVWechat.m */; };
 		1818D42018FDDE8000565F5A /* logo120.png in Resources */ = {isa = PBXBuildFile; fileRef = 1818D41F18FDDE8000565F5A /* logo120.png */; };
 		181D65F618FD85550006D699 /* CDVSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D65F518FD85550006D699 /* CDVSplashScreen.m */; };
+		18B07BD119347371002E884B /* CDVInAppBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DAC783CF624E69805AF132 /* CDVInAppBrowser.m */; };
 		18E6B61018E0783B00631906 /* Icon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E6B60C18E0783B00631906 /* Icon~ipad.png */; };
 		18E6B61118E0783B00631906 /* Icon~ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E6B60D18E0783B00631906 /* Icon~ipad@2x.png */; };
 		18E6B61818E0789000631906 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E6B61218E0789000631906 /* Default-568h@2x.png */; };
@@ -32,7 +32,6 @@
 		18F014F918EFF9810089C0D2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F014F818EFF9810089C0D2 /* XCTest.framework */; };
 		18F014FA18EFF9810089C0D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F014C518ED1BC90089C0D2 /* Foundation.framework */; };
 		18F014FC18EFF9820089C0D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F014FB18EFF9810089C0D2 /* UIKit.framework */; };
-		18F0156818F6D8F90089C0D2 /* CDVInAppBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F0156718F6D8F80089C0D2 /* CDVInAppBrowser.m */; };
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
@@ -76,6 +75,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08AA7908A99C461EAB6DD5F3 /* CDVInAppBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVInAppBrowser.h; path = org.apache.cordova.inappbrowser/CDVInAppBrowser.h; sourceTree = "<group>"; };
 		1818D41F18FDDE8000565F5A /* logo120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo120.png; sourceTree = "<group>"; };
 		181D65F418FD85550006D699 /* CDVSplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVSplashScreen.h; path = org.apache.cordova.splashscreen/CDVSplashScreen.h; sourceTree = "<group>"; };
 		181D65F518FD85550006D699 /* CDVSplashScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVSplashScreen.m; path = org.apache.cordova.splashscreen/CDVSplashScreen.m; sourceTree = "<group>"; };
@@ -111,8 +111,6 @@
 		18F014F718EFF9810089C0D2 /* 微趣拍 Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "微趣拍 Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18F014F818EFF9810089C0D2 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		18F014FB18EFF9810089C0D2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		18F0156618F6D8F80089C0D2 /* CDVInAppBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVInAppBrowser.h; path = org.apache.cordova.inappbrowser/CDVInAppBrowser.h; sourceTree = "<group>"; };
-		18F0156718F6D8F80089C0D2 /* CDVInAppBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVInAppBrowser.m; path = org.apache.cordova.inappbrowser/CDVInAppBrowser.m; sourceTree = "<group>"; };
 		1D3623240D0F684500981E51 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* 微趣拍.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "微趣拍.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,6 +135,7 @@
 		95963B588F71477D84FC3A16 /* CDVCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVCamera.m; path = org.apache.cordova.camera/CDVCamera.m; sourceTree = "<group>"; };
 		9C18AF085F1F44E4B6EEBC60 /* CDVWechat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVWechat.m; path = xu.li.cordova.wechat/CDVWechat.m; sourceTree = "<group>"; };
 		B803D6F47E8F434AB223D8C6 /* ImageIO.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		B8DAC783CF624E69805AF132 /* CDVInAppBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVInAppBrowser.m; path = org.apache.cordova.inappbrowser/CDVInAppBrowser.m; sourceTree = "<group>"; };
 		C59F6656FFCA4D8C8133CADC /* CDVWechat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVWechat.h; path = xu.li.cordova.wechat/CDVWechat.h; sourceTree = "<group>"; };
 		E98A7230C2BC436EB9BB8AB4 /* CDVCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVCamera.h; path = org.apache.cordova.camera/CDVCamera.h; sourceTree = "<group>"; };
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
@@ -313,8 +312,6 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				18F0156618F6D8F80089C0D2 /* CDVInAppBrowser.h */,
-				18F0156718F6D8F80089C0D2 /* CDVInAppBrowser.m */,
 				18F014CF18EF143A0089C0D2 /* cordova.bpush */,
 				95963B588F71477D84FC3A16 /* CDVCamera.m */,
 				7CE480EAA2D040D684EDFB7B /* CDVJpegHeaderWriter.m */,
@@ -325,6 +322,8 @@
 				181D65F518FD85550006D699 /* CDVSplashScreen.m */,
 				9C18AF085F1F44E4B6EEBC60 /* CDVWechat.m */,
 				C59F6656FFCA4D8C8133CADC /* CDVWechat.h */,
+				B8DAC783CF624E69805AF132 /* CDVInAppBrowser.m */,
+				08AA7908A99C461EAB6DD5F3 /* CDVInAppBrowser.h */,
 			);
 			name = Plugins;
 			path = "微趣拍/Plugins";
@@ -513,7 +512,6 @@
 				18F014E618EF22200089C0D2 /* Base64.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				18F014E918EF22200089C0D2 /* OpenUDID.m in Sources */,
-				18F0156818F6D8F90089C0D2 /* CDVInAppBrowser.m in Sources */,
 				18F014D218EF143A0089C0D2 /* CDVBPush.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				18F014E818EF22200089C0D2 /* JSONKit.m in Sources */,
@@ -524,6 +522,7 @@
 				117BB047A3FD44119F745E3F /* CDVWechat.m in Sources */,
 				18F014EA18EF22200089C0D2 /* Reachability.m in Sources */,
 				18F014E718EF22200089C0D2 /* GzipCompressor.m in Sources */,
+				18B07BD119347371002E884B /* CDVInAppBrowser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

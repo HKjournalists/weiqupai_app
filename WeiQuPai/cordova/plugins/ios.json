@@ -26,8 +26,8 @@
                 "<feature name=\"Camera\"><param name=\"ios-package\" value=\"CDVCamera\" /></feature>": 1,
                 "<feature name=\"BPush\"><param name=\"ios-package\" value=\"CDVBPush\" /></feature>": 1,
                 "<feature name=\"Wechat\"><param name=\"ios-package\" value=\"CDVWechat\" /><param name=\"onload\" value=\"true\" /></feature>": 1,
-                "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>": 1,
-                "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>": 1
+                "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>": 1,
+                "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>": 1
             }
         }
     },
@@ -41,10 +41,10 @@
         "cordova.bpush": {
             "PACKAGE_NAME": "com.vqupai.app"
         },
-        "org.apache.cordova.inappbrowser": {
+        "org.apache.cordova.splashscreen": {
             "PACKAGE_NAME": "com.vqupai.app"
         },
-        "org.apache.cordova.splashscreen": {
+        "org.apache.cordova.inappbrowser": {
             "PACKAGE_NAME": "com.vqupai.app"
         }
     },

@@ -131,7 +131,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
             WeiQuPai.Util.forward('showuser', {param: uid});
         }else{
             if(!this.addFriendLayer){
-                var config = {height: 120};
+                var config = {height: 130};
                 this.addFriendLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.AddFriendButtonLayer', config);
             }
             this.addFriendLayer.setUid(uid);

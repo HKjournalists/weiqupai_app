@@ -3,6 +3,7 @@ Ext.define("WeiQuPai.Config", {
     //保存基础url
     host: 'http://t.vqupai.com',
     apiUrl: 'http://t.vqupai.com',
+    updateUrl: 'http://t.vqupai.com/update',
 
     //app版本
     version:"1.1",

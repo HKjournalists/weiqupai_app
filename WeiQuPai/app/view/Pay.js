@@ -27,13 +27,19 @@ Ext.define('WeiQuPai.view.Pay', {
 	},
 
 	loadIframe: function(){
+		var user = WeiQuPai.Cache.get('currentUser');
+		var url = WeiQuPai.Config.apiUrl + "/?r=app/pay&id=" + this.getOrderId() + '&token=' + user.token;
+		var url = "http://baidu.com";
+		window.open(url, '_blank', 'location=yes');
+		return;
+		var user = WeiQuPai.Cache.get('currentUser');
         this.setMasked({xtype: 'wloadmask'});
 		var payIframe = this.down('#payIframe').element.query('iframe')[0];
 		var me = this;
 		payIframe.onload = function(){
 			me.payIframeLoad();
 		};
-		payIframe.src = WeiQuPai.Config.apiUrl + "/?r=app/pay&id=" + this.getOrderId() + '&payment=' + this.getPayment();	
+		payIframe.src = WeiQuPai.Config.apiUrl + "/?r=app/pay&id=" + this.getOrderId() + '&token=' + user.token;
 	},
 
 	payIframeLoad: function(){

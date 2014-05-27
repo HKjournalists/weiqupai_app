@@ -7,11 +7,15 @@ BUILD_DIR=cordova/
 REMOTE_DIR="/alidata/www/m.vqupai.com/webroot/m/"
 PACKAGE_DIR="/alidata/www/vqupai/adhoc/"
 ANDROID_DIR="cordova/platforms/android/ant-build"
+MARKET=all
 if [ "$1" != "" ];then
 	BUILD_ENV=$1
 fi
 if [ "$2" != "" ];then
 	BUILD_TYPE=$2
+fi
+if [ "$3" != "" ]; then
+	MARKET=$3
 fi
 if [ "$1" == "pub" ];then
 	scp ../build/vqupai.ipa $SERVER:$PACKAGE_DIR
@@ -46,12 +50,19 @@ fi
 if [ "$BUILD_TYPE" == "market" ];then
 	cd cordova
 	cp www/app.js app.js
-	while read market; do
-		echo "build apk for market $market"
-		sed  "s/#MARKET#/$market/" app.js > www/app.js
+	if [ "$MARKET" == "all" ];then
+		while read market; do
+			echo "build apk for market $market"
+			sed  "s/#MARKET#/$market/" app.js > www/app.js
+			cordova build android --release
+			mv platforms/android/ant-build/android-release.apk ../../build/$market.apk
+		done < ../market.conf
+	else 
+		echo "build apk for market $MARKET"
+		sed  "s/#MARKET#/$MARKET/" app.js > www/app.js
 		cordova build android --release
-		mv platforms/android/ant-build/android-release.apk ../../build/$market.apk
-	done < ../market.conf
+		mv platforms/android/ant-build/android-release.apk ../../build/$MARKET.apk
+	fi
 	rm app.js
 	cd -
 fi

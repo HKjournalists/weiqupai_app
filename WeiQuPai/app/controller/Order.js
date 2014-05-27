@@ -114,7 +114,7 @@ Ext.define('WeiQuPai.controller.Order', {
     },
 
     selectPayment: function(list, index, dataItem, record, e){
-        this.getOrderView().getRecord().set('payment', record.get('title'));
+        this.getOrderView().getRecord().set('payment', record.get('id'));
         var payment = record.get('title'); 
         this.getPaymentPanel().setContent(payment);
         this.getPaymentList().up('paymentlist').hide();

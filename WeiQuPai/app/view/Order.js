@@ -133,6 +133,7 @@ Ext.define('WeiQuPai.view.Order', {
 	addPayment: function(){
 		var paymentListView = WeiQuPai.Util.createOverlay('WeiQuPai.view.PaymentList');
         this.selectFirst('payment', paymentListView.down('list'));
+        this.getRecord().set('payment', 'alipay');
 	},
 
 	addDeliveryTime: function(){

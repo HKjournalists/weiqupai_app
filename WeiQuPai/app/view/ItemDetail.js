@@ -376,7 +376,9 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 		var sec = this.leftSeconds % 60;
 		var min = (this.leftSeconds - sec) / 60;
 		var countdown = (min < 10 ? '0' + min : min) + ":" + (sec < 10 ? '0' + sec : sec);
-		Ext.get('countdown').setHtml(countdown);
+		//android系统2秒才走一次定时器，加一个span标签就没问题了
+		Ext.get('countdown').setHtml('<span>' + countdown + '</span>');
+
 		var me = this;
 		if(this.leftSeconds <= 6 && this.leftSeconds > 0){
 			setTimeout(function(){

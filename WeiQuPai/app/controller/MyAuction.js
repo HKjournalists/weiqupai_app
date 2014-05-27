@@ -23,10 +23,10 @@ Ext.define('WeiQuPai.controller.MyAuction', {
     },
 
     goPay: function(list, index, dataItem ,record, e){
-        var payView = Ext.create('WeiQuPai.view.Pay', {
-            orderId: record.get('id'),
-            payment: record.get('payment')
-        });
-        this.getMain().push(payView);
+        var payment = record.get('payment');
+        var orderId = record.get('id');
+        var user = WeiQuPai.Cache.get('currentUser');
+        var url = WeiQuPai.Config.apiUrl + "/?r=app/pay&id=" + orderId + '&token=' + user.token;
+        window.open(url, '_blank', 'location=no,title=支付');
     }
 });

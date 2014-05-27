@@ -1,6 +1,6 @@
 Ext.define("WeiQuPai.Util", {
     singleton: true,
-    requires: ['WeiQuPai.view.InputComment', 'WeiQuPai.view.CirclePost', 'WeiQuPai.view.CircleReply', 'WeiQuPai.view.CameraLayer'],
+    requires: ['WeiQuPai.view.InputComment', 'WeiQuPai.view.CirclePost', 'WeiQuPai.view.CircleReply', 'WeiQuPai.view.CameraLayer', 'WeiQuPai.plugin.Toast'],
     globalView: {},
     createOverlay : function(com, conf){
         if(this.globalView[com]) return this.globalView[com];
@@ -333,5 +333,37 @@ Ext.define("WeiQuPai.Util", {
         if(Ext.os.is.android){
             WeiQuPai.lastView = this;
         }
+    },
+
+    //自动消失的提示消息框
+    toast: function(msg, time){
+        if(!this.globalView['toast']){
+            this.globalView['toast'] = Ext.create('WeiQuPai.plugin.Toast', {style:'opacity:0'});
+            Ext.Viewport.add(this.globalView['toast']);
+        }
+        toast = this.globalView['toast'];
+        toast.setMessage(msg);
+        if(this.toastTimeout){
+            clearTimeout(this.toastTimeout);
+            this.toastTimeout = null;
+        }
+        toast.element.setStyle('display', 'block');
+        var fadeIn = Ext.create('Ext.Anim',{
+            autoClear: false,
+            from:{'opacity':0},
+            to: {'opacity':1},
+            duration: 300,
+        });
+        fadeIn.run(toast.element);
+        this.toastTimeout = setTimeout(function(){
+            var fadeOut = Ext.create('Ext.Anim',{
+                autoClear: false,
+                from:{'opacity':1},
+                to: {'opacity':0},
+                duration: 300,
+                after: function(){toast.element.setStyle('display','none')}
+            });
+            fadeOut.run(toast.element);
+        }, time || 3000);
     }
 })

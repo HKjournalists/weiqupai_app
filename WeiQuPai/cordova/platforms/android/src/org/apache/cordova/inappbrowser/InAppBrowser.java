@@ -19,6 +19,8 @@
 package org.apache.cordova.inappbrowser;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.widget.*;
 import org.apache.cordova.inappbrowser.InAppBrowserDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -43,10 +45,6 @@ import android.webkit.CookieManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.Config;
@@ -85,9 +83,10 @@ public class InAppBrowser extends CordovaPlugin {
     private CallbackContext callbackContext;
     private boolean showLocationBar = true;
     private boolean openWindowHidden = false;
-    private String buttonLabel = "Done";
+    private String buttonLabel = "关闭";
     private boolean clearAllCache= false;
     private boolean clearSessionCache=false;
+    private String pageTitle = "";
 
     /**
      * Executes the request and returns PluginResult.
@@ -286,6 +285,8 @@ public class InAppBrowser extends CordovaPlugin {
                     String key = option.nextToken();
                     if (key.equalsIgnoreCase(CLOSE_BUTTON_CAPTION)) {
                         this.buttonLabel = option.nextToken();
+                    }else if(key.equalsIgnoreCase("title")){
+                        this.pageTitle = option.nextToken();
                     } else {
                         Boolean value = option.nextToken().equals("no") ? Boolean.FALSE : Boolean.TRUE;
                         map.put(key, value);
@@ -469,11 +470,25 @@ public class InAppBrowser extends CordovaPlugin {
                 LinearLayout main = new LinearLayout(cordova.getActivity());
                 main.setOrientation(LinearLayout.VERTICAL);
 
+                //mock titlebar
+                RelativeLayout titlebar = new RelativeLayout(cordova.getActivity());
+                titlebar.setBackgroundColor(Color.parseColor("#ccd6c2"));
+                titlebar.setGravity(Gravity.CENTER);
+                titlebar.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, this.dpToPixels(46)));
+                TextView title = new TextView(cordova.getActivity());
+                title.setText(pageTitle);
+                title.setTextColor(Color.BLACK);
+                title.getPaint().setFakeBoldText(true);
+                title.setTextSize(TypedValue.COMPLEX_UNIT_PX, this.dpToPixels(18));
+                titlebar.addView(title);
+
                 // Toolbar layout
                 RelativeLayout toolbar = new RelativeLayout(cordova.getActivity());
                 //Please, no more black! 
-                toolbar.setBackgroundColor(android.graphics.Color.LTGRAY);
-                toolbar.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, this.dpToPixels(44)));
+                toolbar.setBackgroundColor(Color.parseColor("#5f7479"));
+                RelativeLayout.LayoutParams toolbarLayoutParam = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, this.dpToPixels(44));
+                toolbarLayoutParam.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                toolbar.setLayoutParams(toolbarLayoutParam);
                 toolbar.setPadding(this.dpToPixels(2), this.dpToPixels(2), this.dpToPixels(2), this.dpToPixels(2));
                 toolbar.setHorizontalGravity(Gravity.LEFT);
                 toolbar.setVerticalGravity(Gravity.TOP);
@@ -487,8 +502,8 @@ public class InAppBrowser extends CordovaPlugin {
 
                 // Back button
                 Button back = new Button(cordova.getActivity());
-                RelativeLayout.LayoutParams backLayoutParams = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
-                backLayoutParams.addRule(RelativeLayout.ALIGN_LEFT);
+                RelativeLayout.LayoutParams backLayoutParams = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+                backLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
                 back.setLayoutParams(backLayoutParams);
                 back.setContentDescription("Back Button");
                 back.setId(2);
@@ -562,11 +577,15 @@ public class InAppBrowser extends CordovaPlugin {
                 // Close button
                 Button close = new Button(cordova.getActivity());
                 RelativeLayout.LayoutParams closeLayoutParams = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
-                closeLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                closeLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
                 close.setLayoutParams(closeLayoutParams);
                 forward.setContentDescription("Close Button");
                 close.setId(5);
-                //close.setText(buttonLabel);
+                close.setText(buttonLabel);
+                close.setTextSize(TypedValue.COMPLEX_UNIT_PX, this.dpToPixels(18));
+                close.setBackgroundColor(Color.TRANSPARENT);
+                close.setTextColor(Color.WHITE);
+                /*
                 int closeResId = activityRes.getIdentifier("ic_action_remove", "drawable", cordova.getActivity().getPackageName());
                 Drawable closeIcon = activityRes.getDrawable(closeResId);
                 if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN)
@@ -577,6 +596,7 @@ public class InAppBrowser extends CordovaPlugin {
                 {
                     close.setBackground(closeIcon);
                 }
+                */
                 close.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         closeDialog();
@@ -585,7 +605,9 @@ public class InAppBrowser extends CordovaPlugin {
 
                 // WebView
                 inAppWebView = new WebView(cordova.getActivity());
-                inAppWebView.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+                LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, this.dpToPixels(0));
+                llp.weight = 1;
+                inAppWebView.setLayoutParams(llp);
                 inAppWebView.setWebChromeClient(new InAppChromeClient(thatWebView));
                 WebViewClient client = new InAppBrowserClient(thatWebView, edittext);
                 inAppWebView.setWebViewClient(client);
@@ -623,18 +645,22 @@ public class InAppBrowser extends CordovaPlugin {
                 actionButtonContainer.addView(forward);
 
                 // Add the views to our toolbar
-                toolbar.addView(actionButtonContainer);
-                toolbar.addView(edittext);
+                //toolbar.addView(actionButtonContainer);
+                //toolbar.addView(edittext);
                 toolbar.addView(close);
-
+                /*
                 // Don't add the toolbar if its been disabled
                 if (getShowLocationBar()) {
                     // Add our toolbar to our main view/layout
                     main.addView(toolbar);
                 }
+                */
 
+                main.addView(titlebar);
                 // Add our webview to our main view/layout
                 main.addView(inAppWebView);
+
+                main.addView(toolbar);
 
                 WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
                 lp.copyFrom(dialog.getWindow().getAttributes());

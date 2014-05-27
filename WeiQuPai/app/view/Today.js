@@ -64,11 +64,9 @@ Ext.define('WeiQuPai.view.Today', {
    	}, 
 
    	loadData: function(){
-        this.setMasked({xtype: 'wloadmask'});
         var user = WeiQuPai.Cache.get('currentUser');
         this.getStore().getProxy().setExtraParam('token', user && user.token || '');
         this.getStore().load(function(data, operation, success){
-            this.unmask();
             if(!success){
                 Ext.Msg.alert(null, '数据加载失败');
             }

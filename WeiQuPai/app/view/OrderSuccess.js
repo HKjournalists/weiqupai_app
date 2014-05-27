@@ -83,7 +83,9 @@ Ext.define('WeiQuPai.view.OrderSuccess', {
 	payBtnTap: function(){
 		var payment = this.getOrderData().payment;
 		var orderId = this.getOrderData().id;
-		WeiQuPai.Util.forward('pay', {orderId:orderId, payment:payment});
+		var user = WeiQuPai.Cache.get('currentUser');
+		var url = WeiQuPai.Config.apiUrl + "/?r=app/pay&id=" + orderId + '&token=' + user.token;
+		window.open(url, '_blank', 'location=no,title=支付');
 	},
 
 	onDestroy: function(){
