@@ -54,7 +54,7 @@ Ext.define("WeiQuPai.view.DisclosureItem", {
 		//顺序很重要，discolsure一定要先加
 		this.disclosureNode && this.add(this.disclosureNode);
 		this.add(this.detailNode);
-		this.relayEvents(this.element, ['tap', 'singletap', 'doubletap', 'swipe', 'taphold'])
+		this.relayEvents(this.element, ['tap', 'singletap', 'doubletap', 'swipe', 'taphold']);
 	},
 
 	setContent: function(html){
@@ -85,6 +85,35 @@ Ext.define("WeiQuPai.view.DisclosureItem", {
 			delete this.pressedTimer;
 		}
 		this.removeCls('w-disclosure-item-pressed');
-	}
+	},
+
+	//设置
+	setBadgeText: function(text){
+		var badgeEl = this.titleNode.element.down('.x-badge');
+		if(!badgeEl) return;
+		badgeEl.parent().addCls('x-hasbadge');
+		badgeEl.setStyle('display', 'block');
+		badgeEl.removeCls('w-badge-sdot w-badge-mdot');
+		badgeEl.setHtml(text);
+	},
+
+	clearBadge: function(){
+		var badgeEl = this.titleNode.element.down('.x-badge');
+		if(!badgeEl) return;
+		badgeEl.parent().removeCls('x-hasbadge');
+		badgeEl.setStyle('display', 'none');
+		badgeEl.removeCls('w-badge-sdot w-badge-mdot');
+	},
+
+	//设置小红点
+	setBadge: function(size){
+		size = size || 'mdot';
+		var badgeEl = this.titleNode.element.down('.x-badge');
+		if(!badgeEl) return;
+		badgeEl.parent().addCls('x-hasbadge');
+		badgeEl.setStyle('display', 'block');
+		badgeEl.addCls('w-badge-' + size);
+	},
+
 
 });

@@ -7,20 +7,26 @@ Ext.define('WeiQuPai.controller.MyConsignee', {
             myconsignee: 'myconsignee',
             showAdd: 'myconsignee button[action=showAdd]',
             addForm: 'addconsigneeform',
-            doAdd: 'addconsigneeform button[action=add]'
+            editForm: 'editconsigneeform',
+            doAdd: 'addconsigneeform button[action=add]',
+            doUpdate: 'editconsigneeform button[action=update]'
 
     	},
         control: {
         	myconsignee: {
                 'itemdelete': 'doItemDelete',
                 'itemdefault': 'doItemSetDefault',
-                'select': 'doItemSelect'
+                'itemtap': 'doItemTap',
+
             },
             showAdd: {
                 'tap': 'showAddForm'
             },
             doAdd: {
                 'tap': 'doAddConsignee'
+            },
+            doUpdate: {
+                'tap': 'doEditConsignee'
             }
         }
     },
@@ -44,7 +50,7 @@ Ext.define('WeiQuPai.controller.MyConsignee', {
             },
             failure: function(rsp){
                 WeiQuPai.Util.unmask();
-                Ext.msg.Alert(null, '删除失败, 请重试');
+                WeiQuPai.Util.toast('删除失败, 请重试');
             }
         });
     },
@@ -67,13 +73,22 @@ Ext.define('WeiQuPai.controller.MyConsignee', {
             },
             failure: function(rsp){
                 WeiQuPai.Util.unmask();
-                Ext.msg.Alert(null, '数据提交失败，请重试');
+                WeiQuPai.Util.toast('数据提交失败，请重试');
             }
         });
     },
 
     showAddForm: function(btn){
         var view = Ext.create('WeiQuPai.view.AddConsigneeForm');
+        this.getMain().push(view);
+    },
+
+    //显示编辑表单
+    doItemTap: function(list, index, dataItem, record){
+        var view = Ext.create('WeiQuPai.view.EditConsigneeForm');
+        record.data.uc_id = record.data.id;
+        view.setValues(record.data);
+        view.setButtonState();
         this.getMain().push(view);
     },
 
@@ -102,7 +117,37 @@ Ext.define('WeiQuPai.controller.MyConsignee', {
             failure: function(form, result){
                 WeiQuPai.Util.unmask();
                 var msg = result && result.msg || '数据提交失败，请重试';
-                Ext.Msg.alert(null, msg);
+                WeiQuPai.Util.toast(msg);
+            }
+        });
+    },
+
+     doEditConsignee: function(btn){
+        var form = this.getEditForm();
+        var user = WeiQuPai.Cache.get('currentUser');
+        var self = this;
+        WeiQuPai.Util.mask();
+        form.submit({
+            url: WeiQuPai.Config.apiUrl + '/?r=app/userConsignee/update&token=' + user.token,
+            method: 'post',
+            success: function(form, result){
+                WeiQuPai.Util.unmask();
+                if(!WeiQuPai.Util.invalidToken(result)) return false;
+
+                if(result && result.success){
+                    var data = form.getValues();
+                    data.id = data.uc_id;
+                    form.reset();
+                    var preview = self.getMain().pop();
+                    preview.msgbox.hide();
+                    var record = preview.getStore().getById(data.uc_id);
+                    record.set(data);
+                }
+            },
+            failure: function(form, result){
+                WeiQuPai.Util.unmask();
+                var msg = result && result.msg || '数据提交失败，请重试';
+                WeiQuPai.Util.toast(msg);
             }
         });
     }

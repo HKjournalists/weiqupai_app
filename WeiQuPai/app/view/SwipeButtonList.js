@@ -23,6 +23,7 @@ Ext.define('WeiQuPai.view.SwipeButtonList', {
 	mouseX: 0, 
 	mouseY: 0, 
 	currentItem: null,
+	state: 'normal',
 
 	itemSelector: '.w-icon-list-item, .w-list-item',
 
@@ -95,21 +96,18 @@ Ext.define('WeiQuPai.view.SwipeButtonList', {
 		//转换到有按钮的状态，这时候再点或滑动都要回到最初状态，不做任何效果
 		if(targetPosition < 0){
 			buttons.style.zIndex = 0;
-			var self = this;
-			this.un('itemtouchstart', this.onTouchStart);
-			this.on('itemtouchstart', this.restoreState, this, {single: true});
-			//禁用一次itemtap事件,防止其它点周事件受到影响
-			this.onBefore('itemtap', function(e){
-				return false;
-			}, this, {single: true});
+			this.state = 'edit';
 		}
 	},
 
 	beforeTouchStart: function(list, index, dataItem ,record, e){
-		if(e.getTarget('.button-area')){
-			//点了按钮要清除之前的restoreState的状态
-			this.un('itemtouchstart', this.restoreState);
-			this.on('itemtouchstart', this.onTouchStart);
+		//编辑状态
+		console.log('before touch start', this.state);
+		if(this.state == 'edit'){
+			//如果不是点到按钮就回到正常状态
+			if(!e.getTarget('.button-area')){
+				this.restoreState(list, index, dataItem, record, e);
+			}
 			return false;
 		}
 	}, 
@@ -122,7 +120,7 @@ Ext.define('WeiQuPai.view.SwipeButtonList', {
 		var self = this;
 		domItem.addEventListener('webkitTransitionEnd', function(){
 			domItem.removeEventListener('webkitTransitionEnd', arguments.callee);
-			self.on('itemtouchstart', self.onTouchStart);
+			self.state = 'normal';
 		});
 		self.moveToPoisition(domItem, 0, true);
 	},
@@ -133,10 +131,14 @@ Ext.define('WeiQuPai.view.SwipeButtonList', {
 	},
 
 	doItemTap: function(list, index, dataItem, record, e){
-		var slice = e.target.className.split("-");
-		var action = slice.pop();
-		if(slice.join("-") == 'swipe-button'){
-			this.fireEvent('item' + action, list, index, dataItem, record, e);
+		//编辑状态不响应itemtap 除了操作按钮
+		if(this.state == 'edit'){
+			this.state = 'normal';
+			var slice = e.target.className.split("-");
+			var action = slice.pop();
+			if(slice.join("-") == 'swipe-button'){
+				this.fireEvent('item' + action, list, index, dataItem, record, e);
+			}
 			return false;
 		}
 	}

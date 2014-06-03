@@ -6,7 +6,9 @@ Ext.define('WeiQuPai.view.SplashScreen', {
 		cls: 'w-imageviewer',
 		fullscreen: true,
 		hideAnimation: 'fadeOut',
+		showAnimation: 'fadeIn',
 		picData: null,
+		hidden: true
 	},
 
 	initialize: function(){
@@ -23,10 +25,13 @@ Ext.define('WeiQuPai.view.SplashScreen', {
 
 	doImageTap: function(){
 		this.hide(false);
-        Ext.Viewport.setActiveItem('main');
+		if(!data.link) return;
 		var data = this.getPicData();
 		var view = Ext.create('WeiQuPai.view.WebPage');
-		view.setHref(data.link);
+		var href = data.link;
+		var user = WeiQuPai.Cache.get('currentUser');
+		if(user) href += (href.indexOf("?") == -1 ? '?' : '&')  + 'token=' + user.token;
+		view.setHref(href);
 		view.setTitle(data.title || '微趣拍');
 		Ext.Viewport.down('main').push(view);
 	}

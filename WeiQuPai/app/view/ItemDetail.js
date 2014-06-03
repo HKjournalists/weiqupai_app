@@ -21,7 +21,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 		itemTpl: new Ext.XTemplate(
 			'<div class="comment-row">',
 			'<tpl if="avatar">',
-			'<img src="' + WeiQuPai.Config.host + '{avatar}" class="avatar"/>',
+			'<img src="{[this.getAvatar(values.avatar)]}" class="avatar"/>',
 			'<tpl else>',
 			'<img class="avatar"/>',
 			'</tpl>',
@@ -36,7 +36,12 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 	            	'</tpl>',
 	            '</div>',
             '</tpl>',
-            '</div>'
+            '</div>',
+            {
+            	getAvatar: function(avatar){
+            		return WeiQuPai.Util.getImagePath(avatar, '140');
+            	}
+            }
         ),
 		items:[
 			{
@@ -111,6 +116,13 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 				cls : 'item-detail-title'
 			},
 			{
+				xtype: 'container',
+				scrollDock: 'top',
+				itemId: 'chart',
+				cls: 'auction-chart',
+				hidden: true,
+			},
+			{
 				xtype: 'disclosureitem',
 				title: '商家介绍',
 				titleStyle: 'normal',
@@ -130,7 +142,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 				xtype: 'container',
 				cls: 'item-detail-desc',
 				itemId: 'itemDesc',
-				tpl: '{description}{button}',
+				tpl: '{description}',
 				scrollDock: 'top'
 			},
 			{
@@ -228,7 +240,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 				this.shareLayer.setShareData(record.data);
 			},
 			failure: function(record, operation){
-				Ext.Msg.alert(null, '数据加载失败');	
+				WeiQuPai.Util.toast('数据加载失败');	
 			}
 		});
 		this.msgbox.hide();
@@ -238,7 +250,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 		store.getProxy().setExtraParam('auction_id', id);
 		store.loadPage(1, function(records, operation, success){
 			if(!success){
-				Ext.Msg.alert(null, '评论加载失败');
+				WeiQuPai.Util.toast('评论加载失败');
 				return;
 			}
 			if(records.length == 0){
@@ -255,6 +267,8 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 		this.auctionData = data;
 		this.down('detailpicshow').setPicData(data.pic_url);
 		this.down('#itemTitle').setData(data);
+		this.createChart();
+		/*
 		var desc = this.down('#itemDesc');
 		desc.rawContent = data.description;
 		desc.toggleState = 'short';
@@ -263,6 +277,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 			data.description = desc.rawContent.substr(0, 30) + "...";
 			data.button = '<span class="show-more"></span>';
 		}
+		*/
 		this.down('#itemDesc').setData(data);
 		this.down('#countdown').setData(data);
 
@@ -406,6 +421,19 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 			duration: 600
 		});
 		outAnim.run(el);
+	},
+
+	//价格趋势图
+	createChart: function(){
+		//显示趋势图
+		var id = this.auctionData.id;
+		var el = new Image;
+		el.src = WeiQuPai.Config.host + '/apic/' + id + '.png?_dc=' + Math.random();
+		var chart = this.down('#chart');
+		chart.element.appendChild(el);
+		el.onload = function(){
+			chart.show();
+		}
 	},
 
 	//销毁的时候清除定时器

@@ -14,8 +14,6 @@ Ext.define('WeiQuPai.view.Main', {
 
     isAnimating: false,
 
-    forceFireActive: true,
-
     //重写push/pop方法，修复多次点击会重复push/pop的问题
     push: function(){
         if(this.isAnimating) return;
@@ -26,8 +24,7 @@ Ext.define('WeiQuPai.view.Main', {
         if(this.isAnimating) return;
         prev = this.callParent(arguments);
         //pop不能触发tab里view的activate事件，需要手动触发一下
-        //浮动菜单切换tab的时候会触发activate事件，不需要再触发
-        if(prev.isXType('maintab') && this.forceFireActive){
+        if(prev && prev.isXType('maintab')){
             prev.getActiveItem().fireEvent('activate');
         }
         return prev;
@@ -39,6 +36,19 @@ Ext.define('WeiQuPai.view.Main', {
         this.callParent(arguments);
         this.addAnimation();
         this.add(Ext.create('WeiQuPai.view.MainTab'));
+        //android不触发painted事件，不知道为什么,fuck!
+        if(Ext.os.is.android){
+            setTimeout(function(){
+                WeiQuPai.Notify.checkMQ();
+            }, 1000);
+        }else{
+            this.on('painted', this.onPainted);
+        }
+    },
+
+    //启动时检查消息要放到navaigationView初始化完成
+    onPainted: function(){
+        WeiQuPai.Notify.checkMQ();
     },
 
     addAnimation: function(){

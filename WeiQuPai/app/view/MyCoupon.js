@@ -30,6 +30,8 @@ Ext.define('WeiQuPai.view.MyCoupon', {
 		var user = WeiQuPai.Util.checkLogin();
 		if(!user) return;
 
+		WeiQuPai.Notify.clearNotify(WeiQuPai.Notify.MSG_NEW_COUPON);
+
 		this.msgbox = WeiQuPai.Util.msgbox('您还没有任何拍券');
 		this.add(this.msgbox);
 
@@ -37,7 +39,7 @@ Ext.define('WeiQuPai.view.MyCoupon', {
 		store.getProxy().setExtraParam('token', user.token);
 		store.load(function(records, operation, success){
             if(!success){
-                Ext.Msg.alert(null, '数据加载失败');
+                WeiQuPai.Util.toast('数据加载失败');
                 return false;
             }
             if(records.length == 0){

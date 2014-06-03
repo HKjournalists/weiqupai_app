@@ -288,8 +288,8 @@ h3{
 	box-shadow:1px 1px 6px #c1c2c7; 
 }
 .item-detail-title{
-	padding:.7em 1em 1.2em;
-	border-bottom:1px solid $border-color;
+	padding:.7em 1em;
+	//border-bottom:1px solid $border-color;
 }
 
 .item-detail-desc{
@@ -315,13 +315,16 @@ h3{
 }
 
 //已拍列表的图片
+.myauction-img{
+	position:relative;
+	margin-right:1em;
+}
 .myauction-row img{
 	display:block;
 	width:78px;
 	height:78px;
 	border-radius: 5px;
 	border:1px solid #ccc;
-	margin-right:1em;
 }
 .myauction-row .fbig{
 	font-size:1.2em;
@@ -347,9 +350,10 @@ h3{
 .icon-newfriend{
 	background:url(../images/icon-newfriend.png) no-repeat left center;
 	background-size:40px 40px;
-	padding-left:50px;
 	height:40px;
-	line-height:40px;
+	width:40px;
+	margin-right:10px;
+	position:relative;
 }
 .action-title{
 	margin-bottom:.5em;
@@ -522,6 +526,7 @@ h3{
 	margin:2em 0 0 0;
 	text-align:center;
 	color:#5f7479;
+	position:relative;
 }
 .w-my-button-friend{
 	background-image:url(../images/icon-friend.png);
@@ -753,6 +758,9 @@ h3{
 .w-main-tab .x-tab .x-button-label{
 	color: $tab-text-dark;
 	line-height: 2em;
+}
+.w-main-tab .x-tab .x-badge{
+	line-height:1.5em;
 }
 .w-main-tab .x-tab .x-button-icon{
 	height:1.8em;
@@ -1137,12 +1145,15 @@ h3{
 	line-height:1.5;
 	font-size:$normal-font;
 }
+.w-brand-info h3{
+	text-align:center;
+	margin:10px 0;
+}
 .w-brand-info .brand-logo{
 	text-align:center;
 }
 .w-brand-info img{
 	border:1px solid #333;
-	padding:20px;
 }
 .shipment-progress{
 	margin-top:1em;
@@ -1224,4 +1235,91 @@ p.coupon-info{
 	text-align:center;
 	height:30px;
 	line-height:30px;
+}
+.x-badge.w-badge-sdot{
+	width:7px;
+	height:7px;
+	border-radius: 7px;
+	border:none;
+	background:#ed462f;
+	overflow:hidden;
+	font-size:0;
+	min-width:7px;
+	top:2px;
+	left:55%;
+	margin-left:10px;
+}
+
+.x-badge.w-badge-mdot{
+	width: 10px;
+	min-width:10px;
+	height: 10px;
+	border-radius: 10px;
+	border:none;
+	background:#ed462f;
+	overflow: hidden;
+	font-size: 0;
+	right:-4px;
+	top:-4px;
+}
+.w-disclosure-item.no-vpad, .w-disclosure-item.text{
+	padding:0 1em;
+}
+.w-disclosure-item.no-vpad .flex, .w-disclosure-item.text .flex{
+	padding:.7em 0;
+	margin:0;
+}
+.w-disclosure-item.text .x-hasbadge{
+	position:relative;
+	margin-left:.6em;
+	margin-top:-1em;
+}
+//子菜单的小红点
+.submenu .menu-button .w-badge-sdot{
+	top:8px;
+}
+
+.auction-chart{
+	border-bottom:1px solid #ccc;
+	padding-bottom:.7em;
+}
+.auction-chart img{
+	display:block;
+	width:290px;
+	padding:2px;
+	margin:0 auto;
+}
+.sale_pic img{
+	display:block;
+	width:100%;
+	max-width:100%;
+	margin:0 auto .7em auto;
+	//box-shadow:0px 1px 5px #ccc;
+}
+
+//今日的菜单
+.todaymenu{
+	background:rgba(95,116,121, .8);
+	width:12em;
+	border-radius:4px;
+}
+.todaymenu-icon{
+	background:url(../images/arrow-up-trans.png) no-repeat center center;
+	background-size:16px 10px;
+	margin-top:-10px;
+	height:10px;
+}
+.todaymenu-item{
+	padding:.7em;	
+	font-size:.9em;
+	color:#fff;
+}
+.dropdown-title{
+	padding-right:10px;
+	background:url(../images/icon-arrow-down.png) no-repeat right center;
+	background-size:10px 8px;
+}
+.dropdown-title.open{
+	background:url(../images/icon-arrow-up.png) no-repeat right center;
+	background-size:10px 8px;
 }

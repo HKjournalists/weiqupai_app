@@ -7,13 +7,15 @@ Ext.define('WeiQuPai.controller.Setting', {
     		about: 'disclosureitem[itemId=about]',
             priv: 'disclosureitem[itemId=private]',
             retn: 'disclosureitem[itemId=return]',
-            newMessage: 'disclosureitem[itemId=newMessage]'
+            newMessage: 'disclosureitem[itemId=newMessage]',
+            update: 'disclosureitem[itemId=update]',
     	},
         control: {
         	about: {tap:'showAbout'}, 
             priv: {tap: 'showPrivate'},
             newMessage: {tap: 'showNewMessage'},
-            retn: {tap: 'showReturn'}
+            retn: {tap: 'showReturn'},
+            update: {tap: 'showUpdate'},
         }
     },
 
@@ -34,6 +36,11 @@ Ext.define('WeiQuPai.controller.Setting', {
 
     showReturn: function(){
         var view = Ext.create('WeiQuPai.view.ReturnAnnounce');
+        this.getMain().push(view);
+    },
+
+    showUpdate: function(){
+        var view = Ext.create('WeiQuPai.view.AppUpdate');
         this.getMain().push(view);
     }
 });

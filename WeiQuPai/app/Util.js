@@ -1,6 +1,6 @@
 Ext.define("WeiQuPai.Util", {
     singleton: true,
-    requires: ['WeiQuPai.view.InputComment', 'WeiQuPai.view.CirclePost', 'WeiQuPai.view.CircleReply', 'WeiQuPai.view.CameraLayer', 'WeiQuPai.plugin.Toast'],
+    requires: ['WeiQuPai.view.InputComment', 'WeiQuPai.view.CirclePost', 'WeiQuPai.view.CircleReply', 'WeiQuPai.view.CameraLayer', 'WeiQuPai.plugin.Toast', 'WeiQuPai.view.SimpleViewer'],
     globalView: {},
     createOverlay : function(com, conf){
         if(this.globalView[com]) return this.globalView[com];
@@ -28,19 +28,30 @@ Ext.define("WeiQuPai.Util", {
         return cmp;
     }, 
 
+    //获取一个全局view,不存在则创建
+    getGlobalView: function(com){
+        if(!this.globalView[com]){
+            var cmp = Ext.create(com);
+            Ext.Viewport.add(cmp);
+            this.globalView[com] = cmp;
+        }
+        return this.globalView[com];
+    },
+
     /**
      * 显示相机菜单
      * 
      * @param int picWidth 要获取的图片宽度
      * @Param int picHeight 要获取的图片高度
      */
-    showCameraLayer: function(picWidth,picHeight, callback){
+    showCameraLayer: function(picWidth,picHeight, crop, callback){
         if(!this.cameraLayer){
             var config = {height: 200};
             this.cameraLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.CameraLayer', config);
         }
         this.cameraLayer.setPicWidth(picWidth);
         this.cameraLayer.setPicHeight(picHeight);
+        this.cameraLayer.setCrop(crop);
         this.cameraLayer.setCallback(callback);
         this.cameraLayer.show();
         return this.cameraLayer;
@@ -96,7 +107,7 @@ Ext.define("WeiQuPai.Util", {
                 WeiQuPai.Util.unmask();
                 rsp = Ext.decode(rsp.responseText);
                 if(rsp.code && rsp.code > 0){
-                    Ext.Msg.alert(null, rsp.msg);
+                    WeiQuPai.Util.toast(rsp.msg);
                     return;
                 }
                 WeiQuPai.Cache.set('currentUser', rsp.user);
@@ -114,7 +125,7 @@ Ext.define("WeiQuPai.Util", {
             },
             failure: function(rsp){
                 WeiQuPai.Util.unmask();
-                Ext.Msg.alert(null, '登录失败，请重试');
+                WeiQuPai.Util.toast('登录失败，请重试');
             }
         });
     },
@@ -129,7 +140,7 @@ Ext.define("WeiQuPai.Util", {
                 WeiQuPai.Util.unmask();
                 rsp = Ext.decode(rsp.responseText);
                 if(rsp.code > 0){
-                    Ext.Msg.alert(null, rsp.msg);
+                    WeiQuPai.Util.toast(rsp.msg);
                     return;
                 }
                 WeiQuPai.Cache.set('currentUser', rsp);
@@ -139,7 +150,7 @@ Ext.define("WeiQuPai.Util", {
             },
             failure: function(rsp){
                 WeiQuPai.Util.unmask();
-                Ext.msg.Alert(null, '注册失败, 请重试');
+                WeiQuPai.Util.toast('注册失败, 请重试');
             }
         });
     },
@@ -184,7 +195,7 @@ Ext.define("WeiQuPai.Util", {
                 rsp = Ext.decode(rsp.responseText);
                 if(!WeiQuPai.Util.invalidToken(rsp)) return false;
                 if(rsp.code > 0){
-                    Ext.Msg.alert(null, rsp.msg);
+                    WeiQuPai.Util.toast(rsp.msg);
                     return;
                 }
                 //更新本地的用户设置缓存
@@ -215,7 +226,7 @@ Ext.define("WeiQuPai.Util", {
                 rsp = Ext.decode(rsp.responseText);
                 if(!WeiQuPai.Util.invalidToken(rsp)) return false;
                 if(rsp.code > 0){
-                    Ext.Msg.alert(null, rsp.msg);
+                    WeiQuPai.Util.toast(rsp.msg);
                     return;
                 }
                 //更新本地的用户设置缓存
@@ -225,7 +236,7 @@ Ext.define("WeiQuPai.Util", {
             },
             failure: function(rsp){
                 WeiQuPai.Util.unmask();
-                Ext.Msg.alert(null, '数据提交失败，请检查网络');
+                WeiQuPai.Util.toast('数据提交失败，请检查网络');
             }
         });
     },
@@ -256,12 +267,9 @@ Ext.define("WeiQuPai.Util", {
 
     showTab: function(tab){
         var main = Ext.Viewport.down('main');
-        //防止重复触发activate事件
-        main.forceFireActive = false;
         mainTab = main.down('maintab');
         mainTab.setActiveItem(tab);
         main.pop(mainTab);
-        main.forceFireActive = true;
     },
 
     //保存up过的id,如果已经保存过，返回false, cache列表最多保存100个
@@ -313,21 +321,6 @@ Ext.define("WeiQuPai.Util", {
         });
     },
 
-    //加载服务器端的闪屏
-    loadSplash: function(callback){
-        Ext.Ajax.request({
-            url: WeiQuPai.Config.apiUrl + '/?r=app/splashScreen&ver=' + WeiQuPai.Config.version,
-            method: 'get',
-            success: function(rsp){
-                rsp = Ext.decode(rsp.responseText);
-                callback && callback(rsp);
-            },
-            failure: function(){
-                callback && callback();
-            }
-        });
-    },
-
     //保存上一个视图，解决安卓下backbutton弹层不消失的问题
     saveLastView: function(){
         if(Ext.os.is.android){
@@ -365,5 +358,32 @@ Ext.define("WeiQuPai.Util", {
             });
             fadeOut.run(toast.element);
         }, time || 3000);
+    },
+
+    getImagePath: function(file, size){
+        if(!size) return WeiQuPai.Config.host + file;
+        var segment = file.split('/');
+        var baesname = segment.pop();
+        var path = segment.join('/');
+        return WeiQuPai.Config.host + path + '/' + size + '.' + baesname;
+    },
+
+    showSplash: function(){
+         Ext.Ajax.request({
+            url: WeiQuPai.Config.apiUrl + '/?r=app/splashScreen&ver=' + WeiQuPai.Config.version,
+            method: 'get',
+            success: function(rsp){
+                var data = Ext.decode(rsp.responseText);
+                if(!data) return;
+                var view = Ext.create('WeiQuPai.view.SplashScreen');
+                view.setPicData(data);
+                Ext.Viewport.add(view);
+                view.show();
+                setTimeout(function(){
+                    view.hide();
+                }, (data.duration || 5) * 1000);
+            },
+            scope: this
+        });
     }
 })

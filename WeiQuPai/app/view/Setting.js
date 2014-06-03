@@ -3,7 +3,7 @@ Ext.define('WeiQuPai.view.Setting', {
 	xtype: 'setting',
 	requires: [
 		'WeiQuPai.view.DisclosureItem', 'WeiQuPai.view.About', 'WeiQuPai.view.Private', 'WeiQuPai.view.NewMessage',
-		'WeiQuPai.view.ReturnAnnounce'
+		'WeiQuPai.view.ReturnAnnounce', 'WeiQuPai.view.AppUpdate'
 	],
 
 	config: {
@@ -16,27 +16,35 @@ Ext.define('WeiQuPai.view.Setting', {
             },
 			{
 				xtype: 'disclosureitem',
-				title: '新消息通知',
+				cls: 'w-disclosure-item text',
+				title: '<div class="flex"><div>新消息通知</div><div><span class="x-badge" style="display:none"></span></div>',
 				itemId: 'newMessage'	
 			},
 			{
 				xtype: 'disclosureitem',
-				title: '隐私',
+				cls: 'w-disclosure-item text',
+				title: '<div class="flex"><div>隐私</div><div><span class="x-badge" style="display:none"></span></div>',
 				itemId: 'private'	
 			},
 
 			{
 				xtype: 'disclosureitem',
-				title: '退货说明',
-				itemId: 'return',
-				cls: 'w-disclosure-item w-disclosure-item-single'
+				cls: 'w-disclosure-item w-disclosure-item-single text',
+				title: '<div class="flex"><div>退货说明</div><div><span class="x-badge" style="display:none"></span></div>',
+				itemId: 'return'
 			},	
 			{
 				xtype: 'disclosureitem',
-				title: '关于微趣拍',
+				cls: 'w-disclosure-item text',
+				title: '<div class="flex"><div>关于微趣拍</div><div><span class="x-badge" style="display:none"></span></div>',
 				itemId: 'about',
-				cls: 'w-disclosure-item'
 			},
+			{
+				xtype: 'disclosureitem',
+				cls: 'w-disclosure-item text',
+				title: '<div class="flex"><div>检查更新</div><div><span class="x-badge" style="display:none"></span></div>',
+				itemId: 'update'
+			},	
 			{
 				xtype: 'button',
 				text: '退出登录',
@@ -47,5 +55,13 @@ Ext.define('WeiQuPai.view.Setting', {
 				xtype: 'bottombar'
 			}
 		]
+	},
+
+	initialize: function(){
+		this.on('painted', this.onPainted);
+	},
+
+	onPainted: function(){
+		WeiQuPai.Notify.notify(WeiQuPai.Notify.MSG_APP_UPDATE);
 	}
 });

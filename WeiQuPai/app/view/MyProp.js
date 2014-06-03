@@ -36,7 +36,7 @@ Ext.define('WeiQuPai.view.MyProp', {
 		store.getProxy().setExtraParam('token', user.token);
 		store.load(function(records, operation, success){
             if(!success){
-                Ext.Msg.alert(null, '数据加载失败');
+                WeiQuPai.Util.toast('数据加载失败');
                 return false;
             }
             if(records.length == 0){

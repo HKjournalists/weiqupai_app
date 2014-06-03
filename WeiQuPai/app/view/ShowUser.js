@@ -29,22 +29,33 @@ Ext.define('WeiQuPai.view.ShowUser', {
 				'<tpl elseif="feed_type==1">',
 					'<tpl if="content"><p>{content:htmlEncode}</p></tpl>',
 					'<div class="pic-list">',
-					'<tpl for="json_data.pic_list"><img src="' + WeiQuPai.Config.host + '{.}" /></tpl>',
+					'<tpl for="json_data.pic_list"><img src="{[this.getCover(values)]}"/></tpl>',
 					'</div>',
 					'<div class="card" dataType="item">',
-						'<img src="' + WeiQuPai.Config.host + '{json_data.pic_cover}"/>',
+						'<img src="{[this.getCover(values.json_data.pic_cover)]}"/>',
 						'<span>{json_data.title:htmlEncode}</span>',
 					'</div>',
 				'<tpl elseif="feed_type==2">',
 					'<div class="action-title"><span class="uname" uid="{uid}">{nick:htmlEncode}</span><span class="action">拍下了一个宝贝</span></div>',
 					'<p>我刚刚购买了{json_data.title:htmlEncode}</p>',
 					'<div class="card" dataType="item">',
-						'<img src="' + WeiQuPai.Config.host + '{json_data.pic_cover}"/>',
+						'<img src="{[this.getCover(values.json_data.pic_cover)]}"/>',
 						'<span>{json_data.title:htmlEncode}</span>',
 					'</div>',
 				'</tpl>',
 			    '<div class="flex"><span class="time">{ctime}</span></div>',
-			'</div></div>'
+			'</div></div>',
+			{
+				getAvatar: function(avatar){
+            		return WeiQuPai.Util.getImagePath(avatar, '140');
+            	},
+				getCover: function(cover){
+            		return WeiQuPai.Util.getImagePath(cover, '290');
+            	},
+            	getPic: function(pic){
+            		return WeiQuPai.Util.getImagePath(pic, '40');
+            	}
+			}
 		),
 		items: [
 			{
@@ -54,14 +65,22 @@ Ext.define('WeiQuPai.view.ShowUser', {
 				tpl: new Ext.XTemplate(
 					'<div class="user-show-top">',
 						'<div class="user-show-bg">',
-							'<img <tpl if="circle_bg">src="' + WeiQuPai.Config.host + '{circle_bg}"</tpl>/>',
+							'<img <tpl if="circle_bg">src="{[this.getBg(values.circle_bg)]}"</tpl>/>',
 						'</div>',
 						'<div class="user-show-avatar">',
-							'<img <tpl if="avatar">src="' + WeiQuPai.Config.host + '{avatar}"</tpl>/>',
+							'<img <tpl if="avatar">src="{[this.getAvatar(values.avatar)]}"</tpl>/>',
 							'<span class="user-show-name">{nick:htmlEncode}</span>',
 						'</div>',
-					'</div>'
-				)
+					'</div>',
+					{
+						getBg: function(bg){
+							return WeiQuPai.Util.getImagePath(bg, '640');
+						},
+						getAvatar: function(avatar){
+							return WeiQuPai.Util.getImagePath(avatar, '140');
+						}
+					}
+				),
 			},
 			{
 				xtype: 'bottombar'
@@ -97,7 +116,7 @@ Ext.define('WeiQuPai.view.ShowUser', {
 				this.down('#user-info').setRecord(record);
 			},
 			failure: function(record, operation){
-				Ext.Msg.alert(null, '数据加载失败');	
+				WeiQuPai.Util.toast('数据加载失败');	
 			}
 		});
 		var me = this;
@@ -107,7 +126,7 @@ Ext.define('WeiQuPai.view.ShowUser', {
 		store.getProxy().setExtraParam('uid', uid);
 		store.load(function(records, operation, success){
 			if(!success){
-				Ext.Msg.alert(null, '数据加载失败');
+				WeiQuPai.Util.toast('数据加载失败');
 				return false;
 			}
 			if(records.length == 0){

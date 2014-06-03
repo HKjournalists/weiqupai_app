@@ -4,13 +4,13 @@ Ext.define('WeiQuPai.controller.My', {
     config: {
     	refs: {
     		main: 'main',
-    		friendBtn: 'iconbutton[action=friend]',
-            feedBtn: 'iconbutton[action=feed]',
-    		accountBtn: 'iconbutton[action=account]',
-    		consigneeBtn: 'iconbutton[action=consignee]',
-    		propBtn: 'iconbutton[action=prop]',
-    		couponBtn: 'iconbutton[action=coupon]',
-    		settingBtn: 'iconbutton[action=setting]',
+    		friendBtn: 'button[action=friend]',
+            feedBtn: 'button[action=feed]',
+    		accountBtn: 'button[action=account]',
+    		consigneeBtn: 'button[action=consignee]',
+    		propBtn: 'button[action=prop]',
+    		couponBtn: 'button[action=coupon]',
+    		settingBtn: 'button[action=setting]',
             profile: 'disclosureitem[itemId=profile]',
     		my: 'my'
     	},

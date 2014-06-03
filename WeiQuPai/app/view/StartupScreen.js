@@ -6,6 +6,7 @@ Ext.define('WeiQuPai.view.StartupScreen', {
 		cls: 'w-imageviewer',
 		picData: null,
 		fullscreen: true,
+		hidden: true,
 		hideAnimation: 'fadeOut',
 		style:'background:#e4eee6;z-index:1'
 	},
@@ -33,6 +34,7 @@ Ext.define('WeiQuPai.view.StartupScreen', {
 		//最后一张图点击消失
 		if(this.getActiveIndex() == this.getMaxItemIndex()){
 			Ext.Viewport.setActiveItem('main');
+			//this.hide();
 		}
 	}
 });

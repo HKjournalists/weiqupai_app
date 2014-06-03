@@ -51,9 +51,15 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
         }
     },
     
+    //商家
     showShop: function(){
-        var shopView = Ext.create('WeiQuPai.view.Shop', {data: this.getPageView().auctionData.shop});
-        this.getMain().push(shopView);
+        var data = this.getPageView().auctionData;
+        if(data.shop.description || data.shop.pic_url){
+            var shopView = Ext.create('WeiQuPai.view.Shop', {data: this.getPageView().auctionData.shop});
+            this.getMain().push(shopView);
+        }else{
+            window.open(data.shop.site, '_system');
+        }
     },
 
     showBrand: function(){
@@ -66,7 +72,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
         if(!user)return;
         var auctionId = this.getPageView().auctionData.id;
         if(WeiQuPai.Util.hasAuction(auctionId)){
-            Ext.Msg.alert(null, '您已经拍过该商品');
+            WeiQuPai.Util.toast('您已经拍过该商品');
             return;
         }
         WeiQuPai.Util.mask();
@@ -79,7 +85,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
                 if(record.get('status') != WeiQuPai.Config.auctionStatus.STATUS_ONLINE){
                     msgArr = ['拍卖还未开始', null, null, '对不起，拍卖已结束'];
                     msg = msgArr[record.get('status')];
-                    Ext.Msg.alert(null, msg);
+                    WeiQuPai.Util.toast(msg);
                     return;
                 }
                 var orderView = Ext.create('WeiQuPai.view.Order');
@@ -88,7 +94,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
             },
             failure: function(){
                 WeiQuPai.Util.unmask();
-                Ext.Msg.alert(null, '数据加载失败');    
+                WeiQuPai.Util.toast('数据加载失败');    
             }
         }, this);
     },
@@ -118,7 +124,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
                     return false;
                 }
                 var msg = result && result.msg || '评论提交失败，请重试';
-                Ext.Msg.alert(null, msg);
+                WeiQuPai.Util.toast(msg);
             }
         });
     },

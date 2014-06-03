@@ -8,7 +8,7 @@ Ext.define('WeiQuPai.view.MyAuction', {
         store: 'MyAuction',
 		itemTpl: new Ext.XTemplate(
             '<div class="myauction-row">',
-            '<img src="' + WeiQuPai.Config.host + '{pic_cover}" />',
+            '<div class="myauction-img"><img src="{[this.getCover(values.pic_cover)]}"/><span class="x-badge"></span></div>',
             '<div class="info">',
                 '<h2>{title}</h2>',
                 '<p>成交价<span class="fbig">￥{price}</span>',
@@ -23,6 +23,9 @@ Ext.define('WeiQuPai.view.MyAuction', {
             {
                 notPay: function(status){
                     return status == WeiQuPai.Config.orderStatus.STATUS_TOPAY;
+                },
+                getCover: function(cover){
+                    return WeiQuPai.Util.getImagePath(cover, '290');
                 }
             }
         ),
@@ -56,6 +59,24 @@ Ext.define('WeiQuPai.view.MyAuction', {
         }, this);
     },
 
+    setBadge: function(orderId){
+        var item = this.getItemAt(this.getStore().indexOfId(orderId));
+        if(!item) return;
+        var badgeEl = item.element.down('.x-badge');
+        badgeEl.addCls('w-badge-mdot');
+        badgeEl.parent().addCls('x-hasbadge');
+        badgeEl.show();
+    },
+
+    clearBadge: function(orderId){
+        var item = this.getItemAt(this.getStore().indexOfId(orderId));
+        if(!item) return;
+        var badgeEl = item.element.down('.x-badge');
+        badgeEl.removeCls('w-badge-mdot');
+        badgeEl.parent().removeCls('x-hasbadge');
+        badgeEl.hide();
+    },
+
     loadData: function(){
         var user = WeiQuPai.Cache.get('currentUser');
         if(!user){
@@ -73,7 +94,7 @@ Ext.define('WeiQuPai.view.MyAuction', {
         store.getProxy().setExtraParam('token', user.token);
         store.load(function(records, operation, success){
             if(!success){
-                Ext.Msg.alert(null, '数据加载失败');
+                WeiQuPai.Util.toast('数据加载失败');
                 return false;
             }
             if(records.length == 0){
@@ -85,6 +106,8 @@ Ext.define('WeiQuPai.view.MyAuction', {
                 store.removeAll();
                 return false;
             }
+            //通知标红点
+            WeiQuPai.Notify.notify([WeiQuPai.Notify.MSG_NEW_ORDER, WeiQuPai.Notify.MSG_ORDER_SHIP]);
         }, this);
     }
 });

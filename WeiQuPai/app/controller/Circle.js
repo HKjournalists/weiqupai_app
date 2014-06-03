@@ -94,7 +94,7 @@ Ext.define('WeiQuPai.controller.Circle', {
                     rsp = Ext.decode(rsp.responseText);
                     if(!WeiQuPai.Util.invalidToken(rsp)) return false;
                     if(rsp.code > 0){
-                        Ext.Msg.alert(null, rsp.msg);
+                        WeiQuPai.Util.toast(rsp.msg);
                         return;
                     }
                     list.getStore().remove(record);
@@ -131,7 +131,7 @@ Ext.define('WeiQuPai.controller.Circle', {
             failure: function(form, result){
                 WeiQuPai.Util.unmask();
                 var msg = result && result.msg || '数据提交失败，请重试';
-                Ext.Msg.alert(null, msg);
+                WeiQuPai.Util.toast(msg);
             }
         });
     },
@@ -166,7 +166,7 @@ Ext.define('WeiQuPai.controller.Circle', {
             failure: function(form, result){
                 WeiQuPai.Util.unmask();
                 var msg = result && result.msg || '回复提交失败，请重试';
-                Ext.Msg.alert(null, msg);
+                WeiQuPai.Util.toast(msg);
             }
         });
     },
@@ -200,7 +200,7 @@ Ext.define('WeiQuPai.controller.Circle', {
                 rsp = Ext.decode(rsp.responseText);
                 if(!WeiQuPai.Util.invalidToken(rsp)) return false;
                 if(rsp.code > 0){
-                    Ext.Msg.alert(null, rsp.msg);
+                    WeiQuPai.Util.toast(rsp.msg);
                     return;
                 }
                 var replies = record.get('replies');
@@ -228,7 +228,7 @@ Ext.define('WeiQuPai.controller.Circle', {
                 rsp = Ext.decode(rsp.responseText);
                 if(!WeiQuPai.Util.invalidToken(rsp)) return false;
                 if(rsp.code > 0){
-                    Ext.Msg.alert(null, rsp.msg);
+                    WeiQuPai.Util.toast(rsp.msg);
                     return;
                 }
                 var zan = record.get('zan') || [];
@@ -251,7 +251,7 @@ Ext.define('WeiQuPai.controller.Circle', {
                 rsp = Ext.decode(rsp.responseText);
                 if(!WeiQuPai.Util.invalidToken(rsp)) return false;
                 if(rsp.code > 0){
-                    Ext.Msg.alert(null, rsp.msg);
+                    WeiQuPai.Util.toast(rsp.msg);
                     return;
                 }
                 var zan = record.get('zan');

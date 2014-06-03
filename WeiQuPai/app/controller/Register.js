@@ -19,7 +19,11 @@ Ext.define('WeiQuPai.controller.Register', {
         }
         var data = this.getRegForm().getValues();
         WeiQuPai.Util.register(data, function(){
-            WeiQuPai.Util.showTab('my');
+            var prev = Ext.Viewport.down('main').getPreviousItem();
+            var n = 1;
+            //如果是login页面就pop2个view出去
+            prev.isXType('login') && n++;
+            Ext.Viewport.down('main').pop(n);
         });
     }, 
 
@@ -36,7 +40,7 @@ Ext.define('WeiQuPai.controller.Register', {
             msg = '两次密码不相同';
         }
         if(msg){
-            Ext.Msg.alert(null, msg);
+            WeiQuPai.Util.toast(msg);
             return false;
         }
         return true;

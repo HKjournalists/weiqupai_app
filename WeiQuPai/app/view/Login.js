@@ -15,7 +15,7 @@ Ext.define('WeiQuPai.view.Login', {
                 xtype: 'textfield',
                 cls: 'w-input-text w-margin',
                 inputCls: 'w-icon-user',
-                placeHolder: '用户名/手机/邮箱',
+                placeHolder: '手机/邮箱',
                 autoComplete: false
 
             },
@@ -66,6 +66,13 @@ Ext.define('WeiQuPai.view.Login', {
                         flex: 1
                     }
                 ]
+            },
+            {
+                xtype: 'button',
+                align: 'right',
+                text: '忘记密码？',
+                cls: 'w-button-text',
+                action: 'forgetpass'
             },
             {
                 xtype: 'bottombar'

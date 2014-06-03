@@ -40,13 +40,13 @@ Ext.define('WeiQuPai.view.AddFriendButtonLayer', {
                 rsp = Ext.decode(rsp.responseText);
                 if(!WeiQuPai.Util.invalidToken(rsp)) return false;
                 if(rsp.code && rsp.code > 0){
-                    Ext.Msg.alert(null, rsp.msg);
+                    WeiQuPai.Util.toast(rsp.msg);
                     return;
                 }
-                Ext.Msg.alert(null, '请求已发送');
+                WeiQuPai.Util.toast('请求已发送');
             },
             failure: function(rsp){
-                Ext.Msg.Alert(null, '请求失败，请重试');
+                WeiQuPai.Util.toast('请求失败，请重试');
             }
         });
 	}

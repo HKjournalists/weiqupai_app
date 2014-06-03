@@ -117,7 +117,7 @@ static NSSet* org_apache_cordova_validArrowDirections;
     cameraPicker.callbackId = callbackId;
     cameraPicker.targetSize = targetSize;
     //设置裁剪到指定大小 edit by icesyc@2014-04-01
-    cameraPicker.cropToSize = YES;
+    cameraPicker.cropToSize = NO;
     // we need to capture this state for memory warnings that dealloc this object
     cameraPicker.webView = self.webView;
     cameraPicker.popoverSupported = [self popoverSupported];

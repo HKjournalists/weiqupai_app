@@ -54,20 +54,22 @@ Ext.define('WeiQuPai.view.Order', {
 			},
 			{
 				xtype: 'disclosureitem',
+				itemId: 'payment',
+				title: '支付方式',
+				content: ''
+			},
+			/*
+			{
+				xtype: 'disclosureitem',
 				itemId: 'prop',
 				title: '使用道具',
 				content: ''
 			},
+			*/
 			{
 				xtype: 'disclosureitem',
 				itemId: 'coupon',
 				title: '使用拍券',
-				content: ''
-			},
-			{
-				xtype: 'disclosureitem',
-				itemId: 'payment',
-				title: '支付方式',
 				content: ''
 			},
 			{
@@ -142,9 +144,7 @@ Ext.define('WeiQuPai.view.Order', {
 	},
 
 	selectFirst: function(itemId, list){
-        if(list.getSelectionCount() == 0){
-            list.select(0);
-        }
+        list.select(0);
         var title = list.getItemAt(0).getRecord().get('title');
         this.getRecord().set(itemId, title);
         this.down('disclosureitem[itemId=' + itemId + ']').setContent(title);

@@ -5,6 +5,7 @@ Ext.define('WeiQuPai.controller.Login', {
             loginForm: 'login',
             login: 'button[action=login]',
             register: 'button[action=goregister]',
+            forgetpass: 'button[action=forgetpass]',
             goMain: 'button[action=gomain]',
             qqlogin: 'disclosureitem[itemId=qqlogin]',
             weibologin: 'disclosureitem[itemId=weibologin]',
@@ -26,6 +27,9 @@ Ext.define('WeiQuPai.controller.Login', {
             },
             logout: {
                 tap: 'doLogout'
+            },
+            forgetpass:{
+                tap: 'showForgetPass'
             }
         }
     },
@@ -45,15 +49,26 @@ Ext.define('WeiQuPai.controller.Login', {
     },
 
     doQQLogin: function(){
-        Ext.Msg.alert(null, 'qq登录');
+        WeiQuPai.Util.toast('qq登录');
     },
 
     doWeiboLogin: function(){
-        Ext.Msg.alert(null, '微博登录');
+        WeiQuPai.Util.toast('微博登录');
     },
     
     doLogout: function(){
         WeiQuPai.Util.logout();
         WeiQuPai.Util.showTab('today'); 
+    },
+
+    showForgetPass: function(){
+        var view = Ext.create('WeiQuPai.view.WebPage');
+        var user = WeiQuPai.Cache.get('currentUser');
+        var href = 'http://www.vqupai.com/mm/index.php?r=password/reset';
+        if(user) href += (href.indexOf("?") == -1 ? '?' : '&')  + 'token=' + user.token;
+        view.setHref(href);
+        //view.setReloadOnBack(true);
+        view.setTitle('找回密码');
+        Ext.Viewport.down('main').push(view);
     }
 });

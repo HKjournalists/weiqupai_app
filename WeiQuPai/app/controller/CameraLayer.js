@@ -23,11 +23,11 @@ Ext.define('WeiQuPai.controller.CameraLayer', {
             failure: this.onCaptureFailure,
             scope: this,
             quality : 60,
+            width: 640,
+            height:640,
             encoding: 'jpg',
             source: btn.config.action,
-            destination: 'data',
-            width: this.getCameraLayer().getPicWidth(),
-            height:this.getCameraLayer().getPicHeight()
+            destination: 'data'
         });
     },
 
@@ -37,10 +37,13 @@ Ext.define('WeiQuPai.controller.CameraLayer', {
 
     //拍成功后上传图片到server
     onCaptureSuccess: function(imgData){
+        var width = this.getCameraLayer().getPicWidth();
+        var height = this.getCameraLayer().getPicHeight();
+        var crop = this.getCameraLayer().getCrop() ? 1 : 0;
         var user = WeiQuPai.Cache.get('currentUser');
         WeiQuPai.Util.mask();
         Ext.Ajax.request({
-            url: WeiQuPai.Config.apiUrl + '/?r=app/upload&token=' + user.token,
+            url: WeiQuPai.Config.apiUrl + '/?r=app/upload&token=' + user.token + '&w=' + width + '&h=' + height + '&crop=' + crop,
             method: 'post',
             params: {
                 imgData : imgData
@@ -50,7 +53,7 @@ Ext.define('WeiQuPai.controller.CameraLayer', {
                 rsp = Ext.decode(rsp.responseText);
                 if(!WeiQuPai.Util.invalidToken(rsp)) return false;
                 if(rsp.code && rsp.code > 0){
-                    Ext.Msg.alert(null, rsp.msg);
+                    WeiQuPai.Util.toast(rsp.msg);
                     return;
                 }
                 var callback = this.getCameraLayer().getCallback();
@@ -58,7 +61,7 @@ Ext.define('WeiQuPai.controller.CameraLayer', {
             },
             failure: function(rsp){
                 WeiQuPai.Util.unmask();
-                Ext.Msg.alert(null, '图片上传失败，请重试');
+                WeiQuPai.Util.toast('图片上传失败，请重试');
             },
             scope: this
         });

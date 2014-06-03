@@ -14,7 +14,7 @@ Ext.application({
     name: 'WeiQuPai',
 
     requires: [
-        'Ext.MessageBox','WeiQuPai.Config', 'WeiQuPai.Util', 'WeiQuPai.Cache', 'WeiQuPai.plugin.ListPaging', 
+        'Ext.MessageBox','WeiQuPai.Config', 'WeiQuPai.Util', 'WeiQuPai.Notify', 'WeiQuPai.Cache', 'WeiQuPai.plugin.ListPaging', 
         'WeiQuPai.plugin.PullRefresh', 'WeiQuPai.plugin.LoadMask', 'WeiQuPai.view.StartupScreen', 'WeiQuPai.view.SplashScreen',
         'WeiQuPai.view.WebPage', 'Ext.Anim'
     ],
@@ -22,12 +22,12 @@ Ext.application({
     controllers: [
         'Main', 'Today', 'MyAuction', 'MyAuctionDetail','ItemDetail','Order', 'ShowOrder', 'Circle', 'ShowUser',
         'My', 'Setting', 'MyFriend', 'MyConsignee', 'Private', 'NewMessage', 'Login', 'Register', 'Profile', 'CameraLayer',
-        'NewFriend'
+        'NewFriend', 'Routes', 'SpecialSale'
     ],
     views: ['Main'],
     stores: [
         'Auction', 'AuctionComment', 'Banner', 'MyAuction', 'UserConsignee', 'Circle', 'UserFeed', 'UserFriend', 'UserProp', 'UserCoupon',
-        'FriendRequest'
+        'FriendRequest', 'SpecialSale'
     ],
     icon: {
         '57': 'resources/icons/icon.png',
@@ -49,13 +49,12 @@ Ext.application({
     },
 
     startupScreen: [
-        'resources/images/splash1.jpg', 
-        'resources/images/splash2.jpg', 
-        'resources/images/splash3.jpg' 
+        'resources/images/splash1.png', 
+        'resources/images/splash2.png'
     ],
 
     //是否第一次加载
-    firstLaunch: false,
+    firstLaunch: null,
 
     launch: function() {
         var ver = WeiQuPai.Config.version;
@@ -74,6 +73,9 @@ Ext.application({
         this.handleResume();
         this.handlePause();
 
+        //处理postMessage
+        this.handlePostMessage();
+
         this.initMsgBox();
 
         //fix ios7 statusbar overlay
@@ -84,29 +86,17 @@ Ext.application({
         //bind push
         WeiQuPai.Util.bindPush();
 
+
         //startup screen
         if(this.firstLaunch){
-            this.firstLaunch = true;
             WeiQuPai.Cache.set('appver', ver);
             var view = Ext.create('WeiQuPai.view.StartupScreen'); 
             view.setPicData(this.startupScreen);
             Ext.Viewport.add(view);
-            Ext.Viewport.add(Ext.create('WeiQuPai.view.Main'));
-        }else{
-            //splash screen
-            var self = this;
-            WeiQuPai.Util.loadSplash(function(data){
-                if(data && data.enable){
-                    var view = Ext.create('WeiQuPai.view.SplashScreen');
-                    view.setPicData(data);
-                    Ext.Viewport.add(view);
-                    setTimeout(function(){
-                        Ext.Viewport.setActiveItem('main');
-                    }, (data.duration || 5) * 1000);
-                }
-                Ext.Viewport.add(Ext.create('WeiQuPai.view.Main'));
-            });
+            view.show();
         }
+
+        Ext.Viewport.add(Ext.create('WeiQuPai.view.Main'));
 
     },
 
@@ -156,20 +146,35 @@ Ext.application({
     },
 
     handleResume: function(){
-        document.addEventListener('resume', function(e){
+        document.addEventListener('resume', function(){
+            //检查消息
+            WeiQuPai.Notify.checkMQ();
+
+            //处理刷新状态
             var mainTab = Ext.Viewport.down('maintab');
             var main = Ext.Viewport.down('main');
             //如果是在今日，就做软刷新处理
             var today = mainTab.down('today');
             var detail = main.down('itemdetail');
+            var special = main.down('specialsale');
             if(main.getActiveItem() == detail){
                 detail.softRefresh();
                 return;
             }
-            if(mainTab.getActiveItem() == today){
-                today.softRefresh();
+            if(main.getActiveItem() == special){
+                special.fireEvent('activate');
                 return;
             }
+            if(mainTab.getActiveItem() == today){
+                today.fireEvent('activate');
+                return;
+            }
+        }, false);
+    },
+
+    handlePostMessage: function(){
+        window.addEventListener('message', function(e){
+            location.hash = e.data;
         }, false);
     },
 

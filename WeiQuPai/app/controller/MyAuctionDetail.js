@@ -49,15 +49,15 @@ Ext.define('WeiQuPai.controller.MyAuctionDetail', {
                 success: function(rsp){
                     rsp = Ext.decode(rsp.responseText);
                     if(rsp.code && rsp.code > 0){
-                        Ext.Msg.alert(null, '数据更新失败');
+                        WeiQuPai.Util.toast('数据更新失败');
                         return;
                     }
-                    Ext.Msg.alert(null, '您已成功确认收货');
+                    WeiQuPai.Util.toast('您已成功确认收货');
                     self.getConfirmBtn().hide();
                     Ext.get('statusText').setHtml('已完成');
                 },
                 failure: function(){
-                    Ext.Msg.alert(null, '数据更新失败');
+                    WeiQuPai.Util.toast('数据更新失败');
                 }
             });
         };
@@ -65,7 +65,7 @@ Ext.define('WeiQuPai.controller.MyAuctionDetail', {
     },
 
     doShowOrder: function(){
-        Ext.Msg.alert(null, '秀！');
+        WeiQuPai.Util.toast('秀！');
     },
 
     doShowShipment: function(){

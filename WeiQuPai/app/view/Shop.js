@@ -15,7 +15,12 @@ Ext.define('WeiQuPai.view.Shop', {
 			{
 				xtype: 'container',
 				itemId: 'shop-detail',
-				cls: 'w-content',
+				cls: 'w-brand-info',
+				tpl: new Ext.XTemplate(
+					'<tpl if="pic_url"><p class="brand-logo"><img src="' + WeiQuPai.Config.host + '{pic_url}" height="75"/></p></tpl>',
+					'<h3>{title}</h3>',
+					'<p>{description:htmlEncode}</p>'
+				)
 			},
 			{
 				xtype: 'button',
@@ -31,7 +36,7 @@ Ext.define('WeiQuPai.view.Shop', {
 	},
 
 	applyData: function(data){
-		this.down('#shop-detail').setHtml(data.description);
+		this.down('#shop-detail').setData(data);
 		data.site && this.down('button').setHidden(false);
 		this.down('button').on('tap', function(){
 			window.open(data.site, '_system');

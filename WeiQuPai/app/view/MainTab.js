@@ -46,6 +46,39 @@ Ext.define('WeiQuPai.view.MainTab', {
     initialize: function(){
         this.callParent(arguments);
         this.on('hide', this.onHide, this);
+        this.down('tabbar').getAt(0).element.on('doubletap', this.onDoubleTap, this);
+        this.down('tabbar').getAt(1).element.on('doubletap', this.onDoubleTap, this);
+        this.down('tabbar').getAt(2).element.on('doubletap', this.onDoubleTap, this);
+    },
+
+    setBadge: function(tab){
+        var tabList = ['today', 'myauction', 'circle', 'my'];
+        var idx = tabList.indexOf(tab);
+        var tab = this.query('tab')[idx];
+        tab.setBadgeCls('x-badge w-badge-sdot');
+        tab.element.addCls('x-hasbadge');
+        tab.badgeElement.show();
+    },
+
+    setBadgeText: function(tab, text){
+        var tabList = ['today', 'myauction', 'circle', 'my'];
+        var idx = tabList.indexOf(tab);
+        var tab = this.query('tab')[idx];
+        tab.setBadgeCls('x-badge');
+        tab.setBadgeText(text);
+    },
+
+    clearBadge: function(tab){
+        var tabList = ['today', 'myauction', 'circle', 'my'];
+        var idx = tabList.indexOf(tab);
+        var tab = this.query('tab')[idx];
+        tab.setBadgeCls('x-badge');
+        tab.element.removeCls('x-hasbadge');
+        tab.badgeElement.hide();
+    },
+
+    onDoubleTap: function(){
+        this.getActiveItem().getScrollable().getScroller().scrollToTop(true);
     },
 
     onHide: function(){

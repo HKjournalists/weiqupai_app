@@ -261,7 +261,6 @@ Ext.define('WeiQuPai.plugin.PullRefresh', {
      */
     onLatestFetched: function(operation) {
         var store = this.getList().getStore();
-        store.set
         store.removeAll();
         store.add(operation.getRecords());
         /*

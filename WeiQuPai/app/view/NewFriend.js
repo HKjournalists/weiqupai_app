@@ -30,6 +30,9 @@ Ext.define('WeiQuPai.view.NewFriend', {
 	},
 
 	initialize: function(){
+        //清除消息
+        WeiQuPai.Notify.clearNotify(WeiQuPai.Notify.MSG_FRIEND_REQUEST);
+
 		this.callParent(arguments);
 
 		var user = WeiQuPai.Util.checkLogin();
@@ -42,7 +45,7 @@ Ext.define('WeiQuPai.view.NewFriend', {
 		store.getProxy().setExtraParam('token', user.token);
 		store.load(function(records, operation, success){
             if(!success){
-                Ext.Msg.alert(null, '数据加载失败');
+                WeiQuPai.Util.toast('数据加载失败');
                 return false;
             }
             if(records.length == 0){

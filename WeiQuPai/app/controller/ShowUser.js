@@ -19,7 +19,7 @@ Ext.define('WeiQuPai.controller.ShowUser', {
         if(!user || user.id != uid) return;
         //只有点自己的才能换封面
         var self = this;
-        WeiQuPai.Util.showCameraLayer(640, 400, function(url){
+        WeiQuPai.Util.showCameraLayer(640, 400, true, function(url){
             self.setCircleBg(url);
         });
     },

@@ -106,7 +106,7 @@ Ext.define('WeiQuPai.view.ShareLayer', {
         }
         Wechat.share(data, function () {
         }, function (reason) {
-            //Ext.Msg.alert(null, "分享失败: " + reason);
+            //WeiQuPai.Util.toast("分享失败: " + reason);
         });
     },
 });

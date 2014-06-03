@@ -15,7 +15,7 @@ Ext.define('WeiQuPai.view.Register', {
                 name: 'uname',
                 xtype: 'textfield',
                 cls: 'w-input-text w-margin',
-                placeHolder: '用户名/手机/邮箱',
+                placeHolder: '手机/邮箱',
                 autoComplete: false
 
             },

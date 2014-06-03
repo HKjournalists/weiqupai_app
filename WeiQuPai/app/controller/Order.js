@@ -80,7 +80,7 @@ Ext.define('WeiQuPai.controller.Order', {
     //选择使用拍券
     selectCoupon: function(list, index, dataItem, record, e){
         if(record.get('coupon_info').expired){
-            //Ext.Msg.alert(null, '该拍券已经过期，不能使用');
+            //WeiQuPai.Util.toast('该拍券已经过期，不能使用');
             Ext.toast('该拍券已经过期，不能使用');
             return;
         }
@@ -125,11 +125,11 @@ Ext.define('WeiQuPai.controller.Order', {
         if(!user) return;
         var order = this.getOrderView().getRecord();
         if(WeiQuPai.Util.hasAuction(order.get('auction_id'))){
-            Ext.Msg.alert(null, '您已经拍过该商品');
+            WeiQuPai.Util.toast('您已经拍过该商品');
             return;
         }
         if(!order.get('consignee_id')){
-            Ext.Msg.alert(null, '还没有选择收货地址');
+            WeiQuPai.Util.toast('还没有选择收货地址');
             return false;
         }
         var itemData = this.getOrderView().down('#itemInfo').getData();
@@ -145,12 +145,7 @@ Ext.define('WeiQuPai.controller.Order', {
                 rsp = Ext.decode(rsp.responseText);
                 if(!WeiQuPai.Util.invalidToken(rsp)) return false;
                 if(!rsp.success){
-                    //订单超时
-                    var func = function(){
-                        if(rsp.code != 309) return;
-                        Ext.Viewport.down('main').pop();
-                    }
-                    Ext.Msg.alert(null, rsp.msg, func);
+                    WeiQuPai.Util.toast(rsp.msg);
                     return;
                 }
                 //将拍过的商品保存到cache中
@@ -163,7 +158,7 @@ Ext.define('WeiQuPai.controller.Order', {
             },
             failure: function(rsp){
                 WeiQuPai.Util.unmask();
-                Ext.Msg.alert(null, '数据提交失败');
+                WeiQuPai.Util.toast('数据提交失败');
             }
         });
     }

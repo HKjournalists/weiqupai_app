@@ -27,7 +27,7 @@ Ext.define('WeiQuPai.controller.NewFriend', {
                 list.getStore().remove(record);
             },
             failure: function(rsp){
-                Ext.Msg.alert(null, '删除失败, 请重试');
+                WeiQuPai.Util.toast('删除失败, 请重试');
             }
         });
     },
@@ -42,7 +42,7 @@ Ext.define('WeiQuPai.controller.NewFriend', {
                 rsp = Ext.decode(rsp.responseText);
                 if(!WeiQuPai.Util.invalidToken(rsp)) return false;
                 if(rsp.code > 0){
-                    Ext.Msg.alert(null, rsp.msg);
+                    WeiQuPai.Util.toast(rsp.msg);
                     return;
                 }
                 record.set('status', rsp.status);
@@ -52,7 +52,7 @@ Ext.define('WeiQuPai.controller.NewFriend', {
                 WeiQuPai.Cache.set('friends', friends);
             },
             failure: function(rsp){
-                Ext.Msg.alert(null, '请求失败, 请重试');
+                WeiQuPai.Util.toast('请求失败, 请重试');
             }
         });
     }

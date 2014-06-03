@@ -55,7 +55,7 @@ Ext.define('WeiQuPai.view.Shipment', {
 				this.down('#shipmentInfo').setData(record.data);
 			},
 			failure: function(record, operation){
-				Ext.Msg.alert(null, '数据加载失败');
+				WeiQuPai.Util.toast('数据加载失败');
 			}
 		});
 	}

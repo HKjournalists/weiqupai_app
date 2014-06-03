@@ -31,7 +31,7 @@ Ext.define('WeiQuPai.view.Circle', {
 		disableSelection : true,
 		itemTpl: new Ext.XTemplate(
 			'<div class="circle-row">',
-			'<img class="avatar" <tpl if="avatar">src="' + WeiQuPai.Config.host + '{avatar} "</tpl>/>',
+			'<img class="avatar" <tpl if="avatar">src="{[this.getAvatar(values.avatar)]}"</tpl>/>',
 			'<div class="info">',
 			'<tpl if="feed_type==0">',
 				'<div class="action-title"><span class="uname" uid="{uid}">{nick:htmlEncode}</span><span class="action">发表了一条消息</span></div>',
@@ -40,17 +40,17 @@ Ext.define('WeiQuPai.view.Circle', {
 				'<div class="action-title"><span class="uname" uid="{uid}">{nick:htmlEncode}</span><span class="action">发表了一条晒单</span></div>',
 				'<tpl if="content"><p>{content:htmlEncode}</p></tpl>',
 				'<div class="pic-list">',
-				'<tpl for="json_data.pic_list"><img src="' + WeiQuPai.Config.host + '{.}" /></tpl>',
+				'<tpl for="json_data.pic_list"><img src="{[this.getPic(values)]}"/></tpl>',
 				'</div>',
 				'<div class="card" dataType="item">',
-					'<img src="' + WeiQuPai.Config.host + '{json_data.pic_cover}"/>',
+					'<img src="{[this.getCover(values.json_data.pic_cover)]}"/>',
 					'<span>{json_data.title:htmlEncode}</span>',
 				'</div>',
 			'<tpl elseif="feed_type==2">',
 				'<div class="action-title"><span class="uname" uid="{uid}">{nick:htmlEncode}</span><span class="action">拍下了一个宝贝</span></div>',
 				'<p>我刚刚购买了{json_data.title:htmlEncode}</p>',
 				'<div class="card" dataType="item">',
-					'<img src="' + WeiQuPai.Config.host + '{json_data.pic_cover}"/>',
+					'<img src="{[this.getCover(values.json_data.pic_cover)]}"/>',
 					'<span>{json_data.title:htmlEncode}</span>',
 				'</div>',
 			'</tpl>',
@@ -97,7 +97,16 @@ Ext.define('WeiQuPai.view.Circle', {
 						if(zan[i].uid == user.id) return true;
 					}
 					return false;
-				}
+				},
+				getAvatar: function(avatar){
+            		return WeiQuPai.Util.getImagePath(avatar, '140');
+            	},
+				getCover: function(cover){
+            		return WeiQuPai.Util.getImagePath(cover, '290');
+            	},
+            	getPic: function(pic){
+            		return WeiQuPai.Util.getImagePath(pic, '40');
+            	}
 			}
 		),
 		items: [
@@ -118,7 +127,7 @@ Ext.define('WeiQuPai.view.Circle', {
 		this.callParent(arguments);
 		this.setForceReload(true);
 		this.loadData(true);
-		this.on('activate', this.loadData, this);
+		this.on('activate', this.onActivate, this);
         this.on('hide', this.onHide, this);
 		this.onBefore('itemtap', this.bindEvent, this);
 		/*
@@ -133,6 +142,11 @@ Ext.define('WeiQuPai.view.Circle', {
 		this.postForm = WeiQuPai.Util.createOverlay('WeiQuPai.view.CirclePost', {height: 48, showAnimation: false, hideAnimation: false});
 	},
 
+	onActivate: function(){
+		this.loadData();
+		WeiQuPai.Notify.clearNotify([WeiQuPai.Notify.MSG_CIRCLE, WeiQuPai.Notify.MSG_CIRCLE_REPLY, WeiQuPai.Notify.MSG_CIRCLE_ZAN]);
+	},
+
 	loadData: function(firstLoad){
 		//除了第一次每次都重刷广告
 		firstLoad !== true && this.down('banner').updateBanner();
@@ -142,6 +156,7 @@ Ext.define('WeiQuPai.view.Circle', {
 			this.setForceReload(false);
 			var user = WeiQuPai.Cache.get('currentUser');
 			this.getStore().getProxy().setExtraParam('token', user && user.token || null);
+			this.setLoadingText(null);
 			this.getStore().load();
 		}
 	},

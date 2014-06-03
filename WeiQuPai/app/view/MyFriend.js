@@ -20,9 +20,10 @@ Ext.define('WeiQuPai.view.MyFriend', {
             },
             {
             	xtype: 'disclosureitem',
+            	cls: 'w-disclosure-item no-vpad',
             	itemId: 'newFriend',
             	titleStyle: 'normal',
-            	title: '<div class="icon-newfriend">新的朋友</div>',
+            	title: '<div class="flex"><div class="icon-newfriend"><span class="x-badge" style="display:none"></span></div><div class="title">新的朋友</div></div>',
             	scrollDock: 'top'
             },
 			{
@@ -36,6 +37,7 @@ Ext.define('WeiQuPai.view.MyFriend', {
 		this.msgbox = WeiQuPai.Util.msgbox('您还没有好友.');
         this.add(this.msgbox);
 		this.on('activate', this.loadData, this);
+		this.on('painted', this.onPainted);
 	},
 
 	loadData: function(){
@@ -46,7 +48,7 @@ Ext.define('WeiQuPai.view.MyFriend', {
 		store.getProxy().setExtraParam('token', user.token);
 		store.load(function(records, operation, success){
             if(!success){
-                Ext.Msg.alert(null, '数据加载失败');
+                WeiQuPai.Util.toast('数据加载失败');
                 return false;
             }
             if(records.length == 0){
@@ -62,5 +64,10 @@ Ext.define('WeiQuPai.view.MyFriend', {
             //更新本地的好友缓存
             WeiQuPai.Cache.set('friends', friends);
 		}, this);
+	},
+
+	onPainted: function(){
+		//检查是否有新消息，有显示红点
+		WeiQuPai.Notify.notify(WeiQuPai.Notify.MSG_FRIEND_REQUEST);
 	}
 });

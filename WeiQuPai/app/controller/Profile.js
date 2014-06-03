@@ -22,7 +22,7 @@ Ext.define('WeiQuPai.controller.Profile', {
                 itemtap: 'selectGender'
             },
             avatar: {
-                tap: 'showCameraLayer'
+                tap: 'doAvatarTap'
             },
             nick: {
                 tap: function(){
@@ -52,9 +52,17 @@ Ext.define('WeiQuPai.controller.Profile', {
         }
     },
 
+    doAvatarTap: function(e){
+        if(Ext.get(e.target).hasCls('big-avatar')){
+            this.showBigAvatar();
+            return;
+        }
+        this.showCameraLayer();
+    },
+
     showCameraLayer: function(){
         var self = this;
-        WeiQuPai.Util.showCameraLayer(140, 140, function(url){
+        WeiQuPai.Util.showCameraLayer(140, 140, true, function(url){
             self.getProfileView().setAvatar(url);
         });
     },
@@ -73,7 +81,19 @@ Ext.define('WeiQuPai.controller.Profile', {
         this.getMain().push(view);
     },
 
-    
+    //显示头像大图
+    showBigAvatar: function(){
+        var user = WeiQuPai.Cache.get('currentUser');
+        url = user.avatar;
+        if(!url) return false;
+        var viewer =WeiQuPai.Util.getGlobalView('WeiQuPai.view.SimpleViewer');
+        var spic = WeiQuPai.Util.getImagePath(url, '140');
+        var bpic = WeiQuPai.Util.getImagePath(url);
+        viewer.setPic(spic, bpic);
+        viewer.show();
+        return false;
+    },
+
     //选择性别
     selectGender: function(list, index, dataItem, record, e){
         if(list.getSelection()[0] == record){

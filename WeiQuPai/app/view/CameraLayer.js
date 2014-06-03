@@ -4,7 +4,9 @@ Ext.define('WeiQuPai.view.CameraLayer', {
 	xtype: 'cameralayer',
 	config: {
 		picWidth: 140,
-		picHeight: 140,	
+		picHeight: 140,
+		//缩放时是否等比裁剪
+		crop: true,
 		callback: null,
 		
 		cls: 'camera-layer',

@@ -1,7 +1,7 @@
 Ext.define('WeiQuPai.view.ImageViewer', {
 	extend: 'Ext.carousel.Carousel',
 	xtype: 'imageviewer',
-	requires:['Ext.Img', 'Ext.carousel.Carousel'],
+	requires:['Ext.ux.ImageViewer', 'Ext.carousel.Carousel'],
 	config: {
 		cls: 'w-imageviewer',
 		picData: null,
@@ -24,12 +24,15 @@ Ext.define('WeiQuPai.view.ImageViewer', {
 			return false;
 		}
 		for(var i=0; i<data.length; i++){
-			var item = Ext.create('Ext.Img', {
-				src: WeiQuPai.Config.host + data[i]
+			var item = Ext.create('Ext.ux.ImageViewer', {
+				imageSrc: WeiQuPai.Util.getImagePath(data[i]),
+				previewSrc: WeiQuPai.Util.getImagePath(data[i], '290'),
+				doubleTapScale: 0,
+				loadingMask: false
 			});
-			item.on('tap', this.doImageTap, this);
 			this.add(item);
 		}
+		this.on('tap', this.doImageTap, this, {element: 'element'});
 
 	},
 

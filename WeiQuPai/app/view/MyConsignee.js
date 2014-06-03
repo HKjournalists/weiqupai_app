@@ -1,7 +1,7 @@
 Ext.define('WeiQuPai.view.MyConsignee', {
     extend: 'WeiQuPai.view.SwipeButtonList',
     xtype: 'myconsignee',
-    requires: ['WeiQuPai.view.AddConsigneeForm'],
+    requires: ['WeiQuPai.view.AddConsigneeForm', 'WeiQuPai.view.EditConsigneeForm'],
     config:{
         store: 'UserConsignee',
         title: '收货信息',
@@ -52,7 +52,7 @@ Ext.define('WeiQuPai.view.MyConsignee', {
         this.getStore().getProxy().setExtraParam('token', user.token);
         this.getStore().load(function(records, operation, success){
             if(!success){
-                Ext.Msg.alert(null, '数据加载失败');
+                WeiQuPai.Util.toast('数据加载失败');
                 return;
             }
             if(records.length == 0){

@@ -20,6 +20,12 @@ Ext.define('WeiQuPai.view.Profile', {
 			},
 			{
 				xtype: 'disclosureitem',
+				title: '用户名',
+				itemId: 'uname',
+				titleStyle: 'normal'
+			},
+			{
+				xtype: 'disclosureitem',
 				title: '昵称',
 				itemId: 'nick',
 				titleStyle: 'normal'
@@ -71,11 +77,12 @@ Ext.define('WeiQuPai.view.Profile', {
 	initialize: function(){
 		var user = WeiQuPai.Util.checkLogin();
 		if(!user) return;
+		this.user = user;
 		this.setContent(user);
     },
 
     setAvatar: function(url){
-    	absurl = WeiQuPai.Config.host + url;
+    	var absurl = WeiQuPai.Util.getImagePath(url, '140');
     	img = '<img class="big-avatar"' + (url ? ' src="' + absurl + '"' : '')  + '/>';
     	this.down('#avatar').setContent(img);
     	WeiQuPai.Util.updateProfile({avatar: url});
@@ -85,7 +92,7 @@ Ext.define('WeiQuPai.view.Profile', {
     	this.setAvatar(data.avatar);
     	this.addGenderList(data.gender);
 
-    	var fields = ['nick', 'real_name', 'email', 'phone', 'sign'];
+    	var fields = ['uname', 'nick', 'real_name', 'email', 'phone', 'sign'];
     	var self = this;
     	Ext.each(fields, function(f){
     		var value = Ext.String.htmlEncode(data[f]);

@@ -5,6 +5,9 @@ Ext.define('WeiQuPai.view.WebPage', {
 	config: {
 		title: null,
 		href: null,
+
+		//返回时是否重新加载
+		reloadOnBack: false,
 		items: [
 			{
                 xtype: 'titlebar',
@@ -20,8 +23,10 @@ Ext.define('WeiQuPai.view.WebPage', {
 		]
 	}, 
 
+	firstLoad: true,
+
 	initialize: function(){
-		this.on('painted', this.loadIframe, this);
+		this.on('activate', this.onActivate, this);
 	},
 
 	applyTitle: function(title){
@@ -29,22 +34,24 @@ Ext.define('WeiQuPai.view.WebPage', {
 		return title;
 	},
 
-	applyHref: function(href){
+	loadIframe: function(){
         this.setMasked({xtype: 'wloadmask'});
 		var iframe = this.down('iframe').element.query('iframe')[0];
 		var me = this;
 		iframe.onload = function(){
 			me.iframeLoad();
 		};
-		var user = WeiQuPai.Cache.get('currentUser');
-		if(user){
-			href += (href.indexOf("?") == -1 ? '?' : '&')  + 'token=' + user.token;
-		}
-		iframe.src = href;
-		return href;
+		iframe.src = this.getHref();
 	},
 
 	iframeLoad: function(){
 		this.unmask();
+	},
+
+	onActivate: function(){
+		if(this.firstLoad || this.getReloadOnBack()){
+			this.firstLoad = false;
+			this.loadIframe();
+		} 
 	}
 });

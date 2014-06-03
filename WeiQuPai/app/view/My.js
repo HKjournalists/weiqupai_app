@@ -2,7 +2,7 @@ Ext.define('WeiQuPai.view.My', {
 	extend: 'Ext.Container',
 	xtype: 'my',
 	requires: [
-		'WeiQuPai.view.IconButton', 'WeiQuPai.view.MyFriend', 'WeiQuPai.view.Setting', 'WeiQuPai.view.MyProp', 'WeiQuPai.view.MyCoupon',
+		'WeiQuPai.view.MyFriend', 'WeiQuPai.view.Setting', 'WeiQuPai.view.MyProp', 'WeiQuPai.view.MyCoupon',
 		'WeiQuPai.view.MyAccount', 'WeiQuPai.view.MyConsignee', 'WeiQuPai.view.Profile'
 	],
 
@@ -23,10 +23,15 @@ Ext.define('WeiQuPai.view.My', {
 					itemId: 'myInfo',
 					cls: 'w-myinfo',
 					tpl: new Ext.XTemplate(
-						'<img <tpl if="avatar">src="' + WeiQuPai.Config.host + '{avatar}"</tpl>/>',
+						'<img <tpl if="avatar">src="{[this.getAvatar(values.avatar)]}"</tpl>/>',
 						'<div class="info"><h2>{nick:htmlEncode}</h2>',
 						'<p>{sign:htmlEncode}</p>',
-						'</div>'
+						'</div>',
+						{
+							getAvatar: function(avatar){
+								return WeiQuPai.Util.getImagePath(avatar, '140');
+							}
+						}
 					)
 				}
 			},
@@ -35,32 +40,75 @@ Ext.define('WeiQuPai.view.My', {
 				layout: 'hbox',
 				items:[
 					{
-						xtype: 'iconbutton',
-						icon: 'friend',
-						text: '我的好友',
-						action: 'friend',
-						flex: 1
-					},
-					{
-						xtype: 'iconbutton',
-						icon: 'feed',
-						text: '我的动态',
-						action: 'feed',
+						xtype: 'container',
+						layout: {
+							type: 'hbox',
+							pack: 'center'
+						},
 						flex: 1,
+						items: [
+							{
+								xtype: 'button',
+								baseCls: 'w-my-button w-my-button-friend',
+								iconAlign:'top',
+								text: '我的好友',
+								action: 'friend',
+							}
+						]
 					},
 					{
-						xtype: 'iconbutton',
-						icon: 'consignee',
-						text: '收货地址',
-						action: 'consignee',
-						flex: 1
+						xtype: 'container',
+						layout: {
+							type: 'hbox',
+							pack: 'center'
+						},
+						flex: 1,
+						items: [
+							{
+								xtype: 'button',
+								baseCls: 'w-my-button w-my-button-feed',
+								iconAlign:'top',
+								text: '我的动态',
+								action: 'feed',
+							}
+						]
+					},
+					{
+						xtype: 'container',
+						layout: {
+							type: 'hbox',
+							pack: 'center'
+						},
+						flex: 1,
+						items: [
+							{
+								xtype: 'button',
+								baseCls: 'w-my-button w-my-button-consignee',
+								iconAlign:'top',
+								text: '收货地址',
+								action: 'consignee',
+							}
+						]
 					}
 					/*
 					{
-						xtype: 'iconbutton',
-						icon: 'account',
-						text: '帐号绑定',
-						action: 'account'
+						xtype: 'container',
+						layout: {
+							type: 'hbox',
+							pack: 'center'
+						},
+						flex: 1,
+						items: [
+							{
+								xtype: 'button',
+								baseCls: 'w-my-button w-my-button-account',
+								iconAlign:'top',
+								text: '帐号绑定',
+								action: 'account',
+								badgeCls: 'x-badge w-badge-mdot',
+								badgeText:'12'
+							}
+						]
 					}
 					*/
 				]
@@ -69,51 +117,73 @@ Ext.define('WeiQuPai.view.My', {
 				xtype: 'container',
 				layout: 'hbox',
 				items:[
-					
 					{
-						xtype: 'iconbutton',
-						icon: 'prop',
-						text: '我的道具',
-						action: 'prop',
-						flex: 1
+						xtype: 'container',
+						layout: {
+							type: 'hbox',
+							pack: 'center'
+						},
+						flex: 1,
+						items: [
+							{
+								xtype: 'button',
+								baseCls: 'w-my-button w-my-button-coupon',
+								iconAlign:'top',
+								text: '我的拍券',
+								action: 'coupon'
+							}
+						]
 					},
 					{
-						xtype: 'iconbutton',
-						icon: 'coupon',
-						text: '我的拍券',
-						action: 'coupon',
-						flex: 1
+						xtype: 'container',
+						layout: {
+							type: 'hbox',
+							pack: 'center'
+						},
+						flex: 1,
+						items: [
+							{
+								xtype: 'button',
+								baseCls: 'w-my-button w-my-button-setting',
+								iconAlign:'top',
+								text: '设置',
+								action: 'setting'
+							}
+						]
 					},
 					{
-						xtype: 'iconbutton',
-						icon: 'setting',
-						text: '设置',
-						action: 'setting',
-						flex: 1
-					}
-				]
-			},
-			/*
-			{
-				xtype: 'container',
-				layout: 'hbox',
-				items:[
-					{
-						xtype: 'iconbutton',
-						icon: 'setting',
-						text: '设置',
-						action: 'setting'
-					}
+						xtype: 'container',
+						layout: {
+							type: 'hbox',
+							pack: 'center'
+						},
+						flex: 1,
+						items: [
+							{
+								xtype: 'button',
+								baseCls: 'w-my-button w-my-button-prop',
+								iconAlign:'top',
+								text: '我的道具',
+								action: 'prop',
+								style:'visibility:hidden'
+							}
+						]
+					},
 				]
 			}
-			*/
 		]
 	},
 
 	initialize: function(){
 		this.loginTip = Ext.create('WeiQuPai.view.LoginTip');
 		this.add(this.loginTip);
-		this.on('activate', this.loadData, this);
+		this.on('activate', this.onActivate, this);
+	},
+
+	onActivate: function(){
+		//检查通知
+		WeiQuPai.Notify.notify([WeiQuPai.Notify.MSG_FRIEND_REQUEST, WeiQuPai.Notify.MSG_APP_UPDATE]);
+		this.loadData();
 	},
 
 	loadData: function(){

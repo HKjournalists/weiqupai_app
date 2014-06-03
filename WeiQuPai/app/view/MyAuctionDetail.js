@@ -17,7 +17,7 @@ Ext.define('WeiQuPai.view.MyAuctionDetail', {
 				itemId: 'orderInfo',
 				tpl: new Ext.XTemplate(
 					'<div class="order-item-info">',
-						'<img src="' + WeiQuPai.Config.host + '{pic_cover}"/>',
+						'<img src="{[this.getCover(values.pic_cover)]}"/>',
 						'<div class="info">',
 							'<h2>{title}</h2>',
 							'<div class="price-area"><p>您的成交价格<span class="price">￥{price}</span></div>',
@@ -38,7 +38,11 @@ Ext.define('WeiQuPai.view.MyAuctionDetail', {
 					{
 						getStatusText: function(status){
 							return WeiQuPai.Config.orderStatusText[status];
-						}
+						},
+
+						getCover: function(cover){
+		                    return WeiQuPai.Util.getImagePath(cover, '290');
+		                }
 					}
 				)
 			},
@@ -68,6 +72,10 @@ Ext.define('WeiQuPai.view.MyAuctionDetail', {
 		var user = WeiQuPai.Util.checkLogin();
 		if(!user) return;
 
+		//清除红点
+		WeiQuPai.Notify.newOrderClear(this.getRecord().get('id'));
+		WeiQuPai.Notify.orderShipClear(this.getRecord().get('id'));
+
 		var payBtn = Ext.create('Ext.Button', {text: '去支付', action: 'pay', cls: 'w-toolbar-button', iconCls: 'icon-pay', hidden: true});
 		var showBtn = Ext.create('Ext.Button', {text: '晒单', action: 'showOrder', cls: 'w-toolbar-button', iconCls: 'icon-submit', hidden:true});
 		var confirmBtn = Ext.create('Ext.Button', {text: '确认收货', action: 'confirm', cls: 'w-toolbar-button', iconCls: 'icon-submit', hidden: true});
@@ -91,7 +99,7 @@ Ext.define('WeiQuPai.view.MyAuctionDetail', {
 				this.down('#orderInfo').setData(record.data);
 			},
 			failure: function(record, operation){
-				Ext.Msg.alert(null, '数据加载失败');
+				WeiQuPai.Util.toast('数据加载失败');
 			}
 		});
 	}
