@@ -36,9 +36,11 @@ Ext.define('WeiQuPai.controller.Register', {
         else if(d.password.trim().length < 6 || d.password2.trim().length < 6){
             msg = '密码不能少于6位';
         }
+        /*
         else if(d.password != d.password2){
             msg = '两次密码不相同';
         }
+        */
         if(msg){
             WeiQuPai.Util.toast(msg);
             return false;

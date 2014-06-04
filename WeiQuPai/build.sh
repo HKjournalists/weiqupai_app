@@ -67,6 +67,9 @@ if [ "$BUILD_TYPE" == "market" ];then
 	cd -
 fi
 
+if [ "$BUILD_TYPE" == "run" ];then
+	adb install cordova/platforms/android/ant-build/android-release.apk
+fi
 if [ "$BUILD_TYPE" == "all" ] || [ "$BUILD_TYPE" == "web" ];then
 	echo "scp to remote => $SERVER:$REMOTE_DIR"
 	scp -r $BUILD_DIR/www/* $SERVER:$REMOTE_DIR
