@@ -3,6 +3,7 @@ Ext.define('WeiQuPai.view.Login', {
     xtype: 'login',
     requires: ['Ext.field.Text', 'Ext.field.Password', 'Ext.form.FieldSet', 'WeiQuPai.view.Register'],
     config: {
+        scrollable: 'vertical',
         items: [
             {
                 xtype: 'titlebar',

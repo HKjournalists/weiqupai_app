@@ -174,7 +174,12 @@ Ext.application({
 
     handlePostMessage: function(){
         window.addEventListener('message', function(e){
-            location.hash = e.data;
+            //如果hash一样，android上不能发生跳转,需要手动触发
+            if(location.hash.substr(1) == e.data){
+                WeiQuPai.app.getHistory().fireEvent('change', e.data); 
+            }else{
+                location.hash = e.data;
+            }
         }, false);
     },
 
