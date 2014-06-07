@@ -15,9 +15,7 @@ Ext.define('WeiQuPai.controller.MyConsignee', {
         control: {
         	myconsignee: {
                 'itemdelete': 'doItemDelete',
-                'itemdefault': 'doItemSetDefault',
-                'itemtap': 'doItemTap',
-
+                'itemdefault': 'doItemSetDefault'
             },
             showAdd: {
                 'tap': 'showAddForm'
@@ -80,15 +78,6 @@ Ext.define('WeiQuPai.controller.MyConsignee', {
 
     showAddForm: function(btn){
         var view = Ext.create('WeiQuPai.view.AddConsigneeForm');
-        this.getMain().push(view);
-    },
-
-    //显示编辑表单
-    doItemTap: function(list, index, dataItem, record){
-        var view = Ext.create('WeiQuPai.view.EditConsigneeForm');
-        record.data.uc_id = record.data.id;
-        view.setValues(record.data);
-        view.setButtonState();
         this.getMain().push(view);
     },
 

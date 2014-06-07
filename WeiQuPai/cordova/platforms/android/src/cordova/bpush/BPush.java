@@ -32,11 +32,12 @@ public class BPush extends CordovaPlugin {
     protected boolean bindChannel(JSONArray args, CallbackContext callbackContext){
         JSONObject message = new JSONObject();
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this.cordova.getActivity());
-
+        
         try {
             message.put("appid", sp.getString("appid", ""));
             message.put("channelId", sp.getString("channel_id", ""));
             message.put("userId", sp.getString("user_id", ""));
+            message.put("deviceToken", sp.getString("device_token", ""));
         } catch (JSONException e) {
             e.printStackTrace();
         }

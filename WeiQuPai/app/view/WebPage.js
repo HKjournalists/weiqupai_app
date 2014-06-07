@@ -41,6 +41,9 @@ Ext.define('WeiQuPai.view.WebPage', {
 		iframe.onload = function(){
 			me.iframeLoad();
 		};
+		var href = iframe.src || this.getHref();
+		var user = WeiQuPai.Cache.get('currentUser');
+		if(user) href += (href.indexOf("?") == -1 ? '?' : '&')  + 'token=' + user.token;
 		iframe.src = this.getHref();
 	},
 

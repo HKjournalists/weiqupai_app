@@ -57,6 +57,14 @@ Ext.define('WeiQuPai.view.ShareLayer', {
         ]
     },
 
+    show: function(){
+        WeiQuPai.Util.slideUp.call(this);
+    },
+
+    hide: function(){
+        WeiQuPai.Util.slideDown.call(this);
+    },
+
     initialize: function(){
         this.on('show', WeiQuPai.Util.saveLastView, this);
         this.down('button[action=cancel]').on('tap', this.hide, this);

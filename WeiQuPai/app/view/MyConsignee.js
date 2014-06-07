@@ -5,6 +5,7 @@ Ext.define('WeiQuPai.view.MyConsignee', {
     config:{
         store: 'UserConsignee',
         title: '收货信息',
+        selectMode: false,
         itemTpl: new Ext.XTemplate(
             '<div class="w-list-item">',
                 '<div class="content">',
@@ -64,5 +65,21 @@ Ext.define('WeiQuPai.view.MyConsignee', {
                 return false;
             }
         }, this);
-    }
+
+        //是否是订单选择模式
+        if(!this.getSelectMode()){
+            this.on('itemtap', this.showEditForm, this);
+        }
+    },
+
+
+
+    //显示编辑表单
+    showEditForm: function(list, index, dataItem, record){
+        var view = Ext.create('WeiQuPai.view.EditConsigneeForm');
+        record.data.uc_id = record.data.id;
+        view.setValues(record.data);
+        view.setButtonState();
+        Ext.Viewport.down('main').push(view);
+    },
 });

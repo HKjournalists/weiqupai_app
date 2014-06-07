@@ -23,5 +23,13 @@ Ext.define('WeiQuPai.view.FeedShowOption', {
                 ]
             }
         ]
-	}
+	},
+
+    show: function(){
+        WeiQuPai.Util.slideUp.call(this);
+    },
+
+    hide: function(){
+        WeiQuPai.Util.slideDown.call(this);
+    },
 });

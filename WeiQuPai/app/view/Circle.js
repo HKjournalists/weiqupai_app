@@ -30,7 +30,7 @@ Ext.define('WeiQuPai.view.Circle', {
 		store: 'Circle',
 		disableSelection : true,
 		itemTpl: new Ext.XTemplate(
-			'<div class="circle-row">',
+			'<div class="circle-row" data-id="{id}">',
 			'<img class="avatar" <tpl if="avatar">src="{[this.getAvatar(values.avatar)]}"</tpl>/>',
 			'<div class="info">',
 			'<tpl if="feed_type==0">',
@@ -129,7 +129,7 @@ Ext.define('WeiQuPai.view.Circle', {
 		this.loadData(true);
 		this.on('activate', this.onActivate, this);
         this.on('hide', this.onHide, this);
-		this.onBefore('itemtap', this.bindEvent, this);
+		this.handleItemTap();
 		/*
 		var btn = {
 			xtype: 'button',
@@ -165,55 +165,64 @@ Ext.define('WeiQuPai.view.Circle', {
         this.down('banner').stopTimer();
     },
 
-	bindEvent: function(list, index, dataItem, record, e){
-		var user = WeiQuPai.Cache.get('currentUser');
-		if(e.target.className == 'avatar'){
-			this.fireEvent('avatartap', this, index, record);
-			return false;
-		}
-		if(e.target.className == 'uname'){
-			var uid = e.target.getAttribute('uid');
-			this.fireEvent('usertap', this, index, record, uid);
-			return false;
-		}
-
-		//卡片点击
-		var card = Ext.get(e.target).up('.card');
-		if(card){
-			this.fireEvent('cardtap', this, index, record, card.getAttribute('dataType'));
-			return false;
-		}
-
-		//下面的事件都是登录后才会触发的
-		if(!user) return false;
-
-		if(e.target.className == 'delete-post-btn'){
-			this.fireEvent('deletepost', this, index, record);
-			return false;
-		}
-		if(e.target.className == 'zan-btn' || e.target.parentNode.className == 'zan-btn'){
-			this.fireEvent('zan', this, index, record);
-			return false;
-		}
-		if(e.target.className == 'cancel-zan-btn' || e.target.parentNode.className == 'cancel-zan-btn'){
-			this.fireEvent('cancelzan', this, index, record);
-			return false;
-		}
-		if(e.target.className == 'reply-btn' || e.target.parentNode.className == 'reply-btn'){
-			this.fireEvent('replytap', this, index, record, 0, null);
-			return false;
-		}
-		if(e.target.className == 'reply-row'){
-			var toUid = e.target.getAttribute('uid');
-			//删除自己的回复事件
-			if(toUid == user.id){
-				this.fireEvent('deletereply', this, index, record, e.target.getAttribute('rid'));
+    handleItemTap: function(){
+		var me = this;
+		this.element.dom.addEventListener('click', function(e){
+			var row = Ext.fly(e.target).findParent('.circle-row');
+			if(!row) return;
+			var id = row.getAttribute('data-id');
+			var index = me.getStore().indexOfId(id);
+			var record = me.getStore().getAt(index);
+			
+			var user = WeiQuPai.Cache.get('currentUser');
+			if(e.target.className == 'avatar'){
+				me.fireEvent('avatartap', me, index, record);
 				return false;
 			}
-			//回复事件
-			var toUser = e.target.getAttribute('nick');
-			this.fireEvent('replytap', this, index, record, toUid, toUser);
-			return false;
-		}
+			if(e.target.className == 'uname'){
+				var uid = e.target.getAttribute('uid');
+				me.fireEvent('usertap', me, index, record, uid);
+				return false;
+			}
+
+			//卡片点击
+			var card = Ext.get(e.target).up('.card');
+			if(card){
+				me.fireEvent('cardtap', me, index, record, card.getAttribute('dataType'));
+				return false;
+			}
+
+			//下面的事件都是登录后才会触发的
+			if(!user) return false;
+
+			if(e.target.className == 'delete-post-btn'){
+				me.fireEvent('deletepost', me, index, record);
+				return false;
+			}
+			if(e.target.className == 'zan-btn' || e.target.parentNode.className == 'zan-btn'){
+				me.fireEvent('zan', me, index, record);
+				return false;
+			}
+			if(e.target.className == 'cancel-zan-btn' || e.target.parentNode.className == 'cancel-zan-btn'){
+				me.fireEvent('cancelzan', me, index, record);
+				return false;
+			}
+			if(e.target.className == 'reply-btn' || e.target.parentNode.className == 'reply-btn'){
+				me.fireEvent('replytap', me, index, record, 0, null);
+				return false;
+			}
+			if(e.target.className == 'reply-row'){
+				var toUid = e.target.getAttribute('uid');
+				//删除自己的回复事件
+				if(toUid == user.id){
+					me.fireEvent('deletereply', me, index, record, e.target.getAttribute('rid'));
+					return false;
+				}
+				//回复事件
+				var toUser = e.target.getAttribute('nick');
+				me.fireEvent('replytap', me, index, record, toUid, toUser);
+				return false;
+			}
+		});
 	}
 });

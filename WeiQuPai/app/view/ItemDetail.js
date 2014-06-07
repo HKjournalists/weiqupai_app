@@ -19,7 +19,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
         disableSelection : true,
         pressedCls : '',
 		itemTpl: new Ext.XTemplate(
-			'<div class="comment-row">',
+			'<div class="comment-row" data-id="{id}">',
 			'<tpl if="avatar">',
 			'<img src="{[this.getAvatar(values.avatar)]}" class="avatar"/>',
 			'<tpl else>',
@@ -148,27 +148,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 			{
 				xtype: 'bottombar'
 			}
-		], 
-
-		listeners: {
-			itemtap: {
-				order: 'before',
-				fn: function(list, index, dataItem, record, e){
-					if(e.target.className == 'avatar'){
-						this.fireEvent('avatartap', index, record);
-						return false;
-					}
-					if(e.target.className == 'up'){
-						this.fireEvent('uptap', index, record);
-						return false;
-					}
-					if(e.target.className == 'comment'){
-						this.fireEvent('commenttap', index, record);
-						return false;
-					}
-				}
-			}
-		}
+		]
 	},
 
 	refreshTimer: null,
@@ -217,10 +197,35 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 		//没有评论显示的信息
 		this.msgbox = WeiQuPai.Util.msgbox('还没有人评论该商品.');
 		this.shareLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer', {height:160});
-		this.commentForm = WeiQuPai.Util.createOverlay('WeiQuPai.view.InputComment', {height: 48, showAnimation: false, hideAnimation: false});
 		this.add(this.msgbox);
 		//销毁的时候结束定时器
 		this.on('destroy', this.onDestroy);
+
+		//默认的itemtap在android下不能弹出keyboard，又是曲线救国
+		this.handleItemTap();
+	},
+
+	handleItemTap: function(){
+		var me = this;
+		this.element.dom.addEventListener('click', function(e){
+			var row = Ext.fly(e.target).findParent('.comment-row');
+			if(!row) return;
+			var id = row.getAttribute('data-id');
+			var index = me.getStore().indexOfId(id);
+			var record = me.getStore().getAt(index);
+			if(e.target.className == 'avatar'){
+				me.fireEvent('avatartap', index, record);
+				return false;
+			}
+			if(e.target.className == 'up'){
+				me.fireEvent('uptap', index, record);
+				return false;
+			}
+			if(e.target.className == 'comment'){
+				me.fireEvent('commenttap', index, record);
+				return false;
+			}
+		});
 	},
 
 	//接收参数时调用数据

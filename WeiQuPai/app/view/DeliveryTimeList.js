@@ -19,5 +19,13 @@ Ext.define('WeiQuPai.view.DeliveryTimeList', {
                 ]
             }
         ]
-	}
+	},
+
+    show: function(){
+        WeiQuPai.Util.slideUp.call(this);
+    },
+
+    hide: function(){
+        WeiQuPai.Util.slideDown.call(this);
+    },
 });

@@ -71,7 +71,7 @@ Ext.define('WeiQuPai.view.Register', {
     setButtonState: function(){
         var disabled = this.down('textfield[name=uname]').getValue().length == 0
         || this.down('textfield[name=nick]').getValue().length == 0
-        || this.down('passwordfield[name=password]').getValue().length == 0;
+        || this.down('textfield[name=password]').getValue().length == 0;
         this.down('button[action=register]').setDisabled(disabled);
     }
 });

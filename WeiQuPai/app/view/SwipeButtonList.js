@@ -102,7 +102,6 @@ Ext.define('WeiQuPai.view.SwipeButtonList', {
 
 	beforeTouchStart: function(list, index, dataItem ,record, e){
 		//编辑状态
-		console.log('before touch start', this.state);
 		if(this.state == 'edit'){
 			//如果不是点到按钮就回到正常状态
 			if(!e.getTarget('.button-area')){

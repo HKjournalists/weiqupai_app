@@ -5,6 +5,7 @@ Ext.define('WeiQuPai.view.AddConsigneeForm', {
     requires: ['Ext.field.Select'],
     xtype: 'addconsigneeform',
     config: {
+        scrollable: 'vertical',
         items: [
             {
                 xtype: 'titlebar',
@@ -118,6 +119,29 @@ Ext.define('WeiQuPai.view.AddConsigneeForm', {
         this.down('textfield[name=mobile]').on('keyup', this.setButtonState, this);
         province.on('change', this.setButtonState, this);
         this.down('selectfield[name=city]').on('change', this.setButtonState, this);
+
+        //fix 红米上弹层不能消失的问题
+        if(Ext.os.is.android){
+            this.down('selectfield[name=province]').getPhonePicker().show = WeiQuPai.Util.slideUp;
+            this.down('selectfield[name=province]').getPhonePicker().hide = WeiQuPai.Util.slideDown;
+            this.down('selectfield[name=city]').getPhonePicker().show = WeiQuPai.Util.slideUp;
+            this.down('selectfield[name=city]').getPhonePicker().hide = WeiQuPai.Util.slideDown;
+            this.down('selectfield[name=province]').on('focus', function(){this.enableAll(false);}, this);
+            this.down('selectfield[name=province]').on('change', function(){this.enableAll(true);}, this);
+            this.down('selectfield[name=city]').on('focus', function(){this.enableAll(false);}, this);
+            this.down('selectfield[name=city]').on('change', function(){this.enableAll(true);}, this);
+        }
+    },
+    
+    enableAll: function(bool){
+        var me = this;
+        var f = function(){
+            me.query('textfield').forEach(function(f){
+                f.setDisabled(!bool); 
+            });
+
+        }
+        bool ? setTimeout(f, 300) : f();
     },
 
     changeCity: function(comp, newValue){

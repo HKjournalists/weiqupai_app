@@ -28,7 +28,9 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
                     if(!WeiQuPai.Util.checkLogin()) return false;
                     var auctionId = this.getPageView().auctionData.id;
                     var itemId = this.getPageView().auctionData.item_id;
-                    var form = this.getPageView().commentForm;
+                    var form = WeiQuPai.Util.createOverlay('WeiQuPai.view.InputComment', 
+                        {height: 48, showAnimation: false, hideAnimation: false}
+                    );
                     form.down('hiddenfield[name=auction_id]').setValue(auctionId);
                     form.down('hiddenfield[name=item_id]').setValue(itemId);
                     form.show();
@@ -170,7 +172,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
         var replyId = record.get('id');
         var auctionId = this.getPageView().auctionData.id;
         var itemId  = this.getPageView().auctionData.item_id;
-        var form = this.getPageView().commentForm;
+        var form = WeiQuPai.Util.createOverlay('WeiQuPai.view.InputComment', {height: 48, showAnimation: false, hideAnimation: false});
         form.down('hiddenfield[name=auction_id]').setValue(auctionId);
         form.down('hiddenfield[name=item_id]').setValue(itemId);
         form.down('hiddenfield[name=reply_id]').setValue(replyId);

@@ -27,5 +27,13 @@ Ext.define('WeiQuPai.view.DeleteButtonLayer', {
 		this.down('button[action=delete]').on('tap', function(){
 			this.getDeleteAction().call(this.getScope() || this);
 		}, this);
-	}
+	},
+
+	show: function(){
+        WeiQuPai.Util.slideUp.call(this);
+    },
+
+    hide: function(){
+        WeiQuPai.Util.slideDown.call(this);
+    },
 });

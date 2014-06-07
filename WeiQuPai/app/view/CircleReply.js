@@ -3,6 +3,7 @@ Ext.define('WeiQuPai.view.CircleReply', {
 	requires: ['Ext.field.Hidden'],
 	xtype: 'circlereply',
 	config: {
+		scrollable: false,
 		layout: {
 			'type' : 'hbox',
 			'align' : 'center'
@@ -40,11 +41,19 @@ Ext.define('WeiQuPai.view.CircleReply', {
 		]
 	}, 
 
+	show: function(){
+		this.getModal().setHidden(false);
+ 		this.element.setStyle('display', null);	
+		WeiQuPai.Util.saveLastView.call(this);
+		this.down('textfield[name=content]').focus();
+	},
+
+	hide: function(){
+		this.getModal().setHidden(true);
+		this.element.setStyle('display', 'none');
+	},
+
 	initialize: function(){
-		this.on('show', WeiQuPai.Util.saveLastView, this);
-		this.on('show', function(){
-			this.down('textfield[name=content]').focus();
-		});
 		this.down('button[action=publish]').on('tap', function(){
 			this.fireEvent('publish', this);
 		}, this);

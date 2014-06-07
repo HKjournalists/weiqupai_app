@@ -33,7 +33,7 @@ Ext.define('WeiQuPai.controller.Register', {
         if(d.uname.trim().length < 6){
             msg = '用户名不能少于6个字符';
         }
-        else if(d.password.trim().length < 6 || d.password2.trim().length < 6){
+        else if(d.password.trim().length < 6/* || d.password2.trim().length < 6*/){
             msg = '密码不能少于6位';
         }
         /*

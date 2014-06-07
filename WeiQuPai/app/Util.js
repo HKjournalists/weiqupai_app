@@ -28,6 +28,28 @@ Ext.define("WeiQuPai.Util", {
         return cmp;
     }, 
 
+    slideUp: function(){
+        this.element.show();
+        Ext.Anim.run(this.element, 'slide', {
+            direction: 'up',
+            out: false
+        });
+        this.getModal().setHidden(false);
+    },
+
+    slideDown: function(){
+        Ext.Anim.run(this.element, 'slide', {
+            direction: 'down',
+            out: true,
+            autoClear: false,
+            after: function(el){
+                el.hide();
+            }
+        });
+        this.getModal().setHidden(true);
+    },
+
+
     //获取一个全局view,不存在则创建
     getGlobalView: function(com){
         if(!this.globalView[com]){
@@ -131,6 +153,8 @@ Ext.define("WeiQuPai.Util", {
     },
 
     register: function(data, callback){
+        //注册的时候绑定市场
+        data.market = WeiQuPai.Config.market;
         WeiQuPai.Util.mask();
         Ext.Ajax.request({
             url: WeiQuPai.Config.apiUrl + '/?r=app/join',
@@ -304,6 +328,7 @@ Ext.define("WeiQuPai.Util", {
         BPush.bindChannel(function(data){
             //绑定成功，但用户未登录，不需要回传
             if(!user) return;
+            data.os = Ext.os.name.toLowerCase();
             Ext.Ajax.request({
                 url: WeiQuPai.Config.apiUrl + '/?r=app/bindPush/&token=' + user.token,
                 params: data,

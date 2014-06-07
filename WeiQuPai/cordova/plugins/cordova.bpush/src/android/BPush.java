@@ -37,6 +37,7 @@ public class BPush extends CordovaPlugin {
             message.put("appid", sp.getString("appid", ""));
             message.put("channelId", sp.getString("channel_id", ""));
             message.put("userId", sp.getString("user_id", ""));
+            message.put("deviceToken", sp.getString("device_token", ""));
         } catch (JSONException e) {
             e.printStackTrace();
         }

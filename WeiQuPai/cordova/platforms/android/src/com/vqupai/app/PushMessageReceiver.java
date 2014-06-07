@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import com.baidu.android.pushservice.PushConstants;
 import org.json.JSONException;
@@ -78,6 +79,7 @@ public class PushMessageReceiver extends BroadcastReceiver {
             Log.d(TAG, "onMessage: content : " + content);
 
             try {
+                String sn = ((TelephonyManager) context.getSystemService(context.TELEPHONY_SERVICE)).getDeviceId();
                 //把推送的userid保存起来
                 JSONObject jsonContent = new JSONObject(content);
                 JSONObject params = jsonContent.getJSONObject("response_params");
@@ -86,6 +88,7 @@ public class PushMessageReceiver extends BroadcastReceiver {
                 editor.putString("appid", params.getString("appid"));
                 editor.putString("channel_id", params.getString("channel_id"));
                 editor.putString("user_id", params.getString("user_id"));
+                editor.putString("device_token", sn);
                 editor.commit();
             }
             catch (JSONException e) {

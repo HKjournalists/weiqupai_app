@@ -117,7 +117,9 @@ Ext.application({
         var uid = user && user.push_user_id || 0;
         var img = new Image;
         var src = "http://www.vqupai.com/ver/i.gif?ver=" + WeiQuPai.Config.version + '&market=' + WeiQuPai.Config.market;
+        src += '&os=' + Ext.os.name.toLowerCase() + '&osver=' + Ext.os.version.version;
         if(uid) src += "&push_user_id=" + uid;
+
         if(this.firstLaunch) src += "&first=1";
         img.src = src;
     },
@@ -174,6 +176,8 @@ Ext.application({
 
     handlePostMessage: function(){
         window.addEventListener('message', function(e){
+            //sencha自己的message不响应
+            if(e.data.substr(0, 3) == 'Ext') return;
             //如果hash一样，android上不能发生跳转,需要手动触发
             if(location.hash.substr(1) == e.data){
                 WeiQuPai.app.getHistory().fireEvent('change', e.data); 

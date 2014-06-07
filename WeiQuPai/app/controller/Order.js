@@ -46,7 +46,7 @@ Ext.define('WeiQuPai.controller.Order', {
     },
 
     showConsigneeList: function(){
-        var view = Ext.create('WeiQuPai.view.MyConsignee');
+        var view = Ext.create('WeiQuPai.view.MyConsignee', {selectMode: true});
         view.on('itemtap', this.selectConsignee, this);
         this.getMain().push(view);
     },
