@@ -63,7 +63,7 @@ Ext.define('WeiQuPai.view.Banner', {
 			window.open(data.link, '_system');
 		}else{
 			var view = Ext.create('WeiQuPai.view.WebPage');
-			var user = WeiQuPai.Cache.get('currentUser');
+			console.log(data);
 			view.setHref(data.link);
 			view.setReloadOnBack(true);
 			view.setTitle(data.title || '微趣拍');
