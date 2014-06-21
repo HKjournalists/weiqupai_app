@@ -132,24 +132,30 @@ Ext.define("WeiQuPai.Util", {
                     WeiQuPai.Util.toast(rsp.msg);
                     return;
                 }
-                WeiQuPai.Cache.set('currentUser', rsp.user);
-                WeiQuPai.Cache.set('friends', rsp.friends);
-                WeiQuPai.Cache.set('auctions', rsp.auctions);
-
-                //注册之后绑定推送
-                WeiQuPai.Util.bindPush();
-
-                //登录后拍圈要清空并刷新
-                var circle = Ext.Viewport.down('circle');
-                circle.setForceReload(true);
-
-                callback && callback();
+                this.onLoginSuccess(rsp, callback);
             },
             failure: function(rsp){
                 WeiQuPai.Util.unmask();
                 WeiQuPai.Util.toast('登录失败，请重试');
-            }
+            },
+            scope: this
         });
+    },
+
+    //登录成功后的逻辑
+    onLoginSuccess: function(data, callback){
+        WeiQuPai.Cache.set('currentUser', data.user);
+        WeiQuPai.Cache.set('friends', data.friends);
+        WeiQuPai.Cache.set('auctions', data.auctions);
+
+        //注册之后绑定推送
+        WeiQuPai.Util.bindPush();
+
+        //登录后拍圈要清空并刷新
+        var circle = Ext.Viewport.down('circle');
+        circle.setForceReload(true);
+
+        callback && callback();
     },
 
     register: function(data, callback){
@@ -386,6 +392,8 @@ Ext.define("WeiQuPai.Util", {
     },
 
     getImagePath: function(file, size){
+        //如果是绝对地址直接返回
+        if(/^http:/.test(file)) return file;
         if(!size) return WeiQuPai.Config.host + file;
         var segment = file.split('/');
         var baesname = segment.pop();

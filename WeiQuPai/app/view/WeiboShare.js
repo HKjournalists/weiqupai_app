@@ -29,7 +29,7 @@ Ext.define('WeiQuPai.view.WeiboShare', {
 			url: data.url + '&t=weibo',
 			pic: data.thumb,
 			searchPic : 'false',
-			appkey: '3289344208'
+			appkey: '269670787'
 		};
 	},
 

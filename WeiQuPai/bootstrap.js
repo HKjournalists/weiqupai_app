@@ -838,7 +838,6 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.NewMessage": [],
   "WeiQuPai.view.Order": [],
   "WeiQuPai.view.OrderSuccess": [],
-  "WeiQuPai.view.Pay": [],
   "WeiQuPai.view.PaymentList": [],
   "WeiQuPai.view.Private": [],
   "WeiQuPai.view.Profile": [],
@@ -1985,9 +1984,6 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.OrderSuccess": [
     "widget.ordersuccess"
-  ],
-  "WeiQuPai.view.Pay": [
-    "widget.pay"
   ],
   "WeiQuPai.view.PaymentList": [
     "widget.paymentlist"

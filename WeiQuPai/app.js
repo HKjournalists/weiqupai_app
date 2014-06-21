@@ -176,6 +176,14 @@ Ext.application({
 
     handlePostMessage: function(){
         window.addEventListener('message', function(e){
+            if(!e.data) return;
+            //对象的处理逻辑
+            if(Ext.isObject(e.data)){
+                var action = e.data['action'];
+                var controller = WeiQuPai.app.getController('Routes');
+                controller[action] && controller[action](e.data);
+                return;                
+            }
             //sencha自己的message不响应
             if(e.data.substr(0, 3) == 'Ext') return;
             //如果hash一样，android上不能发生跳转,需要手动触发

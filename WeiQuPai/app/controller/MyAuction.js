@@ -27,6 +27,6 @@ Ext.define('WeiQuPai.controller.MyAuction', {
         var orderId = record.get('id');
         var user = WeiQuPai.Cache.get('currentUser');
         var url = WeiQuPai.Config.apiUrl + "/?r=app/pay&id=" + orderId + '&token=' + user.token;
-        window.open(url, '_blank', 'location=no,title=支付');
+        window.open(url, '_blank', 'location=no,title=支付,closebuttoncaption=返回');
     }
 });

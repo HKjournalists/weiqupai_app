@@ -35,7 +35,6 @@ Ext.define('WeiQuPai.view.Login', {
                 action: 'login',
                 disabled: true             
             },
-            /*
             {
                 xtype: 'fieldset',
                 cls: 'w-fieldset',
@@ -53,7 +52,6 @@ Ext.define('WeiQuPai.view.Login', {
 
                 ]
             },
-        */
             {
                 xtype: 'container',
                 cls: 'w-container',

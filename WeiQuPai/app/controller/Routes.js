@@ -35,5 +35,11 @@ Ext.define('WeiQuPai.controller.Routes', {
     	var detailView = Ext.create('WeiQuPai.view.ItemDetail');
         detailView.setParam({id: id});
         this.getMain().push(detailView);
+    },
+
+    share: function(data){
+        var layer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer', {height:160});
+        layer.setShareData(data);
+        layer.show();
     }
 });

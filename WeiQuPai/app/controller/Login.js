@@ -49,11 +49,45 @@ Ext.define('WeiQuPai.controller.Login', {
     },
 
     doQQLogin: function(){
-        WeiQuPai.Util.toast('qq登录');
+        var url = WeiQuPai.Config.apiUrl + '/?r=app/QQLogin/login';
+        var win = window.open(url, '_blank', 'location=no,title=QQ登录,closebuttoncaption=返回');
+        var appView = window;
+        win.addEventListener('loadstop', function(e){
+            if(e.url.indexOf('QQLogin&code=') > 0){
+                win.executeScript({
+                    code: 'window.json',
+                }, function(param){
+                    WeiQuPai.Util.onLoginSuccess(param[0], function(){
+                        var main = Ext.Viewport.down('main');
+                        main.getLayout().setAnimation(null);
+                        main.pop();
+                        main.getLayout().setAnimation(Ext.os.is.iOS ? 'cover' : null);
+                        win.close();
+                    }); 
+                });
+            }
+        }, false);
     },
 
     doWeiboLogin: function(){
-        WeiQuPai.Util.toast('微博登录');
+        var url = WeiQuPai.Config.apiUrl + '/?r=app/WBLogin/login';
+        var win = window.open(url, '_blank', 'location=no,title=新浪微博登录,closebuttoncaption=返回');
+        var appView = window;
+        win.addEventListener('loadstop', function(e){
+            if(e.url.indexOf('WBLogin&code=') > 0){
+                win.executeScript({
+                    code: 'window.json',
+                }, function(param){
+                    WeiQuPai.Util.onLoginSuccess(param[0], function(){
+                        var main = Ext.Viewport.down('main');
+                        main.getLayout().setAnimation(null);
+                        main.pop();
+                        main.getLayout().setAnimation(Ext.os.is.iOS ? 'cover' : null);
+                        win.close();
+                    }); 
+                });
+            }
+        }, false);
     },
     
     doLogout: function(){

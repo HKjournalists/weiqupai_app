@@ -41,6 +41,9 @@
     },
     "{formFileName}.js.tpl.merge": {
       "9502f3b14cc89647cc0b6d8dd845342687ee4777": "eJyFUk1vgzAMvfdXWJWqgIqybkegu/U6TdoRcaBt0kYKAYHpOiH++5zwobIizYfE8cuzXxwf7sjPQiojPNZmZfmR5aLjNyW+eWuszwJoV0Am7ijMOQR2IIosqpx/ZkZoFjj0jj+lILB1TjdE3XIqjFSXcEhjDRVqd3moMAGTo1DkdQhJu5lC1m6ZbkTNpRL6XMMePNmYE6rCkOdi/kOV0UgreLesgkogcZI0gDKr0PJ7Eq9LrdBjAfMDUBTeRbTF/S2uhbngNYLtVi1l72VVIInnCIlKx4Qh86NFAinhZVNfvRZsC0KQyY5k9T2UySv5OjsKbQ9vKXQLabrVU4iyNpWxWzQHO9+bde4h3aaLsdS2R/t1D67fZ9znF/eKnz9vtGkU3CS4pAu3hvex1jkdmwsO4heS9Z+SsdKxQSzMQhGkoSX8qznmChfwRhHq5rPK/yiYTunorPo4fcYvHPjIwg\u003d\u003d"
+    },
+    "development.properties.merge": {
+      "c45c602c9b6f6f73cace183e9f0bf09c00a3ccf6": "eJytkUuOAjEMBfec4one9w24wyy4QFDc0xbBjhyTEbcfp0F89mRny6l6liccvvl2E44rNyxcCNW0c6aGJNBOZlGgKotjUUOmJV2LoyfjdCoxFx0WymBBgJyas/zOj7k2B6+SOVObw0JtMzw6SEZQKTfwpap5UP5WEpyuXHJQgjecvhL2mToVrRcS34Oks6mMYt5NMfbzYr7l8edWns5DzGrst22vu+QtXjR8BAraFqloyoEZAT7l28cW3i9f4R+b7pUs"
     }
   },
   "targets": {
@@ -337,6 +340,26 @@
         "controllerFileName": "Register",
         "name": "Register",
         "controllerNamespace": "WeiQuPai.controller"
+      }
+    },
+    ".sencha/app/development.properties": {
+      "source": "development.properties.merge",
+      "version": "c45c602c9b6f6f73cace183e9f0bf09c00a3ccf6",
+      "parameters": {
+        "viewNamespace": "WeiQuPai.view",
+        "frameworkName": "touch",
+        "frameworkPath": "../touch",
+        "senchadir": ".sencha",
+        "appModels": "",
+        "appControllers": "",
+        "appViews": "",
+        "uniqueId": "4cd489c5-d6d8-41d9-93ca-3e1461ce03e0",
+        "appName": "WeiQuPai",
+        "modelNamespace": "WeiQuPai.model",
+        "name": "WeiQuPai",
+        "library": "core",
+        "controllerNamespace": "WeiQuPai.controller",
+        "appStores": ""
       }
     }
   }

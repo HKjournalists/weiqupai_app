@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		117BB047A3FD44119F745E3F /* CDVWechat.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C18AF085F1F44E4B6EEBC60 /* CDVWechat.m */; };
 		1818D42018FDDE8000565F5A /* logo120.png in Resources */ = {isa = PBXBuildFile; fileRef = 1818D41F18FDDE8000565F5A /* logo120.png */; };
@@ -648,7 +649,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "微趣拍";
-				PROVISIONING_PROFILE = "5FCADCA6-A1C6-418C-9687-E32232F1147D";
+				PROVISIONING_PROFILE = "80E4B699-DD0E-499F-9CA5-7817BBCF8E0C";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 			};
@@ -659,7 +660,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing ZhiBoYunWei network technology Co. Ltd. (V2T4494DCG)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing ZhiBoYunWei network technology Co. Ltd. (V2T4494DCG)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

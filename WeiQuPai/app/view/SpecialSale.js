@@ -79,6 +79,7 @@ Ext.define('WeiQuPai.view.SpecialSale', {
             scope: this,
             success: function(record, operation){
                 this.down('#saleInfo').setData(record.data);
+                this.getStore().removeAll();
                 this.getStore().add(record.get('auctions'));
             },
             failure: function(record, operation){
