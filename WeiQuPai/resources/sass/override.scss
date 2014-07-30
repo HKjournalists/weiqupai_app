@@ -1,0 +1,79 @@
+.x-msgbox-title.x-toolbar.x-docked-top{
+	background-color:transparent;
+}
+.x-msgbox .x-msgbox-title .x-title{
+	color:#000;
+}
+
+//loadmask样式
+.x-mask .x-loading-spinner-outer{
+	min-width:3em;
+	height:3em;
+}
+.x-mask .x-mask-inner{
+	background:rgba(0,0,0,0.25);
+}
+.x-loading-spinner{
+	font-size:20px;
+}
+.x-loading-spinner > span.x-loading-top{
+  background-color: rgba(170, 170, 170, 0.99);
+}
+.x-loading-spinner > span.x-loading-top::after {
+  background-color: rgba(170, 170, 170, 0.9);
+}
+.x-loading-spinner > span.x-loading-left::before {
+  background-color: rgba(170, 170, 170, 0.8);
+}
+.x-loading-spinner > span.x-loading-left {
+  background-color: rgba(170, 170, 170, 0.7);
+}
+.x-loading-spinner > span.x-loading-left::after {
+  background-color: rgba(170, 170, 170, 0.6);
+}
+.x-loading-spinner > span.x-loading-bottom::before {
+  background-color: rgba(170, 170, 170, 0.5);
+}
+.x-loading-spinner > span.x-loading-bottom {
+  background-color: rgba(170, 170, 170, 0.4);
+}
+.x-loading-spinner > span.x-loading-bottom::after {
+  background-color: rgba(170, 170, 170, 0.35);
+}
+.x-loading-spinner > span.x-loading-right::before {
+  background-color: rgba(170, 170, 170, 0.3);
+}
+.x-loading-spinner > span.x-loading-right {
+  background-color: rgba(170, 170, 170, 0.25);
+}
+.x-loading-spinner > span.x-loading-right::after {
+  background-color: rgba(170, 170, 170, 0.2);
+}
+.x-loading-spinner > span.x-loading-top::before {
+  background-color: rgba(170, 170, 170, 0.15);
+}
+//list paging的样式
+.x-list-paging{
+	padding:10px 0;
+	height:40px;
+}
+//pullrefresh样式
+.x-list-pullrefresh-message, .x-list-pullrefresh-updated{
+	line-height:1.5;
+	text-align:left;
+}
+.x-list-pullrefresh-arrow{
+	display:none;
+}
+.x-list-pullrefresh .x-loading-spinner{
+	visibility:hidden;
+	display:block;
+	font-size:20px;
+}
+.x-list-pullrefresh-loading .x-loading-spinner{
+	visibility:visible;
+}
+.x-list-pullrefresh-wrap{
+	margin-left:10px;
+	width:auto;
+}

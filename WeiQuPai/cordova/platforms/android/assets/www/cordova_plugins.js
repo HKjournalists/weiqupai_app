@@ -55,6 +55,20 @@ module.exports = [
         "clobbers": [
             "window.open"
         ]
+    },
+    {
+        "file": "plugins/nl.x-services.plugins.launchmyapp/www/android/LaunchMyApp.js",
+        "id": "nl.x-services.plugins.launchmyapp.LaunchMyApp",
+        "clobbers": [
+            "window.plugins.launchmyapp"
+        ]
+    },
+    {
+        "file": "plugins/com.pfafman.nsLogger/www/nsLogger.js",
+        "id": "com.pfafman.nsLogger.NSLogger",
+        "clobbers": [
+            "NSLogger"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -64,7 +78,9 @@ module.exports.metadata =
     "xu.li.cordova.wechat": "0.4",
     "org.apache.cordova.splashscreen": "0.2.7",
     "cordova.bpush": "0.1",
-    "org.apache.cordova.inappbrowser": "0.4.0"
+    "org.apache.cordova.inappbrowser": "0.4.0",
+    "nl.x-services.plugins.launchmyapp": "3.2.0",
+    "com.pfafman.nsLogger": "0.1.0"
 }
 // BOTTOM OF METADATA
 });

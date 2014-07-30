@@ -114,18 +114,19 @@ Ext.define('WeiQuPai.plugin.PullRefresh', {
         pullTpl: [
             '<div class="x-list-pullrefresh-arrow"></div>',
             '<div class="x-loading-spinner">',
-                '<span class="x-loading-top"></span>',
-                '<span class="x-loading-right"></span>',
-                '<span class="x-loading-bottom"></span>',
-                '<span class="x-loading-left"></span>',
+            '<span class="x-loading-top"></span>',
+            '<span class="x-loading-right"></span>',
+            '<span class="x-loading-bottom"></span>',
+            '<span class="x-loading-left"></span>',
             '</div>',
             '<div class="x-list-pullrefresh-wrap">',
-                '<h3 class="x-list-pullrefresh-message">{message}</h3>',
-                '<div class="x-list-pullrefresh-updated">{updated}</div>',
+            '<h3 class="x-list-pullrefresh-message">{message}</h3>',
+            '<div class="x-list-pullrefresh-updated">{updated}</div>',
             '</div>'
         ].join(''),
 
-        translatable: true
+        translatable: true,
+        refreshFn: null
     },
 
     // @private
@@ -162,12 +163,10 @@ Ext.define('WeiQuPai.plugin.PullRefresh', {
         return {
             reference: 'element',
             classList: ['x-unsized'],
-            children: [
-                {
-                    reference: 'innerElement',
-                    className: Ext.baseCSSPrefix + 'list-pullrefresh'
-                }
-            ]
+            children: [{
+                reference: 'innerElement',
+                className: Ext.baseCSSPrefix + 'list-pullrefresh'
+            }]
         };
     },
 
@@ -227,7 +226,7 @@ Ext.define('WeiQuPai.plugin.PullRefresh', {
 
     // @private
     getPullHeight: function() {
-       return this.innerElement.getHeight();
+        return this.innerElement.getHeight();
     },
 
     /**
@@ -260,10 +259,7 @@ Ext.define('WeiQuPai.plugin.PullRefresh', {
      * timeline between the new and the old records.
      */
     onLatestFetched: function(operation) {
-        var store = this.getList().getStore();
-        store.removeAll();
-        store.add(operation.getRecords());
-        /*
+        var store = this.getList().getStore(),
             oldRecords = store.getData(),
             newRecords = operation.getRecords(),
             length = newRecords.length,
@@ -283,15 +279,12 @@ Ext.define('WeiQuPai.plugin.PullRefresh', {
         }
 
         store.insert(0, toInsert);
-        this.getList().updateAllListItems();
-        */
+        //this.getList().updateAllListItems();
         this.setState("loaded");
-        //this.fireEvent('latestfetched', this, toInsert);
-        /*
+        this.fireEvent('latestfetched', this, toInsert);
         if (this.getAutoSnapBack()) {
             this.snapBack();
         }
-        */
     },
 
     /**
@@ -299,7 +292,7 @@ Ext.define('WeiQuPai.plugin.PullRefresh', {
      * @param {Boolean=} force Force the snapback to occur regardless of state {optional}
      */
     snapBack: function(force) {
-        if(this.getState() !== "loaded" && force !== true) return;
+        if (this.getState() !== "loaded" && force !== true) return;
 
         var list = this.getList(),
             scroller = list.getScrollable().getScroller();
@@ -313,8 +306,9 @@ Ext.define('WeiQuPai.plugin.PullRefresh', {
             scope: this
         });
         this.setIsSnappingBack(true);
-        scroller.scrollTo(null, 0, {duration: this.getSnappingAnimationDuration()});
-        this.onSnapBackEnd();
+        scroller.scrollTo(null, 0, {
+            duration: this.getSnappingAnimationDuration()
+        });
     },
 
     /**
@@ -338,10 +332,10 @@ Ext.define('WeiQuPai.plugin.PullRefresh', {
             var pullHeight = this.getPullHeight(),
                 isSnappingBack = this.getIsSnappingBack();
 
-            if(this.getState() === "loaded" && !isSnappingBack) {
+            if (this.getState() === "loaded" && !isSnappingBack) {
                 this.snapBack();
             }
-            if (this.getState() !== "loading" && this.getState() !=="loaded") {
+            if (this.getState() !== "loading" && this.getState() !== "loaded") {
                 if (-y >= pullHeight + 10) {
                     this.setState("release");
                     scroller.getContainer().onBefore({
@@ -373,10 +367,12 @@ Ext.define('WeiQuPai.plugin.PullRefresh', {
                 translateable = scroller.getTranslatable();
 
             this.setState("loading");
-            translateable.setEasingY({duration: this.getOverpullSnapBackDuration()});
+            translateable.setEasingY({
+                duration: this.getOverpullSnapBackDuration()
+            });
             scroller.minPosition.y = -this.getPullHeight();
             scroller.on({
-                scrollend: 'fetchLatest',
+                scrollend: list[this.getRefreshFn()] || 'fetchLatest',
                 single: true,
                 scope: this
             });
@@ -390,7 +386,10 @@ Ext.define('WeiQuPai.plugin.PullRefresh', {
     updateView: function() {
         var state = this.getState(),
             lastUpdatedText = this.getLastUpdatedText() + Ext.util.Format.date(this.lastUpdated, this.getLastUpdatedDateFormat()),
-            templateConfig = {state: state, updated: lastUpdatedText},
+            templateConfig = {
+                state: state,
+                updated: lastUpdatedText
+            },
             stateFn = state.charAt(0).toUpperCase() + state.slice(1).toLowerCase(),
             fn = "get" + stateFn + "Text";
 

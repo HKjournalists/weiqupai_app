@@ -1,1325 +1,2115 @@
 
 @import 'sencha-touch/cupertino';
 @import 'sencha-touch/cupertino/all';
-@import './pony.scss';
+@import 'override.scss';
 
-$big-font: 1.1em;
-$default-font: 1em;
-$normal-font: 0.9em;
-$small-font: 0.75em;
-$tiny-font: 0.6em;
-$text-color: #000;
-$gray-color: #666;
-$red-color: #d22270;
-$bar-color: #ccd6c2;
-$border-color: #cfd9c6;
-$button-color: #76888d;
-$bg-color: #fff;
-$tabbar-color:#5f7479;
+$color_fff:white;
+$none:none;
+$al_center:center;
+$m_auto:auto;
+$width:320px;
+$w150:150px;
+$zero:0px;
+$border:1px solid #eee;
+$font_12:12px;
+$font_10:10px;
+$color_e7:#e76049;
 
-//tabbar的文字暗色
-$tab-text-dark: #fff;
-//tabbar的文字亮色
-$tab-text-light: #fff;
-//titlebar的文字色
-$title-text-color: #000;
-//按钮的文字色
-$button-text-color: #fff;
+//首页吃喝玩乐按钮样式
+@mixin banner_style
+{
+   background-repeat:no-repeat;
+   background-size:contain;   
+   height:38px;
+   text-align:center;
+   padding:$zero;
+   margin-top:13px;
+}
+//titlebar样式
+@mixin titlebar_title
+{
+   background-size: 100% auto !important;
+   color:$color_fff;
+   font-size:18px!important;
+  
+}
+//拍品详情 card title按钮
+@mixin detailcard_title
+   {
+    background-size:12px 12px;
+    background-position:10px 10px;
+   }
+//拍品详情 焦点图上方按钮排列
+ @mixin details_title_top
+   {
+      background-size:auto 8px;
+      background-position:5px 0px;
+      text-indent:18px;
+   }
+//拍品详情 简介上方按钮
+@mixin detail_top_jiao
+  {
+    background-size:auto 8px;
+    margin-top:-28px;
+  }
+ //拍品详情 商品参数页面下方按钮
+  @mixin discard_date_btn
+  {
+    background-size:auto 12px;
+    background-position:5px;
+    text-indent:20px;
+  } 
+ //个人中心 按钮图片位置
+  @mixin personal_icon
+   {
+     background-repeat:no-repeat;
+     background-size:auto 12px!important;
+     background-position:13px center !important;
+     background-color:transparent;
+   } 
+html body
+{
+  background:transparent!important;
+}
+      .titlebar1
+     {
+        background-image: url(../images/top.png) !important;
+        @include titlebar_title;       
+     }
+     .titlebar2
+     {
+        background-image: url(../images/detail_top1.png) !important;
+        @include titlebar_title;
+     }
+     .titlebar3
+     {
+        background-image: url(../images/person_title.png) !important;
+        @include titlebar_title;
+     }
+     .titlebar1.x-toolbar.x-docked-top,.titlebar2.x-toolbar.x-docked-top,.titlebar3.x-toolbar.x-docked-top
+     {
+      border-bottom:0px;
+     }
+     .titlebar1 .x-title .x-innerhtml,.titlebar2 .x-title .x-innerhtml,.titlebar3 .x-title .x-innerhtml
+     {
+        color:$color_fff;
+     }
+     .titlebar1 .x-button,.titlebar2 .x-button,.titlebar3 .x-button{
+        color:$color_fff;
+        background:transparent;
+        border:0px;
+     }
+     .titlebar1 .x-button-icon,.x-button .x-button-icon
+     { 
+        color:$color_fff;
+        background:none;
+        border:0px;
+     }
+     .carsouel
+     {
+         background-size: 100% auto !important;
+         height:132px;
+     }
+      .x-img.x-img-background{
+        background-size: 100% auto !important;
+     }
+     .titlebar1 .bar_right
+     {
+        background-image:url(../images/icon_home.gif) !important;
+        background-size: 100% auto !important;
+     }
+   
+     .btn1
+     {
+       background-image:url(../images/btn1.jpg);
+       @include banner_style;
 
-$text-button-color:#5f7479;
-$ios7-blue: #157efb;
-$ios7-red: #fc3e39;
-$ios7-green: #53d769;
+     }
+     .btn2
+     {
+       background-image:url(../images/btn2.jpg); 
+       @include banner_style;
+       margin-left:5px;
+     }
+     .btn3
+     {
+        background-image:url(../images/btn3.jpg);
+        @include banner_style;
+        margin:5px 5px 10px 0px;
+     }
+     .btn4
+     {
+       background-image:url(../images/btn4.jpg);
+       @include banner_style;
+       margin:5px 0px;
+     }
+    .x-carousel-indicator-horizontal{
+       height:1em;
+       margin-top:-4px;
+    }
 
-//ios7的titlebar样式，解决statusbar的问题
-.ios7 .x-toolbar.x-docked-top.w-title{
-	box-sizing:content-box;
-	padding-top:20px;
-}
-//默认背影
-html, body{
-	//background-color:#f2fceb;
-}
-.x-layout-card-item{
-	background-color:$bg-color;
-}
-//标题栏样式
-.x-toolbar.x-docked-top.w-title{
-	border-bottom:0;
-	border-radius:0;
-	background-color:$bar-color;
-}
-.x-toolbar .x-title{
-	font-size:$big-font;
-	font-weight:bold;
-	color: $title-text-color;
-	//text-shadow:0 1px rgba(0,0,0,.2);
-}
-.x-msgbox-title.x-toolbar.x-docked-top{
-	background-color:transparent;
-}
-.x-msgbox .x-msgbox-title .x-title{
-	color:#000;
-}
+   .x-carousel-indicator span
+   {
+     width:6px;
+     height:6px;
+   }
+   .btn1,.btn3
+     {
+        background-position:right!important;
+        line-height: 2em;
+    }
+     .btn2,.btn4
+     {
+        background-position:left!important;
+    }
+      .special
+      {
+         height:108px;
+         text-align: $al_center;;
+         margin:$m_auto;
+         font-size:13px;
+         margin-top:-4px;
+         background:white;
+         display:-webkit-box;
+         display:flex;
+      }
 
-//loadmask样式
-.x-mask .x-loading-spinner-outer{
-	min-width:3em;
-	height:3em;
-}
-.x-mask .x-mask-inner{
-	background:rgba(0,0,0,0.25);
-}
-.x-loading-spinner{
-	font-size:20px;
-}
-.x-loading-spinner > span.x-loading-top{
-  background-color: rgba(170, 170, 170, 0.99);
-}
-.x-loading-spinner > span.x-loading-top::after {
-  background-color: rgba(170, 170, 170, 0.9);
-}
-.x-loading-spinner > span.x-loading-left::before {
-  background-color: rgba(170, 170, 170, 0.8);
-}
-.x-loading-spinner > span.x-loading-left {
-  background-color: rgba(170, 170, 170, 0.7);
-}
-.x-loading-spinner > span.x-loading-left::after {
-  background-color: rgba(170, 170, 170, 0.6);
-}
-.x-loading-spinner > span.x-loading-bottom::before {
-  background-color: rgba(170, 170, 170, 0.5);
-}
-.x-loading-spinner > span.x-loading-bottom {
-  background-color: rgba(170, 170, 170, 0.4);
-}
-.x-loading-spinner > span.x-loading-bottom::after {
-  background-color: rgba(170, 170, 170, 0.35);
-}
-.x-loading-spinner > span.x-loading-right::before {
-  background-color: rgba(170, 170, 170, 0.3);
-}
-.x-loading-spinner > span.x-loading-right {
-  background-color: rgba(170, 170, 170, 0.25);
-}
-.x-loading-spinner > span.x-loading-right::after {
-  background-color: rgba(170, 170, 170, 0.2);
-}
-.x-loading-spinner > span.x-loading-top::before {
-  background-color: rgba(170, 170, 170, 0.15);
-}
-//list paging的样式
-.x-list-paging{
-	padding:10px 0;
-	height:40px;
-}
-//pullrefresh样式
-.x-list-pullrefresh-message, .x-list-pullrefresh-updated{
-	line-height:1.5;
-	text-align:left;
-}
-.x-list-pullrefresh-arrow{
-	display:none;
-}
-.x-list-pullrefresh .x-loading-spinner{
-	visibility:hidden;
-	display:block;
-	font-size:20px;
-}
-.x-list-pullrefresh-loading .x-loading-spinner{
-	visibility:visible;
-}
-.x-list-pullrefresh-wrap{
-	margin-left:10px;
-	width:auto;
-}
-
-//自定义的disclosure项目
-.w-disclosure-item{
-	color: #000;
-	font-weight: 400;
-	border-bottom: 1px solid $border-color;
-	padding:.7em 1em;
-	line-height:1.5;
-	background:#fff;
-}
-.w-disclosure-item-single{
-	border-top: 1px solid $border-color;
-	margin-top:1em;
-}
-
-.w-disclosure-title{
-	flex: 1;
-	-webkit-box-flex: 1;
-}
-.w-disclosure-content{
-	color:$gray-color;
-	margin-right:.2em;
-}
-//disclosure的右箭头
-.w-disclosure{
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	-webkit-box-pack:center;
-	-moz-box-pack:center;
-	box-pack:center;
-}
-.w-disclosure-item-pressed{
-	background-color:#ddd;	
-}
-.w-disclosure-inner{
-	display:inline;
-}
-.w-disclosure-inner:after{
-	content: '!';
-	font-family: 'iOS7';
-	color: #ccc;
-	font-size: 14px;
-	text-align: center;
-	background-color: transparent;
-}
-.w-disclosure-title.x-container > .x-inner{
-	-webkit-box-orient: horizontal !important;
-	-webkit-box-align: center;
-}
-//列表的最上边框去掉
-.x-list .x-list-item.x-list-header-wrap.x-list-item-tpl{
-	border-top:0;
-}
-
-h2{
-	font-size: $big-font;
-	font-weight:bold;
-	color:#000;
-}
-h3{
-	font-size:$default-font;
-	font-weight:bold;
-	color:#000;
-}
-
-//前进的按钮没有，要重新定义
-.x-button.x-button-forward {
-    border : 0px;
-    padding:0;
-    &:after {
-        content: '!';
-        font-family: 'iOS7';
-        color: $ios7-blue;
-        font-size: 1.3em;
+      .list-product
+      {
+        border:$border;
+        border-left:$none;
         text-align: center;
-        background-color: transparent;
-        line-height: 1.3em;
-        padding-left: 0px;
+        flex:1;
+        -moz-box-flex: 1;  
+        -webkit-box-flex: 1;
+      }
+    
+      .list-product  p
+      {
+        text-align: center;
+        padding-top:10px;
+        padding-bottom: 10px;
     }
-    .x-button-label {
-        font-size: 1.1em;
-        line-height: 1.3em;
-        font-weight: 300;
-        padding-left: 2px;
+    .todayTitle{
+        border-top:$border;background:#ffffff url(../images/today_title.jpg) left no-repeat;text-indent: 20px;font-size: 13px;font-weight: bold;text-align: left;color:#000;margin-top:5px;background-position:10px 8px;background-size:auto 13px;padding:8px 0px;
     }
-}
+    .todaylist.x-list .x-list-item.x-list-item-tpl .x-innerhtml
+    {
+        padding:0;
+    }
+    .today
+    {
+      display: -moz-box;
+      display: -webkit-box;
+      display: flex;
+      -moz-box-orient: horizontal;
+      -webkit-box-orient: horizontal;
+      box-orient: horizontal;
+      background:$color_fff;
+      width:100%;
+      border:0px;
+     padding:10px 0;
+    }
+    .today .left
+    {
+       width:115px;
+    }
+    .today .right .price .pro
+    {
+     width:20px;height:20px;background:url('../images/heart.jpg') no-repeat;
+     background-size:contain;float:right;
 
-//今日
-.today-item-row{
-	line-height:1.5;
-}
-.today-item-row .item-img{
-	text-align:center;
-}
-.today-item-row img{
-	width:290px;
-	height:290px;
-	padding:3px;
-	border:1px solid #c1c2c7;
-	box-shadow:1px 1px 6px #c1c2c7; 
-}
-.today-item-row h2{
-	line-height:1.5;
-}
-.today-item-row .status{
-	font-size:$small-font;
-	color:#f5f5f6;
-	background:#e4e8e9;
-	border-radius:20px;
-	padding:.2em 1em;
-}
-.today-item-row .not-start .status{
-	background:#bbc9ad;
-}
-.today-item-row .online .status{
-	background:#ca0936;
-}
-.today-item-row .finish .status{
-	background:#bfc7c9;
-}
+    }
+    .today .left .prod
+    {
+      margin-right:8px;
+      border:$border;
+      text-align:center;
+      margin-left:5px;
+      background-size:contain;
+    }
+    .today .right
+    {  
+      margin-right:10px;
+       -moz-box-flex: 2;
+       -webkit-box-flex: 2;
+       flex: 2;
+       font-size:$font_12;
+    }
+    .today .right .title
+    {
+       width:100%;
+       font-size:14px;
+       color:#3a3e3f;
+    }
+   .today .right .price
+    {
+      width:100%;
+      font-size:17px;
+      color:$color_e7;
+      margin-top:14px;
+    }
 
-.today-item-row .price-container{
-	float:right;
-}
-.today-item-row .price{
-	font-size:$big-font;
-	color:$red-color;
-}
-.today-item-row .finish .price{
-	color:#a4acae;
-}
-.today-item-row .market-price{
-	text-decoration:line-through;
-	color:#a4acae;
-	font-size:$small-font;
-}
+    .priceNew img
+    {
+      margin: 0px 5px 1px 5px;
+    }
+    .priceImg
+    {
+     width:87px;
+     height:18px;
+     float:left;
+     margin-left:8px;
+    }
+    .priceMap
+    {
+     clear:both;
+     margin-top:10px;
+     text-align:right;
+     width:100%;
+    }
 
-//广告条
-.banner{
-	height: 75px;
-}
-//商品详情图片列表
-.item-detail-pic-container{
-	padding:.65em 1em;
-}
+    .discuss
+   {
+     width:100%;
+     border-top:$border;
+     margin-top:3px;
+     padding:5px 0px;
 
-.item-detail-pic{
-	width:290px;
-	height:290px;
-	padding:3px;
-	border:1px solid #c1c2c7;
-	box-shadow:1px 1px 6px #c1c2c7; 
-}
-.item-detail-title{
-	padding:.7em 1em;
-	//border-bottom:1px solid $border-color;
-}
+   }
+   .discuss .img
+   {
+     background: url('../images/icon_pinglun.jpg') no-repeat;
+     background-size:contain;
+     height:13px;
+     width:18px;
+     float:left;
+   }
+   .discuss .pre
+   {
+     color:#555;
+     font-size:10px;
+     font-weight: 100;
+     float:left;
+     width:88%;
+   }
+   .x-toolbar.x-docked-top
+   {
+     border-radius:0px!important;
+   }
+   .banner
+   {
+     width:50%;margin-left:20px;text-align:left;margin-top:10px;
+   }
+   .banner .title
+   {
+     font-size:18px;
+   }
+   .banner .des
+   {
+     font-size:8px;color:#666;margin-top:8px;
+   }
+   .banner .price
+   {
+     margin-top:8px;font-size:10px;position:absolute;top:71px;left:93px;color:$color_e7;
+   }
+   .banner .price span
+   {
+    font-size:18px;
+   }
+   .x-list,.x-layout-card-item
+   {
+     background:none;
+   }
+  .x-list .x-list-item.x-list-item-tpl:before{border:none;}
+  .x-carousel-indicator span.x-carousel-indicator-active{
+   background:#ffc600;
+  }
+  //商品详情
+  .detail .x-carousel-indicator-horizontal
+  {
+    margin-bottom:180px;
+  }
+  .detail
+  {
+  background:#f6f6f6;
+  }
+  .detail .x-docked-bottom
+  {
+    min-height:0em;
+    overflow:visible;
+  }
+  .details
+  {
+    width:100%;
+    color:$color_fff;
+    position:relative;
+    height:46px;
+    
+  }
 
-.item-detail-desc{
-	border-bottom: 1px solid $border-color;
-	padding:1em;
-	line-height:1.5;
-	font-size:$normal-font;
-}
-//展开和收起的按钮
-.show-more, .hide-more{
-	width:14px;
-	height:14px;
-	display:inline-block;
-	vertical-align:text-bottom;
-}
-.show-more{
-	background:url(../images/icon-arrow-down.png);
-	background-size:14px 14px;
-}
-.hide-more{
-	background:url(../images/icon-arrow-up.png);
-	background-size:14px 14px;
-}
+  .details  .top
+  {
+    background:url('../images/detail_t.png') repeat-x;
+    height:46px;
+    background-size:contain;
+    width:100%;
+  }
+  .details .top .right
+  {
+   float:right;
+   margin-right:8px;
+   font-size:9px;
+  }
+  .details .top .right ul
+  {
+    list-style:none;
+    padding:$zero;
+    margin:$zero;
 
-//已拍列表的图片
-.myauction-img{
-	position:relative;
-	margin-right:1em;
-}
-.myauction-row img{
-	display:block;
-	width:78px;
-	height:78px;
-	border-radius: 5px;
-	border:1px solid #ccc;
-}
-.myauction-row .fbig{
-	font-size:1.2em;
-	color:$red-color;
-}
+  }
+   .details .top .right ul li
+   {
+     float:left;margin-top:8px;
+   }
+  
+   .details .top .right ul li.heart
+   {
+      background:url('../images/icon_top1.png') no-repeat;
+      @include details_title_top;
+      
+   }
+    .details .top .right ul li.nolike
+   {
+      background:url('../images/icon_top2.png') no-repeat;
+      @include details_title_top;
+   }
+    .details .top .right ul li.pre
+   {
+      background:url('../images/icon_top3.png') no-repeat;
+      @include details_title_top;
+   }
+    .details  .bottom
+  {
+    background:url('../images/detail_b.png') repeat-x;
+    height:46px;
+    background-size:contain;
+    width:100%;
+    bottom:0;
+    padding:20px 0px 0px;
+  }
+  .details  .bottom .left
+  {
+    float:left;
+    width:75%;
+    text-algin:left;
+    padding: 8px 5px 1px 10px;
+    font-size: 14px;
+  }
+   .details  .bottom .right
+  {
+    float:right;
+    height:30px;
+    text-align:right;
+    padding-bottom:10px;
+    width:51px;
+  }
+  .detailDatabot
+  {
+   margin-top:10px;
+  }
+   .details  .bottom .right ul
+  {
+    list-style:none;
+    padding:$zero;
+    margin:$zero;
+  }
+   .details  .bottom .right ul li
+  {
+    float:left;margin-top:8px;
+  }
+   .details .bottom .right ul li.nolike
+   {
+      background:url('../images/sadheart_alt.png') no-repeat;
+      height:13px;
+      background-size:contain;
+      width:17px;
+   }
+    .details .bottom .right ul li.like
+   {
+      background:url('../images/heart_line.png') no-repeat;
+      height:13px;
+      background-size:contain;
+      width:17px;
+      margin-left:10px;
+   }
+   //详情页面底部
+   .x-toolbar.x-docked-bottom
+   {
+     border-top:$zero;
+   }
+  
+   .bottombar .x-toolbar-inner
+   {
+    margin:auto;
+    background: url(../images/bottomBar.png) no-repeat;
+    background-size: contain;
+    height:52px;
+    width:206px;
+    margin:auto;
+    text-align:center;
+    padding:$zero;
+    margin-top:-52px;
+   }
+   .bottom_detail1 .btm1
+   {
+    margin-left:20px;
+    margin-top:17px;
+    width:30px;
+    height:30px;
+   }
+    .bottom_detail1 .btm2
+   {
+    margin-left:-10px;
+    width:50px;
+    height:50px;
+   }
+    .bottom_detail1 .btm3
+   {
+    margin-left:-11px;
+    margin-top:17px;
+    width:30px;
+    height:30px;
+   }
+//详情页面数据价格模块
+   .detailData
+   {
+    background:white;
+    display:box;
+    display:-webkit-box;
+    display:-moz-box;
+    width:100%;
+   }
+   .detailData .left
+   {
+     flex:1;
+     padding:7px 4px 7px 10px;
+     flex:1;
+     -moz-box-flex: 1;  
+     -webkit-box-flex: 1;
+   }
+   @mixin pricex
+   {
+    background-position:0px 0px;
+    background-size: auto 17px;
+    color: #e76049;
+    font-size: 23px;
+    text-indent: 22px;
+    width: 100%;
+    float: none;
+    background-position: 0px 5px;
+   }
+   .detailData .left .priceNew
+   {
+    background:url('../images/detail_money.jpg') left no-repeat;
+    @include pricex;
+   }
+    .detailData .left .priceXiang
+   {
+    background:url('../images/icon_xiang.png') left no-repeat;
+    @include pricex;
+   }
+   .detailData .left .price
+   {
+     color:#cbcbcb;
+     padding-top:5px;
+     width:100%;
+     font-size:15px!important;
+   }
+   .detailData .left .price span
+   {
+     text-decoration:line-through;
+     font-size:15px;
+   }
+   .detail_map
+   {
+     background:url('../images/map.jpg') right no-repeat;
+     height:29px;
+     text-align:right;
+     background-size:contain;
+     margin-top:5px;
+     flex:1;
+     -moz-box-flex: 1;  
+     -webkit-box-flex: 1;
+   }
+   .detail_pai
+   {  
+     flex:1;
+     -moz-box-flex: 1;  
+     -webkit-box-flex: 1;
+   }
+   .detail_pai .detail_img
+   {
+     background:url('../images/icon_detail_pai.png') no-repeat;
+     background-size: 13px auto;
+     margin-top: 15px;
+     color: #e76049;
+     font-size: 16px;
+     text-indent: 50px;
+     float: left;
+     background-position: 30px center;
+   }
+   @mixin detailicon
+   {
+    background-size:auto 7px;
+    width:12px;
+    float:right;
+    margin-top:21px;
+    height:20px;
+    margin-right:10px;
+   }
+   .detail_right
+   {
+    background:url('../images/icon_detail_right.png') no-repeat;
+    @include detailicon;
+   }
+   .detail_down
+   {
+    background:url('../images/icon_detail_down.png') no-repeat;
+    @include detailicon;
+   }
+   //商品详细信息页面下方简介
+   .log_btn .x-button
+   {
+    border:0px;
+    border-radius:0px;
+    border-top:1px solid #efefef;
+    border-bottom:1px solid #efefef;
+    border-right:1px solid #efefef;   
+   }
+   .log_btn .x-button-normal .x-button-label{
+   color:#2eb398;
+   font-size:14px;
+   padding-left:10px;
+   }
+   .my_btn .x-button-normal .x-button-label{
+   color:$color_e7;
+   font-size:13px;
+   }
+   .detailcard
+   {
+     font-size:16px;
+   }
+   .detailcard .x-tabbar.x-docked-top
+   {
+    padding:0px; 
+   }
+   .detailcard .x-tabbar.x-docked-top
+   {
+    border:$zero;
+    border-top:1px solid #efefef;
+    border-bottom:1px solid #efefef;
+   }
+   .detailcard .x-tabbar
+   {
+    min-height:0;
+   }
 
-//晒单的列表
-.show-order-row, .comment-row, .auction-user-row, .circle-row, .user-row, .myauction-row{
-	display:-webkit-box;
-	display:flex;
-}
-.show-order-row h3, .comment-row h3, .auction-user-row h3, .circle-row h3{
-	margin-bottom:.5em;
-}
-.avatar{
-	width:40px;
-	height:40px;
-	margin-right:10px;
-	display:block;
-	background:url(../images/icon-avatar.png) no-repeat;
-	background-size:40px 40px;
-}
-.icon-newfriend{
-	background:url(../images/icon-newfriend.png) no-repeat left center;
-	background-size:40px 40px;
-	height:40px;
-	width:40px;
-	margin-right:10px;
-	position:relative;
-}
-.action-title{
-	margin-bottom:.5em;
-}
-.action{
-	margin-left:.5em;
-	color:#808080;
-	font-weight:normal;
-	font-size:$normal-font;
-}
-.circle-time{
-	margin-bottom:.7em;
-}
-.show-order-row .info, .comment-row .info, .auction-user-row .info, .circle-row .info, .user-row .info, .myauction-row .info{
-	line-height:1.5;
-	font-size:$normal-font;
-	color:$text-color;
-	flex: 1;
-	-webkit-box-flex: 1;
-}
-.pic-list{
-	margin-top:.5em;
-}
-.pic-list img{
-	width:66px;
-	height:66px;
-	border:1px solid #ccc;
-	border-radius:5px;
-	display:inline-block;
-	margin-right:10px;
-}
+   .detailcard .x-tabbar.x-docked-top .x-tab:first-child
+   {
+     border-radius:0px 0px 0px 0px;
+   }
+   .detailcard .x-tabbar.x-docked-top .x-tab:nth-child(1),.detailcard .x-tabbar.x-docked-top .x-tab:nth-child(2){
+    border:0px;
+    border-right:1px solid #efefef;
+   }
+   .detailcard .x-tabbar.x-docked-top .x-tab:nth-child(3)
+   {
+     border:0px;
+   }
+   .detailcard .title
+   {
+     border:0px;
+     border-radius:0px 0px 0px 0px;
+   }
+   .detailcard .x-tabbar.x-docked-top .x-tab .x-button-label
+   {
+     color:#2eb398;
+   }
 
-.reply,.zan{
-	background:#f5f5f5;
-	padding:.3em;
-}
-.bt{
-	border-top:1px solid $border-color;
-}
-.uname{
-	color:#5d7177;
-	font-weight:bold;
-}
-//flex容器
-.flex{
-	display:-webkit-box;
-	display:flex;
-	margin-top:.5em;
-	-webkit-box-align:center;
-	align-items: center;
-}
+   .detailcard .x-tab.x-tab-active .x-button-label
+   {
+     color:white!important;
+   }
+   .x-button-active .x-button-label{
+    color:$color_fff!important;
+   }
+  .detailcard .x-tab:nth-child(1),.log_btn .x-button:nth-child(1),.log_btn1
+  {
+   background:#fff url('../images/cs1.png') no-repeat;
+   @include detailcard_title;
+  }
+  .detailcard .x-tab:nth-child(1).x-tab-active,.log_btn .x-button:nth-child(1).x-button-active,
+  {
+   background:#2eb398 url('../images/detail_list1_ac.png') no-repeat;
+   @include detailcard_title;
+  }
+  .detailcard .x-tab:nth-child(2),.log_btn .x-button:nth-child(2),.log_btn2
+  {
+   background:#fff url('../images/detail_list2.png') no-repeat;
+   @include detailcard_title;
+  }
+  .detailcard .x-tab:nth-child(2).x-tab-active,.log_btn .x-button:nth-child(2).x-button-active,
+  {
+   background:#2eb398 url('../images/detail_list2_ac.png') no-repeat;
+   @include detailcard_title;
+  }
+  .detailcard .x-tab:nth-child(3),.log_btn .x-button:nth-child(3),.log_btn3
+  {
+   background:#fff url('../images/detail_list3.png') no-repeat;
+   @include detailcard_title;
+  }
+  .detailcard .x-tab:nth-child(3).x-tab-active,.log_btn .x-button:nth-child(3).x-button-active,
+  {
+   background:#2eb398 url('../images/detail_list3_ac.png') no-repeat;
+   @include detailcard_title;
+  }
+   .discard
+  {
 
-.time{
-	font-size:$small-font;
-	color:$gray-color;
-	//background:#e4e8e9;
-	//border-radius:20px;
-	//padding:.2em 1em;
-	flex: 1;
-	-webkit-box-flex: 1;
-	display:block;
-}
+    margin:10px 8px 60px 8px;
+    border-radius:6px;
+    background:white;
+    border:1px solid #efefef;
+    padding-top:10px;
+  }
+  .detail_listOne
+  {
+    background:url('../images/detail_top.png') no-repeat center center;
+    @include detail_top_jiao;
+  }
+   .detail_listTwo
+  {
+    background:url('../images/detail_top.png') no-repeat center center;
+    @include detail_top_jiao;
+  }
+   .detail_listThree
+  {
+    background:url('../images/detail_top.png') no-repeat center center;
+    @include detail_top_jiao;
 
-//赞和评论
-.up, .comment{
-	font-size:$small-font;
-	padding:2px 10px 2px 24px;
-	border:1px solid #e0e0e0;
-	border-radius:4px;
-	width:4em;
-	color:#b8b8b8;
-}
-.up{
-	background:url(../images/icon-up.png) no-repeat 10px center;
-	background-size:11px 9px;
-}
-.comment{
-	background:url(../images/icon-comment.png) no-repeat 10px center;
-	background-size:10px 9px;
-	margin-left:10px;
-}
+  }
+  //回复消息，评论展开部分
+  .re_message
+  {
+    width:100%;
+    margin:-1px auto 0px; 
+    background:#f6f6f6;
+    border:1px solid #f6f6f6;
+    border-radius:6px;
+    pading:5px;
+  }
+  .retop
+  {
+    width:98%;
+    margin:auto;
+  }
+  .retop .topleft
+  {
+   width:75%;
+   float:left;
+   border:1px solid white;
+  }
+  .retop .topright
+  {
+   background:url('../images/message_top.png') left no-repeat;
+   background-size:auto 7px;
+   height: 7px;
+    width: 15px;
+    margin-right: 5px;
+    float: right;
+  }
+  .re_message .dis
+  {
+   width:100%;
+  }
+  .re_message .dis .img
+  {
+   width:40px;
+   float:left;
+  } 
+  .re_message .dis .img img
+  {
+   border-radius:15px;
+  }
+   .re_message .dis .name
+  {
+   width:80%;
+   float:left;
+   word-break: break-all;
+  } 
+  .re_message .date
+  {
+   width:98%;
+   margin:15px auto 15px;
+   text-align:left;
+  }
+  //商品详情评论和个人消息共用部分，
+  .discard .list
+  {
+    width:95%;
+    margin:auto;
+    padding:10px 0px;
+    border-bottom:1px solid #efefef;
+  }
+   .message .list
+  {
+    width:100%;
+    margin:10px auto 5px;
+    padding:10px 0px;
+    border-bottom:1px solid #efefef;
+    background:white;
+  }
+  .discard .list .one,.message .list .one
+  {
+    display:flex;
+    display:-webkit-flex;
 
-.small-btn, .zan-btn, .reply-btn, .cancel-zan-btn{
-	font-size:$small-font;
-	padding:2px 10px;
-	border:1px solid #e0e0e0;
-	border-radius:4px;
-	color:#b8b8b8;
-	text-align:center;
-	min-width:5em;
-	margin-left:10px;
-}
-.icon-up{
-	background:url(../images/icon-up.png) no-repeat left center;
-	background-size:11px 9px;
-	width:14px;
-	height:9px;
-	//vertical-align:middle;
-	display:inline-block;
-}
-.icon-comment{
-	background:url(../images/icon-comment.png) no-repeat left center;
-	background-size:10px 9px;
-	width:14px;
-	height:9px;
-	//vertical-align:middle;;
-	display:inline-block;
-}
-.delete-post-btn{
-	color:#567091;
-}
+  }
+  .discard .list .one .img{
+   flex:1;
+   padding:5px;
+  }
+  .message .list .one .img
+  {
+   width:40px;
+   padding:5px;
+   float:left;
+  }
+  .discard .list .one  .img img,,.message .list .one .img img
+  
+  {
+     border-radius: 20px;   
+     -moz-border-radius: 20px; 
+     -webkit-border-radius: 20px; 
+  }
+    .discard .list .one .name
+  {
+   flex:9;
+   padding:15px 15px;
+   font-size:14px;
+   float:left;
+  }
+  .remess
+  {
+  border:0px;margin:0px;padding:0px;border-radius:0px;
+  }
+  .remess .list
+  {
+   border:0px;
+  }
+  .remess .list .date
+  {
+     margin:8px auto;
+  }
+  .remess .confirm_w
+  {
+   width:95%;
+  }
+  .remess .list .one .name{
+    flex: 9;
+    padding: 13px 1px 1px 15px;
+    font-size: 14px;
+    float: left;
+    word-break: break-all;
+    color:#383838;
+  }
+  .message .list .one .name
+  {
+   -webkit-box-flex: 9;
+  float: left;
+  padding: 10px 0px 10px 20px;
+  font-size: 13px;
+  word-break: break-all;
+  color:#383838;
+  }
+  .discard .list .dis
+  {
+   padding:5px;
+   font-size:14px;
+   color:#383838;
+   word-break: break-all;
+  } 
+  .discard .list .date
+  {
+    display:flex;
+    display:-webkit-flex;
+    font-size:10px;
+    color:#858585;
+    width:98%;
+    margin:auto;
+  } 
+  .discard .list .date .left
+  {
+   flex:1;
+   text-align:left;
+   padding:5px;
+   -webkit-box-flex:1;
+   width:50%;
+  }
+  .discard .list .date .right
+  {
+   flex:1;
+   padding:5px;
+  -webkit-box-flex:1;
+  width:50%;
+  // text-align:right;
+  }
+ .pinglun
+ {
+  margin-top:25px;color: #858585;
+ }
+  .discard .list .date .right .like,.product_like,
+  {
+   background:url('../images/two_icon1.jpg') no-repeat;
+   @include discard_date_btn;
+   float:right;
+  }
+   .discard .list .date .right .comment,.product_comment,
+  {
+   background:url('../images/two_icon.jpg') no-repeat;
+   @include discard_date_btn;
+    float:right;
+  }
+  //个人中心首页
+  .personal
+  {
+    background:#b6d557;
+    height:100%;
+  }
+  .personal .title
+  {
+   font-size:18px;
+   color:white;
+   vertical-align:middle;
+   margin-top:10px;
 
-//支付页面
-.order-item-info{
-	padding:.7em 1em;
-	border-bottom:1px solid $border-color;
-	display:-webkit-box;
-	display:flex;
-}
-.order-item-info .info{
-	-webkit-box-flex: 1;
-	flex: 1;
-}
-.order-item-info img{
-	display:block;
-	width:66px;
-	height:66px;
-	border: 1px solid $border-color;	
-	border-radius: 5px;
-	margin-right:1em;
-}
-.order-item-info .price-area{
-	margin-top:.7em;
-	color: $gray-color;
-	font-size:1em;
-}
+  }
+   .personal .title img
+   {
+    border-radius:25px;
+    margin:5px 10px;
+    width:50px;
+    height:50px;
+    float:left;
+   }
+    .personal .title span
+   {
+      margin: 20px 5px 0px;
+      float:left;
+      width: 7em;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+   }
+    .personal .return
+   {
+     background:transparent;
+     color:$color_fff;
+     padding: 32px 0px 0px 0px;
+     text-align:right;
 
+   }
+   .personal .return .x-button-label
+   {
+    text-align:right;
+    margin-right:10px;
+    font-family: 'iOS7';
+   }
+   .personal .x-button
+   {
+     border:0px;
+     font-weight:100;
+     text-indent:35px;
+     height:44px;
+     line-height:40px;
+     margin:0px;
+     padding:0px;
+   }
+   .personal .x-button-normal .x-button-label
+   {
+    color:$color_fff;
+    text-align:left;
+   }
+   .personal .x-button:nth-child(1)
+   {
+    border:0px;
+   }
+   .personal .x-button:nth-child(3)
+   {
+     background-image:url('../images/icon_person_btn1.png');
+     @include personal_icon;
+   }
+    .personal .x-button:nth-child(4)
+   {
+     background-image:url('../images/icon-person_btn2.png');
+     @include personal_icon;
+   }
+   .personal .x-button:nth-child(5)
+   {
+     background-image:url('../images/icon_person_btn4.png');
+     @include personal_icon;
+   }
+    .personal .x-button:nth-child(6)
+   {
+     background-image:url('../images/icon_person_btn3.png');
+     @include personal_icon;
+   }
+    .personal .x-button:nth-child(7)
+   {
+     background-image:url('../images/icon_person_btn5.png');
+     @include personal_icon;
+   }
+   .personal .x-button:nth-child(8)
+   {
+     background-image:url('../images/icon_person_btn6.png');
+     @include personal_icon;
+   }
+    .personal .x-button:nth-child(9)
+   {
+     background-image:url('../images/daoju.png');
+     @include personal_icon;
+   }
+     .personal .x-button:nth-child(10)
+   {
+     background-image:url('../images/icon_person_btn7.png');
+     @include personal_icon;
+   }
+      .personal .x-button:nth-child(11)
+   {
+     background-image:url('../images/icon_person_btn8.png');
+     @include personal_icon;
+   }
+      .personal .x-button:nth-child(12)
+   {
+     background-image:url('../images/icon_person_btn8.png');
+     @include personal_icon;
+   }
+    .personal .x-button:nth-child(2)
+   {
+     background-image:url('../images/home.png');
+     @include personal_icon;
+   }
+   .button_active
+   {
+      background-color:#adca53!important;
+      border:0px;
+      border-radius:0px;
+   }
+   .button_active_sell
+   {  
+     background-image:url('../images/icon_person_btn1_active.png')!important;
+     background-repeat:no-repeat;
+     @extend .button_active;
+   }
+   .button_active_message
+   {  
+     background-image:url('../images/icon_person_btn2_active.png')!important;
+     background-repeat:no-repeat;
+     @extend .button_active;
+   }
+   .button_active_order
+   {  
+     background-image:url('../images/icon_person_btn4_active.png')!important;
+     background-repeat:no-repeat;
+     @extend .button_active;
+   }
+   .button_active_sellRing
+   {  
+     background-image:url('../images/icon_person_btn3_active.png')!important;
+     background-repeat:no-repeat;
+     @extend .button_active;
+   }
+   .button_active_discount
+   {  
+     background-image:url('../images/icon_person_btn5_active.png')!important;
+     background-repeat:no-repeat;
+     @extend .button_active;
+   }
+   .button_active_box
+   {  
+     background-image:url('../images/icon_person_btn6_active.png')!important;
+     background-repeat:no-repeat;
+     @extend .button_active;
+   }
+   .button_active_datum
+   {  
+     background-image:url('../images/icon_person_btn7_active.png')!important;
+     background-repeat:no-repeat;
+     @extend .button_active;
+   }
+    .button_active_system
+   {  
+     background-image:url('../images/icon_person_btn8_active.png')!important;
+     background-repeat:no-repeat;
+     @extend .button_active;
+   }
+   //个人主页
+   //个人主页-背景颜色
+   .person_model
+   {
+     background:url('../images/person_bg.jpg') no-repeat;
+     background-size:100% auto;
+     height:155px;
+     display:flex;
+     color:$color_fff;
+   }
+   .person_zhezhao{
+     background:url('../images/person_zhezhao.png') repeat-x;
+     width:100%;
+     background-size:auto 155px;
+     position:absolute;
+     top:0px;
+     left:0px;
+     height:155px;
+   }
+   .person_zhezhao .one .head
+   {
+     width:33%;
+     padding:20px 15px;
+     text-align:center;
+     float:left;
+   }
+  .person_zhezhao .one .head img
+   {
+     border-radius:35px;
+   }
+   .person_zhezhao .one .head p
+   {
+     margin-top:5px;
+   }
+   .person_zhezhao .one .right
+   {
+    flex:1;
+    text-align:left;
+   }
+   @mixin person_model_word
+   {
+     padding-top:38px;
+     float:left;
+   }
+   @mixin person_model_img{
+     background-repeat:no-repeat;
+     background-size:auto 10px;
+     background-position:5px 40px;
+     text-indent:16px;
+   }
+   .person_zhezhao .one .right .name
+   {
+     @include person_model_word;
+     font-size:18px;
+   }
+    .person_zhezhao .one .right .dis
+   {
+     @include person_model_word;
+     background-image:url('../images/icon_person_base.png');
+     @include person_model_img;
+     margin-left:10px;
+     font-size:15px;
+   }
+   .person_zhezhao .two{
+    position:absolute;
+    bottom:10px;
+   }
+    .person_zhezhao .two .email
+   {
+     @include person_model_word;
+     background-image:url('../images/icon_person_letter.png');
+     @include person_model_img;    
+     padding-top:0px;
+     background-position: 0px 3px;
+     width:23%;
+     float:right;
+   }
+   .person_zhezhao .two span
+   {
+     flex:1;text-align:right;margin-right:10px; width:40%;float:right
+   }
+   .person_zhezhao .two .title{
+    flex:1;
+    text-align:center; float:left;width:33%;
+   }
+   .person_zhezhao .one .right .des
+   {
+    margin-top:45px;
+   }
+   .person_zhezhao .two{
+     width:100%; 
+   }
 
-//我的
-.w-myinfo{
-	-webkit-box-flex: 1;
-	flex: 1;
-}
-.w-myinfo .x-innerhtml{
-	display:-webkit-box;
-	display:flex;
-}
-.w-myinfo img{
-	width:70px;
-	height:70px;
-	margin-right:1em;
-	background:url(../images/icon-big-avatar.png);
-	background-size:70px 70px;
-}
-.w-myinfo .info{
-	-webkit-box-flex: 1;
-	flex: 1;
-}
-.w-myinfo p{
-	color:$gray-color;
-}
-.w-my-button{
-	background-repeat:no-repeat;
-	background-position:center top;
-	background-size:60px 60px;
-	width:60px;
-	padding-top:60px;
-	line-height:1.5;
-	font-size:$small-font;
-	margin:2em 0 0 0;
-	text-align:center;
-	color:#5f7479;
-	position:relative;
-}
-.w-my-button-friend{
-	background-image:url(../images/icon-friend.png);
-}
-.w-my-button-account{
-	background-image:url(../images/icon-account.png);
-}
-.w-my-button-order{
-	background-image:url(../images/icon-order.png);
-}
-.w-my-button-consignee{
-	background-image:url(../images/icon-consignee.png);
-}
-.w-my-button-prop{
-	background-image:url(../images/icon-prop.png);
-}
-.w-my-button-coupon{
-	background-image:url(../images/icon-coupon.png);
-}
-.w-my-button-setting{
-	background-image:url(../images/icon-setting.png);
-}
-.w-my-button-feed{
-	background-image:url(../images/icon-feed.png);
-}
-//带图标和普通文字的列表
-.w-icon-list-item, .w-list-item{
-	display:-webkit-box;
-	display:flex;
-	background:#fff;
-	padding:10px 1em;
-}
-.w-icon-list-item img{
-	width:40px;
-	height:40px;
-	margin-right:.7em;
-}
-.x-list .x-list-item.w-icon-list-item-container .x-innerhtml, .x-list .x-list-item.w-list-item-container .x-innerhtml{
-	padding:0;
-}
-.w-icon-list-item-container .button-area, .w-list-item-container .button-area{
-	position:absolute;
-	right:0;
-	top:0;
-	z-index:-1;
-	display:-webkit-box;
-	display:flex;
-	height:100%;
-}
-.w-coupon-list-item .coupon-icon{
-	width:43px;
-	height:40px;
-	font-size:1em;
-	display:block;
-	margin-right:1em;
-	background-position:left center;
-	background-repeat:no-repeat;
-	background-size:43px 26px;
-}
-.coupon-1{
-	background-image:url(../images/coupon1.png);
-}
-.coupon-5{
-	background-image:url(../images/coupon5.png);
-}
-.coupon-10{
-	background-image:url(../images/coupon10.png);
-}
-.coupon-20{
-	background-image:url(../images/coupon20.png);
-}
-.coupon-50{
-	background-image:url(../images/coupon50.png);
-}
-.coupon-100{
-	background-image:url(../images/coupon100.png);
-}
-.x-item-pressed .w-icon-list-item, .x-item-pressed .w-list-item{
-	background:#ddd;
-}
+   .per_model
+   {
+     margin-top:-5px;
+   }
+    .per_model .x-tabbar.x-docked-top .x-tab .x-button-label
+   {
+     color:#e76049;
+   }
 
-.swipe-button-delete{
-	padding:0 1em;
-	background:#ff3b30;
-	color:white;
-	display:-webkit-box;
-	display:flex;
-	-webkit-box-align:center;
-	align-items: center;
-}
-.swipe-button-default{
-	padding:0 1em;
-	background:#8bcf92;
-	color:white;
-	display:-webkit-box;
-	display:flex;
-	-webkit-box-align:center;
-	align-items: center;
-}
-.coupon-list-item img{
-	width:60px;
-}
-.w-icon-list-item p{
-	line-height:40px;
-	-webkit-box-flex:1;
-	flex:1;
-}
-.w-list-item p{
-	-webkit-box-flex:1;
-	flex: 1;
-}
-.content, .w-icon-list-item .content, .w-list-item .content{
-	line-height:1.5;
-	color:$text-color;
-	-webkit-box-flex:1;
-	flex:1;
-}
-.w-content{
-	margin:1em;
-	line-height:1.5;
-	font-size:$normal-font;
-}
+   .per_model .x-tab.x-tab-active .x-button-label
+   {
+     color:white!important;
+   }
+   .per_model .x-tabbar
+   {
+    min-height:0;
+   }
+   .per_model .x-tabbar.x-docked-top .x-tab.x-tab-active
+   {
+    background:#e76049;
+   }
+    .per_model .x-tabbar.x-docked-top
+   {
+    border:$zero;
+    padding:$zero;
+    border-radius:$zero;
+    border-top:1px solid #e76049;
+    border-bottom:1px solid #e76049;
+   }
+   .per_model .x-tabbar.x-docked-top .x-tab
+   {
+     border:$zero;
+     border-right:1px solid #e76049;
+     border-radius:0px 0px 0px 0px;
+     background:$color_fff;
+   }
+    .per_model .x-tabbar.x-docked-top .x-tab:nth-child(3)
+   {
+     border-right:0px;
+   }
+   .my
+   {
+     background:#efefef;
+   }
+   .mylike
+   { 
+      background:#ffffff!important;
+      padding-top:9px;
+   }
+   .mylike .myProduct
+   {
+    width:30%; 
+    margin:5px;
+    float:left;
+    text-align:center;
+   }
+   .mylike .myProduct .img
+   {
+      
+   }
+   .mylike .myProduct .img img
+   {
+      text-align:center;
+   }
+   .mylike .myProduct .title
+   {
+      font-size:14px;
+      margin-top:5px;
+   }
+   //个人主页 评论
+   .mydis
+   {
+    width:100%;
+    background:white;
+    padding:10px;
+    margin-top:1px;
+   }
+   .mydis .dis
+   {
+    width:100%;
+    font-size:14px;
+   }
+    .mydis .img
+   {
+    width:100%;
+    font-size:14px;
+    margin-top:10px;
+   }
+    .mydis .img img
+    {
+      margin:5px;
+      float:left;
+    }
+    .my_btn .x-button
+    {
+     border:0px;
+     border-radius:0px;
+      border-top:1px solid $color_e7;
+      border-bottom:1px solid $color_e7;
+      border-right:1px solid $color_e7; 
+    }
+    .my_btn .x-button:nth-child(3){
+      border-right:0px;
+    }
+    .my_btn .x-button-active
+    {
+     background:$color_e7;
+     color:$color_fff;
+    }
+   //此部分与个人消息共用
 
-//toggle状态的按钮
-.w-toggle-field{
-	min-height:0;
-}
+    .content
+   {
+    width:100%;
+    background:#fefefe;
+    padding:10px;
+    margin-top:10px;
+    border:1px solid #f0f0f0;
+   }
+   .message .content
+   {
+    width:95%;
+    margin:auto;
+   }
+    .content .left
+   {
+    width:40px;
+    float:left;
+   }
+   .content .right
+   {
+    float:left;
+    width:70%;
+    font-size:13px;
+   }
+   .message .content .right
+   {
+   width:80%;
+   }
+   .mydis .time,.message .time
+   {
+    width:100%;
+    margin:10px 0px 0px;
+    color:#666;
+   }
+   .message .time
+   {
+    width:95%;
+    margin:6px auto 3px; 
+   }
+   .mydis .time .left,.message .time .left
+   {
+    width:50%;
+    float:left;
+    text-align:left;    
+    font-size:12px;
+   }
+   .mydis .time .right
+   {
+    width:50%;
+    float:left;
+    font-size:12px;
+   }
+   .message .time .right
+   {
+    width:50%;
+    background:url('../images/talk.png') right no-repeat;
+    background-size:auto 12px;
+    width:12px;
+    height:12px;
+    float:right;
+   }
+   @mixin mydis_img
+   {
+    background-size:auto 12px;
+    text-indent:16px;
+    float:right;
+   }
+   .mydis .time .right .zan
+   {
+    background:url('../images/two_icon.jpg') left no-repeat;
+    @include mydis_img;
+   }
+   .mydis .time .right .bubble
+   {
+    background:url('../images/two_icon1.jpg') left no-repeat;
+    @include mydis_img;
+    margin-right:5px;
+   }
+   //拍卖详情展开图
+   .bangbai
+   {
+    background:transparent;
+    border:#f6f6f6;
+    height:40px;
+    margin-top:1px;
+    padding:5px;
+   }
+   .bangbai img
+   {
+     border-radius:13px;
+     margin-left:5px;
+     width:26px;
+   }
+  .bangpai-button
+   {
+    border:0px;
+    background:transparent;
+    font-size:12px;
+    color:#e76049;
+    padding-top:13px;
+   }  
+   .daoju
+   {
+    background:#e76049;
+    height:43px;
+    text-align:center;
+    margin-top:1px;
+   }
+   .star
+   {
+    background-image:url('../images/icon_detail_star.png')!important;
+    background-size:12px 12px;
+    background-repeat:no-repeat;
+    background-position:90px;
+    padding-top:13px;
+    color:$color_fff;
+    height:43px;
+    text-align:center;
+   }
+    .daoju_card
+   {
+    background-image:url('../images/icon_detail_card.png')!important;
+    background-size:auto 28px;
+    background-repeat:no-repeat;
+    background-position: center 5px;
+    padding-top: 35px;
+    color:$color_fff;
+    height:60px;
+    text-align:center;
+   }
+   .detail_right_btn
+   {
+    background:url('../images/icon_detail_right.png') right no-repeat;
+    background-size:auto 12px; 
+    margin-right: 4px;
+   }
+   .mybpai img
+   {
+   float:left;
+   }
+   .mybpai span
+   {
+    margin-left:5px;
+    float: left;
+    margin-top: 5px;
+   }
+   .mypai_time
+   {
+    width:80px;
+    height:30px;
+    background:#e76049;
+    color:$color_fff;
+    position:absolute;
+    top:30px;
+    right:0px;
+    padding:5px 10px;
+   }
+ //一拍到底展开页，商品大图页面
+  .yipai
+  {
+   width:90%;
+   margin:14px auto 0px;
+   height:40px;
+  }
+  @mixin yipai_step
+  {
+   background-size:contain;
+   height:31px;
+   width:31px;
+   margin-left:5px;
+  }
+  .yipai .step1
+  {
+   background:url('../images/yi_icon1.png') no-repeat;
+   @include yipai_step;
+  }
+   .yipai .step2
+  {
+   background:url('../images/yi_icon2.png') no-repeat;
+   @include yipai_step;
+  }
+   .yipai .step3
+  {
+   background:url('../images/yi_icon3.png') no-repeat;
+   @include yipai_step; 
+  }
+   .yipai .step4
+  {
+   background:url('../images/yi_icon4.png') no-repeat;
+   @include yipai_step;
+  }
+    .yipai .step5
+  {
+   background:url('../images/yi_icon5.png') no-repeat;
+   @include yipai_step;
+  }
+  .yipai .link
+   {
+     background:url('../images/yi_link.png') center 14px no-repeat;
+     background-size:auto 5px;
+   }
+   .yipai .success
+   {
+     background:url('../images/yi_success.png') center 12px no-repeat;
+     background-size:auto 10px;
+   }
+   .yi_product
+   {
+    width:97%;
+    margin:auto;
+   }
+   .yi_product .list
+   {
+     width:46%;
+     padding:5px;
+     background:$color_fff;
+     color:$color_fff;
+     font-size:12px;
+     float:left;
+     margin:5px;
+   }
+   .yi_product .list .img
+   {
+     width:100%;
+     margin:0px auto 5px;
+     border:1px solid #efefef;
+     text-align:center;
+   }
+  
+    .yi_product .list .img img
+    {
+      margin:auto;
+    }
+    .yi_product .list  .price
+    {
+     position: relative;
+     top: -139px;
+     background:#e76049;
+     width:80px;
+     height:20px;
+     padding-top:3px;
+     text-align:center;
+     float:right;
+    }
+    .yi_product .list  .zhezhao
+    {
+     background:url('../images/yi_zhezhao.png') repeat-x;
+     width:98.1%;
+     position:relative;
+     height:20px;
+     bottom:46px;
+     text-align:center;
+     padding-top:5px;
+     background-size:container;
+     margin:auto;
+    }
+    .yi_product .list .dis
+    {
+     background:url('../images/yipai_human.png') left no-repeat;
+     background-size:auto 7px;
+     text-indent:12px;
+     color:#666;
+     font-size:10px;
+     line-height:25px;
+    }
+    //私信页
+    .letter_btn
+    {
+     background:#4daf7c;
+     border-radius:3px;
+     color:$color_fff;
+     padding-top:8px;
+    }
+    .letter_btn_me
+    {
+     background:$color_e7;
+     border-radius:3px;
+     color:$color_fff;
+     padding-top:8px;
+     width:80px;
+    }
+    .letterMy
+    {
+     width:100%;
+     margin-top:5px;
+     font-size:13px;
+    }
+    .letterMy .img
+    {
+     float:left;
+     margin:0 5px;
+    }
+    .letterMy .letterleft
+    {
+     background:url('../images/letter-left.png') no-repeat;
+     float:left;
+     margin-top:8px;
+     background-size:6px 12px;
+     width:6px;
+     height:12px;
+    }
+    .letterMy .letter
+    {
+     background:$color_fff;
+     padding:5px;
+     width:60%;
+     border-radius:7px;
+     float:left;
+     margin-left:-1px;
 
-//输入框和按钮
-.w-input-text{
-	border:1px solid #ccc;
-	border-radius:5px;
-}
-.w-input-text .x-input-el{
-	padding:.7em;
-}
-//发表信息的样式
-.w-input-comment{
-	margin:.5em 0 .5em .5em;
-}
-.w-input-comment.x-field{
-	min-height:0;
-}
-.w-input-comment .x-input-el.x-input-text{
-	padding:.4em;
-	min-height:0;
-}
-.x-input-el.w-icon-user{
-	background:url(../images/icon-user.png) no-repeat .7em center;
-	background-size:14px 14px;
-	padding-left:36px;
-}
-.x-input-el.w-icon-password{
-	background:url(../images/icon-password.png) no-repeat .7em center;
-	background-size:10px 18px;
-	padding-left:36px;
-}
-.w-button, .w-button-small{
-	border-radius:5px;
-	background-color:$button-color;
-	height:auto;
-	border:none;
-}
-.w-button-small{
-	border-radius:3px;
-}
-.w-button .x-button-label, .w-button-small .x-button-label{
-	padding:.7em 1em;
-	color:$button-text-color;
-	font-weight:bold;
-}
-.w-button-small .x-button-label{
-	padding:.3em 1em;
-	font-size:$small-font;
-	font-weight:normal;
-}
-.w-button.x-item-disabled .x-button-label, .w-button-small.x-item-disabled .x-button-label{
-	opacity: .6;
-}
-.w-button-logout{
-	background-color:$ios7-red;
-	margin:1em;
-}
-.w-button-logout .x-button-label{
-	text-shadow: 0 1px #da2924;	
-}
-.w-button-text{
-	border:none;
-	background:transparent;
-	padding:0;
-}
-.w-button-text.x-item-disabled{
-	opacity:.5;
-}
-.w-button-text .x-button-label{
-	padding:.4em;
-	color:$text-button-color;
-}
-.w-logo{
-	background:url(../images/logo219.png) no-repeat center center;
-	background-size:110px 110px;
-	margin:20px 0;
-	height:110px;
-}
-.w-fieldset{
-	margin:1em;
-}
-.w-fieldset .x-form-fieldset-inner{
-	border-radius:5px;
-}
-.w-fieldset .w-disclosure-item:last-child{
-	border-bottom:0;
-}
-.w-container, .w-margin{
-	margin:1em;
-}
-.w-toolbar{
-	padding:0 .7em;
-	background:$tabbar-color;
-}
-.w-main-tab .x-tabbar{
-	background:$tabbar-color;
-	border:0;
-}
-.w-main-tab .x-tabbar .x-tab{
-	flex: 1;
-	-webkit-box-flex: 1;
-}
-.w-main-tab .x-tab .x-button-label{
-	color: $tab-text-dark;
-	line-height: 2em;
-}
-.w-main-tab .x-tab .x-badge{
-	line-height:1.5em;
-}
-.w-main-tab .x-tab .x-button-icon{
-	height:1.8em;
-}
-.w-main-tab .x-tab.x-tab-active{
-	background:transparent;
-}
-.w-main-tab .x-tab.x-tab-active .x-button-label{
-	color: $tab-text-light;
-}
-.tab-today{
-	background:url(../images/icon-tab-today.png) no-repeat center bottom;
-	background-size:23px 23px;
-}
-.tab-myauction{
-	background:url(../images/icon-tab-myauction.png) no-repeat center bottom;
-	background-size:23px 23px;
-}
-.tab-circle{
-	background:url(../images/icon-tab-circle.png) no-repeat center bottom;
-	background-size:23px 23px;
-}
-.tab-my{
-	background:url(../images/icon-tab-my.png) no-repeat center bottom;
-	background-size:23px 23px;
-}
+    }
+     .letterYou
+    {
+     width:100%;
+     margin:10px auto;
+     font-size:13px;
+    }
+    .letterYou .img
+    {
+     float:right;
+     margin-right:5px;
+    }
+     .letterYou .letterright
+    {
+     background:url('../images/letter-right.png') no-repeat;
+     float:left;
+     margin-top:8px;
+     background-size:6px 12px;
+     width:6px;
+     height:12px;
+     float:right;
+     margin-right:5px;
+    }
+    .letterYou .letter
+    {
+     background:#4daf7c;
+     color:$color_fff;
+     padding:5px;
+     width:60%;
+     border-radius:7px;
+     float:right;
+     margin-right:-1px;
+    }
+    .letterMy .img img,.letterYou .img img
+    {
+      border-radius:15px;
+    }
 
-.w-main-tab .x-tab.x-tab-active .tab-today{
-	background:url(../images/icon-tab-today-on.png) no-repeat center bottom;
-	background-size:23px 23px;
-}
-.w-main-tab .x-tab.x-tab-active .tab-myauction{
-	background:url(../images/icon-tab-myauction-on.png) no-repeat center bottom;
-	background-size:23px 23px;
-}
-.w-main-tab .x-tab.x-tab-active .tab-circle{
-	background:url(../images/icon-tab-circle-on.png) no-repeat center bottom;
-	background-size:23px 23px;
-}
-.w-main-tab .x-tab.x-tab-active .tab-my{
-	background:url(../images/icon-tab-my-on.png) no-repeat center bottom;
-	background-size:23px 23px;
-}
+    //我的订单
+    .myorder
+    {
+      width:100%;
+      border:1px solid #efefef;
+      background:$color_fff;
+    }
+    .myorder_new
+    {
+      width:100%;
+      border:1px solid #efefef;
+      background:$color_fff;
+    }
+    .orderlist
+    {
+      margin:10px;
+    }
+    .orderlist .left
+    {
+      width:65%;
+      text-align:left;
+      float:left;
+    }
+    .orderlist .left ul
+    {
+     list-style:none;
+     padding:0px;
+     margin:0px;
 
-.w-tab-button.x-button{
-	height:2.9em;
-	margin:0;
-	padding:0;
-}
-.w-tab-button .x-button-label{
-	color: $button-text-color;
-	font-size:.65em;
-}
+    }
+    .orderlist .left ul li
+    {
+      margin-top:5px;
+    }
+    .orderlist .right
+    {
+      width:35%;
+      text-align:right;
+      float:left;
+    }
+    .orderlist .right ul
+    {
+     list-style:none;
+     padding:0px;
+     margin:0px;
 
-.tab-back{
-	background:url(../images/icon-tab-back.png) no-repeat center bottom;
-	background-size:26px 20px;
-	height:1.9em;
-	width:1.8em;
-}
-.tab-menu{
-	background:url(../images/icon-tab-menu.png) no-repeat center bottom;
-	background-size:23px 20px;
-	height:1.9em;
-	width:1.5em;
-}
-//子菜单样式
-.submenu{
-	background:url(../images/submenu-border.png) no-repeat;
-	//background-color:#d8e3cd;
-	background-size:127px 180px;
-	font-weight:bold;
-	width:127px;
-	height:180px;
-	padding:0 18px;
-}
-.submenu .menu-button{
-	height:2.65em;
-	border:0;
-	border-radius:0;
-	border-bottom:1px solid #b2b2b2;
-	padding:0 0 0 24px;
-}
-.submenu .menu-button:last-child{
-	border:0;
-}
-.submenu .menu-button .x-button-label{
-	font-size:1em;
-	text-align:left;
-	color:#666;
-}
-.submenu .today{
-	background:url(../images/submenu_01_on.png) no-repeat left center;
-	background-size:20px 20px;
-}
-.submenu .myauction{
-	background:url(../images/submenu_02_on.png) no-repeat left center;
-	background-size:20px 20px;
-}
-.submenu .circle{
-	background:url(../images/submenu_03_on.png) no-repeat left center;
-	background-size:20px 20px;
-}
-.submenu .my{
-	background:url(../images/submenu_04_on.png) no-repeat left center;
-	background-size:20px 20px;
-}
+    }
+    .orderlist .right ul li
+    {
+      margin-top:10px;
+    }
+    .order_dis
+    {
+     margin:10px;
+     border:1px solid #efefef;
+     background:#fefefe;
+    }
+    .order_dis .left
+    {
+     width:50px;
+     height:50px;
+     float:left;
+     margin:5px;
+    }
+    .order_dis .right
+    {
+     width:75%;
+     float:left;
+     margin:5px;
+     word-break: break-all;
+    }
+    //订单详情页面
+    .shai
+    {
+     background:$color_fff;
+    }
+    .orderdetail_btn
+    {
+     border:0px;
+     border-radius:0px;
+     background:$color_fff;
+     color:$color_e7;
+     margin-top:10px;
+     height:35px;
+     padding-top:10px;
 
-//一些按钮的图标
-.w-toolbar-button{
-	margin:0;
-	padding:0 4px;
-}
-.w-toolbar-button .x-button-label{
-	font-size:.75em;
-	color: $button-text-color;
+    }
+    .orderdetail_btn .left
+    {
+     margin-left:10px;
+    }
+    .orderdetail_btn .right
+    {
+     margin-right:10px;
+     text-align:right;
+    }
+    .orderdetail_btn_e7
+    {
+     border:0px;
+     border-radius:0px;
+     background:$color_e7;
+     color:$color_fff;
+     margin-top:10px;
+     height:35px;
+     padding-top:10px;
 
-}
-.icon-write{
-	background:url(../images/bt-reg-on.png) no-repeat left center;
-	background-size:18px 18px;
-}
-.icon-pay{
-	background:url(../images/bt-pay-on.png) no-repeat left center;
-	background-size:24px 24px;
-}
-.icon-submit{
-	background:url(../images/bt-submit-on.png) no-repeat left center;
-	background-size:24px 24px;
-}
-.icon-share{
-	background:url(../images/bt-share-on.png) no-repeat left center;
-	background-size:22px 22px;
-}
-.icon-address{
-	background:url(../images/bt-addadress-on.png) no-repeat left center;
-	background-size:24px 24px;
-}
-//虚边框的按钮
-.w-box-button{
-	border:2px dashed #ccc;
-	background:transparent;
-	border-radius:4px;
-	min-height:42px;
-	margin:4px;
-}
-.w-box-button .x-button-label{
-	color:#ccc;
-	text-shadow:1px 1px 3px #eee;
-}
-.w-input-fullwidth{
-	padding:.2em 0 .2em 1.5em;
-}
-.w-fieldset-full{
-	margin:1em 0 0 0;
-}
+    }
+    @mixin orderBtnH
+    {
+     background-repeat:no-repeat;
+     background-size:auto 12px;
+     background-position:115px center;
+     margin-top:10px;
+     padding-top:10px;
+     height:35px;
+     border:0px;
+     border-radius:0px;
+   
+     color:$color_fff;
+    }
+    .orderdetail_btn1
+    {  
+     background:$color_e7 url('../images/btn_camera.png');
+     @include orderBtnH;
+    }
+    .orderdetail_btn2
+    {  
+     background:$color_e7 url('../images/star.png');
+     @include orderBtnH;
+    }
+    .orderdetail_btn3
+    {  
+     background:$color_e7 url('../images/cloud.png');
+     @include orderBtnH;
+     background-position:100px center;
+    }
+     .orderdetail_btn4
+    {  
+     background: #fff url("../images/yinlian.jpg");
+     background-repeat: no-repeat;
+     background-size: auto 18px;
+     background-position: 115px center;
+     border: 0px;
+     border-radius: 0px;
+     background-position: 80px center;
+    }
+      .orderdetail_btn5
+    {  
+     background:$color_fff url('../images/zhifubao.jpg');
+     background-repeat: no-repeat;
+     background-size: auto 18px;
+     background-position: 115px center;
+     border: 0px;
+     border-radius: 0px;
+     background-position: 80px center;
+    }
+    .orderdetail_btn6
+    {  
+     background:$color_fff url('../images/score.png');
+     @include orderBtnH;
+     background-position:125px center;
+     color:$color_e7;
+     margin-top:0px;
+    }
+    .orderdetail_btn7
+    {  
+     background:$color_fff url('../images/myjuan.png');
+     @include orderBtnH;
+     color:$color_e7;
+    }
+    .orderdetail_btn8
+    {  
+     background:$color_fff url('../images/mydaoju.png');
+     @include orderBtnH;
+     color:$color_e7;
+    }
+    .orderdetail_btn9
+    {  
+     background:$color_fff url('../images/myscore.png');
+     @include orderBtnH;
+     color:$color_e7;
+    }
+    .orderdetail_title
+    {
+     background:$color_fff;
+     width:100%;
+    }
+    .orderdetail_title .left
+    {
+     float:left;
+     width:50px;
+     margin:10px 0px 5px;
+    }
+     .orderdetail_title .right
+    {
+     float:left;
+     width:70%;
+     margin:10px 0px 5px;
+    }
+    .order_title_btn
+    {
+     border:0px;
+     border-radius:0px;
+     color:#000;
+     text-align:right;
+     padding:15px 0px;
+     width:20px;
+    }
+    .shai_title
+    {
+     color:#000;
+     border-top:1px solid #f6f6f6;
+     margin-top:0px;
+     padding:10px 0px;
+    }
+    .shai_title .title
+    {
+     padding:9px 0px;
+    }
+    .shai_title .x-field .x-input-el
+    {
+     padding: 1px 10px 5px;
+    }
+    .shai_title .x-field-input
+    {
+     height:30px;
+     border:1px solid #d4d4d4;
+     background:#fefefe;
+     border-radius:3px;
+     width:94%;
+     margin:auto;
+    }
+    #ext-textareainput-1
+    {
+     background:#fefefe;
+     border-radius:3px;
+    }
+    .shai_width
+    {
+     width:94%;
+     margin:10px auto;
+    }
+    .shai_btn
+    {
+     background:$color_e7;
+     color:$color_fff;
+     padding:5px;
+     border-radius:5px;
+    }
+    @mixin camera_img
+    {
+      border:1px solid #f6f6f6;
+      height:50px;
+      border-radius:5px;
+      background-repeat:no-repeat;
+      background-position:center center;
+      background-size:auto 18px;
+      margin:5px;
+    }
+    .camera
+    {    
+      background:#efefef url('../images/ordershaic.png');
+      @include camera_img;
+    }
+     .camera_add
+    {    
+      background:#efefef url('../images/ordershai+.png');
+      @include camera_img;
+    }
 
-.is-default{
-	width:1em;
-	background:#8bcf92;
-	color:white;
-	display:-webkit-box;
-	display:flex;
-	-webkit-box-align:center;
-	align-items: center;
-}
-.big-avatar{
-	width:70px;
-	height:70px;
-	background:url(../images/icon-big-avatar.png);
-	background-size:70px 70px;
-
-}
-.camera-layer, .delete-button-layer, .button-layer{
- 	background:rgba(0,0,0,.3);
-}
-.w-button-red{
-	background-color:$ios7-red;
-}
-.w-button-gray{
- 	background-color:#ccc;
-}
-.accept-btn, .pay-btn{
- 	font-size:$small-font;
-	padding:0 10px;
-	border-radius:4px;
-	color:#fff;
-	text-align:center;
-	background:#1fcc31;
-	line-height:40px;
-	height:40px;
-	display:inline-block;
-}
-.accept-text{
- 	line-height: 40px;
-	font-size: .8em;
-	color: #666;
-}
-
-.pay-btn-wrap{
-	height:78px;
-	display:-webkit-box;
-	display:flex;
-	align-items:center;
-	-webkit-box-align:center;
-}
-.pay-btn{
-	display:block;
-}
-//订单成功页面的表格
-.order-info{
- 	margin:1em;
-}
-.order-info .row{
- 	-webkit-box-align:start;
- 	align-items:flex-start;
-}
-.order-info .label{
- 	width:5.5em;
- 	min-width:5.5em;
- 	color:#666;
- 	display:block;
-}
-
-//拍品价格计时器样式
-.n{
- 	margin-left:3px;
- 	width:13px;
- 	height:19px;
- 	display:inline-block;
-}
-.n1{
- 	background:url(../images/1.png) no-repeat left center;
- 	background-size:13px 19px;
-}
-.n2{
- 	background:url(../images/2.png) no-repeat left center;
- 	background-size:13px 19px;
-}
-.n3{
- 	background:url(../images/3.png) no-repeat left center;
- 	background-size:13px 19px;
-}
-.n4{
-	background:url(../images/4.png) no-repeat left center;
-	background-size:13px 19px;
-}
-.n5{
- 	background:url(../images/5.png) no-repeat left center;
- 	background-size:13px 19px;
-}
-.n6{
- 	background:url(../images/6.png) no-repeat left center;
- 	background-size:13px 19px;
-}
-.n7{
- 	background:url(../images/7.png) no-repeat left center;
- 	background-size:13px 19px;
-}
-.n8{
- 	background:url(../images/8.png) no-repeat left center;
- 	background-size:13px 19px;
-}
-.n9{
- 	background:url(../images/9.png) no-repeat left center;
- 	background-size:13px 19px;
-}
-.n0{
- 	background:url(../images/0.png) no-repeat left center;
- 	background-size:13px 19px;
-}
-.ndot{
- 	background:url(../images/dot.png) no-repeat left bottom;
- 	background-size:3px 4px;
- 	width:3px;
-}
-.w-toolbar .w-button-pai{
-	margin-top:-10px;
-	width:57px;
-	height:60px;
-	background:url(../images/bt-pai-1.png) no-repeat left top;
-	background-size:57px 60px;
-}
-.w-toolbar .w-button-pai .mask{
-	width:57px;
-	height:60px;
-	overflow:hidden;
-	background:url(../images/bt-pai-0.png) no-repeat left top;
-	background-size:57px 60px;
-	display:none;
-}
-.w-toolbar{
-	overflow:visible;
-}
-
-//自定义的loadingmask
-.w-loading-mask, .w-loading-mask .x-mask-inner{
-	background:transparent;
-	font-size:.8em;
-}
-.w-loading-mask .x-loading-spinner{
-	font-size:2.2em;
-}
-.w-toast{
-	background:rgba(0,0,0,.8);
-	max-width:90%;
-	min-width:10em;
-	line-height:1.5;
-	font-size:.8em;
-	color:#fff;
-	padding:.8em 1em;
-	border-radius:5px;
-	text-align:center;
-}
-//分享
-.share-layer{
-	background:rgba(230,230,230, 1);
-	padding:0 1em;
-}
-.share-title{
-	text-align:center;
-	padding:12px;
-}
-.w-share-button{
-	border:0;
-	background:transparent;
-	height:auto;
-}
-.w-share-button.x-item-disabled{
-	-webkit-opactiy:.4;
-	opacity:.4;
-}
-.w-share-button .x-button-label{
-	color:#000;
-	font-size:.8em;
-	padding:4px;
-}
-.w-share-button .x-button-icon{
-	width:30px;
-	height:30px;
-}
-.x-button-icon.weibo{
-	background:url(../images/icon-weibo.png) no-repeat center center;
-	background-size:30px 30px;
-}
-.x-button-icon.weixin{
-	background:url(../images/icon-weixin.png) no-repeat center center;
-	background-size:30px 30px;
-}
-.x-button-icon.pyquan{
-	background:url(../images/icon-pyquan.png) no-repeat center center;
-	background-size:30px 30px;
-}
-.w-cancel{
-	border-radius:0;
-	border-top:1px solid #5f7479;
-	margin:12px 0;
-}
-.w-imageviewer .x-img.x-img-background{
-	background-size:contain;
-}
-//拍圈的card展示
-.card{
-	background:#f5f5f5;
-	padding:.3em;
-	display:-webkit-box;
-	display:flex;
-	margin-top:4px;
-}
-.card img{
-	width:40px;
-	height:40px;
-	margin-right:12px;
-}
-.card span{
-	display:block;
-	-webkit-box-flex:1;
-	flex:1;
-}
-.w-brand-info{
-	margin:1em;
-	line-height:1.5;
-	font-size:$normal-font;
-}
-.w-brand-info h3{
-	text-align:center;
-	margin:10px 0;
-}
-.w-brand-info .brand-logo{
-	text-align:center;
-}
-.w-brand-info img{
-	border:1px solid #333;
-}
-.shipment-progress{
-	margin-top:1em;
-}
-.shipment-progress li{
-	padding:.5em 0;
-	line-height:1.5;
-	border-bottom:1px solid #f5f5f5;
-}
-.shipment-progress p{
-	font-size:.8em;
-	color:gray;
-}
-p.coupon-info{
-	line-height:1.5;
-}
-.expire_time{
-	display:block;
-	color:#666;
-	font-size:$small-font;
-}
-//拍品详情的倒计时
-.countdown-bar{
-	height:40px;
-	background:#f0f0f1;
-	display:-webkit-box;
-	display:flex;
-	-webkit-box-align:center;
-	align-items:center;
-	text-align:center;
-	//font-size:0.9em;
-}
-.countdown-bar .round, .countdown-bar .countdown, .countdown-bar .price{
-	-webkit-box-flex:1;
-	flex:1;
-	width:33.33%;
-}
-.countdown-bar .price{
-	line-height:0.8;
-}
-.countdown-bar .countdown{
-	color:#f5f5f6;
-	height:100%;
-	line-height:40px;
-}
-.countdown-bar .oprice{
-	color:#a4acae;
-	text-decoration:line-through;
-	font-size:$small-font;
-}
-.countdown-bar .curprice{
-	color:#ca0936;
-}
-.countdown-bar.not-start .round{
-	color:#99ad85;
-}
-.countdown-bar.not-start .countdown{
-	background:#bbc9ad;
-}
-.countdown-bar.online .round{
-	color:#ca0936;
-}
-.countdown-bar.online .countdown{
-	background:#ca0936;
-}
-.countdown-bar.finish .round{
-	color:#a4acae;
-}
-.countdown-bar.finish .countdown{
-	background:#bfc7c9;
-}
-.countdown-bar.finish .curprice{
-	color:#a4acae;
-}
-.w-tip{
-	background:#fff5cd;
-	color:#c60;
-	font-size:12px;
-	text-align:center;
-	height:30px;
-	line-height:30px;
-}
-.x-badge.w-badge-sdot{
-	width:7px;
-	height:7px;
-	border-radius: 7px;
-	border:none;
-	background:#ed462f;
-	overflow:hidden;
-	font-size:0;
-	min-width:7px;
-	top:2px;
-	left:55%;
-	margin-left:10px;
-}
-
-.x-badge.w-badge-mdot{
-	width: 10px;
-	min-width:10px;
-	height: 10px;
-	border-radius: 10px;
-	border:none;
-	background:#ed462f;
-	overflow: hidden;
-	font-size: 0;
-	right:-4px;
-	top:-4px;
-}
-.w-disclosure-item.no-vpad, .w-disclosure-item.text{
-	padding:0 1em;
-}
-.w-disclosure-item.no-vpad .flex, .w-disclosure-item.text .flex{
-	padding:.7em 0;
-	margin:0;
-}
-.w-disclosure-item.text .x-hasbadge{
-	position:relative;
-	margin-left:.6em;
-	margin-top:-1em;
-}
-//子菜单的小红点
-.submenu .menu-button .w-badge-sdot{
-	top:8px;
-}
-
-.auction-chart{
-	border-bottom:1px solid #ccc;
-	padding-bottom:.7em;
-}
-.auction-chart img{
-	display:block;
-	width:290px;
-	padding:2px;
-	margin:0 auto;
-}
-.sale_pic img{
-	display:block;
-	width:100%;
-	max-width:100%;
-	margin:0 auto .7em auto;
-	//box-shadow:0px 1px 5px #ccc;
-}
-
-//今日的菜单
-.todaymenu{
-	background:rgba(95,116,121, .8);
-	width:12em;
-	border-radius:4px;
-}
-.todaymenu-icon{
-	background:url(../images/arrow-up-trans.png) no-repeat center center;
-	background-size:16px 10px;
-	margin-top:-10px;
-	height:10px;
-}
-.todaymenu-item{
-	padding:.7em;	
-	font-size:.9em;
-	color:#fff;
-}
-.dropdown-title{
-	padding-right:10px;
-	background:url(../images/icon-arrow-down.png) no-repeat right center;
-	background-size:10px 8px;
-}
-.dropdown-title.open{
-	background:url(../images/icon-arrow-up.png) no-repeat right center;
-	background-size:10px 8px;
-}
+    //订单确认
+    .confirm
+    {
+     width:100%;
+     background:$color_fff;
+    
+    }
+    .confirm_w{
+     width:96%;
+     margin:auto;
+     padding:5px 0px;
+    }
+    .confirm_title
+    {
+     width:100%;
+     border:1px solid #efefef;
+     background:#f6f6f6;
+     margin:5px 0px;
+    }
+    .confirm_title .img
+    {
+     float:left;
+     width:50px;
+     padding:5px;
+    }
+     .confirm_title .title
+    {
+     float:left;
+     width:70%;
+     padding:5px;
+     margin-left:5px;
+     word-break: break-all;
+    }
+    .confirm_bottom
+    {
+     margin-top:5px;
+     width:100%;
+     text-align:right;
+    }
+     .confirm_bottom span
+     {
+       color:$color_e7;
+     }
+     .font_weight
+     {
+       font-weight:bold;
+       padding:5px;
+       margin:5px;
+     }
+     .font_size{
+      font-size:12px;
+      padding:5px;
+      margin:5px;
+     }
+     .comfirm_btn
+     {
+      border:0px;
+      border-radius:0px;
+      color:$color_e7;
+      text-align:right;
+      padding:5px;
+      margin:5px;
+     }
+     @mixin paisubtn
+     {
+      border:0px;
+      border-radius:0px;
+      background-size:18px 18px;
+      width:18px;
+      height:18px;
+      margin-top:10px;
+      margin-right:10px;
+     }
+     .comfirm_btn1
+     {
+      background:url('../images/address.png') no-repeat;
+      @include paisubtn;
+     }
+     .comfirm_btn2
+     {
+      background:url('../images/address_active.png') no-repeat;
+      @include paisubtn;
+     }
+    //抢拍成功页面
+    .pai_success
+    {
+     padding-top:6px;
+     margin:1px auto 6px;
+     background:url('../images/pai_success.png') no-repeat;
+     background-size:auto 32px;
+     width:32px;
+     height:32px;
+    }
+    .pai_success_zi
+    {
+     color:$color_e7;
+     margin:5px auto 10px;
+     text-align:center;
+    }
+    //我的粉丝 我的关注
+    .myfen
+    {
+     width:96%;
+     margin:5px auto;
+     background:$color_fff;
+     padding:5px;
+     font-size:13px;
+     border:1px solid #efefef;
+     border-radius:4px;
+    }
+    .myfen ul
+    {
+     list-style:none;
+     padding:0px;
+     margin:0px;
+    }
+    .myfen ul li
+    {
+     width:100%;
+     text-align:center;
+     padding:5px 0px 10px;
+    }
+    .myfen ul li .img
+    {
+     float:left;
+     width:60px;
+    }
+    .myfen ul li .name
+    {
+      font-size:13px;
+      float:left;
+      width:70%;
+      margin-top:11px;
+      text-align:left;
+    }
+    //我的拍券
+    .paijuan
+    {
+     background:#efefef;
+    }
+    .plist
+    {
+    
+     background:$color_fff;
+     display:box;
+     margin-top:8px;
+     width:100%;
+     height:40px;
+     font-size:13px;
+    }
+    @mixin plistImg
+    {
+     background-size:auto 25px;
+     background-position:5px 8px;
+     color:$color_e7;
+     box-flex:1;
+     text-indent:20px;
+     padding-top:14px;
+    }
+    .plist .left
+    {
+     background:url('../images/pai_m5.png') no-repeat;
+     @include plistImg;
+    }
+    .plist .right
+    {
+     box-flex:1;
+     padding:14px;
+    }
+    .plist .left1
+    {
+     background:url('../images/pai_m5.png') no-repeat;
+     @include plistImg;
+    }
+    .plist_shuo
+    {
+     background:$color_fff;
+     margin:10px auto;
+     font-size:12px;
+     padding:10px 30px;
+     color:#555;
+    }
+    .plist_shuo ul
+    {
+     padding:0px;
+     margin:0px;
+     list-style-type:disc;
+    }
+    .plist_shuo ul li
+    {
+     height:20px;
+    }
+    //红色按钮
+    .btn_e7
+    {
+     border:0px;
+     border-radius:4px;
+     background:$color_e7;
+     padding:5px;
+     font-size:13px;
+     color:$color_fff;
+    }
+    //背景颜色
+    .bg_ef{
+    background:#f6f6f6;
+    font-size:14px;
+    }
+    .public_14
+    {
+     font-size:14px;
+    }
+    .icon_button
+    {
+     background:url('../images/icon_button.png') right no-repeat;
+     background-size:auto 10px;
+     height:10px;
+    }
+    .arrow_left
+    {
+     background:url('../images/return_.png') no-repeat;
+     height:18px;
+     background-size:auto 18px;
+     width:11px;
+     margin-left:10px;
+    }
+    .refresh
+    {
+     background:url('../images/reflash.png') no-repeat;     
+     background-size:auto 18px;
+     height:18px;
+     width:38px;
+     background-position:10px center;
+    }
+    .color_e7
+    {
+     color:$color_e7;
+    }

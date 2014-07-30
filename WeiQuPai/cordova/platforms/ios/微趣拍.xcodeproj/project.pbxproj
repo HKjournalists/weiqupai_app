@@ -46,6 +46,7 @@
 		39048E168C734F6188AA1253 /* CDVJpegHeaderWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE480EAA2D040D684EDFB7B /* CDVJpegHeaderWriter.m */; };
 		5AEE5B35173C68D80009041E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AEE5B34173C68D80009041E /* CoreLocation.framework */; };
 		5B1594DD16A7569C00FEF299 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */; };
+		A5C6CF481969975A000E05BC /* NSLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6CF471969975A000E05BC /* NSLogger.m */; };
 		B3FF180385D54C60B3E995B5 /* CDVCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 95963B588F71477D84FC3A16 /* CDVCamera.m */; };
 		FCB0DB33F2164EA888278A45 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B803D6F47E8F434AB223D8C6 /* ImageIO.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -134,6 +135,8 @@
 		8D1107310486CEB800E47090 /* 微趣拍-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "微趣拍-Info.plist"; path = "../微趣拍-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		95963B588F71477D84FC3A16 /* CDVCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVCamera.m; path = org.apache.cordova.camera/CDVCamera.m; sourceTree = "<group>"; };
 		9C18AF085F1F44E4B6EEBC60 /* CDVWechat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVWechat.m; path = xu.li.cordova.wechat/CDVWechat.m; sourceTree = "<group>"; };
+		A5C6CF461969975A000E05BC /* NSLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSLogger.h; path = com.pfafman.nsLogger/NSLogger.h; sourceTree = "<group>"; };
+		A5C6CF471969975A000E05BC /* NSLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSLogger.m; path = com.pfafman.nsLogger/NSLogger.m; sourceTree = "<group>"; };
 		B803D6F47E8F434AB223D8C6 /* ImageIO.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		B8DAC783CF624E69805AF132 /* CDVInAppBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVInAppBrowser.m; path = org.apache.cordova.inappbrowser/CDVInAppBrowser.m; sourceTree = "<group>"; };
 		C59F6656FFCA4D8C8133CADC /* CDVWechat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVWechat.h; path = xu.li.cordova.wechat/CDVWechat.h; sourceTree = "<group>"; };
@@ -312,6 +315,8 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				A5C6CF461969975A000E05BC /* NSLogger.h */,
+				A5C6CF471969975A000E05BC /* NSLogger.m */,
 				18F014CF18EF143A0089C0D2 /* cordova.bpush */,
 				95963B588F71477D84FC3A16 /* CDVCamera.m */,
 				7CE480EAA2D040D684EDFB7B /* CDVJpegHeaderWriter.m */,
@@ -514,6 +519,7 @@
 				18F014E918EF22200089C0D2 /* OpenUDID.m in Sources */,
 				18F014D218EF143A0089C0D2 /* CDVBPush.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
+				A5C6CF481969975A000E05BC /* NSLogger.m in Sources */,
 				18F014E818EF22200089C0D2 /* JSONKit.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
 				B3FF180385D54C60B3E995B5 /* CDVCamera.m in Sources */,

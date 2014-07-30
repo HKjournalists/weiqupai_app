@@ -2,10 +2,10 @@ Ext.define('WeiQuPai.view.Main', {
     extend: 'Ext.navigation.View',
     xtype: 'main',
     requires: [
-        'WeiQuPai.view.MainTab', 'WeiQuPai.view.Login', 'WeiQuPai.view.Register'
+        'WeiQuPai.view.MainCard', 'WeiQuPai.view.Sidebar'
     ],
     config: {
-        layout : {
+        layout: {
             type: 'card',
             animation: 'cover'
         },
@@ -15,50 +15,56 @@ Ext.define('WeiQuPai.view.Main', {
     isAnimating: false,
 
     //重写push/pop方法，修复多次点击会重复push/pop的问题
-    push: function(){
-        if(this.isAnimating) return;
+    push: function() {
+        if (this.isAnimating) return;
         return this.callParent(arguments);
     },
 
-    pop: function(){
-        if(this.isAnimating) return;
+    pop: function() {
+        if (this.isAnimating) return;
         prev = this.callParent(arguments);
         //pop不能触发tab里view的activate事件，需要手动触发一下
-        if(prev && prev.isXType('maintab')){
+        if (prev && prev.isXType('maintab')) {
             prev.getActiveItem().fireEvent('activate');
         }
         return prev;
     },
 
     //初始化navigation,设置动画执行的标识
-    initialize: function(){
+    initialize: function() {
         this.getLayout().setAnimation(Ext.os.is.iOS ? 'cover' : null);
         this.callParent(arguments);
         this.addAnimation();
-        this.add(Ext.create('WeiQuPai.view.MainTab'));
+        //保留引用
+        WeiQuPai.mainCard = Ext.create('WeiQuPai.view.MainCard');
+        WeiQuPai.sidebar = Ext.create('WeiQuPai.view.Sidebar', {
+            indicator: false
+        });
+        this.add(WeiQuPai.mainCard);
+        Ext.Viewport.add(WeiQuPai.sidebar);
         //android不触发painted事件，不知道为什么,fuck!
-        if(Ext.os.is.android){
-            setTimeout(function(){
+        if (Ext.os.is.android) {
+            setTimeout(function() {
                 WeiQuPai.Notify.checkMQ();
             }, 1000);
-        }else{
+        } else {
             this.on('painted', this.onPainted);
         }
     },
 
     //启动时检查消息要放到navaigationView初始化完成
-    onPainted: function(){
+    onPainted: function() {
         WeiQuPai.Notify.checkMQ();
     },
 
-    addAnimation: function(){
+    addAnimation: function() {
         var me = this;
         var ani = this.getLayout().getAnimation();
-        if(!ani.id) return;
-        ani.getInAnimation().on('animationstart', function(){
+        if (!ani.id) return;
+        ani.getInAnimation().on('animationstart', function() {
             me.isAnimating = true;
         });
-        ani.on('animationend', function(){
+        ani.on('animationend', function() {
             me.isAnimating = false;
         });
     }

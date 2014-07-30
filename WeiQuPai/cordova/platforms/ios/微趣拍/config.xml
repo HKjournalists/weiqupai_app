@@ -36,6 +36,9 @@
     <feature name="InAppBrowser">
         <param name="ios-package" value="CDVInAppBrowser" />
     </feature>
+    <feature name="NSLogger">
+        <param name="ios-package" value="NSLogger" />
+    </feature>
     <name>微趣拍</name>
     <description>
         微趣拍

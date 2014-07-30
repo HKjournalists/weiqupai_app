@@ -1,46 +1,43 @@
 Ext.define('WeiQuPai.view.MyAuction', {
-	extend: 'Ext.dataview.List',
-	xtype: 'myauction',
-	requires:['WeiQuPai.store.MyAuction', 'WeiQuPai.view.MyAuctionDetail', 'WeiQuPai.view.LoginTip'],
-	config: {
+    extend: 'Ext.dataview.List',
+    xtype: 'myauction',
+    requires: ['WeiQuPai.store.MyAuction', 'WeiQuPai.view.MyOrderDetail', 'WeiQuPai.view.LoginTip'],
+    config: {
         loadingText: null,
-        disableSelection : true,
+        disableSelection: true,
         store: 'MyAuction',
-		itemTpl: new Ext.XTemplate(
+        itemTpl: new Ext.XTemplate(
             '<div class="myauction-row">',
             '<div class="myauction-img"><img src="{[this.getCover(values.pic_cover)]}"/><span class="x-badge"></span></div>',
             '<div class="info">',
-                '<h2>{title}</h2>',
-                '<p>成交价<span class="fbig">￥{price}</span>',
-                '<tpl if="rank != -1">',
-                '<p>此价格击败了<span class="fbig">{rank}%</span>的拍友</p>',
-                '</tpl>',
-                '<p>{ctime}</p>',
+            '<h2>{title}</h2>',
+            '<p>成交价<span class="fbig">￥{price}</span>',
+            '<tpl if="rank != -1">',
+            '<p>此价格击败了<span class="fbig">{rank}%</span>的拍友</p>',
+            '</tpl>',
+            '<p>{ctime}</p>',
             '</div>',
             '<tpl if="this.notPay(status)">',
             '<div class="pay-btn-wrap"><div class="pay-btn">去支付</div></div>',
-            '</tpl>',
-            {
-                notPay: function(status){
+            '</tpl>', {
+                notPay: function(status) {
                     return status == WeiQuPai.Config.orderStatus.STATUS_TOPAY;
                 },
-                getCover: function(cover){
+                getCover: function(cover) {
                     return WeiQuPai.Util.getImagePath(cover, '290');
                 }
             }
         ),
-        items: [
-            {
-                xtype: 'titlebar',
-                title: '已拍',
-                docked: 'top',
-                cls: 'w-title'
-            }
-        ]
+        items: [{
+            xtype: 'titlebar',
+            title: '已拍',
+            docked: 'top',
+            cls: 'w-title'
+        }]
 
     },
 
-    initialize: function(){
+    initialize: function() {
         this.callParent(arguments);
 
         this.msgbox = WeiQuPai.Util.msgbox('您还没有拍到任何宝贝');
@@ -51,35 +48,35 @@ Ext.define('WeiQuPai.view.MyAuction', {
 
         this.on('activate', this.loadData, this);
 
-        this.onBefore('itemtap', function(list, index, dataItem, record, e){
-            if(e.target.className == 'pay-btn'){
+        this.onBefore('itemtap', function(list, index, dataItem, record, e) {
+            if (e.target.className == 'pay-btn') {
                 this.fireEvent('gopay', list, index, dataItem, record, e);
                 return false;
             }
         }, this);
     },
 
-    setBadge: function(orderId){
+    setBadge: function(orderId) {
         var item = this.getItemAt(this.getStore().indexOfId(orderId));
-        if(!item) return;
+        if (!item) return;
         var badgeEl = item.element.down('.x-badge');
         badgeEl.addCls('w-badge-mdot');
         badgeEl.parent().addCls('x-hasbadge');
         badgeEl.show();
     },
 
-    clearBadge: function(orderId){
+    clearBadge: function(orderId) {
         var item = this.getItemAt(this.getStore().indexOfId(orderId));
-        if(!item) return;
+        if (!item) return;
         var badgeEl = item.element.down('.x-badge');
         badgeEl.removeCls('w-badge-mdot');
         badgeEl.parent().removeCls('x-hasbadge');
         badgeEl.hide();
     },
 
-    loadData: function(){
+    loadData: function() {
         var user = WeiQuPai.Cache.get('currentUser');
-        if(!user){
+        if (!user) {
             this.getStore().removeAll();
             this.msgbox.hide();
             this.loginTip.show();
@@ -92,17 +89,17 @@ Ext.define('WeiQuPai.view.MyAuction', {
         var store = this.getStore();
         //加载数据
         store.getProxy().setExtraParam('token', user.token);
-        store.load(function(records, operation, success){
-            if(!success){
+        store.load(function(records, operation, success) {
+            if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');
                 return false;
             }
-            if(records.length == 0){
+            if (records.length == 0) {
                 this.msgbox.show();
                 return;
             }
             //登录超时
-            if(!WeiQuPai.Util.invalidToken(records[0].raw)){
+            if (!WeiQuPai.Util.invalidToken(records[0].raw)) {
                 store.removeAll();
                 return false;
             }

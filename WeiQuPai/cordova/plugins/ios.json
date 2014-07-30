@@ -61,6 +61,20 @@
                         {
                             "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"NSLogger\"><param name=\"ios-package\" value=\"NSLogger\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "*-Info.plist": {
+                "parents": {
+                    "CFBundleURLTypes": [
+                        {
+                            "xml": "<array><dict><key>CFBundleURLSchemes</key><array><string>vqupai</string></array></dict></array>",
+                            "count": 1
                         }
                     ]
                 }
@@ -81,6 +95,13 @@
             "PACKAGE_NAME": "com.vqupai.app"
         },
         "org.apache.cordova.inappbrowser": {
+            "PACKAGE_NAME": "com.vqupai.app"
+        },
+        "nl.x-services.plugins.launchmyapp": {
+            "URL_SCHEME": "vqupai",
+            "PACKAGE_NAME": "com.vqupai.app"
+        },
+        "com.pfafman.nsLogger": {
             "PACKAGE_NAME": "com.vqupai.app"
         }
     },

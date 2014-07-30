@@ -15,6 +15,24 @@
     </style>
     <!-- The line below must be kept intact for Sencha Command to build your application -->
     <script id="microloader" type="text/javascript" src=".sencha/app/microloader/development.js"></script>
+    <script type="text/javascript">
+    var i= 0;
+    //自定义url的回调
+    function handleOpenURL(url) {
+        window.openUrlTimer && clearTimeout(window.openUrlTimer);
+        if (!window.WeiQuPai || !window.Ext || !window.Ext.Viewport || !Ext.Viewport.down('main')) {
+            window.openUrlTimer = setTimeout(function() {
+                handleOpenURL(url);
+            }, 20);
+            return;
+        }
+        window.openUrlTimer = null;
+        //vqupai://xxxx
+        var segment = url.split("://");
+        if (segment[0] != 'vqupai') return;
+        WeiQuPai.app.getHistory().fireEvent('change', segment[1]);
+    }
+    </script>
 </head>
 <body>
 </body>

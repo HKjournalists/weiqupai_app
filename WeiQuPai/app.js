@@ -14,13 +14,13 @@ Ext.application({
     name: 'WeiQuPai',
 
     requires: [
-        'Ext.MessageBox','WeiQuPai.Config', 'WeiQuPai.Util', 'WeiQuPai.Notify', 'WeiQuPai.Cache', 'WeiQuPai.plugin.ListPaging', 
+        'Ext.MessageBox', 'WeiQuPai.Config', 'WeiQuPai.Util', 'WeiQuPai.Notify', 'WeiQuPai.Cache', 'WeiQuPai.plugin.ListPaging',
         'WeiQuPai.plugin.PullRefresh', 'WeiQuPai.plugin.LoadMask', 'WeiQuPai.view.StartupScreen', 'WeiQuPai.view.SplashScreen',
-        'WeiQuPai.view.WebPage', 'Ext.Anim'
+        'WeiQuPai.view.WebPage', 'Ext.Anim', 'WeiQuPai.view.TitleBar'
     ],
 
     controllers: [
-        'Main', 'Today', 'MyAuction', 'MyAuctionDetail','ItemDetail','Order', 'ShowOrder', 'Circle', 'ShowUser',
+        'Main', 'Today', 'MyAuction', 'MyAuctionDetail', 'ItemDetail', 'Order', 'ShowOrder', 'Circle', 'ShowUser',
         'My', 'Setting', 'MyFriend', 'MyConsignee', 'Private', 'NewMessage', 'Login', 'Register', 'Profile', 'CameraLayer',
         'NewFriend', 'Routes', 'SpecialSale'
     ],
@@ -49,7 +49,7 @@ Ext.application({
     },
 
     startupScreen: [
-        'resources/images/splash1.png', 
+        'resources/images/splash1.png',
         'resources/images/splash2.png'
     ],
 
@@ -60,6 +60,8 @@ Ext.application({
         var ver = WeiQuPai.Config.version;
         var flag = WeiQuPai.Cache.get('appver');
         this.firstLaunch = !flag || flag != ver;
+
+        //this.catchError();
 
         this.hideSplash();
 
@@ -79,7 +81,7 @@ Ext.application({
         this.initMsgBox();
 
         //fix ios7 statusbar overlay
-        if(Ext.os.is.ios && Ext.os.version.major >= 7){
+        if (Ext.os.is.ios && Ext.os.version.major >= 7) {
             document.body.className = 'ios7';
         }
 
@@ -88,15 +90,15 @@ Ext.application({
 
 
         //startup screen
-        if(this.firstLaunch){
+        if (this.firstLaunch) {
             WeiQuPai.Cache.set('appver', ver);
-            var view = Ext.create('WeiQuPai.view.StartupScreen'); 
+            var view = Ext.create('WeiQuPai.view.StartupScreen');
             view.setPicData(this.startupScreen);
             Ext.Viewport.add(view);
             view.show();
         }
-
-        Ext.Viewport.add(Ext.create('WeiQuPai.view.Main'));
+        WeiQuPai.navigator = Ext.create('WeiQuPai.view.Main');
+        Ext.Viewport.add(WeiQuPai.navigator);
 
     },
 
@@ -110,30 +112,58 @@ Ext.application({
                 }
             }
         );
-    }, 
+    },
 
-    reportVersion: function(){
+    reportVersion: function() {
         var user = WeiQuPai.Cache.get('currentUser');
         var uid = user && user.push_user_id || 0;
         var img = new Image;
         var src = "http://www.vqupai.com/ver/i.gif?ver=" + WeiQuPai.Config.version + '&market=' + WeiQuPai.Config.market;
         src += '&os=' + Ext.os.name.toLowerCase() + '&osver=' + Ext.os.version.version;
-        if(uid) src += "&push_user_id=" + uid;
+        if (uid) src += "&push_user_id=" + uid;
 
-        if(this.firstLaunch) src += "&first=1";
+        if (this.firstLaunch) src += "&first=1";
         img.src = src;
     },
 
-    hideSplash: function(){
-        setTimeout(function(){
+    catchError: function() {
+        window.onerror = function(msg, url, line, column, err) {
+            var data = {};
+            data['msg'] = msg;
+            data['line'] = line;
+            if (column) {
+                data['column'] = column;
+            }
+            if (err) {
+                data['stack'] = err.stack;
+            }
+            var user = WeiQuPai.Cache.get('currentUser');
+            if (user) data['u'] = user.uname;
+            data['dsp'] = screen.width + 'x' + screen.height;
+            data['ver'] = WeiQuPai.Config.version;
+            data['os'] = Ext.os.name.toLowerCase();
+            data['osver'] = Ext.os.version.version;
+            data['market'] = WeiQuPai.Config.market;
+            var str = '';
+            for (i in data) {
+                str += '&' + i + '=' + encodeURIComponent(data[i])
+            }
+            var img = new Image;
+            img.src = 'http://www.vqupai.com/ver/err.gif?' + str.substr(1);
+            return true;
+        }
+    },
+
+    hideSplash: function() {
+        setTimeout(function() {
             navigator.splashscreen && navigator.splashscreen.hide();
         }, 1000);
     },
 
-    handleBackButton: function(){
-        if(!Ext.os.is.android) return;
-        document.addEventListener('backbutton', function(e){
-            if(WeiQuPai.lastView){
+    handleBackButton: function() {
+        if (!Ext.os.is.android) return;
+        document.addEventListener('backbutton', function(e) {
+            if (WeiQuPai.lastView) {
                 WeiQuPai.lastView.hide();
                 delete WeiQuPai.lastView;
                 return;
@@ -143,12 +173,12 @@ Ext.application({
         }, false);
     },
 
-    handlePause: function(){
-        
+    handlePause: function() {
+
     },
 
-    handleResume: function(){
-        document.addEventListener('resume', function(){
+    handleResume: function() {
+        document.addEventListener('resume', function() {
             //检查消息
             WeiQuPai.Notify.checkMQ();
 
@@ -159,63 +189,86 @@ Ext.application({
             var today = mainTab.down('today');
             var detail = main.down('itemdetail');
             var special = main.down('specialsale');
-            if(main.getActiveItem() == detail){
+            if (main.getActiveItem() == detail) {
                 detail.softRefresh();
                 return;
             }
-            if(main.getActiveItem() == special){
+            if (main.getActiveItem() == special) {
                 special.fireEvent('activate');
                 return;
             }
-            if(mainTab.getActiveItem() == today){
+            if (mainTab.getActiveItem() == today) {
                 today.fireEvent('activate');
                 return;
             }
         }, false);
     },
 
-    handlePostMessage: function(){
-        window.addEventListener('message', function(e){
-            if(!e.data) return;
+    handlePostMessage: function() {
+        window.addEventListener('message', function(e) {
+            if (!e.data) return;
             //对象的处理逻辑
-            if(Ext.isObject(e.data)){
+            if (Ext.isObject(e.data)) {
                 var action = e.data['action'];
                 var controller = WeiQuPai.app.getController('Routes');
                 controller[action] && controller[action](e.data);
-                return;                
+                return;
             }
             //sencha自己的message不响应
-            if(e.data.substr(0, 3) == 'Ext') return;
-            //如果hash一样，android上不能发生跳转,需要手动触发
-            if(location.hash.substr(1) == e.data){
-                WeiQuPai.app.getHistory().fireEvent('change', e.data); 
-            }else{
-                location.hash = e.data;
-            }
+            if (e.data.substr(0, 3) == 'Ext') return;
+            WeiQuPai.app.getHistory().fireEvent('change', e.data);
         }, false);
     },
 
     //修改messagebox的文字
-    initMsgBox: function(){
+    initMsgBox: function() {
         var MB = Ext.MessageBox;
         Ext.apply(Ext.MessageBox, {
-            OK    : {text: '确定', itemId: 'ok',  ui: 'action'},
-            YES   : {text: '是', itemId: 'yes', ui: 'action'},
-            NO    : {text: '否', itemId: 'no'},
-            CANCEL: {text: '取消', itemId: 'cancel'},
-            OKCANCEL: [
-                {text: '取消', itemId: 'cancel'},
-                {text: '确定', itemId: 'ok',  ui : 'action'}
-            ],
-            YESNOCANCEL: [
-                {text: '取消', itemId: 'cancel'},
-                {text: '否', itemId: 'no'},
-                {text: '是', itemId: 'yes', ui: 'action'}
-            ],
-            YESNO: [
-                {text: '否',  itemId: 'no'},
-                {text: '是', itemId: 'yes', ui: 'action'}
-            ]
+            OK: {
+                text: '确定',
+                itemId: 'ok',
+                ui: 'action'
+            },
+            YES: {
+                text: '是',
+                itemId: 'yes',
+                ui: 'action'
+            },
+            NO: {
+                text: '否',
+                itemId: 'no'
+            },
+            CANCEL: {
+                text: '取消',
+                itemId: 'cancel'
+            },
+            OKCANCEL: [{
+                text: '取消',
+                itemId: 'cancel'
+            }, {
+                text: '确定',
+                itemId: 'ok',
+                ui: 'action'
+            }],
+            YESNOCANCEL: [{
+                text: '取消',
+                itemId: 'cancel'
+            }, {
+                text: '否',
+                itemId: 'no'
+            }, {
+                text: '是',
+                itemId: 'yes',
+                ui: 'action'
+            }],
+            YESNO: [{
+                text: '否',
+                itemId: 'no'
+            }, {
+                text: '是',
+                itemId: 'yes',
+                ui: 'action'
+            }]
         });
     }
 });

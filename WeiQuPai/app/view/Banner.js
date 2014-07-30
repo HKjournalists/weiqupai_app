@@ -1,73 +1,87 @@
 Ext.define('WeiQuPai.view.Banner', {
-	extend: 'Ext.carousel.Carousel',
-	xtype: 'banner',
-	config: {
-		paramType: 'index',
-		direction: 'horizontal',
-		cls: 'banner',
-		directionLock: true,
-		indicator: false
-	},
-	timer: null,
+    extend: 'Ext.carousel.Carousel',
+    xtype: 'banner',
+    config: {
+        paramType: 'index',
+        direction: 'horizontal',
+        style: 'height:132px;background-size:100% auto;',
+        directionLock: true,
+        indicator: true
+    },
+    timer: null,
 
-	updateBanner : function(){
-		var store = Ext.getStore('Banner');
-		store.removeAll();
-		store.getProxy().setExtraParam('type', this.getParamType());
-		store.load(this.initData, this);
-	},
+    bannerTpl: new Ext.XTemplate(
+        '<div class="banner">',
+        '<div class="price">',
+        '<span class="color_e7">',
+        '{auction.curr_price}元',
+        '</span>',
+        '</div>',
+        '</div>'
+    ),
 
-	initData: function(records, operation, success){
-		if(!success || records.length == 0){
-			this.hide();
-			return;
-		}
-		this.show();
-		this.stopTimer();
-		this.removeAll(true);
-		for(var i=0; i<records.length; i++){
-			var img = Ext.create('Ext.Img', {
-				src: WeiQuPai.Config.host + records[i].get('pic_url'),
-				cls: 'banner-item',
-				data: records[i].data,
-			});
-			img.on('tap', this.doImageTap, this);
-			this.add(img);
-		}
-		this.setActiveItem(0);
-		this.startTimer();
-	},
+    //更新爆款商品的价格
+    updatePrice: function(idx, price) {
+        var item = this.query('img')[idx];
+        var data = item.getData();
+        data['auction'].curr_price = price;
+        item.setData(data);
+    },
 
-	startTimer: function(){
-		var self = this;
-		this.timer = setInterval(function(){
-			if(self.getActiveIndex() == self.getMaxItemIndex()){
-				self.setActiveItem(0);
-				return;
-			}
-			self.next();
-		}, 5000);
-	},
+    updateBanner: function(data) {
+        this.stopTimer();
+        this.removeAll(true);
+        for (var i = 0; i < data.length; i++) {
+            var img = Ext.create('Ext.Img', {
+                src: WeiQuPai.Util.getImagePath(data[i].pic_url)
+            });
+            if (data[i].auction) {
+                img.setSrc(WeiQuPai.Util.getImagePath(data[i].auction.pic_cover));
+                img.setTpl(this.bannerTpl);
+            }
+            img.setData(data[i]);
+            img.on('tap', this.doImageTap, this);
+            this.add(img);
+        }
+        this.setActiveItem(0);
+        this.startTimer();
+    },
 
-	stopTimer: function(){
-		if(this.timer){
-			clearInterval(this.timer);
-			this.timer = null;
-		}
-	},
+    startTimer: function() {
+        var self = this;
+        this.timer = setInterval(function() {
+            if (self.getActiveIndex() == self.getMaxItemIndex()) {
+                self.setActiveItem(0);
+                return;
+            }
+            self.next();
+        }, 5000);
+    },
 
-	doImageTap: function(img){
-		var data = img.getData();
-		if(!data.link) return;
-		if(data.type == 1){
-			window.open(data.link, '_system');
-		}else{
-			var view = Ext.create('WeiQuPai.view.WebPage');
-			console.log(data);
-			view.setHref(data.link);
-			view.setReloadOnBack(true);
-			view.setTitle(data.title || '微趣拍');
-			Ext.Viewport.down('main').push(view);
-		}
-	}
+    stopTimer: function() {
+        if (this.timer) {
+            clearInterval(this.timer);
+            this.timer = null;
+        }
+    },
+
+    doImageTap: function(img) {
+        var data = img.getData();
+        if (data.type == 3) {
+            var detailView = Ext.create('WeiQuPai.view.ItemDetail');
+            detailView.setAuctionId(data.auction.id);
+            Ext.Viewport.down('main').push(detailView);
+            return;
+        }
+        if (!data.link) return;
+        if (data.type == 1) {
+            window.open(data.link, '_system');
+            return;
+        }
+        var view = Ext.create('WeiQuPai.view.WebPage');
+        view.setHref(data.link);
+        view.setReloadOnBack(true);
+        view.setTitle(data.title || '微趣拍');
+        Ext.Viewport.down('main').push(view);
+    }
 });

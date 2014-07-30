@@ -1,158 +1,243 @@
 Ext.define('WeiQuPai.view.Today', {
-	extend: 'Ext.dataview.List',
-	xtype: 'today',
-	requires: ['WeiQuPai.view.Banner', 'WeiQuPai.view.ItemDetail', 'WeiQuPai.view.SpecialSale', 'WeiQuPai.view.TodayMenu'],
-	config:{
-		plugins: [
-			{
-				type: 'wpullrefresh',
-				lastUpdatedText: '上次刷新：',
-				lastUpdatedDateFormat: 'H点i分',
-				loadingText: '加载中...',
-				pullText: '下拉刷新',
-				releaseText: '释放立即刷新',
-				loadedText: '下拉刷新'
-			}
-		],
-		loadingText: null,
-		store: 'Auction',
-        itemCls: 'today-item-row',
-        disableSelection : true,
+    extend: 'Ext.dataview.List',
+    xtype: 'today',
+    requires: ['WeiQuPai.view.Banner', 'WeiQuPai.view.ItemDetail', 'WeiQuPai.view.SpecialSale'],
+    config: {
+        loadingText: null,
+        store: 'Auction',
+        cls: 'todaylist',
+        style: 'background:#f6f6f6;',
+        disableSelection: true,
+        scrollToTopOnRefresh: false,
+        plugins: [{
+            type: 'wpullrefresh',
+            lastUpdatedText: '上次刷新：',
+            lastUpdatedDateFormat: 'H点i分',
+            loadingText: '加载中...',
+            pullText: '下拉刷新',
+            releaseText: '释放立即刷新',
+            loadedText: '下拉刷新',
+            refreshFn: 'fetchLastest',
+            scrollerAutoRefresh: true
+        }],
         itemTpl: new Ext.XTemplate(
-        	'<p class="item-img"><img src="{[this.getCover(values.pic_cover)]}"/></p>',
-            '<h2>{title}</h2>',
-            '<p class="{[this.statusCss(values.status)]}"><span class="status">{status_text}</span><span class="price-container"><span class="market-price">原价 {oprice}</span> <span class="price">{[this.displayPrice(values)]}</span></span></p>',
-            {
-                statusCss: function(status){
-                    var css = {};
-                    css[WeiQuPai.Config.auctionStatus.STATUS_NOT_START] = 'not-start';
-                    css[WeiQuPai.Config.auctionStatus.STATUS_ONLINE] = 'online';
-                    css[WeiQuPai.Config.auctionStatus.STATUS_FINISH] = 'finish';
-                    return css[status];
+            '<div class="today">',
+
+            '<div class="left">',
+            '<div class="prod">',
+            '<img src="{[this.getCover(values.pic_cover)]}" width="100">',
+            '</div>',
+            '</div>',
+
+            '<div class="right">',
+            '<div class="title">',
+            '{title}',
+            '</div>',
+
+            '<div class="price">',
+            '<span class="priceNew">',
+            '{[this.displayPrice(values)]}',
+            '<img src="{[this.statusImg(values.status)]}" width="32">',
+            '</span>',
+            '<div class="{[this.getLikeCss(values)]}"></div>',
+            '</div>',
+
+            '<div class="pinglun">',
+            '<div class="product_comment">{item_stat.comment_num}</div>',
+            '<div class="product_like">{item_stat.like_num}</div>',
+            '</div>',
+
+            '</div>',
+            '</div>', {
+                statusImg: function(status) {
+                    var img = [];
+                    img[WeiQuPai.Config.auctionStatus.STATUS_NOT_START] = '';
+                    img[WeiQuPai.Config.auctionStatus.STATUS_ONLINE] = 'resources/images/rpz.png';
+                    img[WeiQuPai.Config.auctionStatus.STATUS_FINISH] = 'resources/images/yjs.png';
+                    return img[status];
                 },
 
-                getCover: function(cover){
+                getCover: function(cover) {
                     return WeiQuPai.Util.getImagePath(cover, '290');
                 },
+                getLikeCss: function(values) {
+                    return WeiQuPai.Util.hasCache('like', values.item_id) ? 'prop' : 'prop2';
+                },
 
-            	displayPrice: function(values){
-            		var auctions = WeiQuPai.Cache.get('auctions');
-            		if(auctions && auctions.indexOf(values.id) != -1){
-            			return '已拍';
-            		}
-            		return '￥' + values.curr_price;
-            	}
-            }
-        ),
-        items: [
-        	{
-                xtype: 'titlebar',
-                title: '今日',
-                docked: 'top',
-                cls: 'w-title',
+                displayPrice: function(values) {
+                    var auctions = WeiQuPai.Cache.get('auctions');
+                    if (auctions && auctions.indexOf(values.id) != -1) {
+                        return '已拍';
+                    }
+                    return '￥' + values.curr_price;
+                }
+            }),
+        items: [{
+            xtype: 'vtitlebar',
+            title: '微趣拍',
+            docked: 'top',
+            items: [{
+                iconCls: 'user',
+                action: 'ucenter'
+            }, {
+                align: 'right',
+                iconCls: 'list',
+                action: 'list'
+            }]
+        }, {
+            xtype: 'banner',
+            scrollDock: 'top',
+        }, {
+            xtype: 'container',
+            scrollDock: 'top',
+            layout: 'hbox',
+            items: [{
+                xtype: 'button',
+                baseCls: 'btn1',
+                flex: 1
+
+            }, {
+
+                xtype: 'button',
+                baseCls: 'btn2',
+                flex: 1
+
+            }]
+        }, {
+            xtype: 'container',
+            scrollDock: 'top',
+            layout: 'hbox',
+            items: [{
+
+                xtype: 'button',
+                baseCls: 'btn3',
+                flex: 1
+
+            }, {
+
+                xtype: 'button',
+                baseCls: 'btn4',
+                flex: 1
+
+            }]
+        }, {
+            xtype: 'container',
+            itemId: 'specialList',
+            scrollDock: 'top',
+            layout: {
+                type: 'hbox'
             },
-	        {
-	            xtype: 'banner',
-	        	scrollDock: 'top'
-	        }
-        ]
-	},
+            tpl: new Ext.XTemplate(
+                '<div class="special">',
+                '<tpl for=".">',
+                '<div class="list-product">',
+                '<img src="{[WeiQuPai.Util.getImagePath(values.pic_url)]}" width="60"/>',
+                '<p>{title}</p>',
+                '</div>',
+                '</tpl>',
+                '</div>'
+            )
+        }, {
+            xtype: 'container',
+            html: '今日精选',
+            scrollDock: 'top',
+            cls: 'todayTitle'
+        }]
+    },
 
     firstLoad: true,
+    todayData: null,
 
-	initialize: function(){
-		this.callParent(arguments);
+    initialize: function() {
+        this.callParent(arguments);
         this.loadData();
         this.on('activate', this.onActivate, this);
         this.on('hide', this.onHide, this);
-   	}, 
+        this.onBefore('itemtap', this.bindEvent, this);
+    },
 
-   	loadData: function(){
+    bindEvent: function(list, index, dataItem, record, e) {
+        var me = this;
+        if (e.target.className == 'pro') {
+            me.fireEvent('liketap', me, index, record);
+            return false;
+        }
+        if (e.target.className == 'prop2') {
+            var uid = e.target.getAttribute('uid');
+            me.fireEvent('disliketap', me, index, record);
+            return false;
+        }
+    },
+
+    loadData: function(callback) {
         var user = WeiQuPai.Cache.get('currentUser');
-        this.getStore().getProxy().setExtraParam('token', user && user.token || '');
-        this.getStore().load(function(data, operation, success){
-            if(!success){
-                WeiQuPai.Util.toast('数据加载失败');
-            }
-        }, this);
-   	},
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/today';
+        if (user) {
+            url += '&token=' + user.token;
+        }
+        var me = this;
+        WeiQuPai.Util.get(url, function(data) {
+            me.getStore().setData(data.auctions);
+            me.down('#specialList').setData(data.special);
+            me.down('banner').updateBanner(data.banner);
+            me.todayData = data;
+            callback && callback();
+        });
+    },
 
-    onActivate: function(){
-        this.loadMenu();
+    //下拉刷新, 这里的this是pullRefresh对象
+    fetchLastest: function() {
+        var me = this;
+        this.getList().loadData(function() {
+            me.setState('loaded');
+            me.snapBack();
+        });
+    },
+
+    onActivate: function() {
+        if (this.firstLoad) {
+            this.firstLoad = false;
+            return;
+        }
         this.softRefresh();
     },
 
     //软刷新，只更新当前列表的状态和价格
-    softRefresh: function(){
-        //刷新广告 
-        this.down('banner').updateBanner();
-
-        if(this.firstLoad){
-            this.firstLoad = false;
-            return;
-        }
-
+    softRefresh: function() {
         var store = this.getStore(),
             proxy = store.getProxy(),
             operation;
         ids = [];
-        store.each(function(item, index, length){
+        store.each(function(item, index, length) {
             ids.push(item.get('id'));
         });
-
+        //保存拍卖id和广告位置的映射
+        var bannerCache = {};
+        for (var i = 0; i < this.todayData.banner.length; i++) {
+            var banner = this.todayData.banner[i];
+            if (banner.type == 3) {
+                ids.push(banner.auction.id);
+                bannerCache[banner.auction.id] = i;
+            }
+        }
         var user = WeiQuPai.Cache.get('currentUser');
         var tk = user && user.token || '';
-        Ext.Ajax.request({
-            url: WeiQuPai.Config.apiUrl + '/?r=app/today/refresh&id=' + ids.join(",") + '&token=' + tk,
-            method: 'get',
-            success: function(rsp){
-                rsp = Ext.decode(rsp.responseText);
-                var records = store.getData();
-                var record;
-                for(var i=0,len=rsp.length; i<len; i++){
-                    record = records.getByKey(rsp[i].id);
-                    record.set(rsp[i]);
+        var url = WeiQuPai.Config.apiUrl + '/?r=app/today/refresh&id=' + ids.join(",") + '&token=' + tk;
+        var me = this;
+        WeiQuPai.Util.get(url, function(rsp) {
+            var records = store.getData();
+            for (var record, i = 0, len = rsp.length; i < len; i++) {
+                var bannerIdx = bannerCache[rsp[i].id];
+                if (bannerIdx !== undefined) {
+                    me.down('banner').updatePrice(bannerIdx, rsp[i].curr_price);
                 }
+                record = records.getByKey(rsp[i].id);
+                record && record.set(rsp[i]);
             }
         });
     },
 
-    //加载标题栏的下拉菜单项目[专场的id,title]
-    loadMenu: function(){
-        var user = WeiQuPai.Cache.get('currentUser');
-        var tk = user && user.token || '';
-        var self = this;
-        Ext.Ajax.request({
-            url: WeiQuPai.Config.apiUrl + '/?r=app/specialSale/title&token=' + tk,
-            method: 'get',
-            success: function(rsp){
-                rsp = Ext.decode(rsp.responseText);
-                this.setDynamicTitie(rsp);
-            },
-            scope: this
-        });
-    },
-
-    setDynamicTitie: function(menu){
-        if(!menu || menu.length == 0){
-            this.down('titlebar').titleComponent.setHtml('今日');
-            return;
-        }
-        var popMenu = WeiQuPai.Util.getGlobalView('WeiQuPai.view.TodayMenu');
-        popMenu.clearButton();
-        for(var i=0; i<menu.length; i++){
-            popMenu.addItem(menu[i]);
-        }
-        var titleEl = this.down('titlebar').titleComponent;
-        titleEl.setHtml('<div class="dropdown-title">今日</div>');
-        var self = this;
-        titleEl.element.down('.dropdown-title').on('tap', function(){
-            //this.addCls('open');
-            popMenu.showBy(self.down('titlebar'));
-        });
-    },
-
-    onHide: function(){
+    onHide: function() {
         this.down('banner').stopTimer();
     }
 });
