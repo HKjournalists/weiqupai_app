@@ -257,7 +257,7 @@ Ext.define("WeiQuPai.Util", {
     },
 
     //cache数据，每种类型的cache列表最多保存100个
-    cacheData: function(type, id) {
+    setCache: function(type, id) {
         var data = WeiQuPai.Cache.get('user_data') || {};
         if (!data[type]) {
             data[type] = [];
@@ -282,7 +282,8 @@ Ext.define("WeiQuPai.Util", {
     delCache: function(type, id) {
         var data = WeiQuPai.Cache.get('user_data');
         if (!data || !data[type]) return;
-        return data[type].splice(data[type].indexOf(id), 1);
+        data[type].splice(data[type].indexOf(id), 1);
+        WeiQuPai.Cache.set('user_data', data);
     },
 
     //转到某个视图，并带参数

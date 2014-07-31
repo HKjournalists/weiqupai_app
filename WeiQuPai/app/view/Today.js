@@ -35,11 +35,11 @@ Ext.define('WeiQuPai.view.Today', {
             '</div>',
 
             '<div class="price">',
+            '<div class="{[this.getLikeCss(values)]}"></div>',
             '<span class="priceNew">',
             '{[this.displayPrice(values)]}',
             '<img src="{[this.statusImg(values.status)]}" width="32">',
             '</span>',
-            '<div class="{[this.getLikeCss(values)]}"></div>',
             '</div>',
 
             '<div class="pinglun">',
@@ -58,10 +58,10 @@ Ext.define('WeiQuPai.view.Today', {
                 },
 
                 getCover: function(cover) {
-                    return WeiQuPai.Util.getImagePath(cover, '290');
+                    return WeiQuPai.Util.getImagePath(cover, '200');
                 },
                 getLikeCss: function(values) {
-                    return WeiQuPai.Util.hasCache('like', values.item_id) ? 'prop' : 'prop2';
+                    return WeiQuPai.Util.hasCache('like', parseInt(values.item_id)) ? 'heart' : 'hallow_heart';
                 },
 
                 displayPrice: function(values) {
@@ -168,13 +168,13 @@ Ext.define('WeiQuPai.view.Today', {
 
     bindEvent: function(list, index, dataItem, record, e) {
         var me = this;
-        if (e.target.className == 'pro') {
-            me.fireEvent('liketap', me, index, record);
+        if (e.target.className == 'hallow_heart') {
+            me.fireEvent('liketap', me, index, dataItem, record, e);
             return false;
         }
-        if (e.target.className == 'prop2') {
+        if (e.target.className == 'heart') {
             var uid = e.target.getAttribute('uid');
-            me.fireEvent('disliketap', me, index, record);
+            me.fireEvent('unliketap', me, index, dataItem, record, e);
             return false;
         }
     },

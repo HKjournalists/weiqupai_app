@@ -214,9 +214,15 @@ html body
     {
        width:115px;
     }
-    .today .right .price .pro
+    .today .right .price .hallow_heart
     {
      width:20px;height:20px;background:url('../images/heart.jpg') no-repeat;
+     background-size:contain;float:right;
+
+    }
+    .today .right .price .heart
+    {
+     width:20px;height:20px;background:url('../images/heart_active.jpg') no-repeat;
      background-size:contain;float:right;
 
     }

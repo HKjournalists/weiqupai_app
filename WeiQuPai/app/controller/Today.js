@@ -9,7 +9,7 @@ Ext.define('WeiQuPai.controller.Today', {
             pageView: {
                 itemtap: 'showDetail',
                 liketap: 'doLike',
-                disliketap: 'doDislike'
+                unliketap: 'doUnlike'
             },
             specialBtn: {
                 tap: 'showSpecial'
@@ -17,45 +17,60 @@ Ext.define('WeiQuPai.controller.Today', {
         }
     },
 
+    heartBeat: function(dataItem) {
+        var me = this;
+        var el = dataItem.element.down('.heart');
+        var outAnim = Ext.create('Ext.Anim', {
+            autoClear: false,
+            from: {
+                'zoom': '1'
+            },
+            to: {
+                'zoom': '1.2'
+            },
+            duration: 100,
+            after: function() {
+                inAnim.run(el);
+            }
+        });
+        var inAnim = Ext.create('Ext.Anim', {
+            autoClear: false,
+            from: {
+                'zoom': '1.2'
+            },
+            to: {
+                'zoom': '1'
+            },
+            duration: 100
+        });
+        outAnim.run(el);
+    },
+
     doLike: function(list, index, dataItem, record, e) {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
-        var itemId = record.get('id');
-        Ext.Ajax.request({
-            url: WeiQuPai.Config.apiUrl + '/?r=appv2/itemLike&token=' + user.token,
-            method: 'get',
-            params: {
-                item_id: itemId
-            },
-            success: function(rsp) {
-                rsp = Ext.decode(rsp.responseText);
-                if (!WeiQuPai.Util.invalidToken(rsp)) return false;
-                if (rsp.code > 0) {
-                    WeiQuPai.Util.toast(rsp.msg);
-                    return;
-                }
-            }
+        var itemId = parseInt(record.get('item_id'));
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/itemLike&item_id=' + itemId + '&token=' + user.token;
+        var me = this;
+        WeiQuPai.Util.get(url, function(rsp) {
+            WeiQuPai.Util.setCache('like', itemId);
+            var stat = record.get('item_stat');
+            stat.like_num++;
+            record.set('item_stat', stat);
+            me.heartBeat(dataItem);
         });
     },
 
-    doDislike: function(list, index, dataItem, record, e) {
+    doUnlike: function(list, index, dataItem, record, e) {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
-        var itemId = record.get('id');
-        Ext.Ajax.request({
-            url: WeiQuPai.Config.apiUrl + '/?r=appv2/itemDislike&token=' + user.token,
-            method: 'get',
-            params: {
-                item_id: itemId
-            },
-            success: function(rsp) {
-                rsp = Ext.decode(rsp.responseText);
-                if (!WeiQuPai.Util.invalidToken(rsp)) return false;
-                if (rsp.code > 0) {
-                    WeiQuPai.Util.toast(rsp.msg);
-                    return;
-                }
-            }
+        var itemId = parseInt(record.get('item_id'));
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/itemLike/cancel&item_id=' + itemId + '&token=' + user.token;
+        WeiQuPai.Util.get(url, function(rsp) {
+            WeiQuPai.Util.delCache('like', itemId);
+            var stat = record.get('item_stat');
+            if (stat.like_num > 0) stat.like_num--;
+            record.set('item_stat', stat);
         });
     },
 

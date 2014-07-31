@@ -14,7 +14,7 @@ Ext.define('WeiQuPai.view.Banner', {
         '<div class="banner">',
         '<div class="price">',
         '<span class="color_e7">',
-        '{auction.curr_price}元',
+        '{auction.curr_price}',
         '</span>',
         '</div>',
         '</div>'
