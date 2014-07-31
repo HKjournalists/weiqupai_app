@@ -461,20 +461,20 @@ html body
     padding:$zero;
     margin-top:-52px;
    }
-   .bottom_detail1 .btm1
+   .bottombar .btm1
    {
     margin-left:20px;
     margin-top:17px;
     width:30px;
     height:30px;
    }
-    .bottom_detail1 .btm2
+    .bottombar .btm2
    {
     margin-left:-10px;
     width:50px;
     height:50px;
    }
-    .bottom_detail1 .btm3
+    .bottombar .btm3
    {
     margin-left:-11px;
     margin-top:17px;
@@ -907,7 +907,7 @@ html body
    {
       margin: 20px 5px 0px;
       float:left;
-      width: 7em;
+      width: 120px;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
@@ -915,9 +915,16 @@ html body
     .personal .return
    {
      background:transparent;
-     color:$color_fff;
-     padding: 32px 0px 0px 0px;
-     text-align:right;
+     background: transparent;
+      background-image: url("../images/zd.png");
+      background-repeat: no-repeat;
+      background-position: right center;
+      background-size: auto 10px;
+      margin: 20px 10px;
+      float: right;
+      width: 20px;
+      height: 12px;
+      height: 12px;
 
    }
    .personal .return .x-button-label
@@ -1672,7 +1679,7 @@ html body
     }
     .order_dis .right
     {
-     width:75%;
+     width:65%;
      float:left;
      margin:5px;
      word-break: break-all;
@@ -2032,10 +2039,12 @@ html body
      background-position:5px 8px;
      color:$color_e7;
      box-flex:1;
-     text-indent:20px;
-     padding-top:14px;
+     text-indent: 60px;
+     padding-top: 15px;
+     height: 40px;
+     width:50%;float:left;
     }
-    .plist .left
+    .plist .m5
     {
      background:url('../images/pai_m5.png') no-repeat;
      @include plistImg;
@@ -2045,10 +2054,14 @@ html body
      box-flex:1;
      padding:14px;
     }
-    .plist .left1
+    .plist .m10
     {
-     background:url('../images/pai_m5.png') no-repeat;
+     background:url('../images/pai_m10.png') no-repeat;
      @include plistImg;
+    }
+    .plist .right
+    {
+    width:50%;float:left;text-align:right;padding: 15px 5px;
     }
     .plist_shuo
     {
