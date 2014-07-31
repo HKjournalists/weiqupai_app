@@ -3,7 +3,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
     config: {
         refs: {
             main: 'main',
-            shopInfo : 'disclosureitem[itemId=shopInfo]',
+            shopInfo: 'disclosureitem[itemId=shopInfo]',
             brandInfo: 'disclosureitem[itemId=brandInfo]',
             paiBtn: 'container[itemId=paiBtn]',
             commentBtn: 'button[action=comment]',
@@ -14,66 +14,73 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
             descContainer: 'itemdetail container[itemId=itemDesc]'
         },
         control: {
-           shopInfo : {
+            shopInfo: {
                 tap: 'showShop'
-           },
-           brandInfo: {
+            },
+            brandInfo: {
                 tap: 'showBrand'
-           },
-           paiBtn: {
+            },
+            paiBtn: {
                 pai: 'showOrderView'
-           },
-           commentBtn: {
-                tap: function(){
-                    if(!WeiQuPai.Util.checkLogin()) return false;
+            },
+            commentBtn: {
+                tap: function() {
+                    if (!WeiQuPai.Util.checkLogin()) return false;
                     var auctionId = this.getPageView().auctionData.id;
                     var itemId = this.getPageView().auctionData.item_id;
-                    var form = WeiQuPai.Util.createOverlay('WeiQuPai.view.InputComment', 
-                        {height: 48, showAnimation: false, hideAnimation: false}
-                    );
+                    var form = WeiQuPai.Util.createOverlay('WeiQuPai.view.InputComment', {
+                        height: 48,
+                        showAnimation: false,
+                        hideAnimation: false
+                    });
                     form.down('hiddenfield[name=auction_id]').setValue(auctionId);
                     form.down('hiddenfield[name=item_id]').setValue(itemId);
                     form.show();
                 }
-           },
-           shareBtn: {
+            },
+            shareBtn: {
                 tap: 'doShare'
-           },
-           pageView: {
+            },
+            pageView: {
                 avatartap: 'doAvatarTap',
                 uptap: 'doUpTap',
-                commenttap: 'doCommentTap'
-           },
-           commentForm: {
+                commenttap: 'doCommentTap',
+                refresh: 'doRefresh'
+            },
+            commentForm: {
                 publish: 'doPublishComment'
-           }, 
-           descContainer: {
+            },
+            descContainer: {
                 toggleDesc: 'toggleDesc'
-           }
+            }
         }
     },
-    
+
     //商家
-    showShop: function(){
+    showShop: function() {
         var data = this.getPageView().auctionData;
-        if(data.shop.description || data.shop.pic_url){
-            var shopView = Ext.create('WeiQuPai.view.Shop', {data: this.getPageView().auctionData.shop});
+        if (data.shop.description || data.shop.pic_url) {
+            var shopView = Ext.create('WeiQuPai.view.Shop', {
+                data: this.getPageView().auctionData.shop
+            });
             this.getMain().push(shopView);
-        }else{
+        } else {
             window.open(data.shop.site, '_system');
         }
     },
 
-    showBrand: function(){
-        var brandView = Ext.create('WeiQuPai.view.Brand', {data: this.getPageView().auctionData.brand});
+    showBrand: function() {
+        var brandView = Ext.create('WeiQuPai.view.Brand', {
+            data: this.getPageView().auctionData.brand
+        });
         this.getMain().push(brandView);
     },
 
-    showOrderView: function(){
+    showOrderView: function() {
         var user = WeiQuPai.Util.checkLogin();
-        if(!user)return;
+        if (!user) return;
         var auctionId = this.getPageView().auctionData.id;
-        if(WeiQuPai.Util.hasAuction(auctionId)){
+        if (WeiQuPai.Util.hasAuction(auctionId)) {
             WeiQuPai.Util.toast('您已经拍过该商品');
             return;
         }
@@ -81,10 +88,10 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
         var reserve = WeiQuPai.model.Reserve;
         reserve.getProxy().setExtraParam('token', user.token);
         reserve.load(auctionId, {
-            success: function(record, operation){
+            success: function(record, operation) {
                 WeiQuPai.Util.unmask();
-                if(!WeiQuPai.Util.invalidToken(record.raw)) return false;
-                if(record.get('status') != WeiQuPai.Config.auctionStatus.STATUS_ONLINE){
+                if (!WeiQuPai.Util.invalidToken(record.raw)) return false;
+                if (record.get('status') != WeiQuPai.Config.auctionStatus.STATUS_ONLINE) {
                     msgArr = ['拍卖还未开始', null, null, '对不起，拍卖已结束'];
                     msg = msgArr[record.get('status')];
                     WeiQuPai.Util.toast(msg);
@@ -94,21 +101,21 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
                 orderView.setAuctionData(record.data);
                 this.getMain().push(orderView);
             },
-            failure: function(){
+            failure: function() {
                 WeiQuPai.Util.unmask();
-                WeiQuPai.Util.toast('数据加载失败');    
+                WeiQuPai.Util.toast('数据加载失败');
             }
         }, this);
     },
 
-    doPublishComment: function(form){
+    doPublishComment: function(form) {
         var user = WeiQuPai.Cache.get('currentUser');
         var self = this;
         WeiQuPai.Util.mask();
         form.submit({
-            url: WeiQuPai.Config.apiUrl + '/?r=app/comment/post&token=' + user.token,
+            url: WeiQuPai.Config.apiUrl + '/?r=appv2/comment/post&token=' + user.token,
             method: 'post',
-            success: function(form, result){
+            success: function(form, result) {
                 //评论提交成功后重置表单
                 form.reset();
                 form.hide();
@@ -118,9 +125,9 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
                 list.getStore().add(result.commentList);
                 list.updateAllListItems();
             },
-            failure: function(form, result){
+            failure: function(form, result) {
                 WeiQuPai.Util.unmask();
-                if(!WeiQuPai.Util.invalidToken(result)){
+                if (!WeiQuPai.Util.invalidToken(result)) {
                     form.reset();
                     form.hide();
                     return false;
@@ -131,15 +138,19 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
         });
     },
 
-    doAvatarTap: function(index, record){
+    doAvatarTap: function(index, record) {
         var user = WeiQuPai.Util.checkLogin();
-        if(!user) return;
+        if (!user) return;
         var uid = record.get('uid');
-        if(user.id == uid || WeiQuPai.Util.isFriend(uid)){
-            WeiQuPai.Util.forward('showuser', {param: uid});
-        }else{
-            if(!this.addFriendLayer){
-                var config = {height: 130};
+        if (user.id == uid || WeiQuPai.Util.isFriend(uid)) {
+            WeiQuPai.Util.forward('showuser', {
+                param: uid
+            });
+        } else {
+            if (!this.addFriendLayer) {
+                var config = {
+                    height: 130
+                };
                 this.addFriendLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.AddFriendButtonLayer', config);
             }
             this.addFriendLayer.setUid(uid);
@@ -147,19 +158,19 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
         }
     },
 
-    doUpTap: function(index, record){
+    doUpTap: function(index, record) {
         var user = WeiQuPai.Util.checkLogin();
-        if(!user) return;
+        if (!user) return;
         var id = record.get('id');
         //赞过的不允许再赞
-        if(!WeiQuPai.Util.cacheUp(id)) return;
+        if (!WeiQuPai.Util.cacheUp(id)) return;
 
         Ext.Ajax.request({
             url: WeiQuPai.Config.apiUrl + '/?r=app/comment/up&token=' + user.token + '&id=' + id,
             method: 'get',
-            success: function(rsp){
+            success: function(rsp) {
                 rsp = Ext.decode(rsp);
-                if(!WeiQuPai.Util.invalidToken(rsp)) return false;
+                if (!WeiQuPai.Util.invalidToken(rsp)) return false;
             }
         });
         //异步请求的同时，给数量加1
@@ -167,37 +178,29 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
     },
 
     //点回复按钮
-    doCommentTap: function(index, record){
-        if(!WeiQuPai.Util.checkLogin()) return;
+    doCommentTap: function(index, record) {
+        if (!WeiQuPai.Util.checkLogin()) return;
         var replyId = record.get('id');
         var auctionId = this.getPageView().auctionData.id;
-        var itemId  = this.getPageView().auctionData.item_id;
-        var form = WeiQuPai.Util.createOverlay('WeiQuPai.view.InputComment', {height: 48, showAnimation: false, hideAnimation: false});
+        var itemId = this.getPageView().auctionData.item_id;
+        var form = WeiQuPai.Util.createOverlay('WeiQuPai.view.InputComment', {
+            height: 48,
+            showAnimation: false,
+            hideAnimation: false
+        });
         form.down('hiddenfield[name=auction_id]').setValue(auctionId);
         form.down('hiddenfield[name=item_id]').setValue(itemId);
         form.down('hiddenfield[name=reply_id]').setValue(replyId);
         form.show();
     },
 
-    //商品描述的展开和收起
-    toggleDesc: function(){
-        var desc = this.getDescContainer();
-        var data = desc.getData();
-        if(!desc.rawContent || desc.rawContent.length <= 30) return;
-        if(desc.toggleState == 'short'){
-            desc.toggleState = 'long';
-            data.description = desc.rawContent;
-            data.button = '<span class="hide-more"></span>';
-        }else{
-            desc.toggleState = 'short';
-            data.description = desc.rawContent.substr(0, 30) + "...";
-            data.button = '<span class="show-more"></span>';
-        }
-        desc.setData(data);
+    doShare: function() {
+        this.getPageView().shareLayer.show();
     },
 
-    doShare: function(){
-        this.getPageView().shareLayer.show();
+    doRefresh: function() {
+        this.getPageView().onDestroy();
+        this.getPageView().setParam(this.getPageView().getParam());
     }
 
 });

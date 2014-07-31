@@ -43,7 +43,7 @@ $color_e7:#e76049;
  @mixin details_title_top
    {
       background-size:auto 8px;
-      background-position:5px 0px;
+      background-position:5px center;
       text-indent:18px;
    }
 //拍品详情 简介上方按钮
@@ -217,6 +217,12 @@ html body
     .today .right .price .pro
     {
      width:20px;height:20px;background:url('../images/heart.jpg') no-repeat;
+     background-size:contain;float:right;
+
+    }
+    .today .right .price .proLike
+    {
+     width:20px;height:20px;background:url('../images/heart_active.jpg') no-repeat;
      background-size:contain;float:right;
 
     }
@@ -541,6 +547,8 @@ html body
      flex:1;
      -moz-box-flex: 1;  
      -webkit-box-flex: 1;
+     padding: 7px 20px;
+     color: white;
    }
    .detail_pai
    {  
@@ -762,6 +770,9 @@ html body
     padding:10px 0px;
     border-bottom:1px solid #efefef;
   }
+  .discard .list:nth-last-child(1){
+   border-bottom:0px;
+   }
    .message .list
   {
     width:100%;
@@ -2125,4 +2136,67 @@ html body
     .color_e7
     {
      color:$color_e7;
+    }
+    //图文详情
+    .tuwen
+    {
+      padding: 10px;
+      font-size: 14px;
+      word-wrap: break-word;
+      word-break: break-word;
+      line-height: 2;
+      color: #383838;
+    }
+    .input_text
+    {
+     background:$color_fff;
+     border:1px solid #ccc;
+     border-radius:3px;
+     margin:5px 20px;
+     line-height:18px;
+    }
+    .x-field-input
+    {
+     border:0px;
+     height:30px;
+    }
+    .x-form.x-floating .x-input-el {
+     padding-top: 1px;
+    }
+    @mixin share_btn
+    {
+      background-size: 45px 45px;
+      padding-top: 35px;
+      margin: 5px;
+      background-position: center 5px;
+      height: 80px;
+      font-size:14px;
+      border:0px;
+      color:black;
+    }
+    .xl-share-button
+    {
+     background:url('../images/wb.png') no-repeat;
+     @include share_btn;
+    }
+     .pyq-share-button
+    {
+      background:url('../images/pyq.png') no-repeat;
+      @include share_btn;
+    }
+     .wx-share-button
+    {
+      background:url('../images/wx.png') no-repeat;
+      @include share_btn;
+    }
+    .w-cancel
+    {
+     height:40px;
+     border:0px;
+     border-top:5px solid #f6f6f6;
+     border-radius:0px;
+    }
+    .share-title
+    {
+     background:white;height:30px;text-align:center;font-size:18px;padding-top:6px;
     }

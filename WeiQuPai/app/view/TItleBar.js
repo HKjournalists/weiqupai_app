@@ -28,7 +28,7 @@ Ext.define('WeiQuPai.view.TitleBar', {
         var refresh = this.down('button[action=refresh]');
         if (refresh) {
             refresh.on('tap', function() {
-                this.parent().fireEvent('refresh', refresh);
+                this.getParent().fireEvent('refresh', refresh);
             }, this);
         }
     }

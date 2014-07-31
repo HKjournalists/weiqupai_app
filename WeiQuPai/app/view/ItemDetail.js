@@ -2,66 +2,130 @@ Ext.define('WeiQuPai.view.ItemDetail', {
     extend: 'Ext.Container',
     xtype: 'itemdetail',
     requires: [
-        'WeiQuPai.view.Shop', 'WeiQuPai.view.BottomBar', 'WeiQuPai.view.DisclosureItem',
+        'WeiQuPai.view.Shop', 'WeiQuPai.view.BottomBar',
         'WeiQuPai.view.DetailPicShow', 'WeiQuPai.view.Order', 'WeiQuPai.model.Auction',
         'WeiQuPai.view.ShareLayer', 'WeiQuPai.view.Brand', 'WeiQuPai.model.Reserve',
-        'WeiQuPai.view.Comment'
+        'WeiQuPai.view.Comment', 'WeiQuPai.view.ItemParam', 'WeiQuPai.view.ItemDesc'
     ],
     config: {
-        auctionId: null,
+        param: null,
         scrollable: true,
         cls: 'detail',
-        layout: 'vbox',
         items: [{
-            xtype: 'bottombar',
-            cls: 'bottombar'
-        }, {
-            xtype: 'titlebar',
-            title: '商品详情',
-            cls: 'detail_bar',
+            xtype: 'vtitlebar',
+            title: '拍品详情',
             docked: 'top',
             items: [{
-                iconCls: 'arrow_left'
+                xtype: 'button',
+                baseCls: 'arrow_left',
+                text: '&nbsp;&nbsp;',
+                action: 'back'
+
             }, {
                 align: 'right',
-                iconCls: 'refresh'
+                baseCls: 'refresh',
+                action: 'refresh'
             }]
         }, {
+            xtype: 'detailpicshow'
+        }, {
             xtype: 'container',
-            id: 'detailData',
+            id: "item_stat",
             tpl: new Ext.XTemplate(
-                '<div class="detailData">',
-                '<div class="left">',
-                '<div class="priceNew">',
-                '{curr_price}',
+                '<div class="details">',
+                '<div class="top" style="margin-top:-201px;">',
+                '<div class="right">',
+                '<ul>',
+                '<li class="heart">{item_stat.like_num}</li>',
+                '<li class="nolike">{item_stat.dislike_num}</li>',
+                '<li class="pre">{item_stat.comment_num}</li>',
+                '</ul>',
                 '</div>',
-                '<div class="price">',
-                '<span>',
-                '原价￥{oprice}  ',
-                '</span>',
-                '已售出:{item_stat.sold_num}',
-                '</div>',
-                '</div>',
-                '<div class="detail_map">',
+                '<div style="clear:both"></div>',
                 '</div>',
                 '</div>'
             )
         }, {
-            xtype: 'tabpanel',
-            baseCls: 'detailcard',
-            flex: 1,
+            xtype: 'container',
+            id: 'item_title',
+            tpl: new Ext.XTemplate(
+                '<div class="details">',
+                '<div class="bottom" style="margin-top:110px;">',
+                '<div class="left">',
+                '{title}',
+                '</div>',
+                '<div class="right">',
+                '<ul>',
+                '<li class="nolike"></li>',
+                '<li class="like"></li>',
+                '</ul>',
+                '</div>',
+                '<div style="clear:both"></div>',
+                '</div>',
+                '</div>'
+            )
+        }, {
+            xtype: 'container',
+            id: 'price_data',
+            tpl: new Ext.XTemplate(
+                '<div class="detailData">',
+                '<div class="left">',
+                '<div class="priceNew">{curr_price}</div>',
+                '<div class="price">',
+                '<span>原价￥{oprice}</span>',
+                ' 已售出:{item_stat.sold_num}',
+                '</div>',
+                '</div>',
+                '<div class="detail_map" id="countdown">{[this.formatCountdown(values)]}</div>',
+                '</div>', {
+                    formatCountdown: function(values) {
+                        if (values.status == WeiQuPai.Config.auctionStatus.STATUS_NOT_START) {
+                            return values.start_time;
+                        } else if (values.status == WeiQuPai.Config.auctionStatus.STATUS_FINISH) {
+                            return '00:00';
+                        } else {
+                            var sec = values.left_time % 60;
+                            var min = (values.left_time - sec) / 60;
+                            var countdown = (min < 10 ? '0' + min : min) + ":" + (sec < 10 ? '0' + sec : sec);
+                            return countdown;
+                        }
+                    }
+                }
+            )
+        }, {
+            xtype: 'container',
+            layout: 'hbox',
+            cls: 'log_btn',
+            itemId: 'tabbar',
             items: [{
-                xtype: 'container',
-                title: '商品参数',
-                itemId: 'itemDesc',
-                tpl: '{description}{description}'
+                flex: 1,
+                xtype: 'button',
+                text: '商品参数',
+                action: 'tab_itemparam',
+                cls: 'x-button-active'
             }, {
-                title: '大家评论',
-                xtype: 'comment'
+                flex: 1,
+                xtype: 'button',
+                action: 'tab_comment',
+                text: '大家评论'
             }, {
-                title: '图文详情'
+                flex: 1,
+                xtype: 'button',
+                action: 'tab_itemdesc',
+                text: '图文详情'
             }]
+        }, {
+            xtype: 'itemparam'
+        }, {
+            xtype: 'comment',
+            hidden: true
+        }, {
+            xtype: 'itemdesc',
+            hidden: true
+        }, {
+            xtype: 'bottombar'
         }]
+
     },
 
     refreshTimer: null,
@@ -69,71 +133,68 @@ Ext.define('WeiQuPai.view.ItemDetail', {
     //未开始时为还有多少时间开始，拍卖中时为本轮剩余时间
     leftSeconds: 0,
 
+    //当前激活的tab button
+    activeTab: null,
+
+    tabPosition: 0,
+
     initialize: function() {
         this.callParent(arguments);
 
-        //this.down('bottombar #buttonContainer').add(commentBtn);
-        //this.down('bottombar #buttonContainer').add(paiBtn);
-        //this.down('bottombar #buttonContainer').add(shareButton);
-        /*
-        this.down('#paiBtn').on('tap', function() {
-            if (this.getDisabled()) return;
-            this.fireEvent('pai');
-        }, null, {
-            element: 'element'
-        });
-        */
-        //没有评论显示的信息
-        this.msgbox = WeiQuPai.Util.msgbox('还没有人评论该商品.');
         this.shareLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer', {
             height: 160
         });
-        this.add(this.msgbox);
+        //初始化tab
+        this.initTab();
+
         //销毁的时候结束定时器
         this.on('destroy', this.onDestroy);
-        this.down('tabpanel').on('activeitemchange', this.resizeContainer);
-        //默认的itemtap在android下不能弹出keyboard，又是曲线救国
-        this.handleItemTap();
-    },
 
-    resizeContainer: function(card, newItem) {
-        var barHeight = card.down('tabbar').element.getHeight();
-        contentElement = newItem.innerHtmlElement || newItem.element;
-        var contentHeight = contentElement.getHeight();
-        card.setHeight(contentHeight + barHeight);
-    },
-
-    handleItemTap: function() {
-        var me = this;
-        this.element.dom.addEventListener('click', function(e) {
-            var row = Ext.fly(e.target).findParent('.comment-row');
-            if (!row) return;
-            var id = row.getAttribute('data-id');
-            var index = me.getStore().indexOfId(id);
-            var record = me.getStore().getAt(index);
-            if (e.target.className == 'avatar') {
-                me.fireEvent('avatartap', index, record);
-                return false;
-            }
-            if (e.target.className == 'up') {
-                me.fireEvent('uptap', index, record);
-                return false;
-            }
-            if (e.target.className == 'comment') {
-                me.fireEvent('commenttap', index, record);
-                return false;
-            }
+        this.on('painted', function() {
+            this.tabPosition = this.down('#tabbar').element.getY() + 20;
         });
+
     },
 
-    applyAuctionId: function(id) {
+    initTab: function() {
+        var btns = this.query('#tabbar button');
+        var me = this;
+        for (var i = 0; i < btns.length; i++) {
+            var xtype = btns[i].action.substr(4);
+            btns[i].tabView = this.down(xtype);
+            btns[i].on('tap', function() {
+                if (me.activeTab == this) return;
+                me.activeTab.removeCls('x-button-active');
+                me.activeTab.tabView.hide();
+                this.addCls('x-button-active');
+                this.tabView.show();
+                me.activeTab = this;
+                me.getScrollable().getScroller().scrollTo(0, me.tabPosition, false);
+            });
+        }
+        this.activeTab = btns[0];
+
+        //tab的悬停效果
+        var scroller = this.getScrollable().getScroller();
+        scroller.addListener('scroll', function(scroler, x, y) {
+            if (y >= this.tabPosition) {
+                this.down('#tabbar').setDocked('top');
+            } else {
+                this.down('#tabbar').setDocked(null);
+            }
+
+
+        }, this);
+    },
+
+    applyParam: function(param) {
         //加载数据
-        this.loadData(id);
-        return id;
+        this.loadData(param.id);
+        this.down('comment').setItemId(param.item_id);
+        return param;
     },
 
     loadData: function(id) {
-        this.down('comment').setAuctionId(id);
         var auction = WeiQuPai.model.Auction;
         auction.load(id, {
             scope: this,
@@ -151,17 +212,14 @@ Ext.define('WeiQuPai.view.ItemDetail', {
     setContent: function(data) {
         //保存数据，为后面使用
         this.auctionData = data;
-        //this.down('detailpicshow').setPicData(data.pic_url);
-        this.down('#detailData').setData(data);
-        this.down('#itemDesc').setData(data);
-        this.resizeContainer(this.down('tabpanel'), this.down('tabpanel').getActiveItem());
+        this.down('detailpicshow').setPicData(data.pic_url);
+        this.down('#item_stat').setData(data);
+        this.down('#item_title').setData(data);
+        this.down('#price_data').setData(data);
+        this.down('itemparam').setData(data);
+        this.down('itemdesc').setData(data);
         //this.createChart();
-        //this.down('#countdown').setData(data);
-
-        if (this.auctionData.brand) {
-            this.down('#brandInfo').show();
-        }
-        //this.setCountdown();
+        this.setCountdown();
     },
 
 
@@ -179,13 +237,10 @@ Ext.define('WeiQuPai.view.ItemDetail', {
                 this.auctionData.curr_round = rsp.curr_round;
                 this.auctionData.curr_price = rsp.curr_price;
                 this.auctionData.round_start_time = rsp.round_start_time;
-                this.down('#countdown').setData(this.auctionData);
+                this.down('#price_data').setData(this.auctionData);
                 //如果没结束就继续自动刷新
                 if (rsp.status != WeiQuPai.Config.auctionStatus.STATUS_FINISH) {
-                    Ext.get('paiBtnMask').setStyle('display', 'none');
                     this.setCountdown();
-                } else {
-                    Ext.get('paiBtnMask').setStyle('display', 'block');
                 }
             },
             scope: this

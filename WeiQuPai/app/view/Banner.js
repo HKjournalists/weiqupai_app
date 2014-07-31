@@ -69,7 +69,7 @@ Ext.define('WeiQuPai.view.Banner', {
         var data = img.getData();
         if (data.type == 3) {
             var detailView = Ext.create('WeiQuPai.view.ItemDetail');
-            detailView.setAuctionId(data.auction.id);
+            detailView.setParam(data.auction);
             Ext.Viewport.down('main').push(detailView);
             return;
         }
