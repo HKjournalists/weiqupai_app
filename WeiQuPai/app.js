@@ -26,7 +26,7 @@ Ext.application({
     ],
     views: ['Main'],
     stores: [
-        'Auction', 'AuctionComment', 'Banner', 'MyAuction', 'UserConsignee', 'Circle', 'UserFeed', 'UserFriend', 'UserProp', 'UserCoupon',
+        'Auction', 'Comment', 'Banner', 'MyAuction', 'UserConsignee', 'Circle', 'UserFeed', 'UserFriend', 'UserProp', 'UserCoupon',
         'FriendRequest', 'SpecialSale'
     ],
     icon: {

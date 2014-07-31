@@ -2,9 +2,9 @@ Ext.define('WeiQuPai.view.Comment', {
     extend: 'Ext.DataView',
     xtype: 'comment',
     config: {
-        auctionId: null,
+        itemId: null,
         scrollable: null,
-        store: 'AuctionComment',
+        store: 'Comment',
         loadingText: null,
         disableSelection: true,
         pressedCls: '',
@@ -13,36 +13,19 @@ Ext.define('WeiQuPai.view.Comment', {
             '<div class="list">',
             '<div class="one">',
             '<div class="img">',
-            '<img src="{[this.getAvatar(values.avatar)]}" width="40">',
+            '<img src="{[WeiQuPai.Util.getAvatar(values.avatar, 80)]}" width="40">',
             '</div>',
-            '<div class="name">',
-            '{nick:htmlEncode}',
+            '<div class="name">{nick:htmlEncode}</div>',
             '</div>',
-            '</div>',
-            '<div class="dis">',
-            '{content:htmlEncode}',
-            '</div>',
+            '<div class="dis">{content:htmlEncode}</div>',
             '<div class="date">',
-            '<div class="left">',
-            '{ctime}',
-            '</div>',
+            '<div class="left">{ctime}</div>',
             '<div class="right">',
-            '<div class="like">',
-            '{up_num}',
-            '</div>',
-            '<div class="comment">',
-            '{reply_num}',
+            '<div class="like">{up_num}</div>',
+            '<div class="comment">{reply_num}</div>',
             '</div>',
             '</div>',
-            '</div>',
-            '</div>', {
-                getAvatar: function(avatar) {
-                    if (avatar) {
-                        return WeiQuPai.Util.getImagePath(avatar, '140');
-                    }
-                    return 'resources/image/default_avatar.jpg';
-                }
-            }
+            '</div>'
         ),
         items: [{
             xtype: 'container',
@@ -50,32 +33,68 @@ Ext.define('WeiQuPai.view.Comment', {
             scrollDock: 'top',
             items: [{
                 xtype: 'container',
-                cls: 'detail_listOne',
                 flex: 1
             }, {
                 xtype: 'spacer',
+                cls: 'detail_listOne',
                 flex: 1
             }, {
                 xtype: 'spacer',
                 flex: 1
             }]
         }]
-
     },
 
-    applyAuctionId: function(auctionId) {
-        this.loadData(auctionId);
+    //没有内容的占位容器
+    msgbox: null,
+
+    initialize: function() {
+        this.callParent();
+        this.msgbox = WeiQuPai.Util.msgbox('还没有人评论该商品.');
+        this.add(this.msgbox);
+        //默认的itemtap在android下不能弹出keyboard，又是曲线救国
+        this.handleItemTap();
     },
 
-    loadData: function(auctionId) {
+    handleItemTap: function() {
+        var me = this;
+        this.element.dom.addEventListener('click', function(e) {
+            var row = Ext.fly(e.target).findParent('.comment-row');
+            if (!row) return;
+            var id = row.getAttribute('data-id');
+            var index = me.getStore().indexOfId(id);
+            var record = me.getStore().getAt(index);
+            if (e.target.className == 'avatar') {
+                me.fireEvent('avatartap', index, record);
+                return false;
+            }
+            if (e.target.className == 'up') {
+                me.fireEvent('uptap', index, record);
+                return false;
+            }
+            if (e.target.className == 'comment') {
+                me.fireEvent('commenttap', index, record);
+                return false;
+            }
+        });
+    },
+
+    applyItemId: function(itemId) {
+        this.loadData(itemId);
+    },
+
+    loadData: function(itemId) {
         var store = this.getStore();
         //先清一下数据，防止别的商品的评论先出现
         store.removeAll();
-        store.getProxy().setExtraParam('auction_id', auctionId);
+        store.getProxy().setExtraParam('id', itemId);
         store.loadPage(1, function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('评论加载失败');
                 return;
+            }
+            if (records.length == 0) {
+                this.msgbox.show();
             }
         }, this);
     }

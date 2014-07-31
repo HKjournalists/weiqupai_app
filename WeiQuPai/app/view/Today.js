@@ -130,7 +130,7 @@ Ext.define('WeiQuPai.view.Today', {
             tpl: new Ext.XTemplate(
                 '<div class="special">',
                 '<tpl for=".">',
-                '<div class="list-product">',
+                '<div class="list-product" data-idx="{#}">',
                 '<img src="{[WeiQuPai.Util.getImagePath(values.pic_url)]}" width="60"/>',
                 '<p>{title}</p>',
                 '</div>',
@@ -154,6 +154,16 @@ Ext.define('WeiQuPai.view.Today', {
         this.on('activate', this.onActivate, this);
         this.on('hide', this.onHide, this);
         this.onBefore('itemtap', this.bindEvent, this);
+        this.down('#specialList').on('tap', function(e) {
+            var idx = Ext.get(e.target).up('.list-product').getAttribute('data-idx') - 1;
+            var view = Ext.create('WeiQuPai.view.SpecialSale', {
+                param: this.todayData.special[idx]
+            });
+            WeiQuPai.navigator.push(view);
+        }, this, {
+            element: 'element',
+            delegate: '.list-product'
+        })
     },
 
     bindEvent: function(list, index, dataItem, record, e) {
