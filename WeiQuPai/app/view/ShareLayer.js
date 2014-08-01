@@ -45,7 +45,7 @@ Ext.define('WeiQuPai.view.ShareLayer', {
         }, {
             xtype: 'button',
             action: 'cancel',
-            text: '取消',
+            text: '返回',
             cls: 'w-cancel'
         }]
     },

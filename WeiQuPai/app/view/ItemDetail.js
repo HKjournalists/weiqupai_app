@@ -18,7 +18,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
             items: [{
                 xtype: 'button',
                 baseCls: 'arrow_left',
-                text: '&nbsp;&nbsp;',
+                align: 'left',
                 action: 'back'
 
             }, {

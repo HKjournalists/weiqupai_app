@@ -652,7 +652,7 @@ html body
    }
   .detailcard .x-tab:nth-child(1),.log_btn .x-button:nth-child(1),.log_btn1
   {
-   background:#fff url('../images/cs1.png') no-repeat;
+   background:#fff url('../images/detail_list1.png') no-repeat;
    @include detailcard_title;
   }
   .detailcard .x-tab:nth-child(1).x-tab-active,.log_btn .x-button:nth-child(1).x-button-active,
@@ -933,7 +933,7 @@ html body
       float: right;
       width: 20px;
       height: 12px;
-      height: 12px;
+      padding-top:20px;
 
    }
    .personal .return .x-button-label
@@ -1395,7 +1395,7 @@ html body
    }
     .daoju_card
    {
-    background-image:url('../images/icon_detail_card.png')!important;
+    background-image:url('../images/pai_btn.png')!important;
     background-size:auto 28px;
     background-repeat:no-repeat;
     background-position: center 5px;
@@ -2120,11 +2120,13 @@ html body
     }
     .arrow_left
     {
-     background:url('../images/return_.png') no-repeat;
-     height:18px;
-     background-size:auto 18px;
-     width:11px;
-     margin-left:10px;
+     background-image:url('../images/return_.png');
+     background-repeat: no-repeat;
+      background-size: 11px 18px;
+      background-position: left center;
+      height: 2em;
+      padding: 12px;
+      margin-left: 10px;
     }
     .refresh
     {
@@ -2168,6 +2170,7 @@ html body
     {
      border:0px;
     }
+    //分享按钮
     @mixin share_btn
     {
       background-size: 45px 45px;
@@ -2203,8 +2206,336 @@ html body
     }
     .share-title
     {
-     background:white;height:30px;text-align:center;font-size:18px;padding-top:6px;
+     background:white;height:30px;text-align:center;font-size:18px;padding-top:6px;color:#383838;
     }
+    .share-layer .x-button-normal .x-button-label
+    {
+     color:black;
+    }
+    .x-innerhtml-new
+    {
+     padding:0px;
+    }
+    .mg_10
+    {
+     margin-top:10px;
+    }
+    
+     .today .left .zhuan
+    {
+      background:url('../images/zhuan.png') no-repeat;
+      background-size:auto 29px;
+      position:absolute;
+      top: 10px;
+      left: 8px;
+      height: 29px;
+      width: 32px
+    }
+    //精彩预告新增样式
+    .mylike .yugao
+    {
+      width:100%;
+      background:$color_fff;
+      text-align:center;
+    }
+
+    .mylike .yugao .title
+    {
+      background-image:url('../images/share.png');
+      background-repeat:no-repeat;
+      background-size:auto 16px;
+      background-position:left center;
+      color:$color_e7;
+      width: 80px;
+       margin: auto;
+    }
+    .clear{
+    clear:both;
+    }
+ .per_model .x-tabbar.x-docked-top .x-tab
+   {
+     border:$zero;
+     border-right:1px solid #e76049;
+     border-radius:0px 0px 0px 0px;
+     background:$color_fff;
+     padding:10px;
+   }
+   //首页按钮
+   @mixin user_btn
+   {
+     height:19px;
+     background-size:auto 19px;
+     width:20px;
+     margin-left:10px;
+     padding:10px;
+   }
+    .user
+    {
+     background:url('../images/peple.png') no-repeat;
+     @include user_btn;
+    }
+    .list_btn
+    {
+     background:url('../images/list.png') no-repeat;
+     @include user_btn;
+     margin-left:0px;
+     margin-right: 10px;
+    }
+  //我的优惠
+   @mixin discount_wenzi
+   {
+     text-overflow: ellipsis;
+      word-break: break-all;
+      white-space: nowrap;
+      overflow: hidden;
+   }
+   .discount
+   {
+    background:$color_fff;
+    padding:10px;
+    display:box;
+    display:-weibkit-box;
+    margin-top:10px;
+   }
+   .discount .left
+   {
+     width:110px;
+     float:left;
+   }
+   .discount .left img
+   {
+    border-radius:5px;
+    height:82px;
+   }
+   .discount .right
+   {
+    padding-left:10px;
+    float:left;
+    width:60%;
+   }
+   .discount .right .title
+   {
+    font-size:14px;
+    word-break: break-all;
+   }
+    .discount .right .dis
+   {
+    font-size:13px;
+    word-break: break-all;
+    color:#999;
+     margin-top:7px;
+   }
+    .discount .right .time
+   {
+    font-size:12px;
+    word-break: break-all;
+    color:$color_e7;
+    margin-top:10px;
+   }
+   .discount .right .btn
+   {
+     float:right;
+     margin-top:10px;
+     font-size:12px;
+   }
+   .discountdetail .one
+   {
+    padding:10px;
+    font-size:14px;
+    word-break: break-all;
+    line-height:2em;
+    background:$color_fff;
+   }
+   .discountdetail .two
+   {
+    font-size:14px;
+    word-break: break-all;
+    line-height:2em;
+    padding:10px 40px;
+    background:$color_fff;
+   }
+   .mg_10{
+   margin-top:10px;
+   }
+   .my_btn .x-button:nth-last-child(1)
+    {
+     border-right:0px;
+    }
+    .my_btn .x-button-active
+    {
+      font-size:13px;
+    }
+    //我的拍券
+    .paiquan
+    {
+      background: #f6f6f6;
+      border: 1px solid #efefef;
+      border-radius: 6px;
+    }
+    .paiquan .discard .list .one .img
+    {
+     padding:0px!important;
+    }
+    .paiquan .remess .list .one .name
+    {
+     padding: 8px 1px 1px 15px;
+    }
+    .paiquan .confirm_w
+    {
+     width:100%;
+    }
+    .color_38
+    {
+     color:#383838;
+    }
+    .paiquan .likea
+    {
+      background: url("../images/two_icon1.jpg") no-repeat;
+      background-size: auto 12px;
+      background-position: 5px 10px;
+      text-indent: 20px;
+      font-weight: bold;
+      border-bottom: 1px solid #ccc;
+      margin: 5px;
+      word-wrap: break-word;
+      word-break: break-all;
+      line-height: 23px;
+      padding: 5px 0px;
+
+    }
+    .paiquan .dis
+    {
+      word-wrap: break-word;
+      word-break: break-all;
+      line-height: 20px;
+      margin: 5px;
+    }
+    //一拍到底样式修改
+    .yi_product .list .price
+    {
+     width:100%;
+     position: relative;
+     top: -141px;
+     height:20px;
+     color:$color_fff;
+     font-size:12px;
+    }
+    .yi_product .list .price .left
+    {
+   
+     background: url("../images/yi_zhezhao.png") repeat-x;
+     text-align: center;
+     padding-top: 4px;
+     height:20px;
+     background-size:auto 20px;
+     float:left;
+     width:50%;
+    }
+     .yi_product .list .price .right
+    {
+      float:left;
+      width:50%;
+      background: #e76049;
+      height: 20px;
+      padding-top: 4px;
+    }
+    //分类列表
+    .listting .product
+    {
+     background:$color_fff;
+     margin-top: 10px;
+    }
+     .listting .todayTitle:ntn-child(1)
+    {
+     margin-top:0px;
+    }
+    .listting  .todayTitle
+    {
+      margin-top:10px;  border:0px;
+    }
+    .listting .product .mulu ul
+    {
+     list-style:none;
+     padding:0px;
+     margin:0px;
+    }
+    .listting .product .mulu ul li
+    {
+     float:left;
+     margin-left:10px;
+     padding-bottom:10px;
+    }
+
+    //积分兑换拍券
+    .change
+    {
+     background:$color_fff;
+     margin-top:10px;
+    }
+    .change .card
+    {
+      border:1px solid #ccc;
+      border-left:0px;
+      width:33.3%;
+      float:left;
+      margin-top:10px;
+      background:$color_fff;
+      text-align:center;
+    }
+    .change .card:nth-last-child
+    {
+     border-right:0px;
+    }
+    @mixin renmin
+    {
+      background-size:auto 25px;
+      background-position:center 8px;
+      width:50px;
+      height:35px;
+    }
+    .change .card .m5
+    {
+      background:url('../images/pai_m5.png') no-repeat;
+      @include renmin;
+      width:100%;
+
+    }
+     .change .card .m10
+    {
+      background:url('../images/pai_m10.png') no-repeat;
+      @include renmin;
+    }
+     .change .card .m20
+    {
+      background:url('../images/pai_m5.png') no-repeat;
+      @include renmin;
+    }
+     .change .card .m50
+    {
+      background:url('../images/pai_m5.png') no-repeat;
+      @include renmin;
+    }
+    .change .card .jifen
+    {
+      background:url('../images/score.png') left no-repeat;
+      background-size:22px 22px;
+      width:100px;
+      text-indent:24px;
+      color:$color_e7;
+      margin:8px auto;
+      width: 60px;
+      text-align: left;
+      height: 22px;
+      padding-top: 5px;
+    }
+     .change .card .input
+     {
+      padding:5px;
+     }
+     .change .btn
+     {
+       padding:0px 0px 5px;
+     }
 
     .radio{
       width:18px;
