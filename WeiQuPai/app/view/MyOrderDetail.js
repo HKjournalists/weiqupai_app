@@ -5,33 +5,72 @@ Ext.define('WeiQuPai.view.MyOrderDetail', {
     config: {
         disableSelection: true,
         scrollable: true,
+        cls: 'bg_ef',
         items: [{
-            xtype: 'titlebar',
-            title: '已拍详情',
+            xtype: 'vtitlebar',
+            title: '订单详情',
+            cls: 'titlebar2',
             docked: 'top',
-            cls: 'w-title'
+            items: [{
+                xtype: 'button',
+                baseCls: 'arrow_left',
+                action: 'back'
+            }]
         }, {
             xtype: 'container',
             itemId: 'orderInfo',
+            style: 'padding:0px;margin:0px',
             tpl: new Ext.XTemplate(
-                '<div class="order-item-info">',
-                '<img src="{[this.getCover(values.pic_cover)]}"/>',
-                '<div class="info">',
-                '<h2>{title}</h2>',
-                '<div class="price-area"><p>您的成交价格<span class="price">￥{price}</span></div>',
+                '<div class="myorder_new">',
+                '<div class="order_dis">',
+                '<div class="left">',
+                '<img src="{pic_cover}" width="50">',
+                '</div>',
+                '<div class="right">',
+                '{title}',
+                '</div>',
+                '<div style="clear:both"></div>',
                 '</div>',
                 '</div>',
-                '<div class="order-info">',
-                '<div class="flex row"><span class="label">订单号</span>{id}</div>',
-                '<div class="flex row"><span class="label">收货人</span>{consignee_info.name:htmlEncode}</div>',
-                '<div class="flex row"><span class="label">电话</span>{consignee_info.mobile:htmlEncode}</div>',
-                '<div class="flex row"><span class="label">地址</span>{consignee_info.province}{consignee_info.city}{consignee_info.address:htmlEncode}</div>',
-                '<div class="flex row"><span class="label">邮编</span>{consignee_info.zip:htmlEncode}</div>',
-                '<div class="flex row"><span class="label">配送时间</span>{delivery_time}</div>',
-                '<div class="flex row"><span class="label">支付方式</span>{payment}</div>',
-                '<div class="flex row"><span class="label">状态</span><span id="statusText">{status:this.getStatusText}</span></div>',
-                '<tpl if="coupon"><div class="flex row"><span class="label">拍券</span>{coupon.name}</div></tpl>',
-                '<tpl if="prop"><div class="flex row"><span class="label">道具</span>{prop.name}</div></tpl>',
+                '<div class="myorder" style="margin-top:-1px;">',
+                '<div class="orderlist">',
+                '<div class="left" style="width:100%;">',
+                '<ul>',
+                '<li>',
+                '成交价格:<span style="color:#e76049">{price}</span>',
+                '</li>',
+                '<li>',
+                '订单编号:{id}',
+                '</li>',
+                '<li>',
+                '订单金额:{total_pay}',
+                '</li>',
+                '<li style="margin-top:10px;">',
+                '电话:{consignee_info.mobile}',
+                '</li>',
+                '<li>',
+                '地址:{consignee_info.address}',
+                '</li>',
+                '<li >',
+                '邮编:{consignee_info.zip}',
+                '</li>',
+                '<li style="margin-top:10px;">',
+                '配送方式:{peisong}',
+                '</li>',
+                '<li>',
+                '支付方式:{payment}',
+                '</li>',
+                '<li >',
+                '订单状态:{[this.getStatusText(values.status)]}',
+                '</li>',
+                '<li >',
+                '下单时间:{ctime}',
+                '</li>',
+                '</ul>',
+                '</div>',
+                '<div style="clear:both"></div>',
+                '</div>',
+
                 '</div>', {
                     getStatusText: function(status) {
                         return WeiQuPai.Config.orderStatusText[status];
@@ -43,21 +82,86 @@ Ext.define('WeiQuPai.view.MyOrderDetail', {
                 }
             )
         }, {
-            xtype: 'disclosureitem',
-            cls: 'w-disclosure-item w-disclosure-item-single',
-            title: '查看晒单',
-            itemId: 'showOrder',
-            titleStyle: 'normal',
+            xtype: 'container',
+            baseCls: 'orderdetail_btn',
+            layout: 'hbox',
+            items: [{
+                xtype: 'container',
+                flex: 1,
+                html: '去支付',
+                baseCls: 'left'
+            }, {
+                xtype: 'container',
+                flex: 1,
+                html: '>',
+                baseCls: 'right'
+            }],
+            id: 'pay_btn',
             hidden: true
         }, {
-            xtype: 'disclosureitem',
-            cls: 'w-disclosure-item w-disclosure-item-single',
-            title: '查看物流',
-            itemId: 'shipment',
-            titleStyle: 'normal',
+            xtype: 'container',
+            baseCls: 'orderdetail_btn',
+            layout: 'hbox',
+            items: [{
+                xtype: 'container',
+                flex: 1,
+                html: '确认收货',
+                baseCls: 'left'
+            }, {
+                xtype: 'container',
+                flex: 1,
+                html: '>',
+                baseCls: 'right'
+            }],
+            id: 'confirm_btn',
             hidden: true
         }, {
-            xtype: 'bottombar'
+            baseCls: 'orderdetail_btn',
+            layout: 'hbox',
+            items: [{
+                xtype: 'container',
+                flex: 1,
+                html: '查看物流',
+                baseCls: 'left'
+            }, {
+                xtype: 'container',
+                flex: 1,
+                html: '>',
+                baseCls: 'right'
+            }],
+            itemId: 'logistics',
+            hidden: true
+        }, {
+            baseCls: 'orderdetail_btn',
+            layout: 'hbox',
+            items: [{
+                xtype: 'container',
+                flex: 1,
+                html: '我要晒单',
+                baseCls: 'left'
+            }, {
+                xtype: 'container',
+                flex: 1,
+                html: '>',
+                baseCls: 'right'
+            }],
+            itemId: 'shaidan',
+            hidden: true
+        }, {
+            xtype: 'container',
+            baseCls: 'orderdetail_btn',
+            layout: 'hbox',
+            items: [{
+                xtype: 'container',
+                flex: 1,
+                html: '退货说明',
+                baseCls: 'left'
+            }, {
+                xtype: 'container',
+                flex: 1,
+                html: '>',
+                baseCls: 'right'
+            }]
         }]
     },
 
@@ -69,37 +173,20 @@ Ext.define('WeiQuPai.view.MyOrderDetail', {
         WeiQuPai.Notify.newOrderClear(this.getRecord().get('id'));
         WeiQuPai.Notify.orderShipClear(this.getRecord().get('id'));
 
-        var payBtn = Ext.create('Ext.Button', {
-            text: '去支付',
-            action: 'pay',
-            cls: 'w-toolbar-button',
-            iconCls: 'icon-pay',
-            hidden: true
-        });
-        var showBtn = Ext.create('Ext.Button', {
-            text: '晒单',
-            action: 'showOrder',
-            cls: 'w-toolbar-button',
-            iconCls: 'icon-submit',
-            hidden: true
-        });
-        var confirmBtn = Ext.create('Ext.Button', {
-            text: '确认收货',
-            action: 'confirm',
-            cls: 'w-toolbar-button',
-            iconCls: 'icon-submit',
-            hidden: true
-        });
 
-        this.down('bottombar #buttonContainer').add([payBtn, showBtn, confirmBtn]);
+        // this.down('#order_btn').add([payBtn, showBtn, confirmBtn]);
         var status = this.getRecord().get('status');
         if (status == WeiQuPai.Config.orderStatus.STATUS_TOPAY) {
-            payBtn.show();
-        } else if (status == WeiQuPai.Config.orderStatus.STATUS_TODEAL || status == WeiQuPai.Config.orderStatus.STATUS_SHIPMENT) {
-            confirmBtn.show();
+            this.down('#pay_btn').show();
+        } else if (status == WeiQuPai.Config.orderStatus.STATUS_TODEAL) {
+
+        } else if (status == WeiQuPai.Config.orderStatus.STATUS_SHIPMENT) {
+            this.down('#confirm_btn').show();
+            his.down('#logistics').show();
         }
-        if (status == WeiQuPai.Config.orderStatus.STATUS_SHIPMENT || status == WeiQuPai.Config.orderStatus.STATUS_FINISH) {
-            this.down('#shipment').show();
+        if (status == WeiQuPai.Config.orderStatus.STATUS_FINISH) {
+            this.down('#shaidan').show();
+            this.down('#logistics').show();
         }
         var orderId = this.getRecord().get('id');
         var model = WeiQuPai.model.Order;
