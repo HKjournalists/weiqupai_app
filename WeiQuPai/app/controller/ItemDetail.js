@@ -8,9 +8,10 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
             paiBtn: 'container[itemId=paiBtn]',
             commentBtn: 'button[action=comment]',
             shareBtn: 'button[action=share]',
+            paiBtn: 'button[action=pai]',
             pageView: 'itemdetail',
             commentForm: 'commentform',
-
+            commentView: 'comment',
             descContainer: 'itemdetail container[itemId=itemDesc]'
         },
         control: {
@@ -21,19 +22,17 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
                 tap: 'showBrand'
             },
             paiBtn: {
-                pai: 'showOrderView'
+                tap: 'showOrderView'
             },
             commentBtn: {
                 tap: function() {
                     if (!WeiQuPai.Util.checkLogin()) return false;
-                    var auctionId = this.getPageView().auctionData.id;
                     var itemId = this.getPageView().auctionData.item_id;
                     var form = WeiQuPai.Util.createOverlay('WeiQuPai.view.InputComment', {
                         height: 48,
                         showAnimation: false,
                         hideAnimation: false
                     });
-                    form.down('hiddenfield[name=auction_id]').setValue(auctionId);
                     form.down('hiddenfield[name=item_id]').setValue(itemId);
                     form.show();
                 }
@@ -42,10 +41,12 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
                 tap: 'doShare'
             },
             pageView: {
+                refresh: 'doRefresh'
+            },
+            commentView: {
                 avatartap: 'doAvatarTap',
                 uptap: 'doUpTap',
-                commenttap: 'doCommentTap',
-                refresh: 'doRefresh'
+                commenttap: 'doCommentTap'
             },
             commentForm: {
                 publish: 'doPublishComment'
@@ -116,14 +117,14 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
             url: WeiQuPai.Config.apiUrl + '/?r=appv2/comment/post&token=' + user.token,
             method: 'post',
             success: function(form, result) {
+                WeiQuPai.Util.unmask();
+                var data = form.getValues();
                 //评论提交成功后重置表单
                 form.reset();
                 form.hide();
-                WeiQuPai.Util.unmask();
-                var list = self.getPageView();
+                var list = self.getCommentView();
                 list.msgbox.hide();
-                list.getStore().add(result.commentList);
-                list.updateAllListItems();
+                list.getStore().insert(0, result);
             },
             failure: function(form, result) {
                 WeiQuPai.Util.unmask();
@@ -139,40 +140,22 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
     },
 
     doAvatarTap: function(index, record) {
-        var user = WeiQuPai.Util.checkLogin();
-        if (!user) return;
         var uid = record.get('uid');
-        if (user.id == uid || WeiQuPai.Util.isFriend(uid)) {
-            WeiQuPai.Util.forward('showuser', {
-                param: uid
-            });
-        } else {
-            if (!this.addFriendLayer) {
-                var config = {
-                    height: 130
-                };
-                this.addFriendLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.AddFriendButtonLayer', config);
-            }
-            this.addFriendLayer.setUid(uid);
-            this.addFriendLayer.show();
-        }
+        WeiQuPai.Util.forward('showuser', {
+            param: uid
+        });
     },
 
     doUpTap: function(index, record) {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
-        var id = record.get('id');
+        var id = parseInt(record.get('id'));
         //赞过的不允许再赞
-        if (!WeiQuPai.Util.cacheUp(id)) return;
+        if (WeiQuPai.Util.hasCache('comment_up', id)) return;
+        WeiQuPai.Util.setCache('comment_up', id);
 
-        Ext.Ajax.request({
-            url: WeiQuPai.Config.apiUrl + '/?r=app/comment/up&token=' + user.token + '&id=' + id,
-            method: 'get',
-            success: function(rsp) {
-                rsp = Ext.decode(rsp);
-                if (!WeiQuPai.Util.invalidToken(rsp)) return false;
-            }
-        });
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/comment/up&token=' + user.token + '&id=' + id;
+        WeiQuPai.Util.get(url);
         //异步请求的同时，给数量加1
         record.set('up_num', parseInt(record.get('up_num')) + 1);
     },
@@ -181,14 +164,12 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
     doCommentTap: function(index, record) {
         if (!WeiQuPai.Util.checkLogin()) return;
         var replyId = record.get('id');
-        var auctionId = this.getPageView().auctionData.id;
         var itemId = this.getPageView().auctionData.item_id;
         var form = WeiQuPai.Util.createOverlay('WeiQuPai.view.InputComment', {
             height: 48,
             showAnimation: false,
             hideAnimation: false
         });
-        form.down('hiddenfield[name=auction_id]').setValue(auctionId);
         form.down('hiddenfield[name=item_id]').setValue(itemId);
         form.down('hiddenfield[name=reply_id]').setValue(replyId);
         form.show();

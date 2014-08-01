@@ -16,6 +16,7 @@ Ext.define('WeiQuPai.view.Main', {
 
     //重写push/pop方法，修复多次点击会重复push/pop的问题
     push: function() {
+        console.log(this.isAnimating);
         if (this.isAnimating) return;
         return this.callParent(arguments);
     },
@@ -24,7 +25,7 @@ Ext.define('WeiQuPai.view.Main', {
         if (this.isAnimating) return;
         prev = this.callParent(arguments);
         //pop不能触发tab里view的activate事件，需要手动触发一下
-        if (prev && prev.isXType('maintab')) {
+        if (prev && prev.isXType('maincard')) {
             prev.getActiveItem().fireEvent('activate');
         }
         return prev;
@@ -32,7 +33,6 @@ Ext.define('WeiQuPai.view.Main', {
 
     //初始化navigation,设置动画执行的标识
     initialize: function() {
-        this.getLayout().setAnimation(Ext.os.is.iOS ? 'cover' : null);
         this.callParent(arguments);
         this.addAnimation();
         //保留引用
@@ -60,7 +60,6 @@ Ext.define('WeiQuPai.view.Main', {
     addAnimation: function() {
         var me = this;
         var ani = this.getLayout().getAnimation();
-        if (!ani.id) return;
         ani.getInAnimation().on('animationstart', function() {
             me.isAnimating = true;
         });

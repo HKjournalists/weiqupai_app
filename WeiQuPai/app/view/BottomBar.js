@@ -9,14 +9,15 @@ Ext.define('WeiQuPai.view.BottomBar', {
         },
         cls: 'bottombar',
         items: [{
-            iconCls: 'btm1',
+            cls: 'btm1',
             action: 'share'
         }, {
-            iconCls: 'btm2',
+            cls: 'btm2',
             action: 'pai'
         }, {
-            iconCls: 'btm3',
+            cls: 'btm3',
             action: 'comment'
         }]
     }
+
 });

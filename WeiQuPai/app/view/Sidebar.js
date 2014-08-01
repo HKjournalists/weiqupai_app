@@ -16,30 +16,25 @@ Ext.define('WeiQuPai.view.Sidebar', {
         layout: 'vbox',
         items: [{
             xtype: 'container',
-            layout: 'hbox',
             items: [{
-                flex: 5,
                 id: 'personal',
                 tpl: new Ext.XTemplate(
                     '<div class="title">',
                     '<img src="{[WeiQuPai.Util.getAvatar(values.avatar, 100)]}" width="50"/>',
                     '<span>{nick:htmlEncode}</span>',
+                    '<div class="return"></div>',
                     '<div style="clear:both"></div>',
                     '</div>'
                 ),
 
-            }, {
-                xtype: 'button',
-                flex: 1,
-                text: '!',
-                baseCls: 'return'
             }]
         }, {
             xtype: 'button',
             flex: 1,
             text: '首页',
             id: 'today',
-            cls: 'button_active'
+            cls: 'button_active',
+            action: 'ucenter'
         }, {
             xtype: 'button',
             flex: 1,

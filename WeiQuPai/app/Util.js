@@ -246,7 +246,7 @@ Ext.define("WeiQuPai.Util", {
     //生成一个展现提示信息的容器
     msgbox: function(html, cfg) {
         var config = {
-            cls: 'w-content',
+            cls: 'w-msgbox',
             html: html,
             itemId: 'msgbox',
             scrollDock: 'top',

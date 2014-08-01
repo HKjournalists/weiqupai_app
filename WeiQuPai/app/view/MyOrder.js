@@ -1,38 +1,97 @@
 Ext.define('WeiQuPai.view.MyOrder', {
     extend: 'Ext.dataview.List',
-    xtype: 'myauction',
+    xtype: 'myorder',
     requires: ['WeiQuPai.store.MyOrder', 'WeiQuPai.view.MyOrderDetail', 'WeiQuPai.view.LoginTip'],
     config: {
+        cls: 'bg_ef',
         loadingText: null,
         disableSelection: true,
-        store: 'MyAuction',
+        store: 'MyOrder',
         itemTpl: new Ext.XTemplate(
-            '<div class="myauction-row">',
-            '<div class="myauction-img"><img src="{[this.getCover(values.pic_cover)]}"/><span class="x-badge"></span></div>',
-            '<div class="info">',
-            '<h2>{title}</h2>',
-            '<p>成交价<span class="fbig">￥{price}</span>',
-            '<tpl if="rank != -1">',
-            '<p>此价格击败了<span class="fbig">{rank}%</span>的拍友</p>',
-            '</tpl>',
-            '<p>{ctime}</p>',
+            '<div class="myorder">',
+            '<div class="orderlist">',
+            '<div class="left">',
+            '<ul>',
+            '<li>',
+            '成交价格:<span style="color:#e76049">￥{price}</span>',
+            '</li>',
+            '<li>',
+            '订单编号:{id}',
+            '</li>',
+            '<li>',
+            '订单金额:{total_pay}',
+            '</li>',
+            '<li>',
+            '下单时间:{ctime}',
+            '</li>',
+            '</ul>',
             '</div>',
-            '<tpl if="this.notPay(status)">',
-            '<div class="pay-btn-wrap"><div class="pay-btn">去支付</div></div>',
-            '</tpl>', {
-                notPay: function(status) {
-                    return status == WeiQuPai.Config.orderStatus.STATUS_TOPAY;
+            '<div class="right">',
+            '<ul>',
+            '<li>',
+            '{[this.getStatusText(values.status)]}',
+            '</li>',
+            '<li style="height:18px;color:#e76049;">',
+            '<tpl if="this.shipment(status)">',
+            '查看物流',
+            '</tpl>',
+            '</li>',
+
+            '<li><input type="button" value="{[this.getButtonText(values.status)]}" class="btn_e7"/></li>',
+            '</ul>',
+            '</div>',
+            '<div style="clear:both"></div>',
+            '</div>',
+            '<div class="order_dis">',
+            '<div class="left">',
+            '<img src="{[this.getCover(values.pic_cover)]}" width="50">',
+            '</div>',
+            '<div class="right">',
+            '{title}',
+            '</div>',
+            '<div style="clear:both"></div>',
+            '</div>',
+            '</div>', {
+                getStatusText: function(status) {
+                    return WeiQuPai.Config.orderStatusText[status];
+                },
+                getButtonText: function(status) {
+                    var text;
+                    if (status = WeiQuPai.Config.orderStatus.STATUS_TOPAY) {
+                        text = "去支付";
+                    } else if (status = WeiQuPai.Config.orderStatus.STATUS_FINISH) {
+                        text = "去晒单";
+                    } else if (status = WeiQuPai.Config.orderStatus.STATUS_SHIPMENT) {
+                        text = "确认收货";
+                    } else if (status = WeiQuPai.Config.orderStatus.STATUS_TODEA) {
+                        text = "确认收货";
+                    }
+                    // var text = {
+                    //     WeiQuPai.Config.orderStatus.STATUS_TOPAY: '去支付',
+                    //     WeiQuPai.Config.orderStatus.STATUS_FINISH: '去晒单',
+                    //     WeiQuPai.Config.orderStatus.STATUS_SHIPMENT: '确认收货',
+                    //     WeiQuPai.Config.orderStatus.STATUS_TODEAL: '确认收货'
+                    // };
+
+                    return text;
                 },
                 getCover: function(cover) {
                     return WeiQuPai.Util.getImagePath(cover, '290');
+                },
+                shipment: function(status) {
+                    return status == WeiQuPai.Config.orderStatus.STATUS_SHIPMENT
                 }
             }
         ),
         items: [{
-            xtype: 'titlebar',
-            title: '已拍',
+            xtype: 'vtitlebar',
+            title: '我的订单',
+            cls: 'titlebar2',
             docked: 'top',
-            cls: 'w-title'
+            items: [{
+                iconCls: 'user',
+                action: 'ucenter'
+            }]
         }]
 
     },

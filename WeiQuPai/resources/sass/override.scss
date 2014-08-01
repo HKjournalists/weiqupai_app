@@ -77,3 +77,96 @@
 	margin-left:10px;
 	width:auto;
 }
+.w-tip{
+	background:#fff5cd;
+	color:#c60;
+	font-size:12px;
+	text-align:center;
+	height:30px;
+	line-height:30px;
+}
+.w-imageviewer .x-img.x-img-background{
+	background-size:contain;
+}
+.w-loading-mask, .w-loading-mask .x-mask-inner{
+	background:transparent;
+	font-size:.8em;
+}
+.w-loading-mask .x-loading-spinner{
+	font-size:2.2em;
+}
+.w-toast{
+	background:rgba(0,0,0,.8);
+	max-width:90%;
+	min-width:10em;
+	line-height:1.5;
+	font-size:.8em;
+	color:#fff;
+	padding:.8em 1em;
+	border-radius:5px;
+	text-align:center;
+}
+
+//disclosure的右箭头
+.w-disclosure-item{
+	background:#fff;
+	margin-top:10px;
+	padding:10px;
+}
+.w-disclosure-group{
+	margin-top:10px;
+}
+.w-disclosure-group .w-disclosure-item{
+	border-bottom:1px solid #f6f6f6;
+	margin-top:0;
+}
+.w-disclosure-group .w-disclosure-item:last-child{
+	border-bottom:0;
+}
+
+.w-disclosure-title{
+	color:#e76049;
+}
+.w-disclosure-content-right{
+	color:#666;
+}
+.w-disclosure-content-bottom{
+	line-height:1.5;
+	margin-top:10px;
+}
+.w-disclosure{
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-box-pack:center;
+	-moz-box-pack:center;
+	box-pack:center;
+}
+.w-disclosure-item-pressed{
+	background-color:#ddd;	
+}
+.w-disclosure-inner{
+	display:inline;
+}
+.w-disclosure-inner:after{
+	content: '!';
+	font-family: 'iOS7';
+	color: #e76049;
+	font-size: 12px;
+	text-align: center;
+	background-color: transparent;
+}
+
+.x-dataview-item{
+  background-color:#fff;
+}
+.x-dataview-item.x-item-pressed{
+  background-color:#e0e0e0;
+}
+
+.w-msgbox{
+  padding: 0 10px 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #383838;
+  text-align:center;
+}

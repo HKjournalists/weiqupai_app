@@ -15,6 +15,7 @@ $font_12:12px;
 $font_10:10px;
 $color_e7:#e76049;
 
+
 //首页吃喝玩乐按钮样式
 @mixin banner_style
 {
@@ -43,7 +44,7 @@ $color_e7:#e76049;
  @mixin details_title_top
    {
       background-size:auto 8px;
-      background-position:5px 0px;
+      background-position:5px center;
       text-indent:18px;
    }
 //拍品详情 简介上方按钮
@@ -467,22 +468,19 @@ html body
     padding:$zero;
     margin-top:-52px;
    }
-   .bottom_detail1 .btm1
+   .bottombar .btm1
    {
-    margin-left:20px;
     margin-top:17px;
     width:30px;
     height:30px;
    }
-    .bottom_detail1 .btm2
+    .bottombar .btm2
    {
-    margin-left:-10px;
     width:50px;
     height:50px;
    }
-    .bottom_detail1 .btm3
+    .bottombar .btm3
    {
-    margin-left:-11px;
     margin-top:17px;
     width:30px;
     height:30px;
@@ -547,6 +545,8 @@ html body
      flex:1;
      -moz-box-flex: 1;  
      -webkit-box-flex: 1;
+     padding: 7px 20px;
+     color: white;
    }
    .detail_pai
    {  
@@ -768,6 +768,9 @@ html body
     padding:10px 0px;
     border-bottom:1px solid #efefef;
   }
+  .discard .list:nth-last-child(1){
+   border-bottom:0px;
+   }
    .message .list
   {
     width:100%;
@@ -913,7 +916,7 @@ html body
    {
       margin: 20px 5px 0px;
       float:left;
-      width: 7em;
+      width: 120px;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
@@ -921,9 +924,16 @@ html body
     .personal .return
    {
      background:transparent;
-     color:$color_fff;
-     padding: 32px 0px 0px 0px;
-     text-align:right;
+     background: transparent;
+      background-image: url("../images/zd.png");
+      background-repeat: no-repeat;
+      background-position: right center;
+      background-size: auto 10px;
+      margin: 20px 10px;
+      float: right;
+      width: 20px;
+      height: 12px;
+      height: 12px;
 
    }
    .personal .return .x-button-label
@@ -1678,7 +1688,7 @@ html body
     }
     .order_dis .right
     {
-     width:75%;
+     width:65%;
      float:left;
      margin:5px;
      word-break: break-all;
@@ -1708,7 +1718,7 @@ html body
      margin-right:10px;
      text-align:right;
     }
-    .orderdetail_btn_e7
+    .orderdetail_btn_e7, .w-button
     {
      border:0px;
      border-radius:0px;
@@ -1716,8 +1726,7 @@ html body
      color:$color_fff;
      margin-top:10px;
      height:35px;
-     padding-top:10px;
-
+     line-height:35px;
     }
     @mixin orderBtnH
     {
@@ -1753,20 +1762,20 @@ html body
      background: #fff url("../images/yinlian.jpg");
      background-repeat: no-repeat;
      background-size: auto 18px;
-     background-position: 115px center;
      border: 0px;
      border-radius: 0px;
      background-position: 80px center;
+     width:100%;
     }
       .orderdetail_btn5
     {  
      background:$color_fff url('../images/zhifubao.jpg');
      background-repeat: no-repeat;
      background-size: auto 18px;
-     background-position: 115px center;
      border: 0px;
      border-radius: 0px;
      background-position: 80px center;
+     width:100%;
     }
     .orderdetail_btn6
     {  
@@ -1897,7 +1906,6 @@ html body
     .confirm_title
     {
      width:100%;
-     border:1px solid #efefef;
      background:#f6f6f6;
      margin:5px 0px;
     }
@@ -1957,12 +1965,12 @@ html body
      }
      .comfirm_btn1
      {
-      background:url('../images/address.png') no-repeat;
+      background:url('../images/radio.png') no-repeat;
       @include paisubtn;
      }
      .comfirm_btn2
      {
-      background:url('../images/address_active.png') no-repeat;
+      background:url('../images/radio_check.png') no-repeat;
       @include paisubtn;
      }
     //抢拍成功页面
@@ -2025,7 +2033,7 @@ html body
     .plist
     {
     
-     background:$color_fff;
+     //background:$color_fff;
      display:box;
      margin-top:8px;
      width:100%;
@@ -2038,23 +2046,34 @@ html body
      background-position:5px 8px;
      color:$color_e7;
      box-flex:1;
-     text-indent:20px;
-     padding-top:14px;
+     text-indent: 60px;
+     padding-top: 15px;
+     height: 40px;
+     width:50%;float:left;
     }
-    .plist .left
+    .plist .m5
     {
-     background:url('../images/pai_m5.png') no-repeat;
+     background:url('../images/m5.png') no-repeat;
      @include plistImg;
+    }
+    .plist .m10
+    {
+     background:url('../images/m10.png') no-repeat;
+     @include plistImg;
+    }
+    .plist .m20{
+      background:url('../images/m20.png') no-repeat;
+      @include plistImg;
+    }
+    .plist .m50{
+      background:url('../images/m50.png') no-repeat;
+      @include plistImg;
     }
     .plist .right
     {
      box-flex:1;
      padding:14px;
-    }
-    .plist .left1
-    {
-     background:url('../images/pai_m5.png') no-repeat;
-     @include plistImg;
+    width:50%;float:left;text-align:right;padding: 15px 5px;
     }
     .plist_shuo
     {
@@ -2118,4 +2137,82 @@ html body
     .color_e7
     {
      color:$color_e7;
+    }
+    //图文详情
+    .tuwen
+    {
+      padding: 10px;
+      font-size: 14px;
+      word-wrap: break-word;
+      word-break: break-word;
+      line-height: 2;
+      color: #383838;
+    }
+    .input_text
+    {
+     background:$color_fff;
+     border:1px solid #ccc;
+     border-radius:3px;
+     margin:5px 10px;
+    }
+    .input_text .x-input-el{
+      height:30px;
+      min-height:1em;
+      width:100%;
+    }
+    .send_btn{
+      padding:8px 12px;
+      height:30px;
+    }
+    .x-field-input
+    {
+     border:0px;
+    }
+    @mixin share_btn
+    {
+      background-size: 45px 45px;
+      padding-top: 35px;
+      margin: 5px;
+      background-position: center 5px;
+      height: 80px;
+      font-size:14px;
+      border:0px;
+      color:black;
+    }
+    .xl-share-button
+    {
+     background:url('../images/wb.png') no-repeat;
+     @include share_btn;
+    }
+     .pyq-share-button
+    {
+      background:url('../images/pyq.png') no-repeat;
+      @include share_btn;
+    }
+     .wx-share-button
+    {
+      background:url('../images/wx.png') no-repeat;
+      @include share_btn;
+    }
+    .w-cancel
+    {
+     height:40px;
+     border:0px;
+     border-top:5px solid #f6f6f6;
+     border-radius:0px;
+    }
+    .share-title
+    {
+     background:white;height:30px;text-align:center;font-size:18px;padding-top:6px;
+    }
+
+    .radio{
+      width:18px;
+      height:18px;
+      background:url('../images/radio.png') no-repeat;
+      background-size:18px 18px;
+    }
+    .radio_check{
+      background:url('../images/radio_check.png') no-repeat;
+      background-size:18px 18px;
     }

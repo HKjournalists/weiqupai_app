@@ -1,17 +1,15 @@
-Ext.define('WeiQuPai.store.MyOrder', {
+Ext.define('WeiQuPai.store.MyCoupon', {
     extend: 'Ext.data.Store',
-    requires: ['WeiQuPai.model.Order'],
     config: {
-        storeId: 'MyOrder',
         autoLoad: false,
-        model: 'WeiQuPai.model.Order',
-        pageSize: 10,
+        fields: ['id', 'coupon_info', 'coupon_id', 'num'],
         proxy: {
             type: 'ajax',
-            url: WeiQuPai.Config.host + '/?r=appv2/MyOrder',
+            url: WeiQuPai.Config.host + '/?r=appv2/myCoupon',
             reader: {
                 type: 'json'
             },
+            pageParam: false,
             startParam: false,
             limitParam: false
         }

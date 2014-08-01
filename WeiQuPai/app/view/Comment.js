@@ -10,7 +10,7 @@ Ext.define('WeiQuPai.view.Comment', {
         pressedCls: '',
         cls: 'discard',
         itemTpl: new Ext.XTemplate(
-            '<div class="list">',
+            '<div class="list" data-id="{id}">',
             '<div class="one">',
             '<div class="img">',
             '<img src="{[WeiQuPai.Util.getAvatar(values.avatar, 80)]}" width="40">',
@@ -59,16 +59,16 @@ Ext.define('WeiQuPai.view.Comment', {
     handleItemTap: function() {
         var me = this;
         this.element.dom.addEventListener('click', function(e) {
-            var row = Ext.fly(e.target).findParent('.comment-row');
+            var row = Ext.fly(e.target).up('.list');
             if (!row) return;
             var id = row.getAttribute('data-id');
             var index = me.getStore().indexOfId(id);
             var record = me.getStore().getAt(index);
-            if (e.target.className == 'avatar') {
+            if (e.target.tagName.toLowerCase() == 'img') {
                 me.fireEvent('avatartap', index, record);
                 return false;
             }
-            if (e.target.className == 'up') {
+            if (e.target.className == 'like') {
                 me.fireEvent('uptap', index, record);
                 return false;
             }
