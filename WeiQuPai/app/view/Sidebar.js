@@ -118,11 +118,13 @@ Ext.define('WeiQuPai.view.Sidebar', {
 
         //跳转到个人中心
         this.down('#personal').on('tap', function() {
+
             this.toggle();
             var user = WeiQuPai.Util.checkLogin();
             if (!user) return;
+            var uid = user.id;
             WeiQuPai.Util.forward('showuser', {
-                param: user.id
+                uid: uid
             });
         }, this, {
             'element': 'element'
