@@ -19,7 +19,7 @@ Ext.define('WeiQuPai.controller.Today', {
 
     heartBeat: function(dataItem) {
         var me = this;
-        var el = dataItem.element.down('.heart');
+        var el = dataItem.down('.heart');
         var outAnim = Ext.create('Ext.Anim', {
             autoClear: false,
             from: {

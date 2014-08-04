@@ -40,16 +40,16 @@ Ext.define('WeiQuPai.controller.Pay', {
 
     //选择使用拍券
     selectCoupon: function(list, index, dataItem, record, e) {
-        if (record.get('coupon_info').expired) {
+        if (record.get('expired')) {
             Ext.toast('该拍券已经过期，不能使用');
             return;
         }
         WeiQuPai.navigator.pop();
         var order = this.getPageView().getOrderData();
-        this.getCouponPanel().setContent(record.get('coupon_info').name);
+        this.getCouponPanel().setContent(record.get('name'));
         var curr_price = parseFloat(order.price);
-        var total_pay = Math.max(0, curr_price - parseFloat(record.get('coupon_info').value));
-        order.coupon = record.get('coupon_id');
+        var total_pay = Math.max(0, curr_price - parseFloat(record.get('value')));
+        order.coupon = record.get('id');
         order.total_pay = total_pay;
         this.getPageView().down('#needPay').setContent(order.total_pay.toFixed(2), 'color_e7');
     },

@@ -1,12 +1,11 @@
 Ext.define('WeiQuPai.view.Today', {
-    extend: 'Ext.dataview.List',
+    extend: 'Ext.DataView',
     xtype: 'today',
     requires: ['WeiQuPai.view.Banner', 'WeiQuPai.view.ItemDetail', 'WeiQuPai.view.SpecialSale'],
     config: {
         loadingText: null,
         store: 'Auction',
-        cls: 'todaylist',
-        style: 'background:#f6f6f6;',
+        cls: 'bg_ef',
         disableSelection: true,
         scrollToTopOnRefresh: false,
         plugins: [{
@@ -77,11 +76,11 @@ Ext.define('WeiQuPai.view.Today', {
             title: '微趣拍',
             docked: 'top',
             items: [{
-                iconCls: 'user',
+                baseCls: 'user',
                 action: 'ucenter'
             }, {
                 align: 'right',
-                iconCls: 'list',
+                baseCls: 'list_btn',
                 action: 'list'
             }]
         }, {

@@ -16,7 +16,6 @@ Ext.define('WeiQuPai.view.Main', {
 
     //重写push/pop方法，修复多次点击会重复push/pop的问题
     push: function() {
-        console.log(this.isAnimating);
         if (this.isAnimating) return;
         return this.callParent(arguments);
     },

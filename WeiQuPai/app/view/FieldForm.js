@@ -1,4 +1,3 @@
-
 Ext.define('WeiQuPai.view.FieldForm', {
     extend: 'Ext.form.Panel',
     xtype: 'fieldform',
@@ -6,78 +5,74 @@ Ext.define('WeiQuPai.view.FieldForm', {
         title: null,
         field: null,
         value: null,
-        items: [
-            {
-                xtype: 'titlebar',
-                title: '',
-                docked: 'top',
-                cls: 'w-title'
-            },
-            {
-                xtype: 'fieldset',
-                cls: 'w-fieldset',
-                items: [
-                    {
-                        name: 'name',
-                        xtype: 'textfield',
-                        cls: 'w-input-fullwidth',
-                        placeHolder: '',
-                        autoComplete: false
-                    }
-                ]
-            },
-            {
+        scrollable: 'vertical',
+        cls: 'bg_ef',
+        items: [{
+            xtype: 'vtitlebar',
+            docked: 'top',
+            items: [{
                 xtype: 'button',
-                cls: 'w-button w-margin',
-                text: '保存',
-                action: 'save',
-                disabled: true
-            },
-            {
-                xtype: 'bottombar'
-            }
-        ]
+                baseCls: 'arrow_left',
+                action: 'back'
+            }]
+        }, {
+            xtype: 'fieldset',
+            cls: 'w-fieldset',
+            items: [{
+                name: 'name',
+                xtype: 'textfield',
+                cls: 'w-input-fullwidth',
+                placeHolder: '',
+                autoComplete: false
+            }]
+        }, {
+            xtype: 'button',
+            baseCls: 'w-button',
+            text: '保存',
+            action: 'save',
+            disabled: true
+        }]
     },
 
-    applyField: function(field){
+    applyField: function(field) {
         this.down('textfield').setName(field);
         return field;
     },
 
-    applyTitle: function(title){
+    applyTitle: function(title) {
         this.down('textfield').setPlaceHolder(title);
         this.down('titlebar').setTitle(title);
         return title;
     },
 
-    applyValue: function(value){
+    applyValue: function(value) {
         this.down('textfield').setValue(value);
         return value;
     },
 
-    initialize: function(){
+    initialize: function() {
         this.setButtonState();
         this.down('textfield').on('keyup', this.setButtonState, this);
         this.down('button[action=save]').on('tap', this.saveProfile, this);
     },
 
-    setButtonState: function(){
+    setButtonState: function() {
         var disabled = !this.down('textfield').getValue();
         this.down('button[action=save]').setDisabled(disabled);
     },
 
-    saveProfile: function(){
+    saveProfile: function() {
         var user = WeiQuPai.Cache.get('currentUser');
         var field = this.getField();
         var value = this.down('textfield').getValue();
         //没修改直接返回
-        if(user[field] == value){
+        if (user[field] == value) {
             Ext.Viewport.down('main').pop();
             return;
         }
         var form = this;
         WeiQuPai.Util.mask();
-        WeiQuPai.Util.updateProfile(this.getValues(), function(){
+        WeiQuPai.Util.updateProfile(this.getValues(), function() {
             WeiQuPai.Util.unmask();
             form.reset();
             var preview = Ext.Viewport.down('main').pop();

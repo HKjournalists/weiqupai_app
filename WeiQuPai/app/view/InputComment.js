@@ -7,7 +7,7 @@ Ext.define('WeiQuPai.view.InputComment', {
             'type': 'hbox',
             'align': 'center'
         },
-        scrollable: false,
+        scrollable: null,
         items: [{
             xtype: 'textfield',
             name: 'content',
@@ -29,6 +29,9 @@ Ext.define('WeiQuPai.view.InputComment', {
         }, {
             xtype: 'hiddenfield',
             name: 'item_id'
+        }, {
+            xtype: 'hiddenfield',
+            name: 'auction_id'
         }]
     },
 

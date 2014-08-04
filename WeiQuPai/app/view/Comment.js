@@ -59,7 +59,7 @@ Ext.define('WeiQuPai.view.Comment', {
     handleItemTap: function() {
         var me = this;
         this.element.dom.addEventListener('click', function(e) {
-            var row = Ext.fly(e.target).up('.list');
+            var row = Ext.fly(e.target).findParent('.list');
             if (!row) return;
             var id = row.getAttribute('data-id');
             var index = me.getStore().indexOfId(id);

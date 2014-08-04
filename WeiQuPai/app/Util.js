@@ -8,16 +8,7 @@ Ext.define("WeiQuPai.Util", {
             bottom: 0,
             left: 0,
             hidden: true,
-            height: '50%',
             width: '100%',
-            showAnimation: {
-                type: 'slideIn',
-                direction: 'up'
-            },
-            hideAnimation: {
-                type: 'slideOut',
-                direction: 'down'
-            },
             modal: true,
             hideOnMaskTap: true
         };
@@ -67,18 +58,13 @@ Ext.define("WeiQuPai.Util", {
      * @Param int picHeight 要获取的图片高度
      */
     showCameraLayer: function(picWidth, picHeight, crop, callback) {
-        if (!this.cameraLayer) {
-            var config = {
-                height: 200
-            };
-            this.cameraLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.CameraLayer', config);
-        }
-        this.cameraLayer.setPicWidth(picWidth);
-        this.cameraLayer.setPicHeight(picHeight);
-        this.cameraLayer.setCrop(crop);
-        this.cameraLayer.setCallback(callback);
-        this.cameraLayer.show();
-        return this.cameraLayer;
+        var cameraLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.CameraLayer');
+        cameraLayer.setPicWidth(picWidth);
+        cameraLayer.setPicHeight(picHeight);
+        cameraLayer.setCrop(crop);
+        cameraLayer.setCallback(callback);
+        cameraLayer.show();
+        return cameraLayer;
     },
 
     mask: function(msg) {
@@ -155,10 +141,6 @@ Ext.define("WeiQuPai.Util", {
         //注册之后绑定推送
         WeiQuPai.Util.bindPush();
 
-        //登录后拍圈要清空并刷新
-        var circle = Ext.Viewport.down('circle');
-        circle && circle.setForceReload(true);
-
         //更新sidebar的状态
         WeiQuPai.sidebar.updateUserInfo();
 
@@ -200,12 +182,7 @@ Ext.define("WeiQuPai.Util", {
                 method: 'get'
             });
             //删除用户相关的cache
-            WeiQuPai.Cache.remove('currentUser');
-            WeiQuPai.Cache.remove('user_data');
-            //退出登录后拍圈要清空并刷新
-            var circle = Ext.Viewport.down('circle');
-            circle && circle.setForceReload(true);
-
+            WeiQuPai.Util.clearCache();
         }
         callback && callback();
     },
@@ -223,7 +200,7 @@ Ext.define("WeiQuPai.Util", {
         }
         if (!changed) return;
 
-        var url = WeiQuPai.Config.apiUrl + '/?r=app/profile/update&token=' + user.token;
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/profile/update&token=' + user.token;
         WeiQuPai.Util.post(url, data, function(rsp) {
             //更新本地的用户设置缓存
             user = Ext.merge(user, data);
@@ -256,6 +233,21 @@ Ext.define("WeiQuPai.Util", {
         return Ext.create('Ext.Container', config);
     },
 
+    //更新用户个人资料的缓存
+    updateUserCache: function(field, value) {
+        var user = WeiQuPai.Cache.get('currentUser');
+        if (Ext.isObject(field)) {
+            user = Ext.merge(user, field);
+        } else {
+            user[field] = value;
+        }
+        WeiQuPai.Cache.set('currentUser', user);
+    },
+
+    clearCache: function() {
+        WeiQuPai.Cache.remove('currentUser');
+        WeiQuPai.Cache.remove('user_data');
+    },
     //cache数据，每种类型的cache列表最多保存100个
     setCache: function(type, id) {
         var data = WeiQuPai.Cache.get('user_data') || {};

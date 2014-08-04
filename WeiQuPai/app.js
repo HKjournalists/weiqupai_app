@@ -20,14 +20,14 @@ Ext.application({
     ],
 
     controllers: [
-        'Main', 'Today', 'MyAuction', 'MyOrder', 'MyAuctionDetail', 'ItemDetail', 'Order', 'ShowOrder', 'Circle', 'ShowUser',
+        'Main', 'Today', 'MyAuction', 'MyOrder', 'MyOrderDetail', 'ItemDetail', 'Order', 'ShowOrder', 'Circle', 'ShowUser',
         'My', 'Setting', 'MyFriend', 'MyConsignee', 'Private', 'NewMessage', 'Login', 'Register', 'Profile', 'CameraLayer',
         'NewFriend', 'Routes', 'SpecialSale', 'Pay'
     ],
     views: ['Main'],
     stores: [
-        'Auction', 'Comment', 'Banner', 'MyOrder', 'MyConsignee', 'Circle', 'UserFeed', 'UserFriend', 'UserProp', 'MyCoupon',
-        'FriendRequest', 'SpecialSale'
+        'Auction', 'Comment', 'Banner', 'MyOrder', 'MyConsignee', 'Circle', 'UserFeed', 'MyProp', 'MyCoupon',
+        'SpecialSale', 'Coupon', 'Prop'
     ],
     icon: {
         '57': 'resources/icons/icon.png',

@@ -1,11 +1,22 @@
 Ext.define('WeiQuPai.view.MyCoupon', {
     extend: 'Ext.Container',
     xtype: 'mycoupon',
+    requires: ['WeiQuPai.view.ExchangeCoupon'],
     config: {
         selectMode: false,
-        cls: 'paijuan',
+        cls: 'bg_ef',
         scrollable: 'vertical',
-
+        plugins: [{
+            type: 'wpullrefresh',
+            lastUpdatedText: '上次刷新：',
+            lastUpdatedDateFormat: 'H点i分',
+            loadingText: '加载中...',
+            pullText: '下拉刷新',
+            releaseText: '释放立即刷新',
+            loadedText: '下拉刷新',
+            scrollerAutoRefresh: true,
+            refreshFn: 'fetchLastest',
+        }],
         items: [{
             xtype: 'vtitlebar',
             title: '我的拍券',
@@ -17,8 +28,8 @@ Ext.define('WeiQuPai.view.MyCoupon', {
             loadingText: null,
             itemTpl: new Ext.XTemplate(
                 '<div class="plist">',
-                '<div class="m{coupon_info.value}">{coupon_info.name} X {num}</div>',
-                '<div class="right" >过期时间：{coupon_info.expire_time} <tpl if="coupon_info.expired">[已过期]</tpl></div>',
+                '<div class="m{value}">{name}</div>',
+                '<div class="right" >过期时间：{expire_time} <tpl if="expired">[已过期]</tpl></div>',
                 '<div style="clear:both"></div>',
                 '</div>'
             ),
@@ -52,6 +63,7 @@ Ext.define('WeiQuPai.view.MyCoupon', {
             xtype: 'button',
             text: '积分兑换拍券',
             baseCls: 'w-button',
+            action: 'exchangeCoupon'
         }]
     },
 
@@ -71,11 +83,30 @@ Ext.define('WeiQuPai.view.MyCoupon', {
             btn.action = 'ucenter';
         }
         this.down('vtitlebar').add(btn);
+        this.down('vtitlebar').bindEvent();
+
+        this.down('button[action=exchangeCoupon]').on('tap', this.goExchange, this);
 
         this.loadData();
     },
 
-    loadData: function() {
+    goExchange: function() {
+        var exchangeView = Ext.create('WeiQuPai.view.ExchangeCoupon');
+        //兑换成功之后要刷新本页
+        exchangeView.on('exchanged', this.loadData, this);
+        WeiQuPai.navigator.push(exchangeView);
+    },
+
+    //下拉刷新, 这里的this是pullRefresh对象
+    fetchLastest: function() {
+        var me = this;
+        this.getList().loadData(function() {
+            me.setState('loaded');
+            me.snapBack();
+        });
+    },
+
+    loadData: function(callback) {
         var user = WeiQuPai.Cache.get('currentUser');
         var store = this.down('dataview').getStore();
         store.getProxy().setExtraParam('token', user.token);
@@ -83,6 +114,7 @@ Ext.define('WeiQuPai.view.MyCoupon', {
             if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');
             }
+            Ext.isFunction(callback) && callback();
         }, this);
     }
 });

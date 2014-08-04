@@ -1,47 +1,44 @@
 Ext.define('WeiQuPai.controller.Register', {
     extend: 'Ext.app.Controller',
-    
+
     config: {
         refs: {
             regForm: 'register',
             register: 'register button[action=register]'
         },
         control: {
-            register:{
+            register: {
                 tap: 'doRegister'
             }
         }
     },
-    
-    doRegister: function(btn){
-        if(!this.checkForm()){
+
+    doRegister: function(btn) {
+        if (!this.checkForm()) {
             return false;
         }
         var data = this.getRegForm().getValues();
-        WeiQuPai.Util.register(data, function(){
-            var prev = Ext.Viewport.down('main').getPreviousItem();
-            var n = 1;
+        WeiQuPai.Util.register(data, function() {
+            if (WeiQuPai.loginReferer) {
+                WeiQuPai.sidebar.activeTabItem(WeiQuPai.loginReferer);
+                WeiQuPai.loginReferer = null;
+            }
+            var prev = WeiQuPai.navigator.getPreviousItem();
             //如果是login页面就pop2个view出去
-            prev.isXType('login') && n++;
-            Ext.Viewport.down('main').pop(n);
+            var n = prev.isXType('login') ? 2 : 1;
+            WeiQuPai.navigator.pop(n);
         });
-    }, 
+    },
 
-    checkForm: function(){
+    checkForm: function() {
         var d = this.getRegForm().getValues();
         var msg = null;
-        if(d.uname.trim().length < 6){
+        if (d.uname.trim().length < 6) {
             msg = '用户名不能少于6个字符';
-        }
-        else if(d.password.trim().length < 6/* || d.password2.trim().length < 6*/){
+        } else if (d.password.trim().length < 6 /* || d.password2.trim().length < 6*/ ) {
             msg = '密码不能少于6位';
         }
-        /*
-        else if(d.password != d.password2){
-            msg = '两次密码不相同';
-        }
-        */
-        if(msg){
+        if (msg) {
             WeiQuPai.Util.toast(msg);
             return false;
         }

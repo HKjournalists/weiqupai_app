@@ -1,55 +1,48 @@
 Ext.define('WeiQuPai.view.MyOrder', {
-    extend: 'Ext.dataview.List',
+    extend: 'Ext.DataView',
     xtype: 'myorder',
     requires: ['WeiQuPai.store.MyOrder', 'WeiQuPai.view.MyOrderDetail', 'WeiQuPai.view.LoginTip'],
     config: {
         cls: 'bg_ef',
         loadingText: null,
         disableSelection: true,
+        scrollToTopOnRefresh: false,
         store: 'MyOrder',
-        baseCls: 'x-innerhtml-new',
+        plugins: [{
+            type: 'wpullrefresh',
+            lastUpdatedText: '上次刷新：',
+            lastUpdatedDateFormat: 'H点i分',
+            loadingText: '加载中...',
+            pullText: '下拉刷新',
+            releaseText: '释放立即刷新',
+            loadedText: '下拉刷新',
+            scrollerAutoRefresh: true
+        }],
         itemTpl: new Ext.XTemplate(
             '<div class="myorder mg_10" >',
             '<div class="orderlist" data-orderlist="{#}">',
             '<div class="left">',
             '<ul>',
-            '<li>',
-            '成交价格:<span style="color:#e76049">￥{price}</span>',
-            '</li>',
-            '<li>',
-            '订单编号:{id}',
-            '</li>',
-            '<li>',
-            '订单金额:{total_pay}',
-            '</li>',
-            '<li>',
-            '下单时间:{ctime}',
-            '</li>',
+            '<li>成交价格：<span style="color:#e76049">￥{price}</span></li>',
+            '<li>订单编号：{id}</li>',
+            '<li>订单金额：{total_pay}</li>',
+            '<li>下单时间：{ctime}</li>',
             '</ul>',
             '</div>',
             '<div class="right">',
             '<ul>',
-            '<li>',
-            '{[this.getStatusText(values.status)]}',
-            '</li>',
-            '<li style="height:18px;color:#e76049;">',
-            '<tpl if="this.shipment(status)">',
-            '查看物流',
-            '</tpl>',
-            '</li>',
-
+            '<li>{[this.getStatusText(values.status)]}</li>',
+            '<li style="height:18px;color:#e76049;"<tpl if="this.shipment(status)"> class="shipment_btn">查看物流</tpl></li>',
             '<li><input type="button" value="{[this.getButtonText(values.status)]}" class="btn_e7"/></li>',
             '</ul>',
             '</div>',
             '<div style="clear:both"></div>',
             '</div>',
-            '<div class="order_dis" data-orderdis="{#}">',
+            '<div class="order_dis">',
             '<div class="left">',
             '<img src="{[this.getCover(values.pic_cover)]}" width="50">',
             '</div>',
-            '<div class="right">',
-            '{title}',
-            '</div>',
+            '<div class="right">{title}</div>',
             '<div style="clear:both"></div>',
             '</div>',
             '</div>', {
@@ -57,27 +50,15 @@ Ext.define('WeiQuPai.view.MyOrder', {
                     return WeiQuPai.Config.orderStatusText[status];
                 },
                 getButtonText: function(status) {
-                    var text;
-                    if (status = WeiQuPai.Config.orderStatus.STATUS_TOPAY) {
-                        text = "去支付";
-                    } else if (status = WeiQuPai.Config.orderStatus.STATUS_FINISH) {
-                        text = "去晒单";
-                    } else if (status = WeiQuPai.Config.orderStatus.STATUS_SHIPMENT) {
-                        text = "确认收货";
-                    } else if (status = WeiQuPai.Config.orderStatus.STATUS_TODEA) {
-                        text = "确认收货";
-                    }
-                    // var text = {
-                    //     WeiQuPai.Config.orderStatus.STATUS_TOPAY: '去支付',
-                    //     WeiQuPai.Config.orderStatus.STATUS_FINISH: '去晒单',
-                    //     WeiQuPai.Config.orderStatus.STATUS_SHIPMENT: '确认收货',
-                    //     WeiQuPai.Config.orderStatus.STATUS_TODEAL: '确认收货'
-                    // };
-
-                    return text;
+                    var text = {};
+                    text[WeiQuPai.Config.orderStatus.STATUS_TOPAY] = '去支付';
+                    text[WeiQuPai.Config.orderStatus.STATUS_FINISH] = '去晒单';
+                    text[WeiQuPai.Config.orderStatus.STATUS_SHIPMENT] = '确认收货';
+                    text[WeiQuPai.Config.orderStatus.STATUS_TODEAL] = '确认收货';
+                    return text[status];
                 },
                 getCover: function(cover) {
-                    return WeiQuPai.Util.getImagePath(cover, '290');
+                    return WeiQuPai.Util.getImagePath(cover, '200');
                 },
                 shipment: function(status) {
                     return status == WeiQuPai.Config.orderStatus.STATUS_SHIPMENT
@@ -90,27 +71,42 @@ Ext.define('WeiQuPai.view.MyOrder', {
             cls: 'titlebar2',
             docked: 'top',
             items: [{
-                iconCls: 'user',
+                baseCls: 'user',
                 action: 'ucenter'
             }]
         }]
 
     },
 
+    getEventList: function() {
+        var eventList = {};
+        eventList[WeiQuPai.Config.orderStatus.STATUS_TOPAY] = 'pay';
+        eventList[WeiQuPai.Config.orderStatus.STATUS_FINISH] = 'showorder';
+        eventList[WeiQuPai.Config.orderStatus.STATUS_SHIPMENT] = 'confirm';
+        eventList[WeiQuPai.Config.orderStatus.STATUS_TODEAL] = 'confirm';
+        return eventList;
+    },
+
     initialize: function() {
         this.callParent(arguments);
-
         this.msgbox = WeiQuPai.Util.msgbox('您还没有拍到任何宝贝');
         this.add(this.msgbox);
 
-        this.loginTip = Ext.create('WeiQuPai.view.LoginTip');
-        this.add(this.loginTip);
-
-        this.on('activate', this.loadData, this);
+        this.loadData();
 
         this.onBefore('itemtap', function(list, index, dataItem, record, e) {
-            if (e.target.className == 'pay-btn') {
-                this.fireEvent('gopay', list, index, dataItem, record, e);
+            if (e.target.tagName.toLowerCase() == 'input') {
+                var eventList = this.getEventList();
+                var event = eventList[record.get('status')];
+                this.fireEvent(event, list, index, dataItem, record, e);
+                return false;
+            }
+            if (e.target.className == 'shipment_btn') {
+                this.fireEvent('shipment', list, index, dataItem, record, e);
+                return false;
+            }
+            if (Ext.get(e.target).findParent('.order_dis')) {
+                this.fireEvent('view_auction', list, index, dataItem, record, e);
                 return false;
             }
         }, this);
@@ -137,12 +133,8 @@ Ext.define('WeiQuPai.view.MyOrder', {
     loadData: function() {
         var user = WeiQuPai.Cache.get('currentUser');
         if (!user) {
-            this.getStore().removeAll();
-            this.msgbox.hide();
-            this.loginTip.show();
             return false;
         }
-        this.loginTip.hide();
         this.msgbox.hide();
         //fix 出现loading的bug
         this.setLoadingText(null);

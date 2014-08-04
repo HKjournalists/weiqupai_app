@@ -66,7 +66,7 @@ Ext.define('WeiQuPai.view.Order', {
 
     consigneeTpl: new Ext.XTemplate(
         '<div><b>{name} {mobile}</b></div>',
-        '<div>地址：{province}{city}{address}</div>'
+        '<div>{province}{city}{address}</div>'
     ),
 
     tipTimer: null,

@@ -13,7 +13,7 @@ Ext.define('WeiQuPai.view.Pay', {
         scrollable: true,
         items: [{
             xtype: 'vtitlebar',
-            title: '抢拍成功！',
+            title: '订单支付',
             docked: 'top',
             items: [{
                 xtype: 'button',

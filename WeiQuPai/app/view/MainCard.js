@@ -1,17 +1,13 @@
-Ext.define('WeiQuPai.view.MainCard',
-{
+Ext.define('WeiQuPai.view.MainCard', {
     extend: 'Ext.Container',
     xtype: 'maincard',
     requires: ['WeiQuPai.view.Today'],
-    config:
-    {
-        layout:
-        {
+    config: {
+        layout: {
             type: 'card',
-            animation: false
+            animation: null
         },
-        items: [
-        {
+        items: [{
             xtype: 'today'
         }]
     }

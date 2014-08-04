@@ -127,8 +127,14 @@
 .w-disclosure-title{
 	color:#e76049;
 }
+.w-disclosure-title .x-inner{
+	justify-content:center;
+	-webkit-box-pack:center;
+}
 .w-disclosure-content-right{
 	color:#666;
+	padding-right:4px;
+	max-width:70%;
 }
 .w-disclosure-content-bottom{
 	line-height:1.5;
@@ -164,9 +170,62 @@
 }
 
 .w-msgbox{
-  padding: 0 10px 10px;
+  padding:10px;
   font-size: 14px;
   line-height: 1.5;
   color: #383838;
   text-align:center;
+}
+.w-content{
+	padding:10px;
+	font-size:14px;
+	line-height:1.5;
+	color:#383838;
+}
+.avatar100{
+	width:50px;
+	height:50px;
+	border-radius:25px;
+}
+.w-fieldset{
+	margin-top:10px;
+}
+
+.w-poplayer{
+	border-top:4px solid #e76049;
+	background:#e7e7e7;
+}
+.w-popbutton{
+ height:50px;
+ line-height:50px;
+ background:#fff;
+ border-top:1px solid #d5d5d5;
+ font-size:18px;
+ color:#383838;
+}
+.w-popspacer{
+	margin-top:4px;
+}
+.w-popbutton-active{
+ height:50px;
+ line-height:50px;
+ background:#e76049;
+ font-size:18px;
+ color:#fff;
+}
+.w-poplist-item{
+  font-size:18px;
+  color:#383838;
+  background:#fff;
+  margin-bottom:1px;
+  height:40px;
+  line-height:40px;
+  padding-left:20px;
+}
+.w-poplist .w-poplist-item:last-child{
+	margin-bottom:0;	
+}
+.w-poplist-item.x-item-selected{
+	background:#fff url(../images/yi_success.png) no-repeat 96% center;
+	background-size:18px auto;
 }

@@ -259,7 +259,8 @@ Ext.define('WeiQuPai.plugin.PullRefresh', {
      * timeline between the new and the old records.
      */
     onLatestFetched: function(operation) {
-        var store = this.getList().getStore(),
+        var list = this.getList(),
+            store = list.getStore(),
             oldRecords = store.getData(),
             newRecords = operation.getRecords(),
             length = newRecords.length,
@@ -268,9 +269,19 @@ Ext.define('WeiQuPai.plugin.PullRefresh', {
         for (i = 0; i < length; i++) {
             newRecord = newRecords[i];
             oldRecord = oldRecords.getByKey(newRecord.getId());
-
             if (oldRecord) {
                 oldRecord.set(newRecord.getData());
+                /*
+                   由于model的useCache属性默认为true
+                   这样使得operation加载回来的数据再实例化model的时候，返回了cache的model对象并进行了修改
+                   这些对象原本都在store集合里的，所以store集合的model被直接修改，却没有触发updaterecord事件
+                   导致dataview视图无法被refresh，这应该是框架的bug
+                   这里我们手动去刷新更新数据对应的item;
+                   by icesyc
+                */
+                var idx = store.indexOf(oldRecord);
+                item = list.getViewItems()[idx];
+                list.container.updateListItem(oldRecord, item);
             } else {
                 toInsert.push(newRecord);
             }
@@ -279,7 +290,6 @@ Ext.define('WeiQuPai.plugin.PullRefresh', {
         }
 
         store.insert(0, toInsert);
-        //this.getList().updateAllListItems();
         this.setState("loaded");
         this.fireEvent('latestfetched', this, toInsert);
         if (this.getAutoSnapBack()) {
@@ -352,7 +362,9 @@ Ext.define('WeiQuPai.plugin.PullRefresh', {
                     });
                 }
             }
-            this.getTranslatable().translate(0, -y);
+            if (this.getList().isXType('list')) {
+                this.getTranslatable().translate(0, -y);
+            }
         }
     },
 

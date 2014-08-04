@@ -1,77 +1,85 @@
 Ext.define('WeiQuPai.controller.Profile', {
     extend: 'Ext.app.Controller',
-    
+
     config: {
         refs: {
             main: 'main',
             profileView: 'profile',
             gender: 'disclosureitem[itemId=gender]',
-            genderList: 'genderlist list',
+            genderList: 'genderlist',
             nick: 'disclosureitem[itemId=nick]',
             email: 'disclosureitem[itemId=email]',
             phone: 'disclosureitem[itemId=phone]',
             sign: 'disclosureitem[itemId=sign]',
             realName: 'disclosureitem[itemId=real_name]',
-            avatar: 'disclosureitem[itemId=avatar]'
+            avatar: 'disclosureitem[itemId=avatar]',
+            consignee: 'disclosureitem[itemId=consignee]'
         },
         control: {
             gender: {
                 tap: 'showGenderList'
             },
             genderList: {
-                itemtap: 'selectGender'
+                selected: 'selectGender'
             },
             avatar: {
                 tap: 'doAvatarTap'
             },
             nick: {
-                tap: function(){
+                tap: function() {
                     this.showFieldForm('nick', '昵称');
                 }
             },
             email: {
-                tap: function(){
+                tap: function() {
                     this.showFieldForm('email', '邮箱');
                 }
             },
             phone: {
-                tap: function(){
+                tap: function() {
                     this.showFieldForm('phone', '联系电话');
                 }
             },
             sign: {
-                tap: function(){
+                tap: function() {
                     this.showFieldForm('sign', '个性签名');
                 }
             },
             realName: {
-                tap: function(){
+                tap: function() {
                     this.showFieldForm('real_name', '真实姓名');
                 }
+            },
+            consignee: {
+                tap: 'showConsignee'
             }
         }
     },
 
-    doAvatarTap: function(e){
-        if(Ext.get(e.target).hasCls('big-avatar')){
+    doAvatarTap: function(e) {
+        if (Ext.get(e.target).hasCls('big-avatar')) {
             this.showBigAvatar();
             return;
         }
         this.showCameraLayer();
     },
 
-    showCameraLayer: function(){
+    showConsignee: function() {
+        WeiQuPai.Util.forward('myconsignee');
+    },
+
+    showCameraLayer: function() {
         var self = this;
-        WeiQuPai.Util.showCameraLayer(140, 140, true, function(url){
+        WeiQuPai.Util.showCameraLayer(140, 140, true, function(url) {
             self.getProfileView().setAvatar(url);
         });
     },
 
-    showGenderList: function(){
-       this.getGenderList().up('genderlist').show();
+    showGenderList: function() {
+        this.getGenderList().show();
     },
 
-    showFieldForm : function(field, title){
+    showFieldForm: function(field, title) {
         var data = WeiQuPai.Cache.get('currentUser');
         var view = Ext.create('WeiQuPai.view.FieldForm', {
             title: title,
@@ -82,11 +90,11 @@ Ext.define('WeiQuPai.controller.Profile', {
     },
 
     //显示头像大图
-    showBigAvatar: function(){
+    showBigAvatar: function() {
         var user = WeiQuPai.Cache.get('currentUser');
         url = user.avatar;
-        if(!url) return false;
-        var viewer =WeiQuPai.Util.getGlobalView('WeiQuPai.view.SimpleViewer');
+        if (!url) return false;
+        var viewer = WeiQuPai.Util.getGlobalView('WeiQuPai.view.SimpleViewer');
         var spic = WeiQuPai.Util.getImagePath(url, '140');
         var bpic = WeiQuPai.Util.getImagePath(url);
         viewer.setPic(spic, bpic);
@@ -95,16 +103,13 @@ Ext.define('WeiQuPai.controller.Profile', {
     },
 
     //选择性别
-    selectGender: function(list, index, dataItem, record, e){
-        if(list.getSelection()[0] == record){
-            list.up('genderlist').hide();
-            return;
-        }
-        var user = WeiQuPai.Cache.get('currentUser');
+    selectGender: function(list, record) {
+        this.getGenderList().hide();
         var title = record.get('title');
         var id = record.get('id');
-        list.up('genderlist').hide();
         this.getGender().setContent(title);
-        WeiQuPai.Util.updateProfile({gender: id});
+        WeiQuPai.Util.updateProfile({
+            gender: id
+        });
     }
 });

@@ -10,6 +10,7 @@ Ext.define('WeiQuPai.view.Sidebar', {
         'WeiQuPai.view.Profile', 'WeiQuPai.view.Setting'
     ],
     config: {
+        notLogin: ['today', 'circle', 'setting'],
         activeBtn: null,
         scrollable: true,
         cls: 'personal',
@@ -34,7 +35,6 @@ Ext.define('WeiQuPai.view.Sidebar', {
             text: '首页',
             id: 'today',
             cls: 'button_active',
-            action: 'ucenter'
         }, {
             xtype: 'button',
             flex: 1,
@@ -82,6 +82,7 @@ Ext.define('WeiQuPai.view.Sidebar', {
             id: 'setting'
         }]
     },
+
     initialize: function() {
         this.activeBtn = this.down('#today');
         this.callParent(arguments);
@@ -111,11 +112,7 @@ Ext.define('WeiQuPai.view.Sidebar', {
                 if (btn == this.activeBtn) {
                     return this.toggle();
                 }
-                btn.addCls('button_active');
-                this.activeBtn.removeCls('button_active');
-                this.activeBtn = btn;
                 this.activeTabItem(btn.getId());
-
             }, this);
         }
 
@@ -130,6 +127,20 @@ Ext.define('WeiQuPai.view.Sidebar', {
         }, this, {
             'element': 'element'
         });
+    },
+
+    open: function() {
+        if (this.getState() == 'open') {
+            return;
+        }
+        this.toggle();
+    },
+
+    close: function() {
+        if (this.getState() == 'closed') {
+            return;
+        }
+        this.toggle();
     },
 
     //重写toggle，使点main view的任何区域都可以变回close状态
@@ -154,17 +165,35 @@ Ext.define('WeiQuPai.view.Sidebar', {
         }
     },
 
+    activeTabBtn: function(btn) {
+        if (Ext.isString(btn)) {
+            btn = this.down('#' + btn);
+        }
+        btn.addCls('button_active');
+        this.activeBtn.removeCls('button_active');
+        this.activeBtn = btn;
+    },
+
     activeTabItem: function(xtype) {
+        //需要登录
+        if (this.getNotLogin().indexOf(xtype) == -1 && !WeiQuPai.Util.isLogin()) {
+            WeiQuPai.loginReferer = xtype;
+            WeiQuPai.navigator.push({
+                xtype: 'login'
+            });
+            this.close();
+            return;
+        }
         var mainCard = Ext.Viewport.down('maincard');
         var item = mainCard.down(xtype);
         if (!item) {
-            var view = {
+            mainCard.add({
                 xtype: xtype
-            };
-            mainCard.add(view);
+            });
         }
+        this.activeTabBtn(xtype);
         mainCard.setActiveItem(xtype);
-        this.toggle();
+        this.close();
     },
 
     setBadge: function(tab) {

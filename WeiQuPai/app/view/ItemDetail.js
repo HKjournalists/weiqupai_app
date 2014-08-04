@@ -18,7 +18,6 @@ Ext.define('WeiQuPai.view.ItemDetail', {
             items: [{
                 xtype: 'button',
                 baseCls: 'arrow_left',
-                align: 'left',
                 action: 'back'
 
             }, {
@@ -141,9 +140,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
     initialize: function() {
         this.callParent(arguments);
 
-        this.shareLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer', {
-            height: 160
-        });
+        this.shareLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer');
         //初始化tab
         this.initTab();
 

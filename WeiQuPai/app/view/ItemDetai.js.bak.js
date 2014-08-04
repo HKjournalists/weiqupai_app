@@ -183,9 +183,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
         });
         //没有评论显示的信息
         this.msgbox = WeiQuPai.Util.msgbox('还没有人评论该商品.');
-        this.shareLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer', {
-            height: 160
-        });
+        this.shareLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer');
         this.add(this.msgbox);
         //销毁的时候结束定时器
         this.on('destroy', this.onDestroy);

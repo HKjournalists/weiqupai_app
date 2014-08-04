@@ -4,29 +4,67 @@ Ext.define('WeiQuPai.controller.MyOrder', {
     config: {
         refs: {
             itemlist: 'myorder',
-            main: 'main'
         },
         control: {
             itemlist: {
                 itemtap: 'showDetail',
-                gopay: 'goPay',
+                pay: 'doPay',
+                showorder: 'doShowOrder',
+                confirm: 'doConfirm',
+                shipment: 'doShipment',
+                view_auction: 'doViewAuction'
             }
         }
     },
 
     showDetail: function(list, index, dataItem, record, e) {
         var detailView = {
-            xtype: 'myauctiondetail',
+            xtype: 'myorderdetail',
             record: record
         };
-        this.getMain().push(detailView);
+        WeiQuPai.navigator.push(detailView);
     },
 
-    goPay: function(list, index, dataItem, record, e) {
-        var payment = record.get('payment');
-        var orderId = record.get('id');
-        var user = WeiQuPai.Cache.get('currentUser');
-        var url = WeiQuPai.Config.apiUrl + "/?r=appv2/pay&id=" + orderId + '&token=' + user.token;
-        window.open(url, '_blank', 'location=no,title=支付,closebuttoncaption=返回');
+    doPay: function(list, index, dataItem, record, e) {
+        var pay = Ext.create('WeiQuPai.view.Pay');
+        pay.setOrderData(record.data);
+        WeiQuPai.navigator.push(pay);
+    },
+
+    doConfirm: function(list, index, dataItem, record, e) {
+        var func = function(buttonId) {
+            if (buttonId != 'yes') return;
+            var user = WeiQuPai.Cache.get('currentUser');
+            var self = this;
+            var url = WeiQuPai.Config.apiUrl + '/?r=appv2/MyOrder/confirm';
+            var param = {
+                id: record.get('id'),
+                token: user.token
+            };
+            WeiQuPai.Util.post(url, param, function() {
+                WeiQuPai.Util.toast('您已成功确认收货');
+                record.set('status', WeiQuPai.Config.orderStatus.STATUS_FINISH);
+            });
+        };
+        Ext.Msg.confirm(null, '确认收货吗？', func, this);
+    },
+
+    doShowOrder: function() {
+        WeiQuPai.Util.toast('秀！');
+    },
+
+    doShipment: function(list, index, dataItem, record, e) {
+        WeiQuPai.Util.forward('shipment', {
+            orderId: record.get('id')
+        });;
+    },
+
+    doViewAuction: function(list, index, dataItem, record, e) {
+        WeiQuPai.Util.forward('itemdetail', {
+            param: {
+                id: record.get('auction_id'),
+                item_id: record.get('item_id')
+            }
+        });
     }
 });

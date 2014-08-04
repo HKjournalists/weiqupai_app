@@ -8,45 +8,39 @@ Ext.define('WeiQuPai.view.ShareLayer', {
     requires: ['WeiQuPai.view.WeiboShare'],
     config: {
         shareData: null,
-        cls: 'share-layer',
-        style: 'background:white;',
+        cls: 'w-poplayer share-layer',
         items: [{
             xtype: 'container',
             cls: 'share-title',
             html: '<h2>分享到</h2>'
         }, {
             xtype: 'container',
+            cls: 'share-icon',
             layout: 'hbox',
             items: [{
                 xtype: 'button',
                 text: '微博',
                 action: 'weibo',
-                cls: 'xl-share-button',
-                iconCls: 'weibo',
-                iconAlign: 'top',
+                baseCls: 'xl-share-button',
                 flex: 1
             }, {
                 xtype: 'button',
                 text: '微信',
                 action: 'weixin',
-                cls: 'wx-share-button',
-                iconCls: 'weixin',
-                iconAlign: 'top',
+                baseCls: 'wx-share-button',
                 flex: 1
             }, {
                 xtype: 'button',
                 text: '朋友圈',
                 action: 'pyquan',
-                cls: 'pyq-share-button',
-                iconCls: 'pyquan',
-                iconAlign: 'top',
+                baseCls: 'pyq-share-button',
                 flex: 1
             }]
         }, {
             xtype: 'button',
             action: 'cancel',
             text: '返回',
-            cls: 'w-cancel'
+            baseCls: 'w-popbutton'
         }]
     },
 

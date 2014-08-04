@@ -194,10 +194,6 @@ html body
     .todayTitle{
         border-top:$border;background:#ffffff url(../images/today_title.jpg) left no-repeat;text-indent: 20px;font-size: 13px;font-weight: bold;text-align: left;color:#000;margin-top:5px;background-position:10px 8px;background-size:auto 13px;padding:8px 0px;
     }
-    .todaylist.x-list .x-list-item.x-list-item-tpl .x-innerhtml
-    {
-        padding:0;
-    }
     .today
     {
       display: -moz-box;
@@ -209,7 +205,8 @@ html body
       background:$color_fff;
       width:100%;
       border:0px;
-     padding:10px 0;
+      padding:10px 0;
+      border-bottom:1px solid #f6f6f6;
     }
     .today .left
     {
@@ -914,34 +911,25 @@ html body
    }
     .personal .title span
    {
-      margin: 20px 5px 0px;
+      margin-top:20px;
       float:left;
-      width: 120px;
+      width: 7.8em;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
    }
-    .personal .return
-   {
-     background:transparent;
-     background: transparent;
-      background-image: url("../images/zd.png");
-      background-repeat: no-repeat;
-      background-position: right center;
-      background-size: auto 10px;
-      margin: 20px 10px;
+   .personal .return{
       float: right;
-      width: 20px;
-      height: 12px;
-      padding-top:20px;
-
+      margin-right:10px;
+      margin-top:20px;
    }
-   .personal .return .x-button-label
+    .personal .return:after
    {
-    text-align:right;
-    margin-right:10px;
-    font-family: 'iOS7';
+      content: '!';
+      font-family: 'iOS7';
+      font-size:14px;
    }
+
    .personal .x-button
    {
      border:0px;
@@ -1694,6 +1682,29 @@ html body
      word-break: break-all;
     }
     //订单详情页面
+    .orderdetail ul{
+      margin-top:10px;
+      background:#fff;
+    }
+    .orderdetail .value{
+      float:right;
+      width:70%;
+      text-align:right;
+    }
+    .orderdetail li{
+        padding:8px 10px;
+        border-bottom:1px solid #f6f6f6;
+    }
+    .orderdetail li:after{
+      content: "020";
+      display: block;
+      height: 0;
+      clear: both;
+      visibility:hidden;
+    }
+    orderdetail ul li:last-child{
+        border-bottom:0;
+    }
     .shai
     {
      background:$color_fff;
@@ -2026,15 +2037,10 @@ html body
       text-align:left;
     }
     //我的拍券
-    .paijuan
-    {
-     background:#efefef;
-    }
     .plist
     {
     
      //background:$color_fff;
-     display:box;
      margin-top:8px;
      width:100%;
      height:40px;
@@ -2092,6 +2098,55 @@ html body
     .plist_shuo ul li
     {
      height:20px;
+    }
+    .prop-list{
+      margin-top:8px;
+      background:#fff;
+      padding:10px;
+    }
+    .prop-list:after{
+      content: "020";
+      display: block;
+      height: 0;
+      clear: both;
+      visibility:hidden;  
+    }
+    .prop-list .left{
+      float:left;
+    }
+    .prop-list .prop-desc{
+      margin-left: 45px;
+    }
+    .prop-list .score{
+      margin-top:6px;
+      background:url(../images/score.png) no-repeat left center;
+      background-size:12px 12px;
+      padding-left: 16px;
+      font-size:12px;
+    }
+    .prop-list .exchange_btn{
+      float:right;
+      padding:10px 0 0  10px;
+    }
+    .doubleDiscount{
+      width:39px;
+      height:25px;
+      background:url(../images/doubleDiscount.png) no-repeat;
+      background-size:contain;
+    }
+    .extendDuration{
+      width:39px;
+      height:25px;
+      background:url(../images/extendDuration.png) no-repeat;
+      background-size:contain;
+    }
+    .prop-list .name{
+      margin-bottom:4px;
+    }
+    .prop-list .desc{
+      color:#555;
+      line-height:1.2;
+      font-size:12px;
     }
     //红色按钮
     .btn_e7
@@ -2174,13 +2229,12 @@ html body
     @mixin share_btn
     {
       background-size: 45px 45px;
-      padding-top: 35px;
-      margin: 5px;
-      background-position: center 5px;
+      padding-top: 55px;
+      background-position: center 0;
       height: 80px;
       font-size:14px;
       border:0px;
-      color:black;
+      color:#383838;
     }
     .xl-share-button
     {
@@ -2197,20 +2251,20 @@ html body
       background:url('../images/wx.png') no-repeat;
       @include share_btn;
     }
-    .w-cancel
-    {
-     height:40px;
-     border:0px;
-     border-top:5px solid #f6f6f6;
-     border-radius:0px;
-    }
+
     .share-title
     {
-     background:white;height:30px;text-align:center;font-size:18px;padding-top:6px;color:#383838;
+     background:#fff;
+     height:35px;
+     line-height:35px;
+     text-align:center;
+     font-size:18px;
+     color:#383838;
     }
-    .share-layer .x-button-normal .x-button-label
-    {
-     color:black;
+    .share-icon{
+      background:#fff;
+      border-bottom:1px solid #d5d5d5;
+      margin-bottom:4px;
     }
     .x-innerhtml-new
     {
@@ -2469,16 +2523,13 @@ html body
     //积分兑换拍券
     .change
     {
-     background:$color_fff;
-     margin-top:10px;
+      width: 50%;
+      padding: 10px;
+      float: left;
+      background:#f6f6f6;
     }
     .change .card
     {
-      border:1px solid #ccc;
-      border-left:0px;
-      width:33.3%;
-      float:left;
-      margin-top:10px;
       background:$color_fff;
       text-align:center;
     }
@@ -2490,29 +2541,27 @@ html body
     {
       background-size:auto 25px;
       background-position:center 8px;
-      width:50px;
       height:35px;
     }
     .change .card .m5
     {
-      background:url('../images/pai_m5.png') no-repeat;
+      background:url('../images/m5.png') no-repeat;
       @include renmin;
-      width:100%;
 
     }
      .change .card .m10
     {
-      background:url('../images/pai_m10.png') no-repeat;
+      background:url('../images/m10.png') no-repeat;
       @include renmin;
     }
      .change .card .m20
     {
-      background:url('../images/pai_m5.png') no-repeat;
+      background:url('../images/m20.png') no-repeat;
       @include renmin;
     }
      .change .card .m50
     {
-      background:url('../images/pai_m5.png') no-repeat;
+      background:url('../images/m50.png') no-repeat;
       @include renmin;
     }
     .change .card .jifen
@@ -2546,4 +2595,27 @@ html body
     .radio_check{
       background:url('../images/radio_check.png') no-repeat;
       background-size:18px 18px;
+    }
+
+    .exchange_area{
+      background:#fff;
+      padding:20px 0;
+    }
+    .exchange_btn_add, .exchange_btn_minus{
+      background:#ffbd00;
+      border-radius:5px;
+      font-family:'iOS7';
+      width: 30px;
+      height: 30px;
+      line-height: 24px;
+      color: #fff;
+      font-size: 30px;
+    }
+    .exchange_input{
+      border:1px solid #d5d5d5;
+      width:65px;
+      margin:-5px 12px;
+      text-align:center;
+      font-size:20px;
+      line-height:35px;
     }
