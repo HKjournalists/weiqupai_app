@@ -77,11 +77,11 @@ Ext.define('WeiQuPai.view.Today', {
             title: '微趣拍',
             docked: 'top',
             items: [{
-                iconCls: 'user',
+                baseCls: 'user',
                 action: 'ucenter'
             }, {
                 align: 'right',
-                iconCls: 'list',
+                baseCls: 'list_btn',
                 action: 'list'
             }]
         }, {

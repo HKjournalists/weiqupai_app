@@ -16,18 +16,20 @@ Ext.application({
     requires: [
         'Ext.MessageBox', 'WeiQuPai.Config', 'WeiQuPai.Util', 'WeiQuPai.Notify', 'WeiQuPai.Cache', 'WeiQuPai.plugin.ListPaging',
         'WeiQuPai.plugin.PullRefresh', 'WeiQuPai.plugin.LoadMask', 'WeiQuPai.view.StartupScreen', 'WeiQuPai.view.SplashScreen',
-        'WeiQuPai.view.WebPage', 'Ext.Anim', 'WeiQuPai.view.VTitleBar'
+        'WeiQuPai.view.WebPage', 'Ext.Anim', 'WeiQuPai.view.VTitleBar', 'WeiQuPai.view.ShowUserLike', 'WeiQuPai.view.Myfollow', 'WeiQuPai.view.MyFen',
+        'WeiQuPai.view.ShowUserDis', 'WeiQuPai.view.ShowUserFeed'
     ],
 
     controllers: [
         'Main', 'Today', 'MyAuction', 'MyOrder', 'MyAuctionDetail', 'ItemDetail', 'Order', 'ShowOrder', 'Circle', 'ShowUser',
         'My', 'Setting', 'MyFriend', 'MyConsignee', 'Private', 'NewMessage', 'Login', 'Register', 'Profile', 'CameraLayer',
-        'NewFriend', 'Routes', 'SpecialSale', 'Pay'
+        'NewFriend', 'Routes', 'SpecialSale', 'Pay', 'Myfollow', 'ShowUserLike', 'MyFen'
     ],
     views: ['Main'],
     stores: [
         'Auction', 'Comment', 'Banner', 'MyOrder', 'MyConsignee', 'Circle', 'UserFeed', 'UserFriend', 'UserProp', 'MyCoupon',
-        'FriendRequest', 'SpecialSale'
+        'FriendRequest', 'SpecialSale', 'ShowUserLike', 'ShowUserDis', 'ShowUserFeed', 'Myfollow'
+
     ],
     icon: {
         '57': 'resources/icons/icon.png',

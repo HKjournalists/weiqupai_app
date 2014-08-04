@@ -3,46 +3,62 @@ Ext.define('WeiQuPai.controller.ShowUser', {
     config: {
         refs: {
             main: 'main',
-            showUser: 'showuser'   
+            showUser: 'showuser'
         },
         control: {
             showUser: {
                 bgtap: 'showCameraLayer',
                 cardtap: 'doCardTap',
-            }
+                followtap: 'dofollow',
+                fanstap: 'dofans'
+            },
+
         }
     },
 
-
-    showCameraLayer: function(uid){
+    dofollow: function(e) {
+        var detailView = Ext.create('WeiQuPai.view.Myfollow');
+        //detailView.setParam(record.data);
+        WeiQuPai.navigator.push(detailView);
+    },
+    dofans: function(e) {
+        var detailView = Ext.create('WeiQuPai.view.MyFen');
+        //detailView.setParam(record.data);
+        WeiQuPai.navigator.push(detailView);
+    },
+    showCameraLayer: function(uid) {
         var user = WeiQuPai.Cache.get('currentUser');
-        if(!user || user.id != uid) return;
+        if (!user || user.id != uid) return;
         //只有点自己的才能换封面
         var self = this;
-        WeiQuPai.Util.showCameraLayer(640, 400, true, function(url){
+        WeiQuPai.Util.showCameraLayer(640, 400, true, function(url) {
             self.setCircleBg(url);
         });
     },
 
     //更换背影
-    setCircleBg: function(url){
+    setCircleBg: function(url) {
         var record = this.getShowUser().down('#user-info').getRecord();
         record.set('circle_bg', url);
-        WeiQuPai.Util.updateProfile({circle_bg: url});
+        WeiQuPai.Util.updateProfile({
+            circle_bg: url
+        });
     },
 
     //卡片点击
-    doCardTap: function(list, index, record, dataType){
+    doCardTap: function(list, index, record, dataType) {
         var cardHandler = this['card_' + dataType];
         cardHandler && cardHandler.call(this, record);
     },
 
     //进入商品详情
-    card_item: function(record){
+    card_item: function(record) {
         //处理多次点击的问题
         var main = Ext.Viewport.down('main');
-        if(main.isAnimating) return;
-        var param = {id: record.get('json_data').id};
+        if (main.isAnimating) return;
+        var param = {
+            id: record.get('json_data').id
+        };
         var view = Ext.create('WeiQuPai.view.ItemDetail');
         view.setParam(param);
         main.push(view);

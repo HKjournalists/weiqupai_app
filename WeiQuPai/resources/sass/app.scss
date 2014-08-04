@@ -1074,7 +1074,7 @@ html body
    //个人主页-背景颜色
    .person_model
    {
-     background:url('../images/person_bg.jpg') no-repeat;
+     //background:url('../images/person_bg.jpg') no-repeat;
      background-size:100% auto;
      height:155px;
      display:flex;
@@ -1088,6 +1088,7 @@ html body
      top:0px;
      left:0px;
      height:155px;
+     color:$color_fff;
    }
    .person_zhezhao .one .head
    {
@@ -1130,8 +1131,11 @@ html body
      @include person_model_word;
      background-image:url('../images/icon_person_base.png');
      @include person_model_img;
-     margin-left:10px;
-     font-size:15px;
+     background-size: auto 13px;
+     background-position: 5px 40px;
+     text-indent: 20px;
+     margin-left: 10px;
+     font-size: 15px;
    }
    .person_zhezhao .two{
     position:absolute;
@@ -1210,7 +1214,7 @@ html body
    .mylike
    { 
       background:#ffffff!important;
-      padding-top:9px;
+      //padding-top:9px;
    }
    .mylike .myProduct
    {
@@ -1258,11 +1262,12 @@ html body
     }
     .my_btn .x-button
     {
-     border:0px;
-     border-radius:0px;
+      border:0px;
+      border-radius:0px;
       border-top:1px solid $color_e7;
       border-bottom:1px solid $color_e7;
-      border-right:1px solid $color_e7; 
+      border-right:1px solid $color_e7;
+      height:30px; 
     }
     .my_btn .x-button:nth-child(3){
       border-right:0px;
@@ -1271,6 +1276,7 @@ html body
     {
      background:$color_e7;
      color:$color_fff;
+     padding-top: 1px;
     }
    //此部分与个人消息共用
 
@@ -1992,36 +1998,23 @@ html body
     //我的粉丝 我的关注
     .myfen
     {
-     width:96%;
-     margin:5px auto;
-     background:$color_fff;
-     padding:5px;
-     font-size:13px;
-     border:1px solid #efefef;
-     border-radius:4px;
+   
     }
-    .myfen ul
-    {
-     list-style:none;
-     padding:0px;
-     margin:0px;
-    }
-    .myfen ul li
+    .myfen .myfollow
     {
      width:100%;
      text-align:center;
      padding:5px 0px 10px;
+     display: -webkit-box;
     }
-    .myfen ul li .img
+    .myfen .myfollow .img
     {
-     float:left;
      width:60px;
     }
-    .myfen ul li .name
+    .myfen .myfollow .name
     {
       font-size:13px;
-      float:left;
-      width:70%;
+      -webkit-box-flex:1;
       margin-top:11px;
       text-align:left;
     }
@@ -2237,6 +2230,7 @@ html body
       width:100%;
       background:$color_fff;
       text-align:center;
+      
     }
 
     .mylike .yugao .title
