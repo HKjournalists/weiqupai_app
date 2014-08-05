@@ -45,20 +45,16 @@ Ext.define('WeiQuPai.view.ShowUserDis', {
 
     initialize: function() {
         this.callParent(arguments);
-        var me = this;
-        this.onBefore('itemtap', function(list, index, dataItem, record, e) {
-            if (e.target.className == 'content') {
-                me.fireEvent('protap', me, index, dataItem, record, e);
+        this.on('itemtap', function(list, index, dataItem, record, e) {
+            if (Ext.get(e.target).findParent('.content')) {
+                this.fireEvent('cardtap', this, index, dataItem, record, e);
                 return false;
             }
-            if (e.target.className == 'dis') {
-                me.fireEvent('detailtap', me, index, dataItem, record, e);
+            if (e.target.className == 'zan') {
+                this.fireEvent('zantap', this, index, dataItem, record, e);
                 return false;
             }
-            if (e.target.className == 'bubble') {
-                me.fireEvent('detailtap1', me, index, dataItem, record, e);
-                return false;
-            }
+            this.fireEvent('detailtap', this, index, dataItem, record, e);
         }, this);
     },
 
@@ -69,12 +65,12 @@ Ext.define('WeiQuPai.view.ShowUserDis', {
 
     loadData: function(uid) {
         var store = this.getStore();
+        store.removeAll();
         store.getProxy().setExtraParam('uid', uid);
         store.load(function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');
             }
-            console.log(records);
         });
     }
 

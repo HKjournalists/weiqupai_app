@@ -22,7 +22,8 @@ Ext.application({
     controllers: [
         'Main', 'Today', 'MyAuction', 'MyOrder', 'MyOrderDetail', 'Item', 'Order', 'ShowOrder', 'Circle', 'ShowUser',
         'Setting', 'MyConsignee', 'Login', 'Register', 'Profile', 'CameraLayer',
-        'Routes', 'SpecialSale', 'Pay', 'Myfollow', 'ShowUserLike', 'MyFen', 'Auction', 'Item'
+        'Routes', 'SpecialSale', 'Pay', 'MyFollow', 'MyFen', 'Auction', 'Item',
+        'ShowUserDis', 'ShowUserFeed', 'ShowUserLike'
     ],
     models: [
         'Auction', 'Comment', 'Consignee', 'Feed', 'Item', 'Order', 'Profile', 'Shipment',
@@ -35,7 +36,8 @@ Ext.application({
     ],
     stores: [
         'Auction', 'Comment', 'Banner', 'MyOrder', 'MyConsignee', 'Circle', 'MyProp', 'MyCoupon',
-        'Coupon', 'Prop', 'SpecialSale', 'ShowUserLike', 'ShowUserDis', 'ShowUserFeed', 'Myfollow', 'MyAuction'
+        'Coupon', 'Prop', 'SpecialSale', 'ShowUserLike', 'ShowUserDis', 'ShowUserFeed', 'MyFollow', 'MyAuction',
+        'MyFans'
     ],
     icon: {
         '57': 'resources/icons/icon.png',

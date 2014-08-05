@@ -1231,6 +1231,7 @@ html body
    {
     width:100%;
     font-size:14px;
+    line-height:1.2;
    }
     .mydis .img
    {
@@ -2002,16 +2003,13 @@ html body
      text-align:center;
     }
     //我的粉丝 我的关注
-    .myfen
-    {
-   
-    }
     .myfen .myfollow
     {
      width:100%;
      text-align:center;
-     padding:5px 0px 10px;
+     padding:5px 0px 5px;
      display: -webkit-box;
+     margin-bottom:1px;
     }
     .myfen .myfollow .img
     {

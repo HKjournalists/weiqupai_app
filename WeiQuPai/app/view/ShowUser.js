@@ -1,21 +1,34 @@
 Ext.define('WeiQuPai.view.ShowUser', {
     extend: 'Ext.Container',
     xtype: 'showuser',
-    requires: ['WeiQuPai.view.ShowUserLike', 'WeiQuPai.view.ShowUserDis', 'WeiQuPai.view.ShowUserFeed'],
+    requires: [
+        'WeiQuPai.view.ShowUserLike', 'WeiQuPai.view.ShowUserDis', 'WeiQuPai.view.ShowUserFeed',
+        'WeiQuPai.view.MyFollow', 'WeiQuPai.view.MyFen'
+    ],
     config: {
         uid: null,
         scrollable: true,
         cls: 'bg_ef',
+        plugins: [{
+            type: 'wpullrefresh',
+            lastUpdatedText: '上次刷新：',
+            lastUpdatedDateFormat: 'H点i分',
+            loadingText: '加载中...',
+            pullText: '下拉刷新',
+            releaseText: '释放立即刷新',
+            loadedText: '下拉刷新',
+            refreshFn: 'fetchLastest',
+            scrollerAutoRefresh: true
+        }],
         items: [{
             xtype: 'container',
-            // cls: 'person_model',
             itemId: 'personmodel',
             tpl: new Ext.XTemplate(
-                '<div class="person_model"><img src="{[WeiQuPai.Util.getImagePath(values.circle_bg)]}" width="100%"></div>',
+                '<div class="person_model"><img src="{[this.getBg(values)]}" width="100%"></div>',
                 '<div class="person_zhezhao">',
                 '<div class="one">',
                 '<div class="head">',
-                '<img src="{[WeiQuPai.Util.getAvatar(values.avatar, 140)]}" width="70"><br>',
+                '<img src="{[WeiQuPai.Util.getAvatar(values.avatar, 140)]}" width="70" class="avatar"><br>',
 
                 '</div>',
                 '<div class="right">',
@@ -35,31 +48,38 @@ Ext.define('WeiQuPai.view.ShowUser', {
                 '</div>',
                 '<div style="clear:both"></div>',
                 '<div class="two">',
-                '<div class="title">',
-                '+关注',
-                '</div>',
+                '<tpl if="!this.isSelf(values)">',
+                '<div class="title follow_btn">+关注</div>',
+                '</tpl>',
 
                 '<span>',
                 '<label class="myfollow">关注{follow_num}</label>&nbsp;|',
                 '<label class="myfans">&nbsp;粉丝{fans_num}</label>',
                 '</span>',
-                '<div class="email">',
-                '私信TA',
+                '<tpl if="!this.isSelf(values)">',
+                '<div class="email">私信TA</div>',
+                '</tpl>',
                 '</div>',
-                '</div>',
-                '</div>'
+                '</div>', {
+                    getBg: function(values) {
+                        if (!values.circle_bg) {
+                            return 'resources/images/def_person_bg.jpg';
+                        }
+                        return WeiQuPai.Util.getImagePath(values.circle_bg);
+                    },
+                    isSelf: function(values) {
+                        var user = WeiQuPai.Cache.get('currentUser');
+                        return user && user.id == values.id;
+                    }
+                }
             )
         }, {
             xtype: 'vtitlebar',
             title: '个人主页',
-            cls: 'titlebar3',
             docked: 'top',
             items: [{
                 baseCls: 'arrow_left',
                 action: 'back'
-            }, {
-                align: 'right',
-                baseCls: 'refresh'
             }]
         }, {
             xtype: 'container',
@@ -69,22 +89,23 @@ Ext.define('WeiQuPai.view.ShowUser', {
             items: [{
                 flex: 1,
                 xtype: 'button',
-                text: '喜欢 82',
+                text: '喜欢',
+                cls: 'x-button-active',
                 action: 'tab_showuserlike'
             }, {
                 flex: 1,
                 xtype: 'button',
                 action: 'tab_showuserdis',
-                text: '评论  112'
+                text: '评论'
             }, {
                 flex: 1,
                 xtype: 'button',
-                text: '晒单  234',
+                text: '晒单',
                 action: 'tab_showuserfeed'
             }]
 
         }, {
-            xtype: 'showuserlike'
+            xtype: 'showuserlike',
         }, {
             xtype: 'showuserdis',
             hidden: true
@@ -100,7 +121,7 @@ Ext.define('WeiQuPai.view.ShowUser', {
     initialize: function() {
         this.callParent(arguments);
         this.initTab();
-        this.down('#personmodel').onBefore('tap', this.bindEvent, this, {
+        this.down('#personmodel').on('tap', this.bindEvent, this, {
             element: 'element'
         });
         this.on('painted', function() {
@@ -117,30 +138,50 @@ Ext.define('WeiQuPai.view.ShowUser', {
     },
 
     bindEvent: function(e) {
-        //卡片点击
-        var me = this;
         if (e.target.className == 'myfollow') {
-            me.fireEvent('followtap', me, e);
+            this.fireEvent('followtap', this, e);
             return false;
         }
         if (e.target.className == 'myfans') {
-            var uid = e.target.getAttribute('uid');
-            me.fireEvent('fanstap', me, e);
+            this.fireEvent('fanstap', this, e);
             return false;
         }
-        var card = Ext.get(e.target).up('.card');
-        if (card) {
-            this.fireEvent('cardtap', this, index, record, card.getAttribute('dataType'));
+        if (Ext.get(e.target).hasCls('follow_btn')) {
+            this.fireEvent('follow', this);
             return false;
         }
+        if (e.target.className == 'avatar') {
+            this.fireEvent('avatartap', this);
+            return false;
+        }
+        this.fireEvent('bgtap', this);
     },
 
-    loadData: function(uid) {
+    //下拉刷新, 这里的this是pullRefresh对象
+    fetchLastest: function() {
+        var me = this;
+        var list = this.getList();
+        var uid = list.getUid();
+        list.loadData(uid, function() {
+            me.setState('loaded');
+            me.snapBack();
+        });
+        list.down('showuserlike').setUid(uid);
+        list.down('showuserdis').setUid(uid);
+        list.down('showuserfeed').setUid(uid);
+    },
+
+    loadData: function(uid, callback) {
         var user = WeiQuPai.Cache.get('currentUser');
         var person = this.down('#personmodel');
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/user&uid=' + uid;
+        var me = this;
         WeiQuPai.Util.get(url, function(rsp) {
             person.setData(rsp);
+            me.down('button[action=tab_showuserlike]').setText('喜欢 ' + rsp.like_num);
+            me.down('button[action=tab_showuserdis]').setText('评论 ' + rsp.comment_num);
+            me.down('button[action=tab_showuserfeed]').setText('晒单 ' + rsp.show_order_num);
+            Ext.isFunction(callback) && callback();
         });
 
     },

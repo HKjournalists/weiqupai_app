@@ -2,21 +2,27 @@ Ext.define('WeiQuPai.controller.ShowUserDis', {
     extend: 'Ext.app.Controller',
     config: {
         refs: {
-            main: 'main',
             showuserdis: 'showuserdis'
         },
         control: {
             showuserdis: {
-                protap: 'productdetail',
-                detailtap: 'detail'
+                cardtap: 'productdetail',
+                detailtap: 'detail',
+                zantap: 'zan'
             },
 
         }
     },
 
     productdetail: function(list, index, dataItem, record, e) {
-        var detailView = Ext.create('WeiQuPai.view.ItemDetail');
-        detailView.setParam(record.data);
-        WeiQuPai.navigator.push(detailView);
+        WeiQuPai.Util.goItemView(record.get('item_id'));
+    },
+
+    detail: function(list, index, dataItem, record, e) {
+
+    },
+
+    zan: function(list, index, dataItem, record, e) {
+
     }
 });

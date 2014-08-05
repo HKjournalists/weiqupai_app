@@ -144,7 +144,7 @@ Ext.define('WeiQuPai.controller.Item', {
 
     doRefresh: function() {
         this.getPageView().onDestroy();
-        this.getPageView().setParam(this.getPageView().getParam());
+        this.getPageView().loadData();
     }
 
 });

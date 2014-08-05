@@ -1,25 +1,29 @@
-Ext.define('WeiQuPai.view.Myfollow', {
+Ext.define('WeiQuPai.view.MyFollow', {
     extend: 'Ext.DataView',
     xtype: 'myfollow',
     config: {
-        uid: null,
         loadingText: null,
         disableSelection: true,
-        scrollable: true,
         cls: 'bg_ef myfen',
-        store: 'Myfollow',
+        store: 'MyFollow',
+        plugins: [{
+            type: 'wpullrefresh',
+            lastUpdatedText: '上次刷新：',
+            lastUpdatedDateFormat: 'H点i分',
+            loadingText: '加载中...',
+            pullText: '下拉刷新',
+            releaseText: '释放立即刷新',
+            loadedText: '下拉刷新',
+            scrollerAutoRefresh: true
+        }],
         itemTpl: new Ext.XTemplate(
             '<div class="myfollow" >',
             '<div class="img">',
-            '<img src="{[WeiQuPai.Util.getAvatar(values.avatar, 140)]}" width="40">',
+            '<img src="{[WeiQuPai.Util.getAvatar(values.avatar, 100)]}" width="40">',
             '</div>',
-            '<div class="name">',
-            '{nick}',
-            '</div>',
+            '<div class="name">{nick}</div>',
             '</div>'
-
         ),
-
 
         items: [{
             xtype: 'vtitlebar',
@@ -32,50 +36,20 @@ Ext.define('WeiQuPai.view.Myfollow', {
             }]
         }]
     },
+
     initialize: function() {
-        // this.loadData();
-        this.onBefore('itemtap', this.bindEvent, this);
-        var user = WeiQuPai.Cache.get('currentUser');
         this.callParent(arguments);
-        var store = this.getStore();
-        console.log(store);
-        store.getProxy().setExtraParam('token', user.token);
-        this.getStore().load();
-
+        this.loadData();
     },
 
-    bindEvent: function(e) {
-        // var me = this;
-        // if (e.target.className == 'myfollow') {
-        //     me.fireEvent('persontap', me, e);
-        //     return false;
-
-    },
     loadData: function() {
-
         var user = WeiQuPai.Cache.get('currentUser');
-        var person = this.down('#myfollow');
-        Ext.Ajax.request({
-            url: WeiQuPai.Config.apiUrl + '/?r=appv2/follow',
-            method: 'post',
-            params: {
-
-                token: user.token
-            },
-            success: function(rsp) {
-                rsp = Ext.decode(rsp.responseText);
-                if (!WeiQuPai.Util.invalidToken(rsp)) return false;
-                if (rsp.code && rsp.code > 0) {
-                    WeiQuPai.Util.toast(rsp.msg);
-                    return;
-                }
-                person.setData(rsp);
-            },
-            failure: function(rsp) {
-                WeiQuPai.Util.toast('请求失败，请重试');
+        var store = this.getStore();
+        store.getProxy().setExtraParam('token', user.token);
+        store.load(function(records, operation, success) {
+            if (!success) {
+                WeiQuPai.Util.toast('数据加载失败');
             }
-        });
-
-    },
-
+        }, this);
+    }
 })

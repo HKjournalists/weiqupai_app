@@ -18,21 +18,23 @@ Ext.define('WeiQuPai.view.ShowUserLike', {
     },
 
     initialize: function() {
-        // this.onBefore('itemtap', this.bindEvent, this);
         this.callParent(arguments);
         this.onBefore('itemtap', this.bindEvent, this);
     },
 
     applyUid: function(uid) {
         this.loadData(uid);
-        // console.log("showlike+" + uid);
-        //this.down('itemdetail').setUid(uid);
         return uid;
     },
+
     loadData: function(uid) {
         var store = this.getStore();
         store.getProxy().setExtraParam('uid', uid);
-        store.load();
+        store.load(function(records, operation, success) {
+            if (!success) {
+                WeiQuPai.Util.toast('数据加载失败');
+            }
+        }, this);
     },
 
     bindEvent: function(list, index, dataItem, record, e) {
@@ -41,8 +43,5 @@ Ext.define('WeiQuPai.view.ShowUserLike', {
             me.fireEvent('liketap', me, index, dataItem, record, e);
             return false;
         }
-    },
-
-
-
+    }
 })

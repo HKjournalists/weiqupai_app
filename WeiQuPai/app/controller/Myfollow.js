@@ -1,4 +1,4 @@
-Ext.define('WeiQuPai.controller.Myfollow', {
+Ext.define('WeiQuPai.controller.MyFollow', {
     extend: 'Ext.app.Controller',
     config: {
         refs: {
@@ -18,7 +18,6 @@ Ext.define('WeiQuPai.controller.Myfollow', {
         var detailView = Ext.create('WeiQuPai.view.ShowUser', {
             uid: uid
         });
-        // console.log(uid);
         WeiQuPai.navigator.push(detailView);
     }
 

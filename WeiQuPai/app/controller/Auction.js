@@ -171,7 +171,7 @@ Ext.define('WeiQuPai.controller.Auction', {
 
     doRefresh: function() {
         this.getPageView().onDestroy();
-        this.getPageView().setParam(this.getPageView().getParam());
+        this.getPageView().loadData();
     }
 
 });

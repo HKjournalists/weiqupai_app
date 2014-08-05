@@ -2,30 +2,50 @@ Ext.define('WeiQuPai.controller.ShowUser', {
     extend: 'Ext.app.Controller',
     config: {
         refs: {
-            main: 'main',
             showUser: 'showuser'
         },
         control: {
             showUser: {
                 bgtap: 'showCameraLayer',
-                cardtap: 'doCardTap',
-                followtap: 'dofollow',
-                fanstap: 'dofans'
+                followtap: 'doFollow',
+                fanstap: 'doFans',
+                avatartap: 'showAvatarCameraLayer',
+                follow: 'doFollowMe'
             },
 
         }
     },
 
-    dofollow: function(e) {
-        var detailView = Ext.create('WeiQuPai.view.Myfollow');
-        //detailView.setParam(record.data);
+    doFollow: function(e) {
+        var detailView = Ext.create('WeiQuPai.view.MyFollow');
         WeiQuPai.navigator.push(detailView);
     },
-    dofans: function(e) {
+    doFans: function(e) {
         var detailView = Ext.create('WeiQuPai.view.MyFen');
-        //detailView.setParam(record.data);
         WeiQuPai.navigator.push(detailView);
     },
+
+    //关注他
+    doFollowMe: function() {
+        var user = WeiQuPai.Util.checkLogin();
+        if (!user) return;
+        var uid = this.getShowUser().getUid();
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/follow/follow&id=' + uid + '&token=' + user.token;
+        WeiQuPai.Util.get(url, function(rsp) {
+            WeiQuPai.Util.toast('你成功关注了TA');
+        });
+    },
+
+    showAvatarCameraLayer: function(uid) {
+        var user = WeiQuPai.Cache.get('currentUser');
+        if (!user || user.id != uid) return;
+        //只有点自己的才能换封面
+        var self = this;
+        WeiQuPai.Util.showCameraLayer(100, 100, true, function(url) {
+            self.setAvatar(url);
+        });
+    },
+
     showCameraLayer: function(uid) {
         var user = WeiQuPai.Cache.get('currentUser');
         if (!user || user.id != uid) return;
@@ -44,23 +64,12 @@ Ext.define('WeiQuPai.controller.ShowUser', {
             circle_bg: url
         });
     },
-
-    //卡片点击
-    doCardTap: function(list, index, record, dataType) {
-        var cardHandler = this['card_' + dataType];
-        cardHandler && cardHandler.call(this, record);
-    },
-
-    //进入商品详情
-    card_item: function(record) {
-        //处理多次点击的问题
-        var main = Ext.Viewport.down('main');
-        if (main.isAnimating) return;
-        var param = {
-            id: record.get('json_data').id
-        };
-        var view = Ext.create('WeiQuPai.view.ItemDetail');
-        view.setParam(param);
-        main.push(view);
+    //更换头像
+    setAvatar: function(url) {
+        var record = this.getShowUser().down('#user-info').getRecord();
+        record.set('avatar', url);
+        WeiQuPai.Util.updateProfile({
+            avatar: url
+        });
     }
 });

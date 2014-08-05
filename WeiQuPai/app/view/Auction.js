@@ -9,6 +9,18 @@ Ext.define('WeiQuPai.view.Auction', {
     config: {
         scrollable: true,
         cls: 'detail',
+        loadingText: null,
+        plugins: [{
+            type: 'wpullrefresh',
+            lastUpdatedText: '上次刷新：',
+            lastUpdatedDateFormat: 'H点i分',
+            loadingText: '加载中...',
+            pullText: '下拉刷新',
+            releaseText: '释放立即刷新',
+            loadedText: '下拉刷新',
+            refreshFn: 'fetchLastest',
+            scrollerAutoRefresh: true
+        }],
         items: [{
             xtype: 'vtitlebar',
             title: '拍品详情',
@@ -180,14 +192,25 @@ Ext.define('WeiQuPai.view.Auction', {
         return record;
     },
 
-    loadData: function() {
-        var item = item.getRecord();
-        item.load(record.get('id'), {
+    //下拉刷新, 这里的this是pullRefresh对象
+    fetchLastest: function() {
+        var me = this;
+        this.getList().loadData(function() {
+            me.setState('loaded');
+            me.snapBack();
+        });
+    },
+
+    loadData: function(callback) {
+        var item = this.getRecord();
+        this.down('comment').setItemId(item.get('id'));
+        WeiQuPai.model.Item.load(item.get('id'), {
             scope: this,
             success: function(record, operation) {
                 this.setRecord(record);
                 //添加数据到分享功能
                 this.shareLayer.setShareData(record.data);
+                Ext.isFunction(callback) && callback();
             },
             failure: function(record, operation) {
                 WeiQuPai.Util.toast('数据加载失败');

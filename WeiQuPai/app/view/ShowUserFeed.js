@@ -12,7 +12,7 @@ Ext.define('WeiQuPai.view.ShowUserFeed', {
         itemTpl: new Ext.XTemplate(
             '<div class="mydis">',
             '<div class="dis">',
-            '{content}',
+            '{content:htmlEncode}',
             '</div>',
             '<tpl if="feed_type==1">',
             '<div class="img"><tpl for="json_data.pic_list"><img src="{[this.getPic(values)]}"/></tpl></div>',
@@ -54,29 +54,24 @@ Ext.define('WeiQuPai.view.ShowUserFeed', {
     },
 
     initialize: function() {
-        // this.onBefore('itemtap', this.bindEvent, this);
         this.callParent(arguments);
-        var user = WeiQuPai.Cache.get('currentUser');
-        var me = this;
-        this.onBefore('itemtap', function(list, index, dataItem, record, e) {
-            if (e.target.className == 'content') {
-                me.fireEvent('protap', me, index, dataItem, record, e);
+        this.on('itemtap', function(list, index, dataItem, record, e) {
+            if (Ext.get(e.target).findParent('.content')) {
+                this.fireEvent('cardtap', this, index, dataItem, record, e);
                 return false;
             }
-            if (e.target.className == 'img') {
-                me.fireEvent('detailtap', me, index, dataItem, record, e);
-                return false;
-            }
-            if (e.target.className == 'dis') {
-                me.fireEvent('detailtap', me, index, dataItem, record, e);
+            if (Ext.get(e.target).findParent('.img')) {
+                this.fireEvent('pictap', this, index, dataItem, record, e);
                 return false;
             }
             if (e.target.className == 'bubble') {
-                me.fireEvent('detailtap1', me, index, dataItem, record, e);
+                this.fireEvent('zantap', this, index, dataItem, record, e);
                 return false;
             }
+            this.fireEvent('detailtap', this, index, dataItem, record, e);
         }, this);
     },
+
     applyUid: function(uid) {
         this.loadData(uid);
         return uid;
@@ -84,7 +79,12 @@ Ext.define('WeiQuPai.view.ShowUserFeed', {
 
     loadData: function(uid) {
         var store = this.getStore();
+        store.removeAll();
         store.getProxy().setExtraParam('uid', uid);
-        store.load();
+        store.load(function(records, operation, success) {
+            if (!success) {
+                WeiQuPai.Util.toast('数据加载失败');
+            }
+        });
     }
 });
