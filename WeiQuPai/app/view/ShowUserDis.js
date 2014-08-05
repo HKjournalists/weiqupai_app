@@ -8,7 +8,6 @@ Ext.define('WeiQuPai.view.ShowUserDis', {
         loadingText: null,
         disableSelection: true,
         scrollable: null,
-
         itemTpl: new Ext.XTemplate(
             '<div class="mydis">',
             '<div class="dis">',
@@ -16,7 +15,7 @@ Ext.define('WeiQuPai.view.ShowUserDis', {
             '</div>',
             '<div class="content">',
             '<div class="left">',
-            '<img src="{[WeiQuPai.Util.getAvatar(values.item.pic_cover, 140)]}" width="30">',
+            '<img src="{[WeiQuPai.Util.getImagePath(values.item.pic_cover, 100)]}" width="30">',
             '</div>',
             '<div class="right">',
             '{item.title}',
@@ -45,11 +44,22 @@ Ext.define('WeiQuPai.view.ShowUserDis', {
     },
 
     initialize: function() {
-        // this.onBefore('itemtap', this.bindEvent, this);
         this.callParent(arguments);
-        this.onBefore('itemtap', this.bindEvent, this, {
-            element: 'element'
-        });
+        var me = this;
+        this.onBefore('itemtap', function(list, index, dataItem, record, e) {
+            if (e.target.className == 'content') {
+                me.fireEvent('protap', me, index, dataItem, record, e);
+                return false;
+            }
+            if (e.target.className == 'dis') {
+                me.fireEvent('detailtap', me, index, dataItem, record, e);
+                return false;
+            }
+            if (e.target.className == 'bubble') {
+                me.fireEvent('detailtap1', me, index, dataItem, record, e);
+                return false;
+            }
+        }, this);
     },
 
     applyUid: function(uid) {
@@ -60,16 +70,12 @@ Ext.define('WeiQuPai.view.ShowUserDis', {
     loadData: function(uid) {
         var store = this.getStore();
         store.getProxy().setExtraParam('uid', uid);
-        store.load();
-    },
-
-    bindEvent: function(list, index, dataItem, record, e) {
-        var me = this;
-        if (e.target.className == 'img') {
-            me.fireEvent('liketap', me, index, dataItem, record, e);
-            return false;
-        }
-    },
-
+        store.load(function(records, operation, success) {
+            if (!success) {
+                WeiQuPai.Util.toast('数据加载失败');
+            }
+            console.log(records);
+        });
+    }
 
 });

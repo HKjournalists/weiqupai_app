@@ -1,5 +1,6 @@
 Ext.define('WeiQuPai.view.WebPage', {
     extend: 'Ext.Container',
+    requires: ['WeiQuPai.view.Iframe'],
     xtype: 'webpage',
     config: {
         title: null,
@@ -8,13 +9,14 @@ Ext.define('WeiQuPai.view.WebPage', {
         //返回时是否重新加载
         reloadOnBack: false,
         items: [{
-            xtype: 'titlebar',
+            xtype: 'vtitlebar',
             docked: 'top',
-            cls: 'w-title',
+            items: [{
+                baseCls: 'arrow_left',
+                action: 'back'
+            }]
         }, {
             xtype: 'iframe'
-        }, {
-            xtype: 'bottombar'
         }]
     },
 

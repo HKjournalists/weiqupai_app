@@ -43,9 +43,6 @@ Ext.define('WeiQuPai.view.UserAuction', {
             tpl: new Ext.XTemplate(
                 '<div class="details">',
                 '<div class="bottom" style="margin-top:110px;">',
-                '<div class="left">',
-                '{title}',
-                '</div>',
                 '<div class="right">',
                 '<ul>',
                 '<li class="nolike"></li>',
@@ -61,6 +58,9 @@ Ext.define('WeiQuPai.view.UserAuction', {
             id: 'price_data',
             tpl: new Ext.XTemplate(
                 '<div class="detailData">',
+                '<div class="clear"></div>',
+                '<div class="title_new">{title}</div>',
+                '<div class="content_new">',
                 '<div class="left">',
                 '<div class="priceNew">{auction.curr_price}</div>',
                 '<div class="price">',
@@ -312,7 +312,7 @@ Ext.define('WeiQuPai.view.UserAuction', {
             this.setRefreshTimer(null);
         }
         if (this.getCounterTimer()) {
-            clearInterval(this..getCounterTimer());
+            clearInterval(this.getCounterTimer());
             this.setCounterTimer(null);
         }
     }

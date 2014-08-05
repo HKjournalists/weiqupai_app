@@ -1,7 +1,7 @@
 Ext.define('WeiQuPai.view.Today', {
     extend: 'Ext.DataView',
     xtype: 'today',
-    requires: ['WeiQuPai.view.Banner'],
+    requires: ['WeiQuPai.view.Banner', 'WeiQuPai.view.Auction', 'WeiQuPai.view.SpecialSale', 'WeiQuPai.view.YiPai'],
     config: {
         loadingText: null,
         store: 'Auction',
@@ -99,6 +99,7 @@ Ext.define('WeiQuPai.view.Today', {
 
                 xtype: 'button',
                 baseCls: 'btn2',
+                action: 'yipai',
                 flex: 1
 
             }]

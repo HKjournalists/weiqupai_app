@@ -11,10 +11,9 @@ Ext.define('WeiQuPai.view.ShowUserLike', {
         itemTpl: new Ext.XTemplate(
             '<div class="myProduct">',
             '<div class="img">',
-            '<img src="{[WeiQuPai.Util.getAvatar(values.pic_cover)]}" width="100">',
+            '<img src="{[WeiQuPai.Util.getImagePath(values.pic_cover, 100)]}" width="100">',
             '</div>',
             '</div>'
-
         )
     },
 
@@ -26,9 +25,10 @@ Ext.define('WeiQuPai.view.ShowUserLike', {
 
     applyUid: function(uid) {
         this.loadData(uid);
+        // console.log("showlike+" + uid);
+        //this.down('itemdetail').setUid(uid);
         return uid;
     },
-
     loadData: function(uid) {
         var store = this.getStore();
         store.getProxy().setExtraParam('uid', uid);

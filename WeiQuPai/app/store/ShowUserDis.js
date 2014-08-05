@@ -1,6 +1,5 @@
 Ext.define('WeiQuPai.store.ShowUserDis', {
     extend: 'Ext.data.Store',
-    requires: ['WeiQuPai.model.ShowUserDis'],
     config: {
         storeId: 'ShowUserDis',
         autoLoad: false,

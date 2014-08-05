@@ -1,6 +1,7 @@
 Ext.define('WeiQuPai.view.ShowUser', {
     extend: 'Ext.Container',
     xtype: 'showuser',
+    requires: ['WeiQuPai.view.ShowUserLike', 'WeiQuPai.view.ShowUserDis', 'WeiQuPai.view.ShowUserFeed'],
     config: {
         uid: null,
         scrollable: true,

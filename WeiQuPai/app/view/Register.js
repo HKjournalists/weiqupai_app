@@ -3,11 +3,17 @@ Ext.define('WeiQuPai.view.Register', {
     xtype: 'register',
     config: {
         scrollable: 'vertical',
+        cls: 'register',
         items: [{
-            xtype: 'titlebar',
+            xtype: 'vtitlebar',
             title: '注册',
             docked: 'top',
-            cls: 'w-title'
+            cls: 'titlebar3',
+            docked: 'top',
+            items: [{
+                baseCls: 'arrow_left',
+                action: 'back'
+            }]
         }, {
             name: 'uname',
             xtype: 'textfield',
@@ -42,8 +48,6 @@ Ext.define('WeiQuPai.view.Register', {
             cls: 'w-button w-margin',
             action: 'register',
             disabled: true
-        }, {
-            xtype: 'bottombar'
         }]
     },
 

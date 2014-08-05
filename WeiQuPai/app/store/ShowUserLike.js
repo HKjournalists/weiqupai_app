@@ -1,6 +1,5 @@
 Ext.define('WeiQuPai.store.ShowUserLike', {
     extend: 'Ext.data.Store',
-    requires: ['WeiQuPai.model.ShowUserLike'],
     config: {
         storeId: 'ShowUserLike',
         autoLoad: false,

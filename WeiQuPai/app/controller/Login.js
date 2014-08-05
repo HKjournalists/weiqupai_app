@@ -7,8 +7,8 @@ Ext.define('WeiQuPai.controller.Login', {
             register: 'button[action=goregister]',
             forgetpass: 'button[action=forgetpass]',
             goMain: 'button[action=gomain]',
-            qqlogin: 'disclosureitem[itemId=qqlogin]',
-            weibologin: 'disclosureitem[itemId=weibologin]',
+            qqlogin: 'button[itemId=qqlogin]',
+            weibologin: 'button[itemId=weibologin]',
         },
         control: {
             login: {

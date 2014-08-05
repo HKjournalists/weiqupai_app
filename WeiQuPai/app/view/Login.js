@@ -3,65 +3,79 @@ Ext.define('WeiQuPai.view.Login', {
     xtype: 'login',
     config: {
         scrollable: 'vertical',
+        baseCls: 'login_bg',
+
         items: [{
-            xtype: 'titlebar',
-            title: '登录',
+            xtype: 'vtitlebar',
+            title: '用户登录',
             docked: 'top',
-            cls: 'w-title'
+            items: [{
+                baseCls: 'arrow_left',
+                action: 'back'
+            }]
+        }, {
+            xtype: 'container',
+            baseCls: 'log_logo'
         }, {
             name: 'uname',
             xtype: 'textfield',
-            cls: 'w-input-text w-margin',
+            cls: 'log_input',
             inputCls: 'w-icon-user',
-            placeHolder: '手机/邮箱',
+            placeHolder: '用户名/手机号',
             autoComplete: false
 
         }, {
             name: 'password',
             xtype: 'passwordfield',
-            cls: 'w-input-text w-margin',
+            cls: 'log_input1',
             inputCls: 'w-icon-password',
             placeHolder: '填写密码',
             autoComplete: false
         }, {
+            xtype: 'container',
+            cls: 'login_error',
+            html: '亲，密码输错了额',
+            hidden: true
+        }, {
             xtype: 'button',
-            text: '登录',
-            cls: 'w-button w-margin',
+            text: '登    录',
+            baseCls: 'login_btn',
             action: 'login',
             disabled: true
         }, {
-            xtype: 'fieldset',
-            cls: 'w-fieldset',
+            xtype: 'container',
+            layout: 'hbox',
+            baseCls: 'log_reg',
+            style: 'margin-top:20px;',
             items: [{
-                    xtype: 'disclosureitem',
-                    title: '使用QQ帐号登录',
-                    itemId: 'qqlogin'
+                flex: 1,
+                xtype: 'button',
+                text: '注册账号',
+                action: 'goregister',
+            }, {
+                flex: 1,
+                xtype: 'button',
+                text: '忘记密码',
+                action: 'forgetpass'
+            }]
+        }, {
+            xtype: 'container',
+            layout: 'hbox',
+            style: 'margin-top:20px;height:40px;',
+            cls: 'log_reg',
+            items: [{
+                    xtype: 'button',
+                    text: 'QQ登录',
+                    itemId: 'qqlogin',
+                    baseCls: 'log_qq'
                 }, {
-                    xtype: 'disclosureitem',
-                    title: '使用微博帐号登录',
-                    itemId: 'weibologin'
+                    xtype: 'button',
+                    text: '微博登录',
+                    itemId: 'weibologin',
+                    baseCls: 'log_wb'
                 }
 
             ]
-        }, {
-            xtype: 'container',
-            cls: 'w-container',
-            layout: 'hbox',
-            items: [{
-                xtype: 'button',
-                text: '没有帐号？注册',
-                cls: 'w-button',
-                action: 'goregister',
-                flex: 1
-            }]
-        }, {
-            xtype: 'button',
-            align: 'right',
-            text: '忘记密码？',
-            cls: 'w-button-text',
-            action: 'forgetpass'
-        }, {
-            xtype: 'bottombar'
         }]
     },
     initialize: function() {

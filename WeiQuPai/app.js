@@ -26,11 +26,12 @@ Ext.application({
     ],
     models: [
         'Auction', 'Comment', 'Consignee', 'Feed', 'Item', 'Order', 'Profile', 'Shipment',
-        'SpecialSale', 'UserAuction'
+        'SpecialSale', 'UserAuction', 'ShowUserDis', 'ShowUserLike', 'ShowUserFeed'
     ],
     views: [
-        'Main', 'MainCard', 'StartupScreen', 'SplashScreen', 'WebPage', 'VTitleBar', 'Login', 'Register', 'Auction',
-        'Iframe', 'SimpleViewer', 'Sidebar', 'DisclosureItem', 'Pay', 'Order', 'Item'
+        'Main', 'MainCard', 'StartupScreen', 'SplashScreen', 'WebPage', 'VTitleBar', 'Login', 'Register',
+        'Iframe', 'SimpleViewer', 'Sidebar', 'DisclosureItem', 'Pay', 'Order', 'Item', 'Auction', 'Item',
+        'UserAuction'
     ],
     stores: [
         'Auction', 'Comment', 'Banner', 'MyOrder', 'MyConsignee', 'Circle', 'MyProp', 'MyCoupon',

@@ -165,6 +165,10 @@ Ext.define("WeiQuPai.Util", {
                 WeiQuPai.Cache.set('currentUser', rsp);
                 //注册之后绑定推送
                 WeiQuPai.Util.bindPush();
+
+                //更新sidebar的状态
+                WeiQuPai.sidebar.updateUserInfo();
+
                 callback && callback();
             },
             failure: function(rsp) {
