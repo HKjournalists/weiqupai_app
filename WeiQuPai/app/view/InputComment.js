@@ -1,6 +1,5 @@
 Ext.define('WeiQuPai.view.InputComment', {
     extend: 'Ext.form.Panel',
-    requires: ['Ext.field.Hidden'],
     xtype: 'commentform',
     config: {
         layout: {

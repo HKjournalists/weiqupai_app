@@ -74,13 +74,14 @@ Ext.define('WeiQuPai.view.ExchangeCoupon', {
             coupon_id: coupon_id,
             num: num
         };
-        WeiQuPai.Util.mask();
         WeiQuPai.Util.post(url, data, function(rsp) {
             WeiQuPai.Util.toast('兑换成功');
             WeiQuPai.Util.updateUserCache('score', rsp.score);
             me.down('button').setText(rsp.score);
             me.exchangeLayer.hide();
             me.fireEvent('exchanged');
+        }, {
+            mask: true
         });
     }
 });

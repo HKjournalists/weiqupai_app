@@ -3,12 +3,10 @@ Ext.define('WeiQuPai.controller.Order', {
 
     config: {
         refs: {
-            main: 'main',
             orderView: 'order',
-            deliveryTimePanel: 'disclosureitem[itemId=delivery_time]',
-            deliveryTimeList: 'deliverytimelist list',
-            consigneePanel: 'disclosureitem[itemId=consignee]',
-            consigneeList: 'myconsignee',
+            deliveryTimePanel: 'order disclosureitem[itemId=delivery_time]',
+            deliveryTimeList: 'deliverytimelist',
+            consigneePanel: 'order disclosureitem[itemId=consignee]',
             submitButton: 'button[action=submitOrder]'
         },
         control: {
@@ -16,7 +14,7 @@ Ext.define('WeiQuPai.controller.Order', {
                 tap: 'showDeliveryTimeList'
             },
             deliveryTimeList: {
-                itemtap: 'selectDeliveryTime'
+                selected: 'selectDeliveryTime'
             },
             consigneePanel: {
                 tap: 'showConsigneeList'
@@ -31,28 +29,27 @@ Ext.define('WeiQuPai.controller.Order', {
         var view = Ext.create('WeiQuPai.view.MyConsignee', {
             selectMode: true
         });
-        view.on('itemtap', this.selectConsignee, this);
-        this.getMain().push(view);
+        view.on('selected', this.selectConsignee, this);
+        WeiQuPai.navigator.push(view);
     },
     showDeliveryTimeList: function() {
-        this.getDeliveryTimeList().up('deliverytimelist').show();
+        this.getDeliveryTimeList().show();
     },
 
-
     //选择收货人
-    selectConsignee: function(list, index, dataItem, record, e) {
-        this.getMain().pop();
+    selectConsignee: function(record) {
+        WeiQuPai.navigator.pop();
         this.getOrderView().getRecord().set('consignee_id', record.get('id'));
         var html = this.getOrderView().consigneeTpl.apply(record.getData());
         this.getConsigneePanel().setContent(html);
     },
 
     //选择发货时间
-    selectDeliveryTime: function(list, index, dataItem, record, e) {
-        this.getOrderView().getRecord().set('delivery_time', record.get('title'));
-        var time = record.get('title');
-        this.getDeliveryTimePanel().setContent(time);
-        this.getDeliveryTimeList().up('deliverytimelist').hide();
+    selectDeliveryTime: function(list, record) {
+        var title = record.get('title');
+        this.getOrderView().getRecord().set('delivery_time', title);
+        this.getDeliveryTimePanel().setContent(title);
+        this.getDeliveryTimeList().hide();
     },
 
     submitOrder: function() {
@@ -67,21 +64,19 @@ Ext.define('WeiQuPai.controller.Order', {
             WeiQuPai.Util.toast('还没有选择收货地址');
             return false;
         }
-        var itemData = this.getOrderView().down('#orderInfo').getData();
+        var itemData = this.getOrderView().down('#orderInfo').getData().item;
         var param = WeiQuPai.Util.filterNull(order.data);
         param.token = user.token;
-        WeiQuPai.Util.mask();
         var url = order.getProxy().getApi().create;
         WeiQuPai.Util.post(url, param, function(rsp) {
             //将拍过的商品保存到cache中
             WeiQuPai.Util.setCache('auction', parseInt(order.get('auction_id')));
-            var data = Ext.merge({
-                title: itemData.title,
-                pic_cover: itemData.pic_cover
-            }, rsp);
+            var data = Ext.merge(itemData, rsp);
             WeiQuPai.Util.forward('pay', {
                 orderData: data
             });
+        }, {
+            mask: true
         });
     }
 });

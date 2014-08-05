@@ -1,6 +1,5 @@
 Ext.define('WeiQuPai.store.MyOrder', {
     extend: 'Ext.data.Store',
-    requires: ['WeiQuPai.model.Order'],
     config: {
         storeId: 'MyOrder',
         autoLoad: false,

@@ -1,7 +1,6 @@
 Ext.define('WeiQuPai.view.Shipment', {
     extend: 'Ext.Container',
     xtype: 'shipment',
-    requires: ['WeiQuPai.model.Shipment'],
     config: {
         orderId: null,
         disableSelection: true,

@@ -1,28 +1,23 @@
 Ext.define('WeiQuPai.controller.MyAuction', {
     extend: 'Ext.app.Controller',
-    
+
     config: {
         refs: {
-            itemlist : 'myauction',
-            main: 'main'
+            pageView: 'myauction',
         },
         control: {
-           itemlist : {
+            pageView: {
                 itemtap: 'showDetail',
-                gopay: 'goPay',
-           } 
+                order_item: 'goOrder'
+            }
         }
     },
-    
-    showDetail: function(list, index, dataItem, record, e){
-        var detailView = {
-            xtype: 'myauctiondetail',
-            record: record
-        };
-        this.getMain().push(detailView);
+
+    showDetail: function(list, index, dataItem, record, e) {
+        WeiQuPai.Util.goItemView(record.get('item_id'));
     },
 
-    goPay: function(list, index, dataItem ,record, e){
+    goOrder: function(list, index, dataItem, record, e) {
         var payment = record.get('payment');
         var orderId = record.get('id');
         var user = WeiQuPai.Cache.get('currentUser');

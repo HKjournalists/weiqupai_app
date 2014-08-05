@@ -1,6 +1,5 @@
 Ext.define('WeiQuPai.store.MyConsignee', {
     extend: 'Ext.data.Store',
-    requires: ['WeiQuPai.model.Consignee'],
     config: {
         autoLoad: false,
         storeId: 'MyConsignee',

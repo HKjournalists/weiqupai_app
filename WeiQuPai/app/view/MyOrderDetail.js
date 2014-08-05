@@ -1,7 +1,6 @@
 Ext.define('WeiQuPai.view.MyOrderDetail', {
     extend: 'Ext.Container',
     xtype: 'myorderdetail',
-    requires: ['WeiQuPai.view.ShowOrder', 'WeiQuPai.view.Shipment', 'WeiQuPai.view.ReturnAnnounce'],
     config: {
         disableSelection: true,
         scrollable: true,
@@ -21,8 +20,8 @@ Ext.define('WeiQuPai.view.MyOrderDetail', {
             tpl: new Ext.XTemplate(
                 '<div class="myorder_new">',
                 '<div class="order_dis">',
-                '<div class="left"><img src="{pic_cover}" width="50"></div>',
-                '<div class="right">{title}</div>',
+                '<div class="left"><img src="{[this.getCover(values.item.pic_cover)]}="50"></div>',
+                '<div class="right">{item.title}</div>',
                 '<div style="clear:both"></div>',
                 '</div>',
                 '</div>',
@@ -30,7 +29,7 @@ Ext.define('WeiQuPai.view.MyOrderDetail', {
                 '<ul>',
                 '<li><span class="value color_e7">{price}</span>成交价格</li>',
                 '<li><span class="value">{id}</span>订单编号</li>',
-                '<li><span class="value">{total_pay}元</span>订单金额</li>',
+                '<li><span class="value">{total_pay}</span>订单金额</li>',
                 '</ul>',
                 '<ul>',
                 '<li><span class="value">{consignee_info.mobile}</span>电话</li>',
@@ -42,6 +41,7 @@ Ext.define('WeiQuPai.view.MyOrderDetail', {
                 '<li><span class="value">{payment}</span>支付方式</li>',
                 '<li><span class="value">{[this.getStatusText(values.status)]}</span>订单状态</li>',
                 '<li><span class="value">{ctime}</span>下单时间</li>',
+                '<li><span class="value">{comment}</span>备注</li>',
                 '</ul>',
                 '</div>', {
                     getStatusText: function(status) {
@@ -88,7 +88,7 @@ Ext.define('WeiQuPai.view.MyOrderDetail', {
         WeiQuPai.Notify.orderShipClear(this.getRecord().get('id'));
 
         this.down('#orderInfo').on('tap', function() {
-            this.fireEvent('view_auction');
+            this.fireEvent('view_item');
         }, this, {
             element: 'element',
             delegate: '.order_dis'

@@ -36,7 +36,7 @@ Ext.define('WeiQuPai.view.Banner', {
                 src: WeiQuPai.Util.getImagePath(data[i].pic_url)
             });
             if (data[i].auction) {
-                img.setSrc(WeiQuPai.Util.getImagePath(data[i].auction.pic_cover));
+                img.setSrc(WeiQuPai.Util.getImagePath(data[i].auction.item.pic_cover));
                 img.setTpl(this.bannerTpl);
             }
             img.setData(data[i]);
@@ -68,9 +68,7 @@ Ext.define('WeiQuPai.view.Banner', {
     doImageTap: function(img) {
         var data = img.getData();
         if (data.type == 3) {
-            var detailView = Ext.create('WeiQuPai.view.ItemDetail');
-            detailView.setParam(data.auction);
-            Ext.Viewport.down('main').push(detailView);
+            WeiQuPai.Util.goItemView(data.auction.item_id);
             return;
         }
         if (!data.link) return;

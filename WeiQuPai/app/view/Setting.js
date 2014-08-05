@@ -1,11 +1,7 @@
 Ext.define('WeiQuPai.view.Setting', {
     extend: 'Ext.Container',
     xtype: 'setting',
-    requires: [
-        'WeiQuPai.view.DisclosureItem', 'WeiQuPai.view.About', 'WeiQuPai.view.ReturnAnnounce',
-        'WeiQuPai.view.AppUpdate'
-    ],
-
+    requires: ['WeiQuPai.view.About', 'WeiQuPai.view.ReturnAnnounce', 'WeiQuPai.view.AppUpdate'],
     config: {
         cls: 'bg_ef',
         items: [{

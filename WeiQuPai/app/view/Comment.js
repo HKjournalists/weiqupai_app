@@ -87,7 +87,7 @@ Ext.define('WeiQuPai.view.Comment', {
         var store = this.getStore();
         //先清一下数据，防止别的商品的评论先出现
         store.removeAll();
-        store.getProxy().setExtraParam('id', itemId);
+        store.getProxy().setExtraParam('item_id', itemId);
         store.loadPage(1, function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('评论加载失败');

@@ -1,6 +1,5 @@
 Ext.define('WeiQuPai.store.Comment', {
     extend: 'Ext.data.Store',
-    requires: ['WeiQuPai.model.Comment'],
     config: {
         storeId: 'Comment',
         autoLoad: false,

@@ -2263,11 +2263,6 @@ html body
     {
      padding:0px;
     }
-    .mg_10
-    {
-     margin-top:10px;
-    }
-    
      .today .left .zhuan
     {
       background:url('../images/zhuan.png') no-repeat;
@@ -2403,7 +2398,7 @@ html body
     background:$color_fff;
    }
    .mg_10{
-   margin-top:10px;
+     margin-bottom:10px;
    }
    .my_btn .x-button:nth-last-child(1)
     {
@@ -2613,3 +2608,25 @@ html body
       font-size:20px;
       line-height:35px;
     }
+    .consignee-list-item{
+      background:#fff;
+      margin-bottom:2px;
+      padding:10px;
+    }
+    .consignee-list-item:last-child{
+      margin-bottom:0;
+    }
+    .consignee-list-item .selected{
+      background:#fff url(../images/yi_success.png) no-repeat 96% center;
+      background-size:14px auto;
+    }
+    .consignee-list-item h3{
+      font-size:14px;
+      font-weight:bold;
+      margin-bottom:12px;
+    }
+    .consignee-list-item p{
+      color:#666;
+      line-height:1.2; 
+    }
+

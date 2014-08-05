@@ -1,7 +1,7 @@
 Ext.define('WeiQuPai.view.Today', {
     extend: 'Ext.DataView',
     xtype: 'today',
-    requires: ['WeiQuPai.view.Banner', 'WeiQuPai.view.ItemDetail', 'WeiQuPai.view.SpecialSale'],
+    requires: ['WeiQuPai.view.Banner'],
     config: {
         loadingText: null,
         store: 'Auction',
@@ -24,13 +24,13 @@ Ext.define('WeiQuPai.view.Today', {
 
             '<div class="left">',
             '<div class="prod">',
-            '<img src="{[this.getCover(values.pic_cover)]}" width="100">',
+            '<img src="{[this.getCover(values.item.pic_cover)]}" width="100">',
             '</div>',
             '</div>',
 
             '<div class="right">',
             '<div class="title">',
-            '{title}',
+            '{item.title}',
             '</div>',
 
             '<div class="price">',

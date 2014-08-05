@@ -1,9 +1,6 @@
 Ext.define('WeiQuPai.view.Main', {
     extend: 'Ext.navigation.View',
     xtype: 'main',
-    requires: [
-        'WeiQuPai.view.MainCard', 'WeiQuPai.view.Sidebar'
-    ],
     config: {
         layout: {
             type: 'card',

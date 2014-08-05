@@ -397,18 +397,49 @@ Ext.define("WeiQuPai.Util", {
         });
     },
 
+    /**
+     * 跳转到拍品详情, 根据item舞台的数据跳到不同的页面
+     * 如果有拍卖，跳到拍卖，如果有一拍到底，跳到一拍到底，否则，跳到拍品详情
+     */
+    goItemView: function(item_id) {
+        WeiQuPai.Util.mask();
+        var item = WeiQuPai.model.Item;
+        item.load(item_id, {
+            scope: this,
+            success: function(record, operation) {
+                WeiQuPai.Util.unmask();
+                var view;
+                if (record.get('auction')) {
+                    view = Ext.create('WeiQuPai.view.Auction');
+                } else if (record.get('user_auction')) {
+                    view = Ext.create('WeiQuPai.view.UserAuction');
+                } else {
+                    view = Ext.create('WeiQuPai.view.Item');
+                }
+                view.setRecord(record);
+                WeiQuPai.navigator.push(view);
+            },
+            failure: function(record, operation) {
+                WeiQuPai.Util.unmask();
+                WeiQuPai.Util.toast('数据加载失败');
+            },
+        });
+    },
+
     //封装ajax的请求
-    request: function(url, method, data, callback) {
-        if (Ext.isFunction(data)) {
-            callback = data;
-            data = null;
+    request: function(url, method, data, callback, option) {
+        option = option || {};
+        if (option.mask) {
+            WeiQuPai.Util.mask();
         }
-        Ext.Ajax.request({
+        var request = {
             url: url,
             method: method,
             params: data,
             success: function(rsp) {
-                WeiQuPai.Util.unmask();
+                if (option.mask) {
+                    WeiQuPai.Util.unmask();
+                }
                 rsp = Ext.decode(rsp.responseText);
                 if (!WeiQuPai.Util.invalidToken(rsp)) return false;
                 if (rsp.code > 0) {
@@ -419,16 +450,21 @@ Ext.define("WeiQuPai.Util", {
             },
             failure: function(rsp) {
                 WeiQuPai.Util.unmask();
-                WeiQuPai.Util.toast('数据加载失败，请重试');
+                var msg = option.failMsg || '数据加载失败，请重试';
+                WeiQuPai.Util.toast(msg);
             }
-        });
+        }
+        if (option.scope) {
+            request.scope = option.scope;
+        }
+        return Ext.Ajax.request(request);
     },
 
-    get: function(url, callback) {
-        return WeiQuPai.Util.request(url, 'get', callback);
+    get: function(url, callback, option) {
+        return WeiQuPai.Util.request(url, 'get', null, callback, option);
     },
 
-    post: function(url, data, callback) {
-        return WeiQuPai.Util.request(url, 'post', data, callback);
+    post: function(url, data, callback, option) {
+        return WeiQuPai.Util.request(url, 'post', data, callback, option);
     }
 })

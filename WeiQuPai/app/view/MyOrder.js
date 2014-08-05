@@ -1,7 +1,7 @@
 Ext.define('WeiQuPai.view.MyOrder', {
     extend: 'Ext.DataView',
     xtype: 'myorder',
-    requires: ['WeiQuPai.store.MyOrder', 'WeiQuPai.view.MyOrderDetail', 'WeiQuPai.view.LoginTip'],
+    requires: ['WeiQuPai.view.MyOrderDetail'],
     config: {
         cls: 'bg_ef',
         loadingText: null,
@@ -40,9 +40,9 @@ Ext.define('WeiQuPai.view.MyOrder', {
             '</div>',
             '<div class="order_dis">',
             '<div class="left">',
-            '<img src="{[this.getCover(values.pic_cover)]}" width="50">',
+            '<img src="{[this.getCover(values.item.pic_cover)]}" width="50">',
             '</div>',
-            '<div class="right">{title}</div>',
+            '<div class="right">{item.title}</div>',
             '<div style="clear:both"></div>',
             '</div>',
             '</div>', {
@@ -68,7 +68,6 @@ Ext.define('WeiQuPai.view.MyOrder', {
         items: [{
             xtype: 'vtitlebar',
             title: '我的订单',
-            cls: 'titlebar2',
             docked: 'top',
             items: [{
                 baseCls: 'user',
@@ -106,7 +105,7 @@ Ext.define('WeiQuPai.view.MyOrder', {
                 return false;
             }
             if (Ext.get(e.target).findParent('.order_dis')) {
-                this.fireEvent('view_auction', list, index, dataItem, record, e);
+                this.fireEvent('view_item', list, index, dataItem, record, e);
                 return false;
             }
         }, this);

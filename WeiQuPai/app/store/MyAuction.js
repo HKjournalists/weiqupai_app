@@ -1,6 +1,5 @@
 Ext.define('WeiQuPai.store.MyAuction', {
     extend: 'Ext.data.Store',
-    requires: ['WeiQuPai.model.UserAuction'],
     config: {
         storeId: 'MyAuction',
         autoLoad: false,
@@ -8,7 +7,7 @@ Ext.define('WeiQuPai.store.MyAuction', {
         pageSize: 10,
         proxy: {
             type: 'ajax',
-            url: WeiQuPai.Config.host + '/?r=app/userAuction',
+            url: WeiQuPai.Config.host + '/?r=appv2/userAuction',
             reader: {
                 type: 'json'
             },

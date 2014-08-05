@@ -1,11 +1,5 @@
-/**
- * 订单提交成功的支付选择页面
- *
- */
-
 Ext.define('WeiQuPai.view.Pay', {
     extend: 'Ext.Container',
-    requires: ['WeiQuPai.view.MyCoupon', 'WeiQuPai.view.PaymentList'],
     xtype: 'pay',
     config: {
         cls: 'bg_ef',

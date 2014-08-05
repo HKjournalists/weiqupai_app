@@ -1,88 +1,106 @@
 Ext.define('WeiQuPai.view.MyAuction', {
-    extend: 'Ext.dataview.List',
+    extend: 'Ext.DataView',
     xtype: 'myauction',
-    requires: ['WeiQuPai.store.MyAuction', 'WeiQuPai.view.MyOrderDetail', 'WeiQuPai.view.LoginTip'],
     config: {
+        cls: 'bg_ef',
         loadingText: null,
         disableSelection: true,
+        scrollToTopOnRefresh: false,
         store: 'MyAuction',
+        plugins: [{
+            type: 'wpullrefresh',
+            lastUpdatedText: '上次刷新：',
+            lastUpdatedDateFormat: 'H点i分',
+            loadingText: '加载中...',
+            pullText: '下拉刷新',
+            releaseText: '释放立即刷新',
+            loadedText: '下拉刷新',
+            scrollerAutoRefresh: true
+        }],
         itemTpl: new Ext.XTemplate(
-            '<div class="myauction-row">',
-            '<div class="myauction-img"><img src="{[this.getCover(values.pic_cover)]}"/><span class="x-badge"></span></div>',
-            '<div class="info">',
-            '<h2>{title}</h2>',
-            '<p>成交价<span class="fbig">￥{price}</span>',
-            '<tpl if="rank != -1">',
-            '<p>此价格击败了<span class="fbig">{rank}%</span>的拍友</p>',
-            '</tpl>',
-            '<p>{ctime}</p>',
+            '<div class="myorder mg_10" >',
+            '<div class="orderlist" data-orderlist="{#}">',
+            '<div class="left">',
+            '<ul>',
+            '<li>当前价格：<span style="color:#e76049">{curr_price}</span></li>',
+            '<li>起始价格：{start_price}</li>',
+            '<li>开始时间：{start_time}</li>',
+            '<li>{[this.getLeftTime(values)]}</li>',
+            '</ul>',
             '</div>',
-            '<tpl if="this.notPay(status)">',
-            '<div class="pay-btn-wrap"><div class="pay-btn">去支付</div></div>',
-            '</tpl>', {
-                notPay: function(status) {
-                    return status == WeiQuPai.Config.orderStatus.STATUS_TOPAY;
+            '<div class="right">',
+            '<ul>',
+            '<li>{help_num}人帮拍</li>',
+            '<tpl if="this.canPai(values.status)">',
+            '<li><input type="button" value="我要拍" class="btn_e7"/></li>',
+            '</tpl>',
+            '</ul>',
+            '</div>',
+            '<div style="clear:both"></div>',
+            '</div>',
+            '<div class="order_dis">',
+            '<div class="left">',
+            '<img src="{[this.getCover(values.item.pic_cover)]}" width="50">',
+            '</div>',
+            '<div class="right">{item.title}</div>',
+            '<div style="clear:both"></div>',
+            '</div>',
+            '</div>', {
+                getButtonText: function(status) {
+                    return text[status];
                 },
                 getCover: function(cover) {
-                    return WeiQuPai.Util.getImagePath(cover, '290');
+                    return WeiQuPai.Util.getImagePath(cover, '200');
+                },
+                getLeftTime: function(values) {
+                    if (values.status == WeiQuPai.Config.userAuctionStatus.STATUS_ONLINE) {
+                        return '剩余时间：' + values.left_time_text;
+                    }
+                    var text = {};
+                    text[WeiQuPai.Config.userAuctionStatus.STATUS_ONLINE] = '进行中';
+                    text[WeiQuPai.Config.userAuctionStatus.STATUS_FINISH] = '等待购买';
+                    text[WeiQuPai.Config.userAuctionStatus.STATUS_DEAL] = '已成交';
+                    text[WeiQuPai.Config.userAuctionStatus.STATUS_CANCEL] = '已取消';
+                    return text[values.status];
+                },
+                canPai: function(status) {
+                    return status == WeiQuPai.Config.userAuctionStatus.STATUS_ONLINE ||
+                        status == WeiQuPai.Config.userAuctionStatus.STATUS_FINISH;
                 }
             }
         ),
         items: [{
-            xtype: 'titlebar',
-            title: '已拍',
+            xtype: 'vtitlebar',
+            title: '我的拍卖',
             docked: 'top',
-            cls: 'w-title'
+            items: [{
+                baseCls: 'user',
+                action: 'ucenter'
+            }]
         }]
 
     },
 
     initialize: function() {
         this.callParent(arguments);
-
         this.msgbox = WeiQuPai.Util.msgbox('您还没有拍到任何宝贝');
         this.add(this.msgbox);
 
-        this.loginTip = Ext.create('WeiQuPai.view.LoginTip');
-        this.add(this.loginTip);
-
-        this.on('activate', this.loadData, this);
+        this.loadData();
 
         this.onBefore('itemtap', function(list, index, dataItem, record, e) {
-            if (e.target.className == 'pay-btn') {
-                this.fireEvent('gopay', list, index, dataItem, record, e);
+            if (e.target.tagName.toLowerCase() == 'input') {
+                this.fireEvent('order_item', list, index, dataItem, record, e);
                 return false;
             }
         }, this);
     },
 
-    setBadge: function(orderId) {
-        var item = this.getItemAt(this.getStore().indexOfId(orderId));
-        if (!item) return;
-        var badgeEl = item.element.down('.x-badge');
-        badgeEl.addCls('w-badge-mdot');
-        badgeEl.parent().addCls('x-hasbadge');
-        badgeEl.show();
-    },
-
-    clearBadge: function(orderId) {
-        var item = this.getItemAt(this.getStore().indexOfId(orderId));
-        if (!item) return;
-        var badgeEl = item.element.down('.x-badge');
-        badgeEl.removeCls('w-badge-mdot');
-        badgeEl.parent().removeCls('x-hasbadge');
-        badgeEl.hide();
-    },
-
     loadData: function() {
         var user = WeiQuPai.Cache.get('currentUser');
         if (!user) {
-            this.getStore().removeAll();
-            this.msgbox.hide();
-            this.loginTip.show();
             return false;
         }
-        this.loginTip.hide();
         this.msgbox.hide();
         //fix 出现loading的bug
         this.setLoadingText(null);
@@ -106,5 +124,23 @@ Ext.define('WeiQuPai.view.MyAuction', {
             //通知标红点
             WeiQuPai.Notify.notify([WeiQuPai.Notify.MSG_NEW_ORDER, WeiQuPai.Notify.MSG_ORDER_SHIP]);
         }, this);
-    }
+    },
+
+    setBadge: function(orderId) {
+        var item = this.getItemAt(this.getStore().indexOfId(orderId));
+        if (!item) return;
+        var badgeEl = item.element.down('.x-badge');
+        badgeEl.addCls('w-badge-mdot');
+        badgeEl.parent().addCls('x-hasbadge');
+        badgeEl.show();
+    },
+
+    clearBadge: function(orderId) {
+        var item = this.getItemAt(this.getStore().indexOfId(orderId));
+        if (!item) return;
+        var badgeEl = item.element.down('.x-badge');
+        badgeEl.removeCls('w-badge-mdot');
+        badgeEl.parent().removeCls('x-hasbadge');
+        badgeEl.hide();
+    },
 });

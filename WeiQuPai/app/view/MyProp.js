@@ -33,10 +33,10 @@ Ext.define('WeiQuPai.view.MyProp', {
             loadingText: null,
             itemTpl: new Ext.XTemplate(
                 '<div class="prop-list">',
-                '<div class="left {action}"></div>',
+                '<div class="left {prop.action}"></div>',
                 '<div class="prop-desc">',
-                '<div class="name">{name} * {num}</div>',
-                '<div class="desc">{description}</div>',
+                '<div class="name">{prop.name} * {num}</div>',
+                '<div class="desc">{prop.description}</div>',
                 '</div>',
                 '</div>'
             ),

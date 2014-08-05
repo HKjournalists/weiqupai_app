@@ -24,6 +24,11 @@ Ext.define("WeiQuPai.Config", {
         STATUS_ONLINE: 2,
         STATUS_FINISH: 3
     },
-
+    userAuctionStatus: {
+        STATUS_ONLINE: 1,
+        STATUS_FINISH: 2,
+        STATUS_DEAL: 3,
+        STATUS_CANCEL: 4
+    },
     market: 'appstore'
 })

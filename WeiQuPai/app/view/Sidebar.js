@@ -4,10 +4,9 @@
 Ext.define('WeiQuPai.view.Sidebar', {
     extend: 'WeiQuPai.plugin.Sidebar',
     xtype: 'sidebar',
-    requires: ['WeiQuPai.plugin.Sidebar', 'WeiQuPai.view.ShowUser', 'WeiQuPai.view.MyAuction',
-        'WeiQuPai.view.Message', 'WeiQuPai.view.MyOrder', 'WeiQuPai.view.Circle',
-        'WeiQuPai.view.MyDiscount', 'WeiQuPai.view.MyCoupon', 'WeiQuPai.view.MyProp',
-        'WeiQuPai.view.Profile', 'WeiQuPai.view.Setting'
+    requires: ['WeiQuPai.view.Today', 'WeiQuPai.view.MyAuction', 'WeiQuPai.view.Message',
+        'WeiQuPai.view.MyOrder', 'WeiQuPai.view.Circle', 'WeiQuPai.view.MyDiscount', 'WeiQuPai.view.MyCoupon',
+        'WeiQuPai.view.MyProp', 'WeiQuPai.view.Profile', 'WeiQuPai.view.Setting', 'WeiQuPai.view.ShowUser'
     ],
     config: {
         notLogin: ['today', 'circle', 'setting'],

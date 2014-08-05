@@ -1,10 +1,7 @@
 Ext.define('WeiQuPai.view.Order', {
     extend: 'Ext.Container',
     xtype: 'order',
-    requires: [
-        'WeiQuPai.view.DisclosureItem', 'WeiQuPai.view.ShipmentList', 'WeiQuPai.view.DeliveryTimeList',
-        'WeiQuPai.model.Order', 'WeiQuPai.view.Pay'
-    ],
+    requires: ['WeiQuPai.view.DeliveryTimeList', 'WeiQuPai.view.MyConsignee'],
     config: {
         auctionData: null,
         scrollable: true,
@@ -35,9 +32,9 @@ Ext.define('WeiQuPai.view.Order', {
                 '<div class="confirm_w">',
                 '<div class="confirm_title">',
                 '<div class="img">',
-                '<img src="{[WeiQuPai.Util.getImagePath(values.pic_cover, 200)]}" width="50">',
+                '<img src="{[WeiQuPai.Util.getImagePath(values.item.pic_cover, 200)]}" width="50">',
                 '</div>',
-                '<div class="title">{title}</div>',
+                '<div class="title">{item.title}</div>',
                 '<div style="clear:both"></div>',
                 '</div>',
                 '<div class="confirm_bottom">',
@@ -103,21 +100,23 @@ Ext.define('WeiQuPai.view.Order', {
 
     applyAuctionData: function(data) {
         data.total_pay = data.curr_price;
+        this.getRecord().set('auction_type', data.auction_type);
         this.getRecord().set('price', data.curr_price);
         this.getRecord().set('item_id', data.item_id);
         this.getRecord().set('auction_id', data.id);
         this.getRecord().set('total_pay', data.curr_price)
         this.down('#orderInfo').setData(data);
+        return data;
     },
 
     addDeliveryTime: function() {
         var deliveryTimeView = WeiQuPai.Util.createOverlay('WeiQuPai.view.DeliveryTimeList');
-        this.selectFirst('delivery_time', deliveryTimeView.down('list'));
+        this.selectFirst('delivery_time', deliveryTimeView.down('dataview'));
     },
 
     selectFirst: function(itemId, list) {
         list.select(0);
-        var title = list.getItemAt(0).getRecord().get('title');
+        var title = list.getSelection()[0].get('title');
         this.getRecord().set(itemId, title);
         this.down('disclosureitem[itemId=' + itemId + ']').setContent(title);
     },

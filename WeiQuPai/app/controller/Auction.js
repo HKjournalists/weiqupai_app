@@ -1,18 +1,16 @@
-Ext.define('WeiQuPai.controller.ItemDetail', {
+Ext.define('WeiQuPai.controller.Auction', {
     extend: 'Ext.app.Controller',
     config: {
         refs: {
-            main: 'main',
-            shopInfo: 'disclosureitem[itemId=shopInfo]',
-            brandInfo: 'disclosureitem[itemId=brandInfo]',
-            paiBtn: 'container[itemId=paiBtn]',
-            commentBtn: 'button[action=comment]',
-            shareBtn: 'button[action=share]',
-            paiBtn: 'button[action=pai]',
-            pageView: 'itemdetail',
-            commentForm: 'commentform',
-            commentView: 'comment',
-            descContainer: 'itemdetail container[itemId=itemDesc]'
+            shopInfo: 'auction disclosureitem[itemId=shopInfo]',
+            brandInfo: 'auction disclosureitem[itemId=brandInfo]',
+            commentBtn: 'auction button[action=comment]',
+            shareBtn: 'auction button[action=share]',
+            paiBtn: 'auction button[action=pai]',
+            pageView: 'auction',
+            commentForm: 'auction commentform',
+            commentView: 'auction comment',
+            descContainer: 'auction container[itemId=itemDesc]'
         },
         control: {
             shopInfo: {
@@ -27,7 +25,7 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
             commentBtn: {
                 tap: function() {
                     if (!WeiQuPai.Util.checkLogin()) return false;
-                    var itemId = this.getPageView().auctionData.item_id;
+                    var itemId = this.getPageView().getRecord().get('item_id');
                     var form = WeiQuPai.Util.createOverlay('WeiQuPai.view.InputComment', {
                         height: 48,
                         showAnimation: false,
@@ -59,12 +57,12 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
 
     //商家
     showShop: function() {
-        var data = this.getPageView().auctionData;
+        var data = this.getPageView().getRecord().data;
         if (data.shop.description || data.shop.pic_url) {
             var shopView = Ext.create('WeiQuPai.view.Shop', {
-                data: this.getPageView().auctionData.shop
+                data: data.shop
             });
-            this.getMain().push(shopView);
+            WeiQuPai.navigator.push(shopView);
         } else {
             window.open(data.shop.site, '_system');
         }
@@ -72,41 +70,33 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
 
     showBrand: function() {
         var brandView = Ext.create('WeiQuPai.view.Brand', {
-            data: this.getPageView().auctionData.brand
+            data: this.getPageView().getRecord().get('brand')
         });
-        this.getMain().push(brandView);
+        WeiQuPai.navigator.push(brandView);
     },
 
     showOrderView: function() {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
-        var auctionId = this.getPageView().auctionData.id;
+        var auctionId = this.getPageView().getRecord().get('auction').id;
         if (WeiQuPai.Util.hasAuction(auctionId)) {
             WeiQuPai.Util.toast('您已经拍过该商品');
             return;
         }
-        WeiQuPai.Util.mask();
-        var reserve = WeiQuPai.model.Reserve;
-        reserve.getProxy().setExtraParam('token', user.token);
-        reserve.load(auctionId, {
-            success: function(record, operation) {
-                WeiQuPai.Util.unmask();
-                if (!WeiQuPai.Util.invalidToken(record.raw)) return false;
-                if (record.get('status') != WeiQuPai.Config.auctionStatus.STATUS_ONLINE) {
-                    msgArr = ['拍卖还未开始', null, null, '对不起，拍卖已结束'];
-                    msg = msgArr[record.get('status')];
-                    WeiQuPai.Util.toast(msg);
-                    return;
-                }
-                var orderView = Ext.create('WeiQuPai.view.Order');
-                orderView.setAuctionData(record.data);
-                this.getMain().push(orderView);
-            },
-            failure: function() {
-                WeiQuPai.Util.unmask();
-                WeiQuPai.Util.toast('数据加载失败');
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/reserve&id=' + auctionId + '&token=' + user.token;
+        WeiQuPai.Util.get(url, function(rsp) {
+            if (rsp.status != WeiQuPai.Config.auctionStatus.STATUS_ONLINE) {
+                msgArr = ['拍卖还未开始', null, null, '对不起，拍卖已结束'];
+                msg = msgArr[rsp.status];
+                WeiQuPai.Util.toast(msg);
+                return;
             }
-        }, this);
+            var orderView = Ext.create('WeiQuPai.view.Order');
+            orderView.setAuctionData(rsp);
+            WeiQuPai.navigator.push(orderView);
+        }, {
+            mask: true
+        });
     },
 
     doPublishComment: function(form) {
@@ -164,8 +154,8 @@ Ext.define('WeiQuPai.controller.ItemDetail', {
     doCommentTap: function(index, record) {
         if (!WeiQuPai.Util.checkLogin()) return;
         var replyId = record.get('id');
-        var itemId = this.getPageView().auctionData.item_id;
-        var auctionId = this.getPageView().auctionData.id;
+        var itemId = this.getPageView().getRecord().get('item_id');
+        var auctionId = this.getPageView().getRecord().get('id');
         var form = WeiQuPai.Util.createOverlay('WeiQuPai.view.InputComment', {
             height: 48,
         });

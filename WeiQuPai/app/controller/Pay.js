@@ -46,9 +46,9 @@ Ext.define('WeiQuPai.controller.Pay', {
         }
         WeiQuPai.navigator.pop();
         var order = this.getPageView().getOrderData();
-        this.getCouponPanel().setContent(record.get('name'));
+        this.getCouponPanel().setContent(record.get('coupon').name);
         var curr_price = parseFloat(order.price);
-        var total_pay = Math.max(0, curr_price - parseFloat(record.get('value')));
+        var total_pay = Math.max(0, curr_price - parseFloat(record.get('coupon').value));
         order.coupon = record.get('id');
         order.total_pay = total_pay;
         this.getPageView().down('#needPay').setContent(order.total_pay.toFixed(2), 'color_e7');

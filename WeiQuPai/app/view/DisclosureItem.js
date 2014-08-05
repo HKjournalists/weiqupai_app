@@ -7,7 +7,6 @@ Ext.define("WeiQuPai.view.DisclosureItem", {
         title: '标题',
         contentPosition: 'right',
         content: '',
-        titleStyle: 'bold', //[bold, normal]
         cls: 'w-disclosure-item',
         disclosureItem: true
     },

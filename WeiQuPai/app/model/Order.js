@@ -2,8 +2,8 @@ Ext.define("WeiQuPai.model.Order", {
     extend: 'Ext.data.Model',
 
     config: {
-        fields: ['id', 'auction_id', 'item_id', 'price', 'title', 'pic_cover', 'rank',
-            'total_pay', 'consignee_info', 'payment', 'delivery_time', 'ctime', 'status', 'cancel_reason', 'comment', 'coupon', 'prop'
+        fields: ['id', 'auction_id', 'item_id', 'price', 'item', 'auction', 'rank',
+            'total_pay', 'consignee_info', 'payment', 'delivery_time', 'ctime', 'status', 'cancel_reason', 'comment', 'coupon', 'auction_type'
         ],
         proxy: {
             type: 'ajax',

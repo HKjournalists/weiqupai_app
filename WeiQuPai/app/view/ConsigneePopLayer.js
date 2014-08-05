@@ -1,22 +1,27 @@
-Ext.define('WeiQuPai.view.CameraLayer', {
+Ext.define('WeiQuPai.view.ConsigneePopLayer', {
     extend: 'Ext.Container',
-    xtype: 'cameralayer',
+    xtype: 'consigneepoplayer',
     config: {
-        picWidth: 140,
-        picHeight: 140,
-        //缩放时是否等比裁剪
-        crop: true,
-        callback: null,
         cls: 'w-poplayer',
         items: [{
             xtype: 'button',
-            action: 'camera',
-            text: '拍照',
+            action: 'select',
+            text: '使用',
             baseCls: 'w-popbutton',
         }, {
             xtype: 'button',
-            action: 'album',
-            text: '从手机相册选择',
+            action: 'setDefault',
+            text: '设为默认',
+            baseCls: 'w-popbutton',
+        }, {
+            xtype: 'button',
+            action: 'edit',
+            text: '编辑',
+            baseCls: 'w-popbutton',
+        }, {
+            xtype: 'button',
+            action: 'del',
+            text: '删除',
             baseCls: 'w-popbutton',
         }, {
             xtype: 'button',
@@ -28,6 +33,7 @@ Ext.define('WeiQuPai.view.CameraLayer', {
 
     initialize: function() {
         this.on('show', WeiQuPai.Util.saveLastView, this);
+        this.down('button[action=cancel]').on('tap', this.hide, this);
     },
 
     show: function() {

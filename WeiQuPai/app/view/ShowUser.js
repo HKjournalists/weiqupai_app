@@ -3,66 +3,14 @@ Ext.define('WeiQuPai.view.ShowUser', {
     xtype: 'showuser',
     config: {
         uid: null,
-        // plugins: [{
-        //     type: 'wlistpaging',
-        //     autoPaging: true,
-        // }, {
-        //     type: 'wpullrefresh',
-        //     lastUpdatedText: '上次刷新：',
-        //     lastUpdatedDateFormat: 'H点i分',
-        //     loadingText: '加载中...',
-        //     pullText: '下拉刷新',
-        //     releaseText: '释放立即刷新',
-        //     loadedText: '下拉刷新'
-        // }],
-        // loadingText: null,
-        // pressedCls: '',
-        // param: null,
-        // store: 'UserFeed',
-        // disableSelection: true,
-        // itemTpl: new Ext.XTemplate(
-        //     '<div class="user-row"><div class="info">',
-        //     '<tpl if="feed_type==0">',
-        //     '<p>{content:htmlEncode}</p>',
-        //     '<tpl elseif="feed_type==1">',
-        //     '<tpl if="content"><p>{content:htmlEncode}</p></tpl>',
-        //     '<div class="pic-list">',
-        //     '<tpl for="json_data.pic_list"><img src="{[this.getCover(values)]}"/></tpl>',
-        //     '</div>',
-        //     '<div class="card" dataType="item">',
-        //     '<img src="{[this.getCover(values.json_data.pic_cover)]}"/>',
-        //     '<span>{json_data.title:htmlEncode}</span>',
-        //     '</div>',
-        //     '<tpl elseif="feed_type==2">',
-        //     '<div class="action-title"><span class="uname" uid="{uid}">{nick:htmlEncode}</span><span class="action">拍下了一个宝贝</span></div>',
-        //     '<p>我刚刚购买了{json_data.title:htmlEncode}</p>',
-        //     '<div class="card" dataType="item">',
-        //     '<img src="{[this.getCover(values.json_data.pic_cover)]}"/>',
-        //     '<span>{json_data.title:htmlEncode}</span>',
-        //     '</div>',
-        //     '</tpl>',
-        //     '<div class="flex"><span class="time">{ctime}</span></div>',
-        //     '</div></div>', {
-        //         getAvatar: function(avatar) {
-        //             return WeiQuPai.Util.getImagePath(avatar, '140');
-        //         },
-        //         getCover: function(cover) {
-        //             return WeiQuPai.Util.getImagePath(cover, '290');
-        //         },
-        //         getPic: function(pic) {
-        //             return WeiQuPai.Util.getImagePath(pic, '40');
-        //         }
-        //     }
-        // ),
         scrollable: true,
         cls: 'bg_ef',
         items: [{
             xtype: 'container',
             // cls: 'person_model',
-            store: 'MyCoupon',
             itemId: 'personmodel',
             tpl: new Ext.XTemplate(
-                '<div class="person_model"><img src="{[WeiQuPai.Util.getAvatar(values.circle_bg)]}" width="100%"></div>',
+                '<div class="person_model"><img src="{[WeiQuPai.Util.getImagePath(values.circle_bg)]}" width="100%"></div>',
                 '<div class="person_zhezhao">',
                 '<div class="one">',
                 '<div class="head">',

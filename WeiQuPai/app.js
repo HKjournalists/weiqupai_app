@@ -14,21 +14,27 @@ Ext.application({
     name: 'WeiQuPai',
 
     requires: [
-        'Ext.MessageBox', 'WeiQuPai.Config', 'WeiQuPai.Util', 'WeiQuPai.Notify', 'WeiQuPai.Cache', 'WeiQuPai.plugin.ListPaging',
-        'WeiQuPai.plugin.PullRefresh', 'WeiQuPai.plugin.LoadMask', 'WeiQuPai.view.StartupScreen', 'WeiQuPai.view.SplashScreen',
-        'WeiQuPai.view.WebPage', 'Ext.Anim', 'WeiQuPai.view.VTitleBar', 'WeiQuPai.view.ShowUserLike', 'WeiQuPai.view.Myfollow', 'WeiQuPai.view.MyFen',
-        'WeiQuPai.view.ShowUserDis', 'WeiQuPai.view.ShowUserFeed'
+        'Ext.MessageBox', 'WeiQuPai.Config', 'WeiQuPai.Util', 'WeiQuPai.Notify', 'WeiQuPai.Cache',
+        'WeiQuPai.plugin.ListPaging', 'WeiQuPai.plugin.PullRefresh', 'WeiQuPai.plugin.LoadMask',
+        'Ext.Anim', 'Ext.device.Camera', 'Ext.field.Select', 'Ext.form.FieldSet', 'Ext.Img'
     ],
 
     controllers: [
-        'Main', 'Today', 'MyAuction', 'MyOrder', 'MyOrderDetail', 'ItemDetail', 'Order', 'ShowOrder', 'Circle', 'ShowUser',
-        'My', 'Setting', 'MyFriend', 'MyConsignee', 'Private', 'NewMessage', 'Login', 'Register', 'Profile', 'CameraLayer',
-        'NewFriend', 'Routes', 'SpecialSale', 'Pay', 'Myfollow', 'ShowUserLike', 'MyFen'
+        'Main', 'Today', 'MyAuction', 'MyOrder', 'MyOrderDetail', 'Item', 'Order', 'ShowOrder', 'Circle', 'ShowUser',
+        'Setting', 'MyConsignee', 'Login', 'Register', 'Profile', 'CameraLayer',
+        'Routes', 'SpecialSale', 'Pay', 'Myfollow', 'ShowUserLike', 'MyFen', 'Auction', 'Item'
     ],
-    views: ['Main'],
+    models: [
+        'Auction', 'Comment', 'Consignee', 'Feed', 'Item', 'Order', 'Profile', 'Shipment',
+        'SpecialSale', 'UserAuction'
+    ],
+    views: [
+        'Main', 'MainCard', 'StartupScreen', 'SplashScreen', 'WebPage', 'VTitleBar', 'Login', 'Register', 'Auction',
+        'Iframe', 'SimpleViewer', 'Sidebar', 'DisclosureItem', 'Pay', 'Order', 'Item'
+    ],
     stores: [
-        'Auction', 'Comment', 'Banner', 'MyOrder', 'MyConsignee', 'Circle', 'UserFeed', 'MyProp', 'MyCoupon',
-        'Coupon', 'Prop', 'SpecialSale', 'ShowUserLike', 'ShowUserDis', 'ShowUserFeed', 'Myfollow'
+        'Auction', 'Comment', 'Banner', 'MyOrder', 'MyConsignee', 'Circle', 'MyProp', 'MyCoupon',
+        'Coupon', 'Prop', 'SpecialSale', 'ShowUserLike', 'ShowUserDis', 'ShowUserFeed', 'Myfollow', 'MyAuction'
     ],
     icon: {
         '57': 'resources/icons/icon.png',
@@ -184,11 +190,12 @@ Ext.application({
             WeiQuPai.Notify.checkMQ();
 
             //处理刷新状态
-            var mainTab = Ext.Viewport.down('maintab');
-            var main = Ext.Viewport.down('main');
+            var mainCard = WeiQuPai.mainCard;
+            var main = WeiQuPai.navigator;
             //如果是在今日，就做软刷新处理
-            var today = mainTab.down('today');
-            var detail = main.down('itemdetail');
+            var today = mainCard.down('today');
+            var auction = main.down('auction');
+            var userAuction = main.down('userauction');
             var special = main.down('specialsale');
             if (main.getActiveItem() == detail) {
                 detail.softRefresh();
@@ -198,7 +205,7 @@ Ext.application({
                 special.fireEvent('activate');
                 return;
             }
-            if (mainTab.getActiveItem() == today) {
+            if (mainCard.getActiveItem() == today) {
                 today.fireEvent('activate');
                 return;
             }

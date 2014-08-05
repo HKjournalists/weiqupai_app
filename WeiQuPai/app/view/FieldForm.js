@@ -17,7 +17,7 @@ Ext.define('WeiQuPai.view.FieldForm', {
             }]
         }, {
             xtype: 'fieldset',
-            cls: 'w-fieldset',
+            cls: 'w-fieldset-full',
             items: [{
                 name: 'name',
                 xtype: 'textfield',

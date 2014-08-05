@@ -27,7 +27,7 @@ Ext.define('WeiQuPai.controller.MyOrderDetail', {
                 tap: 'doShowReturn'
             },
             pageView: {
-                view_auction: 'doViewAuction',
+                view_item: 'doViewItem',
             }
         }
     },
@@ -78,13 +78,8 @@ Ext.define('WeiQuPai.controller.MyOrderDetail', {
         WeiQuPai.Util.forward('returnannounce');
     },
 
-    doViewAuction: function(x) {
+    doViewItem: function(x) {
         var record = this.getPageView().getRecord();
-        WeiQuPai.Util.forward('itemdetail', {
-            param: {
-                id: record.get('auction_id'),
-                item_id: record.get('item_id')
-            }
-        });
+        WeiQuPai.Util.goItemView(record.get('item_id'));
     }
 });

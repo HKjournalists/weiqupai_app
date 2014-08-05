@@ -1,8 +1,7 @@
 Ext.define('WeiQuPai.view.Profile', {
     extend: 'Ext.Container',
     xtype: 'profile',
-    requires: ['WeiQuPai.model.Profile', 'WeiQuPai.view.GenderList', 'WeiQuPai.view.FieldForm'],
-
+    requires: ['WeiQuPai.view.GenderList', 'WeiQuPai.view.MyConsignee'],
     config: {
         scrollable: true,
         cls: 'bg_ef',
@@ -114,6 +113,9 @@ Ext.define('WeiQuPai.view.Profile', {
     },
 
     applyRecord: function(record) {
+        if (record == null) {
+            return null;
+        }
         var data = record.data;
         this.setAvatar(data.avatar);
         this.addGenderList(data.gender);

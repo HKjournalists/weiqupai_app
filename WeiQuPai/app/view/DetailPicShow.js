@@ -1,7 +1,6 @@
 Ext.define('WeiQuPai.view.DetailPicShow', {
     extend: 'Ext.carousel.Carousel',
     xtype: 'detailpicshow',
-    requires: ['Ext.Img', 'WeiQuPai.view.ImageViewer'],
     config: {
         direction: 'horizontal',
         style: 'height:200px;background-size:100% auto;',

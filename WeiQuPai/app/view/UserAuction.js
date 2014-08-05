@@ -1,14 +1,7 @@
-Ext.define('WeiQuPai.view.ItemDetail', {
+Ext.define('WeiQuPai.view.UserAuction', {
     extend: 'Ext.Container',
-    xtype: 'itemdetail',
-    requires: [
-        'WeiQuPai.view.Shop', 'WeiQuPai.view.BottomBar',
-        'WeiQuPai.view.DetailPicShow', 'WeiQuPai.view.Order', 'WeiQuPai.model.Auction',
-        'WeiQuPai.view.ShareLayer', 'WeiQuPai.view.Brand', 'WeiQuPai.model.Reserve',
-        'WeiQuPai.view.Comment', 'WeiQuPai.view.ItemParam', 'WeiQuPai.view.ItemDesc'
-    ],
+    xtype: 'auction',
     config: {
-        param: null,
         scrollable: true,
         cls: 'detail',
         items: [{
@@ -69,22 +62,22 @@ Ext.define('WeiQuPai.view.ItemDetail', {
             tpl: new Ext.XTemplate(
                 '<div class="detailData">',
                 '<div class="left">',
-                '<div class="priceNew">{curr_price}</div>',
+                '<div class="priceNew">{auction.curr_price}</div>',
                 '<div class="price">',
                 '<span>原价￥{oprice}</span>',
                 ' 已售出:{item_stat.sold_num}',
                 '</div>',
                 '</div>',
-                '<div class="detail_map" id="countdown">{[this.formatCountdown(values)]}</div>',
+                '<div class="detail_map" id="countdown">{[this.formatCountdown(values.auction)]}</div>',
                 '</div>', {
-                    formatCountdown: function(values) {
-                        if (values.status == WeiQuPai.Config.auctionStatus.STATUS_NOT_START) {
-                            return values.start_time;
-                        } else if (values.status == WeiQuPai.Config.auctionStatus.STATUS_FINISH) {
+                    formatCountdown: function(auction) {
+                        if (auction.status == WeiQuPai.Config.auctionStatus.STATUS_NOT_START) {
+                            return auction.start_time;
+                        } else if (auction.status == WeiQuPai.Config.auctionStatus.STATUS_FINISH) {
                             return '00:00';
                         } else {
-                            var sec = values.left_time % 60;
-                            var min = (values.left_time - sec) / 60;
+                            var sec = auction.left_time % 60;
+                            var min = (auction.left_time - sec) / 60;
                             var countdown = (min < 10 ? '0' + min : min) + ":" + (sec < 10 ? '0' + sec : sec);
                             return countdown;
                         }
@@ -123,19 +116,18 @@ Ext.define('WeiQuPai.view.ItemDetail', {
             hidden: true
         }, {
             xtype: 'bottombar'
-        }]
+        }],
+
+        refreshTimer: null,
+        counterTimer: null,
+
+        //未开始时为还有多少时间开始，拍卖中时为本轮剩余时间
+        leftSeconds: 0,
+
+        //当前激活的tab button
+        activeTab: null,
 
     },
-
-    refreshTimer: null,
-    counterTimer: null,
-    //未开始时为还有多少时间开始，拍卖中时为本轮剩余时间
-    leftSeconds: 0,
-
-    //当前激活的tab button
-    activeTab: null,
-
-    tabPosition: 0,
 
     initialize: function() {
         this.callParent(arguments);
@@ -146,11 +138,6 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 
         //销毁的时候结束定时器
         this.on('destroy', this.onDestroy);
-
-        this.on('painted', function() {
-            this.tabPosition = this.down('#tabbar').element.getY() + 20;
-        });
-
     },
 
     initTab: function() {
@@ -160,43 +147,39 @@ Ext.define('WeiQuPai.view.ItemDetail', {
             var xtype = btns[i].action.substr(4);
             btns[i].tabView = this.down(xtype);
             btns[i].on('tap', function() {
-                if (me.activeTab == this) return;
-                me.activeTab.removeCls('x-button-active');
-                me.activeTab.tabView.hide();
+                var tab = me.getActiveTab();
+                if (tab == this) return;
+                tab.removeCls('x-button-active');
+                tab.tabView.hide();
                 this.addCls('x-button-active');
                 this.tabView.show();
-                me.activeTab = this;
-                me.getScrollable().getScroller().scrollTo(0, me.tabPosition, false);
+                me.setActiveTab(this);
             });
         }
-        this.activeTab = btns[0];
-
-        //tab的悬停效果
-        var scroller = this.getScrollable().getScroller();
-        scroller.addListener('scroll', function(scroler, x, y) {
-            if (y >= this.tabPosition) {
-                this.down('#tabbar').setDocked('top');
-            } else {
-                this.down('#tabbar').setDocked(null);
-            }
-
-
-        }, this);
+        this.setActiveTab(btns[0]);
     },
 
-    applyParam: function(param) {
-        //加载数据
-        this.loadData(param.id);
-        this.down('comment').setItemId(param.item_id);
-        return param;
+    applyRecord: function(record) {
+        if (record == null) {
+            return null;
+        }
+        this.down('comment').setItemId(record.get('id'));
+
+        var data = record.data;
+        this.down('detailpicshow').setPicData(data.pic_url);
+        this.down('#item_stat').setData(data);
+        this.down('#item_title').setData(data);
+        this.down('itemparam').setData(data);
+        this.down('itemdesc').setData(data);
+        return record;
     },
 
-    loadData: function(id) {
-        var auction = WeiQuPai.model.Auction;
-        auction.load(id, {
+    loadData: function() {
+        var item = item.getRecord();
+        item.load(record.get('id'), {
             scope: this,
             success: function(record, operation) {
-                this.setContent(record.data);
+                this.setRecord(record);
                 //添加数据到分享功能
                 this.shareLayer.setShareData(record.data);
             },
@@ -215,70 +198,65 @@ Ext.define('WeiQuPai.view.ItemDetail', {
         this.down('#price_data').setData(data);
         this.down('itemparam').setData(data);
         this.down('itemdesc').setData(data);
-        //this.createChart();
+        this.createChart();
         this.setCountdown();
     },
-
 
     //软刷新
     softRefresh: function() {
         //先确保清空定时器
         this.onDestroy();
-        Ext.Ajax.request({
-            url: WeiQuPai.Config.apiUrl + '/?r=app/auction/refresh&id=' + this.auctionData.id,
-            method: 'get',
-            success: function(rsp) {
-                rsp = Ext.decode(rsp.responseText);
-                this.auctionData.left_time = rsp.left_time;
-                this.auctionData.status = rsp.status;
-                this.auctionData.curr_round = rsp.curr_round;
-                this.auctionData.curr_price = rsp.curr_price;
-                this.auctionData.round_start_time = rsp.round_start_time;
-                this.down('#price_data').setData(this.auctionData);
-                //如果没结束就继续自动刷新
-                if (rsp.status != WeiQuPai.Config.auctionStatus.STATUS_FINISH) {
-                    this.setCountdown();
-                }
-            },
-            scope: this
+        var me = this;
+        var auction = this.getRecord().get('auction');
+        var url = WeiQuPai.Config.apiUrl + '/?r=app/auction/refresh&id=' + auction.id;
+        WeiQuPai.Util.get(url, function(rsp) {
+            auction = Ext.merge(auction, rsp);
+            this.getRecord().set('auction', auction);
+            this.down('#price_data').setData(auction);
+            //如果没结束就继续自动刷新
+            if (rsp.status != WeiQuPai.Config.auctionStatus.STATUS_FINISH) {
+                this.setCountdown();
+            }
         });
     },
 
     //设置定时器
     setCountdown: function() {
         var now = Math.ceil(new Date / 1000);
-        this.leftSeconds = this.auctionData.left_time;
-        if (this.leftSeconds <= 0 || this.auctionData.status == WeiQuPai.Config.auctionStatus.STATUS_FINISH) return;
+        var auction = this.getRecord().get('auction');
+        this.setLeftSeconds(auction.left_time);
+        if (auction.left_time <= 0 || auction.status == WeiQuPai.Config.auctionStatus.STATUS_FINISH) return;
         var me = this;
         //如果是未开始，在开始时间做软刷新
-        if (this.auctionData.status == WeiQuPai.Config.auctionStatus.STATUS_NOT_START) {
-            this.refreshTimer = setTimeout(function() {
+        if (auction.status == WeiQuPai.Config.auctionStatus.STATUS_NOT_START) {
+            this.setRefreshTimer(setTimeout(function() {
                 me.softRefresh();
-            }, this.leftSeconds * 1000);
+            }, auction.left_time * 1000));
             return;
         }
         //已经开始的做计时
-        this.counterTimer = setInterval(function() {
+        this.setCounterTimer(setInterval(function() {
             me.countdown();
-        }, 1000);
+        }, 1000));
     },
 
     countdown: function() {
         //计时结束做下一轮刷新
-        if (this.leftSeconds == 0) {
-            clearInterval(this.counterTimer);
-            this.counterTimer = null;
+        if (this.getLeftSeconds() == 0) {
+            clearInterval(this.getCounterTimer());
+            this.setCounterTimer(null);
             return this.softRefresh();
         }
-        this.leftSeconds--;
-        var sec = this.leftSeconds % 60;
-        var min = (this.leftSeconds - sec) / 60;
+        var ls = this.getLeftSeconds();
+        this.setLeftSeconds(--ls);
+        var sec = ls % 60;
+        var min = (ls - sec) / 60;
         var countdown = (min < 10 ? '0' + min : min) + ":" + (sec < 10 ? '0' + sec : sec);
         //android系统2秒才走一次定时器，加一个span标签就没问题了
         Ext.get('countdown').setHtml('<span>' + countdown + '</span>');
 
         var me = this;
-        if (this.leftSeconds <= 6 && this.leftSeconds > 0) {
+        if (ls <= 6 && ls > 0) {
             setTimeout(function() {
                 me.flashBackground();
             }, 700);
@@ -317,7 +295,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
     //价格趋势图
     createChart: function() {
         //显示趋势图
-        var id = this.auctionData.id;
+        var id = this.getRecord().get('auction').id;
         var el = new Image;
         el.src = WeiQuPai.Config.host + '/apic/' + id + '.png?_dc=' + Math.random();
         var chart = this.down('#chart');
@@ -329,13 +307,13 @@ Ext.define('WeiQuPai.view.ItemDetail', {
 
     //销毁的时候清除定时器
     onDestroy: function() {
-        if (this.refreshTimer) {
-            clearTimeout(this.refreshTimer);
-            this.refreshTimer = null;
+        if (this.getRefreshTimer()) {
+            clearTimeout(this.getRefreshTimer());
+            this.setRefreshTimer(null);
         }
-        if (this.counterTimer) {
-            clearInterval(this.counterTimer);
-            this.counterTimer = null;
+        if (this.getCounterTimer()) {
+            clearInterval(this..getCounterTimer());
+            this.setCounterTimer(null);
         }
     }
 });

@@ -28,7 +28,7 @@ Ext.define('WeiQuPai.view.MyCoupon', {
             loadingText: null,
             itemTpl: new Ext.XTemplate(
                 '<div class="plist">',
-                '<div class="m{value}">{name}</div>',
+                '<div class="m{coupon.value}">{coupon.name}</div>',
                 '<div class="right" >过期时间：{expire_time} <tpl if="expired">[已过期]</tpl></div>',
                 '<div style="clear:both"></div>',
                 '</div>'

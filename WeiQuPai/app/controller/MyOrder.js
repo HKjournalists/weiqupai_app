@@ -12,16 +12,15 @@ Ext.define('WeiQuPai.controller.MyOrder', {
                 showorder: 'doShowOrder',
                 confirm: 'doConfirm',
                 shipment: 'doShipment',
-                view_auction: 'doViewAuction'
+                view_item: 'doViewItem'
             }
         }
     },
 
     showDetail: function(list, index, dataItem, record, e) {
-        var detailView = {
-            xtype: 'myorderdetail',
+        var detailView = Ext.create('WeiQuPai.view.MyOrderDetail', {
             record: record
-        };
+        });
         WeiQuPai.navigator.push(detailView);
     },
 
@@ -59,12 +58,7 @@ Ext.define('WeiQuPai.controller.MyOrder', {
         });;
     },
 
-    doViewAuction: function(list, index, dataItem, record, e) {
-        WeiQuPai.Util.forward('itemdetail', {
-            param: {
-                id: record.get('auction_id'),
-                item_id: record.get('item_id')
-            }
-        });
+    doViewItem: function(list, index, dataItem, record, e) {
+        WeiQuPai.Util.goItemView(record.get('item_id'));
     }
 });
