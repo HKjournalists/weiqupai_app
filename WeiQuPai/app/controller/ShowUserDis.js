@@ -1,19 +1,20 @@
-Ext.define('WeiQuPai.controller.ShowUserLike', {
+Ext.define('WeiQuPai.controller.ShowUserDis', {
     extend: 'Ext.app.Controller',
     config: {
         refs: {
             main: 'main',
-            showuserlike: 'showuserlike'
+            showuserdis: 'showuserdis'
         },
         control: {
-            showuserlike: {
-                itemtap: 'showperson'
+            showuserdis: {
+                protap: 'productdetail',
+                detailtap: 'detail'
             },
 
         }
     },
 
-    showperson: function(list, index, dataItem, record, e) {
+    productdetail: function(list, index, dataItem, record, e) {
         var detailView = Ext.create('WeiQuPai.view.ItemDetail');
         detailView.setParam(record.data);
         WeiQuPai.navigator.push(detailView);

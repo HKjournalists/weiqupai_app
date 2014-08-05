@@ -15,7 +15,7 @@ Ext.define('WeiQuPai.view.MyConsignee', {
             '<tpl if="is_default==1">',
             '<div class="is-default">默认</div>',
             '</tpl>',
-            '</div>',
+            '</div>'
         ),
 
         items: [{

@@ -1,6 +1,7 @@
 Ext.define('WeiQuPai.view.ShowUserLike', {
     extend: 'Ext.DataView',
     xtype: 'showuserlike',
+    requires: ['WeiQuPai.view.ItemDetail'],
     config: {
         uid: null,
         cls: 'mylike',
@@ -26,9 +27,10 @@ Ext.define('WeiQuPai.view.ShowUserLike', {
 
     applyUid: function(uid) {
         this.loadData(uid);
+        // console.log("showlike+" + uid);
+        //this.down('itemdetail').setUid(uid);
         return uid;
     },
-
     loadData: function(uid) {
         var store = this.getStore();
         store.getProxy().setExtraParam('uid', uid);

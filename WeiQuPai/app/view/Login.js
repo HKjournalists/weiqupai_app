@@ -4,87 +4,88 @@ Ext.define('WeiQuPai.view.Login', {
     requires: ['Ext.field.Text', 'Ext.field.Password', 'Ext.form.FieldSet', 'WeiQuPai.view.Register'],
     config: {
         scrollable: 'vertical',
-        items: [
-            {
-                xtype: 'titlebar',
-                title: '登录',
-                docked: 'top',
-                cls: 'w-title'
-            },
-            {
-                name: 'uname',
-                xtype: 'textfield',
-                cls: 'w-input-text w-margin',
-                inputCls: 'w-icon-user',
-                placeHolder: '手机/邮箱',
-                autoComplete: false
+        baseCls: 'login_bg',
 
-            },
-            {
-                name: 'password',
-                xtype: 'passwordfield',
-                cls: 'w-input-text w-margin',
-                inputCls: 'w-icon-password',
-                placeHolder: '填写密码',
-                autoComplete: false
-            },
-            {
-                xtype: 'button',
-                text: '登录',
-                cls: 'w-button w-margin',
-                action: 'login',
-                disabled: true             
-            },
-            {
-                xtype: 'fieldset',
-                cls: 'w-fieldset',
-                items: [
-                    {
-                        xtype: 'disclosureitem',
-                        title: '使用QQ帐号登录',
-                        itemId: 'qqlogin'
-                    },
-                    {
-                        xtype: 'disclosureitem',
-                        title: '使用微博帐号登录',
-                        itemId: 'weibologin'
-                    }
+        items: [{
+            xtype: 'vtitlebar',
+            title: '用户登录',
+            docked: 'top',
+            items: [{
+                baseCls: 'user',
+                action: 'ucenter'
+            }]
+        }, {
+            xtype: 'container',
+            baseCls: 'log_logo'
+        }, {
+            name: 'uname',
+            xtype: 'textfield',
+            cls: 'log_input',
+            inputCls: 'w-icon-user',
+            placeHolder: '用户名/手机号',
+            autoComplete: false
 
-                ]
-            },
-            {
-                xtype: 'container',
-                cls: 'w-container',
-                layout: 'hbox',
-                items: [
-                    {
-                        xtype: 'button',
-                        text: '没有帐号？注册',
-                        cls: 'w-button',
-                        action: 'goregister',
-                        flex: 1
-                    }
-                ]
-            },
-            {
+        }, {
+            name: 'password',
+            xtype: 'passwordfield',
+            cls: 'log_input1',
+            inputCls: 'w-icon-password',
+            placeHolder: '填写密码',
+            autoComplete: false
+        }, {
+            xtype: 'container',
+            cls: 'login_error',
+            html: '亲，密码输错了额',
+            hidden: true
+        }, {
+            xtype: 'button',
+            text: '登    录',
+            baseCls: 'login_btn',
+            action: 'login',
+            disabled: true
+        }, {
+            xtype: 'container',
+            layout: 'hbox',
+            baseCls: 'log_reg',
+            style: 'margin-top:20px;',
+            items: [{
+                flex: 1,
                 xtype: 'button',
-                align: 'right',
-                text: '忘记密码？',
-                cls: 'w-button-text',
+                text: '注册账号',
+                action: 'goregister',
+            }, {
+                flex: 1,
+                xtype: 'button',
+                text: '忘记密码',
                 action: 'forgetpass'
-            },
-            {
-                xtype: 'bottombar'
-            }
-        ]        
+            }]
+        }, {
+            xtype: 'container',
+            layout: 'hbox',
+            style: 'margin-top:20px;height:40px;',
+            cls: 'log_reg',
+            items: [{
+                    xtype: 'button',
+                    text: 'QQ登录',
+                    itemId: 'qqlogin',
+                    baseCls: 'log_qq'
+                }, {
+                    xtype: 'button',
+                    text: '微博登录',
+                    itemId: 'weibologin',
+                    baseCls: 'log_wb'
+                }
+
+            ]
+        }]
     },
-    initialize: function(){
+    initialize: function() {
         this.down('textfield').on('keyup', this.setButtonState, this);
         this.down('passwordfield').on('keyup', this.setButtonState, this);
     },
 
-    setButtonState: function(){
-        var disabled = this.down('textfield').getValue().length == 0 || this.down('passwordfield').getValue().length == 0 
+    setButtonState: function() {
+        var disabled = this.down('textfield').getValue().length == 0 || this.down('passwordfield').getValue().length == 0
         this.down('button[action=login]').setDisabled(disabled);
     }
 });

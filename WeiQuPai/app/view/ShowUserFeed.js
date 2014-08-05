@@ -15,7 +15,7 @@ Ext.define('WeiQuPai.view.ShowUserFeed', {
             '{content}',
             '</div>',
             '<tpl if="feed_type==1">',
-            '<tpl for="json_data.pic_list"><img src="{[this.getPic(values)]}"/></tpl>',
+            '<div class="img"><tpl for="json_data.pic_list"><img src="{[this.getPic(values)]}"/></tpl></div>',
             '</tpl>',
             '<div style="clear:both"></div>',
             '<div class="content">',
@@ -57,9 +57,25 @@ Ext.define('WeiQuPai.view.ShowUserFeed', {
         // this.onBefore('itemtap', this.bindEvent, this);
         this.callParent(arguments);
         var user = WeiQuPai.Cache.get('currentUser');
-        // this.onBefore('itemtap', this.bindEvent, this, {
-        //     element: 'element'
-        // });
+        var me = this;
+        this.onBefore('itemtap', function(list, index, dataItem, record, e) {
+            if (e.target.className == 'content') {
+                me.fireEvent('protap', me, index, dataItem, record, e);
+                return false;
+            }
+            if (e.target.className == 'img') {
+                me.fireEvent('detailtap', me, index, dataItem, record, e);
+                return false;
+            }
+            if (e.target.className == 'dis') {
+                me.fireEvent('detailtap', me, index, dataItem, record, e);
+                return false;
+            }
+            if (e.target.className == 'bubble') {
+                me.fireEvent('detailtap1', me, index, dataItem, record, e);
+                return false;
+            }
+        }, this);
     },
     applyUid: function(uid) {
         this.loadData(uid);
@@ -70,12 +86,5 @@ Ext.define('WeiQuPai.view.ShowUserFeed', {
         var store = this.getStore();
         store.getProxy().setExtraParam('uid', uid);
         store.load();
-    },
-    bindEvent: function(list, index, dataItem, record, e) {
-        var me = this;
-        if (e.target.className == 'img') {
-            me.fireEvent('liketap', me, index, dataItem, record, e);
-            return false;
-        }
-    },
+    }
 });

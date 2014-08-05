@@ -18,7 +18,7 @@ Ext.define('WeiQuPai.controller.Myfollow', {
         var detailView = Ext.create('WeiQuPai.view.ShowUser', {
             uid: uid
         });
-        console.log(uid);
+        // console.log(uid);
         WeiQuPai.navigator.push(detailView);
     }
 

@@ -23,7 +23,7 @@ Ext.application({
     controllers: [
         'Main', 'Today', 'MyAuction', 'MyOrder', 'MyOrderDetail', 'ItemDetail', 'Order', 'ShowOrder', 'Circle', 'ShowUser',
         'My', 'Setting', 'MyFriend', 'MyConsignee', 'Private', 'NewMessage', 'Login', 'Register', 'Profile', 'CameraLayer',
-        'NewFriend', 'Routes', 'SpecialSale', 'Pay', 'Myfollow', 'ShowUserLike', 'MyFen'
+        'NewFriend', 'Routes', 'SpecialSale', 'Pay', 'Myfollow', 'ShowUserLike', 'MyFen', 'ShowUserDis', 'ShowUserFeed'
     ],
     views: ['Main'],
     stores: [

@@ -227,7 +227,6 @@ html body
     .today .left .prod
     {
       margin-right:8px;
-      border:$border;
       text-align:center;
       margin-left:5px;
       background-size:contain;
@@ -395,9 +394,9 @@ html body
    }
     .details  .bottom
   {
-    background:url('../images/detail_b.png') repeat-x;
+    //background:url('../images/detail_b.png') repeat-x;
     height:46px;
-    background-size:contain;
+  //  background-size:contain;
     width:100%;
     bottom:0;
     padding:20px 0px 0px;
@@ -486,18 +485,15 @@ html body
    .detailData
    {
     background:white;
-    display:box;
-    display:-webkit-box;
-    display:-moz-box;
     width:100%;
    }
+   .detailData .title_new{width:100%;padding:10px 0px 0px 10px;font-size:15px;color:#383838;}
+   .detailData .title_new .content_new{width:100%;}
    .detailData .left
    {
-     flex:1;
+     float:left;
+     width:50%;
      padding:7px 4px 7px 10px;
-     flex:1;
-     -moz-box-flex: 1;  
-     -webkit-box-flex: 1;
    }
    @mixin pricex
    {
@@ -539,9 +535,8 @@ html body
      text-align:right;
      background-size:contain;
      margin-top:5px;
-     flex:1;
-     -moz-box-flex: 1;  
-     -webkit-box-flex: 1;
+     float:left;
+     width:50%;
      padding: 7px 20px;
      color: white;
    }
@@ -2463,10 +2458,11 @@ html body
     {
      width:100%;
      position: relative;
-     top: -141px;
+     top: -143px;
      height:20px;
      color:$color_fff;
      font-size:12px;
+     background:transparent;
     }
     .yi_product .list .price .left
     {
@@ -2613,3 +2609,137 @@ html body
       font-size:20px;
       line-height:35px;
     }
+
+
+//登陆页面
+.login_bg{
+  background:url('../images/login_bg.jpg') no-repeat;
+  width:100%;
+  background-size:100% 100%;
+  font-size:14px;
+}
+.login_bg .x-button-normal{
+  color:$color_fff;
+}
+.log_logo{
+  background:url('../images/log_logo.png') no-repeat;
+  width:82px;height:81px; 
+  margin:49px auto;
+  background-size:contain;
+}
+.log_input{
+  width:200px;
+  min-height:31px;
+  margin:auto;
+  border-radius:3px 3px 0px 0px;
+  background:$color_fff;
+  border-bottom:1px solid #f6f6f6;
+}
+.log_input .x-input-el,.log_input1 .x-input-el
+{
+  min-height: 2em;
+  border-width: 0;
+  -webkit-appearance: none;
+  font-size: 14px;
+}
+.log_input1{
+  width:200px;
+  min-height:31px;
+  margin:auto;
+  border-radius:0px 0px 3px 3px;
+  background:$color_fff;
+}
+.log_input .x-field-text{
+  border-radius:15px;
+  border-bottom:1px solid #f6f6f6;
+  height:30px;
+}
+.log_input .x-input-el{
+  border-radius:10px;
+}
+.login_btn{
+  width:200px;
+  background:$color_e7;
+  color:$color_fff;
+  text-align:center;
+  padding-top:7px;
+  height:30px;
+  border-radius:5px;
+  margin:8px auto;
+}
+.float_left
+{
+  float:left; 
+}
+.float_right
+{
+  float:right; 
+}
+.log_reg{
+  width:200px;
+  margin:auto;
+}
+.log_reg .x-button{
+  border:0px;
+  background:transparent;
+}
+.log_reg .x-button-normal .x-button-label
+{
+  color:$color_fff;
+}
+.log_regf{
+  width:200px;
+  margin:auto;
+  background:#fff; 
+  background:rgba(255,255,255,0.4); 
+  filter:alpha(opacity=40);
+  color:$color_fff;
+}
+@mixin log_bqq{
+  background-size:contain;
+  color:$color_fff;
+  height:23px;
+  width:98px;
+  }
+.log_qq{
+  background:url('../images/login_qq.png') no-repeat;
+  @include log_bqq;
+  text-align: left;
+  padding: 5px 0px 5px 15px;
+  font-size: 12px
+  
+}
+.log_wb{
+  background:url('../images/login_wb.png') no-repeat;
+  @include log_bqq;
+  ftext-align: right;
+  padding: 5px 0px 5px 25px;
+  margin-left: 3px;
+  font-size: 12px
+}
+.register .x-field
+{
+  margin-top:10px;
+}
+.register .x-field .x-field-input
+{
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+  border-radius:0px;
+}
+.register .x-input-el,.register .x-field
+{
+  min-height:2em;
+}
+.register .x-button-normal .x-button-label
+{
+  color:#fff;
+}
+.login_error
+{
+  font-size:14px;border-radius:5px;color:#fff;width:200px;margin:8px auto;padding:6px 10px;background:#000; opacity: 0.5; filter: progid:DXImageTransform.Microsoft.alpha(opacity=50);
+}
+
+
+
+

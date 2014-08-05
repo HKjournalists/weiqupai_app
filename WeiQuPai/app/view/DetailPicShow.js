@@ -7,7 +7,7 @@ Ext.define('WeiQuPai.view.DetailPicShow', {
         style: 'height:200px;background-size:100% auto;',
         cls: 'detail',
         directionLock: true,
-        indicator: true,
+        indicator: false,
         picData: null
     },
 

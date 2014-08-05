@@ -9,6 +9,7 @@ Ext.define('WeiQuPai.view.ItemDetail', {
     ],
     config: {
         param: null,
+        uid: null,
         scrollable: true,
         cls: 'detail',
         items: [{
@@ -50,9 +51,6 @@ Ext.define('WeiQuPai.view.ItemDetail', {
             tpl: new Ext.XTemplate(
                 '<div class="details">',
                 '<div class="bottom" style="margin-top:110px;">',
-                '<div class="left">',
-                '{title}',
-                '</div>',
                 '<div class="right">',
                 '<ul>',
                 '<li class="nolike"></li>',
@@ -68,6 +66,9 @@ Ext.define('WeiQuPai.view.ItemDetail', {
             id: 'price_data',
             tpl: new Ext.XTemplate(
                 '<div class="detailData">',
+                '<div class="clear"></div>',
+                '<div class="title_new">{title}</div>',
+                '<div class="content_new">',
                 '<div class="left">',
                 '<div class="priceNew">{curr_price}</div>',
                 '<div class="price">',
@@ -76,6 +77,8 @@ Ext.define('WeiQuPai.view.ItemDetail', {
                 '</div>',
                 '</div>',
                 '<div class="detail_map" id="countdown">{[this.formatCountdown(values)]}</div>',
+                '<div class="clear"></div>',
+                '</div>',
                 '</div>', {
                     formatCountdown: function(values) {
                         if (values.status == WeiQuPai.Config.auctionStatus.STATUS_NOT_START) {
@@ -190,9 +193,15 @@ Ext.define('WeiQuPai.view.ItemDetail', {
         this.down('comment').setItemId(param.item_id);
         return param;
     },
-
-    loadData: function(id) {
+    applyUid: function(uid) {
+        this.loadData(uid);
+        console.log("detail+" + uid);
+        return uid;
+    },
+    loadData: function(id, uid) {
         var auction = WeiQuPai.model.Auction;
+        var item = WeiQuPai.model.Item;
+        console.log("detail+" + uid);
         auction.load(id, {
             scope: this,
             success: function(record, operation) {

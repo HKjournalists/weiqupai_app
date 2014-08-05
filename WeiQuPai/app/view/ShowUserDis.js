@@ -8,7 +8,6 @@ Ext.define('WeiQuPai.view.ShowUserDis', {
         loadingText: null,
         disableSelection: true,
         scrollable: null,
-
         itemTpl: new Ext.XTemplate(
             '<div class="mydis">',
             '<div class="dis">',
@@ -45,11 +44,22 @@ Ext.define('WeiQuPai.view.ShowUserDis', {
     },
 
     initialize: function() {
-        // this.onBefore('itemtap', this.bindEvent, this);
         this.callParent(arguments);
-        this.onBefore('itemtap', this.bindEvent, this, {
-            element: 'element'
-        });
+        var me = this;
+        this.onBefore('itemtap', function(list, index, dataItem, record, e) {
+            if (e.target.className == 'content') {
+                me.fireEvent('protap', me, index, dataItem, record, e);
+                return false;
+            }
+            if (e.target.className == 'dis') {
+                me.fireEvent('detailtap', me, index, dataItem, record, e);
+                return false;
+            }
+            if (e.target.className == 'bubble') {
+                me.fireEvent('detailtap1', me, index, dataItem, record, e);
+                return false;
+            }
+        }, this);
     },
 
     applyUid: function(uid) {
@@ -61,15 +71,6 @@ Ext.define('WeiQuPai.view.ShowUserDis', {
         var store = this.getStore();
         store.getProxy().setExtraParam('uid', uid);
         store.load();
-    },
-
-    bindEvent: function(list, index, dataItem, record, e) {
-        var me = this;
-        if (e.target.className == 'img') {
-            me.fireEvent('liketap', me, index, dataItem, record, e);
-            return false;
-        }
-    },
-
+    }
 
 });
