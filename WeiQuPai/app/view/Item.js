@@ -60,9 +60,6 @@ Ext.define('WeiQuPai.view.Item', {
             tpl: new Ext.XTemplate(
                 '<div class="details">',
                 '<div class="bottom" style="margin-top:110px;">',
-                '<div class="left">',
-                '{title}',
-                '</div>',
                 '<div class="right">',
                 '<ul>',
                 '<li class="nolike"></li>',
@@ -77,11 +74,15 @@ Ext.define('WeiQuPai.view.Item', {
             xtype: 'container',
             id: 'price_data',
             tpl: new Ext.XTemplate(
+                '<div class="clear"></div>',
                 '<div class="detailData">',
+                '<div class="title_new">{title}</div>',
+                '<div class="content_new">',
                 '<div class="left">',
                 '<div class="price">',
                 '<span>原价￥{oprice}</span>',
                 ' 已售出:{item_stat.sold_num}',
+                '</div>',
                 '</div>',
                 '</div>',
                 '</div>'

@@ -121,6 +121,10 @@ Ext.define('WeiQuPai.view.Sidebar', {
             this.toggle();
             var user = WeiQuPai.Util.checkLogin();
             if (!user) return;
+            //     var showUser = Ext.create('WeiQuPai.view.ShowUser');
+            //     showUser.setUid(user.id);
+            //     WeiQuPai.navigator.push(showUser);
+            // });
             var uid = user.id;
             WeiQuPai.Util.forward('showuser', {
                 uid: uid

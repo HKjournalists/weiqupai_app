@@ -60,9 +60,6 @@ Ext.define('WeiQuPai.view.Auction', {
             tpl: new Ext.XTemplate(
                 '<div class="details">',
                 '<div class="bottom" style="margin-top:110px;">',
-                '<div class="left">',
-                '{title}',
-                '</div>',
                 '<div class="right">',
                 '<ul>',
                 '<li class="nolike"></li>',
@@ -77,7 +74,10 @@ Ext.define('WeiQuPai.view.Auction', {
             xtype: 'container',
             id: 'price_data',
             tpl: new Ext.XTemplate(
+                '<div class="clear"></div>',
                 '<div class="detailData">',
+                '<div class="title_new">{title}</div>',
+                '<div class="content_new">',
                 '<div class="left">',
                 '<div class="priceNew">{auction.curr_price}</div>',
                 '<div class="price">',
@@ -85,7 +85,9 @@ Ext.define('WeiQuPai.view.Auction', {
                 ' 已售出:{item_stat.sold_num}',
                 '</div>',
                 '</div>',
+                '</div>',
                 '<div class="detail_map" id="countdown">{[this.formatCountdown(values.auction)]}</div>',
+                '<div class="clear"></div>',
                 '</div>', {
                     formatCountdown: function(auction) {
                         if (auction.status == WeiQuPai.Config.auctionStatus.STATUS_NOT_START) {

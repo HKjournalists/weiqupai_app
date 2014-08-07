@@ -15,7 +15,6 @@ $font_12:12px;
 $font_10:10px;
 $color_e7:#e76049;
 
-
 //首页吃喝玩乐按钮样式
 @mixin banner_style
 {
@@ -702,7 +701,7 @@ html body
   {
     width:100%;
     margin:-1px auto 0px; 
-    background:#f6f6f6;
+    background:#f9f9f9;
     border:1px solid #f6f6f6;
     border-radius:6px;
     pading:5px;
@@ -1192,7 +1191,7 @@ html body
    }
    .my
    {
-     background:#efefef;
+     background:#f6f6f6;
    }
    .mylike
    { 
@@ -1267,7 +1266,7 @@ html body
     .content
    {
     width:100%;
-    background:#fefefe;
+    background:#f9f9f9;
     padding:10px;
     margin-top:10px;
     border:1px solid #f0f0f0;
@@ -1487,20 +1486,17 @@ html body
    }
    .yi_product .list .img
    {
-     width:100%;
+     max-width:100%;
+     min-width:100%;
      margin:0px auto 5px;
      border:1px solid #efefef;
      text-align:center;
+     margin-top:-19px;
+     z-index:0;
    }
   
-    .yi_product .list .img img
-    {
-      margin:auto;
-    }
     .yi_product .list  .price
     {
-     position: relative;
-     top: -139px;
      background:#e76049;
      width:80px;
      height:20px;
@@ -1511,14 +1507,15 @@ html body
     .yi_product .list  .zhezhao
     {
      background:url('../images/yi_zhezhao.png') repeat-x;
-     width:98.1%;
-     position:relative;
-     height:20px;
-     bottom:46px;
+     line-height:20px;
      text-align:center;
-     padding-top:5px;
      background-size:container;
      margin:auto;
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
+     margin-top:-28px;
+     z-index:1;
     }
     .yi_product .list .dis
     {
@@ -1667,7 +1664,7 @@ html body
     {
      margin:10px;
      border:1px solid #efefef;
-     background:#fefefe;
+     background:#f9f9f9;
     }
     .order_dis .left
     {
@@ -1861,14 +1858,14 @@ html body
     {
      height:30px;
      border:1px solid #d4d4d4;
-     background:#fefefe;
+     background:#f9f9f9;
      border-radius:3px;
      width:94%;
      margin:auto;
     }
     #ext-textareainput-1
     {
-     background:#fefefe;
+     background:#f9f9f9;
      border-radius:3px;
     }
     .shai_width
@@ -1895,12 +1892,12 @@ html body
     }
     .camera
     {    
-      background:#efefef url('../images/ordershaic.png');
+      background:#f9f9f9 url('../images/ordershaic.png');
       @include camera_img;
     }
      .camera_add
     {    
-      background:#efefef url('../images/ordershai+.png');
+      background:#f9f9f9 url('../images/ordershai+.png');
       @include camera_img;
     }
 
@@ -2014,6 +2011,10 @@ html body
     .myfen .myfollow .img
     {
      width:60px;
+    }
+    .myfen .myfollow .img img
+    {
+     border-radius:20px;
     }
     .myfen .myfollow .name
     {
@@ -2450,8 +2451,6 @@ html body
     .yi_product .list .price
     {
      width:100%;
-     position: relative;
-     top: -143px;
      height:20px;
      color:$color_fff;
      font-size:12px;
