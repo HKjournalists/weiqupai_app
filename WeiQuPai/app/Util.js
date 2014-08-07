@@ -1,6 +1,5 @@
 Ext.define("WeiQuPai.Util", {
     singleton: true,
-    requires: ['WeiQuPai.view.InputComment', 'WeiQuPai.view.CirclePost', 'WeiQuPai.view.CircleReply', 'WeiQuPai.view.CameraLayer', 'WeiQuPai.plugin.Toast', 'WeiQuPai.view.SimpleViewer'],
     globalView: {},
     createOverlay: function(com, conf) {
         if (this.globalView[com]) return this.globalView[com];

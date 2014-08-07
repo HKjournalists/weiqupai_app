@@ -701,9 +701,7 @@ html body
   .re_message
   {
     width:100%;
-    margin:-1px auto 0px; 
     background:#f6f6f6;
-    border:1px solid #f6f6f6;
     border-radius:6px;
     pading:5px;
   }
@@ -730,11 +728,13 @@ html body
   .re_message .dis
   {
    width:100%;
+   padding:0 8px;
   }
   .re_message .dis .img
   {
-   width:40px;
+   width:30px;
    float:left;
+   margin-right:5px;
   } 
   .re_message .dis .img img
   {
@@ -742,9 +742,9 @@ html body
   }
    .re_message .dis .name
   {
-   width:80%;
-   float:left;
+   margin-left:40px;
    word-break: break-all;
+   padding-top:5px;
   } 
   .re_message .date
   {
@@ -787,7 +787,7 @@ html body
    padding:5px;
    float:left;
   }
-  .discard .list .one  .img img,,.message .list .one .img img
+  .discard .list .one  .img img, .message .list .one .img img
   
   {
      border-radius: 20px;   
@@ -819,7 +819,7 @@ html body
   }
   .remess .list .one .name{
     flex: 9;
-    padding: 13px 1px 1px 15px;
+    padding: 13px 1px 1px 20px;
     font-size: 14px;
     float: left;
     word-break: break-all;
@@ -873,6 +873,12 @@ html body
   .discard .list .date .right .like,.product_like,
   {
    background:url('../images/two_icon1.jpg') no-repeat;
+   @include discard_date_btn;
+   float:right;
+  }
+  .discard .list .date .right .selflike,
+  {
+   background:url('../images/heart_color.png') no-repeat;
    @include discard_date_btn;
    float:right;
   }
@@ -1267,8 +1273,8 @@ html body
     .content
    {
     width:100%;
-    background:#fefefe;
-    padding:10px;
+    background:#f9f9f9;
+    padding:5px;
     margin-top:10px;
     border:1px solid #f0f0f0;
    }
@@ -1281,12 +1287,13 @@ html body
    {
     width:40px;
     float:left;
+    margin-right:5px;
    }
    .content .right
    {
-    float:left;
-    width:70%;
-    font-size:13px;
+    margin-left:45px;
+    line-height:1.3;
+    color:#898294;
    }
    .message .content .right
    {
@@ -1919,8 +1926,9 @@ html body
     .confirm_title
     {
      width:100%;
-     background:#f6f6f6;
+     background:#f9f9f9;
      margin:5px 0px;
+     border:1px solid #f0f0f0;
     }
     .confirm_title .img
     {
@@ -1930,11 +1938,11 @@ html body
     }
      .confirm_title .title
     {
-     float:left;
-     width:70%;
+     margin-left:45px;
      padding:5px;
-     margin-left:5px;
      word-break: break-all;
+     color:#898294;
+     line-height:1.3;
     }
     .confirm_bottom
     {
@@ -2414,7 +2422,7 @@ html body
     }
     .paiquan .remess .list .one .name
     {
-     padding: 8px 1px 1px 15px;
+     padding: 8px 1px 1px 20px;
     }
     .paiquan .confirm_w
     {
@@ -2423,6 +2431,10 @@ html body
     .color_38
     {
      color:#383838;
+    }
+    .color_85
+    {
+      color:#858585;
     }
     .paiquan .likea
     {
@@ -2758,4 +2770,79 @@ html body
 {
   font-size:14px;border-radius:5px;color:#fff;width:200px;margin:8px auto;padding:6px 10px;background:#000; opacity: 0.5; filter: progid:DXImageTransform.Microsoft.alpha(opacity=50);
 }
+.list.circle-row{
+  margin-bottom:10px;
+}
+.paiquan .list .one .avatar, .feed .list .one .avatar{
+  padding:0;
+}
+.paiquan .list .one .name, .feed .list .one .name{
+  padding:5px 1px 1px 20px;
+}
+.paiquan .feed-title{
+  margin-bottom:8px;
+}
 
+.card-img{
+  float:left;
+  width:40px;
+  margin:5px;
+  display:block;
+}
+.pic-group-list{
+  margin-top:8px;
+}
+.pic-group-list img{
+  display:inline-block;
+  margin-right:5px;
+  margin-bottom:5px;
+  width:75px;
+  height:75px;
+}
+.center{
+  text-align:center;
+}
+
+.message_new{
+  background:#fff;
+  border-radius:3px;color:#383838;
+  padding-top:10px;
+}
+.msg-zan{
+   background:#fff;
+   border-radius:3px;color:#383838;
+   margin-top:10px;
+}
+.message_new .title, .msg-zan .title{
+  background: url("../images/two_icon1.jpg") no-repeat;
+  background-size: auto 12px;
+  background-position:10px 15px;
+  padding-left: 30px;
+  padding-top:5px;
+  border-bottom: 1px solid #f6f6f6;
+  overflow:hidden;
+  width: 95%;
+  margin:auto;
+}
+.message_new .title img, .msg-zan .title img{
+  width:30px;
+  height:30px;
+  float:left;
+  margin:0 5px 5px 0px;
+  border-radius: 15px;
+  -webkit-border-radius:15px;
+}
+.msg-reply{
+  width:95%;
+  margin:auto;
+  background:#fff;
+  padding:10px 0;
+  border-radious:0;
+  border-bottom:1px solid #f6f6f6;
+}
+.msg-reply .date{
+  margin:0;
+  color:#858585;
+  font-size:12px; 
+  margin-top:8px;
+}

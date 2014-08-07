@@ -9,14 +9,14 @@
     changes and its generated code, it will produce a "merge conflict" that you
     will need to resolve manually.
 */
-
 Ext.application({
     name: 'WeiQuPai',
 
     requires: [
         'Ext.MessageBox', 'WeiQuPai.Config', 'WeiQuPai.Util', 'WeiQuPai.Notify', 'WeiQuPai.Cache',
         'WeiQuPai.plugin.ListPaging', 'WeiQuPai.plugin.PullRefresh', 'WeiQuPai.plugin.LoadMask',
-        'Ext.Anim', 'Ext.device.Camera', 'Ext.field.Select', 'Ext.form.FieldSet', 'Ext.Img'
+        'WeiQuPai.plugin.Toast', 'Ext.Anim', 'Ext.device.Camera', 'Ext.field.Select',
+        'Ext.form.FieldSet', 'Ext.Img', 'Ext.ux.ImageViewer'
     ],
 
     controllers: [
@@ -31,13 +31,13 @@ Ext.application({
     ],
     views: [
         'Main', 'MainCard', 'StartupScreen', 'SplashScreen', 'WebPage', 'VTitleBar', 'Login', 'Register',
-        'Iframe', 'SimpleViewer', 'Sidebar', 'DisclosureItem', 'Pay', 'Order', 'Item', 'Auction', 'Item',
-        'UserAuction'
+        'Iframe', 'SimpleViewer', 'ImageViewer', 'Sidebar', 'DisclosureItem', 'Pay', 'Order', 'Item', 'Auction', 'Item',
+        'UserAuction', 'InputComment', 'CircleReplyLayer', 'CameraLayer'
     ],
     stores: [
         'Auction', 'Comment', 'Banner', 'MyOrder', 'MyConsignee', 'Circle', 'MyProp', 'MyCoupon',
         'Coupon', 'Prop', 'SpecialSale', 'ShowUserLike', 'ShowUserDis', 'ShowUserFeed', 'MyFollow', 'MyAuction',
-        'MyFans'
+        'MyFans', 'FeedReply'
     ],
     icon: {
         '57': 'resources/icons/icon.png',

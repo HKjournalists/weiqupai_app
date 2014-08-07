@@ -17,7 +17,6 @@ Ext.define('WeiQuPai.view.ImageViewer', {
     },
 
     applyPicData: function(data) {
-        //debugger;
         this.removeAll(true);
         if (!Ext.isArray(data)) {
             return false;

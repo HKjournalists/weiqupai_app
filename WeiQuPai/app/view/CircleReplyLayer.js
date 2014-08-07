@@ -1,24 +1,24 @@
-Ext.define('WeiQuPai.view.CircleReply', {
+Ext.define('WeiQuPai.view.CircleReplyLayer', {
     extend: 'Ext.form.Panel',
-    xtype: 'circlereply',
+    xtype: 'circlereplylayer',
     config: {
-        scrollable: false,
+        scrollable: null,
         layout: {
             'type': 'hbox',
             'align': 'center'
         },
-        scrollable: false,
         cls: 'input-comment',
         items: [{
             xtype: 'textfield',
             name: 'content',
             placeHolder: '评论',
-            cls: 'w-input-text w-input-comment',
+            baseCls: 'input_text',
             clearIcon: false,
             flex: 1
         }, {
             xtype: 'button',
-            cls: 'w-button-text',
+            baseCls: 'btn_e7',
+            cls: 'send_btn',
             action: 'publish',
             text: '发送',
             disabled: true,
@@ -34,6 +34,7 @@ Ext.define('WeiQuPai.view.CircleReply', {
         }]
     },
 
+    /*
     show: function() {
         this.getModal().setHidden(false);
         this.element.setStyle('display', null);
@@ -45,6 +46,7 @@ Ext.define('WeiQuPai.view.CircleReply', {
         this.getModal().setHidden(true);
         this.element.setStyle('display', 'none');
     },
+    */
 
     initialize: function() {
         this.down('button[action=publish]').on('tap', function() {

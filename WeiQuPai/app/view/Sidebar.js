@@ -52,7 +52,7 @@ Ext.define('WeiQuPai.view.Sidebar', {
         }, {
             xtype: 'button',
             flex: 1,
-            text: '拍卖圈',
+            text: '拍圈',
             id: 'circle'
         }, {
             xtype: 'button',
@@ -121,10 +121,9 @@ Ext.define('WeiQuPai.view.Sidebar', {
             this.toggle();
             var user = WeiQuPai.Util.checkLogin();
             if (!user) return;
-            var uid = user.id;
-            WeiQuPai.Util.forward('showuser', {
-                uid: uid
-            });
+            var showUser = Ext.create('WeiQuPai.view.ShowUser');
+            showUser.setUid(user.id);
+            WeiQuPai.navigator.push(showUser);
         }, this, {
             'element': 'element'
         });

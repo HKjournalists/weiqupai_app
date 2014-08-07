@@ -15,12 +15,12 @@ Ext.define('WeiQuPai.view.ShowUserFeed', {
             '{content:htmlEncode}',
             '</div>',
             '<tpl if="feed_type==1">',
-            '<div class="img"><tpl for="json_data.pic_list"><img src="{[this.getPic(values)]}"/></tpl></div>',
+            '<div class="pic-group-list center"><tpl for="json_data.pic_list"><img src="{[this.getPic(values)]}"/></tpl></div>',
             '</tpl>',
             '<div style="clear:both"></div>',
             '<div class="content">',
             '<div class="left">',
-            '<img src="{[WeiQuPai.Util.getImagePath(values.json_data.pic_cover, 100)]}" width="30">',
+            '<img src="{[this.getPic(values.json_data.pic_cover)]}" width="40">',
             '</div>',
             '<div class="right">',
             '{json_data.title}',
@@ -45,7 +45,7 @@ Ext.define('WeiQuPai.view.ShowUserFeed', {
             '</div>',
             '</div>', {
                 getPic: function(pic) {
-                    return WeiQuPai.Util.getImagePath(pic, '100');
+                    return WeiQuPai.Util.getImagePath(pic);
                 }
             }
         )

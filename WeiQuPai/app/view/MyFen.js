@@ -2,6 +2,7 @@ Ext.define('WeiQuPai.view.MyFen', {
     extend: 'Ext.DataView',
     xtype: 'myfen',
     config: {
+        uid: null,
         loadingText: null,
         disableSelection: true,
         scrollable: true,
@@ -37,13 +38,21 @@ Ext.define('WeiQuPai.view.MyFen', {
     },
     initialize: function() {
         this.callParent(arguments);
-        this.loadData();
     },
 
-    loadData: function() {
+    applyUid: function(uid) {
+        var user = WeiQuPai.Cache.get('currentUser');
+        if (user && user.id == uid) {
+            this.down('vtitlebar').setTitle('我的关注');
+        }
+        this.loadData(uid);
+        return uid;
+    },
+
+    loadData: function(uid) {
         var user = WeiQuPai.Cache.get('currentUser');
         var store = this.getStore();
-        store.getProxy().setExtraParam('token', user.token);
+        store.getProxy().setExtraParam('uid', uid);
         store.load(function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');

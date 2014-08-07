@@ -3,7 +3,6 @@ Ext.define('WeiQuPai.controller.CameraLayer', {
 
     config: {
         refs: {
-            main: 'main',
             camera: 'cameralayer button[action=camera]',
             album: 'cameralayer button[action=album]',
             cancel: 'cameralayer button[action=cancel]',

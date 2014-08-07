@@ -3,7 +3,7 @@ Ext.define('WeiQuPai.view.ShowUser', {
     xtype: 'showuser',
     requires: [
         'WeiQuPai.view.ShowUserLike', 'WeiQuPai.view.ShowUserDis', 'WeiQuPai.view.ShowUserFeed',
-        'WeiQuPai.view.MyFollow', 'WeiQuPai.view.MyFen'
+        'WeiQuPai.view.MyFollow', 'WeiQuPai.view.MyFen', 'WeiQuPai.view.ChangeAvatarLayer'
     ],
     config: {
         uid: null,
@@ -139,19 +139,19 @@ Ext.define('WeiQuPai.view.ShowUser', {
 
     bindEvent: function(e) {
         if (e.target.className == 'myfollow') {
-            this.fireEvent('followtap', this, e);
+            this.fireEvent('followtap', this);
             return false;
         }
         if (e.target.className == 'myfans') {
-            this.fireEvent('fanstap', this, e);
+            this.fireEvent('fanstap', this);
             return false;
         }
         if (Ext.get(e.target).hasCls('follow_btn')) {
             this.fireEvent('follow', this);
             return false;
         }
-        if (e.target.className == 'avatar') {
-            this.fireEvent('avatartap', this);
+        if (e.target.className == 'email') {
+            this.fireEvent('pm', this);
             return false;
         }
         this.fireEvent('bgtap', this);

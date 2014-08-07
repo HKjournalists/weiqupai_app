@@ -6,50 +6,64 @@ Ext.define('WeiQuPai.controller.ShowUser', {
         },
         control: {
             showUser: {
-                bgtap: 'showCameraLayer',
+                bgtap: 'showChangeLayer',
                 followtap: 'doFollow',
                 fanstap: 'doFans',
-                avatartap: 'showAvatarCameraLayer',
-                follow: 'doFollowMe'
+                follow: 'doFollowMe',
+                pm: 'doPm',
             },
 
         }
     },
 
-    doFollow: function(e) {
+    doFollow: function(view) {
         var detailView = Ext.create('WeiQuPai.view.MyFollow');
-        WeiQuPai.navigator.push(detailView);
-    },
-    doFans: function(e) {
-        var detailView = Ext.create('WeiQuPai.view.MyFen');
+        detailView.setUid(view.getUid());
         WeiQuPai.navigator.push(detailView);
     },
 
-    //关注他
-    doFollowMe: function() {
+    doFans: function(view) {
+        var detailView = Ext.create('WeiQuPai.view.MyFen');
+        detailView.setUid(view.getUid());
+        WeiQuPai.navigator.push(detailView);
+    },
+
+    doPm: function(view) {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
-        var uid = this.getShowUser().getUid();
+        console.log('pm', view.getUid());
+    },
+
+    //关注他
+    doFollowMe: function(view) {
+        var user = WeiQuPai.Util.checkLogin();
+        if (!user) return;
+        var uid = view.getUid();
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/follow/follow&id=' + uid + '&token=' + user.token;
         WeiQuPai.Util.get(url, function(rsp) {
             WeiQuPai.Util.toast('你成功关注了TA');
         });
     },
 
-    showAvatarCameraLayer: function(uid) {
+    showChangeLayer: function(view) {
+        //只有点自己的才能换封面
+        var uid = view.getUid();
         var user = WeiQuPai.Cache.get('currentUser');
         if (!user || user.id != uid) return;
-        //只有点自己的才能换封面
+        var layer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ChangeAvatarLayer');
+        layer.on('changebg', this.showCameraLayer, this);
+        layer.on('changeavatar', this.showAvatarCameraLayer, this);
+        layer.show();
+    },
+
+    showAvatarCameraLayer: function() {
         var self = this;
         WeiQuPai.Util.showCameraLayer(100, 100, true, function(url) {
             self.setAvatar(url);
         });
     },
 
-    showCameraLayer: function(uid) {
-        var user = WeiQuPai.Cache.get('currentUser');
-        if (!user || user.id != uid) return;
-        //只有点自己的才能换封面
+    showCameraLayer: function() {
         var self = this;
         WeiQuPai.Util.showCameraLayer(640, 400, true, function(url) {
             self.setCircleBg(url);
@@ -58,16 +72,19 @@ Ext.define('WeiQuPai.controller.ShowUser', {
 
     //更换背影
     setCircleBg: function(url) {
-        var record = this.getShowUser().down('#user-info').getRecord();
-        record.set('circle_bg', url);
+        var view = WeiQuPai.navigator.getActiveItem();
+        var data = view.down('#personmodel').getData();
+        data.circle_bg = url;
         WeiQuPai.Util.updateProfile({
             circle_bg: url
         });
     },
+
     //更换头像
     setAvatar: function(url) {
-        var record = this.getShowUser().down('#user-info').getRecord();
-        record.set('avatar', url);
+        var view = WeiQuPai.navigator.getActiveItem();
+        var data = view.down('#personmodel').getData();
+        data.avatar = url;
         WeiQuPai.Util.updateProfile({
             avatar: url
         });

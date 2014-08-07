@@ -5,7 +5,7 @@ Ext.define("WeiQuPai.model.Feed", {
         fields: ['id', 'uid', 'user', 'content', 'ctime', 'json_data', 'feed_type', 'replies', 'zan', 'zan_num', 'reply_num'],
         proxy: {
             type: 'ajax',
-            url: WeiQuPai.Config.apiUrl + '/?r=app/circle',
+            url: WeiQuPai.Config.apiUrl + '/?r=appv2/circle/view',
             reader: 'json',
             startParam: false,
             limitParam: false
