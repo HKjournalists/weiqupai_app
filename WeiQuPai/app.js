@@ -23,7 +23,7 @@ Ext.application({
         'Main', 'Today', 'MyAuction', 'MyOrder', 'MyOrderDetail', 'Item', 'Order', 'ShowOrder', 'Circle', 'ShowUser',
         'Setting', 'MyConsignee', 'Login', 'Register', 'Profile', 'CameraLayer',
         'Routes', 'SpecialSale', 'Pay', 'MyFollow', 'MyFen', 'Auction', 'Item',
-        'ShowUserDis', 'ShowUserFeed', 'ShowUserLike'
+        'ShowUserDis', 'ShowUserFeed', 'ShowUserLike', 'YiPai', 'NoticeToday', 'NoticeTomorrow', 'NoticeAfter'
     ],
     models: [
         'Auction', 'Comment', 'Consignee', 'Feed', 'Item', 'Order', 'Profile', 'Shipment',
@@ -32,12 +32,12 @@ Ext.application({
     views: [
         'Main', 'MainCard', 'StartupScreen', 'SplashScreen', 'WebPage', 'VTitleBar', 'Login', 'Register',
         'Iframe', 'SimpleViewer', 'Sidebar', 'DisclosureItem', 'Pay', 'Order', 'Item', 'Auction', 'Item',
-        'UserAuction'
+        'UserAuction', 'WeiQuPai.view.Notice'
     ],
     stores: [
         'Auction', 'Comment', 'Banner', 'MyOrder', 'MyConsignee', 'Circle', 'MyProp', 'MyCoupon',
         'Coupon', 'Prop', 'SpecialSale', 'ShowUserLike', 'ShowUserDis', 'ShowUserFeed', 'MyFollow', 'MyAuction',
-        'MyFans'
+        'MyFans', 'YiPai'
     ],
     icon: {
         '57': 'resources/icons/icon.png',

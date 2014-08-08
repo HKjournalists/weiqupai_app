@@ -55,21 +55,9 @@ Ext.define('WeiQuPai.view.UserAuction', {
             )
         }, {
             xtype: 'container',
-            id: 'price_data',
+            id: 'mapdata',
             tpl: new Ext.XTemplate(
-                '<div class="detailData">',
-                '<div class="clear"></div>',
-                '<div class="title_new">{title}</div>',
-                '<div class="content_new">',
-                '<div class="left">',
-                '<div class="priceNew">{auction.curr_price}</div>',
-                '<div class="price">',
-                '<span>原价￥{oprice}</span>',
-                ' 已售出:{item_stat.sold_num}',
-                '</div>',
-                '</div>',
-                '<div class="detail_map" id="countdown">{[this.formatCountdown(values.auction)]}</div>',
-                '</div>', {
+                '<div class="mypai_time" id="countdown">{[this.formatCountdown(values.auction)]}</div>', {
                     formatCountdown: function(auction) {
                         if (auction.status == WeiQuPai.Config.auctionStatus.STATUS_NOT_START) {
                             return auction.start_time;
@@ -84,6 +72,101 @@ Ext.define('WeiQuPai.view.UserAuction', {
                     }
                 }
             )
+        }, {
+            xtype: 'container',
+            id: 'price_data',
+            tpl: new Ext.XTemplate(
+                '<div class="clear"></div>',
+                '<div class="detailData">',
+                '<div class="clear"></div>',
+                '<div class="title_new">{title}</div>',
+                '<div class="content_new">',
+                '<div class="left">',
+                '<div class="priceNew">{user_auction.start_price}</div>',
+                '<div class="price">',
+                '<span>原价￥{oprice}</span>',
+                '</div>',
+                '</div>',
+                '<div class="detail_pai">',
+                '<span class="detail_img">',
+                '已有',
+                '551',
+                '人帮拍',
+                '</span>',
+                '<span class="detail_down">',
+                '</span>',
+                '</div>',
+                '<div style="clear:both"></div>',
+                '</div>'
+            )
+        }, {
+            xtype: 'container',
+            layout: 'hbox',
+            items: [{
+                flex: 4,
+                id: 'detailshow',
+                cls: 'bangbai',
+                tpl: new Ext.XTemplate(
+                    '<tpl for=".">',
+                    '<img src="{img_url}">',
+                    '</tpl>'
+                )
+            }, {
+                flex: 1,
+                xtype: 'button',
+                text: '+更多帮拍',
+                baseCls: 'bangpai-button'
+            }]
+        }, {
+            xtype: 'container',
+            cls: 'daoju',
+            items: [{
+                xtype: 'button',
+                text: '使用道具杀价',
+                baseCls: 'star'
+            }]
+
+        }, {
+            xtype: 'container',
+            layout: 'hbox',
+            cls: 'daoju',
+            style: 'height:60px;',
+            items: [{
+                xtype: 'button',
+                flex: 1,
+                baseCls: 'daoju_card',
+                text: '加速卡*1'
+            }, {
+                xtype: 'button',
+                flex: 1,
+                baseCls: 'daoju_card',
+                text: '加速卡*1'
+            }, {
+                xtype: 'button',
+                flex: 1,
+                baseCls: 'daoju_card',
+                text: '加速卡*1'
+            }]
+        }, {
+            xtype: 'container',
+            layout: 'hbox',
+            cls: 'bangbai',
+            items: [{
+                flex: 4,
+                id: 'Mydetailshow',
+                tpl: new Ext.XTemplate(
+                    '<tpl for=".">',
+                    '<div class="mybpai">',
+                    '<img src="{img_url}">',
+                    '<span><strong>{name}</strong>已将价格杀至<label style="color:#e76049">{price}</label>元</span>',
+                    '</div>',
+                    '</tpl>'
+                )
+            }, {
+                flex: 1,
+                xtype: 'button',
+                baseCls: 'detail_right_btn'
+            }]
         }, {
             xtype: 'container',
             layout: 'hbox',
@@ -131,7 +214,6 @@ Ext.define('WeiQuPai.view.UserAuction', {
 
     initialize: function() {
         this.callParent(arguments);
-
         this.shareLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer');
         //初始化tab
         this.initTab();
@@ -166,11 +248,14 @@ Ext.define('WeiQuPai.view.UserAuction', {
         this.down('comment').setItemId(record.get('id'));
 
         var data = record.data;
+        //console.log(data);
         this.down('detailpicshow').setPicData(data.pic_url);
         this.down('#item_stat').setData(data);
         this.down('#item_title').setData(data);
         this.down('itemparam').setData(data);
         this.down('itemdesc').setData(data);
+        this.down('#mapdata').setData(data);
+        this.down('#price_data').setData(data);
         return record;
     },
 
@@ -198,6 +283,7 @@ Ext.define('WeiQuPai.view.UserAuction', {
         this.down('#price_data').setData(data);
         this.down('itemparam').setData(data);
         this.down('itemdesc').setData(data);
+        this.down('#mapdata').setData(data);
         this.createChart();
         this.setCountdown();
     },
@@ -212,7 +298,9 @@ Ext.define('WeiQuPai.view.UserAuction', {
         WeiQuPai.Util.get(url, function(rsp) {
             auction = Ext.merge(auction, rsp);
             this.getRecord().set('auction', auction);
-            this.down('#price_data').setData(auction);
+            console.log(auction);
+            // this.down('#price_data').setData(auction);
+            this.down('#mapdata').setData(auction);
             //如果没结束就继续自动刷新
             if (rsp.status != WeiQuPai.Config.auctionStatus.STATUS_FINISH) {
                 this.setCountdown();

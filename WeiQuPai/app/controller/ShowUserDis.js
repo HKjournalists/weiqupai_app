@@ -15,6 +15,7 @@ Ext.define('WeiQuPai.controller.ShowUserDis', {
     },
 
     productdetail: function(list, index, dataItem, record, e) {
+        console.log(record);
         WeiQuPai.Util.goItemView(record.get('item_id'));
     },
 

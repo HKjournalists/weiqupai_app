@@ -4,7 +4,8 @@ Ext.define('WeiQuPai.controller.Today', {
     config: {
         refs: {
             pageView: 'today',
-            yipai: 'today button[action=yipai]'
+            yipai: 'today button[action=yipai]',
+            notice: 'today button[action=notice]'
         },
         control: {
             pageView: {
@@ -17,8 +18,15 @@ Ext.define('WeiQuPai.controller.Today', {
             },
             yipai: {
                 tap: 'yipailist'
+            },
+            notice: {
+                tap: 'noticelist'
             }
         }
+    },
+    noticelist: function() {
+        var detailView = Ext.create('WeiQuPai.view.Notice');
+        WeiQuPai.navigator.push(detailView);
     },
     yipailist: function() {
         var detailView = Ext.create('WeiQuPai.view.YiPai');
