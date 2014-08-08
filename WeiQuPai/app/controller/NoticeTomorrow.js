@@ -1,4 +1,4 @@
-Ext.define('WeiQuPai.controller.NoticeToday', {
+Ext.define('WeiQuPai.controller.NoticeTomorrow', {
     extend: 'Ext.app.Controller',
     config: {
         refs: {
