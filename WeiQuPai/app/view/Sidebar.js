@@ -52,7 +52,7 @@ Ext.define('WeiQuPai.view.Sidebar', {
         }, {
             xtype: 'button',
             flex: 1,
-            text: '拍卖圈',
+            text: '拍圈',
             id: 'circle'
         }, {
             xtype: 'button',
