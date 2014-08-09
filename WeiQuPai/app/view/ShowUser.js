@@ -178,7 +178,7 @@ Ext.define('WeiQuPai.view.ShowUser', {
         var me = this;
         WeiQuPai.Util.get(url, function(rsp) {
             person.setData(rsp);
-            console.log(rsp);
+           // console.log(rsp);
             me.down('button[action=tab_showuserlike]').setText('喜欢 ' + rsp.like_num);
             me.down('button[action=tab_showuserdis]').setText('评论 ' + rsp.comment_num);
             me.down('button[action=tab_showuserfeed]').setText('晒单 ' + rsp.show_order_num);

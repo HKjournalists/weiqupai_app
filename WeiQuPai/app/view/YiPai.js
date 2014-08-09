@@ -39,7 +39,7 @@ Ext.define('WeiQuPai.view.YiPai', {
             '<tpl for="auctions">',
             '<div class="dis">',
             '<span id="yipai_price">',
-            '<span class="yipai_name">{user.nick}</span><span class="color_e7"> {curr_price}</span>',
+            '<span class="yipai_name" uid="{uid}">{user.nick}</span><span class="color_e7"> {curr_price}</span>',
             '</div>',
             '</tpl>',
             '</div>',
@@ -107,14 +107,16 @@ Ext.define('WeiQuPai.view.YiPai', {
     initialize: function() {
         this.callParent(arguments);
         this.loadData();
+       // var me=this;
         this.on('itemtap', function(list, index, dataItem, record, e) {
             if (Ext.get(e.target).findParent('.img')) {
                 this.fireEvent('cardtap', this, index, dataItem, record, e);
                 return false;
             }
-            if (Ext.get(e.target).findParent('.yipai_name') ) {
-                this.fireEvent('persontap', this, index, dataItem, record, e);
-                console.log(index + "+" + this + "+" + record + "+" + e);
+
+            if (e.target.className == 'yipai_name') {
+                var toUid = e.target.getAttribute('uid');
+                this.fireEvent('persontap', this, index, record, e.target.getAttribute('uid'));
                 return false;
             }
         }, this);
@@ -125,13 +127,7 @@ Ext.define('WeiQuPai.view.YiPai', {
         return uid;
     },
     loadData: function(uid) {
-        // var user = WeiQuPai.Cache.get('currentUser');
-        // var url = WeiQuPai.Config.apiUrl + '/?r=appv2/auctionPool';
-        // var me = this;
-        // WeiQuPai.Util.get(url, function(data) {
-        //     me.down('#yipai').setData(data);
-        // });
-         var store = this.getStore();
+        var store = this.getStore();
         store.getProxy().setExtraParam('uid', uid);
         store.load(function(records, operation, success) {
             if (!success) {

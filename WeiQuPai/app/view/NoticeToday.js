@@ -13,8 +13,8 @@ Ext.define('WeiQuPai.view.NoticeToday', {
             tpl: new Ext.XTemplate(
                 '<div class="yugao"><div class="title">13:00</div></div>',
                 '<tpl for=".">',
-                '<div class="myProduct">',
-                '<img src="{item.pic_cover}" width="100">',
+                '<div >',
+                '<img src="{item.pic_cover}" width="100" class="myProduct" itemid="{item_id}">',
                 '</div>',
                 '</tpl>',
                 '<div style="clear:both"></div>'
@@ -34,21 +34,18 @@ Ext.define('WeiQuPai.view.NoticeToday', {
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/auctionNotice&day=' + 1;
         var me = this;
         WeiQuPai.Util.get(url, function(rsp) {
-            
-         //  var aa= me.getStore().setData(rsp);
            console.log(rsp);
-           // me.down('#specialList').setData(data.special);
             person.setData(rsp);
             Ext.isFunction(callback) && callback();
         });
     },
 
     bindEvent: function(e) {
-        var me = this;
-        // console.log(record + "+" + e + "+" + dataItem);
-        if (Ext.get(e.target).findParent('.myProduct')) {
-            me.fireEvent('cardtap', me, e);
-            return false;
-        }
+         if (e.target.className == 'myProduct') {
+                var toUid = e.target.getAttribute('itemid');
+                console.log(toUid+"+"+e.target.getAttribute('itemid'));
+                this.fireEvent('cardtap', this, e.target.getAttribute('itemid'));
+                return false;
+            }
     }
 })
