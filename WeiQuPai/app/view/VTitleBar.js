@@ -30,14 +30,6 @@ Ext.define('WeiQuPai.view.VTitleBar', {
                 WeiQuPai.navigator.pop();
             });
         }
-
-        var refresh = this.down('button[action=refresh]');
-        if (refresh && !comp.refresh) {
-            comp.refresh = 1;
-            refresh.on('tap', function() {
-                this.getParent().fireEvent('refresh', refresh);
-            }, this);
-        }
         this.setListenerComp(comp);
     }
 });

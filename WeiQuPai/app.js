@@ -23,7 +23,7 @@ Ext.application({
         'Main', 'Today', 'MyAuction', 'MyOrder', 'MyOrderDetail', 'UserAuction', 'Order', 'ShowOrder', 'Circle',
         'ShowUser', 'Setting', 'MyConsignee', 'Login', 'Register', 'Profile', 'CameraLayer', 'Routes', 'SpecialSale',
         'Pay', 'MyFollow', 'MyFen', 'Auction', 'ShowUserDis', 'ShowUserFeed', 'ShowUserLike', 'Feed', 'Comment',
-        'CommentList', 'MyMessage', 'PrivateMessage'
+        'CommentList', 'MyMessage', 'PrivateMessage', 'YiPai', 'NoticeToday', 'NoticeTomorrow', 'NoticeAfter'
     ],
     models: [
         'Auction', 'Comment', 'Consignee', 'Feed', 'Item', 'Order', 'Profile', 'Shipment',
@@ -32,12 +32,12 @@ Ext.application({
     views: [
         'Main', 'MainCard', 'StartupScreen', 'SplashScreen', 'WebPage', 'VTitleBar', 'Login', 'Register',
         'Iframe', 'SimpleViewer', 'ImageViewer', 'Sidebar', 'DisclosureItem', 'Pay', 'Order', 'Item', 'Auction', 'Item',
-        'UserAuction', 'InputComment', 'CircleReplyLayer', 'CameraLayer', 'PrivateMessage'
+        'UserAuction', 'InputComment', 'CircleReplyLayer', 'CameraLayer', 'Notice'
     ],
     stores: [
         'Auction', 'Comment', 'Banner', 'MyOrder', 'MyConsignee', 'Circle', 'MyProp', 'MyCoupon',
         'Coupon', 'Prop', 'SpecialSale', 'ShowUserLike', 'ShowUserDis', 'ShowUserFeed', 'MyFollow', 'MyAuction',
-        'MyFans', 'FeedReply', 'MyMessage', 'CommentReply', 'PrivateMessage'
+        'MyFans', 'FeedReply', 'MyMessage', 'CommentReply', 'PrivateMessage', 'YiPai'
     ],
     icon: {
         '57': 'resources/icons/icon.png',

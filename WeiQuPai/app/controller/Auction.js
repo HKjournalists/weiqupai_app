@@ -8,6 +8,7 @@ Ext.define('WeiQuPai.controller.Auction', {
             shareBtn: 'button[action=share]',
             paiBtn: 'auction button[action=pai]',
             commentForm: 'inputcomment[itemId=postComment]',
+            refreshBtn: 'button[action=refresh]'
         },
         control: {
             shopInfo: {
@@ -25,8 +26,8 @@ Ext.define('WeiQuPai.controller.Auction', {
             shareBtn: {
                 tap: 'doShare'
             },
-            pageView: {
-                refresh: 'doRefresh'
+            refreshBtn: {
+                tap: 'doRefresh'
             },
             commentForm: {
                 publish: 'doPublishComment'

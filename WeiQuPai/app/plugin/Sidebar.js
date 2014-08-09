@@ -458,7 +458,7 @@ Ext.define('WeiQuPai.plugin.Sidebar',
                         fromX = this.fromX;
 
                     this.from = {
-                        '-webkit-transform': 'translate3d(' + fromX + 'px, 0px, 0)'
+                        '-webkit-transform': 'translate3d(' + fromX + 'px, 0px, 0)',
                     };
                     this.to = {
                         '-webkit-transform': 'translate3d(' + toX + 'px, 0px, 0)'

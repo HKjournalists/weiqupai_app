@@ -4,7 +4,9 @@ Ext.define('WeiQuPai.controller.Today', {
     config: {
         refs: {
             pageView: 'today',
-            yipai: 'today button[action=yipai]'
+            yipai: 'today button[action=yipai]',
+            notice: 'today button[action=notice]',
+            circle: 'today button[action=circle]'
         },
         control: {
             pageView: {
@@ -17,15 +19,32 @@ Ext.define('WeiQuPai.controller.Today', {
             },
             yipai: {
                 tap: 'yipailist'
+            },
+            notice: {
+                tap: 'noticelist'
+            },
+            circle: {
+                tap: 'goCircle'
             }
         }
     },
+    noticelist: function() {
+        var detailView = Ext.create('WeiQuPai.view.Notice');
+        WeiQuPai.navigator.push(detailView);
+    },
+
     yipailist: function() {
         var detailView = Ext.create('WeiQuPai.view.YiPai');
         //console.log("record+" + record + "e=" + e);
         //detailView.setParam(record);
         WeiQuPai.navigator.push(detailView);
     },
+
+    goCircle: function() {
+        var view = Ext.create('WeiQuPai.view.Circle');
+        WeiQuPai.navigator.push(view);
+    },
+
     heartBeat: function(dataItem) {
         var me = this;
         var el = dataItem.down('.heart');

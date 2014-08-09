@@ -111,13 +111,15 @@ Ext.define('WeiQuPai.view.Today', {
 
                 xtype: 'button',
                 baseCls: 'btn3',
+                action: 'circle',
                 flex: 1
 
             }, {
 
                 xtype: 'button',
                 baseCls: 'btn4',
-                flex: 1
+                flex: 1,
+                action: 'notice'
 
             }]
         }, {

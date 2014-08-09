@@ -24,7 +24,7 @@ Ext.define('WeiQuPai.view.ShowUser', {
             xtype: 'container',
             itemId: 'personmodel',
             tpl: new Ext.XTemplate(
-                '<div class="person_model"><img src="{[this.getBg(values)]}" width="100%"></div>',
+                '<div class="person_model"><img src="{[this.getBg(values)]}" width="100%" height="155"></div>',
                 '<div class="person_zhezhao">',
                 '<div class="one">',
                 '<div class="head">',
