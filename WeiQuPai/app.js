@@ -37,7 +37,7 @@ Ext.application({
     stores: [
         'Auction', 'Comment', 'Banner', 'MyOrder', 'MyConsignee', 'Circle', 'MyProp', 'MyCoupon',
         'Coupon', 'Prop', 'SpecialSale', 'ShowUserLike', 'ShowUserDis', 'ShowUserFeed', 'MyFollow', 'MyAuction',
-        'MyFans', 'YiPai'
+        'MyFans', 'YiPai','NoticeToday'
     ],
     icon: {
         '57': 'resources/icons/icon.png',

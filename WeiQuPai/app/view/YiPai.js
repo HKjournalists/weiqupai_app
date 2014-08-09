@@ -2,6 +2,7 @@ Ext.define('WeiQuPai.view.YiPai', {
     extend: 'Ext.DataView',
     xtype: 'yipai',
     config: {
+        uid:null,
         loadingText: null,
         store: 'Auction',
         cls: 'bg_ef yi_product',
@@ -23,8 +24,8 @@ Ext.define('WeiQuPai.view.YiPai', {
             '<div class="list">',
             '<div class="yipailist">',
             '<div class="price">',
-            '<div class="left">原价:{item.oprice}</div>',
-            '<div class="right">低价:{item.oprice}</div>',
+            '<div class="left">原:{item.oprice}</div>',
+            '<div class="right">底:{item.oprice}</div>',
             '<div class="clear"></div>',
             '</div>',
             '<div>',
@@ -111,7 +112,7 @@ Ext.define('WeiQuPai.view.YiPai', {
                 this.fireEvent('cardtap', this, index, dataItem, record, e);
                 return false;
             }
-            if (e.target.className == 'yipai_name') {
+            if (Ext.get(e.target).findParent('.yipai_name') ) {
                 this.fireEvent('persontap', this, index, dataItem, record, e);
                 console.log(index + "+" + this + "+" + record + "+" + e);
                 return false;
@@ -119,14 +120,19 @@ Ext.define('WeiQuPai.view.YiPai', {
         }, this);
 
     },
-    loadData: function() {
+     applyUid: function(uid) {
+        this.loadData(uid);
+        return uid;
+    },
+    loadData: function(uid) {
         // var user = WeiQuPai.Cache.get('currentUser');
         // var url = WeiQuPai.Config.apiUrl + '/?r=appv2/auctionPool';
         // var me = this;
         // WeiQuPai.Util.get(url, function(data) {
         //     me.down('#yipai').setData(data);
         // });
-        var store = this.getStore();
+         var store = this.getStore();
+        store.getProxy().setExtraParam('uid', uid);
         store.load(function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');

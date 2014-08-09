@@ -8,17 +8,17 @@ Ext.define('WeiQuPai.view.Today', {
         cls: 'bg_ef',
         disableSelection: true,
         scrollToTopOnRefresh: false,
-        plugins: [{
-            type: 'wpullrefresh',
-            lastUpdatedText: '上次刷新：',
-            lastUpdatedDateFormat: 'H点i分',
-            loadingText: '加载中...',
-            pullText: '下拉刷新',
-            releaseText: '释放立即刷新',
-            loadedText: '下拉刷新',
-            refreshFn: 'fetchLastest',
-            scrollerAutoRefresh: true
-        }],
+        // plugins: [{
+        //     type: 'wpullrefresh',
+        //     lastUpdatedText: '上次刷新：',
+        //     lastUpdatedDateFormat: 'H点i分',
+        //     loadingText: '加载中...',
+        //     pullText: '下拉刷新',
+        //     releaseText: '释放立即刷新',
+        //     loadedText: '下拉刷新',
+        //     refreshFn: 'fetchLastest',
+        //     scrollerAutoRefresh: true
+        // }],
         itemTpl: new Ext.XTemplate(
             '<div class="today">',
 

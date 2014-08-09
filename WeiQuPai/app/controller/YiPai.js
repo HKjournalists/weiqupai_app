@@ -17,8 +17,8 @@ Ext.define('WeiQuPai.controller.YiPai', {
         WeiQuPai.Util.goItemView(record.get('item').id);
     },
     persondetail: function(list, index, dataItem, record, e) {
-        var uid = record.get('auctions')[index].uid;
-        console.log(record.get('auctions')[index]);
+        var uid = record.get('auctions');
+        console.log(record.get('auctions'));
         var detailView = Ext.create('WeiQuPai.view.ShowUser', {
             uid: uid
         });

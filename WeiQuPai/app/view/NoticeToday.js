@@ -9,7 +9,7 @@ Ext.define('WeiQuPai.view.NoticeToday', {
         scrollable: null,
         items: [{
             xtype: 'container',
-            id: 'notice',
+            itemId: 'notice',
             tpl: new Ext.XTemplate(
                 '<div class="yugao"><div class="title">13:00</div></div>',
                 '<tpl for=".">',
@@ -34,6 +34,10 @@ Ext.define('WeiQuPai.view.NoticeToday', {
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/auctionNotice&day=' + 1;
         var me = this;
         WeiQuPai.Util.get(url, function(rsp) {
+            
+         //  var aa= me.getStore().setData(rsp);
+           console.log(rsp);
+           // me.down('#specialList').setData(data.special);
             person.setData(rsp);
             Ext.isFunction(callback) && callback();
         });
