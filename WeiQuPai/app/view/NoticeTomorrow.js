@@ -42,11 +42,10 @@ Ext.define('WeiQuPai.view.NoticeTomorrow', {
     },
 
     bindEvent: function(e) {
-        var me = this;
-        // console.log(record + "+" + e + "+" + dataItem);
-        if (Ext.get(e.target).findParent('.myProduct')) {
-            me.fireEvent('cardtap', me, e);
-            return false;
+         if (e.target.className == 'myProduct') {
+                var toUid = e.target.getAttribute('itemid');
+                this.fireEvent('cardtap', this, e.target.getAttribute('itemid'));
+                return false;
         }
     }
 })
