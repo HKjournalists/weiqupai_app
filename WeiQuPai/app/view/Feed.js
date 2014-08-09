@@ -4,11 +4,13 @@
 Ext.define('WeiQuPai.view.Feed', {
     extend: 'Ext.DataView',
     xtype: 'feed',
+    requires: ['WeiQuPai.view.DeleteButtonLayer'],
     config: {
         feedId: null,
+        feedRecord: null,
         cls: 'bg_ef',
         loadingText: null,
-        disableSelection: true,
+        scrollToTopOnRefresh: false,
         store: 'FeedReply',
         plugins: [{
             type: 'wpullrefresh',
@@ -22,13 +24,13 @@ Ext.define('WeiQuPai.view.Feed', {
             scrollerAutoRefresh: true
         }],
         itemTpl: new Ext.XTemplate(
-            '<div class="message_new">',
+            '<div class="message_new" data-id="{id}">',
             '<div class="msg-reply re_message">',
             '<div class="dis">',
             '<div class="img avatar"><img src="{[this.getAvatar(values.user.avatar)]}" width="30"></div>',
             '<div class="name"><b>{user.nick}</b><tpl if="to_nick">回复<b>{to_nick}</b></tpl>:{content:htmlEncode}</div>',
             '<div style="clear:both"></div>',
-            '<div class="date">{ctime}  <tpl if="this.isSelf(uid)"><span class="delete-post-btn">删除</span></tpl></div>',
+            '<div class="date"><tpl if="this.isSelf(uid)"><span class="delete-reply-btn">删除</span></tpl>{ctime}</div>',
             '</div>',
 
             '</div>',
@@ -67,7 +69,7 @@ Ext.define('WeiQuPai.view.Feed', {
                 '<div class="list">',
 
                 '<div class="one">',
-                '<div class="img avatar"><img src="{[this.getAvatar(values.user.avatar)]}" width="40"></div>',
+                '<div class="img avatar"><img src="{[this.getAvatar(values.user.avatar)]}" width="40" class="avatar-img"></div>',
                 '<div class="name"><b>{user.nick}</b>:<span class="color_38">{content:htmlEncode}</span>',
                 '<div class="pic-group-list"><tpl for="json_data.pic_list"><img src="{[this.getShowOrderPic(values)]}" data-idx="{#}"/></tpl></div>',
                 '</div>',
@@ -77,7 +79,7 @@ Ext.define('WeiQuPai.view.Feed', {
                 '<div class="left">{ctime}</div>',
                 '<div class="right">',
                 '<div class="comment">{reply_num}</div>',
-                '<div class="like">{zan_num}</div>',
+                '<div class="{[this.getZanCls(values)]}">{zan_num}</div>',
                 '<div style="clear:both"></div>',
                 '</div>',
                 '</div>',
@@ -96,6 +98,9 @@ Ext.define('WeiQuPai.view.Feed', {
                     },
                     getPic: function(pic) {
                         return WeiQuPai.Util.getImagePath(pic, 100);
+                    },
+                    getZanCls: function(values) {
+                        return WeiQuPai.Util.hasCache('circle_zan', values.id) ? 'selflike' : 'like';
                     }
                 }
             )
@@ -103,27 +108,87 @@ Ext.define('WeiQuPai.view.Feed', {
             xtype: 'container',
             itemId: 'zanList',
             tpl: new Ext.XTemplate(
-                '<div class="msg-zan"><div class="title">',
+                '<div class="msg-zan">',
+                '<tpl if="zan.length"><div class="title">',
                 '<tpl for="zan"><img src="{[this.getAvatar(values.avatar)]}" class="zan_avatar" data-uid="{id}"/></tpl>',
+                '</div></tpl>',
                 '</div>', {
                     getAvatar: function(avatar) {
                         return WeiQuPai.Util.getAvatar(avatar, 140);
                     },
                 }
             )
+        }, {
+            xtype: 'circlereplylayer',
+            itemId: 'replylayer',
+            docked: 'bottom'
         }]
     },
 
     initialize: function() {
         this.callParent(arguments);
         this.handleItemTap();
+        this.down('#feed').on('tap', this.bindFeedEvent, this, {
+            element: 'element'
+        });
+        this.down('#zanList').on('tap', this.bindFeedEvent, this, {
+            element: 'element'
+        })
+    },
+
+    //下拉刷新, 这里的this是pullRefresh对象
+    fetchLastest: function() {
+        var me = this;
+        this.getList().loadData(function() {
+            me.setState('loaded');
+            me.snapBack();
+        });
     },
 
     updateFeedId: function(fid) {
         this.loadData();
     },
 
-    loadData: function() {
+    updateReplyData: function(field, value) {
+        var data = this.down('#feed').getData();
+        data[field] = parseInt(data[field]) + value;
+        this.down('#feed').setData(data);
+        this.getFeedRecord().set(field, data[field]);
+    },
+
+    updateZanData: function(value) {
+        var user = WeiQuPai.Cache.get('currentUser');
+        this.updateReplyData('zan_num', value);
+        var data = this.down('#zanList').getData();
+        if (value > 0) {
+            var d = {
+                id: user.id,
+                nick: user.nick,
+                avatar: user.avatar
+            }
+            data.zan.push(d);
+        } else {
+            for (var i = 0; i < data.zan.length; i++) {
+                if (data.zan[i].id == user.id) {
+                    data.zan.splice(i, 1);
+                    break;
+                }
+            }
+        }
+        this.down('#zanList').setData(data);
+    },
+
+    applyFeedRecord: function(record) {
+        if (record == null) {
+            return;
+        }
+        var data = record.data;
+        this.down('#feed').setData(data);
+        this.down('#zanList').setData(data);
+        return record;
+    },
+
+    loadData: function(callback) {
         var fid = this.getFeedId();
         var user = WeiQuPai.Cache.get('currentUser');
         var feed = WeiQuPai.model.Feed;
@@ -134,10 +199,10 @@ Ext.define('WeiQuPai.view.Feed', {
                 WeiQuPai.Util.toast('数据加载失败');
             },
             success: function(record, operation) {
-                this.down('#feed').setRecord(record);
-                this.down('#zanList').setRecord(record);
+                this.setFeedRecord(record);
                 this.getStore().setData(record.get('replies'));
-            },
+                Ext.isFunction(callback) && callback();
+            }
         });
     },
 
@@ -149,7 +214,7 @@ Ext.define('WeiQuPai.view.Feed', {
         } else {
             var me = this;
             this.element.dom.addEventListener('click', function(e) {
-                var row = Ext.fly(e.target).up('.circle-row');
+                var row = Ext.get(e.target).findParent('.message_new');
                 if (!row) return;
                 var id = row.getAttribute('data-id');
                 var index = me.getStore().indexOfId(id);
@@ -166,49 +231,42 @@ Ext.define('WeiQuPai.view.Feed', {
             me.fireEvent('avatartap', me, index, record);
             return false;
         }
-        if (e.target.className == 'uname') {
-            var uid = e.target.getAttribute('uid');
-            me.fireEvent('usertap', me, index, record, uid);
-            return false;
-        }
 
-        / /
-        卡片点击
-        var card = Ext.get(e.target).up('.card');
-        if (card) {
-            me.fireEvent('cardtap', me, index, record, card.getAttribute('dataType'));
+        if (e.target.className == 'delete-reply-btn') {
+            me.fireEvent('deletereply', me, index, record);
             return false;
         }
+        me.fireEvent('replytap', me, index, record);
+    },
 
-        //下面的事件都是登录后才会触发的
-        if (!user) return false;
-
-        if (e.target.className == 'delete-post-btn') {
-            me.fireEvent('deletepost', me, index, record);
+    bindFeedEvent: function(e) {
+        var me = this;
+        if (Ext.get(e.target).findParent('.avatar-img')) {
+            me.fireEvent('feedavatartap', me);
             return false;
         }
-        if (e.target.className == 'zan-btn' || e.target.parentNode.className == 'zan-btn') {
-            me.fireEvent('zan', me, index, record);
+        var el = Ext.get(e.target).findParent('.zan_avatar');
+        if (el) {
+            var uid = el.getAttribute('data-uid');
+            me.fireEvent('zanavatartap', me, uid);
             return false;
         }
-        if (e.target.className == 'cancel-zan-btn' || e.target.parentNode.className == 'cancel-zan-btn') {
-            me.fireEvent('cancelzan', me, index, record);
+        if (Ext.get(e.target).findParent('.like')) {
+            me.fireEvent('zan', me);
             return false;
         }
-        if (e.target.className == 'reply-btn' || e.target.parentNode.className == 'reply-btn') {
-            me.fireEvent('replytap', me, index, record, 0, null);
+        if (Ext.get(e.target).findParent('.selflike')) {
+            me.fireEvent('cancelzan', me);
             return false;
         }
-        if (e.target.className == 'reply-row') {
-            var toUid = e.target.getAttribute('uid');
-            //删除自己的回复事件
-            if (toUid == user.id) {
-                me.fireEvent('deletereply', me, index, record, e.target.getAttribute('rid'));
-                return false;
-            }
-            //回复事件
-            var toUser = e.target.getAttribute('nick');
-            me.fireEvent('replytap', me, index, record, toUid, toUser);
+        if (Ext.get(e.target).findParent('.pic-group-list')) {
+            var picIdx = e.target.getAttribute('data-idx');
+            me.fireEvent('pictap', me, picIdx);
+            return false;
+        }
+        //卡片点击
+        if (Ext.get(e.target).up('.confirm_title')) {
+            me.fireEvent('cardtap', me);
             return false;
         }
     }

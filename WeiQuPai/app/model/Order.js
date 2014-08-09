@@ -10,7 +10,6 @@ Ext.define("WeiQuPai.model.Order", {
             reader: 'json',
             api: {
                 read: WeiQuPai.Config.apiUrl + '/?r=appv2/myOrder/view',
-                create: WeiQuPai.Config.apiUrl + '/?r=appv2/order'
             }
         }
     }

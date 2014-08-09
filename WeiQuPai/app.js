@@ -16,28 +16,28 @@ Ext.application({
         'Ext.MessageBox', 'WeiQuPai.Config', 'WeiQuPai.Util', 'WeiQuPai.Notify', 'WeiQuPai.Cache',
         'WeiQuPai.plugin.ListPaging', 'WeiQuPai.plugin.PullRefresh', 'WeiQuPai.plugin.LoadMask',
         'WeiQuPai.plugin.Toast', 'Ext.Anim', 'Ext.device.Camera', 'Ext.field.Select',
-        'Ext.form.FieldSet', 'Ext.Img', 'Ext.ux.ImageViewer'
+        'Ext.form.FieldSet', 'Ext.Img', 'Ext.ux.ImageViewer', 'Ext.field.Hidden'
     ],
 
     controllers: [
-        'Main', 'Today', 'MyAuction', 'MyOrder', 'MyOrderDetail', 'Item', 'Order', 'ShowOrder', 'Circle', 'ShowUser',
-        'Setting', 'MyConsignee', 'Login', 'Register', 'Profile', 'CameraLayer',
-        'Routes', 'SpecialSale', 'Pay', 'MyFollow', 'MyFen', 'Auction', 'Item',
-        'ShowUserDis', 'ShowUserFeed', 'ShowUserLike'
+        'Main', 'Today', 'MyAuction', 'MyOrder', 'MyOrderDetail', 'UserAuction', 'Order', 'ShowOrder', 'Circle',
+        'ShowUser', 'Setting', 'MyConsignee', 'Login', 'Register', 'Profile', 'CameraLayer', 'Routes', 'SpecialSale',
+        'Pay', 'MyFollow', 'MyFen', 'Auction', 'ShowUserDis', 'ShowUserFeed', 'ShowUserLike', 'Feed', 'Comment',
+        'CommentList', 'MyMessage', 'PrivateMessage'
     ],
     models: [
         'Auction', 'Comment', 'Consignee', 'Feed', 'Item', 'Order', 'Profile', 'Shipment',
-        'SpecialSale', 'UserAuction', 'ShowUserDis', 'ShowUserLike', 'ShowUserFeed'
+        'SpecialSale', 'UserAuction', 'ShowUserDis', 'ShowUserLike', 'ShowUserFeed', 'Message'
     ],
     views: [
         'Main', 'MainCard', 'StartupScreen', 'SplashScreen', 'WebPage', 'VTitleBar', 'Login', 'Register',
         'Iframe', 'SimpleViewer', 'ImageViewer', 'Sidebar', 'DisclosureItem', 'Pay', 'Order', 'Item', 'Auction', 'Item',
-        'UserAuction', 'InputComment', 'CircleReplyLayer', 'CameraLayer'
+        'UserAuction', 'InputComment', 'CircleReplyLayer', 'CameraLayer', 'PrivateMessage'
     ],
     stores: [
         'Auction', 'Comment', 'Banner', 'MyOrder', 'MyConsignee', 'Circle', 'MyProp', 'MyCoupon',
         'Coupon', 'Prop', 'SpecialSale', 'ShowUserLike', 'ShowUserDis', 'ShowUserFeed', 'MyFollow', 'MyAuction',
-        'MyFans', 'FeedReply'
+        'MyFans', 'FeedReply', 'MyMessage', 'CommentReply', 'PrivateMessage'
     ],
     icon: {
         '57': 'resources/icons/icon.png',

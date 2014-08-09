@@ -1,12 +1,13 @@
 Ext.define('WeiQuPai.view.InputComment', {
     extend: 'Ext.form.Panel',
-    xtype: 'commentform',
+    xtype: 'inputcomment',
     config: {
+        scrollable: null,
+        baseCls: '',
         layout: {
             'type': 'hbox',
             'align': 'center'
         },
-        scrollable: null,
         items: [{
             xtype: 'textfield',
             name: 'content',
@@ -36,9 +37,11 @@ Ext.define('WeiQuPai.view.InputComment', {
 
     initialize: function() {
         this.on('show', WeiQuPai.Util.saveLastView, this);
+        /*
         this.on('show', function() {
             this.down('textfield[name=content]').focus();
         });
+*/
         this.down('button[action=publish]').on('tap', function() {
             this.fireEvent('publish', this);
         }, this);

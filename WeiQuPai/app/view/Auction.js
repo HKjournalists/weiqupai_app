@@ -2,7 +2,7 @@ Ext.define('WeiQuPai.view.Auction', {
     extend: 'Ext.Container',
     xtype: 'auction',
     requires: [
-        'WeiQuPai.view.Comment', 'WeiQuPai.view.ItemParam', 'WeiQuPai.view.ItemDesc',
+        'WeiQuPai.view.CommentList', 'WeiQuPai.view.ItemParam', 'WeiQuPai.view.ItemDesc',
         'WeiQuPai.view.Shop', 'WeiQuPai.view.Brand', 'WeiQuPai.view.DetailPicShow',
         'WeiQuPai.view.BottomBar', 'WeiQuPai.view.ImageViewer', 'WeiQuPai.view.ShareLayer'
     ],
@@ -60,9 +60,6 @@ Ext.define('WeiQuPai.view.Auction', {
             tpl: new Ext.XTemplate(
                 '<div class="details">',
                 '<div class="bottom" style="margin-top:110px;">',
-                '<div class="left">',
-                '{title}',
-                '</div>',
                 '<div class="right">',
                 '<ul>',
                 '<li class="nolike"></li>',
@@ -77,7 +74,10 @@ Ext.define('WeiQuPai.view.Auction', {
             xtype: 'container',
             id: 'price_data',
             tpl: new Ext.XTemplate(
+                '<div class="clear"></div>',
                 '<div class="detailData">',
+                '<div class="title_new">{title}</div>',
+                '<div class="content_new">',
                 '<div class="left">',
                 '<div class="priceNew">{auction.curr_price}</div>',
                 '<div class="price">',
@@ -85,7 +85,9 @@ Ext.define('WeiQuPai.view.Auction', {
                 ' 已售出:{item_stat.sold_num}',
                 '</div>',
                 '</div>',
+                '</div>',
                 '<div class="detail_map" id="countdown">{[this.formatCountdown(values.auction)]}</div>',
+                '<div class="clear"></div>',
                 '</div>', {
                     formatCountdown: function(auction) {
                         if (auction.status == WeiQuPai.Config.auctionStatus.STATUS_NOT_START) {
@@ -115,7 +117,7 @@ Ext.define('WeiQuPai.view.Auction', {
             }, {
                 flex: 1,
                 xtype: 'button',
-                action: 'tab_comment',
+                action: 'tab_commentlist',
                 text: '大家评论'
             }, {
                 flex: 1,
@@ -126,7 +128,7 @@ Ext.define('WeiQuPai.view.Auction', {
         }, {
             xtype: 'itemparam'
         }, {
-            xtype: 'comment',
+            xtype: 'commentlist',
             hidden: true
         }, {
             xtype: 'itemdesc',
@@ -180,7 +182,6 @@ Ext.define('WeiQuPai.view.Auction', {
         if (record == null) {
             return null;
         }
-        this.down('comment').setItemId(record.get('id'));
 
         var data = record.data;
         this.down('detailpicshow').setPicData(data.pic_url);
@@ -189,6 +190,7 @@ Ext.define('WeiQuPai.view.Auction', {
         this.down('#price_data').setData(data);
         this.down('itemparam').setData(data);
         this.down('itemdesc').setData(data);
+        this.down('commentlist').setItemId(record.get('id'));
         return record;
     },
 
@@ -203,7 +205,6 @@ Ext.define('WeiQuPai.view.Auction', {
 
     loadData: function(callback) {
         var item = this.getRecord();
-        this.down('comment').setItemId(item.get('id'));
         WeiQuPai.model.Item.load(item.get('id'), {
             scope: this,
             success: function(record, operation) {

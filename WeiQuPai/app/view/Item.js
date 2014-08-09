@@ -2,7 +2,7 @@ Ext.define('WeiQuPai.view.Item', {
     extend: 'Ext.Container',
     xtype: 'item',
     requires: [
-        'WeiQuPai.view.Comment', 'WeiQuPai.view.ItemParam', 'WeiQuPai.view.ItemDesc',
+        'WeiQuPai.view.CommentList', 'WeiQuPai.view.ItemParam', 'WeiQuPai.view.ItemDesc',
         'WeiQuPai.view.Shop', 'WeiQuPai.view.Brand', 'WeiQuPai.view.DetailPicShow',
         'WeiQuPai.view.BottomBar', 'WeiQuPai.view.ImageViewer', 'WeiQuPai.view.ShareLayer'
     ],
@@ -60,9 +60,6 @@ Ext.define('WeiQuPai.view.Item', {
             tpl: new Ext.XTemplate(
                 '<div class="details">',
                 '<div class="bottom" style="margin-top:110px;">',
-                '<div class="left">',
-                '{title}',
-                '</div>',
                 '<div class="right">',
                 '<ul>',
                 '<li class="nolike"></li>',
@@ -77,11 +74,15 @@ Ext.define('WeiQuPai.view.Item', {
             xtype: 'container',
             id: 'price_data',
             tpl: new Ext.XTemplate(
+                '<div class="clear"></div>',
                 '<div class="detailData">',
+                '<div class="title_new">{title}</div>',
+                '<div class="content_new">',
                 '<div class="left">',
                 '<div class="price">',
                 '<span>原价￥{oprice}</span>',
                 ' 已售出:{item_stat.sold_num}',
+                '</div>',
                 '</div>',
                 '</div>',
                 '</div>'
@@ -100,7 +101,7 @@ Ext.define('WeiQuPai.view.Item', {
             }, {
                 flex: 1,
                 xtype: 'button',
-                action: 'tab_comment',
+                action: 'tab_commentlist',
                 text: '大家评论'
             }, {
                 flex: 1,
@@ -111,7 +112,7 @@ Ext.define('WeiQuPai.view.Item', {
         }, {
             xtype: 'itemparam'
         }, {
-            xtype: 'comment',
+            xtype: 'commentlist',
             hidden: true
         }, {
             xtype: 'itemdesc',
@@ -177,7 +178,7 @@ Ext.define('WeiQuPai.view.Item', {
     loadData: function(callback) {
         var item = this.getRecord();
         console.log(item);
-        this.down('comment').setItemId(item.get('id'));
+        this.down('commentlist').setItemId(item.get('id'));
         WeiQuPai.model.Item.load(item.get('id'), {
             scope: this,
             success: function(record, operation) {
@@ -196,7 +197,7 @@ Ext.define('WeiQuPai.view.Item', {
         if (record == null) {
             return null;
         }
-        this.down('comment').setItemId(record.get('id'));
+        this.down('commentlist').setItemId(record.get('id'));
 
         var data = record.data;
         this.down('detailpicshow').setPicData(data.pic_url);

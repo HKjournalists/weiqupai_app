@@ -2,15 +2,12 @@ Ext.define('WeiQuPai.controller.Auction', {
     extend: 'Ext.app.Controller',
     config: {
         refs: {
-            shopInfo: 'auction disclosureitem[itemId=shopInfo]',
-            brandInfo: 'auction disclosureitem[itemId=brandInfo]',
-            commentBtn: 'auction button[action=comment]',
-            shareBtn: 'auction button[action=share]',
+            shopInfo: 'disclosureitem[itemId=shopInfo]',
+            brandInfo: 'disclosureitem[itemId=brandInfo]',
+            commentBtn: 'button[action=comment]',
+            shareBtn: 'button[action=share]',
             paiBtn: 'auction button[action=pai]',
-            pageView: 'auction',
-            commentForm: 'auction commentform',
-            commentView: 'auction comment',
-            descContainer: 'auction container[itemId=itemDesc]'
+            commentForm: 'inputcomment[itemId=postComment]',
         },
         control: {
             shopInfo: {
@@ -23,17 +20,7 @@ Ext.define('WeiQuPai.controller.Auction', {
                 tap: 'showOrderView'
             },
             commentBtn: {
-                tap: function() {
-                    if (!WeiQuPai.Util.checkLogin()) return false;
-                    var itemId = this.getPageView().getRecord().get('item_id');
-                    var form = WeiQuPai.Util.createOverlay('WeiQuPai.view.InputComment', {
-                        height: 48,
-                        showAnimation: false,
-                        hideAnimation: false
-                    });
-                    form.down('hiddenfield[name=item_id]').setValue(itemId);
-                    form.show();
-                }
+                tap: 'showCommentLayer'
             },
             shareBtn: {
                 tap: 'doShare'
@@ -41,23 +28,26 @@ Ext.define('WeiQuPai.controller.Auction', {
             pageView: {
                 refresh: 'doRefresh'
             },
-            commentView: {
-                avatartap: 'doAvatarTap',
-                uptap: 'doUpTap',
-                commenttap: 'doCommentTap'
-            },
             commentForm: {
                 publish: 'doPublishComment'
-            },
-            descContainer: {
-                toggleDesc: 'toggleDesc'
             }
         }
     },
 
+    showCommentLayer: function() {
+        if (!WeiQuPai.Util.checkLogin()) return false;
+        var currentView = WeiQuPai.navigator.getActiveItem();
+        var itemId = currentView.getRecord().get('id');
+        var form = WeiQuPai.Util.createOverlay('WeiQuPai.view.InputComment');
+        form.setItemId('postComment');
+        form.down('hiddenfield[name=item_id]').setValue(itemId);
+        form.show();
+        form.down('textfield[name=content]').focus();
+    },
     //商家
     showShop: function() {
-        var data = this.getPageView().getRecord().data;
+        var currentView = WeiQuPai.navigator.getActiveItem();
+        var data = currentView.getRecord().data;
         if (data.shop.description || data.shop.pic_url) {
             var shopView = Ext.create('WeiQuPai.view.Shop', {
                 data: data.shop
@@ -69,16 +59,19 @@ Ext.define('WeiQuPai.controller.Auction', {
     },
 
     showBrand: function() {
+        var currentView = WeiQuPai.navigator.getActiveItem();
         var brandView = Ext.create('WeiQuPai.view.Brand', {
-            data: this.getPageView().getRecord().get('brand')
+            data: currentView.getRecord().get('brand')
         });
         WeiQuPai.navigator.push(brandView);
     },
 
+    //普通拍卖到订单页
     showOrderView: function() {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
-        var auctionId = this.getPageView().getRecord().get('auction').id;
+        var currentView = WeiQuPai.navigator.getActiveItem();
+        var auctionId = currentView.getRecord().get('auction').id;
         if (WeiQuPai.Util.hasAuction(auctionId)) {
             WeiQuPai.Util.toast('您已经拍过该商品');
             return;
@@ -92,6 +85,7 @@ Ext.define('WeiQuPai.controller.Auction', {
                 return;
             }
             var orderView = Ext.create('WeiQuPai.view.Order');
+            rsp.auction_type = 1;
             orderView.setAuctionData(rsp);
             WeiQuPai.navigator.push(orderView);
         }, {
@@ -112,8 +106,13 @@ Ext.define('WeiQuPai.controller.Auction', {
                 //评论提交成功后重置表单
                 form.reset();
                 form.hide();
-                var list = self.getCommentView();
+                var list = WeiQuPai.navigator.getActiveItem().down('commentlist');
                 list.msgbox.hide();
+                result.user = {
+                    id: user.id,
+                    avatar: user.avatar,
+                    nick: user.nick
+                }
                 list.getStore().insert(0, result);
             },
             failure: function(form, result) {
@@ -129,49 +128,15 @@ Ext.define('WeiQuPai.controller.Auction', {
         });
     },
 
-    doAvatarTap: function(index, record) {
-        var uid = record.get('uid');
-        WeiQuPai.Util.forward('showuser', {
-            param: uid
-        });
-    },
-
-    doUpTap: function(index, record) {
-        var user = WeiQuPai.Util.checkLogin();
-        if (!user) return;
-        var id = parseInt(record.get('id'));
-        //赞过的不允许再赞
-        if (WeiQuPai.Util.hasCache('comment_up', id)) return;
-        WeiQuPai.Util.setCache('comment_up', id);
-
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/comment/up&token=' + user.token + '&id=' + id;
-        WeiQuPai.Util.get(url);
-        //异步请求的同时，给数量加1
-        record.set('up_num', parseInt(record.get('up_num')) + 1);
-    },
-
-    //点回复按钮
-    doCommentTap: function(index, record) {
-        if (!WeiQuPai.Util.checkLogin()) return;
-        var replyId = record.get('id');
-        var itemId = this.getPageView().getRecord().get('item_id');
-        var auctionId = this.getPageView().getRecord().get('id');
-        var form = WeiQuPai.Util.createOverlay('WeiQuPai.view.InputComment', {
-            height: 48,
-        });
-        form.down('hiddenfield[name=item_id]').setValue(itemId);
-        form.down('hiddenfield[name=auction_id]').setValue(auctionId);
-        form.down('hiddenfield[name=reply_id]').setValue(replyId);
-        form.show();
-    },
-
     doShare: function() {
-        this.getPageView().shareLayer.show();
+        var currentView = WeiQuPai.navigator.getActiveItem();
+        currentView.shareLayer.show();
     },
 
     doRefresh: function() {
-        this.getPageView().onDestroy();
-        this.getPageView().loadData();
+        var currentView = WeiQuPai.navigator.getActiveItem();
+        currentView.onDestroy();
+        currentView.loadData();
     }
 
 });

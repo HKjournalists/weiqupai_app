@@ -9,6 +9,7 @@ Ext.define('WeiQuPai.view.Circle', {
         cls: 'bg_ef discard remess paiquan',
         loadingText: null,
         disableSelection: true,
+        scrollToTopOnRefresh: false,
         plugins: [{
             type: 'wpullrefresh',
             lastUpdatedText: '上次刷新：',
@@ -17,7 +18,6 @@ Ext.define('WeiQuPai.view.Circle', {
             pullText: '下拉刷新',
             releaseText: '释放立即刷新',
             loadedText: '下拉刷新',
-            refreshFn: 'fetchLastest',
             scrollerAutoRefresh: true
         }],
         store: 'Circle',
@@ -144,14 +144,11 @@ Ext.define('WeiQuPai.view.Circle', {
         }
 
         //卡片点击
-        var card = Ext.get(e.target).up('.confirm_title');
+        var card = Ext.get(e.target).findParent('.confirm_title');
         if (card) {
             me.fireEvent('cardtap', me, index, record);
             return false;
         }
-
-        //下面的事件都是登录后才会触发的
-        if (!user) return false;
 
         if (e.target.className == 'delete-post-btn') {
             me.fireEvent('deletepost', me, index, record);

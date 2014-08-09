@@ -4,7 +4,7 @@
 Ext.define('WeiQuPai.view.Sidebar', {
     extend: 'WeiQuPai.plugin.Sidebar',
     xtype: 'sidebar',
-    requires: ['WeiQuPai.view.Today', 'WeiQuPai.view.MyAuction', 'WeiQuPai.view.Message',
+    requires: ['WeiQuPai.view.Today', 'WeiQuPai.view.MyAuction', 'WeiQuPai.view.MyMessage',
         'WeiQuPai.view.MyOrder', 'WeiQuPai.view.Circle', 'WeiQuPai.view.MyDiscount', 'WeiQuPai.view.MyCoupon',
         'WeiQuPai.view.MyProp', 'WeiQuPai.view.Profile', 'WeiQuPai.view.Setting', 'WeiQuPai.view.ShowUser'
     ],
@@ -25,8 +25,7 @@ Ext.define('WeiQuPai.view.Sidebar', {
                     '<div class="return"></div>',
                     '<div style="clear:both"></div>',
                     '</div>'
-                ),
-
+                )
             }]
         }, {
             xtype: 'button',
@@ -43,7 +42,7 @@ Ext.define('WeiQuPai.view.Sidebar', {
             xtype: 'button',
             flex: 1,
             text: '我的消息',
-            id: 'message'
+            id: 'mymessage'
         }, {
             xtype: 'button',
             flex: 1,
@@ -117,7 +116,6 @@ Ext.define('WeiQuPai.view.Sidebar', {
 
         //跳转到个人中心
         this.down('#personal').on('tap', function() {
-
             this.toggle();
             var user = WeiQuPai.Util.checkLogin();
             if (!user) return;

@@ -29,7 +29,7 @@ Ext.define('WeiQuPai.view.ShowUserDis', {
             '</div>',
             '<div class="right">',
             '<div class="zan">',
-            '{up_num}',
+            '{zan_num}',
             '</div>',
             '<div class="bubble">',
             '{reply_num}',

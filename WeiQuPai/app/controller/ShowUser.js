@@ -31,7 +31,6 @@ Ext.define('WeiQuPai.controller.ShowUser', {
     doPm: function(view) {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
-        console.log('pm', view.getUid());
     },
 
     //关注他

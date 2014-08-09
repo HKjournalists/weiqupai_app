@@ -7,7 +7,6 @@ Ext.define('WeiQuPai.view.CircleReplyLayer', {
             'type': 'hbox',
             'align': 'center'
         },
-        cls: 'input-comment',
         items: [{
             xtype: 'textfield',
             name: 'content',
@@ -22,6 +21,7 @@ Ext.define('WeiQuPai.view.CircleReplyLayer', {
             action: 'publish',
             text: '发送',
             disabled: true,
+            style: 'margin-right:10px;'
         }, {
             xtype: 'hiddenfield',
             name: 'feed_id'
@@ -52,11 +52,11 @@ Ext.define('WeiQuPai.view.CircleReplyLayer', {
         this.down('button[action=publish]').on('tap', function() {
             this.fireEvent('publish', this);
         }, this);
-
         this.down('textfield').on('keyup', function() {
             var disabled = this.down('textfield').getValue().trim().length == 0;
             this.down('button[action=publish]').setDisabled(disabled);
         }, this);
+
 
         var me = this;
         this.element.dom.addEventListener('submit', function(e) {

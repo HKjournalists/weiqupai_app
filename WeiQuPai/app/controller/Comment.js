@@ -1,30 +1,29 @@
-Ext.define('WeiQuPai.controller.Feed', {
+Ext.define('WeiQuPai.controller.Comment', {
     extend: 'Ext.app.Controller',
     config: {
         refs: {
-            pageView: 'feed',
-            circleReply: 'circlereplylayer',
+            pageView: 'comment',
+            reply: 'inputcomment[itemId=reply]',
         },
         control: {
             pageView: {
                 avatartap: 'doAvatarTap',
                 feedavatartap: 'doFeedAvatarTap',
                 zanavatartap: 'doZanAvatarTap',
-                //replytap: 'activeReplyForm',
                 deletereply: 'showDeleteReply',
                 zan: 'doZan',
                 cancelzan: 'doCancelZan',
                 pictap: 'doPicTap',
                 cardtap: 'doCardTap'
             },
-            circleReply: {
+            reply: {
                 publish: 'doPublishReply',
             }
         }
     },
 
     doFeedAvatarTap: function(view) {
-        var uid = view.getFeedRecord().get('uid');
+        var uid = view.getCommentRecord().get('uid');
         var showUser = Ext.create('WeiQuPai.view.ShowUser');
         showUser.setUid(uid);
         WeiQuPai.navigator.push(showUser);
@@ -43,48 +42,18 @@ Ext.define('WeiQuPai.controller.Feed', {
         WeiQuPai.navigator.push(showUser);
     },
 
-    //显示回复的表单
-    activeReplyForm: function(list, index, record) {
-        var user = WeiQuPai.Util.checkLogin();
-        if (!user) return;
-        var toNick = record.get('user').nick;
-        var toUid = record.get('uid');
-        var placeHolder = '回复' + toNick;
-        var form = list.down('circlereplylayer');
-        form.down('textfield[name=content]').setPlaceHolder(placeHolder);
-        form.down('hiddenfield[name=feed_id]').setValue(record.get('id'));
-        form.down('hiddenfield[name=to_uid]').setValue(toUid);
-        form.down('hiddenfield[name=to_nick]').setValue(toNick);
-        form.down('textfield[name=content]').focus();
-    },
-
-    //删除动态
-    doDeletePost: function(list, index, record) {
-        var user = WeiQuPai.Util.checkLogin();
-        if (!user) return;
-        var func = function(buttonId) {
-            if (buttonId != 'yes') return;
-            var feed_id = record.get('id');
-            var url = WeiQuPai.Config.apiUrl + '/?r=appv2/circle/delete&id=' + feed_id + '&token=' + user.token;
-            WeiQuPai.Util.get(url, function(rsp) {
-                list.getStore().remove(record);
-            });
-        }
-        Ext.Msg.confirm(null, '确实要删除吗？', func, this);
-
-    },
-
-
     //发表回复
     doPublishReply: function(form) {
         var user = WeiQuPai.Cache.get('currentUser');
         var pageView = this.getPageView();
-        var fid = pageView.getFeedRecord().get('id');
+        var item = pageView.getCommentRecord().get('item');
+        var cid = pageView.getCommentRecord().get('id');
         WeiQuPai.Util.mask();
-        form.down('hiddenfield[name=feed_id]').setValue(fid);
+        form.down('hiddenfield[name=item_id]').setValue(item.id);
+        form.down('hiddenfield[name=reply_id]').setValue(cid);
         var data = form.getValues();
         form.submit({
-            url: WeiQuPai.Config.apiUrl + '/?r=appv2/circle/reply&token=' + user.token,
+            url: WeiQuPai.Config.apiUrl + '/?r=appv2/comment/post&token=' + user.token,
             method: 'post',
             success: function(form, result) {
                 WeiQuPai.Util.unmask();
@@ -126,7 +95,7 @@ Ext.define('WeiQuPai.controller.Feed', {
         var user = WeiQuPai.Cache.get('currentUser');
         var self = this;
         var list = this.getPageView();
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/circle/deleteReply&id=' + id + '&token=' + user.token;
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/comment/delete&id=' + id + '&token=' + user.token;
         WeiQuPai.Util.get(url, function(rsp) {
             list.getStore().remove(record);
             list.updateReplyData('reply_num', -1);
@@ -145,11 +114,11 @@ Ext.define('WeiQuPai.controller.Feed', {
     doZan: function(view) {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
-        var record = view.getFeedRecord();
-        var feed_id = record.get('id');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/circle/zan&id=' + feed_id + '&token=' + user.token;
+        var record = view.getCommentRecord();
+        var cid = parseInt(record.get('id'));
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/comment/zan&id=' + cid + '&token=' + user.token;
         WeiQuPai.Util.get(url, function(rsp) {
-            WeiQuPai.Util.setCache('circle_zan', feed_id);
+            WeiQuPai.Util.setCache('comment_zan', cid);
             view.updateZanData(1);
         });
     },
@@ -158,25 +127,16 @@ Ext.define('WeiQuPai.controller.Feed', {
     doCancelZan: function(view) {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
-        var feed_id = view.getFeedRecord().get('id');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/circle/cancelZan&id=' + feed_id + '&token=' + user.token;
+        var cid = parseInt(view.getCommentRecord().get('id'));
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/comment/cancelZan&id=' + cid + '&token=' + user.token;
         WeiQuPai.Util.get(url, function(rsp) {
-            WeiQuPai.Util.delCache('circle_zan', feed_id);
+            WeiQuPai.Util.delCache('comment_zan', cid);
             view.updateZanData(-1);
         });
     },
 
-    //点图片
-    doPicTap: function(view, picIdx) {
-        var viewer = WeiQuPai.Util.getGlobalView('WeiQuPai.view.ImageViewer');
-        viewer.setPicData(view.getFeedRecord().get('json_data').pic_list);
-        var picIdx = parseInt(picIdx) - 1;
-        viewer.setActiveItem(picIdx);
-        viewer.show();
-    },
-
     //卡片点击
     doCardTap: function(view) {
-        WeiQuPai.Util.goItemView(view.getFeedRecord().get('json_data').item_id);
+        WeiQuPai.Util.goItemView(view.getCommentRecord().get('item').id);
     }
 });

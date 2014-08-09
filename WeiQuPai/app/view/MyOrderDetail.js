@@ -20,7 +20,7 @@ Ext.define('WeiQuPai.view.MyOrderDetail', {
             tpl: new Ext.XTemplate(
                 '<div class="myorder_new">',
                 '<div class="order_dis">',
-                '<div class="left"><img src="{[this.getCover(values.item.pic_cover)]}="50"></div>',
+                '<img src="{[this.getCover(values.item.pic_cover)]}" class="card-img"/>',
                 '<div class="right">{item.title}</div>',
                 '<div style="clear:both"></div>',
                 '</div>',
