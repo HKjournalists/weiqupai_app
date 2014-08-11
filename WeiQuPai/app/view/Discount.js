@@ -1,11 +1,11 @@
-Ext.define('WeiQuPai.view.MyDiscount', {
+Ext.define('WeiQuPai.view.Discount', {
     extend: 'Ext.DataView',
-    xtype: 'mydiscount',
+    xtype: 'discount',
     config: {
         scrollable: true,
         cls: 'detail',
         scrollToTopOnRefresh: false,
-        store: 'MyDiscount',
+        store: 'Discount',
         plugins: [{
             type: 'wpullrefresh',
             lastUpdatedText: '上次刷新：',
@@ -18,11 +18,11 @@ Ext.define('WeiQuPai.view.MyDiscount', {
         }],
         itemTpl: new Ext.XTemplate(
             '<div class="discount">',
-            '<div class="left"><img src="{[WeiQuPai.Util.getImagePath(values.discount.pic_url)]}" width="110"></div>',
+            '<div class="left"><img src="{[WeiQuPai.Util.getImagePath(values.pic_url)]}" width="110"></div>',
             '<div class="right">',
-            '<div class="title">{discount.title}</div>',
-            '<div class="dis">{discount.description}</div>',
-            '<div class="time">有效期 {discount.expire_time}</div>',
+            '<div class="title">{title}</div>',
+            '<div class="dis">{description}</div>',
+            '<div class="time"><input type="button" value="分享领取" class="btn_e7 get_btn"/>有效期 {expire_time}</div>',
             '</div>',
             '<div class="clear"></div>',
             '</div>'
@@ -30,12 +30,12 @@ Ext.define('WeiQuPai.view.MyDiscount', {
 
         items: [{
             xtype: 'vtitlebar',
-            title: '我的优惠',
+            title: '惠吃惠喝',
             docked: 'top',
             items: [{
                 xtype: 'button',
-                baseCls: 'user',
-                action: 'ucenter'
+                baseCls: 'arrow_left',
+                action: 'back'
             }]
         }]
     },

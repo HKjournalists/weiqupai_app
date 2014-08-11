@@ -1,7 +1,7 @@
 Ext.define('WeiQuPai.view.MyOrder', {
     extend: 'Ext.DataView',
     xtype: 'myorder',
-    requires: ['WeiQuPai.view.MyOrderDetail'],
+    requires: ['WeiQuPai.view.MyOrderDetail', 'WeiQuPai.view.ShowOrder'],
     config: {
         cls: 'bg_ef',
         loadingText: null,
@@ -17,6 +17,8 @@ Ext.define('WeiQuPai.view.MyOrder', {
             releaseText: '释放立即刷新',
             loadedText: '下拉刷新',
             scrollerAutoRefresh: true
+        }, {
+            type: 'wlistpaging',
         }],
         itemTpl: new Ext.XTemplate(
             '<div class="myorder mg_10" >',
@@ -133,7 +135,6 @@ Ext.define('WeiQuPai.view.MyOrder', {
             return false;
         }
         this.msgbox.hide();
-        //fix 出现loading的bug
         this.setLoadingText(null);
         var store = this.getStore();
         //加载数据

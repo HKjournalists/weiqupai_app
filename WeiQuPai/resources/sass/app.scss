@@ -180,7 +180,7 @@ html body
         border-left:$none;
         text-align: center;
         flex:1;
-        -moz-box-flex: 1;  
+        padding:5px;
         -webkit-box-flex: 1;
       }
     
@@ -216,7 +216,7 @@ html body
      background:url('../images/heart.jpg') right no-repeat;
      background-size: auto 16px;
      float: right;
-     width: 40px;
+     width: 20px;
      height: 20px;
 
     }
@@ -225,7 +225,7 @@ html body
      width:20px;height:20px;background:url('../images/heart_active.jpg') right no-repeat;
      background-size: auto 16px;
      float: right;
-     width: 40px;
+     width: 20px;
      height: 20px;
     }
     .today .left .prod
@@ -492,14 +492,20 @@ html body
     background:white;
     width:100%;
    }
-   .detailData .title_new{width:100%;padding:10px 0px 0px 10px;font-size:15px;color:#383838;}
-   .detailData .title_new .content_new{width:100%;}
+   .detailData .title_new{
+    width:100%;
+    padding:10px 10px 0;
+    font-size:15px;
+    color:#383838;
+  }
+   .detailData .content_new{
+    padding:4px 0 0px 10px;
+   }
    .detailData .left
    {
      float:left;
      width:50%;
-     padding:7px 4px 7px 10px;
-   }
+     }
    @mixin pricex
    {
     background-position:0px 0px;
@@ -521,29 +527,29 @@ html body
     background:url('../images/icon_xiang.png') left no-repeat;
     @include pricex;
    }
-   .detailData .left .price
+   .detailData .price
    {
+     clear:both;
      color:#cbcbcb;
-     padding-top:5px;
-     width:100%;
+     padding:4px 10px 5px;
      font-size:15px!important;
    }
-   .detailData .left .price span
+   .detailData .price span
    {
      text-decoration:line-through;
      font-size:15px;
    }
    .detail_map
    {
-     background:url('../images/map.jpg') right no-repeat;
-     height:29px;
-     text-align:right;
-     background-size:contain;
-     margin-top:5px;
-     float:left;
-     width:50%;
-     padding: 7px 20px;
+     background:$color_e7 url('../images/map.jpg') 5px center no-repeat;
+     background-size:16px 15px;
+     height:30px;
+     line-height:30px;
+     float:right;
      color: white;
+     min-width:6em;
+     padding:0 5px 0 24px;
+     text-align:right;
    }
    .detail_pai
    {  
@@ -1415,23 +1421,28 @@ html body
    .mybpai img
    {
    float:left;
+   width:30px;
+   border-radius:15px;
    }
    .mybpai span
    {
-    margin-left:5px;
-    float: left;
-    margin-top: 5px;
+    margin-left: 40px;
+    display: block;
+   }
+   .mybpai span.single{
+    line-height:30px;
    }
    .mypai_time
    {
-    width:80px;
     height:30px;
+    line-height:30px;
     background:#e76049;
     color:$color_fff;
     position:absolute;
     top:30px;
     right:0px;
-    padding:5px 10px;
+    text-align:center;
+    padding:0 5px;
    }
  //一拍到底展开页，商品大图页面
   .yipai
@@ -1720,7 +1731,7 @@ html body
     }
     .shai
     {
-     background:$color_fff;
+     background:#f6f6f6;
     }
     .orderdetail_btn
     {
@@ -1853,39 +1864,9 @@ html body
      padding:15px 0px;
      width:20px;
     }
-    .shai_title
-    {
-     color:#000;
-     border-top:1px solid #f6f6f6;
-     margin-top:0px;
-     padding:10px 0px;
-    }
-    .shai_title .title
-    {
-     padding:9px 0px;
-    }
-    .shai_title .x-field .x-input-el
-    {
-     padding: 1px 10px 5px;
-    }
-    .shai_title .x-field-input
-    {
-     height:30px;
-     border:1px solid #d4d4d4;
-     background:#f9f9f9;
-     border-radius:3px;
-     width:94%;
-     margin:auto;
-    }
-    #ext-textareainput-1
-    {
-     background:#f9f9f9;
-     border-radius:3px;
-    }
-    .shai_width
-    {
-     width:94%;
-     margin:10px auto;
+
+    .shai_content{
+      padding:4px;
     }
     .shai_btn
     {
@@ -1902,19 +1883,32 @@ html body
       background-repeat:no-repeat;
       background-position:center center;
       background-size:auto 18px;
-      margin:5px;
+      margin:10px;
+      width:60px;
+      float:left;
+    }
+    .camera_btn_area:after{
+      content: "020";
+      display: block;
+      height: 0;
+      clear: both;
+      visibility:hidden; 
     }
     .camera
     {    
-      background:#f9f9f9 url('../images/ordershaic.png');
+      background:#fff url('../images/ordershaic.png');
       @include camera_img;
     }
      .camera_add
     {    
-      background:#f9f9f9 url('../images/ordershai+.png');
+      background:#fff url('../images/ordershai+.png');
       @include camera_img;
     }
 
+    .camera_btn_area .photo{
+      @include camera_img;
+      background-size:cover;
+    }
     //订单确认
     .confirm
     {
@@ -2350,7 +2344,7 @@ html body
     padding:10px;
     display:box;
     display:-weibkit-box;
-    margin-top:10px;
+    margin-bottom:10px;
    }
    .discount .left
    {
@@ -2364,9 +2358,8 @@ html body
    }
    .discount .right
    {
-    padding-left:10px;
-    float:left;
-    width:60%;
+    margin-left:120px;
+
    }
    .discount .right .title
    {
@@ -2386,6 +2379,10 @@ html body
     word-break: break-all;
     color:$color_e7;
     margin-top:10px;
+    line-height:25px;
+   }
+   .discount .get_btn{
+      float:right;
    }
    .discount .right .btn
    {

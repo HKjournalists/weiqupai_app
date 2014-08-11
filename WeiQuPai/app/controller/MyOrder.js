@@ -48,8 +48,10 @@ Ext.define('WeiQuPai.controller.MyOrder', {
         Ext.Msg.confirm(null, '确认收货吗？', func, this);
     },
 
-    doShowOrder: function() {
-        WeiQuPai.Util.toast('秀！');
+    doShowOrder: function(list, index, dataItem, record, e) {
+        var view = Ext.create('WeiQuPai.view.ShowOrder');
+        view.setRecord(record);
+        WeiQuPai.navigator.push(view);
     },
 
     doShipment: function(list, index, dataItem, record, e) {

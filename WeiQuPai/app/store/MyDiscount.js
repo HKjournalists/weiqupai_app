@@ -1,17 +1,16 @@
-Ext.define('WeiQuPai.store.Auction', {
+Ext.define('WeiQuPai.store.MyDiscount', {
     extend: 'Ext.data.Store',
     config: {
-        storeId: 'Auction',
         autoLoad: false,
-        model: 'WeiQuPai.model.Auction',
+        fields: ['id', 'discount_id', 'discount', 'ctime'],
         proxy: {
             type: 'ajax',
-            url: WeiQuPai.Config.apiUrl + '/?r=appv2/today/auction',
+            url: WeiQuPai.Config.host + '/?r=appv2/myDiscount',
             reader: {
                 type: 'json'
             },
             startParam: false,
-            limitParam: false,
+            limitParam: false
         },
         pageSize: 10
     }

@@ -17,6 +17,8 @@ Ext.define('WeiQuPai.view.MyMessage', {
             loadedText: '下拉刷新',
             refreshFn: 'fetchLastest',
             scrollerAutoRefresh: true
+        }, {
+            type: 'wlistpaging',
         }],
         itemTpl: new Ext.XTemplate(
             '<div class="list">',

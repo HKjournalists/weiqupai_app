@@ -71,7 +71,7 @@ Ext.define('WeiQuPai.view.Feed', {
                 '<div class="one">',
                 '<div class="img avatar"><img src="{[this.getAvatar(values.user.avatar)]}" width="40" class="avatar-img"></div>',
                 '<div class="name"><b>{user.nick}</b>:<span class="color_38">{content:htmlEncode}</span>',
-                '<div class="pic-group-list"><tpl for="json_data.pic_list"><img src="{[this.getShowOrderPic(values)]}" data-idx="{#}"/></tpl></div>',
+                '<div class="pic-group-list"><tpl for="json_data.pic_list"><img src="{[this.getShowOrderPic(values)]}" data-idx="{#}" class="pic-list-img"/></tpl></div>',
                 '</div>',
                 '</div>',
 
@@ -199,6 +199,10 @@ Ext.define('WeiQuPai.view.Feed', {
                 WeiQuPai.Util.toast('数据加载失败');
             },
             success: function(record, operation) {
+                if (record.raw.code > 0) {
+                    WeiQuPai.Util.toast(record.raw.msg);
+                    return;
+                }
                 this.setFeedRecord(record);
                 this.getStore().setData(record.get('replies'));
                 Ext.isFunction(callback) && callback();
@@ -259,7 +263,7 @@ Ext.define('WeiQuPai.view.Feed', {
             me.fireEvent('cancelzan', me);
             return false;
         }
-        if (Ext.get(e.target).findParent('.pic-group-list')) {
+        if (Ext.get(e.target).findParent('.pic-list-img')) {
             var picIdx = e.target.getAttribute('data-idx');
             me.fireEvent('pictap', me, picIdx);
             return false;

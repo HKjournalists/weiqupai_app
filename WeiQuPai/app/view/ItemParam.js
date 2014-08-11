@@ -3,6 +3,7 @@ Ext.define('WeiQuPai.view.ItemParam', {
     xtype: 'itemparam',
     config: {
         cls: 'discard tuwen',
+        style: 'min-height:180px',
         tpl: '型号：{model}<br/>规格：{specification}',
         items: [{
             xtype: 'container',

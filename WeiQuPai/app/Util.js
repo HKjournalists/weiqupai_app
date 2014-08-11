@@ -407,6 +407,8 @@ Ext.define("WeiQuPai.Util", {
     goItemView: function(item_id) {
         WeiQuPai.Util.mask();
         var item = WeiQuPai.model.Item;
+        var user = WeiQuPai.Cache.get('currentUser');
+        item.getProxy().setExtraParam('token', user && user.token || '');
         item.load(item_id, {
             scope: this,
             success: function(record, operation) {
@@ -427,6 +429,65 @@ Ext.define("WeiQuPai.Util", {
                 WeiQuPai.Util.toast('数据加载失败');
             },
         });
+    },
+
+    formatTime: function(secs) {
+        var def = [86400, 3600, 60];
+        var fmt = ['天', '小时', '分'];
+        var res = '';
+        for (var i = 0; i < def.length; i++) {
+            v = Math.floor(secs / def[i]);
+            secs = secs % def[i];
+            if (v > 0) {
+                res += v + fmt[i];
+            }
+        }
+        return res;
+    },
+
+    //重置listPaging的状态,一般只在下拉刷新是手动处理store数据的时候才会需要
+    resetListPaging: function(list) {
+        list.getStore().currentPage = 1;
+        var plugins = list.getPlugins();
+        //要是第一页根本不够，就不需要通知重置
+        if (list.getStore().getPageSize() > list.getStore().getCount()) {
+            return;
+        }
+        for (var i = 0; i < plugins.length; i++) {
+            if (Ext.getClassName(plugins[i]) == 'WeiQuPai.plugin.ListPaging') {
+                plugins[i].setIsFullyLoaded(false);
+                plugins[i].getLoadMoreCmp().show();
+                return;
+            }
+        }
+    },
+
+    //点赞的时候心的动画
+    heartBeat: function(el) {
+        setTimeout(function() {
+            var outAnim = Ext.create('Ext.Anim', {
+                from: {
+                    '-webkit-transform': 'scale(1)',
+                },
+                to: {
+                    '-webkit-transform': 'scale(1.4)',
+                },
+                duration: 200,
+                after: function() {
+                    inAnim.run(el);
+                }
+            });
+            var inAnim = Ext.create('Ext.Anim', {
+                from: {
+                    '-webkit-transform': 'scale(1.4)',
+                },
+                to: {
+                    '-webkit-transform': 'scale(1)',
+                },
+                duration: 100
+            });
+            outAnim.run(el);
+        }, 20);
     },
 
     //封装ajax的请求

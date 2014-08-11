@@ -20,10 +20,11 @@ Ext.application({
     ],
 
     controllers: [
-        'Main', 'Today', 'MyAuction', 'MyOrder', 'MyOrderDetail', 'UserAuction', 'Order', 'ShowOrder', 'Circle',
-        'ShowUser', 'Setting', 'MyConsignee', 'Login', 'Register', 'Profile', 'CameraLayer', 'Routes', 'SpecialSale',
-        'Pay', 'MyFollow', 'MyFen', 'Auction', 'ShowUserDis', 'ShowUserFeed', 'ShowUserLike', 'Feed', 'Comment',
-        'CommentList', 'MyMessage', 'PrivateMessage', 'YiPai', 'NoticeToday', 'NoticeTomorrow', 'NoticeAfter'
+        'Auction', 'CameraLayer', 'Circle', 'Comment', 'CommentList', 'Feed', 'Login', 'Main', 'MyAuction',
+        'MyConsignee', 'MyFen', 'MyFollow', 'MyMessage', 'MyOrder', 'MyOrderDetail', 'NoticeAfter',
+        'NoticeToday', 'NoticeTomorrow', 'Order', 'Pay', 'PrivateMessage', 'Profile', 'Register',
+        'Routes', 'Setting', 'ShowOrder', 'ShowUser', 'ShowUserDis', 'ShowUserFeed', 'ShowUserLike',
+        'Today', 'UserAuction', 'YiPai', 'Discount'
     ],
     models: [
         'Auction', 'Comment', 'Consignee', 'Feed', 'Item', 'Order', 'Profile', 'Shipment',
@@ -32,12 +33,12 @@ Ext.application({
     views: [
         'Main', 'MainCard', 'StartupScreen', 'SplashScreen', 'WebPage', 'VTitleBar', 'Login', 'Register',
         'Iframe', 'SimpleViewer', 'ImageViewer', 'Sidebar', 'DisclosureItem', 'Pay', 'Order', 'Item', 'Auction', 'Item',
-        'UserAuction', 'InputComment', 'CircleReplyLayer', 'CameraLayer', 'Notice'
+        'UserAuction', 'InputComment', 'CircleReplyLayer', 'CameraLayer'
     ],
     stores: [
         'Auction', 'Comment', 'Banner', 'MyOrder', 'MyConsignee', 'Circle', 'MyProp', 'MyCoupon',
         'Coupon', 'Prop', 'SpecialSale', 'ShowUserLike', 'ShowUserDis', 'ShowUserFeed', 'MyFollow', 'MyAuction',
-        'MyFans', 'FeedReply', 'MyMessage', 'CommentReply', 'PrivateMessage', 'YiPai'
+        'MyFans', 'FeedReply', 'MyMessage', 'CommentReply', 'PrivateMessage', 'YiPai', 'Discount', 'MyDiscount'
     ],
     icon: {
         '57': 'resources/icons/icon.png',

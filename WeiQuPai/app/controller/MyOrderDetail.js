@@ -64,7 +64,9 @@ Ext.define('WeiQuPai.controller.MyOrderDetail', {
 
     doShowOrder: function() {
         var record = this.getPageView().getRecord();
-        WeiQuPai.Util.toast('秀！');
+        var view = Ext.create('WeiQuPai.view.ShowOrder');
+        view.setRecord(record);
+        WeiQuPai.navigator.push(view);
     },
 
     doShipment: function() {

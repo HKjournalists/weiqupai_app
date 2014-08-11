@@ -2,7 +2,7 @@ Ext.define('WeiQuPai.view.YiPai', {
     extend: 'Ext.DataView',
     xtype: 'yipai',
     config: {
-        uid:null,
+        uid: null,
         loadingText: null,
         store: 'Auction',
         cls: 'bg_ef yi_product',
@@ -17,11 +17,11 @@ Ext.define('WeiQuPai.view.YiPai', {
             pullText: '下拉刷新',
             releaseText: '释放立即刷新',
             loadedText: '下拉刷新',
-            refreshFn: 'fetchLastest',
             scrollerAutoRefresh: true
         }],
+        itemCls: 'list',
+        baseCls: 'water-floow',
         itemTpl: new Ext.XTemplate(
-            '<div class="list">',
             '<div class="yipailist">',
             '<div class="price">',
             '<div class="left">原:{item.oprice}</div>',
@@ -42,7 +42,6 @@ Ext.define('WeiQuPai.view.YiPai', {
             '<span class="yipai_name" uid="{uid}">{user.nick}</span><span class="color_e7"> {curr_price}</span>',
             '</div>',
             '</tpl>',
-            '</div>',
             '</div>'
         ),
         items: [{
@@ -101,13 +100,10 @@ Ext.define('WeiQuPai.view.YiPai', {
         }]
     },
 
-    firstLoad: true,
-    todayData: null,
-
     initialize: function() {
         this.callParent(arguments);
         this.loadData();
-       // var me=this;
+        // var me=this;
         this.on('itemtap', function(list, index, dataItem, record, e) {
             if (Ext.get(e.target).findParent('.img')) {
                 this.fireEvent('cardtap', this, index, dataItem, record, e);
@@ -122,30 +118,14 @@ Ext.define('WeiQuPai.view.YiPai', {
         }, this);
 
     },
-     applyUid: function(uid) {
-        this.loadData(uid);
-        return uid;
-    },
-    loadData: function(uid) {
+
+    loadData: function(callback) {
         var store = this.getStore();
-        store.getProxy().setExtraParam('uid', uid);
         store.load(function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');
             }
+            Ext.isFunction(callback) && callback();
         });
-    },
-
-    //下拉刷新, 这里的this是pullRefresh对象
-    fetchLastest: function() {
-        var me = this;
-        this.getList().loadData(function() {
-            me.setState('loaded');
-            me.snapBack();
-        });
-    },
-
-    onHide: function() {
-        this.down('banner').stopTimer();
     }
 });

@@ -1,7 +1,9 @@
 Ext.define('WeiQuPai.view.Today', {
     extend: 'Ext.DataView',
     xtype: 'today',
-    requires: ['WeiQuPai.view.Banner', 'WeiQuPai.view.Auction', 'WeiQuPai.view.SpecialSale', 'WeiQuPai.view.YiPai'],
+    requires: ['WeiQuPai.view.Banner', 'WeiQuPai.view.Auction', 'WeiQuPai.view.SpecialSale',
+        'WeiQuPai.view.Discount', 'WeiQuPai.view.YiPai'
+    ],
     config: {
         loadingText: null,
         store: 'Auction',
@@ -18,6 +20,8 @@ Ext.define('WeiQuPai.view.Today', {
             loadedText: '下拉刷新',
             refreshFn: 'fetchLastest',
             scrollerAutoRefresh: true
+        }, {
+            type: 'wlistpaging',
         }],
         itemTpl: new Ext.XTemplate(
             '<div class="today">',
@@ -93,6 +97,7 @@ Ext.define('WeiQuPai.view.Today', {
             items: [{
                 xtype: 'button',
                 baseCls: 'btn1',
+                action: 'discount',
                 flex: 1
 
             }, {
@@ -155,9 +160,9 @@ Ext.define('WeiQuPai.view.Today', {
         this.loadData();
         this.on('activate', this.onActivate, this);
         this.on('hide', this.onHide, this);
-        this.onBefore('itemtap', this.bindEvent, this);
+        this.on('itemtap', this.bindEvent, this);
         this.down('#specialList').on('tap', function(e) {
-            var idx = Ext.get(e.target).up('.list-product').getAttribute('data-idx') - 1;
+            var idx = Ext.get(e.target).findParent('.list-product').getAttribute('data-idx') - 1;
             var view = Ext.create('WeiQuPai.view.SpecialSale', {
                 param: this.todayData.special[idx]
             });
@@ -165,7 +170,7 @@ Ext.define('WeiQuPai.view.Today', {
         }, this, {
             element: 'element',
             delegate: '.list-product'
-        })
+        });
     },
 
     bindEvent: function(list, index, dataItem, record, e) {
@@ -179,6 +184,7 @@ Ext.define('WeiQuPai.view.Today', {
             me.fireEvent('unliketap', me, index, dataItem, record, e);
             return false;
         }
+        this.fireEvent('showdetail', me, index, dataItem, record, e);
     },
 
     loadData: function(callback) {
@@ -201,6 +207,7 @@ Ext.define('WeiQuPai.view.Today', {
     fetchLastest: function() {
         var me = this;
         this.getList().loadData(function() {
+            WeiQuPai.Util.resetListPaging(me.getList());
             me.setState('loaded');
             me.snapBack();
         });

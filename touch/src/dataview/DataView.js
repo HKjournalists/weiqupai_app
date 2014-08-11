@@ -506,8 +506,7 @@ Ext.define('Ext.dataview.DataView', {
         if (me.getStore()) {
             if (me.isPainted()) {
                 me.refresh();
-            }
-            else {
+            } else {
                 me.on({
                     painted: 'refresh',
                     single: true
@@ -532,8 +531,7 @@ Ext.define('Ext.dataview.DataView', {
             this.addCls(baseCls + '-inlineblock');
             if (Ext.isObject(newInline) && newInline.wrap === false) {
                 this.addCls(baseCls + '-nowrap');
-            }
-            else {
+            } else {
                 this.removeCls(baseCls + '-nowrap');
             }
         }
@@ -599,8 +597,7 @@ Ext.define('Ext.dataview.DataView', {
         if (record) {
             if (pressedDelay > 0) {
                 me.pressedTimeout = Ext.defer(me.doAddPressedCls, pressedDelay, me, [record]);
-            }
-            else {
+            } else {
                 me.doAddPressedCls(record);
             }
         }
@@ -722,8 +719,7 @@ Ext.define('Ext.dataview.DataView', {
         if (me.container && !me.isDestroyed) {
             if (suppressEvent) {
                 me.doItemDeselect(me, record);
-            }
-            else {
+            } else {
                 me.fireAction('deselect', [me, record, suppressEvent], 'doItemDeselect');
             }
         }
@@ -759,7 +755,9 @@ Ext.define('Ext.dataview.DataView', {
 
     applyStore: function(store) {
         var me = this,
-            bindEvents = Ext.apply({}, me.storeEventHooks, { scope: me }),
+            bindEvents = Ext.apply({}, me.storeEventHooks, {
+                scope: me
+            }),
             proxy, reader;
 
         if (store) {
@@ -794,7 +792,9 @@ Ext.define('Ext.dataview.DataView', {
 
     updateStore: function(newStore, oldStore) {
         var me = this,
-            bindEvents = Ext.apply({}, me.storeEventHooks, { scope: me }),
+            bindEvents = Ext.apply({}, me.storeEventHooks, {
+                scope: me
+            }),
             proxy, reader;
 
         if (oldStore && Ext.isObject(oldStore) && oldStore.isStore) {
@@ -806,8 +806,7 @@ Ext.define('Ext.dataview.DataView', {
 
             if (oldStore.getAutoDestroy()) {
                 oldStore.destroy();
-            }
-            else {
+            } else {
                 proxy = oldStore.getProxy();
                 if (proxy) {
                     reader = proxy.getReader();
@@ -1003,7 +1002,7 @@ Ext.define('Ext.dataview.DataView', {
 
         if (reader) {
             // TODO: Use un() instead of clearListeners() when TOUCH-2723 is fixed.
-//          reader.un('exception', 'handleException', this);
+            //          reader.un('exception', 'handleException', this);
             reader.clearListeners();
         }
 
@@ -1067,8 +1066,7 @@ Ext.define('Ext.dataview.DataView', {
             if (me.isSelected(record)) {
                 me.doItemSelect(me, record);
             }
-        }
-        else {
+        } else {
             item = me.getViewItems()[newIndex];
             if (item) {
                 // Bypassing setter because sometimes we pass the same record (different data)

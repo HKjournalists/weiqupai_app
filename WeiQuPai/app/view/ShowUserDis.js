@@ -65,9 +65,8 @@ Ext.define('WeiQuPai.view.ShowUserDis', {
 
     loadData: function(uid) {
         var store = this.getStore();
-        store.removeAll();
         store.getProxy().setExtraParam('uid', uid);
-        store.load(function(records, operation, success) {
+        store.loadPage(1, function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');
             }

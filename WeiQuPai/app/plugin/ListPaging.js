@@ -11,7 +11,7 @@ Ext.define('WeiQuPai.plugin.ListPaging', {
          * @cfg {Boolean} autoPaging
          * True to automatically load the next page when you scroll to the bottom of the list.
          */
-        autoPaging: false,
+        autoPaging: true,
 
         /**
          * @cfg {String} loadMoreText The text used as the label of the Load More button.
@@ -31,10 +31,10 @@ Ext.define('WeiQuPai.plugin.ListPaging', {
          */
         loadTpl: [
             '<div class="{cssPrefix}loading-spinner" style="font-size: 20px; margin: 0px auto;">',
-                 '<span class="{cssPrefix}loading-top"></span>',
-                 '<span class="{cssPrefix}loading-right"></span>',
-                 '<span class="{cssPrefix}loading-bottom"></span>',
-                 '<span class="{cssPrefix}loading-left"></span>',
+            '<span class="{cssPrefix}loading-top"></span>',
+            '<span class="{cssPrefix}loading-right"></span>',
+            '<span class="{cssPrefix}loading-bottom"></span>',
+            '<span class="{cssPrefix}loading-left"></span>',
             '</div>'
         ].join(''),
 
@@ -46,7 +46,7 @@ Ext.define('WeiQuPai.plugin.ListPaging', {
             xtype: 'component',
             baseCls: Ext.baseCSSPrefix + 'list-paging',
             scrollDock: 'bottom',
-            hidden: true
+            //hidden: true
         },
 
         /**
@@ -81,7 +81,10 @@ Ext.define('WeiQuPai.plugin.ListPaging', {
         loading: false,
 
         //是否完全加载
-        isFullyLoaded: false
+        isFullyLoaded: false,
+
+        //下一页的回调函数
+        nextPageFn: null,
     },
 
     /**
@@ -90,13 +93,11 @@ Ext.define('WeiQuPai.plugin.ListPaging', {
      */
     init: function(list) {
         var scroller = list.getScrollable().getScroller(),
-            store    = list.getStore();
+            store = list.getStore();
 
         this.setList(list);
         this.setScroller(scroller);
         this.bindStore(list.getStore());
-
-        this.addLoadMoreCmp();
 
         // The List's Store could change at any time so make sure we are informed when that happens
         list.updateStore = Ext.Function.createInterceptor(list.updateStore, this.bindStore, this);
@@ -107,6 +108,11 @@ Ext.define('WeiQuPai.plugin.ListPaging', {
                 scope: this
             });
         }
+
+        //list加载完再添加load more 否则会添加上list上面
+        list.on('painted', function() {
+            this.addLoadMoreCmp();
+        }, this);
     },
 
     /**
@@ -141,13 +147,13 @@ Ext.define('WeiQuPai.plugin.ListPaging', {
      */
     disableDataViewMask: function() {
         var list = this.getList();
-            this._listMask = list.getLoadingText();
+        this._listMask = list.getLoadingText();
 
         list.setLoadingText(null);
     },
 
     enableDataViewMask: function() {
-        if(this._listMask) {
+        if (this._listMask) {
             var list = this.getList();
             list.setLoadingText(this._listMask);
             delete this._listMask;
@@ -193,7 +199,10 @@ Ext.define('WeiQuPai.plugin.ListPaging', {
         if (!this.getLoading() && y >= scroller.maxPosition.y) {
             this.currentScrollToTopOnRefresh = list.getScrollToTopOnRefresh();
             list.setScrollToTopOnRefresh(false);
-
+            var fn = this.getNextPageFn();
+            if (fn) {
+                return list[fn].call(list, this);
+            }
             this.loadNextPage();
         }
     },
@@ -228,7 +237,7 @@ Ext.define('WeiQuPai.plugin.ListPaging', {
      * @private
      */
     onStoreLoad: function(store, records, success) {
-        var loadCmp  = this.getLoadMoreCmp();
+        var loadCmp = this.getLoadMoreCmp();
         var scroller = this.getScroller();
         var pageSize = this.getList().getStore().getPageSize();
         this.setLoading(false);
@@ -236,15 +245,17 @@ Ext.define('WeiQuPai.plugin.ListPaging', {
         if (records.length < pageSize) {
             this.setIsFullyLoaded(true);
             scroller.on({
-                scrollend: function(){
+                scrollend: function() {
                     loadCmp.hide();
                     scroller.refresh();
                 },
                 single: true
             });
             var offset = -loadCmp.element.getHeight();
-            scroller.scrollBy(null, offset, {duration: 300});
-        }else{
+            scroller.scrollBy(null, offset, {
+                duration: 300
+            });
+        } else {
             loadCmp.show();
         }
 
@@ -259,7 +270,7 @@ Ext.define('WeiQuPai.plugin.ListPaging', {
     onFilter: function(store) {
         if (store.getCount() === 0) {
             this.getLoadMoreCmp().hide();
-        }else {
+        } else {
             this.getLoadMoreCmp().show();
         }
     },
@@ -271,7 +282,7 @@ Ext.define('WeiQuPai.plugin.ListPaging', {
      */
     addLoadMoreCmp: function() {
         var list = this.getList(),
-            cmp  = this.getLoadMoreCmp();
+            cmp = this.getLoadMoreCmp();
 
         if (!this.getLoadMoreCmpAdded()) {
             list.add(cmp);
@@ -293,10 +304,12 @@ Ext.define('WeiQuPai.plugin.ListPaging', {
      */
     loadNextPage: function() {
         var me = this;
-        if (!me.getIsFullyLoaded()){
+        if (!me.getIsFullyLoaded()) {
             me.disableDataViewMask();
             me.setLoading(true);
-            me.getList().getStore().nextPage({ addRecords: true}, this);
+            me.getList().getStore().nextPage({
+                addRecords: true
+            }, this);
         }
     }
 });

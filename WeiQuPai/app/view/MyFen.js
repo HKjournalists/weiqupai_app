@@ -28,7 +28,7 @@ Ext.define('WeiQuPai.view.MyFen', {
         ),
         items: [{
             xtype: 'vtitlebar',
-            title: '我的粉丝',
+            title: 'TA的粉丝',
             docked: 'top',
             items: [{
                 baseCls: 'arrow_left',
@@ -43,7 +43,7 @@ Ext.define('WeiQuPai.view.MyFen', {
     applyUid: function(uid) {
         var user = WeiQuPai.Cache.get('currentUser');
         if (user && user.id == uid) {
-            this.down('vtitlebar').setTitle('我的关注');
+            this.down('vtitlebar').setTitle('我的粉丝');
         }
         this.loadData(uid);
         return uid;

@@ -3,24 +3,61 @@
  */
 
 Ext.define('WeiQuPai.view.SpecialSale', {
-    extend: 'Ext.dataview.List',
+    extend: 'Ext.DataView',
     xtype: 'specialsale',
     config: {
         param: null,
         loadingText: null,
         store: 'SpecialSale',
-        itemCls: 'today-item-row',
         disableSelection: true,
+        plugins: [{
+            type: 'wpullrefresh',
+            lastUpdatedText: '上次刷新：',
+            lastUpdatedDateFormat: 'H点i分',
+            loadingText: '加载中...',
+            pullText: '下拉刷新',
+            releaseText: '释放立即刷新',
+            loadedText: '下拉刷新',
+            scrollerAutoRefresh: true
+        }],
         itemTpl: new Ext.XTemplate(
-            '<p class="item-img"><img src="' + WeiQuPai.Config.host + '{pic_cover}" /></p>',
-            '<h2>{title}</h2>',
-            '<p class="{[this.statusCss(values.status)]}"><span class="status">{status_text}</span><span class="price-container"><span class="market-price">原价 {oprice}</span> <span class="price">{[this.displayPrice(values)]}</span></span></p>', {
-                statusCss: function(status) {
-                    var css = {};
-                    css[WeiQuPai.Config.auctionStatus.STATUS_NOT_START] = 'not-start';
-                    css[WeiQuPai.Config.auctionStatus.STATUS_ONLINE] = 'online';
-                    css[WeiQuPai.Config.auctionStatus.STATUS_FINISH] = 'finish';
-                    return css[status];
+            '<div class="today">',
+
+            '<div class="left">',
+            '<div class="prod">',
+            '<img src="{[this.getCover(values.item.pic_cover)]}" width="100">',
+            '</div>',
+            '</div>',
+
+            '<div class="right">',
+            '<div class="title">{item.title}</div>',
+            '<div class="price">',
+            '<div class="{[this.getLikeCss(values)]}"></div>',
+            '<span class="priceNew">{[this.displayPrice(values)]}',
+            '<img src="{[this.statusImg(values.status)]}" width="32">',
+            '</span>',
+            '</div>',
+
+            '<div class="pinglun">',
+            '<div class="product_comment">{item_stat.comment_num}</div>',
+            '<div class="product_like">{item_stat.like_num}</div>',
+            '</div>',
+
+            '</div>',
+            '</div>', {
+                statusImg: function(status) {
+                    var img = [];
+                    img[WeiQuPai.Config.auctionStatus.STATUS_NOT_START] = '';
+                    img[WeiQuPai.Config.auctionStatus.STATUS_ONLINE] = 'resources/images/rpz.png';
+                    img[WeiQuPai.Config.auctionStatus.STATUS_FINISH] = 'resources/images/yjs.png';
+                    return img[status];
+                },
+
+                getCover: function(cover) {
+                    return WeiQuPai.Util.getImagePath(cover, '200');
+                },
+                getLikeCss: function(values) {
+                    return WeiQuPai.Util.hasCache('like', parseInt(values.item_id)) ? 'heart' : 'hallow_heart';
                 },
 
                 displayPrice: function(values) {
@@ -33,23 +70,14 @@ Ext.define('WeiQuPai.view.SpecialSale', {
             }
         ),
         items: [{
-            xtype: 'titlebar',
+            xtype: 'vtitlebar',
             title: '专场拍卖',
             docked: 'top',
-            cls: 'w-title'
-        }, {
-            xtype: 'container',
-            scrollDock: 'top',
-            tpl: new Ext.XTemplate(
-                '<div class="sale_pic"><img src="{[this.getPic(values.pic_url)]}"/></div>', {
-                    getPic: function(pic) {
-                        return WeiQuPai.Util.getImagePath(pic);
-                    }
-                }
-            ),
-            itemId: 'saleInfo'
-        }, {
-            xtype: 'bottombar'
+            items: [{
+                xtype: 'button',
+                baseCls: 'arrow_left',
+                action: 'back'
+            }]
         }]
     },
 
@@ -58,6 +86,7 @@ Ext.define('WeiQuPai.view.SpecialSale', {
     initialize: function() {
         this.callParent(arguments);
         this.on('activate', this.onActivate, this);
+        this.on('itemtap', this.bindEvent, this);
     },
 
     applyParam: function(param) {
@@ -66,19 +95,29 @@ Ext.define('WeiQuPai.view.SpecialSale', {
         return param;
     },
 
-    loadData: function(id) {
-        var model = WeiQuPai.model.SpecialSale;
-        model.load(id, {
-            scope: this,
-            success: function(record, operation) {
-                this.down('#saleInfo').setData(record.data);
-                this.getStore().removeAll();
-                this.getStore().add(record.get('auctions'));
-            },
-            failure: function(record, operation) {
+    loadData: function(id, callback) {
+        this.getStore().getProxy().setExtraParam('id', id);
+        this.getStore().load(function(records, operation, success) {
+            if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');
+                return;
             }
-        });
+            Ext.isFunction(callback) && callback();
+        }, this);
+    },
+
+    bindEvent: function(list, index, dataItem, record, e) {
+        var me = this;
+        if (e.target.className == 'hallow_heart') {
+            me.fireEvent('liketap', me, index, dataItem, record, e);
+            return false;
+        }
+        if (e.target.className == 'heart') {
+            var uid = e.target.getAttribute('uid');
+            me.fireEvent('unliketap', me, index, dataItem, record, e);
+            return false;
+        }
+        this.fireEvent('showdetail', me, index, dataItem, record, e);
     },
 
     onActivate: function() {

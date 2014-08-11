@@ -10,7 +10,6 @@ Ext.define('WeiQuPai.view.Sidebar', {
     ],
     config: {
         notLogin: ['today', 'circle', 'setting'],
-        activeBtn: null,
         scrollable: true,
         cls: 'personal',
         layout: 'vbox',
@@ -80,6 +79,8 @@ Ext.define('WeiQuPai.view.Sidebar', {
             id: 'setting'
         }]
     },
+
+    activeBtn: null,
 
     initialize: function() {
         this.activeBtn = this.down('#today');

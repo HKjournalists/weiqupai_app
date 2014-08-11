@@ -16,6 +16,8 @@ Ext.define('WeiQuPai.view.MyAuction', {
             releaseText: '释放立即刷新',
             loadedText: '下拉刷新',
             scrollerAutoRefresh: true
+        }, {
+            type: 'wlistpaging',
         }],
         itemTpl: new Ext.XTemplate(
             '<div class="myorder mg_10" >',
@@ -105,7 +107,7 @@ Ext.define('WeiQuPai.view.MyAuction', {
         var store = this.getStore();
         //加载数据
         store.getProxy().setExtraParam('token', user.token);
-        store.load(function(records, operation, success) {
+        store.loadPage(1, function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');
                 return false;

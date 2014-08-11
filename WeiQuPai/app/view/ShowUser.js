@@ -3,7 +3,8 @@ Ext.define('WeiQuPai.view.ShowUser', {
     xtype: 'showuser',
     requires: [
         'WeiQuPai.view.ShowUserLike', 'WeiQuPai.view.ShowUserDis', 'WeiQuPai.view.ShowUserFeed',
-        'WeiQuPai.view.MyFollow', 'WeiQuPai.view.MyFen', 'WeiQuPai.view.ChangeAvatarLayer'
+        'WeiQuPai.view.MyFollow', 'WeiQuPai.view.MyFen', 'WeiQuPai.view.ChangeAvatarLayer',
+        'WeiQuPai.view.PrivateMessage'
     ],
     config: {
         uid: null,
@@ -171,16 +172,21 @@ Ext.define('WeiQuPai.view.ShowUser', {
         list.down('showuserfeed').setUid(uid);
     },
 
+    applyData: function(data) {
+        this.down('#personmodel').setData(data);
+        this.down('button[action=tab_showuserlike]').setText('喜欢 ' + data.like_num);
+        this.down('button[action=tab_showuserdis]').setText('评论 ' + data.comment_num);
+        this.down('button[action=tab_showuserfeed]').setText('晒单 ' + data.show_order_num);
+        return data;
+    },
+
     loadData: function(uid, callback) {
         var user = WeiQuPai.Cache.get('currentUser');
         var person = this.down('#personmodel');
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/user&uid=' + uid;
         var me = this;
         WeiQuPai.Util.get(url, function(rsp) {
-            person.setData(rsp);
-            me.down('button[action=tab_showuserlike]').setText('喜欢 ' + rsp.like_num);
-            me.down('button[action=tab_showuserdis]').setText('评论 ' + rsp.comment_num);
-            me.down('button[action=tab_showuserfeed]').setText('晒单 ' + rsp.show_order_num);
+            me.setData(rsp);
             Ext.isFunction(callback) && callback();
         });
 

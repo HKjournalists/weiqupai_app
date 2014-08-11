@@ -51,6 +51,8 @@ Ext.define('WeiQuPai.controller.Circle', {
             var zan = parseInt(record.get('zan_num'));
             WeiQuPai.Util.setCache('circle_zan', feed_id);
             record.set('zan_num', zan + 1);
+            var el = Ext.get(list.getViewItems()[index]).down('.selflike');
+            WeiQuPai.Util.heartBeat(el);
         });
     },
 

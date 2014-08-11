@@ -19,6 +19,8 @@ Ext.define('WeiQuPai.view.Circle', {
             releaseText: '释放立即刷新',
             loadedText: '下拉刷新',
             scrollerAutoRefresh: true
+        }, {
+            type: 'wlistpaging',
         }],
         store: 'Circle',
         itemTpl: new Ext.XTemplate(
@@ -33,7 +35,7 @@ Ext.define('WeiQuPai.view.Circle', {
             '<tpl elseif="feed_type==1">',
             '<div class="feed-title"><b>{user.nick}</b><span class="color_85"> 发表了一个晒单</span></div>',
             '<div class="color_38">{content:htmlEncode}</div>',
-            '<div class="pic-group-list"><tpl for="json_data.pic_list"><img src="{[this.getShowOrderPic(values)]}" data-idx="{#}"/></tpl></div>',
+            '<div class="pic-group-list"><tpl for="json_data.pic_list"><img src="{[this.getShowOrderPic(values)]}" data-idx="{#}" class="pic-list-img"/></tpl></div>',
             '<div class="confirm_w"><div class="confirm_title">',
             '<img src="{[this.getPic(values.json_data.pic_cover)]}"}" class="card-img"/>',
             '<div class="title">{json_data.title}</div>',
@@ -162,7 +164,7 @@ Ext.define('WeiQuPai.view.Circle', {
             me.fireEvent('cancelzan', me, index, record);
             return false;
         }
-        if (Ext.get(e.target).findParent('.pic-group-list')) {
+        if (Ext.get(e.target).findParent('.pic-list-img')) {
             var picIdx = e.target.getAttribute('data-idx');
             me.fireEvent('pictap', me, index, record, picIdx);
             return false;

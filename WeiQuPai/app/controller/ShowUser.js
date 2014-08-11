@@ -31,6 +31,11 @@ Ext.define('WeiQuPai.controller.ShowUser', {
     doPm: function(view) {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
+        var data = view.getData();
+        var view = Ext.create('WeiQuPai.view.PrivateMessage');
+        view.setUid(data.id);
+        view.down('vtitlebar').setTitle(data.nick);
+        WeiQuPai.navigator.push(view);
     },
 
     //关注他
@@ -57,7 +62,7 @@ Ext.define('WeiQuPai.controller.ShowUser', {
 
     showAvatarCameraLayer: function() {
         var self = this;
-        WeiQuPai.Util.showCameraLayer(100, 100, true, function(url) {
+        WeiQuPai.Util.showCameraLayer(140, 140, true, function(url) {
             self.setAvatar(url);
         });
     },

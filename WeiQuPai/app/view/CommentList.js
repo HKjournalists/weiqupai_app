@@ -10,6 +10,7 @@ Ext.define('WeiQuPai.view.CommentList', {
         disableSelection: true,
         scrollToTopOnRefresh: false,
         cls: 'discard',
+        style: 'min-height:180px',
         itemTpl: new Ext.XTemplate(
             '<div class="list" data-id="{id}">',
             '<div class="one">',

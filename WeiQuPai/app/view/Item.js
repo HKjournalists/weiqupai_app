@@ -39,7 +39,7 @@ Ext.define('WeiQuPai.view.Item', {
             xtype: 'detailpicshow'
         }, {
             xtype: 'container',
-            id: "item_stat",
+            itemId: "item_stat",
             tpl: new Ext.XTemplate(
                 '<div class="details">',
                 '<div class="top" style="margin-top:-201px;">',
@@ -56,7 +56,7 @@ Ext.define('WeiQuPai.view.Item', {
             )
         }, {
             xtype: 'container',
-            id: 'item_title',
+            itemId: 'item_title',
             tpl: new Ext.XTemplate(
                 '<div class="details">',
                 '<div class="bottom" style="margin-top:110px;">',
@@ -72,19 +72,11 @@ Ext.define('WeiQuPai.view.Item', {
             )
         }, {
             xtype: 'container',
-            id: 'price_data',
+            itemId: 'price_data',
             tpl: new Ext.XTemplate(
-                '<div class="clear"></div>',
                 '<div class="detailData">',
                 '<div class="title_new">{title}</div>',
-                '<div class="content_new">',
-                '<div class="left">',
-                '<div class="price">',
-                '<span>原价￥{oprice}</span>',
-                ' 已售出:{item_stat.sold_num}',
-                '</div>',
-                '</div>',
-                '</div>',
+                '<div class="price"><span>原价￥{oprice}</span>已售出:{item_stat.sold_num}</div>',
                 '</div>'
             )
         }, {
@@ -129,6 +121,9 @@ Ext.define('WeiQuPai.view.Item', {
         this.callParent(arguments);
 
         this.shareLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer');
+        this.down('#item_title').on('tap', this.bindEvent, this, {
+            element: 'element'
+        });
         //初始化tab
         this.initTab();
     },
@@ -166,6 +161,17 @@ Ext.define('WeiQuPai.view.Item', {
 */
     },
 
+    bindEvent: function(e) {
+        if (e.target.className == 'like') {
+            this.fireEvent('itemlike', this);
+            return false;
+        }
+        if (e.target.className == 'nolike') {
+            this.fireEvent('itemdislike', this);
+            return false;
+        }
+    },
+
     //下拉刷新, 这里的this是pullRefresh对象
     fetchLastest: function() {
         var me = this;
@@ -177,7 +183,6 @@ Ext.define('WeiQuPai.view.Item', {
 
     loadData: function(callback) {
         var item = this.getRecord();
-        console.log(item);
         this.down('commentlist').setItemId(item.get('id'));
         WeiQuPai.model.Item.load(item.get('id'), {
             scope: this,
@@ -203,8 +208,15 @@ Ext.define('WeiQuPai.view.Item', {
         this.down('detailpicshow').setPicData(data.pic_url);
         this.down('#item_stat').setData(data);
         this.down('#item_title').setData(data);
+        this.down('#price_data').setData(data);
         this.down('itemparam').setData(data);
         this.down('itemdesc').setData(data);
         return record;
-    }
+    },
+
+    updateItemStat: function(field, value) {
+        var data = this.down('#item_stat').getData();
+        data.item_stat[field] = parseInt(data.item_stat[field]) + value;
+        this.down('#item_stat').setData(data);
+    },
 });

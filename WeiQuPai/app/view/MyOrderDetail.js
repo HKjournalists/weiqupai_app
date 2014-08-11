@@ -1,6 +1,7 @@
 Ext.define('WeiQuPai.view.MyOrderDetail', {
     extend: 'Ext.Container',
     xtype: 'myorderdetail',
+    requires: ['WeiQuPai.view.ShowOrder'],
     config: {
         disableSelection: true,
         scrollable: true,

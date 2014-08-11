@@ -8,7 +8,9 @@ Ext.define('WeiQuPai.controller.Auction', {
             shareBtn: 'button[action=share]',
             paiBtn: 'auction button[action=pai]',
             commentForm: 'inputcomment[itemId=postComment]',
-            refreshBtn: 'button[action=refresh]'
+            refreshBtn: 'button[action=refresh]',
+            auctionView: 'auction',
+            itemView: 'item'
         },
         control: {
             shopInfo: {
@@ -31,6 +33,14 @@ Ext.define('WeiQuPai.controller.Auction', {
             },
             commentForm: {
                 publish: 'doPublishComment'
+            },
+            auctionView: {
+                itemlike: 'doItemLike',
+                itemdislike: 'doItemDislike'
+            },
+            itemView: {
+                itemlike: 'doItemLike',
+                itemdislike: 'doItemDislike'
             }
         }
     },
@@ -96,6 +106,7 @@ Ext.define('WeiQuPai.controller.Auction', {
 
     doPublishComment: function(form) {
         var user = WeiQuPai.Cache.get('currentUser');
+        var view = WeiQuPai.navigator.getActiveItem();
         var self = this;
         WeiQuPai.Util.mask();
         form.submit({
@@ -115,6 +126,8 @@ Ext.define('WeiQuPai.controller.Auction', {
                     nick: user.nick
                 }
                 list.getStore().insert(0, result);
+                view.updateItemStat('comment_num', 1);
+
             },
             failure: function(form, result) {
                 WeiQuPai.Util.unmask();
@@ -129,6 +142,26 @@ Ext.define('WeiQuPai.controller.Auction', {
         });
     },
 
+    doItemLike: function(view) {
+        var user = WeiQuPai.Util.checkLogin();
+        if (!user) return;
+        var itemId = view.getRecord().get('id');
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/itemLike&item_id=' + itemId + '&token=' + user.token;
+        WeiQuPai.Util.get(url, function(rsp) {
+            view.updateItemStat('like_num', 1);
+        });
+    },
+
+    doItemDislike: function(view) {
+        var user = WeiQuPai.Util.checkLogin();
+        if (!user) return;
+        var itemId = view.getRecord().get('id');
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/itemDislike&item_id=' + itemId + '&token=' + user.token;
+        WeiQuPai.Util.get(url, function(rsp) {
+            view.updateItemStat('dislike_num', 1);
+        });
+    },
+
     doShare: function() {
         var currentView = WeiQuPai.navigator.getActiveItem();
         currentView.shareLayer.show();
@@ -136,7 +169,7 @@ Ext.define('WeiQuPai.controller.Auction', {
 
     doRefresh: function() {
         var currentView = WeiQuPai.navigator.getActiveItem();
-        currentView.onDestroy();
+        currentView.onDestroy && currentView.onDestroy();
         currentView.loadData();
     }
 

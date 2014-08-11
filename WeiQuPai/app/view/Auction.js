@@ -39,7 +39,7 @@ Ext.define('WeiQuPai.view.Auction', {
             xtype: 'detailpicshow'
         }, {
             xtype: 'container',
-            id: "item_stat",
+            itemId: "item_stat",
             tpl: new Ext.XTemplate(
                 '<div class="details">',
                 '<div class="top" style="margin-top:-201px;">',
@@ -56,7 +56,7 @@ Ext.define('WeiQuPai.view.Auction', {
             )
         }, {
             xtype: 'container',
-            id: 'item_title',
+            itemId: 'item_title',
             tpl: new Ext.XTemplate(
                 '<div class="details">',
                 '<div class="bottom" style="margin-top:110px;">',
@@ -72,28 +72,24 @@ Ext.define('WeiQuPai.view.Auction', {
             )
         }, {
             xtype: 'container',
-            id: 'price_data',
+            itemId: 'price_data',
             tpl: new Ext.XTemplate(
-                '<div class="clear"></div>',
                 '<div class="detailData">',
                 '<div class="title_new">{title}</div>',
                 '<div class="content_new">',
-                '<div class="left">',
-                '<div class="priceNew">{auction.curr_price}</div>',
-                '<div class="price">',
-                '<span>原价￥{oprice}</span>',
-                ' 已售出:{item_stat.sold_num}',
-                '</div>',
-                '</div>',
-                '</div>',
+                '<div class="left"><div class="priceNew">{auction.curr_price}</div></div>',
                 '<div class="detail_map" id="countdown">{[this.formatCountdown(values.auction)]}</div>',
                 '<div class="clear"></div>',
-                '</div>', {
+                '</div>',
+                '<div class="price clear">',
+                '<span>原价￥{oprice}</span> 已售出:{item_stat.sold_num}',
+                '</div></div>', {
                     formatCountdown: function(auction) {
                         if (auction.status == WeiQuPai.Config.auctionStatus.STATUS_NOT_START) {
-                            return auction.start_time;
+                            //return auction.start_time;
+                            return '等待开始';
                         } else if (auction.status == WeiQuPai.Config.auctionStatus.STATUS_FINISH) {
-                            return '00:00';
+                            return '已结束';
                         } else {
                             var sec = auction.left_time % 60;
                             var min = (auction.left_time - sec) / 60;
@@ -152,6 +148,9 @@ Ext.define('WeiQuPai.view.Auction', {
         this.callParent(arguments);
 
         this.shareLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer');
+        this.down('#item_title').on('tap', this.bindEvent, this, {
+            element: 'element'
+        });
         //初始化tab
         this.initTab();
 
@@ -178,6 +177,17 @@ Ext.define('WeiQuPai.view.Auction', {
         this.setActiveTab(btns[0]);
     },
 
+    bindEvent: function(e) {
+        if (e.target.className == 'like') {
+            this.fireEvent('itemlike', this);
+            return false;
+        }
+        if (e.target.className == 'nolike') {
+            this.fireEvent('itemdislike', this);
+            return false;
+        }
+    },
+
     applyRecord: function(record) {
         if (record == null) {
             return null;
@@ -192,6 +202,12 @@ Ext.define('WeiQuPai.view.Auction', {
         this.down('itemdesc').setData(data);
         this.down('commentlist').setItemId(record.get('id'));
         return record;
+    },
+
+    updateItemStat: function(field, value) {
+        var data = this.down('#item_stat').getData();
+        data.item_stat[field] = parseInt(data.item_stat[field]) + value;
+        this.down('#item_stat').setData(data);
     },
 
     //下拉刷新, 这里的this是pullRefresh对象

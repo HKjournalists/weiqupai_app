@@ -7,7 +7,7 @@ Ext.define('WeiQuPai.controller.ShowUserDis', {
         control: {
             showuserdis: {
                 cardtap: 'productdetail',
-                detailtap: 'detail',
+                detailtap: 'showDetail',
                 zantap: 'zan'
             },
 
@@ -15,12 +15,13 @@ Ext.define('WeiQuPai.controller.ShowUserDis', {
     },
 
     productdetail: function(list, index, dataItem, record, e) {
-        console.log(record);
         WeiQuPai.Util.goItemView(record.get('item_id'));
     },
 
-    detail: function(list, index, dataItem, record, e) {
-
+    showDetail: function(list, index, dataItem, record, e) {
+        var view = Ext.create('WeiQuPai.view.Comment');
+        view.setCommentId(record.get('id'));
+        WeiQuPai.navigator.push(view);
     },
 
     zan: function(list, index, dataItem, record, e) {

@@ -1,6 +1,6 @@
 Ext.define('WeiQuPai.view.UserAuction', {
     extend: 'Ext.Container',
-    xtype: 'auction',
+    xtype: 'userauction',
     config: {
         scrollable: true,
         cls: 'detail',
@@ -68,17 +68,20 @@ Ext.define('WeiQuPai.view.UserAuction', {
             xtype: 'container',
             id: 'mapdata',
             tpl: new Ext.XTemplate(
-                '<div class="mypai_time" id="countdown">{[this.formatCountdown(values.user_auction)]}</div>', {
-                    formatCountdown: function(auction) {
-                        if (auction.status == WeiQuPai.Config.auctionStatus.STATUS_NOT_START) {
-                            return auction.start_time;
-                        } else if (auction.status == WeiQuPai.Config.auctionStatus.STATUS_FINISH) {
-                            return '00:00';
+                '<div class="mypai_time" id="countdown">{[this.formatCountdown(values)]}</div>', {
+                    formatCountdown: function(values) {
+                        if (values.self_auction) {
+                            if (values.self_auction.status == WeiQuPai.Config.userAuctionStatus.STATUS_ONLINE) {
+                                return '剩余' + WeiQuPai.Util.formatTime(values.self_auction.left_time);
+                            } else {
+                                var text = {};
+                                text[WeiQuPai.Config.userAuctionStatus.STATUS_FINISH] = '等待购买';
+                                text[WeiQuPai.Config.userAuctionStatus.STATUS_DEAL] = '已成交';
+                                text[WeiQuPai.Config.userAuctionStatus.STATUS_CANCEL] = '已被取消';
+                                return text[values.self_auction.status];
+                            }
                         } else {
-                            var sec = auction.left_time % 60;
-                            var min = (auction.left_time - sec) / 60;
-                            var countdown = (min < 10 ? '0' + min : min) + ":" + (sec < 10 ? '0' + sec : sec);
-                            return countdown;
+                            return '等待开始';
                         }
                     }
                 }
@@ -93,41 +96,21 @@ Ext.define('WeiQuPai.view.UserAuction', {
                 '<div class="title_new">{title}</div>',
                 '<div class="content_new">',
                 '<div class="left">',
-                '<div class="priceNew">{user_auction.start_price}</div>',
-                '<div class="price">',
-                '<span>原价￥{oprice}</span>',
-                '</div>',
+                '<tpl if="self_auction">',
+                '<div class="priceNew">{self_auction.curr_price}</div>',
+                '</tpl>',
+                '<div class="price"><span>原价￥{oprice}</span></div>',
                 '</div>',
                 '<div class="detail_pai">',
-                '<span class="detail_img">',
-                '已有',
-                '551',
-                '人帮拍',
-                '</span>',
-                '<span class="detail_down">',
-                '</span>',
+                '<tpl if="self_auction">',
+                '<span class="detail_img">已有{self_auction.help_num}人帮拍</span>',
+                '<span class="detail_down"></span>',
+                '</tpl>',
                 '</div>',
                 '<div style="clear:both"></div>',
+                '</div>',
                 '</div>'
             )
-        }, {
-            xtype: 'container',
-            layout: 'hbox',
-            items: [{
-                flex: 4,
-                id: 'detailshow',
-                cls: 'bangbai',
-                tpl: new Ext.XTemplate(
-                    '<tpl for=".">',
-                    '<img src="{img_url}">',
-                    '</tpl>'
-                )
-            }, {
-                flex: 1,
-                xtype: 'button',
-                text: '+更多帮拍',
-                baseCls: 'bangpai-button'
-            }]
         }, {
             xtype: 'container',
             cls: 'daoju',
@@ -159,25 +142,8 @@ Ext.define('WeiQuPai.view.UserAuction', {
                 text: '加速卡*1'
             }]
         }, {
-            xtype: 'container',
-            layout: 'hbox',
-            cls: 'bangbai',
-            items: [{
-                flex: 4,
-                id: 'Mydetailshow',
-                tpl: new Ext.XTemplate(
-                    '<tpl for=".">',
-                    '<div class="mybpai">',
-                    '<img src="{img_url}">',
-                    '<span><strong>{name}</strong>已将价格杀至<label style="color:#e76049">{price}</label>元</span>',
-                    '</div>',
-                    '</tpl>'
-                )
-            }, {
-                flex: 1,
-                xtype: 'button',
-                baseCls: 'detail_right_btn'
-            }]
+            xtype: 'disclosureitem',
+            itemId: 'otherAuction'
         }, {
             xtype: 'container',
             layout: 'hbox',
@@ -201,12 +167,15 @@ Ext.define('WeiQuPai.view.UserAuction', {
                 text: '图文详情'
             }]
         }, {
-            xtype: 'itemparam'
+            xtype: 'itemparam',
+            flex: 1
         }, {
             xtype: 'commentlist',
+            flex: 1,
             hidden: true
         }, {
             xtype: 'itemdesc',
+            flex: 1,
             hidden: true
         }, {
             xtype: 'bottombar'
@@ -231,6 +200,7 @@ Ext.define('WeiQuPai.view.UserAuction', {
 
         //销毁的时候结束定时器
         this.on('destroy', this.onDestroy);
+        this.on('painted', this.onPainted, this);
     },
 
     initTab: function() {
@@ -256,7 +226,6 @@ Ext.define('WeiQuPai.view.UserAuction', {
         if (record == null) {
             return null;
         }
-
         var data = record.data;
         this.down('detailpicshow').setPicData(data.pic_url);
         this.down('#item_stat').setData(data);
@@ -266,7 +235,21 @@ Ext.define('WeiQuPai.view.UserAuction', {
         this.down('#mapdata').setData(data);
         this.down('#price_data').setData(data);
         this.down('commentlist').setItemId(record.get('id'));
+        this.updateOtherAuction(data);
+        this.setCountdown(data);
         return record;
+    },
+
+    updateOtherAuction: function(data) {
+        var container = this.down('#otherAuction');
+        container.setHidden(!data.other_auction);
+        var titleTpl = new Ext.XTemplate('<div class="mybpai">',
+            '<img src="{user.avatar}">',
+            '<span><strong>{user.nick}</strong>',
+            '已将价格杀至<label style="color:#e76049">{curr_price}</label>元</span>',
+            '</div>');
+        data.other_auction.user.avatar = WeiQuPai.Util.getAvatar(data.other_auction.user.avatar, 140);
+        container.setTitle(titleTpl.apply(data.other_auction));
     },
 
     //下拉刷新, 这里的this是pullRefresh对象
@@ -294,36 +277,25 @@ Ext.define('WeiQuPai.view.UserAuction', {
         });
     },
 
-    //软刷新
-    softRefresh: function() {
-        //先确保清空定时器
-        this.onDestroy();
-        var me = this;
-        var auction = this.getRecord().get('user_auction');
-        var url = WeiQuPai.Config.apiUrl + '/?r=app/userAuction/refresh&id=' + auction.id;
-        WeiQuPai.Util.get(url, function(rsp) {
-            auction = Ext.merge(auction, rsp);
-            this.getRecord().set('user_auction', auction);
-            this.down('#mapdata').setData(auction);
-            //如果没结束就继续自动刷新
-            if (rsp.status != WeiQuPai.Config.auctionStatus.STATUS_FINISH) {
-                this.setCountdown();
-            }
-        });
+    updateCounterState: function() {
+        var selfAuction = this.getRecord().get('self_auction');
+        var text = {};
+        text[WeiQuPai.Config.userAuctionStatus.STATUS_ONLINE] = '进行中';
+        text[WeiQuPai.Config.userAuctionStatus.STATUS_FINISH] = '等待购买';
+        text[WeiQuPai.Config.userAuctionStatus.STATUS_DEAL] = '已成交';
+        text[WeiQuPai.Config.userAuctionStatus.STATUS_CANCEL] = '已被取消';
+        Ext.get('countdown').setHtml(text[selfAuction.status]);
     },
 
     //设置定时器
-    setCountdown: function() {
+    setCountdown: function(data) {
         var now = Math.ceil(new Date / 1000);
-        var auction = this.getRecord().get('user_auction');
+        var auction = data.self_auction;
+        if (!auction) return;
         this.setLeftSeconds(auction.left_time);
-        if (auction.left_time <= 0 || auction.status == WeiQuPai.Config.auctionStatus.STATUS_FINISH) return;
         var me = this;
-        //如果是未开始，在开始时间做软刷新
-        if (auction.status == WeiQuPai.Config.auctionStatus.STATUS_NOT_START) {
-            this.setRefreshTimer(setTimeout(function() {
-                me.softRefresh();
-            }, auction.left_time * 1000));
+        //如果不是正在进行状态，不做计时器
+        if (auction.status != WeiQuPai.Config.userAuctionStatus.STATUS_ONLINE) {
             return;
         }
         //已经开始的做计时
@@ -337,22 +309,13 @@ Ext.define('WeiQuPai.view.UserAuction', {
         if (this.getLeftSeconds() == 0) {
             clearInterval(this.getCounterTimer());
             this.setCounterTimer(null);
-            return this.softRefresh();
+            return this.updateCounterState();
         }
         var ls = this.getLeftSeconds();
         this.setLeftSeconds(--ls);
-        var sec = ls % 60;
-        var min = (ls - sec) / 60;
-        var countdown = (min < 10 ? '0' + min : min) + ":" + (sec < 10 ? '0' + sec : sec);
+        var countdown = WeiQuPai.Util.formatTime(ls);
         //android系统2秒才走一次定时器，加一个span标签就没问题了
-        Ext.get('countdown').setHtml('<span>' + countdown + '</span>');
-
-        var me = this;
-        if (ls <= 6 && ls > 0) {
-            setTimeout(function() {
-                me.flashBackground();
-            }, 700);
-        }
+        Ext.get('countdown').setHtml('<span>剩余' + countdown + '</span>');
     },
 
     //价格趋势图
@@ -377,6 +340,13 @@ Ext.define('WeiQuPai.view.UserAuction', {
         if (this.getCounterTimer()) {
             clearInterval(this.getCounterTimer());
             this.setCounterTimer(null);
+        }
+    },
+
+    onPainted: function() {
+        var container = this.down('#otherAuction');
+        if (container.element.down('span').getHeight() < 30) {
+            container.element.down('span').addCls('single');
         }
     }
 });

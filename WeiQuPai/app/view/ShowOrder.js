@@ -1,46 +1,65 @@
 Ext.define('WeiQuPai.view.ShowOrder', {
-	extend: 'Ext.dataview.List',
-	xtype: 'showorder',
+    extend: 'Ext.Container',
+    xtype: 'showorder',
+    config: {
+        picList: [],
+        cls: 'shai public_14',
+        scrollable: true,
+        items: [{
+            xtype: 'vtitlebar',
+            title: '我要晒单',
+            docked: 'top',
+            items: [{
+                xtype: 'button',
+                baseCls: 'arrow_left',
+                action: 'back'
+            }]
+        }, {
+            xtype: 'container',
+            id: 'ordershai',
+            tpl: new Ext.XTemplate(
+                '<div class="myorder">',
+                '<div class="order_dis">',
+                '<img src="{[this.getCover(values.item.pic_cover)]}" class="card-img"/>',
+                '<div class="right">{item.title}</div>',
+                '<div class="clear"></div>',
+                '</div></div>', {
+                    getCover: function(cover) {
+                        return WeiQuPai.Util.getImagePath(cover, '200');
+                    },
+                }
+            )
+        }, {
+            xtype: 'container',
+            cls: 'camera_btn_area',
+            itemId: 'cameraArea',
+            items: [{
+                xtype: 'button',
+                baseCls: 'camera',
+                action: 'showOrderCamera'
+            }]
+        }, {
+            xtype: 'textareafield',
+            placeHolder: '说说你此刻的心情',
+            maxLength: 1000,
+            maxRows: 4,
+            name: 'content',
+            cls: 'shai_content'
+        }, {
+            xtype: 'button',
+            baseCls: 'orderdetail_btn_e7',
+            action: 'publish',
+            text: '确定发布'
+        }]
+    },
 
-	config: {
-		store: 'Item',
-        disableSelection : true,
-		itemTpl: new Ext.XTemplate(
-			'<div class="show-order-row">',
-                '<img src="' + WeiQuPai.Config.host + 'pic/avatar.jpg" class="avatar"/>',
-                '<div class="info">',
-                '<h3>{name}</h3>',
-                '<div class="pic-list">',
-                	'<img src="' + WeiQuPai.Config.host + '{pic_url}" />',
-                	'<img src="' + WeiQuPai.Config.host + '{pic_url}" />',
-                	'<img src="' + WeiQuPai.Config.host + '{pic_url}" />',
-                '</div>',
-                '<p>这里是描述么这里是描述么这里是描述么这里是描述么这里是描述么这里是描述么这里是描述么这里是描述么这里是描述么</p>',
-                '<div class="flex"><div class="time">{time}</div><div class="up">100</div><div class="comment">500</div></div>',
-            '</div>'
-        ),
-		items:[
-			{
-				xtype: 'panel',
-				cls: 'auction-info',
-				html: '<h2>{title}</h2><p>您的成交价格<span class="price">￥{price}</span></p>',
-				scrollDock: 'top'
-			},
-			{
-				xtype: 'bottombar'
-			}
-		], 
-		listeners: {
-			itemtap: function(list, index, dataItem, record, e){
-				if(e.target.className == 'avatar'){
-					this.fireEvent('avatartap', this, index, record);
-					e.stopEvent();
-				}
-			}
-		}
-	},
+    initialize: function() {},
 
-	initialize: function(){
-		this.callParent(arguments);
-	}
+    applyRecord: function(record) {
+        if (record == null) {
+            return;
+        }
+        this.down('#ordershai').setData(record.data);
+        return record;
+    }
 });

@@ -4,13 +4,20 @@ Ext.define('WeiQuPai.controller.Today', {
     config: {
         refs: {
             pageView: 'today',
+            specialView: 'specialsale',
             yipai: 'today button[action=yipai]',
             notice: 'today button[action=notice]',
-            circle: 'today button[action=circle]'
+            circle: 'today button[action=circle]',
+            discount: 'today button[action=discount]'
         },
         control: {
             pageView: {
-                itemtap: 'showDetail',
+                showdetail: 'showDetail',
+                liketap: 'doLike',
+                unliketap: 'doUnlike'
+            },
+            specialView: {
+                showdetail: 'showDetail',
                 liketap: 'doLike',
                 unliketap: 'doUnlike'
             },
@@ -25,6 +32,9 @@ Ext.define('WeiQuPai.controller.Today', {
             },
             circle: {
                 tap: 'goCircle'
+            },
+            discount: {
+                tap: 'goDiscount'
             }
         }
     },
@@ -35,43 +45,16 @@ Ext.define('WeiQuPai.controller.Today', {
 
     yipailist: function() {
         var detailView = Ext.create('WeiQuPai.view.YiPai');
-        //console.log("record+" + record + "e=" + e);
-        //detailView.setParam(record);
         WeiQuPai.navigator.push(detailView);
     },
 
     goCircle: function() {
-        var view = Ext.create('WeiQuPai.view.Circle');
-        WeiQuPai.navigator.push(view);
+        WeiQuPai.sidebar.activeTabItem('circle');
     },
 
-    heartBeat: function(dataItem) {
-        var me = this;
-        var el = dataItem.down('.heart');
-        var outAnim = Ext.create('Ext.Anim', {
-            autoClear: false,
-            from: {
-                'zoom': '1'
-            },
-            to: {
-                'zoom': '1.2'
-            },
-            duration: 100,
-            after: function() {
-                inAnim.run(el);
-            }
-        });
-        var inAnim = Ext.create('Ext.Anim', {
-            autoClear: false,
-            from: {
-                'zoom': '1.2'
-            },
-            to: {
-                'zoom': '1'
-            },
-            duration: 100
-        });
-        outAnim.run(el);
+    goDiscount: function() {
+        var view = Ext.create('WeiQuPai.view.Discount');
+        WeiQuPai.navigator.push(view);
     },
 
     doLike: function(list, index, dataItem, record, e) {
@@ -79,13 +62,12 @@ Ext.define('WeiQuPai.controller.Today', {
         if (!user) return;
         var itemId = parseInt(record.get('item_id'));
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/itemLike&item_id=' + itemId + '&token=' + user.token;
-        var me = this;
         WeiQuPai.Util.get(url, function(rsp) {
             WeiQuPai.Util.setCache('like', itemId);
             var stat = record.get('item_stat');
             stat.like_num++;
             record.set('item_stat', stat);
-            me.heartBeat(dataItem);
+            WeiQuPai.Util.heartBeat(dataItem.down('.heart'));
         });
     },
 
