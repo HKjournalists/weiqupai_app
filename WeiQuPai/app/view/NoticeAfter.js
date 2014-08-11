@@ -11,15 +11,15 @@ Ext.define('WeiQuPai.view.NoticeAfter', {
             xtype: 'container',
             id: 'noticeafter',
             tpl: new Ext.XTemplate(
-                '<div class="yugao"><div class="title">13:00</div></div>',
-                '<tpl for=".">',
-                '<div class="myProduct">',
-                '<div class="img">',
-                '<img src="{item.pic_cover}" width="100">',
-                '</div>',
-                '</div>',
+                 '<tpl for=".">',
+                '<div>',
+                '<div class="yugao"><div class="title">{time}</div></div>',
+                '<tpl for="items">',
+                '<img src="{item.pic_cover}" width="100" class="myProduct" itemid="{item_id}">',
                 '</tpl>',
-                '<div style="clear:both"></div>'
+                '<div style="clear:both"></div>',
+                '</div>',
+                '</tpl>'
             )
         }]
     },
