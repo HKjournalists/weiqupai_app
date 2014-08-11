@@ -123,6 +123,7 @@ html body
      {
        background-image:url(../images/btn1.jpg);
        @include banner_style;
+       margin-top:-20px;
 
      }
      .btn2
@@ -130,7 +131,51 @@ html body
        background-image:url(../images/btn2.jpg); 
        @include banner_style;
        margin-left:5px;
+       position:relative;
+       z-index:0;
+       margin-top:-20px;
      }
+     .hot
+     {
+        background: url(../images/hot.png) no-repeat;
+        background-size: contain;
+        width: 28px;
+        height: 28px;
+        position: relative;
+        z-index: 1;
+        margin-left: 290px;
+        animation:hotmove 0.5s linear 0.5s infinite alternate;-moz-animation:hotmove  0.5s linear  0.5s infinite alternate; -webkit-animation:hotmove  0.5s linear  0.5s infinite alternate;-o-animation:hotmove  0.5s linear  0.5s infinite alternate;
+     }
+      @keyframes hotmove
+      {
+          0%  {left:0px; top:15px;}
+          50%  {left:0px; top:0px;}
+          100%  {left:0px; top:15px;}
+      }
+      @-moz-keyframes hotmove
+      {
+          0%  {top:2px;}
+          25%  {top:0px;}
+          50%  {top:2px;}
+          75%  {top:0px;}
+          100%  {top:0px;}
+      }
+      @-webkit-keyframes hotmove
+      {
+          0%  {top:2px;}
+          25%  {top:0px;}
+          50%  {top:2px;}
+          75%  {top:0px;}
+          100%  {top:0px;}
+      }
+      @-o-keyframes hotmove
+      {
+           0%  {top:2px;}
+          25%  {top:0px;}
+          50%  {top:2px;}
+          75%  {top:0px;}
+          100%  {top:0px;}
+      }
      .btn3
      {
         background-image:url(../images/btn3.jpg);
@@ -541,8 +586,8 @@ html body
    }
    .detail_map
    {
-     background: #e76049 url("../images/map.jpg") 1px center no-repeat;
-     background-size: auto 25px;
+     background: #e76049 url("../images/map.jpg") 6px center no-repeat;
+     background-size: auto 15px;
      height:30px;
      line-height:30px;
      float:right;
@@ -1515,8 +1560,9 @@ html body
      margin:0px auto 5px;
      border:1px solid #efefef;
      text-align:center;
-     margin-top:-19px;
+     margin-top:-18px;
      z-index:0;
+     position:relative;
    }
   
     .yi_product .list  .price
@@ -1540,6 +1586,7 @@ html body
      text-overflow: ellipsis;
      margin-top:-28px;
      z-index:1;
+     position:relative;
     }
     .yi_product .list .dis
     {
@@ -2421,7 +2468,6 @@ html body
     .paiquan
     {
       background: #f6f6f6;
-      border: 1px solid #efefef;
       border-radius: 6px;
     }
     .paiquan .discard .list .one .img
@@ -2474,6 +2520,8 @@ html body
      color:$color_fff;
      font-size:12px;
      background:transparent;
+     z-index:1;
+     position:relative;
     }
     .yi_product .list .price .left
     {
@@ -2862,4 +2910,11 @@ html body
 .pm-dataitem{
   background:transparent;
   margin:15px 5px;
+}
+.empty{
+  background:url('../images/empty.png') no-repeat;
+  background-size:contain;
+  width:151px;
+  height:107px;
+  margin:100px auto;
 }

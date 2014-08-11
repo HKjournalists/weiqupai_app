@@ -29,7 +29,7 @@ Ext.define('WeiQuPai.view.YiPai', {
             '<div class="clear"></div>',
             '</div>',
             '<div>',
-            '<img src="{[WeiQuPai.Util.getImagePath(values.item.pic_cover, 140)]}" class="img">',
+            '<img src="{item.pic_cover}" class="img">',
             '<div class="zhezhao">',
             '{item.title}',
             '</div>',

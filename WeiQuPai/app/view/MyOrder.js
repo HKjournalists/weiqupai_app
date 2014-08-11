@@ -88,7 +88,8 @@ Ext.define('WeiQuPai.view.MyOrder', {
 
     initialize: function() {
         this.callParent(arguments);
-        this.msgbox = WeiQuPai.Util.msgbox('您还没有拍到任何宝贝');
+        //this.msgbox = WeiQuPai.Util.msgbox('您还没有拍到任何宝贝');
+        this.msgbox = WeiQuPai.Util.msgbox('');
         this.add(this.msgbox);
 
         this.loadData();

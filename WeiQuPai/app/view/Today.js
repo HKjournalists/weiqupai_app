@@ -90,7 +90,10 @@ Ext.define('WeiQuPai.view.Today', {
         }, {
             xtype: 'banner',
             scrollDock: 'top',
-        }, {
+        },  
+        { xtype:'container',
+            baseCls:'hot'
+        },{
             xtype: 'container',
             scrollDock: 'top',
             layout: 'hbox',
@@ -106,9 +109,9 @@ Ext.define('WeiQuPai.view.Today', {
                 baseCls: 'btn2',
                 action: 'yipai',
                 flex: 1
-
             }]
-        }, {
+        },
+          {
             xtype: 'container',
             scrollDock: 'top',
             layout: 'hbox',

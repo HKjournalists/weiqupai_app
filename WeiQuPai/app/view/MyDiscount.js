@@ -42,7 +42,8 @@ Ext.define('WeiQuPai.view.MyDiscount', {
 
     initialize: function() {
         this.callParent(arguments);
-        this.msgbox = WeiQuPai.Util.msgbox('您还没有拍到任何宝贝');
+        //this.msgbox = WeiQuPai.Util.msgbox('您还没有拍到任何宝贝');
+        this.msgbox = WeiQuPai.Util.msgbox('');
         this.add(this.msgbox);
         this.loadData();
         this.on('itemtap', this.bindEvent, this);
