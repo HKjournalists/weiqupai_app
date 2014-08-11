@@ -36,18 +36,17 @@ Ext.define('WeiQuPai.view.NoticeToday', {
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/auctionNotice&day=' + 1;
         var me = this;
         WeiQuPai.Util.get(url, function(rsp) {
-           console.log(rsp);
             person.setData(rsp);
             Ext.isFunction(callback) && callback();
         });
     },
 
     bindEvent: function(e) {
-         if (e.target.className == 'myProduct') {
-                var toUid = e.target.getAttribute('itemid');
-                console.log(toUid+"+"+e.target.getAttribute('itemid'));
-                this.fireEvent('cardtap', this, e.target.getAttribute('itemid'));
-                return false;
-            }
+        if (e.target.className == 'myProduct') {
+            var toUid = e.target.getAttribute('itemid');
+            console.log(toUid + "+" + e.target.getAttribute('itemid'));
+            this.fireEvent('cardtap', this, e.target.getAttribute('itemid'));
+            return false;
+        }
     }
 })

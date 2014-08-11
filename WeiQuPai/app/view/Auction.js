@@ -109,16 +109,19 @@ Ext.define('WeiQuPai.view.Auction', {
                 xtype: 'button',
                 text: '商品参数',
                 action: 'tab_itemparam',
+                itemId: 'tab_itemparam',
                 cls: 'x-button-active'
             }, {
                 flex: 1,
                 xtype: 'button',
                 action: 'tab_commentlist',
+                itemId: 'tab_commentlist',
                 text: '大家评论'
             }, {
                 flex: 1,
                 xtype: 'button',
                 action: 'tab_itemdesc',
+                itemId: 'tab_itemdesc',
                 text: '图文详情'
             }]
         }, {
@@ -162,7 +165,7 @@ Ext.define('WeiQuPai.view.Auction', {
         var btns = this.query('#tabbar button');
         var me = this;
         for (var i = 0; i < btns.length; i++) {
-            var xtype = btns[i].action.substr(4);
+            var xtype = btns[i].getItemId().substr(4);
             btns[i].tabView = this.down(xtype);
             btns[i].on('tap', function() {
                 var tab = me.getActiveTab();
