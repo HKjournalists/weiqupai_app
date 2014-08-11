@@ -108,13 +108,13 @@ Ext.define('WeiQuPai.view.Auction', {
                 flex: 1,
                 xtype: 'button',
                 text: '商品参数',
-                action: 'tab_itemparam',
-                cls: 'x-button-active'
+                action: 'tab_itemparam'
             }, {
                 flex: 1,
                 xtype: 'button',
                 action: 'tab_commentlist',
-                text: '大家评论'
+                text: '大家评论',
+                cls: 'x-button-active'
             }, {
                 flex: 1,
                 xtype: 'button',
@@ -122,10 +122,10 @@ Ext.define('WeiQuPai.view.Auction', {
                 text: '图文详情'
             }]
         }, {
-            xtype: 'itemparam'
-        }, {
-            xtype: 'commentlist',
+            xtype: 'itemparam',
             hidden: true
+        }, {
+            xtype: 'commentlist'
         }, {
             xtype: 'itemdesc',
             hidden: true

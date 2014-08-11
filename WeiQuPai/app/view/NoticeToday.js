@@ -12,7 +12,7 @@ Ext.define('WeiQuPai.view.NoticeToday', {
             itemId: 'notice',
             tpl: new Ext.XTemplate(
                 '<tpl for=".">',
-                '<div>',
+                '<div class="detailDatabot">',
                 '<div class="yugao"><div class="title">{time}</div></div>',
                 '<tpl for="items">',
                 '<img src="{item.pic_cover}" width="100" class="myProduct" itemid="{item_id}">',
