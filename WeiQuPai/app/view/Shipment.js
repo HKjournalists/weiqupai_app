@@ -37,7 +37,8 @@ Ext.define('WeiQuPai.view.Shipment', {
     },
 
     initialize: function() {
-        this.msgbox = WeiQuPai.Util.msgbox('未查到对应的物流信息');
+       // this.msgbox = WeiQuPai.Util.msgbox('未查到对应的物流信息');
+       this.msgbox = WeiQuPai.Util.msgbox('');
         this.add(this.msgbox);
     },
 

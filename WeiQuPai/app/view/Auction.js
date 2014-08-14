@@ -4,9 +4,12 @@ Ext.define('WeiQuPai.view.Auction', {
     requires: [
         'WeiQuPai.view.CommentList', 'WeiQuPai.view.ItemParam', 'WeiQuPai.view.ItemDesc',
         'WeiQuPai.view.Shop', 'WeiQuPai.view.Brand', 'WeiQuPai.view.DetailPicShow',
-        'WeiQuPai.view.BottomBar', 'WeiQuPai.view.ImageViewer', 'WeiQuPai.view.ShareLayer'
+        'WeiQuPai.view.BottomBar', 'WeiQuPai.view.ImageViewer', 'WeiQuPai.view.ShareLayer',
+        'WeiQuPai.view.AuctionTip'
     ],
     config: {
+        showAnimation: 'fadeIn',
+        hideAnimation: 'fadeOut',
         scrollable: true,
         cls: 'detail',
         loadingText: null,
@@ -151,8 +154,9 @@ Ext.define('WeiQuPai.view.Auction', {
     tabPosition: 0,
 
     initialize: function() {
+        var view = Ext.create('WeiQuPai.view.AuctionTip');
+        view.show();
         this.callParent(arguments);
-
         this.shareLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer');
         this.down('#item_title').on('tap', this.bindEvent, this, {
             element: 'element'
@@ -160,7 +164,7 @@ Ext.define('WeiQuPai.view.Auction', {
         //初始化tab
         this.initTab();
         //销毁的时候结束定时器
-        this.on('destroy', this.onDestroy);
+        this.on('destroy', this.onDestroy);;
     },
 
     initTab: function() {

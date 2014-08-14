@@ -75,7 +75,6 @@ Ext.define('WeiQuPai.view.ShareLayer', {
             data: this.getShareData()
         });
     },
-
     shareWeixin: function() {
         this.hide();
         this.shareWechat(Wechat.Scene.SESSION);

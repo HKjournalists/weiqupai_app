@@ -33,7 +33,7 @@ Ext.application({
     views: [
         'Main', 'MainCard', 'StartupScreen', 'SplashScreen', 'WebPage', 'VTitleBar', 'Login', 'Register',
         'Iframe', 'SimpleViewer', 'ImageViewer', 'Sidebar', 'DisclosureItem', 'Pay', 'Order', 'Item', 'Auction', 'Item',
-        'InputComment', 'CircleReplyLayer', 'CameraLayer'
+        'UserAuction', 'InputComment', 'CircleReplyLayer', 'CameraLayer', 'AuctionTip', 'MainTip', 'NoticeTip', 'AuctionTipTwo'
     ],
     stores: [
         'Auction', 'Comment', 'Banner', 'MyOrder', 'MyConsignee', 'Circle', 'MyProp', 'MyCoupon',
@@ -62,7 +62,10 @@ Ext.application({
 
     startupScreen: [
         'resources/images/splash1.png',
-        'resources/images/splash2.png'
+        'resources/images/splash2.png',
+        'resources/images/splash3.png',
+        'resources/images/splash4.png',
+        'resources/images/splash5.png'
     ],
 
     //是否第一次加载
@@ -215,6 +218,7 @@ Ext.application({
                 return;
             }
         }, false);
+
     },
 
     handlePostMessage: function() {

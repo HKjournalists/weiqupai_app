@@ -5,9 +5,8 @@ Ext.define("WeiQuPai.Config", {
     apiUrl: 'http://localhost',
     updateUrl: 'http://localhost/update',
 
-
     //app版本
-    version: "1.5",
+    version: "2.0",
 
     //订单状态
     orderStatusText: ['未付款', '处理中', '已发货', '已完成', '取消未付款', '取消已付款'],

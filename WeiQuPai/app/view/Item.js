@@ -76,8 +76,28 @@ Ext.define('WeiQuPai.view.Item', {
             tpl: new Ext.XTemplate(
                 '<div class="detailData">',
                 '<div class="title_new">{title}</div>',
-                '<div class="price"><span>原价￥{oprice}</span>已售出:{item_stat.sold_num}</div>',
-                '</div>'
+                '<div class="content_new">',
+                '<div class="left"><div class="priceNew" id="countdown">{[this.formatCountdown(values.auction)]}</div></div>',
+                '<div class="noticetip"><div class="notice_btn1">期望价</div><div class="notice_btn2">提醒我</div></div>',
+                '<div class="clear"></div>',
+                '</div>',
+                '<div class="price clear">',
+                '<span>原价￥{oprice}</span> 已售出:{item_stat.sold_num}',
+                '</div></div>', {
+                    formatCountdown: function(auction) {
+                        if (auction.status == WeiQuPai.Config.auctionStatus.STATUS_NOT_START) {
+                            //return auction.start_time;
+                            return '等待开始';
+                        } else if (auction.status == WeiQuPai.Config.auctionStatus.STATUS_FINISH) {
+                            return '已结束';
+                        } else {
+                            var sec = auction.left_time % 60;
+                            var min = (auction.left_time - sec) / 60;
+                            var countdown = (min < 10 ? '0' + min : min) + ":" + (sec < 10 ? '0' + sec : sec);
+                            return countdown;
+                        }
+                    }
+                }
             )
         }, {
             xtype: 'container',
@@ -90,7 +110,7 @@ Ext.define('WeiQuPai.view.Item', {
                 xtype: 'button',
                 text: '商品参数',
                 action: 'tab_itemparam',
-                itemId: 'tab_itemparam',
+                itemId: 'tab_itemparam'
             }, {
                 flex: 1,
                 xtype: 'button',
@@ -124,6 +144,8 @@ Ext.define('WeiQuPai.view.Item', {
 
 
     initialize: function() {
+        var view = Ext.create('WeiQuPai.view.NoticeTip');
+        view.show();
         this.callParent(arguments);
 
         this.shareLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer');

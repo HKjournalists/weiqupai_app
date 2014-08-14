@@ -2,7 +2,7 @@ Ext.define('WeiQuPai.view.Today', {
     extend: 'Ext.DataView',
     xtype: 'today',
     requires: ['WeiQuPai.view.Banner', 'WeiQuPai.view.Auction', 'WeiQuPai.view.SpecialSale',
-        'WeiQuPai.view.Discount', 'WeiQuPai.view.KillEnd'
+        'WeiQuPai.view.Discount', 'WeiQuPai.view.KillEnd', 'WeiQuPai.view.AuctionTip'
     ],
     config: {
         loadingText: null,
@@ -92,6 +92,9 @@ Ext.define('WeiQuPai.view.Today', {
             scrollDock: 'top',
         }, {
             xtype: 'container',
+            baseCls: 'hot'
+        }, {
+            xtype: 'container',
             scrollDock: 'top',
             layout: 'hbox',
             items: [{
@@ -106,7 +109,6 @@ Ext.define('WeiQuPai.view.Today', {
                 baseCls: 'btn2',
                 action: 'killend',
                 flex: 1
-
             }]
         }, {
             xtype: 'container',
@@ -156,6 +158,7 @@ Ext.define('WeiQuPai.view.Today', {
     todayData: null,
 
     initialize: function() {
+        //this.AuctionTip = WeiQuPai.Util.createOverlay('WeiQuPai.view.AuctionTip');
         this.callParent(arguments);
         this.loadData();
         this.on('activate', this.onActivate, this);
@@ -171,6 +174,7 @@ Ext.define('WeiQuPai.view.Today', {
             element: 'element',
             delegate: '.list-product'
         });
+
     },
 
     bindEvent: function(list, index, dataItem, record, e) {
