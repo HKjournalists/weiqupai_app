@@ -85,14 +85,14 @@ Ext.define('WeiQuPai.Notify', {
     clearNotifier: {},
 
     frNotify: function(msg) {
-        Ext.Viewport.down('maintab').setBadge('my');
+        Ext.Viewport.down('maincard').setBadge('my');
         this.setButtonBadge(Ext.Viewport.down('my button[action=friend]'));
         var nf = Ext.Viewport.down('disclosureitem[itemId=newFriend]');
         nf && nf.setBadge();
     },
 
     frClear: function() {
-        Ext.Viewport.down('maintab').clearBadge('my');
+        Ext.Viewport.down('maincard').clearBadge('my');
         this.clearButtonBadge(Ext.Viewport.down('my button[action=friend]'));
         var nf = Ext.Viewport.down('disclosureitem[itemId=newFriend]');
         nf && nf.clearBadge();
@@ -101,11 +101,11 @@ Ext.define('WeiQuPai.Notify', {
     },
 
     msgNotify: function(msg) {
-        Ext.Viewport.down('maintab').setBadge('my');
+        Ext.Viewport.down('maincard').setBadge('my');
     },
 
     msgClear: function() {
-        Ext.Viewport.down('maintab').clearBadge('my');
+        Ext.Viewport.down('maincard').clearBadge('my');
         //清除对应的消息
         this.msg[this.MSG_MESSAGE] = null;
     },
@@ -113,18 +113,17 @@ Ext.define('WeiQuPai.Notify', {
     circleNotify: function(msg) {
         //如果当前是拍圈就剧新
         var activeView = Ext.Viewport.down('main').getActiveItem();
-        var mainTab = Ext.Viewport.down('maintab');
+        var maincard = Ext.Viewport.down('maincard');
         var circle = Ext.Viewport.down('circle');
-        circle.setForceReload(true);
-        if (activeView == mainTab && mainTab.getActiveItem() == circle) {
+        if (activeView == maincard && maincard.getActiveItem() == circle) {
             circle.loadData();
         } else {
-            Ext.Viewport.down('maintab').setBadge('circle');
+            Ext.Viewport.down('maincard').setBadge('circle');
         }
     },
 
     circleClear: function() {
-        Ext.Viewport.down('maintab').clearBadge('circle');
+        Ext.Viewport.down('maincard').clearBadge('circle');
         //清除对应的消息
         this.msg[this.MSG_CIRCLE] = null;
     },
@@ -150,14 +149,14 @@ Ext.define('WeiQuPai.Notify', {
     },
 
     appUpdateNotify: function(msg) {
-        Ext.Viewport.down('maintab').setBadge('my');
+        Ext.Viewport.down('maincard').setBadge('my');
         this.setButtonBadge(Ext.Viewport.down('my button[action=setting]'));
         var nf = Ext.Viewport.down('disclosureitem[itemId=update]');
         nf && nf.setBadge();
     },
 
     appUpdateClear: function() {
-        Ext.Viewport.down('maintab').clearBadge('my');
+        Ext.Viewport.down('maincard').clearBadge('my');
         this.clearButtonBadge(Ext.Viewport.down('my button[action=setting]'));
         Ext.Viewport.down('disclosureitem[itemId=update]').clearBadge();
         //清除对应的消息
@@ -166,12 +165,12 @@ Ext.define('WeiQuPai.Notify', {
 
     //新拍券
     newCouponNotify: function() {
-        Ext.Viewport.down('maintab').setBadge('my');
+        Ext.Viewport.down('maincard').setBadge('my');
         this.setButtonBadge(Ext.Viewport.down('my button[action=coupon]'));
     },
 
     newCouponClear: function() {
-        Ext.Viewport.down('maintab').clearBadge('my');
+        Ext.Viewport.down('maincard').clearBadge('my');
         this.clearButtonBadge(Ext.Viewport.down('my button[action=coupon]'));
         //清除对应的消息
         this.msg[this.MSG_NEW_COUPON] = null;
@@ -179,12 +178,12 @@ Ext.define('WeiQuPai.Notify', {
 
     //新道具
     newPropNotify: function() {
-        Ext.Viewport.down('maintab').setBadge('my');
+        Ext.Viewport.down('maincard').setBadge('my');
         this.setButtonBadge(Ext.Viewport.down('my button[action=prop]'));
     },
 
     newPropClear: function() {
-        Ext.Viewport.down('maintab').clearBadge('my');
+        Ext.Viewport.down('maincard').clearBadge('my');
         this.clearButtonBadge(Ext.Viewport.down('my button[action=prop]'));
         this.msg[this.MSG_NEW_PROP] = null;
     },
@@ -193,7 +192,7 @@ Ext.define('WeiQuPai.Notify', {
     newOrderNotify: function() {
         var msg = this.msg[this.MSG_NEW_ORDER];
         if (!msg || msg.length == 0) return;
-        Ext.Viewport.down('maintab').setBadge('myauction');
+        Ext.Viewport.down('maincard').setBadge('myauction');
         //给每个订单标红点
         var myauction = Ext.Viewport.down('myauction');
         for (var i = 0; i < msg.length; i++) {
@@ -204,7 +203,7 @@ Ext.define('WeiQuPai.Notify', {
     newOrderClear: function(id) {
         var msg = this.msg[this.MSG_NEW_ORDER];
         if (!msg || msg.length == 0) return;
-        Ext.Viewport.down('maintab').clearBadge('myauction');
+        Ext.Viewport.down('maincard').clearBadge('myauction');
         //给某个订单清除红点
         var myauction = Ext.Viewport.down('myauction');
         myauction.clearBadge(id);
@@ -217,7 +216,7 @@ Ext.define('WeiQuPai.Notify', {
         var msg = this.msg[this.MSG_ORDER_SHIP];
         if (!msg || msg.length == 0) return;
 
-        Ext.Viewport.down('maintab').setBadge('myauction');
+        Ext.Viewport.down('maincard').setBadge('myauction');
         //给每个订单标红点
         var myauction = Ext.Viewport.down('myauction');
         for (var i = 0; i < msg.length; i++) {
@@ -229,7 +228,7 @@ Ext.define('WeiQuPai.Notify', {
         var msg = this.msg[this.MSG_ORDER_SHIP];
         if (!msg || msg.length == 0) return;
 
-        Ext.Viewport.down('maintab').clearBadge('myauction');
+        Ext.Viewport.down('maincard').clearBadge('myauction');
         //给某个订单清除红点
         var myauction = Ext.Viewport.down('myauction');
         myauction.clearBadge(id);

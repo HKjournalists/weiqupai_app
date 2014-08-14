@@ -9,6 +9,9 @@ Ext.define('WeiQuPai.view.MainCard', {
         items: [{
             xtype: 'today'
         }]
+    },
+    initialize: function() {
+
     }
 
 });

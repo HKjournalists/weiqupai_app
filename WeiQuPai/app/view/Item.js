@@ -76,8 +76,28 @@ Ext.define('WeiQuPai.view.Item', {
             tpl: new Ext.XTemplate(
                 '<div class="detailData">',
                 '<div class="title_new">{title}</div>',
-                '<div class="price"><span>原价￥{oprice}</span>已售出:{item_stat.sold_num}</div>',
-                '</div>'
+                '<div class="content_new">',
+                '<div class="left"><div class="priceNew" id="countdown">{[this.formatCountdown(values.auction)]}</div></div>',
+                '<div class="noticetip"><div class="notice_btn1">期望价</div><div class="notice_btn2">提醒我</div></div>',
+                '<div class="clear"></div>',
+                '</div>',
+                '<div class="price clear">',
+                '<span>原价￥{oprice}</span> 已售出:{item_stat.sold_num}',
+                '</div></div>', {
+                    formatCountdown: function(auction) {
+                        if (auction.status == WeiQuPai.Config.auctionStatus.STATUS_NOT_START) {
+                            //return auction.start_time;
+                            return '等待开始';
+                        } else if (auction.status == WeiQuPai.Config.auctionStatus.STATUS_FINISH) {
+                            return '已结束';
+                        } else {
+                            var sec = auction.left_time % 60;
+                            var min = (auction.left_time - sec) / 60;
+                            var countdown = (min < 10 ? '0' + min : min) + ":" + (sec < 10 ? '0' + sec : sec);
+                            return countdown;
+                        }
+                    }
+                }
             )
         }, {
             xtype: 'container',
@@ -88,17 +108,20 @@ Ext.define('WeiQuPai.view.Item', {
                 flex: 1,
                 xtype: 'button',
                 text: '商品参数',
-                action: 'tab_itemparam'
+                action: 'tab_itemparam',
+                itemId: 'tab_itemparam'
             }, {
                 flex: 1,
                 xtype: 'button',
                 action: 'tab_commentlist',
                 text: '大家评论',
-                cls: 'x-button-active'
+                cls: 'x-button-active',
+                itemId: 'tab_commentlist'
             }, {
                 flex: 1,
                 xtype: 'button',
                 action: 'tab_itemdesc',
+                itemId: 'tab_itemdesc',
                 text: '图文详情'
             }]
         }, {
@@ -118,6 +141,8 @@ Ext.define('WeiQuPai.view.Item', {
 
 
     initialize: function() {
+        var view = Ext.create('WeiQuPai.view.NoticeTip');
+        view.show();
         this.callParent(arguments);
 
         this.shareLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer');
@@ -132,7 +157,7 @@ Ext.define('WeiQuPai.view.Item', {
         var btns = this.query('#tabbar button');
         var me = this;
         for (var i = 0; i < btns.length; i++) {
-            var xtype = btns[i].action.substr(4);
+            var xtype = btns[i].getItemId().substr(4);
             btns[i].tabView = this.down(xtype);
             btns[i].on('tap', function() {
                 var tab = me.getActiveTab();

@@ -4,9 +4,12 @@ Ext.define('WeiQuPai.view.Auction', {
     requires: [
         'WeiQuPai.view.CommentList', 'WeiQuPai.view.ItemParam', 'WeiQuPai.view.ItemDesc',
         'WeiQuPai.view.Shop', 'WeiQuPai.view.Brand', 'WeiQuPai.view.DetailPicShow',
-        'WeiQuPai.view.BottomBar', 'WeiQuPai.view.ImageViewer', 'WeiQuPai.view.ShareLayer'
+        'WeiQuPai.view.BottomBar', 'WeiQuPai.view.ImageViewer', 'WeiQuPai.view.ShareLayer',
+        'WeiQuPai.view.AuctionTip'
     ],
     config: {
+        showAnimation: 'fadeIn',
+        hideAnimation: 'fadeOut',
         scrollable: true,
         cls: 'detail',
         loadingText: null,
@@ -108,17 +111,20 @@ Ext.define('WeiQuPai.view.Auction', {
                 flex: 1,
                 xtype: 'button',
                 text: '商品参数',
-                action: 'tab_itemparam'
+                action: 'tab_itemparam',
+                itemId: 'tab_itemparam'
             }, {
                 flex: 1,
                 xtype: 'button',
                 action: 'tab_commentlist',
+                itemId: 'tab_commentlist',
                 text: '大家评论',
                 cls: 'x-button-active'
             }, {
                 flex: 1,
                 xtype: 'button',
                 action: 'tab_itemdesc',
+                itemId: 'tab_itemdesc',
                 text: '图文详情'
             }]
         }, {
@@ -143,10 +149,10 @@ Ext.define('WeiQuPai.view.Auction', {
         activeTab: null,
 
     },
-
     initialize: function() {
+        var view = Ext.create('WeiQuPai.view.AuctionTip');
+        view.show();
         this.callParent(arguments);
-
         this.shareLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer');
         this.down('#item_title').on('tap', this.bindEvent, this, {
             element: 'element'
@@ -155,14 +161,14 @@ Ext.define('WeiQuPai.view.Auction', {
         this.initTab();
 
         //销毁的时候结束定时器
-        this.on('destroy', this.onDestroy);
+        this.on('destroy', this.onDestroy);;
     },
 
     initTab: function() {
         var btns = this.query('#tabbar button');
         var me = this;
         for (var i = 0; i < btns.length; i++) {
-            var xtype = btns[i].action.substr(4);
+            var xtype = btns[i].getItemId().substr(4);
             btns[i].tabView = this.down(xtype);
             btns[i].on('tap', function() {
                 var tab = me.getActiveTab();

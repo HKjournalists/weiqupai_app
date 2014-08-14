@@ -27,17 +27,20 @@ Ext.define('WeiQuPai.view.Notice', {
                 xtype: 'button',
                 text: '今天',
                 cls: 'x-button-active',
-                action: 'tab_noticetoday'
+                action: 'tab_noticetoday',
+                itemId: 'tab_noticetoday'
             }, {
                 flex: 1,
                 xtype: 'button',
                 action: 'tab_noticetomorrow',
+                itemId: 'tab_noticetomorrow',
                 text: '明天'
             }, {
                 flex: 1,
                 xtype: 'button',
                 text: '后天',
-                action: 'tab_noticeafter'
+                action: 'tab_noticeafter',
+                itemId: 'tab_noticeafter'
             }]
 
         }, {
@@ -57,19 +60,13 @@ Ext.define('WeiQuPai.view.Notice', {
     initialize: function() {
         this.callParent(arguments);
         this.initTab();
-        // this.down('#personmodel').on('tap', this.bindEvent, this, {
-        //     element: 'element'
-        // });
-        // this.on('painted', function() {
-        //     this.tabPosition = this.down('#tabber').element.getY() + 40;
-        // });
     },
 
     initTab: function() {
         var btns = this.query('#tabber button');
         var me = this;
         for (var i = 0; i < btns.length; i++) {
-            var xtype = btns[i].action.substr(4);
+            var xtype = btns[i].getItemId().substr(4);
             btns[i].tabView = this.down(xtype);
             btns[i].on('tap', function() {
                 if (me.activeTab == this) return;

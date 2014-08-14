@@ -7,7 +7,9 @@ Ext.define('WeiQuPai.view.StartupScreen', {
         fullscreen: true,
         hidden: true,
         hideAnimation: 'fadeOut',
-        style: 'background:#e4eee6;z-index:1'
+        direction: 'hbox',
+        indicator: false,
+        style: 'background:#fffffa;z-index:1'
     },
 
     initialize: function() {
@@ -33,6 +35,8 @@ Ext.define('WeiQuPai.view.StartupScreen', {
         //最后一张图点击消失
         if (this.getActiveIndex() == this.getMaxItemIndex()) {
             Ext.Viewport.setActiveItem('main');
+            var maintip = Ext.create('WeiQuPai.view.MainTip');
+            maintip.show();
             //this.hide();
         }
     }

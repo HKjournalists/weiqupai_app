@@ -2,7 +2,7 @@ Ext.define('WeiQuPai.view.Today', {
     extend: 'Ext.DataView',
     xtype: 'today',
     requires: ['WeiQuPai.view.Banner', 'WeiQuPai.view.Auction', 'WeiQuPai.view.SpecialSale',
-        'WeiQuPai.view.Discount', 'WeiQuPai.view.YiPai'
+        'WeiQuPai.view.Discount', 'WeiQuPai.view.YiPai', 'WeiQuPai.view.AuctionTip'
     ],
     config: {
         loadingText: null,
@@ -90,10 +90,10 @@ Ext.define('WeiQuPai.view.Today', {
         }, {
             xtype: 'banner',
             scrollDock: 'top',
-        },  
-        { xtype:'container',
-            baseCls:'hot'
-        },{
+        }, {
+            xtype: 'container',
+            baseCls: 'hot'
+        }, {
             xtype: 'container',
             scrollDock: 'top',
             layout: 'hbox',
@@ -110,8 +110,7 @@ Ext.define('WeiQuPai.view.Today', {
                 action: 'yipai',
                 flex: 1
             }]
-        },
-          {
+        }, {
             xtype: 'container',
             scrollDock: 'top',
             layout: 'hbox',
@@ -159,12 +158,14 @@ Ext.define('WeiQuPai.view.Today', {
     todayData: null,
 
     initialize: function() {
+        //this.AuctionTip = WeiQuPai.Util.createOverlay('WeiQuPai.view.AuctionTip');
         this.callParent(arguments);
         this.loadData();
         this.on('activate', this.onActivate, this);
         this.on('hide', this.onHide, this);
         this.on('itemtap', this.bindEvent, this);
         this.down('#specialList').on('tap', function(e) {
+            Ext.Msg.alert("2");
             var idx = Ext.get(e.target).findParent('.list-product').getAttribute('data-idx') - 1;
             var view = Ext.create('WeiQuPai.view.SpecialSale', {
                 param: this.todayData.special[idx]
@@ -174,6 +175,7 @@ Ext.define('WeiQuPai.view.Today', {
             element: 'element',
             delegate: '.list-product'
         });
+
     },
 
     bindEvent: function(list, index, dataItem, record, e) {

@@ -76,6 +76,6 @@ if [ "$BUILD_TYPE" == "all" ] || [ "$BUILD_TYPE" == "web" ];then
 fi
 
 #clean the temp file
-rm -rf ../build/{temp,native,native-package-mobile}
+#rm -rf ../build/{temp,native,native-package-mobile}
 #restore the working copy Config.js
 mv app/Config.js.bak app/Config.js

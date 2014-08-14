@@ -38,7 +38,26 @@ Ext.define("WeiQuPai.Util", {
         });
         this.getModal().setHidden(true);
     },
+    slideLeft: function() {
+        this.element.show();
+        Ext.Anim.run(this.element, 'slide', {
+            direction: 'left',
+            out: false
+        });
+        this.getModal().setHidden(false);
+    },
 
+    slideRight: function() {
+        Ext.Anim.run(this.element, 'slide', {
+            direction: 'right',
+            out: true,
+            autoClear: false,
+            after: function(el) {
+                el.hide();
+            }
+        });
+        this.getModal().setHidden(true);
+    },
 
     //获取一个全局view,不存在则创建
     getGlobalView: function(com) {
@@ -226,7 +245,7 @@ Ext.define("WeiQuPai.Util", {
     //生成一个展现提示信息的容器
     msgbox: function(html, cfg) {
         var config = {
-           // cls: 'w-empty',
+            // cls: 'w-empty',
             cls: 'empty',
             html: html,
             itemId: 'msgbox',

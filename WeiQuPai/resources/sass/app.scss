@@ -1263,10 +1263,13 @@ html body
    }
    .mylike .myProduct
    {
-    width:30%; 
-    margin:5px;
-    float:left;
-    text-align:center;
+    float: left;
+    background-size: contain;
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+    border: 1px solid #efefef;
+    margin: 8px 3px;
    }
    .mylike .myProduct .img
    {
@@ -2918,3 +2921,90 @@ html body
   height:107px;
   margin:100px auto;
 }
+
+
+
+//tip提示层
+.dialog{
+  position:fixed;
+  left:0;;
+  top:0;
+  width:100%;
+  height:100%;
+  background:#000;
+  opacity:0.5;
+  z-index:111;
+  bottom:0;
+  right:0;
+}
+.dialog_tip1{
+  position:absolute;
+  top: 210px;
+  background: url("../images/detail_tip1.png") no-repeat;
+  background-size: 100% 196px;
+  height: 196px;
+  width: 100%;
+}
+.dialog_tip2{
+  position:absolute;
+  bottom: 0px;
+  background: url("../images/detail_tip2.png") no-repeat;
+  background-size: 100% 237px;
+  height: 237px;
+  width: 100%;
+}
+.dialog_tip3{
+  position:absolute;
+  top: 230px;
+  background: url("../images/notice_tip.png") no-repeat;
+  background-size: 100% 186px;
+  height: 186px;
+  width: 100%;
+}
+.dialog_tip_main{
+  position:absolute;
+  left:0px;
+  top: -13px;
+  background: url("../images/main_tips.png") no-repeat;
+  background-size: 100% 113px;
+  height: 113px;
+  width: 100%;
+}
+//tips提示多了一个遮罩层
+.x-trans{
+  background:transparent;
+}
+//精彩预告详情也提醒
+.noticetip{
+  float:right;
+  width:50%;
+}
+.noticetip .notice_btn1{
+  background:#ffc600;
+  background-image:url(../images/notice_btn1.png);
+  background-size:14px 15px;
+  background-repeat:no-repeat;
+  background-position: 3px 4px;
+  width: 50%;
+  float: left;
+  color: #fff;
+  border: 0px;
+  padding: 4px;
+  text-indent: 20px;
+}
+
+.noticetip .notice_btn2{
+  background:#e76049;
+  background-image:url(../images/notice_btn1.png);
+  background-repeat:no-repeat;
+  background-size:14px 15px;
+  background-position: 3px 4px;
+  width: 50%;
+  float: left;
+  color: #fff;
+  border: 0px;
+  padding: 4px;
+  text-indent: 20px;
+}
+
+

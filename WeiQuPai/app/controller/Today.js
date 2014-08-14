@@ -86,5 +86,9 @@ Ext.define('WeiQuPai.controller.Today', {
 
     showDetail: function(list, index, dataItem, record, e) {
         WeiQuPai.Util.goItemView(record.get('item_id'));
+
+        //this.getPageView().AuctionTip.show();
+        //view.show();
+
     }
 });
