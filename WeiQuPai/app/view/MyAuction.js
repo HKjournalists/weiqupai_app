@@ -88,15 +88,35 @@ Ext.define('WeiQuPai.view.MyAuction', {
 
         this.loadData();
 
+        this.on('activate', this.onActivate, this);
+
         this.onBefore('itemtap', function(list, index, dataItem, record, e) {
             if (e.target.tagName.toLowerCase() == 'input') {
                 this.fireEvent('order_item', list, index, dataItem, record, e);
                 return false;
             }
+            if (Ext.get(e.target).findParent('.order_dis')) {
+                this.fireEvent('itemdetail', list, index, dataItem, record, e);
+                return false;
+            }
         }, this);
     },
 
+    onActivate: function() {
+        var msgType = [WeiQuPai.Notify.MSG_AUCTION_FINISH, WeiQuPai.Notify.MSG_AUCTION_RESERVE_PRICE,
+            WeiQuPai.Notify.MSG_USER_AUCTION_HELP
+        ];
+        //有新消息才刷新
+        if (WeiQuPai.Notify.hasNotify(msgType)) {
+            this.loadData();
+            WeiQuPai.Notify.clearNotify(msgType);
+        }
+    },
+
     loadData: function() {
+        if (this.getStore().isLoading()) {
+            return false;
+        }
         var user = WeiQuPai.Cache.get('currentUser');
         if (!user) {
             return false;
@@ -122,25 +142,6 @@ Ext.define('WeiQuPai.view.MyAuction', {
                 return false;
             }
             //通知标红点
-            WeiQuPai.Notify.notify([WeiQuPai.Notify.MSG_NEW_ORDER, WeiQuPai.Notify.MSG_ORDER_SHIP]);
         }, this);
-    },
-
-    setBadge: function(orderId) {
-        var item = this.getItemAt(this.getStore().indexOfId(orderId));
-        if (!item) return;
-        var badgeEl = item.element.down('.x-badge');
-        badgeEl.addCls('w-badge-mdot');
-        badgeEl.parent().addCls('x-hasbadge');
-        badgeEl.show();
-    },
-
-    clearBadge: function(orderId) {
-        var item = this.getItemAt(this.getStore().indexOfId(orderId));
-        if (!item) return;
-        var badgeEl = item.element.down('.x-badge');
-        badgeEl.removeCls('w-badge-mdot');
-        badgeEl.parent().removeCls('x-hasbadge');
-        badgeEl.hide();
-    },
+    }
 });

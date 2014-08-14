@@ -20,12 +20,7 @@ Ext.define('WeiQuPai.view.MyProp', {
         items: [{
             xtype: 'vtitlebar',
             title: '我的道具',
-            docked: 'top',
-            items: [{
-                xtype: 'button',
-                baseCls: 'user',
-                action: 'ucenter'
-            }]
+            docked: 'top'
         }, {
             xtype: 'dataview',
             store: 'MyProp',
@@ -75,6 +70,19 @@ Ext.define('WeiQuPai.view.MyProp', {
     },
 
     initialize: function() {
+        var btn = {
+            xtype: 'button'
+        };
+        if (this.config.selectMode) {
+            btn.baseCls = 'arrow_left',
+            btn.action = 'back';
+        } else {
+            btn.baseCls = 'user';
+            btn.action = 'ucenter';
+        }
+        this.down('vtitlebar').add(btn);
+        this.down('vtitlebar').bindEvent();
+
         this.loadData();
         this.down('button[action=exchangeProp]').on('tap', this.goExchange, this);
     },

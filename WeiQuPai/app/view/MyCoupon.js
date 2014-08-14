@@ -88,6 +88,16 @@ Ext.define('WeiQuPai.view.MyCoupon', {
         this.down('button[action=exchangeCoupon]').on('tap', this.goExchange, this);
 
         this.loadData();
+        this.on('activate', this.onActivate, this);
+    },
+
+    onActivate: function() {
+        var msgType = [WeiQuPai.Notify.MSG_NEW_COUPON];
+        //有新消息才刷新
+        if (WeiQuPai.Notify.hasNotify(msgType)) {
+            this.loadData();
+            WeiQuPai.Notify.clearNotify(msgType);
+        }
     },
 
     goExchange: function() {
@@ -107,6 +117,9 @@ Ext.define('WeiQuPai.view.MyCoupon', {
     },
 
     loadData: function(callback) {
+        if (this.getStore().isLoading()) {
+            return false;
+        }
         var user = WeiQuPai.Cache.get('currentUser');
         var store = this.down('dataview').getStore();
         store.getProxy().setExtraParam('token', user.token);

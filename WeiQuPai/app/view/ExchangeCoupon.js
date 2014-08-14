@@ -44,8 +44,6 @@ Ext.define('WeiQuPai.view.ExchangeCoupon', {
     initialize: function() {
         this.callParent(arguments);
         this.loadData();
-        var user = WeiQuPai.Cache.get('currentUser');
-        this.down('button').setText(user.score);
         this.exchangeLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ExchangeLayer');
         this.exchangeLayer.setCallback(this.exchange);
         this.exchangeLayer.setScope(this);
@@ -53,6 +51,12 @@ Ext.define('WeiQuPai.view.ExchangeCoupon', {
     },
 
     loadData: function(callback) {
+        var me = this;
+        var user = WeiQuPai.Cache.get('currentUser');
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/myScore&token=' + user.token;
+        WeiQuPai.Util.get(url, function(rsp) {
+            me.down('button').setText(rsp.score);
+        });
         this.getStore().load(function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');

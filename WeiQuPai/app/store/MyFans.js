@@ -4,6 +4,7 @@ Ext.define('WeiQuPai.store.MyFans', {
         storeId: 'MyFans',
         autoLoad: false,
         fields: ['id', 'nick', 'avatar'],
+        pageSize: 100,
         proxy: {
             type: 'ajax',
             url: WeiQuPai.Config.host + '/?r=appv2/follow/fans',

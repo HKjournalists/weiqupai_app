@@ -111,7 +111,7 @@
 .w-disclosure-item{
 	background:#fff;
 	margin-top:10px;
-	padding:10px;
+	padding:12px 10px;
 }
 .w-disclosure-group{
 	margin-top:10px;
@@ -249,4 +249,29 @@
 }
 .w-button.x-item-disabled{
 	color:#ccc;
+}
+
+.w-badge{
+	width:6px;
+	height:6px;
+	border-radius: 3px;
+	border:none;
+	background:#ed462f;
+	overflow:hidden;
+	font-size:0;
+	min-width:6px;
+	display: inline-block;
+	vertical-align: top;
+}
+.w-hasbadge .x-badge{
+	width:6px;
+	height:6px;
+	border-radius: 3px;
+	border:none;
+	background:#ed462f;
+	overflow:hidden;
+	font-size:0;
+	min-width:6px;
+	top:16px;
+	left:24px;
 }

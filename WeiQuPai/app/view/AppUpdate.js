@@ -2,6 +2,7 @@ Ext.define('WeiQuPai.view.AppUpdate', {
     extend: 'Ext.Container',
     xtype: 'appupdate',
     config: {
+        cls: 'bg_ef',
         scrollable: true,
         items: [{
             xtype: 'vtitlebar',
@@ -15,7 +16,8 @@ Ext.define('WeiQuPai.view.AppUpdate', {
         }, {
             xtype: 'container',
             itemId: 'releaseLog',
-            cls: 'w-content'
+            cls: 'w-content',
+            flex: 1
         }, {
             xtype: 'button',
             text: '前去下载最新版本',

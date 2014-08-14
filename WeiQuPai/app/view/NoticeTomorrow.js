@@ -31,7 +31,7 @@ Ext.define('WeiQuPai.view.NoticeTomorrow', {
         });
     },
 
-    loadData: function(uid, callback) {
+    loadData: function(callback) {
         var person = this.down('#noticet');
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/auctionNotice&day=' + 2;
         var me = this;
@@ -42,10 +42,10 @@ Ext.define('WeiQuPai.view.NoticeTomorrow', {
     },
 
     bindEvent: function(e) {
-         if (e.target.className == 'myProduct') {
-                var toUid = e.target.getAttribute('itemid');
-                this.fireEvent('cardtap', this, e.target.getAttribute('itemid'));
-                return false;
+        if (e.target.className == 'myProduct') {
+            var toUid = e.target.getAttribute('itemid');
+            this.fireEvent('cardtap', this, e.target.getAttribute('itemid'));
+            return false;
         }
     }
 })

@@ -19,7 +19,7 @@ Ext.define('WeiQuPai.view.Sidebar', {
                 id: 'personal',
                 tpl: new Ext.XTemplate(
                     '<div class="title">',
-                    '<img src="{[WeiQuPai.Util.getAvatar(values.avatar, 100)]}" width="50"/>',
+                    '<img src="{[WeiQuPai.Util.getAvatar(values.avatar, 140)]}" width="50"/>',
                     '<span>{nick:htmlEncode}</span>',
                     '<div class="return"></div>',
                     '<div style="clear:both"></div>',
@@ -196,28 +196,14 @@ Ext.define('WeiQuPai.view.Sidebar', {
     },
 
     setBadge: function(tab) {
-        var tabList = ['today', 'myauction', 'circle', 'my'];
-        var idx = tabList.indexOf(tab);
-        var tab = this.query('tab')[idx];
-        tab.setBadgeCls('x-badge w-badge-sdot');
-        tab.element.addCls('x-hasbadge');
-        tab.badgeElement.show();
-    },
-
-    setBadgeText: function(tab, text) {
-        var tabList = ['today', 'myauction', 'circle', 'my'];
-        var idx = tabList.indexOf(tab);
-        var tab = this.query('tab')[idx];
-        tab.setBadgeCls('x-badge');
-        tab.setBadgeText(text);
+        var tabBtn = this.down('#' + tab);
+        tabBtn.addCls('w-hasbadge');
+        tabBtn.element.down('.x-badge').show();
     },
 
     clearBadge: function(tab) {
-        var tabList = ['today', 'myauction', 'circle', 'my'];
-        var idx = tabList.indexOf(tab);
-        var tab = this.query('tab')[idx];
-        tab.setBadgeCls('x-badge');
-        tab.element.removeCls('x-hasbadge');
-        tab.badgeElement.hide();
+        var tabBtn = this.down('#' + tab);
+        tabBtn.removeCls('w-hasbadge');
+        tabBtn.element.down('.x-badge').hide();
     }
 });

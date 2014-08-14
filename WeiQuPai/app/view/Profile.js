@@ -104,8 +104,8 @@ Ext.define('WeiQuPai.view.Profile', {
     },
 
     setAvatar: function(url) {
-        var absurl = WeiQuPai.Util.getAvatar(url, '100');
-        img = '<img class="avatar100"' + (url ? ' src="' + absurl + '"' : '') + '/>';
+        var absurl = WeiQuPai.Util.getAvatar(url, '140');
+        var img = '<img class="avatar100" src="' + absurl + '"/>';
         this.down('#avatar').setContent(img);
         WeiQuPai.Util.updateProfile({
             avatar: url

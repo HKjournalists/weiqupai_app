@@ -11,7 +11,7 @@ Ext.define('WeiQuPai.view.NoticeAfter', {
             xtype: 'container',
             id: 'noticeafter',
             tpl: new Ext.XTemplate(
-                 '<tpl for=".">',
+                '<tpl for=".">',
                 '<div>',
                 '<div class="yugao"><div class="title">{time}</div></div>',
                 '<tpl for="items">',
@@ -31,7 +31,7 @@ Ext.define('WeiQuPai.view.NoticeAfter', {
         });
     },
 
-    loadData: function(uid, callback) {
+    loadData: function(callback) {
         var person = this.down('#noticeafter');
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/auctionNotice&day=' + 3;
         var me = this;
@@ -42,10 +42,10 @@ Ext.define('WeiQuPai.view.NoticeAfter', {
     },
 
     bindEvent: function(e) {
-         if (e.target.className == 'myProduct') {
-                var toUid = e.target.getAttribute('itemid');
-                this.fireEvent('cardtap', this, e.target.getAttribute('itemid'));
-                return false;
+        if (e.target.className == 'myProduct') {
+            var toUid = e.target.getAttribute('itemid');
+            this.fireEvent('cardtap', this, e.target.getAttribute('itemid'));
+            return false;
         }
     }
 })

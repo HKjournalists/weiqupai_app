@@ -1,9 +1,9 @@
 Ext.define("WeiQuPai.Config", {
 	singleton: true,
     //保存基础url
-    host: 'http://localhost',
-    apiUrl: 'http://localhost',
-    updateUrl: 'http://localhost/update',
+    host: 'http://tt.vqupai.com',
+    apiUrl: 'http://tt.vqupai.com',
+    updateUrl: 'http://tt.vqupai.com/update',
 
     //app版本
     version:"1.5",

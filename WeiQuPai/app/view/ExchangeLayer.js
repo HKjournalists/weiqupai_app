@@ -19,18 +19,18 @@ Ext.define('WeiQuPai.view.ExchangeLayer', {
             },
             items: [{
                 xtype: 'button',
-                action: 'add',
-                baseCls: 'exchange_btn_add',
-                text: '+',
+                text: '-',
+                action: 'minus',
+                baseCls: 'exchange_btn_minus',
             }, {
                 xtype: 'container',
                 itemId: 'num',
                 cls: 'exchange_input',
             }, {
                 xtype: 'button',
-                text: '-',
-                action: 'minus',
-                baseCls: 'exchange_btn_minus',
+                action: 'add',
+                baseCls: 'exchange_btn_add',
+                text: '+',
             }]
         }, {
             xtype: 'button',

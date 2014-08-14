@@ -46,8 +46,6 @@ Ext.define('WeiQuPai.view.ExchangeProp', {
     initialize: function() {
         this.callParent(arguments);
         this.loadData();
-        var user = WeiQuPai.Cache.get('currentUser');
-        this.down('button').setText(user.score);
         this.exchangeLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ExchangeLayer');
         this.exchangeLayer.setCallback(this.exchange);
         this.exchangeLayer.setScope(this);
@@ -55,6 +53,12 @@ Ext.define('WeiQuPai.view.ExchangeProp', {
     },
 
     loadData: function(callback) {
+        var me = this;
+        var user = WeiQuPai.Cache.get('currentUser');
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/myScore&token=' + user.token;
+        WeiQuPai.Util.get(url, function(rsp) {
+            me.down('button').setText(rsp.score);
+        });
         this.getStore().load(function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');
@@ -77,13 +81,14 @@ Ext.define('WeiQuPai.view.ExchangeProp', {
             prop_id: prop_id,
             num: num
         };
-        WeiQuPai.Util.mask();
         WeiQuPai.Util.post(url, data, function(rsp) {
             WeiQuPai.Util.updateUserCache('score', rsp.score);
             me.down('button').setText(rsp.score);
             WeiQuPai.Util.toast('兑换成功');
             me.exchangeLayer.hide();
             me.fireEvent('exchanged');
+        }, {
+            mask: true
         });
     }
 });

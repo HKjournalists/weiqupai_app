@@ -16,11 +16,13 @@ Ext.define('WeiQuPai.view.MyFollow', {
             releaseText: '释放立即刷新',
             loadedText: '下拉刷新',
             scrollerAutoRefresh: true
+        }, {
+            type: 'wlistpaging',
         }],
         itemTpl: new Ext.XTemplate(
             '<div class="myfollow" >',
             '<div class="img">',
-            '<img src="{[WeiQuPai.Util.getAvatar(values.avatar, 100)]}" width="40">',
+            '<img src="{[WeiQuPai.Util.getAvatar(values.avatar, 140)]}" width="40">',
             '</div>',
             '<div class="name">{nick}</div>',
             '</div>'

@@ -84,9 +84,6 @@ Ext.define('WeiQuPai.view.MyOrderDetail', {
 
     initialize: function() {
         var user = WeiQuPai.Cache.get('currentUser');
-        //清除红点
-        WeiQuPai.Notify.newOrderClear(this.getRecord().get('id'));
-        WeiQuPai.Notify.orderShipClear(this.getRecord().get('id'));
 
         this.down('#orderInfo').on('tap', function() {
             this.fireEvent('view_item');

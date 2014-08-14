@@ -15,7 +15,7 @@ Ext.define('WeiQuPai.view.CommentList', {
             '<div class="list" data-id="{id}">',
             '<div class="one">',
             '<div class="img">',
-            '<img src="{[WeiQuPai.Util.getAvatar(values.user.avatar, 80)]}" width="40">',
+            '<img src="{[WeiQuPai.Util.getAvatar(values.user.avatar, 140)]}" width="40">',
             '</div>',
             '<div class="name">{user.nick:htmlEncode}</div>',
             '</div>',
@@ -70,30 +70,39 @@ Ext.define('WeiQuPai.view.CommentList', {
 
     handleItemTap: function() {
         var me = this;
-        this.element.dom.addEventListener('click', function(e) {
-            var row = Ext.fly(e.target).findParent('.list');
-            if (!row) return;
-            var id = row.getAttribute('data-id');
-            var index = me.getStore().indexOfId(id);
-            var record = me.getStore().getAt(index);
-            if (e.target.tagName.toLowerCase() == 'img') {
-                me.fireEvent('avatartap', index, record);
-                return false;
-            }
-            if (e.target.className == 'like') {
-                me.fireEvent('zantap', index, record);
-                return false;
-            }
-            if (e.target.className == 'selflike') {
-                me.fireEvent('cancelzantap', index, record);
-                return false;
-            }
-            if (e.target.className == 'delete-post-btn') {
-                me.fireEvent('deletepost', me, index, record);
-                return false;
-            }
-            me.fireEvent('commenttap', index, record);
-        });
+        if (Ext.os.is.android) {
+            this.element.dom.addEventListener('click', this.bindEvent);
+        } else {
+            this.on('itemtap', function(list, index, dataItem, record, e) {
+                this.bindEvent(e);
+            });
+        }
+    },
+
+    bindEvent: function(e) {
+        var me = this;
+        var row = Ext.fly(e.target).findParent('.list');
+        if (!row) return;
+        var id = row.getAttribute('data-id');
+        var index = me.getStore().indexOfId(id);
+        var record = me.getStore().getAt(index);
+        if (e.target.tagName.toLowerCase() == 'img') {
+            me.fireEvent('avatartap', index, record);
+            return false;
+        }
+        if (e.target.className == 'like') {
+            me.fireEvent('zantap', index, record);
+            return false;
+        }
+        if (e.target.className == 'selflike') {
+            me.fireEvent('cancelzantap', index, record);
+            return false;
+        }
+        if (e.target.className == 'delete-post-btn') {
+            me.fireEvent('deletepost', me, index, record);
+            return false;
+        }
+        me.fireEvent('commenttap', index, record);
     },
 
     applyItemId: function(itemId) {

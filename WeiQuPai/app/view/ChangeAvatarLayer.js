@@ -37,7 +37,7 @@ Ext.define('WeiQuPai.view.ChangeAvatarLayer', {
     },
 
     fireMyEvent: function(btn) {
-        this.fireEvent(btn.action);
+        this.fireEvent(btn.config.action);
         this.hide();
     }
 });

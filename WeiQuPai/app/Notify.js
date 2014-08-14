@@ -19,6 +19,18 @@ Ext.define('WeiQuPai.Notify', {
     MSG_NEW_ORDER: 11,
     MSG_ORDER_SHIP: 12,
     MSG_SPLASH: 13,
+    //用户关注
+    MSG_FOLLOW: 14,
+    //拍卖开始
+    MSG_AUCTION_START: 15,
+    //拍卖结束
+    MSG_AUCTION_FINISH: 16,
+    //拍卖到达底价
+    MSG_AUCTION_RESERVE_PRICE: 17,
+    //拍卖变价
+    MSG_AUCTION_CHANGE_PRICE: 18,
+    //有人帮拍
+    MSG_USER_AUCTION_HELP: 19,
 
     //保存消息
     msg: {},
@@ -84,156 +96,65 @@ Ext.define('WeiQuPai.Notify', {
     //清除红点用的消息处理
     clearNotifier: {},
 
-    frNotify: function(msg) {
-        Ext.Viewport.down('maincard').setBadge('my');
-        this.setButtonBadge(Ext.Viewport.down('my button[action=friend]'));
-        var nf = Ext.Viewport.down('disclosureitem[itemId=newFriend]');
-        nf && nf.setBadge();
-    },
-
-    frClear: function() {
-        Ext.Viewport.down('maincard').clearBadge('my');
-        this.clearButtonBadge(Ext.Viewport.down('my button[action=friend]'));
-        var nf = Ext.Viewport.down('disclosureitem[itemId=newFriend]');
-        nf && nf.clearBadge();
-        //清除对应的消息
-        this.msg[this.MSG_FRIEND_REQUEST] = null;
-    },
-
     msgNotify: function(msg) {
-        Ext.Viewport.down('maincard').setBadge('my');
+        WeiQuPai.sidebar.setBadge('mymessage');
     },
 
     msgClear: function() {
-        Ext.Viewport.down('maincard').clearBadge('my');
+        WeiQuPai.sidebar.clearBadge('mymessage');
         //清除对应的消息
         this.msg[this.MSG_MESSAGE] = null;
     },
 
     circleNotify: function(msg) {
-        //如果当前是拍圈就剧新
-        var activeView = Ext.Viewport.down('main').getActiveItem();
-        var maincard = Ext.Viewport.down('maincard');
-        var circle = Ext.Viewport.down('circle');
-        if (activeView == maincard && maincard.getActiveItem() == circle) {
-            circle.loadData();
-        } else {
-            Ext.Viewport.down('maincard').setBadge('circle');
-        }
+        WeiQuPai.sidebar.setBadge('circle');
     },
 
     circleClear: function() {
-        Ext.Viewport.down('maincard').clearBadge('circle');
+        WeiQuPai.sidebar.clearBadge('circle');
         //清除对应的消息
         this.msg[this.MSG_CIRCLE] = null;
     },
 
-    circleReplyNotify: function(msg) {
-        this.circleNotify(msg);
-    },
-
-    circleReplyClear: function() {
-        this.circleClear();
-        //清除对应的消息
-        this.msg[this.MSG_CIRCLE_REPLY] = null;
-    },
-
-    circleZanNotify: function(msg) {
-        this.circleNotify(msg);
-    },
-
-    circleZanClear: function() {
-        this.circleClear();
-        //清除对应的消息
-        this.msg[this.MSG_CIRCLE_ZAN] = null;
-    },
-
     appUpdateNotify: function(msg) {
-        Ext.Viewport.down('maincard').setBadge('my');
-        this.setButtonBadge(Ext.Viewport.down('my button[action=setting]'));
-        var nf = Ext.Viewport.down('disclosureitem[itemId=update]');
-        nf && nf.setBadge();
+        WeiQuPai.sidebar.setBadge('setting');
     },
 
     appUpdateClear: function() {
-        Ext.Viewport.down('maincard').clearBadge('my');
-        this.clearButtonBadge(Ext.Viewport.down('my button[action=setting]'));
-        Ext.Viewport.down('disclosureitem[itemId=update]').clearBadge();
+        WeiQuPai.sidebar.clearBadge('setting');
         //清除对应的消息
         this.msg[this.MSG_APP_UPDATE] = null;
     },
 
     //新拍券
     newCouponNotify: function() {
-        Ext.Viewport.down('maincard').setBadge('my');
-        this.setButtonBadge(Ext.Viewport.down('my button[action=coupon]'));
+        WeiQuPai.sidebar.setBadge('mycoupon');
     },
 
     newCouponClear: function() {
-        Ext.Viewport.down('maincard').clearBadge('my');
-        this.clearButtonBadge(Ext.Viewport.down('my button[action=coupon]'));
+        WeiQuPai.sidebar.clearBadge('mycoupon');
         //清除对应的消息
         this.msg[this.MSG_NEW_COUPON] = null;
     },
 
     //新道具
     newPropNotify: function() {
-        Ext.Viewport.down('maincard').setBadge('my');
-        this.setButtonBadge(Ext.Viewport.down('my button[action=prop]'));
+        WeiQuPai.sidebar.setBadge('myprop');
     },
 
     newPropClear: function() {
-        Ext.Viewport.down('maincard').clearBadge('my');
-        this.clearButtonBadge(Ext.Viewport.down('my button[action=prop]'));
+        WeiQuPai.sidebar.clearBadge('myprop');
         this.msg[this.MSG_NEW_PROP] = null;
     },
 
     //新订单
     newOrderNotify: function() {
-        var msg = this.msg[this.MSG_NEW_ORDER];
-        if (!msg || msg.length == 0) return;
-        Ext.Viewport.down('maincard').setBadge('myauction');
-        //给每个订单标红点
-        var myauction = Ext.Viewport.down('myauction');
-        for (var i = 0; i < msg.length; i++) {
-            myauction.setBadge(msg[i]);
-        }
+        WeiQuPai.sidebar.setBadge('myorder');
     },
 
     newOrderClear: function(id) {
-        var msg = this.msg[this.MSG_NEW_ORDER];
-        if (!msg || msg.length == 0) return;
-        Ext.Viewport.down('maincard').clearBadge('myauction');
-        //给某个订单清除红点
-        var myauction = Ext.Viewport.down('myauction');
-        myauction.clearBadge(id);
-        var idx = msg.indexOf(id);
-        idx >= 0 && msg.splice(idx, 1);
-    },
-
-    //订单已发货
-    orderShipNotify: function() {
-        var msg = this.msg[this.MSG_ORDER_SHIP];
-        if (!msg || msg.length == 0) return;
-
-        Ext.Viewport.down('maincard').setBadge('myauction');
-        //给每个订单标红点
-        var myauction = Ext.Viewport.down('myauction');
-        for (var i = 0; i < msg.length; i++) {
-            myauction.setBadge(msg[i]);
-        }
-    },
-
-    orderShipClear: function(id) {
-        var msg = this.msg[this.MSG_ORDER_SHIP];
-        if (!msg || msg.length == 0) return;
-
-        Ext.Viewport.down('maincard').clearBadge('myauction');
-        //给某个订单清除红点
-        var myauction = Ext.Viewport.down('myauction');
-        myauction.clearBadge(id);
-        var idx = msg.indexOf(id);
-        idx >= 0 && msg.splice(idx, 1);
+        WeiQuPai.sidebar.clearBadge('myorder');
+        this.msg[this.MSG_NEW_ORDER] = null;
     },
 
     //显示闪屏
@@ -244,19 +165,29 @@ Ext.define('WeiQuPai.Notify', {
     //闪屏不需要清除红点
     flashClear: function() {},
 
-    setButtonBadge: function(btn) {
-        btn.badgeElement.setStyle('display', 'block');
-        btn.setBadgeCls('x-badge w-badge-mdot');
-        btn.element.addCls('x-hasbadge');
+    auctionHelpNotify: function() {
+        WeiQuPai.sidebar.setBadge('myauction');
     },
-
-    clearButtonBadge: function(btn) {
-        btn.badgeElement.setStyle('display', 'none');
-        btn.element.removeCls('x-hasbadge');
-    }
+    auctionHelpClear: function() {
+        WeiQuPai.sidebar.clearBadge('myauction');
+        this.msg[this.MSG_USER_AUCTION_HELP] = null;
+    },
+    auctionFinishNotify: function() {
+        WeiQuPai.sidebar.setBadge('myauction');
+    },
+    auctionFinishClear: function() {
+        WeiQuPai.sidebar.clearBadge('myauction');
+        this.msg[this.MSG_AUCTION_FINISH] = null;
+    },
+    auctionReservePriceNotify: function() {
+        WeiQuPai.sidebar.setBadge('myauction');
+    },
+    auctionReservePriceClear: function() {
+        WeiQuPai.sidebar.clearBadge('myauction');
+        this.msg[this.MSG_AUCTION_RESERVE_PRICE] = null;
+    },
 });
 
-WeiQuPai.Notify.notifier[WeiQuPai.Notify.MSG_FRIEND_REQUEST] = WeiQuPai.Notify.frNotify;
 WeiQuPai.Notify.notifier[WeiQuPai.Notify.MSG_MESSAGE] = WeiQuPai.Notify.msgNotify;
 WeiQuPai.Notify.notifier[WeiQuPai.Notify.MSG_CIRCLE] = WeiQuPai.Notify.circleNotify;
 WeiQuPai.Notify.notifier[WeiQuPai.Notify.MSG_CIRCLE_REPLY] = WeiQuPai.Notify.circleReplyNotify;
@@ -267,9 +198,11 @@ WeiQuPai.Notify.notifier[WeiQuPai.Notify.MSG_NEW_PROP] = WeiQuPai.Notify.newProp
 WeiQuPai.Notify.notifier[WeiQuPai.Notify.MSG_NEW_ORDER] = WeiQuPai.Notify.newOrderNotify;
 WeiQuPai.Notify.notifier[WeiQuPai.Notify.MSG_ORDER_SHIP] = WeiQuPai.Notify.orderShipNotify;
 WeiQuPai.Notify.notifier[WeiQuPai.Notify.MSG_SPLASH] = WeiQuPai.Notify.flashNotify;
+WeiQuPai.Notify.notifier[WeiQuPai.Notify.MSG_USER_AUCTION_HELP] = WeiQuPai.Notify.auctionHelpNotify;
+WeiQuPai.Notify.notifier[WeiQuPai.Notify.MSG_AUCTION_FINISH] = WeiQuPai.Notify.auctionFinishNotify;
+WeiQuPai.Notify.notifier[WeiQuPai.Notify.MSG_AUCTION_RESERVE_PRICE] = WeiQuPai.Notify.auctionReservePriceNotify;
 
 //取消红点的notifier
-WeiQuPai.Notify.clearNotifier[WeiQuPai.Notify.MSG_FRIEND_REQUEST] = WeiQuPai.Notify.frClear;
 WeiQuPai.Notify.clearNotifier[WeiQuPai.Notify.MSG_MESSAGE] = WeiQuPai.Notify.msgClear;
 WeiQuPai.Notify.clearNotifier[WeiQuPai.Notify.MSG_CIRCLE] = WeiQuPai.Notify.circleClear;
 WeiQuPai.Notify.clearNotifier[WeiQuPai.Notify.MSG_CIRCLE_REPLY] = WeiQuPai.Notify.circleReplyClear;
@@ -280,3 +213,6 @@ WeiQuPai.Notify.clearNotifier[WeiQuPai.Notify.MSG_NEW_PROP] = WeiQuPai.Notify.ne
 WeiQuPai.Notify.clearNotifier[WeiQuPai.Notify.MSG_NEW_ORDER] = WeiQuPai.Notify.newOrderClear;
 WeiQuPai.Notify.clearNotifier[WeiQuPai.Notify.MSG_ORDER_SHIP] = WeiQuPai.Notify.orderShipClear;
 WeiQuPai.Notify.clearNotifier[WeiQuPai.Notify.MSG_SPLASH] = WeiQuPai.Notify.flashClear;
+WeiQuPai.Notify.clearNotifier[WeiQuPai.Notify.MSG_USER_AUCTION_HELP] = WeiQuPai.Notify.auctionHelpClear;
+WeiQuPai.Notify.clearNotifier[WeiQuPai.Notify.MSG_AUCTION_FINISH] = WeiQuPai.Notify.auctionFinishClear;
+WeiQuPai.Notify.clearNotifier[WeiQuPai.Notify.MSG_AUCTION_RESERVE_PRICE] = WeiQuPai.Notify.auctionReservePriceClear;

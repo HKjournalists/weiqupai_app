@@ -83,6 +83,7 @@ Ext.define('WeiQuPai.view.Item', {
             xtype: 'container',
             layout: 'hbox',
             cls: 'log_btn',
+            style: 'position:relative;z-index:100',
             itemId: 'tabbar',
             items: [{
                 flex: 1,
@@ -90,13 +91,13 @@ Ext.define('WeiQuPai.view.Item', {
                 text: '商品参数',
                 action: 'tab_itemparam',
                 itemId: 'tab_itemparam',
-                cls: 'x-button-active'
             }, {
                 flex: 1,
                 xtype: 'button',
                 action: 'tab_commentlist',
                 itemId: 'tab_commentlist',
-                text: '大家评论'
+                text: '大家评论',
+                cls: 'x-button-active'
             }, {
                 flex: 1,
                 xtype: 'button',
@@ -105,13 +106,15 @@ Ext.define('WeiQuPai.view.Item', {
                 text: '图文详情'
             }]
         }, {
-            xtype: 'itemparam'
-        }, {
-            xtype: 'commentlist',
+            xtype: 'itemparam',
             hidden: true
+        }, {
+            xtype: 'commentlist'
         }, {
             xtype: 'itemdesc',
             hidden: true
+        }, {
+            xtype: 'bottombar'
         }],
 
         //当前激活的tab button
@@ -145,23 +148,28 @@ Ext.define('WeiQuPai.view.Item', {
                 this.addCls('x-button-active');
                 this.tabView.show();
                 me.setActiveTab(this);
+                setTimeout(function() {
+                    var scroller = me.getScrollable().getScroller();
+                    if (scroller.position.y > me.tabPosition) {
+                        scroller.scrollTo(null, me.tabPosition, true);
+                    }
+                }, 50);
             });
         }
-        this.setActiveTab(btns[0]);
+        this.setActiveTab(btns[1]);
 
         //tab的悬停效果
-        /*
+        this.on('painted', function() {
+            this.tabPosition = this.down('#tabbar').element.getY() - this.down('vtitlebar').element.getHeight();
+        });
         var scroller = this.getScrollable().getScroller();
-        scroller.addListener('scroll', function(scroler, x, y) {
+        scroller.addListener('scroll', function(scroller, x, y) {
             if (y >= this.tabPosition) {
-                this.down('#tabbar').setDocked('top');
+                this.down('#tabbar').translate(null, y - this.tabPosition, false);
             } else {
-                this.down('#tabbar').setDocked(null);
+                this.down('#tabbar').translate(null, 0, false);
             }
-
-
         }, this);
-*/
     },
 
     bindEvent: function(e) {

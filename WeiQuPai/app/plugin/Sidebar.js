@@ -48,8 +48,7 @@
 	 $mgd-sidebar-header-color-2: lighten(#CCC, 4%);
  */
 
-Ext.define('WeiQuPai.plugin.Sidebar',
-{
+Ext.define('WeiQuPai.plugin.Sidebar', {
     extend: 'Ext.Container',
     xtype: 'tabsidebar',
 
@@ -58,14 +57,12 @@ Ext.define('WeiQuPai.plugin.Sidebar',
         'Ext.Button' // make sure .x-button class is defined
     ],
 
-    config:
-    {
+    config: {
         /**
          * @cfg {Object || Boolean} indicator
          * if false, no idicator is shown, otherwise this defines the indicator
          */
-        indicator:
-        {
+        indicator: {
             itemId: 'mgd-tab-sidebar-button',
             /**
              * @cfg {String} text
@@ -154,8 +151,7 @@ Ext.define('WeiQuPai.plugin.Sidebar',
         moveActiveView: true
     },
 
-    cachedConfig:
-    {
+    cachedConfig: {
         /**
          * @cfg {String} state
          * keep track of the state of the content panel.
@@ -186,8 +182,7 @@ Ext.define('WeiQuPai.plugin.Sidebar',
          * @cfg defaults
          * defines the baseCls of all items
          */
-        defaults:
-        {
+        defaults: {
             //baseCls: 'mgd-tab-sidebar-menu-item'
         },
 
@@ -199,8 +194,7 @@ Ext.define('WeiQuPai.plugin.Sidebar',
         width: 0
     },
 
-    constructor: function(config)
-    {
+    constructor: function(config) {
         this.callParent(arguments);
     },
 
@@ -208,13 +202,11 @@ Ext.define('WeiQuPai.plugin.Sidebar',
      * Component initialization function.
      * @private
      */
-    initialize: function()
-    {
+    initialize: function() {
         /**
          * add the animation if not available
          */
-        if (!(Ext.aims || Ext.anims.tabsidebar))
-        {
+        if (!(Ext.aims || Ext.anims.tabsidebar)) {
             this.tabsidebarAnimation();
         }
 
@@ -227,12 +219,10 @@ Ext.define('WeiQuPai.plugin.Sidebar',
     },
 
     /* ------------------------------------- SIDE-MENU -------------------------------------- */
-    createSideMenu: function()
-    {
+    createSideMenu: function() {
         this.setHidden(true);
         // if the header and items are required
-        if (!Ext.isEmpty(this.getHeader()))
-        {
+        if (!Ext.isEmpty(this.getHeader())) {
             var header = {
                 xtype: 'container',
                 docked: 'top',
@@ -255,30 +245,21 @@ Ext.define('WeiQuPai.plugin.Sidebar',
      *     The width of the container Number for Percentage
      *     String as '50px'
      */
-    updateMenuWidth: function(width)
-    {
-        if (this.getWidth() !== 0)
-        {
+    updateMenuWidth: function(width) {
+        if (this.getWidth() !== 0) {
             var startWidth = this.getWidth();
             if (this.getState() === 'open')
                 this.toggle();
-            Ext.defer(function()
-            {
-                if (typeof width !== 'string')
-                {
+            Ext.defer(function() {
+                if (typeof width !== 'string') {
                     var dX = Ext.Viewport.element.dom.clientWidth,
                         dY = Ext.Viewport.element.dom.clientHeight;
 
                     width = (dX < dY ? dX : dY) / 100 * width;
-                }
-                else
-                {
-                    if (!width.substr(width.length - 2) === 'px')
-                    {
+                } else {
+                    if (!width.substr(width.length - 2) === 'px') {
                         Console.warn('Change width either as type Number for percentage or type String like "50px"')
-                    }
-                    else
-                    {
+                    } else {
                         width = parseInt(width.substr(0, width.length - 2));
                     }
                 }
@@ -294,10 +275,8 @@ Ext.define('WeiQuPai.plugin.Sidebar',
     /**
      * create the indicator
      */
-    createIndicator: function()
-    {
-        if (this.getIndicator() !== false)
-        {
+    createIndicator: function() {
+        if (this.getIndicator() !== false) {
             // Set the text on the button
             var button = this.getIndicator();
             button.xtype = 'button';
@@ -311,8 +290,7 @@ Ext.define('WeiQuPai.plugin.Sidebar',
         }
     },
 
-    orientationchange: function()
-    {
+    orientationchange: function() {
         this.config.sidebar.toggle();
     },
 
@@ -321,8 +299,7 @@ Ext.define('WeiQuPai.plugin.Sidebar',
      * @param {String} icon CSS class to add to the icon element.
      * @param {String} [align='left'] Options are: 'top', 'right', 'bottom', 'left' and 'center'
      */
-    updateIndicatorIcon: function(icon, align)
-    {
+    updateIndicatorIcon: function(icon, align) {
         align = align || 'left';
         this.getIndicator().setIconMask(true);
         this.getIndicator().setIconCls(icon);
@@ -331,86 +308,70 @@ Ext.define('WeiQuPai.plugin.Sidebar',
     /**
      * after initialization remove the icon of the indicator
      */
-    removeIndicatorIcon: function()
-    {
+    removeIndicatorIcon: function() {
         this.getIndicator().setIconCls(null);
     },
     /**
      * after initialization change the text of the indicator
      * @param text
      */
-    updateIndicatorText: function(text)
-    {
+    updateIndicatorText: function(text) {
         this.getIndicator().setText(text);
     },
     /**
      * after initialization change the cls of the indicator
      * @param cls
      */
-    updateIndicatorCls: function(cls)
-    {
+    updateIndicatorCls: function(cls) {
         this.getIndicator().setCls(cls);
     },
 
     /* --------------------------------------- ACTION --------------------------------------- */
-    toggle: function(button)
-    {
-        console.log('[tab.Sidebar][toggle] tapped the button');
+    toggle: function(button) {
         button = button || this.getIndicator();
         var activeView = Ext.Viewport.getActiveItem(),
             sidebar = button ? button.config.sidebar : this;
         var width = sidebar.getWidth();
 
-        if (sidebar.getState() === 'closed')
-        {
+        if (sidebar.getState() === 'closed') {
             // set State
             sidebar.setState('open');
             sidebar.setHidden(false);
             // run the opening animation
-            Ext.Anim.run(sidebar, 'tabsidebar',
-            {
+            Ext.Anim.run(sidebar, 'tabsidebar', {
                 duration: sidebar.getDuration(),
                 fromX: -width
             });
             if (sidebar.getMoveActiveView())
-                Ext.Anim.run(activeView, 'tabsidebar',
-                {
+                Ext.Anim.run(activeView, 'tabsidebar', {
                     duration: sidebar.getDuration(),
                     toX: width
                 });
-            if (button)
-            {
-                Ext.Anim.run(button, 'tabsidebar',
-                {
+            if (button) {
+                Ext.Anim.run(button, 'tabsidebar', {
                     duration: sidebar.getDuration(),
                     toX: width
                 });
                 // show a different symbol in the button
                 button.addCls(button.config.openCls);
             }
-        }
-        else
-        {
+        } else {
             // set State
             sidebar.setState('closed');
             // run the closing animation
-            Ext.Anim.run(sidebar, 'tabsidebar',
-            {
+            Ext.Anim.run(sidebar, 'tabsidebar', {
                 out: true,
                 duration: sidebar.getDuration(),
                 toX: -width
             });
             if (sidebar.getMoveActiveView())
-                Ext.Anim.run(activeView, 'tabsidebar',
-                {
+                Ext.Anim.run(activeView, 'tabsidebar', {
                     out: true,
                     duration: sidebar.getDuration(),
                     fromX: width
                 });
-            if (button)
-            {
-                Ext.Anim.run(button, 'tabsidebar',
-                {
+            if (button) {
+                Ext.Anim.run(button, 'tabsidebar', {
                     out: true,
                     duration: sidebar.getDuration(),
                     fromX: width
@@ -437,20 +398,16 @@ Ext.define('WeiQuPai.plugin.Sidebar',
      * @cfg {Boolean} [out=false]
      * out: true to close the el, false to open the el
      */
-    tabsidebarAnimation: function()
-    {
-        Ext.apply(Ext.anims,
-        {
-            tabsidebar: new Ext.Anim(
-            {
+    tabsidebarAnimation: function() {
+        Ext.apply(Ext.anims, {
+            tabsidebar: new Ext.Anim({
                 zIndex: 0,
                 out: false,
                 toX: 0,
                 fromX: 0,
                 autoClear: false,
 
-                before: function(el)
-                {
+                before: function(el) {
                     var currentZIndex = this.zIndex,
                         zIndex = currentZIndex - 1,
                         out = this.out,
@@ -468,20 +425,16 @@ Ext.define('WeiQuPai.plugin.Sidebar',
         });
     },
 
-    scrollConfig: function()
-    {
+    scrollConfig: function() {
         return {
             direction: 'vertical',
             directionLock: true,
-            momentumEasing:
-            {
-                momentum:
-                {
+            momentumEasing: {
+                momentum: {
                     acceleration: 30,
                     friction: 0.5
                 },
-                bounce:
-                {
+                bounce: {
                     acceleration: 0.0001,
                     springTension: 0.9999
                 },

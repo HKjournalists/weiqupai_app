@@ -24,7 +24,7 @@ Ext.define('WeiQuPai.view.ImageViewer', {
         for (var i = 0; i < data.length; i++) {
             var item = Ext.create('Ext.ux.ImageViewer', {
                 imageSrc: WeiQuPai.Util.getImagePath(data[i]),
-                previewSrc: WeiQuPai.Util.getImagePath(data[i], '290'),
+                previewSrc: WeiQuPai.Util.getImagePath(data[i], '640'),
                 doubleTapScale: 0,
                 loadingMask: false
             });

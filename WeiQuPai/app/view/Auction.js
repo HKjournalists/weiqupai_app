@@ -104,19 +104,20 @@ Ext.define('WeiQuPai.view.Auction', {
             layout: 'hbox',
             cls: 'log_btn',
             itemId: 'tabbar',
+            style: 'position:relative;z-index:100',
             items: [{
                 flex: 1,
                 xtype: 'button',
                 text: '商品参数',
                 action: 'tab_itemparam',
-                itemId: 'tab_itemparam',
-                cls: 'x-button-active'
+                itemId: 'tab_itemparam'
             }, {
                 flex: 1,
                 xtype: 'button',
                 action: 'tab_commentlist',
                 itemId: 'tab_commentlist',
-                text: '大家评论'
+                text: '大家评论',
+                cls: 'x-button-active'
             }, {
                 flex: 1,
                 xtype: 'button',
@@ -125,10 +126,10 @@ Ext.define('WeiQuPai.view.Auction', {
                 text: '图文详情'
             }]
         }, {
-            xtype: 'itemparam'
-        }, {
-            xtype: 'commentlist',
+            xtype: 'itemparam',
             hidden: true
+        }, {
+            xtype: 'commentlist'
         }, {
             xtype: 'itemdesc',
             hidden: true
@@ -147,6 +148,8 @@ Ext.define('WeiQuPai.view.Auction', {
 
     },
 
+    tabPosition: 0,
+
     initialize: function() {
         this.callParent(arguments);
 
@@ -156,7 +159,6 @@ Ext.define('WeiQuPai.view.Auction', {
         });
         //初始化tab
         this.initTab();
-
         //销毁的时候结束定时器
         this.on('destroy', this.onDestroy);
     },
@@ -175,9 +177,28 @@ Ext.define('WeiQuPai.view.Auction', {
                 this.addCls('x-button-active');
                 this.tabView.show();
                 me.setActiveTab(this);
+                setTimeout(function() {
+                    var scroller = me.getScrollable().getScroller();
+                    if (scroller.position.y > me.tabPosition) {
+                        scroller.scrollTo(null, me.tabPosition, true);
+                    }
+                }, 50);
             });
         }
-        this.setActiveTab(btns[0]);
+        this.setActiveTab(btns[1]);
+
+        //tab的悬停效果
+        this.on('painted', function() {
+            this.tabPosition = this.down('#tabbar').element.getY() - this.down('vtitlebar').element.getHeight();
+        });
+        var scroller = this.getScrollable().getScroller();
+        scroller.addListener('scroll', function(scroller, x, y) {
+            if (y >= this.tabPosition) {
+                this.down('#tabbar').translate(null, y - this.tabPosition, false);
+            } else {
+                this.down('#tabbar').translate(null, 0, false);
+            }
+        }, this);
     },
 
     bindEvent: function(e) {
@@ -191,9 +212,9 @@ Ext.define('WeiQuPai.view.Auction', {
         }
     },
 
-    applyRecord: function(record) {
+    updateRecord: function(record) {
         if (record == null) {
-            return null;
+            return;
         }
 
         var data = record.data;
@@ -204,6 +225,7 @@ Ext.define('WeiQuPai.view.Auction', {
         this.down('itemparam').setData(data);
         this.down('itemdesc').setData(data);
         this.down('commentlist').setItemId(record.get('id'));
+        this.setCountdown();
         return record;
     },
 
