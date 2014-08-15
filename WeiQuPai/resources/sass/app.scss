@@ -851,7 +851,7 @@ html body
   {
     display:box;
     display:-webkit-box;
-
+    display:-moz-box;
   }
   .discard .list .one .img{
    -moz-box-flex:1.0;
@@ -863,7 +863,6 @@ html body
   {
    width:40px;
    padding:5px;
-   float:left;
   }
   .discard .list .one  .img img, .message .list .one .img img
   
@@ -879,7 +878,6 @@ html body
    box-flex:9.0;
    padding:15px 15px;
    font-size:14px;
-   float:left;
   }
   .remess
   {
@@ -903,7 +901,6 @@ html body
     box-flex:9.0;
     padding: 13px 1px 1px 20px;
     font-size: 14px;
-    float: left;
     word-break: break-all;
     color:#383838;
   }
@@ -912,7 +909,6 @@ html body
   -moz-box-flex:9.0;
   -webkit-box-flex:9.0;
   box-flex:9.0;
-  float: left;
   padding: 10px 0px 10px 20px;
   font-size: 13px;
   word-break: break-all;
@@ -3105,7 +3101,7 @@ html body
   background-size:contain;
   width:100%;
   height:92px;
-  margin-top:-10px;
+  margin-top:-5px;
 }
 .situation .helper{
   background:url(../images/bar_bg.jpg) repeat-y;
@@ -3248,24 +3244,24 @@ html body
 .dialog_tip1{
   position:absolute;
   top: 210px;
-  background: url("../images/detail_tip1.png") no-repeat;
-  background-size: 100% 196px;
+  background: url("../images/detail_tip1.png") right no-repeat;
+  background-size: auto 196px;
   height: 196px;
   width: 100%;
 }
 .dialog_tip2{
   position:absolute;
   bottom: 0px;
-  background: url("../images/detail_tip2.png") no-repeat;
-  background-size: 100% 237px;
+  background: url("../images/detail_tip2.png") center no-repeat;
+  background-size: auto 237px;
   height: 237px;
   width: 100%;
 }
 .dialog_tip3{
   position:absolute;
   top: 230px;
-  background: url("../images/notice_tip.png") no-repeat;
-  background-size: 100% 186px;
+  background: url("../images/notice_tip.png") right no-repeat;
+  background-size: auto 186px;
   height: 186px;
   width: 100%;
 }
@@ -3273,8 +3269,8 @@ html body
   position:absolute;
   left:0px;
   top: -13px;
-  background: url("../images/main_tips.png") no-repeat;
-  background-size: 100% 113px;
+  background: url("../images/main_tips.png") right no-repeat;
+  background-size: auto 113px;
   height: 113px;
   width: 100%;
 }
