@@ -2972,23 +2972,23 @@ html body
 }
 
 .bar{}
-.bar .bar_banner{background:url(../images/bar_banner.jpg) no-repeat;background-size:100% 68px;width:100%;height:68px;}
-.bar_banner .btn{
+.bar .bar_banner{max-width:100%;min-width:100%;}
+.bar_banner_btn{
   margin-top: 40px;
   margin-right: 5px;
   float: right;
-  background: url(../images/bar_banner_btn.jpg) no-repeat;
+  background: url(../images/bar_banner_btn.png) no-repeat;
   background-size: contain;
   width: 26px;
   height: 26px;
   border:0px;
   -webkit-appearance:none;
 }
-.barimg{max-width:100%;min-width:100%;margin-top:5px;}
+.barimg{max-width:100%;min-width:100%;}
 .barper{background: white; margin-top:-2px;}
 .barper .top{color:red;font-size:13px;padding-top:10px;margin:0px 6px;}
 .barper .top .left{
-  background: url(../images/bar_xue.jpg) left no-repeat;
+  background: url(../images/bar_xue.png) left no-repeat;
   background-size: 8px 10px;
   background-position: 3px 3px;
   width: 50%;
@@ -2998,7 +2998,7 @@ html body
   text-indent: 15px;
   }
 .barper .top .right{
-  background:url(../images/bar_person.jpg) right no-repeat;
+  background:url(../images/bar_person.png) right no-repeat;
   background-size:65px 25px;
   width:50%;
   float:right;
@@ -3030,7 +3030,7 @@ html body
   margin-left:6px;
 }
 .bar_icon{
-  background: url(../images/bar_icon.jpg) no-repeat;
+  background: url(../images/bar_icon.png) no-repeat;
   background-size: 45px 48px;
   float: right;
   margin-right: 7px;
@@ -3107,8 +3107,8 @@ html body
   background:$color_fff url(../images/bar_friend.png) no-repeat top center;
   background-size:contain;
   width:100%;
-  height:92px;
-  margin-top:-5px;
+  height:82px;
+  margin-top:5px;
 }
 .situation .helper{
   background:url(../images/bar_bg.jpg) repeat-y;
@@ -3355,4 +3355,13 @@ html body
   word-break: break-all;
   word-wrap: break-word;
   line-height:15px;
+}
+.startupbtn{
+  background: url(../images/yubtn.gif) no-repeat;
+  background-size: auto 11px;
+  background-position: center center;
+  width: 77px;
+  height: 11px;
+  margin-top: 440px;
+  margin-left: 120px;
 }

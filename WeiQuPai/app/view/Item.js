@@ -92,7 +92,8 @@ Ext.define('WeiQuPai.view.Item', {
                 xtype: 'button',
                 action: 'tab_itemdesc',
                 itemId: 'tab_itemdesc',
-                text: '图文详情'
+                text: '图文详情',
+                cls: 'x-button-active'
             }, {
                 flex: 1,
                 xtype: 'button',
@@ -104,8 +105,7 @@ Ext.define('WeiQuPai.view.Item', {
                 xtype: 'button',
                 action: 'tab_commentlist',
                 itemId: 'tab_commentlist',
-                text: '大家评论',
-                cls: 'x-button-active'
+                text: '大家评论'
             }]
         }, {
             xtype: 'itemdesc'
@@ -115,6 +115,7 @@ Ext.define('WeiQuPai.view.Item', {
         }, {
             xtype: 'commentlist',
             hidden: true
+
         }, {
             xtype: 'bottombar',
             itemId: 'bottombar',

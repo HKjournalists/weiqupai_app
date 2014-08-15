@@ -48,10 +48,10 @@ Ext.define('WeiQuPai.view.CommentList', {
                 flex: 1
             }, {
                 xtype: 'spacer',
-                cls: 'detail_listOne',
                 flex: 1
             }, {
                 xtype: 'spacer',
+                cls: 'detail_listOne',
                 flex: 1
             }]
         }]

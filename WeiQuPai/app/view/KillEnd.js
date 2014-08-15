@@ -52,7 +52,7 @@ Ext.define('WeiQuPai.view.KillEnd', {
             }]
         }, {
             xtype: 'container',
-            html: '<div class="bar_banner"><input type="button" class="btn"></div>',
+            html: '<div><img src="resources/images/bar_banner.png"  class="bar_banner"/></div>',
             itemId: 'help'
         }]
     },

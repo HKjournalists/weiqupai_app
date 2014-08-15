@@ -9,7 +9,8 @@ Ext.define('WeiQuPai.view.StartupScreen', {
         hideAnimation: 'fadeOut',
         direction: 'vertical',
         indicator: false,
-        style: 'background:#fffffa;z-index:1'
+        style: 'background:#fffffa;z-index:1',
+        html: "<div class='startupbtn'></div>"
     },
 
     initialize: function() {

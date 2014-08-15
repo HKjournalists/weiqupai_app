@@ -10,13 +10,13 @@ Ext.define('WeiQuPai.view.ItemDesc', {
             scrollDock: 'top',
             items: [{
                 xtype: 'container',
-                flex: 1
-            }, {
-                xtype: 'spacer',
-                flex: 1
-            }, {
-                xtype: 'spacer',
                 cls: 'detail_listOne',
+                flex: 1
+            }, {
+                xtype: 'spacer',
+                flex: 1
+            }, {
+                xtype: 'spacer',
                 flex: 1
             }]
         }]
