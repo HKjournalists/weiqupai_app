@@ -11,13 +11,20 @@ Ext.define('WeiQuPai.controller.KillEnd', {
                 detail: 'showDetail',
                 kill: 'createAuction',
                 topkiller: 'showTopKiller',
-                avatartap: 'showUser'
+                avatartap: 'showUser',
+                pricetap: 'showAuction'
             }
         }
     },
 
     showDetail: function(list, index, dataItem, record, e) {
         WeiQuPai.Util.goItemView(record.get('item_id'));
+    },
+
+    showAuction: function(aid) {
+        var view = Ext.create('WeiQuPai.view.UserAuction');
+        view.setAuctionId(aid);
+        WeiQuPai.navigator.push(view);
     },
 
     showHelp: function(list, index, dataItem, record, e) {
@@ -39,8 +46,9 @@ Ext.define('WeiQuPai.controller.KillEnd', {
 
     //创建拍卖
     createAuction: function(list, index, dataItem, record, e) {
+        var user = WeiQuPai.Util.checkLogin();
+        if (!user) return;
         var poolId = record.get('id');
-        var user = WeiQuPai.Cache.get('currentUser');
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/userAuction/create';
         data = {
             pool_id: poolId,
@@ -49,7 +57,9 @@ Ext.define('WeiQuPai.controller.KillEnd', {
         WeiQuPai.Util.post(url, data, function(rsp) {
             var view = Ext.create('WeiQuPai.view.UserAuction');
             view.setAuctionId(rsp.id);
-            WeiQuPai.navigator.push(view);
+            setTImeout(function() {
+                WeiQuPai.navigator.push(view);
+            }, 0);
             if (!rsp.is_new) {
                 return;
             }

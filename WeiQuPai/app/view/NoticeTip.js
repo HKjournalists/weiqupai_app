@@ -2,6 +2,7 @@ Ext.define('WeiQuPai.view.NoticeTip', {
     extend: 'Ext.Container',
     xtype: 'noticetip',
     config: {
+        hidden: true,
         showAnimation: 'fadeIn',
         hideAnimation: 'fadeOut',
         html: "<div>" +

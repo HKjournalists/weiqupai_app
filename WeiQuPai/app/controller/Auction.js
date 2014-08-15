@@ -40,7 +40,9 @@ Ext.define('WeiQuPai.controller.Auction', {
             },
             itemView: {
                 itemlike: 'doItemLike',
-                itemdislike: 'doItemDislike'
+                itemdislike: 'doItemDislike',
+                expectprice: 'doSetExpectPrice',
+                noticetap: 'doNotice'
             }
         }
     },
@@ -98,7 +100,9 @@ Ext.define('WeiQuPai.controller.Auction', {
             var orderView = Ext.create('WeiQuPai.view.Order');
             rsp.auction_type = 1;
             orderView.setAuctionData(rsp);
-            WeiQuPai.navigator.push(orderView);
+            setTimeout(function() {
+                WeiQuPai.navigator.push(orderView);
+            }, 0);
         }, {
             mask: true
         });
@@ -159,6 +163,73 @@ Ext.define('WeiQuPai.controller.Auction', {
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/itemDislike&item_id=' + itemId + '&token=' + user.token;
         WeiQuPai.Util.get(url, function(rsp) {
             view.updateItemStat('dislike_num', 1);
+        });
+    },
+
+    //开拍提醒
+    doNotice: function(view) {
+        var user = WeiQuPai.Util.checkLogin();
+        if (!user) return;
+        var itemId = view.getRecord().get('id');
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/auctionNotify';
+        var data = {
+            type: 1,
+            notify_id: itemId,
+            token: user.token
+        };
+        WeiQuPai.Util.post(url, data, function(rsp) {
+            WeiQuPai.Util.toast('设置成功，这个东东开拍的时候你会收到通知哦～');
+        });
+    },
+
+    //设置提醒价格,适用于正在拍的商品
+    doSetNoticePrice: function(view) {
+        var user = WeiQuPai.Util.checkLogin();
+        if (!user) return;
+        var form = WeiQuPai.Util.createOverlay('WeiQuPai.view.PriceForm');
+        var text = form.down('textfield');
+        text.setPlaceHolder('输入要被提醒的价格');
+        form.show();
+        text.focus();
+        form.on('submitprice', function() {
+            var data = {};
+            data.price = text.getValue();
+            data.type = 2;
+            data.notify_id = view.getRecord().get('auction').id;
+            data.token = user.token;
+            var url = WeiQuPai.Config.apiUrl + '/?r=appv2/auctionNotify';
+            WeiQuPai.Util.post(url, data, function(rsp) {
+                form.reset();
+                form.hide();
+                WeiQuPai.Util.toast('设置成功，价格达到' + data.price + '的时候你会收到通知哦~');
+            });
+        }, this, {
+            single: true
+        });
+    },
+
+    //设置期望价格，适用于未在拍的商品
+    doSetExpectPrice: function(view) {
+        var user = WeiQuPai.Util.checkLogin();
+        if (!user) return;
+        var form = WeiQuPai.Util.createOverlay('WeiQuPai.view.PriceForm');
+        var text = form.down('textfield');
+        text.setPlaceHolder('输入您的期望价吧');
+        form.show();
+        text.focus();
+        form.on('submitprice', function() {
+            var data = {};
+            data.price = text.getValue();
+            data.item_id = view.getRecord().get('id');
+            data.token = user.token;
+            var url = WeiQuPai.Config.apiUrl + '/?r=appv2/expectPrice';
+            WeiQuPai.Util.post(url, data, function(rsp) {
+                form.reset();
+                form.hide();
+                WeiQuPai.Util.toast('提交成功，我们会考虑你提交的价格哦~');
+            });
+        }, this, {
+            single: true
         });
     },
 

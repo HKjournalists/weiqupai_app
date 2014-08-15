@@ -117,11 +117,11 @@ Ext.define('WeiQuPai.view.MyCoupon', {
     },
 
     loadData: function(callback) {
-        if (this.getStore().isLoading()) {
-            return false;
-        }
         var user = WeiQuPai.Cache.get('currentUser');
         var store = this.down('dataview').getStore();
+        if (store.isLoading()) {
+            return false;
+        }
         store.getProxy().setExtraParam('token', user.token);
         store.load(function(records, operation, success) {
             if (!success) {

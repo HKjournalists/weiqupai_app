@@ -41,7 +41,7 @@ Ext.define('WeiQuPai.Notify', {
         var user = WeiQuPai.Cache.get('currentUser');
         if (!user) return;
         Ext.Ajax.request({
-            url: WeiQuPai.Config.apiUrl + '/?r=app/mq&token=' + user.token,
+            url: WeiQuPai.Config.apiUrl + '/?r=appv2/mq&token=' + user.token,
             method: 'get',
             success: function(rsp) {
                 rsp = Ext.decode(rsp.responseText);

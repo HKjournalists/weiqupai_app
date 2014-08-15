@@ -30,7 +30,7 @@ Ext.define('WeiQuPai.view.KillEnd', {
             '<div class="bottom"><ul>',
             '<tpl for="auctions">',
             '<li><img src="{[this.getAvatar(values.user.avatar)]}" class="killer_avatar" data-uid="{user.id}"/>',
-            '<span class="user_price">￥{curr_price}</spa></li>',
+            '<span class="user_price" data-aid="{id}">￥{curr_price}</spa></li>',
             '</tpl>',
             '<div class="clear"></div></ul></div>',
             '</div>',
@@ -94,6 +94,12 @@ Ext.define('WeiQuPai.view.KillEnd', {
         if (avatar) {
             var uid = avatar.getAttribute('data-uid');
             this.fireEvent('avatartap', uid);
+            return false;
+        }
+        var price = Ext.get(e.target).findParent('.user_price');
+        if (price) {
+            var aid = price.getAttribute('data-aid');
+            this.fireEvent('pricetap', aid);
             return false;
         }
         this.fireEvent('detail', list, index, dataItem, record, e);

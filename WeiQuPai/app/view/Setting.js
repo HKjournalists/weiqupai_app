@@ -36,7 +36,6 @@ Ext.define('WeiQuPai.view.Setting', {
 
     initialize: function() {
         this.on('activate', this.onActivate, this);
-        this.on('painted', this.onPainted);
     },
 
     onActivate: function() {

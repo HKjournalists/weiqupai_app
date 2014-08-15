@@ -5,8 +5,8 @@ Ext.define('WeiQuPai.view.AuctionTip', {
         'WeiQuPai.view.AuctionTipTwo'
     ],
     config: {
+        hidden: true,
         showAnimation: 'fadeIn',
-        hideAnimation: 'fadeOut',
         html: "<div>" +
             "<div class='dialog'>" +
             "<div class='dialog_tip1'></div></div>",
@@ -14,7 +14,7 @@ Ext.define('WeiQuPai.view.AuctionTip', {
             painted: function(pp) {
                 pp.on('tap', function() {
                     this.hide();
-                    var view = Ext.create('WeiQuPai.view.AuctionTipTwo');
+                    var view = WeiQuPai.Util.getGlobalView('WeiQuPai.view.AuctionTipTwo');
                     view.show();
                 })
 

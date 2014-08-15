@@ -81,7 +81,9 @@ Ext.define('WeiQuPai.controller.UserAuction', {
             rsp.auction_type = 2;
             var view = Ext.create('WeiQuPai.view.Order');
             view.setAuctionData(rsp);
-            WeiQuPai.navigator.push(view);
+            setTimeout(function() {
+                WeiQuPai.navigator.push(view);
+            }, 0);
         });
     }
 });

@@ -3038,6 +3038,7 @@ html body
 .situation .product .top .right{
   height:30px;
   padding:5px 0 5px;
+  -webkit-box-flex:1;
 }
 .situation .product .bottom{
   margin-top:5px;
@@ -3076,9 +3077,9 @@ html body
 }
 .situation .time ul li span{color:$color_e7;line-height: 20px;}
 .situation .prop{
-  background:url(../images/bar_friend.png) no-repeat;
+  background:url(../images/bar_friend.png) no-repeat top center;
   background-size:contain;
-  width:320px;
+  width:100%;
   height:92px;
   margin-top:-10px;
 }
@@ -3087,6 +3088,7 @@ html body
   width:320px;
   background-size:contain;
   padding:10px;
+  margin:auto;
 }
 .helper .helper_nick{
   text-align:right;

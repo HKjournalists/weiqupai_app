@@ -77,27 +77,13 @@ Ext.define('WeiQuPai.view.Item', {
                 '<div class="detailData">',
                 '<div class="title_new">{title}</div>',
                 '<div class="content_new">',
-                '<div class="left"><div class="priceNew" id="countdown">{[this.formatCountdown(values.auction)]}</div></div>',
+                '<div class="left"></div>',
                 '<div class="noticetip"><div class="notice_btn1">期望价</div><div class="notice_btn2">提醒我</div></div>',
                 '<div class="clear"></div>',
                 '</div>',
                 '<div class="price clear">',
                 '<span>原价￥{oprice}</span> 已售出:{item_stat.sold_num}',
-                '</div></div>', {
-                    formatCountdown: function(auction) {
-                        if (auction.status == WeiQuPai.Config.auctionStatus.STATUS_NOT_START) {
-                            //return auction.start_time;
-                            return '等待开始';
-                        } else if (auction.status == WeiQuPai.Config.auctionStatus.STATUS_FINISH) {
-                            return '已结束';
-                        } else {
-                            var sec = auction.left_time % 60;
-                            var min = (auction.left_time - sec) / 60;
-                            var countdown = (min < 10 ? '0' + min : min) + ":" + (sec < 10 ? '0' + sec : sec);
-                            return countdown;
-                        }
-                    }
-                }
+                '</div></div>'
             )
         }, {
             xtype: 'container',
@@ -134,7 +120,8 @@ Ext.define('WeiQuPai.view.Item', {
             xtype: 'itemdesc',
             hidden: true
         }, {
-            xtype: 'bottombar'
+            xtype: 'bottombar',
+            cls: 'bottombarD'
         }],
 
         //当前激活的tab button
@@ -144,16 +131,28 @@ Ext.define('WeiQuPai.view.Item', {
 
 
     initialize: function() {
-        var view = Ext.create('WeiQuPai.view.NoticeTip');
-        view.show();
         this.callParent(arguments);
 
         this.shareLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer');
         this.down('#item_title').on('tap', this.bindEvent, this, {
             element: 'element'
         });
+
+        var me = this;
+        this.down('#price_data').element.dom.addEventListener('click', function(e) {
+            me.bindEvent(e);
+        });
+
+        this.showTips();
         //初始化tab
         this.initTab();
+    },
+
+    showTips: function() {
+        setTimeout(function() {
+            var view = WeiQuPai.Util.getGlobalView('WeiQuPai.view.NoticeTip');
+            view.show();
+        }, 500);
     },
 
     initTab: function() {
@@ -183,6 +182,8 @@ Ext.define('WeiQuPai.view.Item', {
         //tab的悬停效果
         this.on('painted', function() {
             this.tabPosition = this.down('#tabbar').element.getY() - this.down('vtitlebar').element.getHeight();
+        }, this, {
+            single: true
         });
         var scroller = this.getScrollable().getScroller();
         scroller.addListener('scroll', function(scroller, x, y) {
@@ -201,6 +202,14 @@ Ext.define('WeiQuPai.view.Item', {
         }
         if (e.target.className == 'nolike') {
             this.fireEvent('itemdislike', this);
+            return false;
+        }
+        if (Ext.get(e.target).findParent('.notice_btn1')) {
+            this.fireEvent('expectprice', this);
+            return false;
+        }
+        if (Ext.get(e.target).findParent('.notice_btn2')) {
+            this.fireEvent('noticetap', this);
             return false;
         }
     },

@@ -133,6 +133,7 @@ Ext.define('WeiQuPai.view.TopKiller', {
         }
         if (e.target.tagName.toLowerCase() == 'input') {
             this.fireEvent('help', list, index, dataItem, record, e);
+            return false;
         }
         this.fireEvent('detail', list, index, dataItem, record, e);
     }

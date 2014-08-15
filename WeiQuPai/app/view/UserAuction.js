@@ -96,11 +96,18 @@ Ext.define('WeiQuPai.view.UserAuction', {
         this.loadData();
     },
 
+    updateAuctionData: function(data) {
+        var user = WeiQuPai.Cache.get('currentUser');
+        if (!user || data.uid != user.id) {
+            this.down('bottombar').addCls('bottombarD');
+            this.down('button[action=pai]').setDisabled(true);
+        }
+    },
+
     //下拉刷新, 这里的this是pullRefresh对象
     fetchLastest: function() {
         var me = this;
         this.getList().loadData(function() {
-            WeiQuPai.Util.resetListPaging(me.getList());
             me.setState('loaded');
             me.snapBack();
         });
@@ -120,13 +127,14 @@ Ext.define('WeiQuPai.view.UserAuction', {
             me.getStore().getProxy().setExtraParam('id', id);
             me.getStore().setData(rsp.helpers);
             me.getStore().currentPage = 1;
+            WeiQuPai.Util.resetListPaging(me);
             Ext.isFunction(callback) && callback();
         });
     },
 
     bindAuctionEvent: function(e) {
         if (Ext.get(e.target).findParent('.product')) {
-            this.fireEvent('itemdetai');
+            this.fireEvent('itemdetail');
             return false;
         }
         if (Ext.get(e.target).findParent('.prop')) {

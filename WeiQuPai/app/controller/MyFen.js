@@ -18,7 +18,6 @@ Ext.define('WeiQuPai.controller.MyFen', {
         var detailView = Ext.create('WeiQuPai.view.ShowUser', {
             uid: uid
         });
-        console.log(uid);
         WeiQuPai.navigator.push(detailView);
     }
 

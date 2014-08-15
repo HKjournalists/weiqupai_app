@@ -8,8 +8,6 @@ Ext.define('WeiQuPai.view.Auction', {
         'WeiQuPai.view.AuctionTip'
     ],
     config: {
-        showAnimation: 'fadeIn',
-        hideAnimation: 'fadeOut',
         scrollable: true,
         cls: 'detail',
         loadingText: null,
@@ -154,9 +152,8 @@ Ext.define('WeiQuPai.view.Auction', {
     tabPosition: 0,
 
     initialize: function() {
-        var view = Ext.create('WeiQuPai.view.AuctionTip');
-        view.show();
         this.callParent(arguments);
+        this.showTips();
         this.shareLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer');
         this.down('#item_title').on('tap', this.bindEvent, this, {
             element: 'element'
@@ -165,6 +162,14 @@ Ext.define('WeiQuPai.view.Auction', {
         this.initTab();
         //销毁的时候结束定时器
         this.on('destroy', this.onDestroy);;
+    },
+
+    showTips: function() {
+        if (!WeiQuPai.app.firstLaunch) return;
+        setTimeout(function() {
+            var view = WeiQuPai.Util.getGlobalView('WeiQuPai.view.AuctionTip');
+            view.show();
+        }, 500);
     },
 
     initTab: function() {
@@ -194,6 +199,8 @@ Ext.define('WeiQuPai.view.Auction', {
         //tab的悬停效果
         this.on('painted', function() {
             this.tabPosition = this.down('#tabbar').element.getY() - this.down('vtitlebar').element.getHeight();
+        }, this, {
+            single: true
         });
         var scroller = this.getScrollable().getScroller();
         scroller.addListener('scroll', function(scroller, x, y) {

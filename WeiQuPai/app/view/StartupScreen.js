@@ -35,7 +35,7 @@ Ext.define('WeiQuPai.view.StartupScreen', {
         //最后一张图点击消失
         if (this.getActiveIndex() == this.getMaxItemIndex()) {
             Ext.Viewport.setActiveItem('main');
-            var maintip = Ext.create('WeiQuPai.view.MainTip');
+            var maintip = WeiQuPai.Util.getGlobalView('WeiQuPai.view.MainTip');
             maintip.show();
             //this.hide();
         }

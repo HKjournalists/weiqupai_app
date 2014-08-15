@@ -203,6 +203,7 @@ Ext.define('WeiQuPai.view.Today', {
             me.down('#specialList').setData(data.special);
             me.down('banner').updateBanner(data.banner);
             me.todayData = data;
+            WeiQuPai.Util.resetListPaging(me);
             callback && callback();
         });
     },
@@ -211,7 +212,6 @@ Ext.define('WeiQuPai.view.Today', {
     fetchLastest: function() {
         var me = this;
         this.getList().loadData(function() {
-            WeiQuPai.Util.resetListPaging(me.getList());
             me.setState('loaded');
             me.snapBack();
         });

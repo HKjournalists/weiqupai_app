@@ -2,7 +2,7 @@ Ext.define('WeiQuPai.view.MainTip', {
     extend: 'Ext.Container',
     xtype: 'maintip',
     config: {
-        showAnimation: 'fadeIn',
+        hidden: true,
         hideAnimation: 'fadeOut',
         html: "<div>" +
             "<div class='dialog'>" +

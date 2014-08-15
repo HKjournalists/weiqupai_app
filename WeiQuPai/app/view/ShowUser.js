@@ -224,6 +224,8 @@ Ext.define('WeiQuPai.view.ShowUser', {
             setTimeout(function() {
                 me.tabPosition = me.down('#tabbar').element.getY() - me.down('vtitlebar').element.getHeight();
             }, 200);
+        }, this, {
+            single: true
         });
         var scroller = this.getScrollable().getScroller();
         scroller.addListener('scroll', function(scroller, x, y) {

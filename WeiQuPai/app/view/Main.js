@@ -44,7 +44,9 @@ Ext.define('WeiQuPai.view.Main', {
                 WeiQuPai.Notify.checkMQ();
             }, 1000);
         } else {
-            this.on('painted', this.onPainted);
+            this.on('painted', this.onPainted, this, {
+                single: true
+            });
         }
     },
 
