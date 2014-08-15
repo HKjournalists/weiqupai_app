@@ -29,16 +29,16 @@ Ext.define('WeiQuPai.controller.Circle', {
     doDeletePost: function(list, index, record) {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
-        var func = function(buttonId) {
-            if (buttonId != 'yes') return;
+        var deleteLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.DeleteButtonLayer');
+        var list = this.getPageView();
+        deleteLayer.setDeleteAction(function() {
             var feed_id = record.get('id');
             var url = WeiQuPai.Config.apiUrl + '/?r=appv2/circle/delete&id=' + feed_id + '&token=' + user.token;
             WeiQuPai.Util.get(url, function(rsp) {
                 list.getStore().remove(record);
             });
-        }
-        Ext.Msg.confirm(null, '确实要删除吗？', func, this);
-
+        });
+        deleteLayer.show();
     },
 
     //赞

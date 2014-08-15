@@ -83,7 +83,6 @@ Ext.define('WeiQuPai.view.MyAuction', {
 
     initialize: function() {
         this.callParent(arguments);
-        //this.msgbox = WeiQuPai.Util.msgbox('您还没有创建拍卖');
         this.msgbox = WeiQuPai.Util.msgbox(' ');
         this.add(this.msgbox);
 

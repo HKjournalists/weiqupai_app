@@ -1958,6 +1958,13 @@ html body
     .shai_content{
       padding:4px;
     }
+    .order_comment{
+      margin-top:10px;
+      padding:4px;
+    }
+    .order_comment textarea{
+      min-height:4em;
+    }
     .shai_btn
     {
      background:$color_e7;
@@ -2479,6 +2486,10 @@ html body
    }
    .discount .get_btn{
       float:right;
+   }
+   .discount .used{
+      float:right;
+      color:#aaa;
    }
    .discount .right .btn
    {

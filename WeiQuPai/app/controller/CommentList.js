@@ -10,7 +10,7 @@ Ext.define('WeiQuPai.controller.CommentList', {
                 zantap: 'doZan',
                 cancelzantap: 'doCancelZan',
                 commenttap: 'doCommentTap',
-                deletepost: 'showDeleteLayer',
+                deletepost: 'doDeletePost',
             }
         }
     },
@@ -46,25 +46,19 @@ Ext.define('WeiQuPai.controller.CommentList', {
         record.set('zan_num', parseInt(record.get('zan_num')) - 1);
     },
 
-    //显示删除评论的浮层
-    showDeleteLayer: function(list, index, record) {
-        var deleteLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.DeleteButtonLayer');
-        var self = this;
-        deleteLayer.setDeleteAction(function() {
-            return self.doDeletePost(record);
-        });
-        deleteLayer.show();
-    },
-
     //删除回复
     doDeletePost: function(record) {
-        var id = record.get('id');
-        var user = WeiQuPai.Cache.get('currentUser');
-        var list = this.getCommentView();
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/comment/delete&id=' + id + '&token=' + user.token;
-        WeiQuPai.Util.get(url, function(rsp) {
-            list.getStore().remove(record);
+        var list = self.getCommentView();
+        var deleteLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.DeleteButtonLayer');
+        deleteLayer.setDeleteAction(function() {
+            var id = record.get('id');
+            var user = WeiQuPai.Cache.get('currentUser');
+            var url = WeiQuPai.Config.apiUrl + '/?r=appv2/comment/delete&id=' + id + '&token=' + user.token;
+            WeiQuPai.Util.get(url, function(rsp) {
+                list.getStore().remove(record);
+            });
         });
+        deleteLayer.show();
     },
 
     //点回复按钮

@@ -3,7 +3,7 @@ Ext.define('WeiQuPai.view.ItemDesc', {
     xtype: 'itemdesc',
     config: {
         cls: 'discard tuwen',
-        tpl: '{description}',
+        tpl: '{content}',
         items: [{
             xtype: 'container',
             layout: 'hbox',

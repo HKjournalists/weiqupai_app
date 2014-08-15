@@ -77,7 +77,8 @@ Ext.define('WeiQuPai.controller.Feed', {
 
     //发表回复
     doPublishReply: function(form) {
-        var user = WeiQuPai.Cache.get('currentUser');
+        var user = WeiQuPai.Util.checkLogin();
+        if(!user) return;
         var pageView = this.getPageView();
         var fid = pageView.getFeedRecord().get('id');
         WeiQuPai.Util.mask();

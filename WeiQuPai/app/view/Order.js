@@ -51,6 +51,13 @@ Ext.define('WeiQuPai.view.Order', {
             title: '配送时间',
             contentPosition: 'bottom'
         }, {
+            xtype: 'textareafield',
+            placeHolder: '如果商品为多色，请备注您希望购买的颜色',
+            maxLength: 100,
+            name: 'comment',
+            cls: 'order_comment',
+            clearIcon: false
+        }, {
             xtype: 'button',
             text: '提交订单',
             baseCls: 'w-button',

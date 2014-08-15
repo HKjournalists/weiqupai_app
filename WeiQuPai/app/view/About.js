@@ -16,7 +16,6 @@ Ext.define('WeiQuPai.view.About', {
             }]
         }, {
             xtype: 'container',
-            flex: 1,
             cls: 'about',
             html: '<div class="aboutTop"></div>' +
                 '<div class="aboutdis">' +

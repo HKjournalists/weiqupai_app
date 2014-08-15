@@ -63,6 +63,7 @@ Ext.define('WeiQuPai.controller.Order', {
         var itemData = this.getOrderView().down('#orderInfo').getData().item;
         var param = WeiQuPai.Util.filterNull(order.data);
         param.token = user.token;
+        param.comment = this.getOrderView().down('textareafield').getValue();
         var controller = param.auction_type == 1 ? 'order' : 'discountOrder';
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/' + controller;
         WeiQuPai.Util.post(url, param, function(rsp) {

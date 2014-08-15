@@ -44,7 +44,8 @@ Ext.define('WeiQuPai.controller.Comment', {
 
     //发表回复
     doPublishReply: function(form) {
-        var user = WeiQuPai.Cache.get('currentUser');
+        var user = WeiQuPai.Util.checkLogin();
+        if(!user) return;
         var pageView = this.getPageView();
         var item = pageView.getCommentRecord().get('item');
         var cid = pageView.getCommentRecord().get('id');
