@@ -4,7 +4,6 @@ Ext.define("WeiQuPai.Config", {
     host: 'http://localhost',
     apiUrl: 'http://localhost',
     updateUrl: 'http://localhost/update',
-
     //app版本
     version: "2.0",
 
