@@ -836,7 +836,7 @@ html body
     padding:10px 0px;
     border-bottom:1px solid #efefef;
   }
-  .discard .list:nth-last-child(1){
+  .discard  .x-dataview-item:last-child .list{
    border-bottom:0px;
    }
    .message .list
@@ -844,7 +844,6 @@ html body
     width:95%;
     margin:0px auto 5px;
     padding:10px 0px;
-    border-bottom:1px solid #efefef;
   }
   .discard .list .one,.message .list .one
   {

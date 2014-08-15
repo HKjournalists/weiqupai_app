@@ -1,28 +1,30 @@
-Ext.define('WeiQuPai.controller.CommentList', {
+Ext.define('WeiQuPai.controller.UserAuctionComment', {
     extend: 'Ext.app.Controller',
     config: {
         refs: {
-            commentView: 'commentlist',
+            pageView: 'userauctioncomment',
+            inputcomment: 'userauctioncomment inputcomment'
         },
         control: {
-            commentView: {
+            pageView: {
                 avatartap: 'doAvatarTap',
-                zantap: 'doZan',
-                cancelzantap: 'doCancelZan',
                 commenttap: 'doCommentTap',
-                deletepost: 'showDeleteLayer',
+                deletemsg: 'showDeleteLayer',
+            },
+            inputcomment: {
+                publish: 'doPublishComment'
             }
         }
     },
 
-    doAvatarTap: function(index, record) {
+    doAvatarTap: function(list, index, record) {
         var uid = record.get('uid');
         var view = Ext.create('WeiQuPai.view.ShowUser');
         view.setUid(uid);
         WeiQuPai.navigator.push(view);
     },
 
-    doZan: function(index, record) {
+    doZan: function(list, index, record) {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
         var id = parseInt(record.get('id'));
@@ -35,7 +37,7 @@ Ext.define('WeiQuPai.controller.CommentList', {
         record.set('zan_num', parseInt(record.get('zan_num')) + 1);
     },
 
-    doCancelZan: function(index, record) {
+    doCancelZan: function(list, index, record) {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
         var id = parseInt(record.get('id'));
@@ -60,27 +62,45 @@ Ext.define('WeiQuPai.controller.CommentList', {
     doDeletePost: function(record) {
         var id = record.get('id');
         var user = WeiQuPai.Cache.get('currentUser');
-        var list = this.getCommentView();
+        var list = this.getPageView();
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/comment/delete&id=' + id + '&token=' + user.token;
         WeiQuPai.Util.get(url, function(rsp) {
             list.getStore().remove(record);
         });
     },
 
-    //点回复按钮
-    doCommentTap: function(index, record) {
-        var view = Ext.create('WeiQuPai.view.Comment');
-        view.setCommentId(record.get('id'));
-        WeiQuPai.navigator.push(view);
+    //发表拍卖评论
+    doPublishComment: function(form) {
+        var user = WeiQuPai.Cache.get('currentUser');
+        var pageView = this.getPageView();
+        var auctionId = pageView.getAuctionId();
+        WeiQuPai.Util.mask();
+        form.down('hiddenfield[name=auction_id]').setValue(auctionId);
+        var data = form.getValues();
+        form.submit({
+            url: WeiQuPai.Config.apiUrl + '/?r=appv2/comment/post&token=' + user.token,
+            method: 'post',
+            success: function(form, result) {
+                WeiQuPai.Util.unmask();
+                if (!WeiQuPai.Util.invalidToken(result)) return false;
+                form.reset();
+                result.user = {
+                    id: user.id,
+                    nick: user.nick,
+                    avatar: user.avatar
+                }
+                pageView.msgbox.hide();
+                pageView.getStore().add(result);
+                setTimeout(function() {
+                    var scroller = pageView.getScrollable().getScroller();
+                    scroller.scrollToEnd(true);
+                }, 200);
+            },
+            failure: function(form, result) {
+                WeiQuPai.Util.unmask();
+                var msg = result && result.msg || '评论提交失败，请重试';
+                WeiQuPai.Util.toast(msg);
+            }
+        });
     },
-
-    doShare: function() {
-        this.getPageView().shareLayer.show();
-    },
-
-    doRefresh: function() {
-        this.getPageView().onDestroy();
-        this.getPageView().loadData();
-    }
-
 });

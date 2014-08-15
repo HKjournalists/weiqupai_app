@@ -1,6 +1,7 @@
 Ext.define('WeiQuPai.view.UserAuction', {
     extend: 'Ext.DataView',
     xtype: 'userauction',
+    requires: ['WeiQuPai.view.UserAuctionComment'],
     config: {
         cls: 'bg_ef detail situation',
         store: 'UserAuctionHelper',
@@ -75,7 +76,8 @@ Ext.define('WeiQuPai.view.UserAuction', {
                 }
             )
         }, {
-            xtype: 'bottombar'
+            xtype: 'bottombar',
+            itemId: 'userbottombar'
         }],
 
         auctionId: null,

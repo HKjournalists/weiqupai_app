@@ -22,9 +22,12 @@ Ext.define('WeiQuPai.controller.MyMessage', {
         } else if (type == 2) {
             view = Ext.create('WeiQuPai.view.Comment');
             view.setCommentId(record.get('content').comment_id);
-        } else {
+        } else if (type == 3) {
             view = Ext.create('WeiQuPai.view.Feed');
             view.setFeedId(record.get('content').feed_id);
+        } else if (type == 4){
+            view = Ext.create('WeiQuPai.view.UserAuctionComment');
+            view.setAuctionId(record.get('content').auction_id);
         }
         WeiQuPai.navigator.push(view);
     },
