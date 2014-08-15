@@ -3277,7 +3277,6 @@ html body
 //精彩预告详情也提醒
 .noticetip{
   float:right;
-  width:50%;
 }
 .noticetip .notice_btn1{
   background:#ffc600;
@@ -3325,8 +3324,9 @@ html body
   top:0px;
   left:0px;
   background:url(../images/about.png) no-repeat;
-  background-size:auto 83px;
+  background-size:100% 83px;
   height:83px;
+  width:100%;
   z-index:1;
 }
 .aboutcontent
