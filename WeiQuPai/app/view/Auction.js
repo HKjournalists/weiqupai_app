@@ -109,6 +109,12 @@ Ext.define('WeiQuPai.view.Auction', {
             items: [{
                 flex: 1,
                 xtype: 'button',
+                action: 'tab_itemdesc',
+                itemId: 'tab_itemdesc',
+                text: '图文详情'
+            }, {
+                flex: 1,
+                xtype: 'button',
                 text: '商品参数',
                 action: 'tab_itemparam',
                 itemId: 'tab_itemparam'
@@ -119,23 +125,18 @@ Ext.define('WeiQuPai.view.Auction', {
                 itemId: 'tab_commentlist',
                 text: '大家评论',
                 cls: 'x-button-active'
-            }, {
-                flex: 1,
-                xtype: 'button',
-                action: 'tab_itemdesc',
-                itemId: 'tab_itemdesc',
-                text: '图文详情'
             }]
+        }, {
+            xtype: 'itemdesc'
         }, {
             xtype: 'itemparam',
             hidden: true
         }, {
-            xtype: 'commentlist'
-        }, {
-            xtype: 'itemdesc',
+            xtype: 'commentlist',
             hidden: true
         }, {
-            xtype: 'bottombar'
+            xtype: 'bottombar',
+            itemId: 'bottombar'
         }],
 
         refreshTimer: null,
@@ -194,7 +195,7 @@ Ext.define('WeiQuPai.view.Auction', {
                 }, 50);
             });
         }
-        this.setActiveTab(btns[1]);
+        this.setActiveTab(btns[0]);
 
         //tab的悬停效果
         this.on('painted', function() {

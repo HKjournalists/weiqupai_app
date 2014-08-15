@@ -4,10 +4,18 @@ Ext.define('WeiQuPai.controller.UserAuction', {
         refs: {
             pageView: 'userauction',
             paiBtn: 'userauction button[action=pai]',
+            shareBtn: 'userauction button[action=share]',
+            commentBtn: 'userauction button[action=comment]'
         },
         control: {
             paiBtn: {
                 tap: 'showOrderView'
+            },
+            shareBtn: {
+                tap: 'showShareLayer'
+            },
+            commentBtn: {
+                tap: 'showComment'
             },
             pageView: {
                 itemdetail: 'showItem',
@@ -28,6 +36,17 @@ Ext.define('WeiQuPai.controller.UserAuction', {
         if (record.get('source') > 1 || record.get('uid') == 0) return;
         var view = Ext.create('WeiQuPai.view.ShowUser');
         view.setUid(record.get('user').id);
+        WeiQuPai.navigator.push(view);
+    },
+
+    showShareLayer: function(){
+
+    },
+
+    showComment: function(){
+        var aid = this.getPageView().getAuctionId();
+        var view = Ext.create('WeiQuPai.view.UserAuctionComment');
+        view.setAuctionId(aid);
         WeiQuPai.navigator.push(view);
     },
 

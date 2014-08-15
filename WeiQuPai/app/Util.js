@@ -245,6 +245,7 @@ Ext.define("WeiQuPai.Util", {
 
     //生成一个展现提示信息的容器
     msgbox: function(html, cfg) {
+        html = html || null;
         var config = {
             // cls: 'w-empty',
             cls: 'empty',
@@ -400,7 +401,9 @@ Ext.define("WeiQuPai.Util", {
 
     getAvatar: function(avatar, size) {
         if (!avatar) {
-            return 'resources/images/defavatar.jpg';
+            var idx = Math.ceil(Math.random() * 10) >  5 ? 1 : 0;
+            var arr = ['resources/images/defavatar1.png', 'resources/images/defavatar2.png'];
+            return arr[idx];
         }
         return this.getImagePath(avatar, size);
     },

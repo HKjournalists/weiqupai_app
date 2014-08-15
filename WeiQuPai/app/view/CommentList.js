@@ -62,8 +62,7 @@ Ext.define('WeiQuPai.view.CommentList', {
 
     initialize: function() {
         this.callParent();
-       // this.msgbox = WeiQuPai.Util.msgbox('还没有人评论该商品.');
-        this.msgbox = WeiQuPai.Util.msgbox('');
+        this.msgbox = WeiQuPai.Util.msgbox();
         this.add(this.msgbox);
         //默认的itemtap在android下不能弹出keyboard，又是曲线救国
         this.handleItemTap();
@@ -112,7 +111,6 @@ Ext.define('WeiQuPai.view.CommentList', {
 
     loadData: function(itemId) {
         var store = this.getStore();
-        //先清一下数据，防止别的商品的评论先出现
         store.getProxy().setExtraParam('item_id', itemId);
         store.loadPage(1, function(records, operation, success) {
             if (!success) {

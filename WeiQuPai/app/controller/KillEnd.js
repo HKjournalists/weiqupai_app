@@ -57,7 +57,7 @@ Ext.define('WeiQuPai.controller.KillEnd', {
         WeiQuPai.Util.post(url, data, function(rsp) {
             var view = Ext.create('WeiQuPai.view.UserAuction');
             view.setAuctionId(rsp.id);
-            setTImeout(function() {
+            setTimeout(function() {
                 WeiQuPai.navigator.push(view);
             }, 0);
             if (!rsp.is_new) {

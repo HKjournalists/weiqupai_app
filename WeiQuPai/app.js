@@ -24,7 +24,7 @@ Ext.application({
         'MyConsignee', 'MyFen', 'MyFollow', 'MyMessage', 'MyOrder', 'MyOrderDetail', 'NoticeAfter',
         'NoticeToday', 'NoticeTomorrow', 'Order', 'Pay', 'PrivateMessage', 'Profile', 'Register',
         'Routes', 'Setting', 'ShowOrder', 'ShowUser', 'ShowUserDis', 'ShowUserFeed', 'ShowUserLike',
-        'Today', 'Discount', 'KillEnd', 'TopKiller', 'UserAuction'
+        'Today', 'Discount', 'KillEnd', 'TopKiller', 'UserAuction', 'UserAuctionComment'
     ],
     models: [
         'Auction', 'Comment', 'Consignee', 'Feed', 'Item', 'Order', 'Profile', 'Shipment',

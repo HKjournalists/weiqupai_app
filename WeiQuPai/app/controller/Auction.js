@@ -4,7 +4,7 @@ Ext.define('WeiQuPai.controller.Auction', {
         refs: {
             shopInfo: 'disclosureitem[itemId=shopInfo]',
             brandInfo: 'disclosureitem[itemId=brandInfo]',
-            commentBtn: 'button[action=comment]',
+            commentBtn: '#bottombar button[action=comment]',
             shareBtn: 'button[action=share]',
             paiBtn: 'auction button[action=pai]',
             commentForm: 'inputcomment[itemId=postComment]',
