@@ -10,7 +10,7 @@ Ext.define('WeiQuPai.controller.Comment', {
                 avatartap: 'doAvatarTap',
                 feedavatartap: 'doFeedAvatarTap',
                 zanavatartap: 'doZanAvatarTap',
-                deletereply: 'showDeleteReply',
+                deletereply: 'doDeleteReply',
                 zan: 'doZan',
                 cancelzan: 'doCancelZan',
                 pictap: 'doPicTap',
@@ -45,7 +45,7 @@ Ext.define('WeiQuPai.controller.Comment', {
     //发表回复
     doPublishReply: function(form) {
         var user = WeiQuPai.Util.checkLogin();
-        if(!user) return;
+        if (!user) return;
         var pageView = this.getPageView();
         var item = pageView.getCommentRecord().get('item');
         var cid = pageView.getCommentRecord().get('id');
@@ -80,27 +80,20 @@ Ext.define('WeiQuPai.controller.Comment', {
         });
     },
 
-    //显示删除回复的浮层
-    showDeleteReply: function(list, index, record) {
-        var deleteLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.DeleteButtonLayer');
-        var self = this;
-        deleteLayer.setDeleteAction(function() {
-            return self.doDeleteReply(record);
-        });
-        deleteLayer.show();
-    },
-
     //删除回复
     doDeleteReply: function(record) {
-        var id = record.get('id');
-        var user = WeiQuPai.Cache.get('currentUser');
-        var self = this;
         var list = this.getPageView();
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/comment/delete&id=' + id + '&token=' + user.token;
-        WeiQuPai.Util.get(url, function(rsp) {
-            list.getStore().remove(record);
-            list.updateReplyData('reply_num', -1);
+        var deleteLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.DeleteButtonLayer');
+        deleteLayer.setDeleteAction(function() {
+            var id = record.get('id');
+            var user = WeiQuPai.Cache.get('currentUser');
+            var url = WeiQuPai.Config.apiUrl + '/?r=appv2/comment/delete&id=' + id + '&token=' + user.token;
+            WeiQuPai.Util.get(url, function(rsp) {
+                list.getStore().remove(record);
+                list.updateReplyData('reply_num', -1);
+            });
         });
+        deleteLayer.show();
     },
 
     //点回复的头像

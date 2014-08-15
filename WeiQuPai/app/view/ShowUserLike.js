@@ -29,6 +29,7 @@ Ext.define('WeiQuPai.view.ShowUserLike', {
 
     loadData: function(uid) {
         var store = this.getStore();
+        this.setLoadingText(null);
         store.getProxy().setExtraParam('uid', uid);
         store.load(function(records, operation, success) {
             if (!success) {

@@ -401,7 +401,7 @@ Ext.define("WeiQuPai.Util", {
 
     getAvatar: function(avatar, size) {
         if (!avatar) {
-            var idx = Math.ceil(Math.random() * 10) >  5 ? 1 : 0;
+            var idx = Math.ceil(Math.random() * 10) > 5 ? 1 : 0;
             var arr = ['resources/images/defavatar1.png', 'resources/images/defavatar2.png'];
             return arr[idx];
         }
@@ -430,8 +430,9 @@ Ext.define("WeiQuPai.Util", {
     /**
      * 跳转到拍品详情, 根据item舞台的数据跳到不同的页面
      * 如果有拍卖，跳到拍卖，如果有一拍到底，跳到一拍到底，否则，跳到拍品详情
+     * fromUserAuction 表示是否从血战到底过来, 从血战到底过来的不需要在拍品详情里显示提示
      */
-    goItemView: function(item_id) {
+    goItemView: function(item_id, fromUserAuction) {
         var user = WeiQuPai.Cache.get('currentUser');
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/item&id=' + item_id;
         WeiQuPai.Util.get(url, function(rsp) {
@@ -440,6 +441,7 @@ Ext.define("WeiQuPai.Util", {
                 view = Ext.create('WeiQuPai.view.Auction');
             } else {
                 view = Ext.create('WeiQuPai.view.Item');
+                fromUserAuction && view.element.down('.noticetip').hide();
             }
             view.setRecord(item);
             setTimeout(function() {

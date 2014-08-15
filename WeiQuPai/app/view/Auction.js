@@ -31,10 +31,6 @@ Ext.define('WeiQuPai.view.Auction', {
                 baseCls: 'arrow_left',
                 action: 'back'
 
-            }, {
-                align: 'right',
-                baseCls: 'refresh',
-                action: 'refresh'
             }]
         }, {
             xtype: 'detailpicshow'

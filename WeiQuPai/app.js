@@ -34,7 +34,7 @@ Ext.application({
         'Main', 'MainCard', 'StartupScreen', 'SplashScreen', 'WebPage', 'VTitleBar', 'Login', 'Register',
         'Iframe', 'SimpleViewer', 'ImageViewer', 'Sidebar', 'DisclosureItem', 'Pay', 'Order', 'Item', 'Auction', 'Item',
         'UserAuction', 'InputComment', 'CircleReplyLayer', 'CameraLayer', 'AuctionTip', 'MainTip', 'NoticeTip',
-        'AuctionTipTwo', 'PriceForm'
+        'AuctionTipTwo', 'PriceForm', 'DeleteButtonLayer', 'ConfirmLayer'
     ],
     stores: [
         'Auction', 'Comment', 'Banner', 'MyOrder', 'MyConsignee', 'Circle', 'MyProp', 'MyCoupon',

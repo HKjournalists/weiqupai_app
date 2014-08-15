@@ -40,12 +40,11 @@ Ext.define('WeiQuPai.controller.MyOrderDetail', {
     },
 
     doConfirm: function() {
-        var pageView = this.getPageView(),
-            record = pageView.getRecord();
-        var func = function(buttonId) {
-            if (buttonId != 'yes') return;
+        var pageView = this.getPageView();
+        var record = pageView.getRecord();
+        var confirmLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ConfirmLayer');
+        confirmLayer.setConfirmAction(function() {
             var user = WeiQuPai.Cache.get('currentUser');
-            var self = this;
             var url = WeiQuPai.Config.apiUrl + '/?r=appv2/MyOrder/confirm';
             var param = {
                 id: record.get('id'),
@@ -58,8 +57,8 @@ Ext.define('WeiQuPai.controller.MyOrderDetail', {
                 pageView.updateButtonStatus();
 
             });
-        };
-        Ext.Msg.confirm(null, '确认收货吗？', func, this);
+        });
+        confirmLayer.show();
     },
 
     doShowOrder: function() {
@@ -71,9 +70,9 @@ Ext.define('WeiQuPai.controller.MyOrderDetail', {
 
     doShipment: function() {
         var record = this.getPageView().getRecord();
-        WeiQuPai.Util.forward('shipment', {
-            orderId: record.get('id')
-        });;
+        var view = Ext.create('WeiQuPai.view.Shipment');
+        view.setOrderId(record.get('id'));
+        WeiQuPai.navigator.push(view);
     },
 
     doShowReturn: function() {

@@ -1,7 +1,7 @@
 Ext.define('WeiQuPai.view.MyOrder', {
     extend: 'Ext.DataView',
     xtype: 'myorder',
-    requires: ['WeiQuPai.view.MyOrderDetail', 'WeiQuPai.view.ShowOrder'],
+    requires: ['WeiQuPai.view.MyOrderDetail', 'WeiQuPai.view.ShowOrder', 'WeiQuPai.view.Shipment'],
     config: {
         cls: 'bg_ef',
         loadingText: null,
@@ -34,7 +34,7 @@ Ext.define('WeiQuPai.view.MyOrder', {
             '<div class="right">',
             '<ul>',
             '<li>{[this.getStatusText(values.status)]}</li>',
-            '<li style="height:18px;color:#e76049;"<tpl if="this.shipment(status)"> class="shipment_btn">查看物流</tpl></li>',
+            '<li style="height:18px;color:#e76049;"></li>',
             '<li><input type="button" value="{[this.getButtonText(values.status)]}" class="btn_e7"/></li>',
             '</ul>',
             '</div>',
@@ -59,9 +59,6 @@ Ext.define('WeiQuPai.view.MyOrder', {
                 },
                 getCover: function(cover) {
                     return WeiQuPai.Util.getImagePath(cover, '200');
-                },
-                shipment: function(status) {
-                    return status == WeiQuPai.Config.orderStatus.STATUS_SHIPMENT
                 }
             }
         ),
@@ -88,8 +85,7 @@ Ext.define('WeiQuPai.view.MyOrder', {
 
     initialize: function() {
         this.callParent(arguments);
-        //this.msgbox = WeiQuPai.Util.msgbox('您还没有拍到任何宝贝');
-        this.msgbox = WeiQuPai.Util.msgbox('');
+        this.msgbox = WeiQuPai.Util.msgbox();
         this.add(this.msgbox);
 
         this.loadData();
@@ -101,10 +97,6 @@ Ext.define('WeiQuPai.view.MyOrder', {
                 var eventList = this.getEventList();
                 var event = eventList[record.get('status')];
                 this.fireEvent(event, list, index, dataItem, record, e);
-                return false;
-            }
-            if (e.target.className == 'shipment_btn') {
-                this.fireEvent('shipment', list, index, dataItem, record, e);
                 return false;
             }
             if (Ext.get(e.target).findParent('.order_dis')) {

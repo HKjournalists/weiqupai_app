@@ -31,10 +31,9 @@ Ext.define('WeiQuPai.controller.MyOrder', {
     },
 
     doConfirm: function(list, index, dataItem, record, e) {
-        var func = function(buttonId) {
-            if (buttonId != 'yes') return;
+        var confirmLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ConfirmLayer');
+        confirmLayer.setConfirmAction(function() {
             var user = WeiQuPai.Cache.get('currentUser');
-            var self = this;
             var url = WeiQuPai.Config.apiUrl + '/?r=appv2/MyOrder/confirm';
             var param = {
                 id: record.get('id'),
@@ -44,20 +43,14 @@ Ext.define('WeiQuPai.controller.MyOrder', {
                 WeiQuPai.Util.toast('您已成功确认收货');
                 record.set('status', WeiQuPai.Config.orderStatus.STATUS_FINISH);
             });
-        };
-        Ext.Msg.confirm(null, '确认收货吗？', func, this);
+        });
+        confirmLayer.show();
     },
 
     doShowOrder: function(list, index, dataItem, record, e) {
         var view = Ext.create('WeiQuPai.view.ShowOrder');
         view.setRecord(record);
         WeiQuPai.navigator.push(view);
-    },
-
-    doShipment: function(list, index, dataItem, record, e) {
-        WeiQuPai.Util.forward('shipment', {
-            orderId: record.get('id')
-        });;
     },
 
     doViewItem: function(list, index, dataItem, record, e) {

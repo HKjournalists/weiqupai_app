@@ -471,9 +471,9 @@ html body
   {
     float:right;
     height:30px;
-    text-align:right;
-    padding-bottom:10px;
-    width:51px;
+    text-align: right;
+    margin-top: -5px;
+    width: 70px;
   }
   .detailDatabot
   {
@@ -492,17 +492,16 @@ html body
    .details .bottom .right ul li.nolike
    {
       background:url('../images/sadheart_alt.png') no-repeat;
-      height:13px;
-      background-size:contain;
-      width:17px;
+      height: 17px;
+      background-size: auto 17px;
+      width: 40px;
    }
     .details .bottom .right ul li.like
    {
       background:url('../images/heart_line.png') no-repeat;
-      height:13px;
-      background-size:contain;
-      width:17px;
-      margin-left:10px;
+      height: 17px;
+      background-size: auto 17px;
+      width: 30px;
    }
    //详情页面底部
    .x-toolbar.x-docked-bottom
@@ -837,7 +836,7 @@ html body
     padding:10px 0px;
     border-bottom:1px solid #efefef;
   }
-  .discard .list:last-child{
+  .discard  .x-dataview-item:last-child .list{
    border-bottom:0px;
    }
    .message .list
@@ -845,7 +844,6 @@ html body
     width:95%;
     margin:0px auto 5px;
     padding:10px 0px;
-    border-bottom:1px solid #efefef;
   }
   .discard .list .one,.message .list .one
   {
@@ -854,9 +852,7 @@ html body
     display:-moz-box;
   }
   .discard .list .one .img{
-   -moz-box-flex:1.0;
-   -webkit-box-flex:1.0;
-   box-flex:1.0;
+   max-width:40px;
    padding:5px;
   }
   .message .list .one .img
@@ -873,9 +869,9 @@ html body
   }
     .discard .list .one .name
   {
-  -moz-box-flex:9.0;
-   -webkit-box-flex:9.0;
-   box-flex:9.0;
+  -moz-box-flex:1.0;
+   -webkit-box-flex:1.0;
+   box-flex:1.0;
    padding:15px 15px;
    font-size:14px;
   }
@@ -2457,7 +2453,7 @@ html body
    .discount .left img
    {
     border-radius:5px;
-    height:82px;
+    height:80px;
    }
    .discount .right
    {
@@ -3108,7 +3104,7 @@ html body
 }
 .situation .time ul li span{color:$color_e7;line-height: 20px;}
 .situation .prop{
-  background:url(../images/bar_friend.png) no-repeat top center;
+  background:$color_fff url(../images/bar_friend.png) no-repeat top center;
   background-size:contain;
   width:100%;
   height:92px;
@@ -3292,7 +3288,6 @@ html body
 //精彩预告详情也提醒
 .noticetip{
   float:right;
-  width:50%;
 }
 .noticetip .notice_btn1{
   background:#ffc600;
@@ -3340,8 +3335,9 @@ html body
   top:0px;
   left:0px;
   background:url(../images/about.png) no-repeat;
-  background-size:auto 83px;
+  background-size:100% 83px;
   height:83px;
+  width:100%;
   z-index:1;
 }
 .aboutcontent

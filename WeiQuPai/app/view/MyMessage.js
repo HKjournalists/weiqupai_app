@@ -62,6 +62,9 @@ Ext.define('WeiQuPai.view.MyMessage', {
 
     initialize: function() {
         this.callParent(arguments);
+        this.msgbox = WeiQuPai.Util.msgbox();
+        this.add(this.msgbox);
+
         this.loadData();
         this.on('itemtap', this.bindEvent, this);
         this.on('activate', this.onActivate, this);
@@ -86,6 +89,10 @@ Ext.define('WeiQuPai.view.MyMessage', {
         this.getStore().load(function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');
+            }
+            if (records.length == 0) {
+                this.msgbox.show();
+                return;
             }
         }, this);
     },

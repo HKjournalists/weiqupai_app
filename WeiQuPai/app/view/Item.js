@@ -30,10 +30,6 @@ Ext.define('WeiQuPai.view.Item', {
                 baseCls: 'arrow_left',
                 action: 'back'
 
-            }, {
-                align: 'right',
-                baseCls: 'refresh',
-                action: 'refresh'
             }]
         }, {
             xtype: 'detailpicshow'
