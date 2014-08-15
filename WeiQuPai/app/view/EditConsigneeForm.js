@@ -106,11 +106,11 @@ Ext.define('WeiQuPai.view.EditConsigneeForm', {
     extend: 'Ext.form.Panel',
     xtype: 'editconsigneeform',
     config: {
-
+        cls: 'bg_ef',
         scrollable: 'vertical',
         items: [{
             xtype: 'vtitlebar',
-            title: '添加收货地址',
+            title: '修改收货地址',
             docked: 'top',
             items: [{
                 xtype: 'button',

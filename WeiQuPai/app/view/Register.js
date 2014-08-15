@@ -55,7 +55,9 @@ Ext.define('WeiQuPai.view.Register', {
         this.down('textfield[name=uname]').on('keyup', this.setButtonState, this);
         this.down('textfield[name=nick]').on('keyup', this.setButtonState, this);
         this.down('textfield[name=password]').on('keyup', this.setButtonState, this);
-        this.on('painted', this.onPainted);
+        this.on('painted', this.onPainted, this, {
+            single: true
+        });
     },
 
     onPainted: function() {

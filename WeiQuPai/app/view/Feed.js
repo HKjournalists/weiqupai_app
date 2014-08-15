@@ -94,10 +94,10 @@ Ext.define('WeiQuPai.view.Feed', {
                         return WeiQuPai.Util.getAvatar(avatar, 140);
                     },
                     getShowOrderPic: function(pic) {
-                        return WeiQuPai.Util.getImagePath(pic);
+                        return WeiQuPai.Util.getImagePath(pic, 150);
                     },
                     getPic: function(pic) {
-                        return WeiQuPai.Util.getImagePath(pic, 100);
+                        return WeiQuPai.Util.getImagePath(pic, 200);
                     },
                     getZanCls: function(values) {
                         return WeiQuPai.Util.hasCache('circle_zan', values.id) ? 'selflike' : 'like';

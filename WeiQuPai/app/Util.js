@@ -227,6 +227,7 @@ Ext.define("WeiQuPai.Util", {
             //更新本地的用户设置缓存
             user = Ext.merge(user, data);
             WeiQuPai.Cache.set('currentUser', user);
+            WeiQuPai.sidebar.updateUserInfo();
             callback && callback();
         });
     },
@@ -388,7 +389,9 @@ Ext.define("WeiQuPai.Util", {
         if (/^http:/.test(file)) return file;
         //如果不是以/开头，则是本地的相对路径
         var prefix = file.charAt(0) == '/' ? WeiQuPai.Config.host : '';
-        if (!size) return prefix + file;
+        if (!prefix || !size) {
+            return prefix + file;
+        }
         var segment = file.split('/');
         var basename = segment.pop();
         var path = segment.join('/');
@@ -396,7 +399,9 @@ Ext.define("WeiQuPai.Util", {
     },
 
     getAvatar: function(avatar, size) {
-        avatar = avatar || 'resources/images/defavatar.jpg';
+        if (!avatar) {
+            return 'resources/images/defavatar.jpg';
+        }
         return this.getImagePath(avatar, size);
     },
 
@@ -424,29 +429,21 @@ Ext.define("WeiQuPai.Util", {
      * 如果有拍卖，跳到拍卖，如果有一拍到底，跳到一拍到底，否则，跳到拍品详情
      */
     goItemView: function(item_id) {
-        WeiQuPai.Util.mask();
-        var item = WeiQuPai.model.Item;
         var user = WeiQuPai.Cache.get('currentUser');
-        item.getProxy().setExtraParam('token', user && user.token || '');
-        item.load(item_id, {
-            scope: this,
-            success: function(record, operation) {
-                WeiQuPai.Util.unmask();
-                var view;
-                if (record.get('auction')) {
-                    view = Ext.create('WeiQuPai.view.Auction');
-                } else if (record.get('user_auction')) {
-                    view = Ext.create('WeiQuPai.view.UserAuction');
-                } else {
-                    view = Ext.create('WeiQuPai.view.Item');
-                }
-                view.setRecord(record);
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/item&id=' + item_id;
+        WeiQuPai.Util.get(url, function(rsp) {
+            var view, item = Ext.create('WeiQuPai.model.Item', rsp);
+            if (item.get('auction')) {
+                view = Ext.create('WeiQuPai.view.Auction');
+            } else {
+                view = Ext.create('WeiQuPai.view.Item');
+            }
+            view.setRecord(item);
+            setTimeout(function() {
                 WeiQuPai.navigator.push(view);
-            },
-            failure: function(record, operation) {
-                WeiQuPai.Util.unmask();
-                WeiQuPai.Util.toast('数据加载失败');
-            },
+            }, 0);
+        }, {
+            mask: true
         });
     },
 
@@ -468,15 +465,16 @@ Ext.define("WeiQuPai.Util", {
     resetListPaging: function(list) {
         list.getStore().currentPage = 1;
         var plugins = list.getPlugins();
-        //要是第一页根本不够，就不需要通知重置
-        if (list.getStore().getPageSize() > list.getStore().getCount()) {
-            return;
-        }
         for (var i = 0; i < plugins.length; i++) {
-            if (Ext.getClassName(plugins[i]) == 'WeiQuPai.plugin.ListPaging') {
-                plugins[i].setIsFullyLoaded(false);
+            if (Ext.getClassName(plugins[i]) != 'WeiQuPai.plugin.ListPaging') {
+                continue;
+            }
+            if (list.getStore().getCount() < list.getStore().getPageSize()) {
+                plugins[i].getLoadMoreCmp().hide();
+                plugins[i].setIsFullyLoaded(true);
+            } else {
                 plugins[i].getLoadMoreCmp().show();
-                return;
+                plugins[i].setIsFullyLoaded(false);
             }
         }
     },

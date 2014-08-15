@@ -105,6 +105,10 @@ Ext.define('WeiQuPai.view.PrivateMessage', {
         var user = WeiQuPai.Cache.get('currentUser');
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/message/pm&sender=' + list.getUid() + '&page=' + nextPage + '&token=' + user.token;
         WeiQuPai.Util.get(url, function(rsp) {
+            if (rsp.length == 0) {
+                me.setState('loaded');
+                return me.snapBack();
+            }
             me.setState('pull');
             var toInsert = [];
             var oldRecord;

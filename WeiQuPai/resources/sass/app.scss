@@ -71,6 +71,14 @@ html body
 {
   background:transparent!important;
 }
+
+.ios7 .titlebar1, .ios7 .titlebar2, .ios7 .titlebar3{
+    height:62px;
+    padding-top:15px;
+  }
+  .ios7 .personal .title{
+    padding-top:15px;
+  }
       .titlebar1
      {
         background-image: url(../images/top.png) !important;
@@ -259,20 +267,20 @@ html body
     }
     .today .right .price .hallow_heart
     {
-     background:url('../images/heart.jpg') right no-repeat;
+     background:url('../images/heart.jpg') center center no-repeat;
      background-size: auto 16px;
      float: right;
-     width: 20px;
-     height: 20px;
+     width: 30px;
+     height: 30px;
 
     }
     .today .right .price .heart
     {
-     width:20px;height:20px;background:url('../images/heart_active.jpg') right no-repeat;
+     background:url('../images/heart_active.jpg') center center no-repeat;
      background-size: auto 16px;
      float: right;
-     width: 20px;
-     height: 20px;
+     width: 30px;
+     height: 30px;
     }
     .today .left .prod
     {
@@ -447,7 +455,6 @@ html body
   {
     //background:url('../images/detail_b.png') repeat-x;
     height:46px;
-  //  background-size:contain;
     width:100%;
     bottom:0;
     padding:20px 0px 0px;
@@ -515,18 +522,30 @@ html body
     padding:$zero;
     margin-top:-52px;
    }
-   .bottombar .btm1
+    .bottombarD .x-toolbar-inner
+   {
+    margin:auto;
+    background: url(../images/bottomBarD.png) no-repeat;
+    background-size: contain;
+    height:52px;
+    width:206px;
+    margin:auto;
+    text-align:center;
+    padding:$zero;
+    margin-top:-52px;
+   }
+   .bottombar .btm1,.bottombarD .btm1
    {
     margin-top:17px;
     width:30px;
     height:30px;
    }
-    .bottombar .btm2
+    .bottombar .btm2,.bottombarD .btm2
    {
     width:50px;
     height:50px;
    }
-    .bottombar .btm3
+    .bottombar .btm3,.bottombarD .btm3
    {
     margin-top:17px;
     width:30px;
@@ -584,6 +603,7 @@ html body
    {
      text-decoration:line-through;
      font-size:15px;
+     margin-right:1em;
    }
    .detail_map
    {
@@ -733,7 +753,7 @@ html body
    .discard
   {
 
-    margin:10px 8px 60px 8px;
+    margin:10px 8px 10px 8px;
     border-radius:6px;
     background:white;
     border:1px solid #efefef;
@@ -1136,6 +1156,11 @@ html body
      display:box;
      display:-webkit-box;
      color:$color_fff;
+     overflow:hidden;
+   }
+   .person_model img{
+    min-width:100%;
+    max-width:100%;
    }
    .person_zhezhao{
      background:url('../images/person_zhezhao.png') repeat-x;
@@ -1821,7 +1846,7 @@ html body
      margin-right:10px;
      text-align:right;
     }
-    .orderdetail_btn_e7, .w-button
+    .orderdetail_btn_e7
     {
      border:0px;
      border-radius:0px;
@@ -1830,6 +1855,7 @@ html body
      margin-top:10px;
      height:35px;
      line-height:35px;
+     -webkit-appearance:none;
     }
     @mixin orderBtnH
     {
@@ -2227,6 +2253,7 @@ html body
      padding:5px;
      font-size:13px;
      color:$color_fff;
+     -webkit-appearance:none;
     }
     //背景颜色
     .bg_ef{
@@ -2245,22 +2272,17 @@ html body
     }
     .arrow_left
     {
-     background-image:url('../images/return_.png');
-     background-repeat: no-repeat;
+      background:url('../images/return_.png') no-repeat center center;
       background-size: 11px 18px;
-      background-position: left center;
-      height: 2em;
-      padding: 12px;
-      margin-left: 10px;
-      padding: 0px 30px 0px 10px;
+      height: 2.1em;
+      padding: 0 20px;
     }
     .refresh
     {
-     background:url('../images/reflash.png') no-repeat;     
+     background:url('../images/reflash.png') no-repeat center center;
      background-size:auto 18px;
-     height:18px;
-     width:38px;
-     background-position:10px center;
+     height:2.1em;
+     padding:0 20px;
     }
     .color_e7
     {
@@ -2276,12 +2298,20 @@ html body
       line-height: 2;
       color: #383838;
     }
+    .tuwen img{
+      max-width:100%;
+    }
+    .tuwen li{
+      margin-left:1.5em;
+      list-style:inherit;
+    }
     .input_text
     {
      background:$color_fff;
      border:1px solid #ccc;
      border-radius:3px;
      margin:5px 10px;
+     font-size:14px;
     }
     .input_text .x-input-el{
       height:30px;
@@ -2386,23 +2416,19 @@ html body
    //首页按钮
    @mixin user_btn
    {
-     height:19px;
      background-size:auto 19px;
-     width:20px;
-     margin-left:10px;
-     padding:10px;
+     height: 2.1em;
+     padding: 0 20px;
    }
     .user
     {
-     background:url('../images/peple.png') no-repeat;
+     background:url('../images/peple.png') no-repeat center center ;
      @include user_btn;
     }
     .list_btn
     {
-     background:url('../images/list.png') no-repeat;
+     background:url('../images/list.png') no-repeat center center;
      @include user_btn;
-     margin-left:0px;
-     margin-right: 10px;
     }
   //我的优惠
    @mixin discount_wenzi
@@ -2937,6 +2963,264 @@ html body
 .pm-dataitem{
   background:transparent;
   margin:15px 5px;
+}
+.add-content{
+  margin-top:5px;
+}
+
+.bar{}
+.bar .bar_banner{background:url(../images/bar_banner.jpg) no-repeat;background-size:100% 68px;width:100%;height:68px;}
+.bar_banner .btn{
+  margin-top: 40px;
+  margin-right: 5px;
+  float: right;
+  background: url(../images/bar_banner_btn.jpg) no-repeat;
+  background-size: contain;
+  width: 26px;
+  height: 26px;
+  border:0px;
+  -webkit-appearance:none;
+}
+.barimg{max-width:100%;min-width:100%;margin-top:5px;}
+.barper{background: white; margin-top:-2px;}
+.barper .top{color:red;font-size:13px;padding-top:10px;margin:0px 6px;}
+.barper .top .left{
+  background: url(../images/bar_xue.jpg) left no-repeat;
+  background-size: 8px 10px;
+  background-position: 3px 3px;
+  width: 50%;
+  float: left;
+  height: 18px;
+  padding-top: 1px;
+  text-indent: 15px;
+  }
+.barper .top .right{
+  background:url(../images/bar_person.jpg) right no-repeat;
+  background-size:65px 25px;
+  width:50%;
+  float:right;
+  height:25px;
+}
+.barper .bottom{
+  margin-top:5px;
+}
+.barper .bottom ul{
+  list-style-type: none;
+  margin:0px;
+  padding:0px;
+}
+.barper .bottom ul li{
+  float:left;
+  width:33.3%;
+  text-align: center;
+  font-size:15px;
+  padding-bottom:10px;
+}
+.barper .bottom ul li img{
+  border-radius:15px;
+  vertical-align: middle;
+  width:30px;
+  height:30px;
+}
+.barper .bottom .user_price{
+  line-height:30px;
+  margin-left:6px;
+}
+.bar_icon{
+  background: url(../images/bar_icon.jpg) no-repeat;
+  background-size: 45px 48px;
+  float: right;
+  margin-right: 7px;
+  height: 48px;
+  width: 45px;
+  border: 1px solid red;
+  position: relative;
+  margin-top: -70px;
+  border:0px;
+}
+//我的战况
+.situation{
+}
+.situation .product{
+  color:#898294;
+  height:74px;
+  width:100%;
+  background:$color_e7;
+  padding:10px;
+}
+.situation .product .top{
+  height:40px;
+  border:1px solid #fefefe;
+  display:-webkit-box;
+  background: $color_fff;
+}
+.situation .product .top .left{
+  width:40px;
+  height:40px;
+  padding:5px;
+}
+.situation .product .top .right{
+  height:30px;
+  padding:5px 0 5px;
+  -webkit-box-flex:1;
+}
+.situation .product .bottom{
+  margin-top:5px;
+  text-align: right;
+  color:$color_fff;
+  font-size:12px;
+}
+@mixin situation_bg{
+  background: $color_fff;
+  width:100%;
+  margin-top:5px;
+}
+@mixin ul_style{
+   margin:0px;
+   paddding:0px;
+   list-style-type: none;
+}
+.situation .time{
+  @include situation_bg;
+}
+.situation .time ul{
+  @include ul_style;
+}
+.situation .time ul li
+{
+  float:left;
+  width:33.3%;
+  text-align: center;
+  padding-top:5px;
+  padding-bottom:5px;
+}
+.situation .time ul li span.active{
+  background: url(../images/bar_guan.png) right no-repeat;
+  background-size: 12px 8px;
+  padding: 16px 10px 0px;
+}
+.situation .time ul li span{color:$color_e7;line-height: 20px;}
+.situation .prop{
+  background:url(../images/bar_friend.png) no-repeat top center;
+  background-size:contain;
+  width:100%;
+  height:92px;
+  margin-top:-10px;
+}
+.situation .helper{
+  background:url(../images/bar_bg.jpg) repeat-y;
+  width:320px;
+  background-size:contain;
+  padding:10px;
+  margin:auto;
+}
+.helper .helper_nick{
+  text-align:right;
+  display:inline-block;
+  vertical-align:middle;
+  width:129px;
+  padding-right:10px;
+}
+.helper .helper_avatar{
+  width:40px;
+  height:40px;
+  border-radius:20px;
+  display:inline-block;
+  vertical-align:middle;
+}
+.helper .helper_discount{
+  width:130px;
+  text-align: left;
+  padding-left:10px;
+  display:inline-block;
+  vertical-align:middle;
+}
+.situation .help_time{
+  font-size:12px;
+  color:#898294;
+  margin-left:6px;
+}
+.situation .x-list-paging{
+  background:#fff;
+}
+.killer{
+  margin-top:10px;
+}
+.killer .kill_top{
+  background: url(../images/bar_tip.png) no-repeat;
+  background-size: contain;
+  width:21px;
+  height:4px;
+  margin:auto;
+  z-index:1;
+}
+.killer .kill_content{
+  z-index:0;
+}
+.killer .kill_content .banner{
+  background:url(../images/bar_killer.jpg) no-repeat;
+  background:contain;
+  width:314px;
+  height:13px;
+  margin:5px auto;
+}
+.killer .kill_content .contentkill{
+  padding:15px 10px 10px;
+  display:-webkit-box;
+}
+.killer .kill_content .person{
+  width:30px;
+  height:30px;
+  border-radius:15px;
+}
+.killer .kill_content .map{
+  -webkit-box-flex:1;
+  margin:15px 50px 0px 5px;
+  height:15px;
+  background: #efefef;
+  border-radius:3px;
+}
+.killer .kill_content .btn{
+  border:0px;
+  background:$color_e7;
+  padding:5px;
+  color:$color_fff;
+  border-radius:4px;
+  margin-top:5px;
+  -webkit-appearance:none;
+}
+.progress-bar{
+  background:#f2bc00;
+  border-radius:4px;
+  height:15px;
+  position:relative;
+}
+.killerbar{
+  background: #f2bc00;
+  position: absolute;
+  border-radius: 4px;
+  top: -25px;
+  left:100%;
+  margin-left:-22px;
+  color: white;
+  width: 65px;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+}
+.killertip{
+  background: url(../images/bar_tip.jpg) no-repeat;
+  background-size: 4px 4px;
+  margin-top: -1px;
+  float: left;
+  width: 80px;
+  height: 8px;
+  margin-left: 20px;
+  text-align: center;
+  position: absolute;
+}
+.hidden{
+  visibility:hidden;
 }
 .empty{
   background:url('../images/empty.png') no-repeat;

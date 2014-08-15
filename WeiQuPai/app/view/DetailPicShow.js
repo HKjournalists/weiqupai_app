@@ -17,7 +17,7 @@ Ext.define('WeiQuPai.view.DetailPicShow', {
         this.removeAll();
         for (var i = 0; i < data.length; i++) {
             var item = Ext.create('Ext.Img', {
-                src: WeiQuPai.Util.getImagePath(data[i], '290')
+                src: WeiQuPai.Util.getImagePath(data[i])
             });
             item.on('tap', this.doImageTap, this);
             this.add(item);

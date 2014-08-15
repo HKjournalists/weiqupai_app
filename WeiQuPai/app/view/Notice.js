@@ -8,6 +8,17 @@ Ext.define('WeiQuPai.view.Notice', {
         uid: null,
         scrollable: true,
         cls: 'bg_ef',
+        plugins: [{
+            type: 'wpullrefresh',
+            lastUpdatedText: '上次刷新：',
+            lastUpdatedDateFormat: 'H点i分',
+            loadingText: '加载中...',
+            pullText: '下拉刷新',
+            releaseText: '释放立即刷新',
+            loadedText: '下拉刷新',
+            refreshFn: 'fetchLastest',
+            scrollerAutoRefresh: true
+        }],
         items: [{
             xtype: 'vtitlebar',
             title: '精彩预告',
@@ -21,7 +32,7 @@ Ext.define('WeiQuPai.view.Notice', {
             xtype: 'container',
             layout: 'hbox',
             cls: 'my_btn',
-            itemId: 'tabber',
+            itemId: 'tabbar',
             items: [{
                 flex: 1,
                 xtype: 'button',
@@ -62,8 +73,24 @@ Ext.define('WeiQuPai.view.Notice', {
         this.initTab();
     },
 
+    //下拉刷新, 这里的this是pullRefresh对象
+    fetchLastest: function() {
+        var me = this;
+        var loadCount = 0;
+        var allLoad = function() {
+            loadCount++;
+            if (loadCount == 3) {
+                me.setState('loaded');
+                me.snapBack();
+            }
+        }
+        this.getList().down('noticetoday').loadData(allLoad);
+        this.getList().down('noticetomorrow').loadData(allLoad);
+        this.getList().down('noticeafter').loadData(allLoad);
+    },
+
     initTab: function() {
-        var btns = this.query('#tabber button');
+        var btns = this.query('#tabbar button');
         var me = this;
         for (var i = 0; i < btns.length; i++) {
             var xtype = btns[i].getItemId().substr(4);
@@ -76,20 +103,18 @@ Ext.define('WeiQuPai.view.Notice', {
                 this.addCls('x-button-active');
                 this.tabView.show();
                 me.activeTab = this;
-                me.getScrollable().getScroller().scrollTo(0, me.tabPosition, false);
+                me.getScrollable().getScroller().scrollTo(0, me.tabPosition, true);
             });
         }
         this.activeTab = btns[0];
 
         //tab的悬停效果
         var scroller = this.getScrollable().getScroller();
-        scroller.addListener('scroll', function(scroler, x, y) {
+        scroller.addListener('scroll', function(scroller, x, y) {
             if (y >= this.tabPosition) {
-                this.down('#tabber').setDocked('top');
-            } else {
-                this.down('#tabber').setDocked(null);
+                var offset = y - this.tabPosition;
+                this.down('#tabbar').translate(null, offset, false);
             }
-
 
         }, this);
     }

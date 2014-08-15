@@ -15,7 +15,7 @@ Ext.define('WeiQuPai.view.ShowUserDis', {
             '</div>',
             '<div class="content">',
             '<div class="left">',
-            '<img src="{[WeiQuPai.Util.getImagePath(values.item.pic_cover, 100)]}" width="40">',
+            '<img src="{[WeiQuPai.Util.getImagePath(values.item.pic_cover, 200)]}" width="40">',
             '</div>',
             '<div class="right">',
             '{item.title}',

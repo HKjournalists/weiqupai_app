@@ -1,16 +1,12 @@
 Ext.define("WeiQuPai.Config", {
     singleton: true,
     //保存基础url
-    // host: 'http://localhost',
-    // apiUrl: 'http://localhost',
-    // updateUrl: 'http://localhost/update',
-    host: 'http://192.168.1.174',
-    apiUrl: 'http://192.168.1.174',
-    updateUrl: 'http://192.168.1.174/update',
-
+    host: 'http://localhost',
+    apiUrl: 'http://localhost',
+    updateUrl: 'http://localhost/update',
 
     //app版本
-    version: "1.5",
+    version: "2.0",
 
     //订单状态
     orderStatusText: ['未付款', '处理中', '已发货', '已完成', '取消未付款', '取消已付款'],

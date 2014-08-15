@@ -74,10 +74,10 @@ Ext.define('WeiQuPai.view.Circle', {
                     return WeiQuPai.Util.hasCache('circle_zan', values.id) ? 'selflike' : 'like';
                 },
                 getPic: function(pic) {
-                    return WeiQuPai.Util.getImagePath(pic, 100);
+                    return WeiQuPai.Util.getImagePath(pic, 200);
                 },
                 getShowOrderPic: function(pic) {
-                    return WeiQuPai.Util.getImagePath(pic);
+                    return WeiQuPai.Util.getImagePath(pic, 150);
                 },
                 getAvatar: function(avatar) {
                     return WeiQuPai.Util.getAvatar(avatar, 140);
@@ -113,6 +113,9 @@ Ext.define('WeiQuPai.view.Circle', {
     },
 
     loadData: function() {
+        if (this.getStore().isLoading()) {
+            return false;
+        }
         var user = WeiQuPai.Cache.get('currentUser');
         this.getStore().getProxy().setExtraParam('token', user && user.token || null);
         this.setLoadingText(null);

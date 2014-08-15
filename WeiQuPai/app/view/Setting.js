@@ -36,13 +36,12 @@ Ext.define('WeiQuPai.view.Setting', {
 
     initialize: function() {
         this.on('activate', this.onActivate, this);
-        this.on('painted', this.onPainted);
     },
 
     onActivate: function() {
         this.down('button[action=logout]').setHidden(!WeiQuPai.Util.isLogin());
-    },
-    onPainted: function() {
-        WeiQuPai.Notify.notify(WeiQuPai.Notify.MSG_APP_UPDATE);
+        if (WeiQuPai.Notify.hasNotify(WeiQuPai.Notify.MSG_APP_UPDATE)) {
+            this.down('disclosureitem[itemId=update]').setBadge();
+        }
     }
 });

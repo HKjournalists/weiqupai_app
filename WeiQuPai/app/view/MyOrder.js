@@ -94,6 +94,8 @@ Ext.define('WeiQuPai.view.MyOrder', {
 
         this.loadData();
 
+        this.on('activate', this.onActivate, this);
+
         this.onBefore('itemtap', function(list, index, dataItem, record, e) {
             if (e.target.tagName.toLowerCase() == 'input') {
                 var eventList = this.getEventList();
@@ -112,25 +114,19 @@ Ext.define('WeiQuPai.view.MyOrder', {
         }, this);
     },
 
-    setBadge: function(orderId) {
-        var item = this.getItemAt(this.getStore().indexOfId(orderId));
-        if (!item) return;
-        var badgeEl = item.element.down('.x-badge');
-        badgeEl.addCls('w-badge-mdot');
-        badgeEl.parent().addCls('x-hasbadge');
-        badgeEl.show();
-    },
-
-    clearBadge: function(orderId) {
-        var item = this.getItemAt(this.getStore().indexOfId(orderId));
-        if (!item) return;
-        var badgeEl = item.element.down('.x-badge');
-        badgeEl.removeCls('w-badge-mdot');
-        badgeEl.parent().removeCls('x-hasbadge');
-        badgeEl.hide();
+    onActivate: function() {
+        var msgType = [WeiQuPai.Notify.MSG_NEW_ORDER];
+        //有新消息才刷新
+        if (WeiQuPai.Notify.hasNotify(msgType)) {
+            this.loadData();
+            WeiQuPai.Notify.clearNotify(msgType);
+        }
     },
 
     loadData: function() {
+        if (this.getStore().isLoading()) {
+            return false;
+        }
         var user = WeiQuPai.Cache.get('currentUser');
         if (!user) {
             return false;
@@ -154,8 +150,6 @@ Ext.define('WeiQuPai.view.MyOrder', {
                 store.removeAll();
                 return false;
             }
-            //通知标红点
-            WeiQuPai.Notify.notify([WeiQuPai.Notify.MSG_NEW_ORDER, WeiQuPai.Notify.MSG_ORDER_SHIP]);
         }, this);
     }
 });

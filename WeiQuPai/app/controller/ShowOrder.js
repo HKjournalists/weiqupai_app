@@ -52,7 +52,7 @@ Ext.define('WeiQuPai.controller.ShowOrder', {
         picList.push(url);
         var img = Ext.create('Ext.Img');
         img.dataIndex = picList.length - 1;
-        img.setSrc(url);
+        img.setSrc(WeiQuPai.Util.getImagePath(url, 150));
         img.setCls('photo');
         img.on('tap', this.showDeleteLayer, this);
         cameraArea.insert(cameraArea.getItems().length - 1, img);

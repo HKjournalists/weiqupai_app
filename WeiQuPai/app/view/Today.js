@@ -2,7 +2,7 @@ Ext.define('WeiQuPai.view.Today', {
     extend: 'Ext.DataView',
     xtype: 'today',
     requires: ['WeiQuPai.view.Banner', 'WeiQuPai.view.Auction', 'WeiQuPai.view.SpecialSale',
-        'WeiQuPai.view.Discount', 'WeiQuPai.view.YiPai', 'WeiQuPai.view.AuctionTip'
+        'WeiQuPai.view.Discount', 'WeiQuPai.view.KillEnd', 'WeiQuPai.view.AuctionTip'
     ],
     config: {
         loadingText: null,
@@ -107,7 +107,7 @@ Ext.define('WeiQuPai.view.Today', {
 
                 xtype: 'button',
                 baseCls: 'btn2',
-                action: 'yipai',
+                action: 'killend',
                 flex: 1
             }]
         }, {
@@ -165,7 +165,6 @@ Ext.define('WeiQuPai.view.Today', {
         this.on('hide', this.onHide, this);
         this.on('itemtap', this.bindEvent, this);
         this.down('#specialList').on('tap', function(e) {
-            Ext.Msg.alert("2");
             var idx = Ext.get(e.target).findParent('.list-product').getAttribute('data-idx') - 1;
             var view = Ext.create('WeiQuPai.view.SpecialSale', {
                 param: this.todayData.special[idx]
@@ -204,6 +203,7 @@ Ext.define('WeiQuPai.view.Today', {
             me.down('#specialList').setData(data.special);
             me.down('banner').updateBanner(data.banner);
             me.todayData = data;
+            WeiQuPai.Util.resetListPaging(me);
             callback && callback();
         });
     },
@@ -212,7 +212,6 @@ Ext.define('WeiQuPai.view.Today', {
     fetchLastest: function() {
         var me = this;
         this.getList().loadData(function() {
-            WeiQuPai.Util.resetListPaging(me.getList());
             me.setState('loaded');
             me.snapBack();
         });

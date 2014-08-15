@@ -25,7 +25,7 @@ Ext.define('WeiQuPai.view.ShowUser', {
             xtype: 'container',
             itemId: 'personmodel',
             tpl: new Ext.XTemplate(
-                '<div class="person_model"><img src="{[this.getBg(values)]}" width="100%" height="155"></div>',
+                '<div class="person_model"><img src="{[this.getBg(values)]}"></div>',
                 '<div class="person_zhezhao">',
                 '<div class="one">',
                 '<div class="head">',
@@ -86,7 +86,8 @@ Ext.define('WeiQuPai.view.ShowUser', {
             xtype: 'container',
             layout: 'hbox',
             cls: 'my_btn',
-            itemId: 'tabber',
+            style: 'position:relative;z-index:100',
+            itemId: 'tabbar',
             items: [{
                 flex: 1,
                 xtype: 'button',
@@ -127,9 +128,6 @@ Ext.define('WeiQuPai.view.ShowUser', {
         this.initTab();
         this.down('#personmodel').on('tap', this.bindEvent, this, {
             element: 'element'
-        });
-        this.on('painted', function() {
-            this.tabPosition = this.down('#tabber').element.getY() + 40;
         });
     },
 
@@ -196,7 +194,7 @@ Ext.define('WeiQuPai.view.ShowUser', {
     },
 
     initTab: function() {
-        var btns = this.query('#tabber button');
+        var btns = this.query('#tabbar button');
         var me = this;
         for (var i = 0; i < btns.length; i++) {
             var xtype = btns[i].getItemId().substr(4);
@@ -209,21 +207,33 @@ Ext.define('WeiQuPai.view.ShowUser', {
                 this.addCls('x-button-active');
                 this.tabView.show();
                 me.activeTab = this;
-                me.getScrollable().getScroller().scrollTo(0, me.tabPosition, false);
+                setTimeout(function() {
+                    var scroller = me.getScrollable().getScroller();
+                    if (scroller.position.y > me.tabPosition) {
+                        scroller.scrollTo(null, me.tabPosition, true);
+                    }
+                }, 50);
             });
         }
         this.activeTab = btns[0];
 
         //tab的悬停效果
+        this.on('painted', function() {
+            var me = this;
+            //不使用timeout获取的值有可能不对
+            setTimeout(function() {
+                me.tabPosition = me.down('#tabbar').element.getY() - me.down('vtitlebar').element.getHeight();
+            }, 200);
+        }, this, {
+            single: true
+        });
         var scroller = this.getScrollable().getScroller();
-        scroller.addListener('scroll', function(scroler, x, y) {
+        scroller.addListener('scroll', function(scroller, x, y) {
             if (y >= this.tabPosition) {
-                this.down('#tabber').setDocked('top');
+                this.down('#tabbar').translate(null, y - this.tabPosition, false);
             } else {
-                this.down('#tabber').setDocked(null);
+                this.down('#tabbar').translate(null, 0, false);
             }
-
-
         }, this);
     }
 });

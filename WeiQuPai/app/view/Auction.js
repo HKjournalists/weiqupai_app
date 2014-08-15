@@ -8,8 +8,6 @@ Ext.define('WeiQuPai.view.Auction', {
         'WeiQuPai.view.AuctionTip'
     ],
     config: {
-        showAnimation: 'fadeIn',
-        hideAnimation: 'fadeOut',
         scrollable: true,
         cls: 'detail',
         loadingText: null,
@@ -107,6 +105,7 @@ Ext.define('WeiQuPai.view.Auction', {
             layout: 'hbox',
             cls: 'log_btn',
             itemId: 'tabbar',
+            style: 'position:relative;z-index:100',
             items: [{
                 flex: 1,
                 xtype: 'button',
@@ -149,19 +148,28 @@ Ext.define('WeiQuPai.view.Auction', {
         activeTab: null,
 
     },
+
+    tabPosition: 0,
+
     initialize: function() {
-        var view = Ext.create('WeiQuPai.view.AuctionTip');
-        view.show();
         this.callParent(arguments);
+        this.showTips();
         this.shareLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer');
         this.down('#item_title').on('tap', this.bindEvent, this, {
             element: 'element'
         });
         //初始化tab
         this.initTab();
-
         //销毁的时候结束定时器
         this.on('destroy', this.onDestroy);;
+    },
+
+    showTips: function() {
+        if (!WeiQuPai.app.firstLaunch) return;
+        setTimeout(function() {
+            var view = WeiQuPai.Util.getGlobalView('WeiQuPai.view.AuctionTip');
+            view.show();
+        }, 500);
     },
 
     initTab: function() {
@@ -178,9 +186,30 @@ Ext.define('WeiQuPai.view.Auction', {
                 this.addCls('x-button-active');
                 this.tabView.show();
                 me.setActiveTab(this);
+                setTimeout(function() {
+                    var scroller = me.getScrollable().getScroller();
+                    if (scroller.position.y > me.tabPosition) {
+                        scroller.scrollTo(null, me.tabPosition, true);
+                    }
+                }, 50);
             });
         }
-        this.setActiveTab(btns[0]);
+        this.setActiveTab(btns[1]);
+
+        //tab的悬停效果
+        this.on('painted', function() {
+            this.tabPosition = this.down('#tabbar').element.getY() - this.down('vtitlebar').element.getHeight();
+        }, this, {
+            single: true
+        });
+        var scroller = this.getScrollable().getScroller();
+        scroller.addListener('scroll', function(scroller, x, y) {
+            if (y >= this.tabPosition) {
+                this.down('#tabbar').translate(null, y - this.tabPosition, false);
+            } else {
+                this.down('#tabbar').translate(null, 0, false);
+            }
+        }, this);
     },
 
     bindEvent: function(e) {
@@ -194,9 +223,9 @@ Ext.define('WeiQuPai.view.Auction', {
         }
     },
 
-    applyRecord: function(record) {
+    updateRecord: function(record) {
         if (record == null) {
-            return null;
+            return;
         }
 
         var data = record.data;
@@ -207,6 +236,7 @@ Ext.define('WeiQuPai.view.Auction', {
         this.down('itemparam').setData(data);
         this.down('itemdesc').setData(data);
         this.down('commentlist').setItemId(record.get('id'));
+        this.setCountdown();
         return record;
     },
 

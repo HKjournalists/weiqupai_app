@@ -89,6 +89,7 @@ Ext.define('WeiQuPai.controller.ShowUser', {
         var view = WeiQuPai.navigator.getActiveItem();
         var data = view.down('#personmodel').getData();
         data.avatar = url;
+        view.down('#personmodel').setData(data);
         WeiQuPai.Util.updateProfile({
             avatar: url
         });

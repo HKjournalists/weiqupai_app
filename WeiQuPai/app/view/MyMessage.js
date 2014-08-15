@@ -26,7 +26,7 @@ Ext.define('WeiQuPai.view.MyMessage', {
             '<div class="img">',
             '<img src="{[this.getAvatar(values.sender.avatar)]}" width="40">',
             '</div>',
-            '<div class="name">{content.content:htmlEncode}</div>',
+            '<div class="name">{content.content:htmlEncode} {[this.getAddContent(values)]}</div>',
             '<div style="clear:both"></div>',
             '</div>',
 
@@ -39,6 +39,12 @@ Ext.define('WeiQuPai.view.MyMessage', {
             '</div>', {
                 getAvatar: function(avatar) {
                     return WeiQuPai.Util.getAvatar(avatar, 140);
+                },
+                getAddContent: function(values) {
+                    if (values.content.add_content) {
+                        return '<p class="add-content">' + Ext.String.htmlEncode(values.content.add_content) + '</p>';
+                    }
+                    return '';
                 }
             }
         ),
@@ -58,9 +64,22 @@ Ext.define('WeiQuPai.view.MyMessage', {
         this.callParent(arguments);
         this.loadData();
         this.on('itemtap', this.bindEvent, this);
+        this.on('activate', this.onActivate, this);
+    },
+
+    onActivate: function() {
+        //有新消息才刷新
+        var msgType = WeiQuPai.Notify.MSG_MESSAGE;
+        if (WeiQuPai.Notify.hasNotify(msgType)) {
+            this.loadData();
+            WeiQuPai.Notify.clearNotify(msgType);
+        }
     },
 
     loadData: function() {
+        if (this.getStore().isLoading()) {
+            return false;
+        }
         var user = WeiQuPai.Cache.get('currentUser');
         this.getStore().getProxy().setExtraParam('token', user && user.token || null);
         this.setLoadingText(null);

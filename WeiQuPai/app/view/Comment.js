@@ -95,7 +95,7 @@ Ext.define('WeiQuPai.view.Comment', {
                         return WeiQuPai.Util.getImagePath(pic);
                     },
                     getPic: function(pic) {
-                        return WeiQuPai.Util.getImagePath(pic, 100);
+                        return WeiQuPai.Util.getImagePath(pic, 200);
                     },
                     getZanCls: function(values) {
                         return WeiQuPai.Util.hasCache('comment_zan', parseInt(values.id)) ? 'selflike' : 'like';

@@ -112,7 +112,9 @@ Ext.define('WeiQuPai.plugin.ListPaging', {
         //list加载完再添加load more 否则会添加上list上面
         list.on('painted', function() {
             this.addLoadMoreCmp();
-        }, this);
+        }, this, {
+            single: true
+        });
     },
 
     /**

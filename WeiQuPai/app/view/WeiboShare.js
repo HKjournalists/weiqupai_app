@@ -15,7 +15,9 @@ Ext.define('WeiQuPai.view.WeiboShare', {
     },
 
     initialize: function() {
-        this.on('painted', this.loadIframe, this);
+        this.on('painted', this.loadIframe, this, {
+            single: true
+        });
     },
 
     applyData: function(data) {
