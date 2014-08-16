@@ -54,6 +54,7 @@ Ext.define('WeiQuPai.view.MyFollow', {
     },
 
     loadData: function(uid) {
+        this.setLoadingText(null);
         var store = this.getStore();
         store.getProxy().setExtraParam('uid', uid);
         store.load(function(records, operation, success) {

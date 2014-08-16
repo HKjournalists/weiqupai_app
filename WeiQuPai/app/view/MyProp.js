@@ -105,6 +105,7 @@ Ext.define('WeiQuPai.view.MyProp', {
 
     loadData: function(callback) {
         var user = WeiQuPai.Cache.get('currentUser');
+        this.down('dataview').setLoadingText(null);
         var store = this.down('dataview').getStore();
         store.getProxy().setExtraParam('token', user.token);
         store.load(function(records, operation, success) {

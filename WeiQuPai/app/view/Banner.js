@@ -36,7 +36,7 @@ Ext.define('WeiQuPai.view.Banner', {
                 src: WeiQuPai.Util.getImagePath(data[i].pic_url)
             });
             if (data[i].auction) {
-                img.setSrc(WeiQuPai.Util.getImagePath(data[i].auction.item.pic_cover));
+                //img.setSrc(WeiQuPai.Util.getImagePath(data[i].auction.item.pic_cover));
                 img.setTpl(this.bannerTpl);
             }
             img.setData(data[i]);

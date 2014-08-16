@@ -17,7 +17,7 @@ Ext.define('WeiQuPai.controller.TopKiller', {
 
     showItem: function() {
         var data = this.getPageView().down('#itemInfo').getData();
-        WeiQuPai.Util.goItemView(data.item_id);
+        WeiQuPai.Util.goItemView(data.item_id, true);
     },
 
     showUser: function(list, index, dataItem, record, e) {

@@ -118,6 +118,7 @@ Ext.define('WeiQuPai.view.MyCoupon', {
 
     loadData: function(callback) {
         var user = WeiQuPai.Cache.get('currentUser');
+        this.down('dataview').setLoadingText(null);
         var store = this.down('dataview').getStore();
         if (store.isLoading()) {
             return false;

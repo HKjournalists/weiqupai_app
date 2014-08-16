@@ -158,7 +158,6 @@ Ext.define('WeiQuPai.view.Today', {
     todayData: null,
 
     initialize: function() {
-        //this.AuctionTip = WeiQuPai.Util.createOverlay('WeiQuPai.view.AuctionTip');
         this.callParent(arguments);
         this.loadData();
         this.on('activate', this.onActivate, this);

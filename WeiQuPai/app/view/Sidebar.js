@@ -104,6 +104,18 @@ Ext.define('WeiQuPai.view.Sidebar', {
         this.down('#personal').setData(data);
     },
 
+    destroyLoginView: function() {
+        var buttons = this.query('button');
+        for (var i = 0; i < buttons.length; i++) {
+            var xtype = buttons[i].getId();
+            if (this.getNotLogin().indexOf(xtype) != -1) {
+                continue;
+            }
+            var item = WeiQuPai.mainCard.down(xtype);
+            item && WeiQuPai.mainCard.remove(item);
+        }
+    },
+
     bindEvent: function() {
         var buttons = this.query('button');
         for (var i = 0; i < buttons.length; i++) {
@@ -183,7 +195,7 @@ Ext.define('WeiQuPai.view.Sidebar', {
             this.close();
             return;
         }
-        var mainCard = Ext.Viewport.down('maincard');
+        var mainCard = WeiQuPai.mainCard;
         var item = mainCard.down(xtype);
         if (!item) {
             mainCard.add({

@@ -73,6 +73,7 @@ Ext.define('WeiQuPai.view.KillEnd', {
     loadData: function() {
         var store = this.getStore();
         //加载数据
+        this.setLoadingText(null);
         store.load(function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');

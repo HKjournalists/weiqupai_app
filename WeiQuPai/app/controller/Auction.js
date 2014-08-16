@@ -236,12 +236,5 @@ Ext.define('WeiQuPai.controller.Auction', {
     doShare: function() {
         var currentView = WeiQuPai.navigator.getActiveItem();
         currentView.shareLayer.show();
-    },
-
-    doRefresh: function() {
-        var currentView = WeiQuPai.navigator.getActiveItem();
-        currentView.onDestroy && currentView.onDestroy();
-        currentView.loadData();
     }
-
 });

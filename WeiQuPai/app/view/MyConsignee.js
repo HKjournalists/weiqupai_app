@@ -56,7 +56,7 @@ Ext.define('WeiQuPai.view.MyConsignee', {
     initialize: function() {
         this.callParent(arguments);
 
-       // this.msgbox = WeiQuPai.Util.msgbox('您还没有添加收货信息.');
+        // this.msgbox = WeiQuPai.Util.msgbox('您还没有添加收货信息.');
         this.msgbox = WeiQuPai.Util.msgbox(' ');
         this.add(this.msgbox);
 
@@ -74,6 +74,7 @@ Ext.define('WeiQuPai.view.MyConsignee', {
     loadData: function(callback) {
         var user = WeiQuPai.Cache.get('currentUser');
         var store = this.down('dataview').getStore();
+        this.down('dataview').setLoadingText(null);
         store.getProxy().setExtraParam('token', user.token);
         store.load(function(records, operation, success) {
             Ext.isFunction(callback) && callback();

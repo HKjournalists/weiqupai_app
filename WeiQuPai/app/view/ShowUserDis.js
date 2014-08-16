@@ -56,6 +56,9 @@ Ext.define('WeiQuPai.view.ShowUserDis', {
             }
             this.fireEvent('detailtap', this, index, dataItem, record, e);
         }, this);
+
+        this.msgbox = WeiQuPai.Util.msgbox();
+        this.add(this.msgbox);
     },
 
     applyUid: function(uid) {
@@ -70,6 +73,10 @@ Ext.define('WeiQuPai.view.ShowUserDis', {
         store.loadPage(1, function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');
+                return false;
+            }
+            if (records.length == 0) {
+                this.msgbox.show();
             }
         });
     }

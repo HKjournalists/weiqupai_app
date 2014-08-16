@@ -54,6 +54,7 @@ Ext.define('WeiQuPai.view.MyFen', {
 
     loadData: function(uid) {
         var user = WeiQuPai.Cache.get('currentUser');
+        this.setLoadingText(null);
         var store = this.getStore();
         store.getProxy().setExtraParam('uid', uid);
         store.load(function(records, operation, success) {

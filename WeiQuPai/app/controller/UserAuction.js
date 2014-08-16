@@ -28,7 +28,7 @@ Ext.define('WeiQuPai.controller.UserAuction', {
     //显示商品详情
     showItem: function() {
         var data = this.getPageView().getAuctionData();
-        WeiQuPai.Util.goItemView(data.item_id);
+        WeiQuPai.Util.goItemView(data.item_id, true);
     },
 
     //显示用户
@@ -39,11 +39,11 @@ Ext.define('WeiQuPai.controller.UserAuction', {
         WeiQuPai.navigator.push(view);
     },
 
-    showShareLayer: function(){
+    showShareLayer: function() {
 
     },
 
-    showComment: function(){
+    showComment: function() {
         var aid = this.getPageView().getAuctionId();
         var view = Ext.create('WeiQuPai.view.UserAuctionComment');
         view.setAuctionId(aid);

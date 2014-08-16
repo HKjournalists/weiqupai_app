@@ -59,6 +59,7 @@ Ext.define('WeiQuPai.view.ExchangeProp', {
         WeiQuPai.Util.get(url, function(rsp) {
             me.down('button').setText(rsp.score);
         });
+        this.setLoadingText(null);
         this.getStore().load(function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');

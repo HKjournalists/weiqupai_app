@@ -70,11 +70,6 @@ Ext.define('WeiQuPai.controller.CommentList', {
 
     doShare: function() {
         this.getPageView().shareLayer.show();
-    },
-
-    doRefresh: function() {
-        this.getPageView().onDestroy();
-        this.getPageView().loadData();
     }
 
 });

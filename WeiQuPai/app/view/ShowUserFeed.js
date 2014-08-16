@@ -58,21 +58,9 @@ Ext.define('WeiQuPai.view.ShowUserFeed', {
 
     initialize: function() {
         this.callParent(arguments);
-        this.on('itemtap', function(list, index, dataItem, record, e) {
-            if (Ext.get(e.target).findParent('.content')) {
-                this.fireEvent('cardtap', this, index, dataItem, record, e);
-                return false;
-            }
-            if (Ext.get(e.target).findParent('.img')) {
-                this.fireEvent('pictap', this, index, dataItem, record, e);
-                return false;
-            }
-            if (e.target.className == 'bubble') {
-                this.fireEvent('zantap', this, index, dataItem, record, e);
-                return false;
-            }
-            this.fireEvent('detailtap', this, index, dataItem, record, e);
-        }, this);
+        this.on('itemtap', this.bindEvent, this);
+        this.msgbox = WeiQuPai.Util.msgbox();
+        this.add(this.msgbox);
     },
 
     applyUid: function(uid) {
@@ -88,6 +76,25 @@ Ext.define('WeiQuPai.view.ShowUserFeed', {
             if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');
             }
+            if (records.length == 0) {
+                this.msgbox.show();
+            }
         });
+    },
+
+    bindEvent: function(list, index, dataItem, record, e) {
+        if (Ext.get(e.target).findParent('.content')) {
+            this.fireEvent('cardtap', this, index, dataItem, record, e);
+            return false;
+        }
+        if (Ext.get(e.target).findParent('.img')) {
+            this.fireEvent('pictap', this, index, dataItem, record, e);
+            return false;
+        }
+        if (e.target.className == 'bubble') {
+            this.fireEvent('zantap', this, index, dataItem, record, e);
+            return false;
+        }
+        this.fireEvent('detailtap', this, index, dataItem, record, e);
     }
 });

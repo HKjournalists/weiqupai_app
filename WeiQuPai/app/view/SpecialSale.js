@@ -96,6 +96,7 @@ Ext.define('WeiQuPai.view.SpecialSale', {
     },
 
     loadData: function(id, callback) {
+        this.setLoadingText(null);
         this.getStore().getProxy().setExtraParam('id', id);
         this.getStore().load(function(records, operation, success) {
             if (!success) {

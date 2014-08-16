@@ -30,14 +30,7 @@ Ext.define('WeiQuPai.view.MyAuction', {
             '<li>{[this.getLeftTime(values)]}</li>',
             '</ul>',
             '</div>',
-            '<div class="right">',
-            '<ul>',
-            '<li>{help_num}人帮拍</li>',
-            '<tpl if="this.canPai(values.status)">',
-            '<li><input type="button" value="我要拍" class="btn_e7"/></li>',
-            '</tpl>',
-            '</ul>',
-            '</div>',
+            '<div class="right"><ul><li>{help_num}人帮拍</li></ul></div>',
             '<div style="clear:both"></div>',
             '</div>',
             '<div class="order_dis">',
@@ -62,10 +55,6 @@ Ext.define('WeiQuPai.view.MyAuction', {
                     text[WeiQuPai.Config.userAuctionStatus.STATUS_DEAL] = '已成交';
                     text[WeiQuPai.Config.userAuctionStatus.STATUS_CANCEL] = '已取消';
                     return text[values.status];
-                },
-                canPai: function(status) {
-                    return status == WeiQuPai.Config.userAuctionStatus.STATUS_ONLINE ||
-                        status == WeiQuPai.Config.userAuctionStatus.STATUS_FINISH;
                 }
             }
         ),

@@ -110,6 +110,7 @@ Ext.define('WeiQuPai.view.CommentList', {
     },
 
     loadData: function(itemId) {
+        this.setLoadingText(null);
         var store = this.getStore();
         store.getProxy().setExtraParam('item_id', itemId);
         store.loadPage(1, function(records, operation, success) {
