@@ -26,18 +26,25 @@ Ext.define('WeiQuPai.view.TopKiller', {
             '<div class="map">',
             '<div class="progress-bar" style="width:0%"><div class="killerbar">￥{curr_price}<div class="killertip"></div></div></div>',
             '</div>',
-            '<input type="button" value="帮杀!" class="{[this.getBtnCls(values)]}" />',
+            '{[this.getBtn(values)]}',
             '</div>',
             '</div>',
             '</div>', {
                 getAvatar: function(avatar) {
                     return WeiQuPai.Util.getAvatar(avatar, 140);
                 },
-                getBtnCls: function(values) {
+                getBtn: function(values) {
+                    var value;
                     if (values.status > 1 || values.left_time == 0 || values.curr_price == values.reserve_price) {
-                        return 'btn hidden';
+                        if (values.curr_price == values.reserve_price) {
+                            value = '已到底价';
+                        } else {
+                            var statusText = ['', '进行中', '已结束', '已成交', '已取消'];
+                            value = statusText[values.status];
+                        }
+                        return '<input type="button" value="' + value + '" class="btn disabled"/>';
                     }
-                    return 'btn';
+                    return '<input type="button" value="帮杀!" class="btn help"/>'
                 }
             }
         ),
@@ -131,7 +138,7 @@ Ext.define('WeiQuPai.view.TopKiller', {
             this.fireEvent('avatartap', list, index, dataItem, record, e);
             return false;
         }
-        if (e.target.tagName.toLowerCase() == 'input') {
+        if (Ext.get(e.target).findParent('.help')) {
             this.fireEvent('help', list, index, dataItem, record, e);
             return false;
         }

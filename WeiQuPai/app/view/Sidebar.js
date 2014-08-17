@@ -82,6 +82,9 @@ Ext.define('WeiQuPai.view.Sidebar', {
 
     activeBtn: null,
 
+    //左上角个人中心按钮是否已标红
+    ucenterBadge: false,
+
     initialize: function() {
         this.activeBtn = this.down('#today');
         this.callParent(arguments);
@@ -204,18 +207,53 @@ Ext.define('WeiQuPai.view.Sidebar', {
         }
         this.activeTabBtn(xtype);
         mainCard.setActiveItem(xtype);
+        //如果有通知要在对应view上的个人中心按钮显示红点
+        if (WeiQuPai.Notify.hasNotify()) {
+            var item = mainCard.getActiveItem();
+            var btn = item.down('button[action=ucenter]');
+            btn.addCls('w-hasbadge');
+            btn.element.down('.x-badge').show();
+        }
         this.close();
+    },
+
+    setUcenterBadge: function() {
+        if (this.ucenterBadge) {
+            return;
+        }
+        this.ucenterBadge = true;
+        var btns = WeiQuPai.navigator.query('button[action=ucenter]');
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addCls('w-hasbadge');
+            btns[i].element.down('.x-badge').show();
+        }
+    },
+
+    clearUcenterBadge: function() {
+        if (!this.ucenterBadge) {
+            return;
+        }
+        this.ucenterBadge = false;
+        var btns = WeiQuPai.navigator.query('button[action=ucenter]');
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].removeCls('w-hasbadge');
+            btns[i].element.down('.x-badge').hide();
+        }
     },
 
     setBadge: function(tab) {
         var tabBtn = this.down('#' + tab);
         tabBtn.addCls('w-hasbadge');
         tabBtn.element.down('.x-badge').show();
+        this.setUcenterBadge();
     },
 
     clearBadge: function(tab) {
         var tabBtn = this.down('#' + tab);
         tabBtn.removeCls('w-hasbadge');
         tabBtn.element.down('.x-badge').hide();
+        if (!WeiQuPai.Notify.hasNotify()) {
+            this.clearUcenterBadge();
+        }
     }
 });

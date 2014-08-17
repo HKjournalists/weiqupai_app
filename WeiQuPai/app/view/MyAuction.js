@@ -72,9 +72,15 @@ Ext.define('WeiQuPai.view.MyAuction', {
 
     initialize: function() {
         this.callParent(arguments);
-        this.msgbox = WeiQuPai.Util.msgbox(' ');
+        this.msgbox = WeiQuPai.Util.msgbox();
         this.add(this.msgbox);
-
+        this.createBtn = Ext.create('Ext.Button', {
+            baseCls: 'w-button',
+            text: '快来血战到底创建自己的拍卖吧',
+            action: 'killend',
+            hidden: true
+        })
+        this.add(this.createBtn);
         this.loadData();
 
         this.on('activate', this.onActivate, this);
@@ -111,6 +117,7 @@ Ext.define('WeiQuPai.view.MyAuction', {
             return false;
         }
         this.msgbox.hide();
+        this.createBtn.hide();
         //fix 出现loading的bug
         this.setLoadingText(null);
         var store = this.getStore();
@@ -123,6 +130,7 @@ Ext.define('WeiQuPai.view.MyAuction', {
             }
             if (records.length == 0) {
                 this.msgbox.show();
+                this.createBtn.show();
                 return;
             }
             //登录超时

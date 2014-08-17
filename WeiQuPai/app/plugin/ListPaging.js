@@ -264,7 +264,7 @@ Ext.define('WeiQuPai.plugin.ListPaging', {
             this.getList().setScrollToTopOnRefresh(this.currentScrollToTopOnRefresh);
             delete this.currentScrollToTopOnRefresh;
         }
-
+        scroller.refresh();
         this.enableDataViewMask();
     },
 

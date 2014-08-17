@@ -270,6 +270,11 @@ Ext.define('WeiQuPai.view.Auction', {
         data.item_stat[field] = parseInt(data.item_stat[field]) + value;
         this.down('#item_stat').setData(data);
         this.down('#item_title').setData(data);
+        //更新auction model对应的数据，使得上一层view的对应视图更新
+        var auction = this.getRecord().get('auction');
+        if (!auction) return;
+        var record = Ext.getStore('Auction').getById(auction.id);
+        record && record.set('item_stat', data.item_stat);
     },
 
     //下拉刷新, 这里的this是pullRefresh对象

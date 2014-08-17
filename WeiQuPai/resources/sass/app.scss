@@ -3224,6 +3224,10 @@ html body
   margin-top:5px;
   -webkit-appearance:none;
 }
+.killer .kill_content .btn.disabled, .w-button.disabled{
+  background:#ccc;
+  color:#fff;
+}
 .progress-bar{
   background:#f2bc00;
   border-radius:4px;

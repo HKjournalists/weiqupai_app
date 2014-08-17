@@ -30,11 +30,14 @@ Ext.define('WeiQuPai.controller.MyDiscount', {
         var discountId = record.get('id');
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
-
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/myDiscount/use&id=' + discountId + '&token=' + user.token;
-        WeiQuPai.Util.get(url, function(rsp) {
-            record.set('used', 1);
+        var confirmLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ConfirmLayer');
+        confirmLayer.setConfirmAction(function() {
+            var url = WeiQuPai.Config.apiUrl + '/?r=appv2/myDiscount/use&id=' + discountId + '&token=' + user.token;
+            WeiQuPai.Util.get(url, function(rsp) {
+                record.set('used', 1);
+            });
         });
+        confirmLayer.show();
     },
 
     useDetailDiscount: function() {
@@ -44,10 +47,14 @@ Ext.define('WeiQuPai.controller.MyDiscount', {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
 
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/myDiscount/use&id=' + discountId + '&token=' + user.token;
-        WeiQuPai.Util.get(url, function(rsp) {
-            record.set('used', 1);
-            view.updateDiscountRecord(record);
+        var confirmLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ConfirmLayer');
+        confirmLayer.setConfirmAction(function() {
+            var url = WeiQuPai.Config.apiUrl + '/?r=appv2/myDiscount/use&id=' + discountId + '&token=' + user.token;
+            WeiQuPai.Util.get(url, function(rsp) {
+                record.set('used', 1);
+                view.updateDiscountRecord(record);
+            });
         });
+        confirmLayer.show();
     }
 });

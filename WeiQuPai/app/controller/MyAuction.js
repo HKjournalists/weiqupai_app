@@ -4,14 +4,23 @@ Ext.define('WeiQuPai.controller.MyAuction', {
     config: {
         refs: {
             pageView: 'myauction',
+            killendBtn: 'myauction button[action=killend]'
         },
         control: {
             pageView: {
                 itemtap: 'showDetail',
                 order_item: 'goOrder',
                 itemdetail: 'showItem'
+            },
+            killendBtn: {
+                tap: 'showKillEnd',
             }
         }
+    },
+
+    showKillEnd: function() {
+        var view = Ext.create('WeiQuPai.view.KillEnd');
+        WeiQuPai.navigator.push(view);
     },
 
     showDetail: function(list, index, dataItem, record, e) {

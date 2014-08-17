@@ -56,10 +56,8 @@ Ext.define('WeiQuPai.view.MyConsignee', {
     initialize: function() {
         this.callParent(arguments);
 
-        // this.msgbox = WeiQuPai.Util.msgbox('您还没有添加收货信息.');
-        this.msgbox = WeiQuPai.Util.msgbox(' ');
+        this.msgbox = WeiQuPai.Util.msgbox();
         this.add(this.msgbox);
-
         this.popLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ConsigneePopLayer');
         this.popLayer.down('button[action=select]').setHidden(!this.getSelectMode());
         this.down('dataview').on('itemtap', this.onItemTap, this);

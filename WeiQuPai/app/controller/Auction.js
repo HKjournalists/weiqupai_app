@@ -220,7 +220,7 @@ Ext.define('WeiQuPai.controller.Auction', {
         text.setPlaceHolder('输入要被提醒的价格');
         form.setSubmitAction(function() {
             if (!/^\d+$/.test(text.getValue())) {
-                WeiQuPai.Util.toast('请输入数字');
+                WeiQuPai.Util.toast('请输入要被提醒的价格');
                 return;
             }
             var data = {};
@@ -248,7 +248,7 @@ Ext.define('WeiQuPai.controller.Auction', {
         text.setPlaceHolder('输入您的期望价吧');
         form.setSubmitAction(function() {
             if (!/^\d+$/.test(text.getValue())) {
-                WeiQuPai.Util.toast('请输入数字');
+                WeiQuPai.Util.toast('输入您的期望价吧');
                 return;
             }
             var data = {};

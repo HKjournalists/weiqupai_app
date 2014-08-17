@@ -13,14 +13,13 @@ Ext.define('WeiQuPai.view.AuctionChart', {
         tpl: new Ext.XTemplate(
             '<div class="tip-title">价格趋势</div>',
             '<img src="{img}" class="chart-img"/>',
-            '<div class="tip"><span class="tip-btn">设置期望价格</span></div>'
+            '<div class="tip"><span class="tip-btn">设置提醒价格</span></div>'
         ),
         showAnimation: 'popIn',
         hideAnimation: 'popOut'
     },
 
     applySrc: function(src) {
-        var src = 'http://m.vqupai.com/apicv2/6/6265.png';
         var d = {
             img: src
         }

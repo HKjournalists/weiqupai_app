@@ -13,7 +13,7 @@ Ext.define('WeiQuPai.controller.Profile', {
             sign: 'disclosureitem[itemId=sign]',
             realName: 'disclosureitem[itemId=real_name]',
             avatar: 'disclosureitem[itemId=avatar]',
-            consignee: 'disclosureitem[itemId=consignee]'
+            consignee: 'profile disclosureitem[itemId=consignee]'
         },
         control: {
             gender: {

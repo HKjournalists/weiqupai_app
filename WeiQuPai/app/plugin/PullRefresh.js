@@ -307,20 +307,18 @@ Ext.define('WeiQuPai.plugin.PullRefresh', {
         var list = this.getList(),
             scroller = list.getScrollable().getScroller();
         var me = this;
-        setTimeout(function() {
-            scroller.refresh();
-            scroller.minPosition.y = 0;
+        scroller.refresh();
+        scroller.minPosition.y = 0;
 
-            scroller.on({
-                scrollend: me.onSnapBackEnd,
-                single: true,
-                scope: me
-            });
-            me.setIsSnappingBack(true);
-            scroller.scrollTo(null, 0, {
-                duration: me.getSnappingAnimationDuration()
-            });
-        }, 50);
+        scroller.on({
+            scrollend: me.onSnapBackEnd,
+            single: true,
+            scope: me
+        });
+        me.setIsSnappingBack(true);
+        scroller.scrollTo(null, 0, {
+            duration: me.getSnappingAnimationDuration()
+        });
     },
 
     /**

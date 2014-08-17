@@ -393,7 +393,7 @@ Ext.define("WeiQuPai.Util", {
 
     getAvatar: function(avatar, size) {
         if (!avatar) {
-            var idx = Math.ceil(Math.random() * 4);
+            var idx = Math.ceil(Math.random() * 5);
             return 'resources/images/defavatar' + idx + '.png';
         }
         return this.getImagePath(avatar, size);

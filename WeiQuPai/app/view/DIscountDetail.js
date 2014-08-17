@@ -75,7 +75,12 @@ Ext.define('WeiQuPai.view.DiscountDetail', {
         if (record == null) {
             return;
         }
-        this.down('button[action=useit]').setHidden(record.get('used') == 1);
+        var btn = this.down('button[action=useit]');
+        if (record.get('used') == 1) {
+            btn.setText('已使用');
+            btn.setCls('disabled');
+            btn.setDisabled(true);
+        }
     },
 
     loadData: function() {
