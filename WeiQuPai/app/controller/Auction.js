@@ -8,7 +8,6 @@ Ext.define('WeiQuPai.controller.Auction', {
             shareBtn: 'button[action=share]',
             paiBtn: 'auction button[action=pai]',
             commentForm: 'inputcomment[itemId=postComment]',
-            refreshBtn: 'button[action=refresh]',
             auctionView: 'auction',
             itemView: 'item'
         },
@@ -36,7 +35,10 @@ Ext.define('WeiQuPai.controller.Auction', {
             },
             auctionView: {
                 itemlike: 'doItemLike',
-                itemdislike: 'doItemDislike'
+                itemdislike: 'doItemDislike',
+                cancelitemlike: 'doCancelItemLike',
+                cancelitemdislike: 'doCancelItemDislike',
+                pricetip: 'doSetNoticePrice'
             },
             itemView: {
                 itemlike: 'doItemLike',
@@ -152,7 +154,9 @@ Ext.define('WeiQuPai.controller.Auction', {
         var itemId = view.getRecord().get('id');
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/itemLike&item_id=' + itemId + '&token=' + user.token;
         WeiQuPai.Util.get(url, function(rsp) {
+            WeiQuPai.Util.setCache('item_like', parseInt(itemId));
             view.updateItemStat('like_num', 1);
+            WeiQuPai.Util.heartBeat(view.down('#item_title').element.down('.selflike'));
         });
     },
 
@@ -162,7 +166,32 @@ Ext.define('WeiQuPai.controller.Auction', {
         var itemId = view.getRecord().get('id');
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/itemDislike&item_id=' + itemId + '&token=' + user.token;
         WeiQuPai.Util.get(url, function(rsp) {
+            WeiQuPai.Util.setCache('item_dislike', parseInt(itemId));
             view.updateItemStat('dislike_num', 1);
+            WeiQuPai.Util.heartBeat(view.down('#item_title').element.down('.selfnolike'));
+
+        });
+    },
+
+    doCancelItemLike: function(view) {
+        var user = WeiQuPai.Util.checkLogin();
+        if (!user) return;
+        var itemId = view.getRecord().get('id');
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/itemLike/cancel/&item_id=' + itemId + '&token=' + user.token;
+        WeiQuPai.Util.get(url, function(rsp) {
+            WeiQuPai.Util.delCache('item_like', parseInt(itemId));
+            view.updateItemStat('like_num', -1);
+        });
+    },
+
+    doCancelItemDislike: function(view) {
+        var user = WeiQuPai.Util.checkLogin();
+        if (!user) return;
+        var itemId = view.getRecord().get('id');
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/itemDislike/cancel&item_id=' + itemId + '&token=' + user.token;
+        WeiQuPai.Util.get(url, function(rsp) {
+            WeiQuPai.Util.delCache('item_dislike', parseInt(itemId));
+            view.updateItemStat('dislike_num', -1);
         });
     },
 
@@ -189,9 +218,11 @@ Ext.define('WeiQuPai.controller.Auction', {
         var form = WeiQuPai.Util.createOverlay('WeiQuPai.view.PriceForm');
         var text = form.down('textfield');
         text.setPlaceHolder('输入要被提醒的价格');
-        form.show();
-        text.focus();
-        form.on('submitprice', function() {
+        form.setSubmitAction(function() {
+            if (!/^\d+$/.test(text.getValue())) {
+                WeiQuPai.Util.toast('请输入数字');
+                return;
+            }
             var data = {};
             data.price = text.getValue();
             data.type = 2;
@@ -203,9 +234,9 @@ Ext.define('WeiQuPai.controller.Auction', {
                 form.hide();
                 WeiQuPai.Util.toast('设置成功，价格达到' + data.price + '的时候你会收到通知哦~');
             });
-        }, this, {
-            single: true
         });
+        form.show();
+        text.focus();
     },
 
     //设置期望价格，适用于未在拍的商品
@@ -215,9 +246,11 @@ Ext.define('WeiQuPai.controller.Auction', {
         var form = WeiQuPai.Util.createOverlay('WeiQuPai.view.PriceForm');
         var text = form.down('textfield');
         text.setPlaceHolder('输入您的期望价吧');
-        form.show();
-        text.focus();
-        form.on('submitprice', function() {
+        form.setSubmitAction(function() {
+            if (!/^\d+$/.test(text.getValue())) {
+                WeiQuPai.Util.toast('请输入数字');
+                return;
+            }
             var data = {};
             data.price = text.getValue();
             data.item_id = view.getRecord().get('id');
@@ -228,9 +261,9 @@ Ext.define('WeiQuPai.controller.Auction', {
                 form.hide();
                 WeiQuPai.Util.toast('提交成功，我们会考虑你提交的价格哦~');
             });
-        }, this, {
-            single: true
         });
+        form.show();
+        text.focus();
     },
 
     doShare: function() {

@@ -21,16 +21,16 @@ Ext.define('WeiQuPai.view.MyDiscount', {
             '<div class="left"><img src="{[WeiQuPai.Util.getImagePath(values.discount.pic_url)]}" width="110"></div>',
             '<div class="right">',
             '<div class="title">{discount.title}</div>',
-            '<div class="dis">{discount.description}</div>',
+            '<div class="dis">{discount.abstract}</div>',
             '<div class="time">',
             '{[this.getUsed(values.used)]}有效期 {discount.expire_time}</div>',
             '</div>',
             '<div class="clear"></div>',
             '</div>', {
                 getUsed: function(used) {
-                    if(used == 1){
+                    if (used == 1) {
                         return '<span class="used">已使用</span>';
-                    }else{
+                    } else {
                         return '<input type="button" value="使用" class="btn_e7 get_btn"/>';
                     }
                 }
@@ -84,6 +84,8 @@ Ext.define('WeiQuPai.view.MyDiscount', {
     bindEvent: function(list, index, dataItem, record, e) {
         if (Ext.get(e.target).findParent('.get_btn')) {
             this.fireEvent('useit', this, index, dataItem, record, e);
+            return false;
         }
+        this.fireEvent('showdetail', this, index, dataItem, record, e);
     }
 });

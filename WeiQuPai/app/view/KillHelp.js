@@ -4,7 +4,6 @@ Ext.define('WeiQuPai.view.KillHelp', {
     config: {
         scrollable: true,
         layout: 'vbox',
-        cls: 'bg_ef',
         items: [{
             xtype: 'vtitlebar',
             title: '血战到底玩法帮助',
@@ -16,9 +15,8 @@ Ext.define('WeiQuPai.view.KillHelp', {
             }]
         }, {
             xtype: 'container',
-            flex: 1,
-            cls: 'w-content',
-            html: '想怎么玩就怎么玩'
+            style: 'padding:10px',
+            html: '<img src="resources/images/kill_help.png" style="min-width:100%;max-width:100%"/>'
         }]
     }
 

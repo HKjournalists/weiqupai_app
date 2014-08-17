@@ -22,7 +22,7 @@ Ext.define('WeiQuPai.view.KillEnd', {
         }],
         itemTpl: new Ext.XTemplate(
             '<div class="clear"></div>',
-            '<img src="{pic_url}"  class="barimg" />',
+            '<img src="{[this.getPic(values.pic_url)]}"  class="barimg" />',
             '<input type="button" class="bar_icon"></div>',
             '<div class="barper">',
             '<div class="top"><div class="left">每场血战时限：{duration}小时</div><div class="right topkiller"></div>',
@@ -37,6 +37,9 @@ Ext.define('WeiQuPai.view.KillEnd', {
             '</div>', {
                 getAvatar: function(avatar) {
                     return WeiQuPai.Util.getAvatar(avatar, 140);
+                },
+                getPic: function(pic_url) {
+                    return WeiQuPai.Util.getImagePath(pic_url);
                 }
             }
         ),

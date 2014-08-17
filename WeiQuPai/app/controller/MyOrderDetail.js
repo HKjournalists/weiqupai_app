@@ -76,7 +76,8 @@ Ext.define('WeiQuPai.controller.MyOrderDetail', {
     },
 
     doShowReturn: function() {
-        WeiQuPai.Util.forward('returnannounce');
+        var view = Ext.create('WeiQuPai.view.ReturnAnnounce');
+        WeiQuPai.navigator.push(view);
     },
 
     doViewItem: function(x) {

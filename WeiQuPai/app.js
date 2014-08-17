@@ -28,7 +28,8 @@ Ext.application({
     ],
     models: [
         'Auction', 'Comment', 'Consignee', 'Feed', 'Item', 'Order', 'Profile', 'Shipment',
-        'SpecialSale', 'UserAuction', 'ShowUserDis', 'ShowUserLike', 'ShowUserFeed', 'Message'
+        'SpecialSale', 'UserAuction', 'ShowUserDis', 'ShowUserLike', 'ShowUserFeed', 'Message',
+        'Discount'
     ],
     views: [
         'Main', 'MainCard', 'StartupScreen', 'SplashScreen', 'WebPage', 'VTitleBar', 'Login', 'Register',
@@ -40,7 +41,7 @@ Ext.application({
         'Auction', 'Comment', 'Banner', 'MyOrder', 'MyConsignee', 'Circle', 'MyProp', 'MyCoupon',
         'Coupon', 'Prop', 'SpecialSale', 'ShowUserLike', 'ShowUserDis', 'ShowUserFeed', 'MyFollow', 'MyAuction',
         'MyFans', 'FeedReply', 'MyMessage', 'CommentReply', 'PrivateMessage', 'Discount', 'MyDiscount',
-        'KillEnd', 'UserAuction', 'UserAuctionHelper'
+        'KillEnd', 'UserAuction', 'UserAuctionHelper', 'Category', 'CategoryItem'
     ],
     icon: {
         '57': 'resources/icons/icon.png',

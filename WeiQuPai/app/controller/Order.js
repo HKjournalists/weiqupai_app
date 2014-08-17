@@ -70,9 +70,9 @@ Ext.define('WeiQuPai.controller.Order', {
             //将拍过的商品保存到cache中
             WeiQuPai.Util.setCache('auction', parseInt(order.get('auction_id')));
             rsp.item = itemData;
-            WeiQuPai.Util.forward('pay', {
-                orderData: rsp
-            });
+            var view = Ext.create('WeiQuPai.view.Pay');
+            view.setOrderData(rsp);
+            WeiQuPai.navigator.push(view);
         }, {
             mask: true
         });

@@ -35,7 +35,7 @@ Ext.define('WeiQuPai.view.MyOrder', {
             '<ul>',
             '<li>{[this.getStatusText(values.status)]}</li>',
             '<li style="height:18px;color:#e76049;"></li>',
-            '<li><input type="button" value="{[this.getButtonText(values.status)]}" class="btn_e7"/></li>',
+            '<tpl if="this.hasBtn(status)"><li><input type="button" value="{[this.getButtonText(values.status)]}" class="btn_e7"/></li></tpl>',
             '</ul>',
             '</div>',
             '<div style="clear:both"></div>',
@@ -59,6 +59,9 @@ Ext.define('WeiQuPai.view.MyOrder', {
                 },
                 getCover: function(cover) {
                     return WeiQuPai.Util.getImagePath(cover, '200');
+                },
+                hasBtn: function(status) {
+                    return status <= WeiQuPai.Config.orderStatus.STATUS_FINISH;
                 }
             }
         ),

@@ -45,7 +45,6 @@ Ext.define('WeiQuPai.plugin.ListPaging', {
         loadMoreCmp: {
             xtype: 'component',
             baseCls: Ext.baseCSSPrefix + 'list-paging',
-            scrollDock: 'bottom',
             //hidden: true
         },
 
@@ -285,7 +284,6 @@ Ext.define('WeiQuPai.plugin.ListPaging', {
     addLoadMoreCmp: function() {
         var list = this.getList(),
             cmp = this.getLoadMoreCmp();
-
         if (!this.getLoadMoreCmpAdded()) {
             list.add(cmp);
 
@@ -297,7 +295,6 @@ Ext.define('WeiQuPai.plugin.ListPaging', {
             list.fireEvent('loadmorecmpadded', this, list);
             this.setLoadMoreCmpAdded(true);
         }
-
         return cmp;
     },
 

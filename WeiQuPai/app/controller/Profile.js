@@ -65,7 +65,8 @@ Ext.define('WeiQuPai.controller.Profile', {
     },
 
     showConsignee: function() {
-        WeiQuPai.Util.forward('myconsignee');
+        var view = Ext.create('WeiQuPai.view.MyConsignee');
+        WeiQuPai.navigator.push(view);
     },
 
     showCameraLayer: function() {

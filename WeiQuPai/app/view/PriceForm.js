@@ -3,6 +3,7 @@ Ext.define('WeiQuPai.view.PriceForm', {
     xtype: 'priceform',
     config: {
         scrollable: null,
+        submitAction: null,
         baseCls: '',
         layout: {
             'type': 'hbox',
@@ -29,7 +30,7 @@ Ext.define('WeiQuPai.view.PriceForm', {
     initialize: function() {
         this.on('show', WeiQuPai.Util.saveLastView, this);
         this.down('button[action=submit]').on('tap', function() {
-            this.fireEvent('submitprice', this);
+            this.getSubmitAction().call(this);
         }, this);
 
         this.down('textfield').on('keyup', function() {
@@ -41,9 +42,9 @@ Ext.define('WeiQuPai.view.PriceForm', {
         this.element.dom.addEventListener('submit', function(e) {
             e.preventDefault();
             if (me.down('textfield').getValue().trim().length > 0) {
-                me.fireEvent('submitprice', me);
+                me.getSubmitAction().call(this);
             }
-        }, this);
+        });
     }
 
 });

@@ -2,7 +2,7 @@ Ext.define('WeiQuPai.view.Today', {
     extend: 'Ext.DataView',
     xtype: 'today',
     requires: ['WeiQuPai.view.Banner', 'WeiQuPai.view.Auction', 'WeiQuPai.view.SpecialSale',
-        'WeiQuPai.view.Discount', 'WeiQuPai.view.KillEnd', 'WeiQuPai.view.AuctionTip'
+        'WeiQuPai.view.Discount', 'WeiQuPai.view.KillEnd', 'WeiQuPai.view.AuctionTip', 'WeiQuPai.view.Category'
     ],
     config: {
         loadingText: null,
@@ -85,7 +85,7 @@ Ext.define('WeiQuPai.view.Today', {
             }, {
                 align: 'right',
                 baseCls: 'list_btn',
-                action: 'list'
+                action: 'category'
             }]
         }, {
             xtype: 'banner',

@@ -8,7 +8,8 @@ Ext.define('WeiQuPai.controller.Today', {
             killend: 'today button[action=killend]',
             notice: 'today button[action=notice]',
             circle: 'today button[action=circle]',
-            discount: 'today button[action=discount]'
+            discount: 'today button[action=discount]',
+            catBtn: 'button[action=category]'
         },
         control: {
             pageView: {
@@ -35,6 +36,9 @@ Ext.define('WeiQuPai.controller.Today', {
             },
             discount: {
                 tap: 'goDiscount'
+            },
+            catBtn: {
+                tap: 'showCategory'
             }
         }
     },
@@ -86,9 +90,10 @@ Ext.define('WeiQuPai.controller.Today', {
 
     showDetail: function(list, index, dataItem, record, e) {
         WeiQuPai.Util.goItemView(record.get('item_id'));
+    },
 
-        //this.getPageView().AuctionTip.show();
-        //view.show();
-
+    showCategory: function() {
+        var view = Ext.create('WeiQuPai.view.Category');
+        WeiQuPai.navigator.push(view);
     }
 });

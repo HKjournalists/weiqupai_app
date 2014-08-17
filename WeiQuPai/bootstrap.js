@@ -46,7 +46,8 @@ Ext.Loader.addClassPathMappings({
   "Ext.device.sqlite.SQLResultSetRowList": "../touch/src/device/sqlite/Sencha.js",
   "Ext.device.sqlite.SQLTransaction": "../touch/src/device/sqlite/Sencha.js",
   "Ext.draw.engine.SvgContext.Gradient": "../touch/src/draw/engine/SvgContext.js",
-  "WeiQuPai": "app"
+  "WeiQuPai": "app",
+  "WeiQuPai.view.DiscountDetail": "app/view/DIscountDetail.js"
 });
 Ext.ClassManager.addNameAlternateMappings({
   "Ext.AbstractComponent": [],
@@ -821,6 +822,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.model.Auction": [],
   "WeiQuPai.model.Comment": [],
   "WeiQuPai.model.Consignee": [],
+  "WeiQuPai.model.Discount": [],
   "WeiQuPai.model.Feed": [],
   "WeiQuPai.model.FeedReply": [],
   "WeiQuPai.model.Item": [],
@@ -869,6 +871,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.AddConsigneeForm": [],
   "WeiQuPai.view.AppUpdate": [],
   "WeiQuPai.view.Auction": [],
+  "WeiQuPai.view.AuctionChart": [],
   "WeiQuPai.view.AuctionTip": [],
   "WeiQuPai.view.AuctionTipTwo": [],
   "WeiQuPai.view.Banner": [],
@@ -888,6 +891,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.DetailPicShow": [],
   "WeiQuPai.view.DisclosureItem": [],
   "WeiQuPai.view.Discount": [],
+  "WeiQuPai.view.DiscountDetail": [],
   "WeiQuPai.view.EditConsigneeForm": [],
   "WeiQuPai.view.ExchangeCoupon": [],
   "WeiQuPai.view.ExchangeLayer": [],
@@ -1945,6 +1949,7 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.model.Auction": [],
   "WeiQuPai.model.Comment": [],
   "WeiQuPai.model.Consignee": [],
+  "WeiQuPai.model.Discount": [],
   "WeiQuPai.model.Feed": [],
   "WeiQuPai.model.FeedReply": [],
   "WeiQuPai.model.Item": [],
@@ -2013,6 +2018,9 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.Auction": [
     "widget.auction"
   ],
+  "WeiQuPai.view.AuctionChart": [
+    "widget.auctionchart"
+  ],
   "WeiQuPai.view.AuctionTip": [
     "widget.auctiontip"
   ],
@@ -2069,6 +2077,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.Discount": [
     "widget.discount"
+  ],
+  "WeiQuPai.view.DiscountDetail": [
+    "widget.discountdetail"
   ],
   "WeiQuPai.view.EditConsigneeForm": [
     "widget.editconsigneeform"

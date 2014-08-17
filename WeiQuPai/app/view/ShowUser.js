@@ -117,10 +117,10 @@ Ext.define('WeiQuPai.view.ShowUser', {
         }, {
             xtype: 'showuserfeed',
             hidden: true
-        }]
+        }],
+        //当前激活的tab button
+        activeTab: null
     },
-    //当前激活的tab button
-    activeTab: null,
 
     tabPosition: 0,
     initialize: function() {
@@ -200,13 +200,14 @@ Ext.define('WeiQuPai.view.ShowUser', {
             var xtype = btns[i].getItemId().substr(4);
             btns[i].tabView = this.down(xtype);
             btns[i].on('tap', function() {
-                if (me.activeTab == this) return;
-                me.activeTab.removeCls('x-button-active');
-                me.activeTab.addCls('x-button');
-                me.activeTab.tabView.hide();
+                var tab = me.getActiveTab();
+                if (tab == this) return;
+                tab.removeCls('x-button-active');
+                tab.addCls('x-button');
+                tab.tabView.hide();
                 this.addCls('x-button-active');
                 this.tabView.show();
-                me.activeTab = this;
+                me.setActiveTab(this);
                 setTimeout(function() {
                     var scroller = me.getScrollable().getScroller();
                     if (scroller.position.y > me.tabPosition) {
@@ -215,7 +216,7 @@ Ext.define('WeiQuPai.view.ShowUser', {
                 }, 50);
             });
         }
-        this.activeTab = btns[0];
+        this.setActiveTab(btns[0]);
 
         //tab的悬停效果
         this.on('painted', function() {
@@ -235,5 +236,14 @@ Ext.define('WeiQuPai.view.ShowUser', {
                 this.down('#tabbar').translate(null, 0, false);
             }
         }, this);
+        scroller.addListener('scrollend', this.listPaging, this);
+    },
+
+    listPaging: function(scroller, x, y) {
+        if (y < scroller.maxPosition.y) {
+            return;
+        }
+        var tabView = this.getActiveTab().tabView;
+        tabView.nextPage && tabView.nextPage(scroller);
     }
 });

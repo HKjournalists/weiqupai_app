@@ -147,6 +147,7 @@ Ext.define('WeiQuPai.view.Item', {
     },
 
     showTips: function() {
+        if (!WeiQuPai.app.firstLaunch) return;
         setTimeout(function() {
             var view = WeiQuPai.Util.getGlobalView('WeiQuPai.view.NoticeTip');
             view.show();

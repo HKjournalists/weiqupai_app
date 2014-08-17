@@ -5,7 +5,7 @@ Ext.define('WeiQuPai.view.Auction', {
         'WeiQuPai.view.CommentList', 'WeiQuPai.view.ItemParam', 'WeiQuPai.view.ItemDesc',
         'WeiQuPai.view.Shop', 'WeiQuPai.view.Brand', 'WeiQuPai.view.DetailPicShow',
         'WeiQuPai.view.BottomBar', 'WeiQuPai.view.ImageViewer', 'WeiQuPai.view.ShareLayer',
-        'WeiQuPai.view.AuctionTip'
+        'WeiQuPai.view.AuctionTip', 'WeiQuPai.view.AuctionChart'
     ],
     config: {
         scrollable: true,
@@ -59,13 +59,22 @@ Ext.define('WeiQuPai.view.Auction', {
                 '<div class="bottom" style="margin-top:110px;">',
                 '<div class="right">',
                 '<ul>',
-                '<li class="nolike"></li>',
-                '<li class="like"></li>',
+                '<li class="{[this.getDislikeCls(values)]}"></li>',
+                '<li class="{[this.getLikeCls(values)]}"></li>',
                 '</ul>',
                 '</div>',
                 '<div style="clear:both"></div>',
                 '</div>',
-                '</div>'
+                '</div>', {
+                    getLikeCls: function(values) {
+                        var id = parseInt(values.id);
+                        return WeiQuPai.Util.hasCache('item_like', id) ? 'selflike' : 'like';
+                    },
+                    getDislikeCls: function(values) {
+                        var id = parseInt(values.id);
+                        return WeiQuPai.Util.hasCache('item_dislike', id) ? 'selfnolike' : 'nolike';
+                    }
+                }
             )
         }, {
             xtype: 'container',
@@ -206,6 +215,15 @@ Ext.define('WeiQuPai.view.Auction', {
                 this.down('#tabbar').translate(null, 0, false);
             }
         }, this);
+        scroller.addListener('scrollend', this.listPaging, this);
+    },
+
+    listPaging: function(scroller, x, y) {
+        if (y < scroller.maxPosition.y) {
+            return;
+        }
+        var tabView = this.getActiveTab().tabView;
+        tabView.nextPage && tabView.nextPage(scroller);
     },
 
     bindEvent: function(e) {
@@ -215,6 +233,14 @@ Ext.define('WeiQuPai.view.Auction', {
         }
         if (e.target.className == 'nolike') {
             this.fireEvent('itemdislike', this);
+            return false;
+        }
+        if (e.target.className == 'selflike') {
+            this.fireEvent('cancelitemlike', this);
+            return false;
+        }
+        if (e.target.className == 'selfnolike') {
+            this.fireEvent('cancelitemdislike', this);
             return false;
         }
         if (Ext.get(e.target).findParent('.detail_map')) {
@@ -243,6 +269,7 @@ Ext.define('WeiQuPai.view.Auction', {
         var data = this.down('#item_stat').getData();
         data.item_stat[field] = parseInt(data.item_stat[field]) + value;
         this.down('#item_stat').setData(data);
+        this.down('#item_title').setData(data);
     },
 
     //下拉刷新, 这里的this是pullRefresh对象
@@ -360,21 +387,14 @@ Ext.define('WeiQuPai.view.Auction', {
         outAnim.run(el);
     },
 
-    //价格趋势图
-    createChart: function() {
+    showChart: function() {
         //显示趋势图
         var id = this.getRecord().get('auction').id;
-        var el = new Image;
-        el.src = WeiQuPai.Config.host + '/apic/' + id + '.png?_dc=' + Math.random();
-        var chart = this.down('#chart');
-        chart.element.appendChild(el);
-        el.onload = function() {
-            chart.show();
-        }
-    },
-
-    showChart: function() {
-        console.log('chart');
+        var src = WeiQuPai.Config.host + '/apic/' + id + '.png?_dc=' + Math.random();
+        var chart = WeiQuPai.Util.getGlobalView('WeiQuPai.view.AuctionChart');
+        chart.setSrc(src);
+        chart.setParentCmp(this);
+        chart.show();
     },
 
     //销毁的时候清除定时器

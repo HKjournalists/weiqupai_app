@@ -1,6 +1,7 @@
 Ext.define('WeiQuPai.view.Discount', {
     extend: 'Ext.DataView',
     xtype: 'discount',
+    requires: ['WeiQuPai.view.DiscountDetail'],
     config: {
         scrollable: true,
         cls: 'detail',
@@ -15,13 +16,15 @@ Ext.define('WeiQuPai.view.Discount', {
             releaseText: '释放立即刷新',
             loadedText: '下拉刷新',
             scrollerAutoRefresh: true
+        }, {
+            type: 'wlistpaging'
         }],
         itemTpl: new Ext.XTemplate(
             '<div class="discount">',
             '<div class="left"><img src="{[WeiQuPai.Util.getImagePath(values.pic_url)]}" width="110"></div>',
             '<div class="right">',
             '<div class="title">{title}</div>',
-            '<div class="dis">{description}</div>',
+            '<div class="dis">{abstract}</div>',
             '<div class="time"><input type="button" value="分享领取" class="btn_e7 get_btn"/>有效期 {expire_time}</div>',
             '</div>',
             '<div class="clear"></div>',
@@ -75,6 +78,8 @@ Ext.define('WeiQuPai.view.Discount', {
     bindEvent: function(list, index, dataItem, record, e) {
         if (Ext.get(e.target).findParent('.get_btn')) {
             this.fireEvent('getit', this, index, dataItem, record, e);
+            return false;
         }
+        this.fireEvent('showdetail', list, index, dataItem, record, e);
     }
 });

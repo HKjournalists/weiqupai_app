@@ -118,7 +118,8 @@ Ext.define("WeiQuPai.Util", {
     invalidToken: function(obj) {
         if (obj && obj.code && obj.code == 401) {
             Ext.Msg.alert(null, '由于您长时间未登录，您需要重新登录', function() {
-                WeiQuPai.Util.forward('login');
+                var view = Ext.create('WeiQuPai.view.Login');
+                WeiQuPai.navigator.push(view);
             });
             return false;
         }
@@ -300,15 +301,6 @@ Ext.define("WeiQuPai.Util", {
         if (!data || !data[type]) return;
         data[type].splice(data[type].indexOf(id), 1);
         WeiQuPai.Cache.set('user_data', data);
-    },
-
-    //转到某个视图，并带参数
-    forward: function(xtype, config) {
-        var view = Ext.merge({
-            xtype: xtype
-        }, config);
-        var main = Ext.Viewport.down('main');
-        main.push(view);
     },
 
     //是否已拍过该商品

@@ -71,9 +71,9 @@ Ext.define('WeiQuPai.view.ShareLayer', {
 
     shareWeibo: function() {
         this.hide();
-        WeiQuPai.Util.forward('weiboshare', {
-            data: this.getShareData()
-        });
+        var view = Ext.create('WeiQuPai.view.WeiboShare');
+        view.setData(this.getShareData());
+        WeiQuPai.navigator.push(view);
     },
     shareWeixin: function() {
         this.hide();

@@ -491,7 +491,13 @@ html body
   }
    .details .bottom .right ul li.nolike
    {
-      background:url('../images/sadheart_alt.png') no-repeat;
+      background:url('../images/sadheart.png') no-repeat;
+      height: 17px;
+      background-size: auto 17px;
+      width: 40px;
+   }
+   .detail .bottom .right ul li.selfnolike{
+      background:url('../images/sadheart_active.png') no-repeat;
       height: 17px;
       background-size: auto 17px;
       width: 40px;
@@ -499,6 +505,13 @@ html body
     .details .bottom .right ul li.like
    {
       background:url('../images/heart_line.png') no-repeat;
+      height: 17px;
+      background-size: auto 17px;
+      width: 30px;
+   }
+    .details .bottom .right ul li.selflike
+   {
+      background:url('../images/heart_line_active.png') no-repeat;
       height: 17px;
       background-size: auto 17px;
       width: 30px;
@@ -1293,8 +1306,6 @@ html body
    }
    .mylike
    { 
-      background:#ffffff!important;
-      //padding-top:9px;
    }
    .mylike .myProduct
    {
@@ -2505,8 +2516,8 @@ html body
    {
     font-size:14px;
     word-break: break-all;
-    line-height:2em;
-    padding:10px 40px;
+    line-height:2;
+    padding:10px;
     background:$color_fff;
    }
    .mg_10{
@@ -3111,9 +3122,9 @@ html body
   margin-top:5px;
 }
 .situation .helper{
-  background:url(../images/bar_bg.jpg) repeat-y;
+  background:url(../images/bar_bg.png)  center center repeat-y;
   width:320px;
-  background-size:contain;
+  background-size:1px auto;
   padding:10px;
   margin:auto;
 }
@@ -3362,4 +3373,67 @@ html body
   background-position: center center;
   height: 11px;
   margin-top: 465px;
+}
+.chart-img{
+  min-width:100%;
+  max-width:100%;
+  display:block;
+  min-height:80px;
+}
+.tip{
+  text-align:center;
+  margin:10px;
+}
+.tip-title{
+  background: $color_e7;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 0 0 4px 4px;
+  display: block;
+  width: 5em;
+  text-align: center;
+  padding: 2px 0;
+  margin: auto;
+}
+.tip-btn{
+  background-image:url('../images/share.png');
+  background-repeat:no-repeat;
+  background-size:auto 16px;
+  background-position:left center;
+  color:$color_e7;
+  width: 5em;
+  padding-left:20px;
+  font-size:14px;
+
+}
+
+.cateogry-item-container .x-dataview-container:after{
+  content: "020";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility:hidden; 
+}
+.category-item{
+  width:50%;
+  float:left;
+}
+.category-item .item{
+  padding:10px;
+}
+.category-item:nth-child(even) .item{
+  padding-left:0;
+}
+.category-item img{
+  //max-width:100%;
+  //min-width:100%;
+  width:120px;
+  height:120px;
+}
+.category-item .title{
+  margin-top:10px;
+  font-size:12px;
+  color:#383838;
+  height:2.4em;
+  overflow:hidden;
 }
