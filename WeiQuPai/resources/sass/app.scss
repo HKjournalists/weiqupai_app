@@ -14,7 +14,17 @@ $border:1px solid #eee;
 $font_12:12px;
 $font_10:10px;
 $color_e7:#e76049;
-
+@media screen and (min-width:768px) and (max-width: 768px) {
+  body,body.x-desktop {
+    width: 768px!important;
+  }
+}
+@media screen and (min-width:640px) and (max-width: 640px) {
+  body,body.x-desktop, .mx-webkit{
+    width: 640px!important;
+    margin:auto;
+  }
+}
 //首页吃喝玩乐按钮样式
 @mixin banner_style
 {
@@ -37,7 +47,7 @@ $color_e7:#e76049;
 @mixin detailcard_title
    {
     background-size:12px 12px;
-    background-position:10px 10px;
+    background-position:10px 8px;
    }
 //拍品详情 焦点图上方按钮排列
  @mixin details_title_top
@@ -119,7 +129,8 @@ html body
          height:132px;
      }
       .x-img.x-img-background{
-        background-size: 100% auto !important;
+        background-size: 320px auto !important;
+        text-align:center;
      }
      .titlebar1 .bar_right
      {
@@ -146,12 +157,13 @@ html body
      .hot
      {
         background: url(../images/hot.png) no-repeat;
+        background-position: 250px;
         background-size: contain;
-        width: 28px;
         height: 28px;
         position: relative;
         z-index: 1;
-        margin-left: 260px;
+        width: 320px;
+        margin: auto;
         animation:hotmove 0.5s linear 0.5s infinite alternate;-moz-animation:hotmove  0.5s linear  0.5s infinite alternate; -webkit-animation:hotmove  0.5s linear  0.5s infinite alternate;-o-animation:hotmove  0.5s linear  0.5s infinite alternate;
      }
       @keyframes hotmove
@@ -245,7 +257,7 @@ html body
         padding-bottom: 10px;
     }
     .todayTitle{
-        border-top:$border;background:#ffffff url(../images/today_title.jpg) left no-repeat;text-indent: 20px;font-size: 13px;font-weight: bold;text-align: left;color:#000;margin-top:5px;background-position:10px 8px;background-size:auto 13px;padding:8px 0px;
+        border-top:$border;background:#ffffff url(../images/today_title.jpg) left no-repeat;text-indent: 20px;font-size: 13px;font-weight: bold;text-align: left;color:#000;margin-top:5px;background-position:10px 9px;background-size:auto 13px;padding:8px 0px;
     }
     .today
     {
@@ -360,7 +372,7 @@ html body
    }
    .banner
    {
-     width:50%;margin-left:20px;text-align:left;margin-top:10px;
+     width:320px;margin:auto;
    }
    .banner .title
    {
@@ -372,7 +384,10 @@ html body
    }
    .banner .price
    {
-     margin-top:8px;font-size:10px;position:absolute;top:71px;left:93px;color:$color_e7;
+    margin-top: 75px;
+    color: #e76049;
+    padding-left: 20px;
+    text-align: left;
    }
    .banner .price span
    {
@@ -953,7 +968,8 @@ html body
   -moz-box-flex:1.0;
   -webkit-box-flex:1.0;
    box-flex:1.0;
-   padding:5px;
+   //padding:5px;
+   line-height:20px;
   width:50%;
   // text-align:right;
   }
@@ -1168,7 +1184,7 @@ html body
     max-width:100%;
    }
    .person_zhezhao{
-     background:url('../images/person_zhezhao.png') repeat-x;
+    // background:url('../images/person_zhezhao.png') repeat-x;
      width:100%;
      background-size:auto 155px;
      position:absolute;
@@ -1217,14 +1233,15 @@ html body
    }
     .person_zhezhao .one .right .dis
    {
-     @include person_model_word;
-     background-image:url('../images/icon_person_base.png');
-     @include person_model_img;
-     background-size: auto 13px;
-     background-position: 5px 40px;
-     text-indent: 20px;
-     margin-left: 10px;
-     font-size: 15px;
+    padding-top: 41px;
+    float: left;
+    background-image: url("../images/icon_person_base.png");
+    background-repeat: no-repeat;
+    background-size: auto 13px;
+    background-position: 5px 43px;
+    text-indent: 20px;
+    margin-left: 10px;
+    font-size: 15px;
    }
    .person_zhezhao .two{
     position:absolute;
@@ -1255,9 +1272,11 @@ html body
    .person_zhezhao .one .right .des
    {
     margin-top:45px;
+    text-shadow: 2px 1px 2px black;
    }
    .person_zhezhao .two{
      width:100%; 
+     text-shadow: 2px 1px 2px black;
    }
 
    .per_model
@@ -2996,7 +3015,7 @@ html body
 }
 .barimg{max-width:100%;min-width:100%;}
 .barper{background: white; margin-top:-2px;}
-.barper .top{color:red;font-size:13px;padding-top:10px;margin:0px 6px;}
+.barper .top{color:red;font-size:13px;margin:0px 6px;}
 .barper .top .left{
   background: url(../images/bar_xue.png) left no-repeat;
   background-size: 8px 10px;
@@ -3046,11 +3065,10 @@ html body
   margin-right: 7px;
   height: 48px;
   width: 45px;
-  border: 1px solid red;
   position: relative;
-  margin-top: -70px;
-  border:0px;
-}
+  margin-top: -75px;
+  border: 0px;
+  }
 //我的战况
 .situation{
 }

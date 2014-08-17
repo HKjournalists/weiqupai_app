@@ -11,6 +11,7 @@ Ext.define('WeiQuPai.view.DetailPicShow', {
     },
 
     applyPicData: function(data, oldData) {
+        // Ext.Msg.alert('1');
         data = Ext.isArray(data) ? data : [data];
         this.removeAll();
         for (var i = 0; i < data.length; i++) {
