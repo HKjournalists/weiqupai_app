@@ -842,6 +842,8 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.plugin.Toast": [],
   "WeiQuPai.store.Auction": [],
   "WeiQuPai.store.Banner": [],
+  "WeiQuPai.store.Category": [],
+  "WeiQuPai.store.CategoryItem": [],
   "WeiQuPai.store.Circle": [],
   "WeiQuPai.store.Comment": [],
   "WeiQuPai.store.CommentReply": [],
@@ -878,6 +880,8 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.BottomBar": [],
   "WeiQuPai.view.Brand": [],
   "WeiQuPai.view.CameraLayer": [],
+  "WeiQuPai.view.Category": [],
+  "WeiQuPai.view.CategoryItem": [],
   "WeiQuPai.view.ChangeAvatarLayer": [],
   "WeiQuPai.view.Circle": [],
   "WeiQuPai.view.CirclePost": [],
@@ -1979,6 +1983,8 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.store.Auction": [],
   "WeiQuPai.store.Banner": [],
+  "WeiQuPai.store.Category": [],
+  "WeiQuPai.store.CategoryItem": [],
   "WeiQuPai.store.Circle": [],
   "WeiQuPai.store.Comment": [],
   "WeiQuPai.store.CommentReply": [],
@@ -2038,6 +2044,12 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.CameraLayer": [
     "widget.cameralayer"
+  ],
+  "WeiQuPai.view.Category": [
+    "widget.category"
+  ],
+  "WeiQuPai.view.CategoryItem": [
+    "widget.categoryitem"
   ],
   "WeiQuPai.view.ChangeAvatarLayer": [
     "widget.changeavatarlayer"
