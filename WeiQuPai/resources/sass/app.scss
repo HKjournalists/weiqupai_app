@@ -161,13 +161,12 @@ html body
      .hot
      {
         background: url(../images/hot.png) no-repeat;
-        background-position: 250px;
         background-size: contain;
         height: 28px;
         position: relative;
         z-index: 1;
-        width: 320px;
-        margin: auto;
+        width: 30px;
+        margin-left: 250px;
         animation:hotmove 0.5s linear 0.5s infinite alternate;-moz-animation:hotmove  0.5s linear  0.5s infinite alternate; -webkit-animation:hotmove  0.5s linear  0.5s infinite alternate;-o-animation:hotmove  0.5s linear  0.5s infinite alternate;
      }
       @keyframes hotmove
@@ -2541,6 +2540,13 @@ html body
     line-height:2;
     padding:10px;
     background:$color_fff;
+   }
+   .discountdetail .two img{
+    max-width:100%;
+   }
+   .discountdetail li{
+      margin-left:1.5em;
+      list-style:inherit;
    }
    .mg_10{
      margin-bottom:10px;
