@@ -13,7 +13,7 @@ Ext.define('WeiQuPai.view.AuctionChart', {
         tpl: new Ext.XTemplate(
             '<div class="tip-title">价格趋势</div>',
             '<img src="{img}" class="chart-img"/>',
-            '<div class="tip"><span class="tip-btn">提醒我</span></div>'
+            '<div class="tip"><span class="tip-btn">设置期望价格</span></div>'
         ),
         showAnimation: 'popIn',
         hideAnimation: 'popOut'

@@ -5,6 +5,7 @@ Ext.define('WeiQuPai.view.Today', {
         'WeiQuPai.view.Discount', 'WeiQuPai.view.KillEnd', 'WeiQuPai.view.AuctionTip', 'WeiQuPai.view.Category'
     ],
     config: {
+        scrollable: true,
         loadingText: null,
         store: 'Auction',
         cls: 'bg_ef',
