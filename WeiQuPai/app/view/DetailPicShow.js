@@ -3,7 +3,7 @@ Ext.define('WeiQuPai.view.DetailPicShow', {
     xtype: 'detailpicshow',
     config: {
         direction: 'horizontal',
-        style: 'height:200px;background-size:100% auto;',
+        style: 'height:200px;background-size:100% auto!important;',
         cls: 'detail',
         directionLock: true,
         indicator: false,

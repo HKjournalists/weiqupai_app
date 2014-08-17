@@ -4,6 +4,7 @@ Ext.define('WeiQuPai.view.Banner', {
     config: {
         paramType: 'index',
         direction: 'horizontal',
+        cls: 'banner_img',
         style: 'height:130px;background-size:100% auto;background:white;',
         directionLock: true,
         indicator: true

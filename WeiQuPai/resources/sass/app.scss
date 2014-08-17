@@ -128,7 +128,11 @@ html body
          background-size: 100% auto !important;
          height:132px;
      }
-      .x-img.x-img-background{
+     .x-img.x-img-background{
+        background-size: 100% auto !important;
+        text-align:center;
+     }
+     .banner_img .x-img.x-img-background{
         background-size: 320px auto !important;
         text-align:center;
      }
