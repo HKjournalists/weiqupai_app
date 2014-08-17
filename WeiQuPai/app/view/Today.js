@@ -25,7 +25,7 @@ Ext.define('WeiQuPai.view.Today', {
             type: 'wlistpaging',
         }],
         itemTpl: new Ext.XTemplate(
-            '<div class="today">',
+            '<div class="today" item_id={item_id}>',
 
             '<div class="left">',
             '<div class="prod">',
@@ -92,9 +92,14 @@ Ext.define('WeiQuPai.view.Today', {
             xtype: 'banner',
             scrollDock: 'top',
         }, {
-            xtype: 'button',
-            baseCls: 'hot',
-            action: 'hot'
+            xtype: 'container',
+            style: 'width:320px;margin:auto;',
+            items: [{
+                xtype: 'button',
+                baseCls: 'hot',
+                action: 'hot'
+            }]
+
         }, {
             xtype: 'container',
             scrollDock: 'top',
