@@ -91,8 +91,9 @@ Ext.define('WeiQuPai.view.Today', {
             xtype: 'banner',
             scrollDock: 'top',
         }, {
-            xtype: 'container',
-            baseCls: 'hot'
+            xtype: 'button',
+            baseCls: 'hot',
+            action: 'hot'
         }, {
             xtype: 'container',
             scrollDock: 'top',

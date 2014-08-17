@@ -6,6 +6,7 @@ Ext.define('WeiQuPai.controller.Today', {
             pageView: 'today',
             specialView: 'specialsale',
             killend: 'today button[action=killend]',
+            hot: 'today button[action=hot]',
             notice: 'today button[action=notice]',
             circle: 'today button[action=circle]',
             discount: 'today button[action=discount]'
@@ -27,6 +28,9 @@ Ext.define('WeiQuPai.controller.Today', {
             killend: {
                 tap: 'showKillEnd'
             },
+            hot: {
+                tap: 'showKillEnd'
+            },
             notice: {
                 tap: 'noticelist'
             },
@@ -42,7 +46,6 @@ Ext.define('WeiQuPai.controller.Today', {
         var detailView = Ext.create('WeiQuPai.view.Notice');
         WeiQuPai.navigator.push(detailView);
     },
-
     showKillEnd: function() {
         var detailView = Ext.create('WeiQuPai.view.KillEnd');
         WeiQuPai.navigator.push(detailView);
