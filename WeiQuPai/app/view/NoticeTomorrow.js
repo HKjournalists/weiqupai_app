@@ -12,11 +12,14 @@ Ext.define('WeiQuPai.view.NoticeTomorrow', {
             id: 'noticet',
             tpl: new Ext.XTemplate(
                 '<tpl for=".">',
-                '<div>',
+                '<div class="detailDatabot">',
                 '<div class="yugao"><div class="title">{time}</div></div>',
                 '<tpl for="items">',
-                '<img src="{[WeiQuPai.Util.getImagePath(values.item.pic_cover, 200)]}" width="100" class="myProduct" itemid="{item_id}">',
-                '</tpl>',
+                '<div class="myProduct">',
+                '<div class="img">',
+                '<img src="{[WeiQuPai.Util.getImagePath(values.item.pic_cover, 200)]}" width="100" itemid="{item_id}" class="notice_t imgbase" >',
+                '</div>',
+                '</div>',
                 '<div style="clear:both"></div>',
                 '</div>',
                 '</tpl>'
@@ -42,7 +45,7 @@ Ext.define('WeiQuPai.view.NoticeTomorrow', {
     },
 
     bindEvent: function(e) {
-        if (e.target.className == 'myProduct') {
+        if (e.target.className == 'notice_t') {
             var toUid = e.target.getAttribute('itemid');
             this.fireEvent('cardtap', this, e.target.getAttribute('itemid'));
             return false;

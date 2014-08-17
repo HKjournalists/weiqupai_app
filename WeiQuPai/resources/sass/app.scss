@@ -1311,19 +1311,18 @@ html body
    {
     float: left;
     background-size: contain;
-    height: 100px;
-    width: 100px;
-    overflow: hidden;
-    border: 1px solid #efefef;
-    margin: 8px 3px;
+    width: 33.3%;
+    text-align: center;
    }
    .mylike .myProduct .img
    {
       
    }
-   .mylike .myProduct .img img
+   .mylike .myProduct .img .imgbase
    {
-      text-align:center;
+      padding:5px;
+      min-width:100%;
+      max-width:100%;
    }
    .mylike .myProduct .title
    {
