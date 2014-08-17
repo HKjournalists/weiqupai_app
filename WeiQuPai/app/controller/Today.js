@@ -70,7 +70,7 @@ Ext.define('WeiQuPai.controller.Today', {
         var itemId = parseInt(record.get('item_id'));
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/itemLike&item_id=' + itemId + '&token=' + user.token;
         WeiQuPai.Util.get(url, function(rsp) {
-            WeiQuPai.Util.setCache('like', itemId);
+            WeiQuPai.Util.setCache('item_like', itemId);
             var stat = record.get('item_stat');
             stat.like_num++;
             record.set('item_stat', stat);
@@ -84,7 +84,7 @@ Ext.define('WeiQuPai.controller.Today', {
         var itemId = parseInt(record.get('item_id'));
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/itemLike/cancel&item_id=' + itemId + '&token=' + user.token;
         WeiQuPai.Util.get(url, function(rsp) {
-            WeiQuPai.Util.delCache('like', itemId);
+            WeiQuPai.Util.delCache('item_like', itemId);
             var stat = record.get('item_stat');
             if (stat.like_num > 0) stat.like_num--;
             record.set('item_stat', stat);

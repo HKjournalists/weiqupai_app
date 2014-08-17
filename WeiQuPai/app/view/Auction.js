@@ -255,7 +255,7 @@ Ext.define('WeiQuPai.view.Auction', {
             return;
         }
         var data = record.data;
-        this.down('detailpicshow').setPicData(data.pic_url);
+        this.down('detailpicshow').setPicData(data.pic_top);
         this.down('#item_stat').setData(data);
         this.down('#item_title').setData(data);
         this.down('#price_data').setData(data);

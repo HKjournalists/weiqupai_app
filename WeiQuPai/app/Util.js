@@ -393,9 +393,8 @@ Ext.define("WeiQuPai.Util", {
 
     getAvatar: function(avatar, size) {
         if (!avatar) {
-            var idx = Math.ceil(Math.random() * 10) > 5 ? 1 : 0;
-            var arr = ['resources/images/defavatar1.png', 'resources/images/defavatar2.png'];
-            return arr[idx];
+            var idx = Math.ceil(Math.random() * 4);
+            return 'resources/images/defavatar' + idx + '.png';
         }
         return this.getImagePath(avatar, size);
     },
@@ -431,11 +430,12 @@ Ext.define("WeiQuPai.Util", {
             var view, item = Ext.create('WeiQuPai.model.Item', rsp);
             if (item.get('auction')) {
                 view = Ext.create('WeiQuPai.view.Auction');
+                view.setRecord(item);
             } else {
                 view = Ext.create('WeiQuPai.view.Item');
+                view.setRecord(item);
                 fromUserAuction && view.element.down('.noticetip').hide();
             }
-            view.setRecord(item);
             setTimeout(function() {
                 WeiQuPai.navigator.push(view);
             }, 0);

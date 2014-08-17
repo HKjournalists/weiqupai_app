@@ -11,7 +11,7 @@ Ext.define('WeiQuPai.view.ShowUserLike', {
         itemTpl: new Ext.XTemplate(
             '<div class="myProduct">',
             '<div class="img">',
-            '<img src="{[WeiQuPai.Util.getImagePath(values.pic_cover, 100)]}" class="imgbase" width="100">',
+            '<img src="{[WeiQuPai.Util.getImagePath(values.pic_cover, 200)]}" class="imgbase" width="100">',
             '</div>',
             '</div>'
         ),

@@ -152,7 +152,7 @@
     }
     
     [self.inAppBrowserViewController showLocationBar:browserOptions.location];
-    [self.inAppBrowserViewController showToolBar:browserOptions.toolbar :browserOptions.toolbarposition];
+    //[self.inAppBrowserViewController showToolBar:browserOptions.toolbar :browserOptions.toolbarposition];
     if (browserOptions.closebuttoncaption != nil) {
         [self.inAppBrowserViewController setCloseButtonTitle:browserOptions.closebuttoncaption];
     }
@@ -222,8 +222,12 @@
     CDVInAppBrowserNavigationController* nav = [[CDVInAppBrowserNavigationController alloc]
                                                 initWithRootViewController:self.inAppBrowserViewController];
     nav.orientationDelegate = self.inAppBrowserViewController;
-    nav.navigationBar.barTintColor = [UIColor colorWithRed:204/255.0 green:214/255.0 blue:194/255.0 alpha:1];
-    nav.navigationBar.tintColor = [UIColor blackColor];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"top.png"] forBarMetrics:UIBarMetricsDefault];
+    nav.navigationBar.tintColor = [UIColor whiteColor];
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:UITextAttributeTextColor];
+    nav.navigationBar.titleTextAttributes = dict;
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStyleBordered target:self action:@selector(close:)];
+    self.inAppBrowserViewController.navigationItem.leftBarButtonItem = backItem;
     //nav.navigationBarHidden = YES;
     // Run later to avoid the "took a long time" log message.
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -533,7 +537,7 @@
     self.toolbar.clearsContextBeforeDrawing = NO;
     self.toolbar.clipsToBounds = NO;
     self.toolbar.contentMode = UIViewContentModeScaleToFill;
-    self.toolbar.hidden = NO;
+    self.toolbar.hidden = YES;
     self.toolbar.multipleTouchEnabled = NO;
     self.toolbar.opaque = NO;
     self.toolbar.userInteractionEnabled = YES;
