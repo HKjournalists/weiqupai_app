@@ -17,7 +17,7 @@ Ext.define('WeiQuPai.view.NoticeAfter', {
                 '<tpl for="items">',
                 '<div class="myProduct">',
                 '<div class="img">',
-                '<img src="{[WeiQuPai.Util.getImagePath(values.item.pic_cover, 200)]}" width="100" itemid="{item_id}" class="notice_t imgbase" >',
+                '<img src="{[WeiQuPai.Util.getImagePath(values.item.pic_cover, 200)]}" width="100" item_id="{item_id}" class="notice_t imgbase" >',
                 '</div>',
                 '</div>',
                 '</tpl>',
@@ -46,9 +46,9 @@ Ext.define('WeiQuPai.view.NoticeAfter', {
     },
 
     bindEvent: function(e) {
-        if (e.target.className == 'notice_t') {
-            var toUid = e.target.getAttribute('itemid');
-            this.fireEvent('cardtap', this, e.target.getAttribute('itemid'));
+        if (Ext.get(e.target).hasCls('notice_t')) {
+            var itemId = e.target.getAttribute('item_id');
+            WeiQuPai.Util.goItemView(itemId);
             return false;
         }
     }

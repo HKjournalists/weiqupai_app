@@ -21,9 +21,8 @@ Ext.application({
 
     controllers: [
         'Auction', 'CameraLayer', 'Circle', 'Comment', 'CommentList', 'Feed', 'Login', 'Main', 'MyAuction',
-        'MyConsignee', 'MyFen', 'MyFollow', 'MyMessage', 'MyOrder', 'MyOrderDetail', 'NoticeAfter',
-        'NoticeToday', 'NoticeTomorrow', 'Order', 'Pay', 'PrivateMessage', 'Profile', 'Register',
-        'Routes', 'Setting', 'ShowOrder', 'ShowUser', 'ShowUserDis', 'ShowUserFeed', 'ShowUserLike',
+        'MyConsignee', 'MyFen', 'MyFollow', 'MyMessage', 'MyOrder', 'MyOrderDetail', 'Order', 'Pay',
+        'PrivateMessage', 'Profile', 'Register', 'Routes', 'Setting', 'ShowOrder', 'ShowUser', 'ShowUserDis', 'ShowUserFeed', 'ShowUserLike',
         'Today', 'Discount', 'KillEnd', 'TopKiller', 'UserAuction', 'UserAuctionComment', 'MyDiscount'
     ],
     models: [

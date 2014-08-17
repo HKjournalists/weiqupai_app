@@ -64,7 +64,7 @@ Ext.define('WeiQuPai.view.ShowUser', {
                 '</div>', {
                     getBg: function(values) {
                         if (!values.circle_bg) {
-                            return 'resources/images/def_person_bg.jpg';
+                            return 'resources/images/def_person_bg.png';
                         }
                         return WeiQuPai.Util.getImagePath(values.circle_bg);
                     },
