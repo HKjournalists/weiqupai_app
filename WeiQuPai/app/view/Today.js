@@ -65,7 +65,7 @@ Ext.define('WeiQuPai.view.Today', {
                     return WeiQuPai.Util.getImagePath(cover, '200');
                 },
                 getLikeCss: function(values) {
-                    return WeiQuPai.Util.hasCache('like', parseInt(values.item_id)) ? 'heart' : 'hallow_heart';
+                    return WeiQuPai.Util.hasCache('item_like', parseInt(values.item_id)) ? 'heart' : 'hallow_heart';
                 },
 
                 displayPrice: function(values) {

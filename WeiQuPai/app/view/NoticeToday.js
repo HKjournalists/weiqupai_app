@@ -17,7 +17,7 @@ Ext.define('WeiQuPai.view.NoticeToday', {
                 '<tpl for="items">',
                 '<div class="myProduct">',
                 '<div class="img">',
-                '<img src="{[WeiQuPai.Util.getImagePath(values.item.pic_cover, 200)]}" width="100" itemid="{item_id}" class="notice_t imgbase" >',
+                '<img src="{[WeiQuPai.Util.getImagePath(values.item.pic_cover, 200)]}" width="100" itemid="{item_id}" class="notice_t imgbase">',
                 '</div>',
                 '</div>',
                 '</tpl>',

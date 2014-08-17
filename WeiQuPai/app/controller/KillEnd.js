@@ -18,7 +18,7 @@ Ext.define('WeiQuPai.controller.KillEnd', {
     },
 
     showDetail: function(list, index, dataItem, record, e) {
-        WeiQuPai.Util.goItemView(record.get('item_id'));
+        WeiQuPai.Util.goItemView(record.get('item').id, true);
     },
 
     showAuction: function(aid) {

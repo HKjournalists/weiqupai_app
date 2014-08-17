@@ -69,6 +69,17 @@ Ext.define('WeiQuPai.controller.Order', {
         WeiQuPai.Util.post(url, param, function(rsp) {
             //将拍过的商品保存到cache中
             WeiQuPai.Util.setCache('auction', parseInt(order.get('auction_id')));
+            //如果是0元订单跳到订单详情
+            if (rsp.price == 0) {
+                var record = Ext.create('WeiQuPai.model.Order', rsp);
+                var view = Ext.create('WeiQuPai.view.MyOrderDetail', {
+                    record: record
+                });
+                WeiQuPai.navigator.push(view);
+                setTimeout(function() {
+                    WeiQuPai.Util.toast('您的订单已经提交成功，请等待发货');
+                }, 400);
+            }
             rsp.item = itemData;
             var view = Ext.create('WeiQuPai.view.Pay');
             view.setOrderData(rsp);

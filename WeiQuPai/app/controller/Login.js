@@ -64,9 +64,8 @@ Ext.define('WeiQuPai.controller.Login', {
                             WeiQuPai.loginReferer = null;
                         }
                         var main = WeiQuPai.navigator;
-                        main.getLayout().setAnimation(null);
+                        var anim = main.getLayout().getAnimation();
                         main.pop();
-                        main.getLayout().setAnimation(Ext.os.is.iOS ? 'cover' : null);
                         win.close();
                     });
                 });
@@ -89,9 +88,7 @@ Ext.define('WeiQuPai.controller.Login', {
                             WeiQuPai.loginReferer = null;
                         }
                         var main = WeiQuPai.navigator;
-                        main.getLayout().setAnimation(null);
                         main.pop();
-                        main.getLayout().setAnimation(Ext.os.is.iOS ? 'cover' : null);
                         win.close();
                     });
                 });
