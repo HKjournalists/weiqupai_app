@@ -165,7 +165,10 @@ Ext.define('WeiQuPai.view.Today', {
             xtype: 'button',
             baseCls: 'icontop',
             itemId: 'icontop',
-            action: 'icontop'
+            action: 'icontop',
+            docked: 'bottom',
+            hidden: 'true',
+            style: 'border:1px solid red!important;'
         }]
     },
 
@@ -178,9 +181,17 @@ Ext.define('WeiQuPai.view.Today', {
                 duration: 300
             });
         }, this);
-
-        console.log("宽度 = " + window.innerWidth + "滚动条" + document.documentElement.scrollTop + "+" + window.scrollY);
-        console.log("高度 = " + window.innerHeight);
+        var me = this;
+        //不使用timeout获取的值有可能不对
+        var scroller = this.getScrollable().getScroller();
+        scroller.addListener('scroll', function(scroller, x, y) {
+            //console.log(y);
+            if (y > 0) {
+                this.down('#icontop').show();
+            } else {
+                this.down('#icontop').hide();
+            }
+        }, this);
         this.callParent(arguments);
         this.loadData();
         this.on('activate', this.onActivate, this);
@@ -197,16 +208,6 @@ Ext.define('WeiQuPai.view.Today', {
             delegate: '.list-product'
         });
 
-    },
-    onScrollChange: function(scroller, x, y) {
-        var t = document.documentElement.scrollTop;
-        var top_div = this.down('button[action=icontop]');
-        if (t = 0) {
-            Ext.Msg.alter("触发事件了");
-            top_div.show();
-        } else {
-            top_div.hide();
-        }
     },
     bindEvent: function(list, index, dataItem, record, e) {
         var me = this;
