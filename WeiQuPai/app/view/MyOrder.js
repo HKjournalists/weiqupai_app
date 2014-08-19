@@ -127,25 +127,13 @@ Ext.define('WeiQuPai.view.MyOrder', {
         if (!user) {
             return false;
         }
-        this.msgbox.hide();
         this.setLoadingText(null);
         var store = this.getStore();
         //加载数据
         store.getProxy().setExtraParam('token', user.token);
-        store.load(function(records, operation, success) {
-            if (!success) {
-                WeiQuPai.Util.toast('数据加载失败');
-                return false;
-            }
-            if (records.length == 0) {
-                this.msgbox.show();
-                return;
-            }
-            //登录超时
-            if (!WeiQuPai.Util.invalidToken(records[0].raw)) {
-                store.removeAll();
-                return false;
-            }
-        }, this);
+        //加载数据
+        store.on('load', WeiQuPai.Util.onStoreLoad, this);
+        store.on('latestfetched', WeiQuPai.Util.onStoreLoad, this);
+        store.loadPage(1);
     }
 });

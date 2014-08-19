@@ -58,13 +58,22 @@ Ext.define('WeiQuPai.view.Item', {
                 '<div class="bottom" style="margin-top:110px;">',
                 '<div class="right">',
                 '<ul>',
-                '<li class="nolike"></li>',
-                '<li class="like"></li>',
+                '<li class="{[this.getDislikeCls(values)]}"></li>',
+                '<li class="{[this.getLikeCls(values)]}"></li>',
                 '</ul>',
                 '</div>',
                 '<div style="clear:both"></div>',
                 '</div>',
-                '</div>'
+                '</div>', {
+                    getLikeCls: function(values) {
+                        var id = parseInt(values.id);
+                        return WeiQuPai.Util.hasCache('item_like', id) ? 'selflike' : 'like';
+                    },
+                    getDislikeCls: function(values) {
+                        var id = parseInt(values.id);
+                        return WeiQuPai.Util.hasCache('item_dislike', id) ? 'selfnolike' : 'nolike';
+                    }
+                }
             )
         }, {
             xtype: 'container',
@@ -118,7 +127,7 @@ Ext.define('WeiQuPai.view.Item', {
 
         }, {
             xtype: 'bottombar',
-            itemId: 'bottombar',
+            itemId: 'auctionBottombar',
             cls: 'bottombarD'
         }],
 
@@ -131,7 +140,6 @@ Ext.define('WeiQuPai.view.Item', {
     initialize: function() {
         this.callParent(arguments);
 
-        this.shareLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer');
         this.down('#item_title').on('tap', this.bindEvent, this, {
             element: 'element'
         });
@@ -192,6 +200,15 @@ Ext.define('WeiQuPai.view.Item', {
                 this.down('#tabbar').translate(null, 0, false);
             }
         }, this);
+        scroller.addListener('scrollend', this.listPaging, this);
+    },
+
+    listPaging: function(scroller, x, y) {
+        if (y < scroller.maxPosition.y) {
+            return;
+        }
+        var tabView = this.getActiveTab().tabView;
+        tabView.nextPage && tabView.nextPage(scroller);
     },
 
     bindEvent: function(e) {
@@ -201,6 +218,14 @@ Ext.define('WeiQuPai.view.Item', {
         }
         if (e.target.className == 'nolike') {
             this.fireEvent('itemdislike', this);
+            return false;
+        }
+        if (e.target.className == 'selflike') {
+            this.fireEvent('cancelitemlike', this);
+            return false;
+        }
+        if (e.target.className == 'selfnolike') {
+            this.fireEvent('cancelitemdislike', this);
             return false;
         }
         if (Ext.get(e.target).findParent('.notice_btn1')) {
@@ -217,8 +242,10 @@ Ext.define('WeiQuPai.view.Item', {
     fetchLastest: function() {
         var me = this;
         this.getList().loadData(function() {
-            me.setState('loaded');
-            me.snapBack();
+            setTimeout(function() {
+                me.setState('loaded');
+                me.snapBack();
+            }, 100);
         });
     },
 
@@ -229,8 +256,6 @@ Ext.define('WeiQuPai.view.Item', {
             scope: this,
             success: function(record, operation) {
                 this.setRecord(record);
-                //添加数据到分享功能
-                this.shareLayer.setShareData(record.data);
                 Ext.isFunction(callback) && callback();
             },
             failure: function(record, operation) {
@@ -259,5 +284,6 @@ Ext.define('WeiQuPai.view.Item', {
         var data = this.down('#item_stat').getData();
         data.item_stat[field] = parseInt(data.item_stat[field]) + value;
         this.down('#item_stat').setData(data);
+        this.down('#item_title').setData(data);
     },
 });

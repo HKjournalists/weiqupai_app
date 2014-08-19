@@ -1,45 +1,37 @@
-Ext.define('WeiQuPai.controller.ShowOrder', {
+Ext.define('WeiQuPai.controller.FeedBack', {
     extend: 'Ext.app.Controller',
 
     config: {
         refs: {
-            pageView: 'showorder',
-            pubBtn: 'showorder button[action=publish]',
-            showOrderCamera: 'button[action=showOrderCamera]',
+            pageView: 'feedback',
+            pubBtn: 'feedback button[action=feedsubmit]',
+            feedBackCamera: 'button[action=feedBackCamera]',
         },
         control: {
             pubBtn: {
                 tap: 'doPublish'
             },
-            showOrderCamera: {
+            feedBackCamera: {
                 tap: 'showCameraLayer'
             },
         }
     },
 
     doPublish: function() {
-        var user = WeiQuPai.Util.checkLogin();
-        if (!user) return;
         var view = this.getPageView();
-        var data = {};
-        data.content = view.down('textareafield').getValue();
-        data.picList = view.getPicList().join("|");
-        data.item_id = view.getRecord().get('item').id;
-        data.pic_cover = view.getRecord().get('item').pic_cover;
-        data.token = user.token;
-        if (data.picList.length == 0) {
-            WeiQuPai.Util.toast('还是上传一张照片吧~');
-            return;
+        var content = view.down('textareafield').getValue().trim();
+        if (content.length == 0) {
+            return false;
         }
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/circle/post';
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/feedback';
+        var user = WeiQuPai.Cache.get('currentUser');
+        var data = {};
+        data.uid = user && user.id || 0;
+        data.picList = view.getPicList().join("|");
+        data.content = content;
         WeiQuPai.Util.post(url, data, function(rsp) {
-            WeiQuPai.navigator.pop('maincard');
-            WeiQuPai.sidebar.activeTabItem('circle');
-            WeiQuPai.navigator.down('circle').loadData();
-
-            WeiQuPai.app.statReport({
-                act: 'showorder'
-            });
+            view.down('textareafield').reset();
+            WeiQuPai.Util.toast('您的意见已提交，感谢您的反馈');
         });
     },
 

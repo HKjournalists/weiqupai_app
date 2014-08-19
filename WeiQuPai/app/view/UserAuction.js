@@ -131,6 +131,19 @@ Ext.define('WeiQuPai.view.UserAuction', {
             me.getStore().currentPage = 1;
             WeiQuPai.Util.resetListPaging(me);
             Ext.isFunction(callback) && callback();
+
+            //上报统计
+            var lastView = WeiQuPai.navigator.getPreviousItem();
+            if (lastView.isXType('maincard')) {
+                lastView = lastView.getActiveItem();
+            }
+            var from = lastView.getXTypes().split('/').pop();
+            var data = {};
+            data.from = from;
+            data.page = 'useraution';
+            data.auction_id = rsp.id;
+            data.item_id = rsp.item_id;
+            WeiQuPai.app.statReport(data);
         });
     },
 

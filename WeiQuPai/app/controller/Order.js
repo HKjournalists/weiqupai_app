@@ -72,13 +72,13 @@ Ext.define('WeiQuPai.controller.Order', {
             //如果是0元订单跳到订单详情
             if (rsp.price == 0) {
                 var record = Ext.create('WeiQuPai.model.Order', rsp);
-                var view = Ext.create('WeiQuPai.view.MyOrderDetail', {
-                    record: record
-                });
+                var view = Ext.create('WeiQuPai.view.MyOrderDetail');
+                view.setOrderId(rsp.id);
                 WeiQuPai.navigator.push(view);
                 setTimeout(function() {
                     WeiQuPai.Util.toast('您的订单已经提交成功，请等待发货');
                 }, 400);
+                return;
             }
             rsp.item = itemData;
             var view = Ext.create('WeiQuPai.view.Pay');

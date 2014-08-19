@@ -5,7 +5,6 @@
 Ext.define('WeiQuPai.view.ShareLayer', {
     extend: 'Ext.Container',
     xtype: 'sharelayer',
-    requires: ['WeiQuPai.view.WeiboShare'],
     config: {
         shareData: null,
         cls: 'w-poplayer share-layer',
@@ -61,28 +60,44 @@ Ext.define('WeiQuPai.view.ShareLayer', {
     },
 
     applyShareData: function(data) {
-        return {
-            title: data.title + ' - 微趣拍',
-            thumb: data.thumb || WeiQuPai.Config.host + data.pic_cover,
-            url: data.url || 'http://www.vqupai.com/mm/index.php?r=auction/show&id=' + data.id,
-            description: data.description || '微趣拍'
-        };
+        data.title = data.title + ' - 微趣拍';
+        data.description = data.description || '微趣拍';
+        return data;
     },
 
     shareWeibo: function() {
         this.hide();
-        var view = Ext.create('WeiQuPai.view.WeiboShare');
-        view.setData(this.getShareData());
-        WeiQuPai.navigator.push(view);
+        var data = this.getShareData();
+        var param = {
+            title: data.title,
+            url: data.url + '&t=weibo',
+            pic: data.thumb,
+            searchPic: 'false',
+            appkey: '269670787'
+        }
+        var query = Ext.Object.toQueryString(param);
+        var url = 'http://service.weibo.com/share/mobile.php?' + query;
+        window.open(url, '_blank', 'location=no,title=微博分享,closebuttoncaption=关闭');
+
+        //上报统计
+        WeiQuPai.app.statReport({
+            act: 'shareweibo'
+        });
     },
     shareWeixin: function() {
         this.hide();
         this.shareWechat(Wechat.Scene.SESSION);
+        WeiQuPai.app.statReport({
+            act: 'sharewechat'
+        });
     },
 
     sharePyquan: function() {
         this.hide();
         this.shareWechat(Wechat.Scene.TIMELINE);
+        WeiQuPai.app.statReport({
+            act: 'sharetimeline'
+        });
     },
 
     shareWechat: function(scene) {

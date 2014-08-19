@@ -78,10 +78,9 @@ Ext.define('WeiQuPai.view.SpecialSale', {
                 baseCls: 'arrow_left',
                 action: 'back'
             }]
-        }]
+        }],
+        firstLoad: true
     },
-
-    firstLoad: true,
 
     initialize: function() {
         this.callParent(arguments);
@@ -122,20 +121,16 @@ Ext.define('WeiQuPai.view.SpecialSale', {
     },
 
     onActivate: function() {
+        if (this.getFirstLoad()) {
+            this.setFirstLoad(false);
+            return;
+        }
         this.softRefresh();
     },
 
     //软刷新，只更新当前列表的状态和价格
     softRefresh: function() {
-
-        if (this.firstLoad) {
-            this.firstLoad = false;
-            return;
-        }
-
-        var store = this.getStore(),
-            proxy = store.getProxy(),
-            operation;
+        var store = this.getStore();
         ids = [];
         store.each(function(item, index, length) {
             ids.push(item.get('id'));

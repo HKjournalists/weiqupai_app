@@ -73,6 +73,9 @@ Ext.define('WeiQuPai.controller.Profile', {
         var self = this;
         WeiQuPai.Util.showCameraLayer(140, 140, true, function(url) {
             self.getProfileView().setAvatar(url);
+            WeiQuPai.app.statReport({
+                act: 'setavatar'
+            });
         });
     },
 

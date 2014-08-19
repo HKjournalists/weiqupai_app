@@ -314,6 +314,7 @@ Ext.define("WeiQuPai.Util", {
         if (!window.BPush) return;
         var user = WeiQuPai.Cache.get('currentUser');
         BPush.bindChannel(function(data) {
+            WeiQuPai.Cache.set('device', data.deviceToken);
             //绑定成功，但用户未登录，不需要回传
             if (!user) return;
             data.os = Ext.os.name.toLowerCase();
@@ -544,5 +545,16 @@ Ext.define("WeiQuPai.Util", {
 
     post: function(url, data, callback, option) {
         return WeiQuPai.Util.request(url, 'post', data, callback, option);
+    },
+
+    //列表加载完数据执行的回调
+    onStoreLoad: function(store, records, operation, success) {
+        if (!success) {
+            WeiQuPai.Util.toast('数据加载失败');
+            return false;
+        }
+        if (this.msgbox) {
+            store.getCount() == 0 ? this.msgbox.show() : this.msgbox.hide();
+        }
     }
 })

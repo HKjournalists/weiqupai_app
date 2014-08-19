@@ -18,9 +18,8 @@ Ext.define('WeiQuPai.controller.MyOrder', {
     },
 
     showDetail: function(list, index, dataItem, record, e) {
-        var detailView = Ext.create('WeiQuPai.view.MyOrderDetail', {
-            record: record
-        });
+        var detailView = Ext.create('WeiQuPai.view.MyOrderDetail');
+        detailView.setOrderId(record.get('id'));
         WeiQuPai.navigator.push(detailView);
     },
 

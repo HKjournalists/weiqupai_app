@@ -165,8 +165,10 @@ Ext.define('WeiQuPai.view.ShowUser', {
         var list = this.getList();
         var uid = list.getUid();
         list.loadData(uid, function() {
-            me.setState('loaded');
-            me.snapBack();
+            setTimeout(function() {
+                me.setState('loaded');
+                me.snapBack();
+            }, 100);
         });
         list.down('showuserlike').setUid(uid);
         list.down('showuserdis').setUid(uid);

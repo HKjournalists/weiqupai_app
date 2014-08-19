@@ -40,7 +40,16 @@ Ext.define('WeiQuPai.controller.UserAuction', {
     },
 
     showShareLayer: function() {
-
+        var data = this.getPageView().getAuctionData();
+        var shareData = {
+            title: data.item.title,
+            thumb: WeiQuPai.Util.getImagePath(data.item.pic_cover, 200),
+            url: 'http://www.vqupai.com/mm/index.php?r=userAuction&id=' + data.id
+        }
+        var layer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer');
+        layer.down('button[action=weibo]').setDisabled(true);
+        layer.setShareData(shareData);
+        layer.show();
     },
 
     showComment: function() {

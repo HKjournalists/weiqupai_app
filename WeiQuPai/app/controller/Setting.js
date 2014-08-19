@@ -7,6 +7,7 @@ Ext.define('WeiQuPai.controller.Setting', {
             about: 'disclosureitem[itemId=about]',
             retn: 'disclosureitem[itemId=return]',
             update: 'disclosureitem[itemId=update]',
+            feedback: 'disclosureitem[itemId=feedback]',
             logoutBtn: 'button[action=logout]'
         },
         control: {
@@ -18,6 +19,9 @@ Ext.define('WeiQuPai.controller.Setting', {
             },
             update: {
                 tap: 'showUpdate'
+            },
+            feedback: {
+                tap: 'showFeedBack'
             },
             logoutBtn: {
                 tap: 'logout'
@@ -37,6 +41,11 @@ Ext.define('WeiQuPai.controller.Setting', {
 
     showUpdate: function() {
         var view = Ext.create('WeiQuPai.view.AppUpdate');
+        this.getMain().push(view);
+    },
+
+    showFeedBack: function() {
+        var view = Ext.create('WeiQuPai.view.FeedBack');
         this.getMain().push(view);
     },
 

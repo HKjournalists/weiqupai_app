@@ -51,11 +51,11 @@ Ext.define('WeiQuPai.view.MyDiscount', {
 
     initialize: function() {
         this.callParent(arguments);
-        //this.msgbox = WeiQuPai.Util.msgbox('您还没有拍到任何宝贝');
-        this.msgbox = WeiQuPai.Util.msgbox('');
+        this.msgbox = WeiQuPai.Util.msgbox();
         this.add(this.msgbox);
         this.loadData();
         this.on('itemtap', this.bindEvent, this);
+        this.plugins
     },
 
     loadData: function() {
@@ -64,21 +64,9 @@ Ext.define('WeiQuPai.view.MyDiscount', {
         var user = WeiQuPai.Cache.get('currentUser');
         store.getProxy().setExtraParam('token', user.token);
         //加载数据
-        store.loadPage(1, function(records, operation, success) {
-            if (!success) {
-                WeiQuPai.Util.toast('数据加载失败');
-                return false;
-            }
-            if (records.length == 0) {
-                this.msgbox.show();
-                return;
-            }
-            //登录超时
-            if (!WeiQuPai.Util.invalidToken(records[0].raw)) {
-                store.removeAll();
-                return false;
-            }
-        }, this);
+        store.on('load', WeiQuPai.Util.onStoreLoad, this);
+        store.on('latestfetched', WeiQuPai.Util.onStoreLoad, this);
+        store.loadPage(1);
     },
 
     bindEvent: function(list, index, dataItem, record, e) {

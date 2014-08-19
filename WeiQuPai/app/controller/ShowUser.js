@@ -64,6 +64,9 @@ Ext.define('WeiQuPai.controller.ShowUser', {
         var self = this;
         WeiQuPai.Util.showCameraLayer(140, 140, true, function(url) {
             self.setAvatar(url);
+            WeiQuPai.app.statReport({
+                act: 'setavatar'
+            });
         });
     },
 
@@ -71,6 +74,9 @@ Ext.define('WeiQuPai.controller.ShowUser', {
         var self = this;
         WeiQuPai.Util.showCameraLayer(640, 400, true, function(url) {
             self.setCircleBg(url);
+            WeiQuPai.app.statReport({
+                act: 'setbg'
+            });
         });
     },
 

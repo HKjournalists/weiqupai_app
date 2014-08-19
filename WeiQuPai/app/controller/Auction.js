@@ -4,9 +4,9 @@ Ext.define('WeiQuPai.controller.Auction', {
         refs: {
             shopInfo: 'disclosureitem[itemId=shopInfo]',
             brandInfo: 'disclosureitem[itemId=brandInfo]',
-            commentBtn: '#bottombar button[action=comment]',
-            shareBtn: 'button[action=share]',
-            paiBtn: 'auction button[action=pai]',
+            commentBtn: '#auctionBottombar button[action=comment]',
+            shareBtn: '#auctionBottombar button[action=share]',
+            paiBtn: '#auctionBottombar button[action=pai]',
             commentForm: 'inputcomment[itemId=postComment]',
             auctionView: 'auction',
             itemView: 'item'
@@ -43,6 +43,8 @@ Ext.define('WeiQuPai.controller.Auction', {
             itemView: {
                 itemlike: 'doItemLike',
                 itemdislike: 'doItemDislike',
+                cancelitemlike: 'doCancelItemLike',
+                cancelitemdislike: 'doCancelItemDislike',
                 expectprice: 'doSetExpectPrice',
                 noticetap: 'doNotice'
             }
@@ -88,7 +90,7 @@ Ext.define('WeiQuPai.controller.Auction', {
         var currentView = WeiQuPai.navigator.getActiveItem();
         var auctionId = currentView.getRecord().get('auction').id;
         if (WeiQuPai.Util.hasAuction(auctionId)) {
-            WeiQuPai.Util.toast('您已经拍过该商品');
+            WeiQuPai.Util.toast('您已经购买过该商品，请到[我的订单]里查看吧');
             return;
         }
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/reserve&id=' + auctionId + '&token=' + user.token;
@@ -267,7 +269,16 @@ Ext.define('WeiQuPai.controller.Auction', {
     },
 
     doShare: function() {
-        var currentView = WeiQuPai.navigator.getActiveItem();
-        currentView.shareLayer.show();
+        var view = WeiQuPai.navigator.getActiveItem();
+        var data = view.getRecord().data;
+        var layer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer');
+        layer.down('button[action=weibo]').setDisabled(false);
+        var shareData = {
+            title: data.title,
+            thumb: WeiQuPai.Util.getImagePath(data.pic_cover, 200),
+            url: 'http://www.vqupai.com/mm/?r=item/show&id=' + data.id
+        }
+        layer.setShareData(shareData);
+        layer.show();
     }
 });

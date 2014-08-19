@@ -30,11 +30,6 @@ Ext.define('WeiQuPai.view.DiscountDetail', {
                 '</div>'
             )
         }, {
-            xtype: 'container',
-            cls: 'one mg_10',
-            itemId: 'intro',
-            tpl: new Ext.XTemplate('{intro}')
-        }, {
             xtype: 'button',
             baseCls: 'w-button',
             action: 'getit',
@@ -45,6 +40,11 @@ Ext.define('WeiQuPai.view.DiscountDetail', {
             action: 'useit',
             text: '使用',
             hidden: true
+        }, {
+            xtype: 'container',
+            cls: 'one mg_10',
+            itemId: 'intro',
+            tpl: new Ext.XTemplate('{intro}')
         }, {
             xtype: 'container',
             cls: 'two',

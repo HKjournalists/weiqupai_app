@@ -207,6 +207,7 @@ Ext.define('WeiQuPai.view.Sidebar', {
         }
         this.activeTabBtn(xtype);
         mainCard.setActiveItem(xtype);
+
         //如果有通知要在对应view上的个人中心按钮显示红点
         if (WeiQuPai.Notify.hasNotify()) {
             var item = mainCard.getActiveItem();
@@ -215,6 +216,11 @@ Ext.define('WeiQuPai.view.Sidebar', {
             btn.element.down('.x-badge').show();
         }
         this.close();
+
+        //上报统计
+        WeiQuPai.app.statReport({
+            page: xtype
+        });
     },
 
     setUcenterBadge: function() {

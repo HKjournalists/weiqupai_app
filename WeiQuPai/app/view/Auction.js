@@ -141,7 +141,7 @@ Ext.define('WeiQuPai.view.Auction', {
 
         }, {
             xtype: 'bottombar',
-            itemId: 'bottombar'
+            itemId: 'auctionBottombar'
         }],
 
         refreshTimer: null,
@@ -160,7 +160,6 @@ Ext.define('WeiQuPai.view.Auction', {
     initialize: function() {
         this.callParent(arguments);
         this.showTips();
-        this.shareLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer');
         this.down('#item_title').element.on('tap', this.bindEvent, this);
         this.down('#price_data').element.on('tap', this.bindEvent, this);
         //初始化tab
@@ -275,14 +274,18 @@ Ext.define('WeiQuPai.view.Auction', {
         if (!auction) return;
         var record = Ext.getStore('Auction').getById(auction.id);
         record && record.set('item_stat', data.item_stat);
+        var record = Ext.getStore('SpecialSale').getById(auction.id);
+        record && record.set('item_stat', data.item_stat);
     },
 
     //下拉刷新, 这里的this是pullRefresh对象
     fetchLastest: function() {
         var me = this;
         this.getList().loadData(function() {
-            me.setState('loaded');
-            me.snapBack();
+            setTimeout(function() {
+                me.setState('loaded');
+                me.snapBack();
+            }, 100);
         });
     },
 
@@ -293,8 +296,6 @@ Ext.define('WeiQuPai.view.Auction', {
             success: function(record, operation) {
                 this.setRecord(record);
                 this.updateRecord(record);
-                //添加数据到分享功能
-                this.shareLayer.setShareData(record.data);
                 Ext.isFunction(callback) && callback();
             },
             failure: function(record, operation) {
@@ -400,6 +401,10 @@ Ext.define('WeiQuPai.view.Auction', {
         chart.setSrc(src);
         chart.setParentCmp(this);
         chart.show();
+
+        WeiQuPai.app.statReport({
+            act: 'showchart'
+        });
     },
 
     //销毁的时候清除定时器

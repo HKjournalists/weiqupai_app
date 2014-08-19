@@ -35,7 +35,8 @@ Ext.define('WeiQuPai.controller.TopKiller', {
     //帮拍
     doHelp: function(list, index, dataItem, record, e) {
         var auctionId = record.get('id');
-        var user = WeiQuPai.Cache.get('currentUser');
+        var user = WeiQuPai.Util.checkLogin();
+        if (!user) return;
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/userAuction/help&id=' + auctionId + '&token=' + user.token;
         WeiQuPai.Util.get(url, function(rsp) {
             WeiQuPai.Util.toast('您成功帮忙减掉了' + rsp.discount + '元');

@@ -5,7 +5,7 @@ Ext.define('WeiQuPai.view.Today', {
         'WeiQuPai.view.Discount', 'WeiQuPai.view.KillEnd', 'WeiQuPai.view.AuctionTip', 'WeiQuPai.view.Category'
     ],
     config: {
-        scrollable: true,
+        scrollable: 'vertical',
         loadingText: null,
         store: 'Auction',
         cls: 'bg_ef',
@@ -218,8 +218,10 @@ Ext.define('WeiQuPai.view.Today', {
     fetchLastest: function() {
         var me = this;
         this.getList().loadData(function() {
-            me.setState('loaded');
-            me.snapBack();
+            setTimeout(function() {
+                me.setState('loaded');
+                me.snapBack();
+            }, 100);
         });
     },
 
@@ -233,9 +235,7 @@ Ext.define('WeiQuPai.view.Today', {
 
     //软刷新，只更新当前列表的状态和价格
     softRefresh: function() {
-        var store = this.getStore(),
-            proxy = store.getProxy(),
-            operation;
+        var store = this.getStore();
         ids = [];
         store.each(function(item, index, length) {
             ids.push(item.get('id'));

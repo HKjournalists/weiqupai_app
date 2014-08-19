@@ -19,7 +19,7 @@ Ext.define('WeiQuPai.view.Category', {
             '<div class="product">',
             '<div class="todayTitle">{title}</div>',
             '<div class="mulu">',
-            '<ul><tpl for="childs"><li><input type="button" value="{title}" class="btn_e7" data-id="{id}"/></li></tpl></ul>',
+            '<ul><tpl for="childs"><li><input type="button" value="{title}" class="cate_btn" data-id="{id}"/></li></tpl></ul>',
             '<div class="clear"></div>',
             '</div>',
             '</div>'

@@ -50,8 +50,20 @@ Ext.define('WeiQuPai.view.Circle', {
             '<div class="title">{json_data.title}</div>',
             '<div style="clear:both"></div>',
             '</div></div>',
-            '</tpl>',
 
+            '<tpl elseif="feed_type==3">',
+            '<div class="feed-title"><b>{user.nick}</b><span class="color_85"> 创建了血战到底</span></div>',
+            '<div class="feed-content">',
+            '<span class="help_btn">帮杀</span>',
+            '<span class="auction_btn">观战</span>',
+            '<span class="kill_btn">参战</span>',
+            '</div>',
+            '<div class="confirm_w"><div class="confirm_title">',
+            '<img src="{[this.getPic(values.json_data.pic_cover)]}"}" class="card-img"/>',
+            '<div class="title">{json_data.title}</div>',
+            '<div style="clear:both"></div>',
+            '</div></div>',
+            '</tpl>',
 
             '<div class="date">',
             '<div class="left">{ctime} <tpl if="this.isSelf(uid)"><span class="delete-post-btn">删除</span></tpl></div>',
@@ -119,7 +131,7 @@ Ext.define('WeiQuPai.view.Circle', {
         var user = WeiQuPai.Cache.get('currentUser');
         this.getStore().getProxy().setExtraParam('token', user && user.token || null);
         this.setLoadingText(null);
-        this.getStore().load();
+        this.getStore().loadPage(1);
     },
 
     handleItemTap: function() {
@@ -138,6 +150,20 @@ Ext.define('WeiQuPai.view.Circle', {
                 me.bindEvent(index, record, e);
             });
         }
+
+        //按钮的状态事件
+        this.onBefore('itemtouchstart', function(list, index, dataItem, record, e) {
+            if (/(help|auction|kill)_btn/.test(e.target.className)) {
+                Ext.get(e.target).addCls('active');
+                return false;
+            }
+        }, this);
+        this.onBefore('itemtouchend', function(list, index, dataItem, record, e) {
+            if (/(help|auction|kill)_btn/.test(e.target.className)) {
+                Ext.get(e.target).removeCls('active');
+                return false;
+            }
+        }, this);
     },
 
     bindEvent: function(index, record, e) {
@@ -170,6 +196,18 @@ Ext.define('WeiQuPai.view.Circle', {
         if (Ext.get(e.target).findParent('.pic-list-img')) {
             var picIdx = e.target.getAttribute('data-idx');
             me.fireEvent('pictap', me, index, record, picIdx);
+            return false;
+        }
+        if (Ext.get(e.target).findParent('.help_btn')) {
+            me.fireEvent('helptap', me, index, record);
+            return false;
+        }
+        if (Ext.get(e.target).findParent('.show_btn')) {
+            me.fireEvent('showtap', me, index, record);
+            return false;
+        }
+        if (Ext.get(e.target).findParent('.kill_btn')) {
+            me.fireEvent('killtap', me, index, record);
             return false;
         }
         me.fireEvent('feedtap', me, index, record);

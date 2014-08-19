@@ -79,11 +79,12 @@ Ext.define('WeiQuPai.view.MyOrderDetail', {
             title: '退货说明',
             itemId: 'return_btn',
             style: 'margin-bottom:10px'
-        }]
+        }],
+
+        orderId: null
     },
 
     initialize: function() {
-        var user = WeiQuPai.Cache.get('currentUser');
 
         this.down('#orderInfo').on('tap', function() {
             this.fireEvent('view_item');
@@ -92,13 +93,22 @@ Ext.define('WeiQuPai.view.MyOrderDetail', {
             delegate: '.order_dis'
         });
 
-        this.updateButtonStatus();
-        var orderId = this.getRecord().get('id');
+    },
+
+    updateOrderId: function(id) {
+        this.loadData();
+    },
+
+    loadData: function() {
+        var user = WeiQuPai.Cache.get('currentUser');
+        var orderId = this.getOrderId();
         var model = WeiQuPai.model.Order;
         model.getProxy().setExtraParam('token', user.token);
-        WeiQuPai.model.Order.load(orderId, {
+        model.load(orderId, {
             scope: this,
             success: function(record, operation) {
+                this.setRecord(record);
+                this.updateButtonStatus();
                 this.down('#orderInfo').setData(record.data);
             },
             failure: function(record, operation) {

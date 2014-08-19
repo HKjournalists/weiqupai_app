@@ -15,7 +15,6 @@ Ext.define('WeiQuPai.view.MyMessage', {
             pullText: '下拉刷新',
             releaseText: '释放立即刷新',
             loadedText: '下拉刷新',
-            refreshFn: 'fetchLastest',
             scrollerAutoRefresh: true
         }, {
             type: 'wlistpaging',
@@ -84,17 +83,12 @@ Ext.define('WeiQuPai.view.MyMessage', {
             return false;
         }
         var user = WeiQuPai.Cache.get('currentUser');
-        this.getStore().getProxy().setExtraParam('token', user && user.token || null);
         this.setLoadingText(null);
-        this.getStore().load(function(records, operation, success) {
-            if (!success) {
-                WeiQuPai.Util.toast('数据加载失败');
-            }
-            if (records.length == 0) {
-                this.msgbox.show();
-                return;
-            }
-        }, this);
+        var store = this.getStore();
+        store.getProxy().setExtraParam('token', user && user.token || null);
+        store.on('load', WeiQuPai.Util.onStoreLoad, this);
+        store.on('latestfetched', WeiQuPai.Util.onStoreLoad, this);
+        store.loadPage(1);
     },
 
     bindEvent: function(list, index, dataItem, record, e) {

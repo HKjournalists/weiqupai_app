@@ -270,7 +270,6 @@ html body
       -moz-box-orient: horizontal;
       -webkit-box-orient: horizontal;
       box-orient: horizontal;
-      background:$color_fff;
       width:100%;
       border:0px;
       padding:10px 0;
@@ -1755,13 +1754,11 @@ html body
     {
       width:100%;
       border:1px solid #efefef;
-      background:$color_fff;
     }
     .myorder_new
     {
       width:100%;
       border:1px solid #efefef;
-      background:$color_fff;
     }
     .orderlist
     {
@@ -2374,6 +2371,10 @@ html body
      background:url('../images/wb.png') no-repeat;
      @include share_btn;
     }
+    .xl-share-button.x-item-disabled{
+     background:url('../images/wb_disable.png') no-repeat;
+     @include share_btn;
+    }
      .pyq-share-button
     {
       background:url('../images/pyq.png') no-repeat;
@@ -2471,7 +2472,6 @@ html body
    }
    .discount
    {
-    background:$color_fff;
     padding:10px;
     display:box;
     display:-weibkit-box;
@@ -2651,6 +2651,9 @@ html body
     {
       margin-top:10px;  border:0px;
     }
+    .listting .mulu{
+      padding:0 10px 10px 0;
+    }
     .listting .product .mulu ul
     {
      list-style:none;
@@ -2661,9 +2664,16 @@ html body
     {
      float:left;
      margin-left:10px;
-     padding-bottom:10px;
     }
 
+    .listting .product .mulu .cate_btn{
+      border: 0px;
+      background: #fff;
+      padding: 5px;
+      font-size: 13px;
+      color:#333;
+      -webkit-appearance: none;
+    }
     //积分兑换拍券
     .change
     {
@@ -2932,7 +2942,30 @@ html body
 .paiquan .feed-title{
   margin-bottom:8px;
 }
-
+.feed-content .help_btn{
+  background:url(../images/bs.png) no-repeat 4px center;
+  background-size:13px 11px;
+  padding:4px 4px 4px 18px;
+  margin-right:10px;
+  color:$color_e7;
+}
+.feed-content .auction_btn {
+  background:url(../images/eyes.png) no-repeat 4px center;
+  background-size:13px 11px;
+  padding:4px 4px 4px 18px;
+  margin-right:10px;
+  color:$color_e7;
+}
+.feed-content .kill_btn{
+  background:url(../images/flag.png) no-repeat 4px center;
+  background-size:13px 11px;
+  padding:4px 4px 4px 18px;
+  margin-right:10px;
+  color:$color_e7;
+}
+.feed-content .help_btn.active, .feed-content .auction_btn.active, .feed-content .kill_btn.active{
+  background-color:#e0e0e0;
+}
 .card-img{
   float:left;
   width:40px;

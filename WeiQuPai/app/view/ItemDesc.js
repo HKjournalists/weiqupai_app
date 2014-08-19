@@ -20,38 +20,25 @@ Ext.define('WeiQuPai.view.ItemDesc', {
                 flex: 1
             }]
         }]
+    },
+
+    initialize: function() {
+        this.element.onBefore('tap', function(e) {
+            var tag = e.target.tagName.toLowerCase();
+            if (tag == 'img') {
+                WeiQuPai.app.statReport({
+                    act: 'desc_pic_tap'
+                });
+                var viewer = WeiQuPai.Util.getGlobalView('WeiQuPai.view.SimpleViewer');
+                var spic = WeiQuPai.Util.getImagePath(url);
+                var bpic = spic;
+                viewer.setPic(spic, bpic);
+                viewer.show();
+            } else if (tag == 'a') {
+                var title = e.target.title || '微趣拍';
+                window.open(e.target.href, '_blank', 'location=no,title=' + title);
+            }
+            return false;
+        }, this);
     }
-    // initialize: function() {
-    //     this.callParent(arguments);
-    //    this.on('itemtap', function(list, index, dataItem, record, e) {
-    //         if (e.target.name == 'img') {
-    //             this.fireEvent('zantap', this, index, dataItem, record, e);
-    //             return false;
-    //         }
-    //         this.fireEvent('detailtap', this, index, dataItem, record, e);
-    //     }, this);
-    // },
-
-    // applyPicData: function(data, oldData) {
-    //     data = Ext.isArray(data) ? data : [data];
-    //     this.removeAll();
-    //     for (var i = 0; i < data.length; i++) {
-    //         var item = Ext.create('Ext.Img', {
-    //             src: WeiQuPai.Util.getImagePath(data[i])
-    //         });
-    //         item.on('tap', this.doImageTap, this);
-    //         this.add(item);
-    //     }
-    //     this.setActiveItem(0);
-    //     var viewer = WeiQuPai.Util.getGlobalView('WeiQuPai.view.ImageViewer');
-    //     viewer.setPicData(data);
-    //     return data;
-    // },
-
-    // doImageTap: function(img, e) {
-    //     var idx = this.getActiveIndex();
-    //     var viewer = WeiQuPai.Util.getGlobalView('WeiQuPai.view.ImageViewer');
-    //     viewer.setActiveItem(idx);
-    //     viewer.show();
-    // }
 });

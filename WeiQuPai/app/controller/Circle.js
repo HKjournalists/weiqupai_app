@@ -12,7 +12,10 @@ Ext.define('WeiQuPai.controller.Circle', {
                 cancelzan: 'doCancelZan',
                 cardtap: 'doCardTap',
                 feedtap: 'doFeedTap',
-                pictap: 'doPicTap'
+                pictap: 'doPicTap',
+                helptap: 'doHelpTap',
+                showtap: 'doShowTap',
+                killtap: 'doKillTap'
             }
         }
     },
@@ -79,6 +82,30 @@ Ext.define('WeiQuPai.controller.Circle', {
         var feedView = Ext.create('WeiQuPai.view.Feed');
         feedView.setFeedId(record.get('id'));
         WeiQuPai.navigator.push(feedView);
+    },
+
+    //帮拍点击
+    doHelpTap: function(list, index, record) {
+        var auctionId = record.get('json_data').auction_id;
+        var user = WeiQuPai.Util.checkLogin();
+        if (!user) return;
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/userAuction/help&id=' + auctionId + '&token=' + user.token;
+        WeiQuPai.Util.get(url, function(rsp) {
+            WeiQuPai.Util.toast('您成功帮忙减掉了' + rsp.discount + '元');
+        });
+    },
+
+    //观战点击
+    doShowTap: function(list, index, record) {
+        var view = Ext.create('WeiQuPai.view.UserAuction');
+        view.setAuctionId(record.get('json_data').auction_id);
+        WeiQuPai.navigator.push(view);
+    },
+
+    //血战到底点击
+    doKillTap: function(list, index, record) {
+        var view = Ext.create('WeiQuPai.view.KillEnd');
+        WeiQuPai.navigator.push(view);
     },
 
     //点图片

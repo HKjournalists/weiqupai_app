@@ -5,7 +5,7 @@ Ext.define('WeiQuPai.view.UserAuctionComment', {
         cls: 'feed discard remess',
         loadingText: null,
         scrollToTopOnRefresh: false,
-        store: 'Comment',
+        store: 'UserAuctionComment',
         plugins: [{
             type: 'wpullrefresh',
             lastUpdatedText: '上次刷新：',
@@ -63,7 +63,7 @@ Ext.define('WeiQuPai.view.UserAuctionComment', {
         this.on('itemtap', this.bindEvent, this);
     },
 
-    updateAuctionId: function(id){
+    updateAuctionId: function(id) {
         this.loadData();
     },
 
@@ -72,17 +72,12 @@ Ext.define('WeiQuPai.view.UserAuctionComment', {
             return false;
         }
         var user = WeiQuPai.Cache.get('currentUser');
-        this.getStore().getProxy().setExtraParam('token', user && user.token || null);
-        this.getStore().getProxy().setExtraParam('auction_id', this.getAuctionId());
+        var store = this.getStore();
+        store.getProxy().setExtraParam('token', user && user.token || null);
+        store.getProxy().setExtraParam('auction_id', this.getAuctionId());
         this.setLoadingText(null);
-        this.getStore().loadPage(1, function(records, operation, success) {
-            if (!success) {
-                WeiQuPai.Util.toast('数据加载失败');
-            }
-            if(records.length == 0){
-                this.msgbox.show();
-            }
-        }, this);
+        store.on('load', WeiQuPai.Util.onStoreLoad, this);
+        store.loadPage(1);
     },
 
     bindEvent: function(list, index, dataItem, record, e) {

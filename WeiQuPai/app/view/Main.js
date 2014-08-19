@@ -14,6 +14,30 @@ Ext.define('WeiQuPai.view.Main', {
     //重写push/pop方法，修复多次点击会重复push/pop的问题
     push: function() {
         if (this.isAnimating) return;
+
+        //上报统计
+        var view = arguments[0];
+        var page = view.getXTypes().split('/').pop();
+
+        var lastView = this.getActiveItem();
+        if (lastView.isXType('maincard')) {
+            lastView = lastView.getActiveItem();
+        }
+        var from = lastView.getXTypes().split('/').pop();
+        var data = {};
+        data.page = page;
+        data.from = from;
+        //如果是系统拍卖要把item_id上报, 用户拍卖的商品在这里拿不到item_id,要在UserAuction里上报
+        if (page == 'auction') {
+            data.item_id = view.getRecord().get('id');
+            data.auction_id = view.getRecord().get('auction').id;
+        } else if (page == 'item') {
+            data.item_id = view.getRecord().get('id');
+        }
+        if (page != 'userauction') {
+            WeiQuPai.app.statReport(data);
+        }
+
         return this.callParent(arguments);
     },
 
@@ -38,16 +62,6 @@ Ext.define('WeiQuPai.view.Main', {
         });
         this.add(WeiQuPai.mainCard);
         Ext.Viewport.add(WeiQuPai.sidebar);
-        //android不触发painted事件，不知道为什么,fuck!
-        if (Ext.os.is.android) {
-            setTimeout(function() {
-                WeiQuPai.Notify.checkMQ();
-            }, 1000);
-        } else {
-            this.on('painted', this.onPainted, this, {
-                single: true
-            });
-        }
     },
 
     //启动时检查消息要放到navaigationView初始化完成

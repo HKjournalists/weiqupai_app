@@ -291,7 +291,7 @@ Ext.define('WeiQuPai.plugin.PullRefresh', {
 
         store.insert(0, toInsert);
         this.setState("loaded");
-        this.fireEvent('latestfetched', this, toInsert);
+        store.fireEvent('latestfetched', store, toInsert);
         if (this.getAutoSnapBack()) {
             this.snapBack();
         }

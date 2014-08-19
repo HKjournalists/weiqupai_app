@@ -32,7 +32,7 @@ Ext.define('WeiQuPai.controller.MyAuction', {
     //显示商品详情
     showItem: function(list, index, dataItem, record, e) {
         var itemId = record.get('item_id');
-        WeiQuPai.Util.goItemView(itemId);
+        WeiQuPai.Util.goItemView(itemId, true);
     },
 
     goOrder: function(list, index, dataItem, record, e) {

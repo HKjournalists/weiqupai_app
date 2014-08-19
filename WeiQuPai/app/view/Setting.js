@@ -19,6 +19,10 @@ Ext.define('WeiQuPai.view.Setting', {
             itemId: 'return'
         }, {
             xtype: 'disclosureitem',
+            title: '意见反馈',
+            itemId: 'feedback'
+        }, {
+            xtype: 'disclosureitem',
             title: '关于微趣拍',
             itemId: 'about',
         }, {

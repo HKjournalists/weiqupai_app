@@ -116,29 +116,27 @@ Ext.define('WeiQuPai.view.MyAuction', {
         if (!user) {
             return false;
         }
-        this.msgbox.hide();
-        this.createBtn.hide();
         //fix 出现loading的bug
         this.setLoadingText(null);
         var store = this.getStore();
         //加载数据
         store.getProxy().setExtraParam('token', user.token);
-        store.loadPage(1, function(records, operation, success) {
-            if (!success) {
-                WeiQuPai.Util.toast('数据加载失败');
-                return false;
-            }
-            if (records.length == 0) {
-                this.msgbox.show();
-                this.createBtn.show();
-                return;
-            }
-            //登录超时
-            if (!WeiQuPai.Util.invalidToken(records[0].raw)) {
-                store.removeAll();
-                return false;
-            }
-            //通知标红点
-        }, this);
+        store.on('load', this.onStoreLoad, this);
+        store.on('latestfetched', this.onStoreLoad, this);
+        store.loadPage(1);
+    },
+
+    onStoreLoad: function(store, records, operation, success) {
+        if (!success) {
+            WeiQuPai.Util.toast('数据加载失败');
+            return false;
+        }
+        if (store.getCount() == 0) {
+            this.msgbox.show();
+            this.createBtn.show();
+        } else {
+            this.msgbox.hide();
+            this.createBtn.hide();
+        }
     }
 });
