@@ -92,6 +92,17 @@ Ext.define('WeiQuPai.view.UserAuction', {
         });
 
         this.on('itemtap', this.bindEvent, this);
+
+        this.showTips();
+    },
+
+
+    showTips: function() {
+        if (!WeiQuPai.app.firstLaunch) return;
+        setTimeout(function() {
+            var view = WeiQuPai.Util.getGlobalView('WeiQuPai.view.KillTip');
+            view.show();
+        }, 500);
     },
 
     updateAuctionId: function(id) {
