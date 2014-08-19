@@ -57,7 +57,7 @@ Ext.define('WeiQuPai.view.UserAuction', {
                 '<div class="time"><ul>',
                 '<li>当前时间<br><span id="timer">{[this.getTime()]}</span></li>',
                 '<li>{[this.getLeftTime(values)]}</li>',
-                '<li>当前战果<br><span  class="active">{curr_price}</span></li>',
+                '<li>当前战果<br><span>{curr_price}</span></li>',
                 '<div class="clear"></div></ul></div>',
                 '<div class="prop"></div>', {
                     getCover: function(pic_cover) {
@@ -121,8 +121,10 @@ Ext.define('WeiQuPai.view.UserAuction', {
     fetchLastest: function() {
         var me = this;
         this.getList().loadData(function() {
-            me.setState('loaded');
-            me.snapBack();
+            setTimeout(function() {
+                me.setState('loaded');
+                me.snapBack();
+            }, 100);
         });
     },
 

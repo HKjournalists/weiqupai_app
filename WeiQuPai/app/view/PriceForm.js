@@ -10,7 +10,7 @@ Ext.define('WeiQuPai.view.PriceForm', {
             'align': 'center'
         },
         items: [{
-            xtype: 'textfield',
+            xtype: 'numberfield',
             name: 'price',
             placeHolder: '输入您的期望价',
             baseCls: 'input_text',

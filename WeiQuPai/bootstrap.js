@@ -789,6 +789,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.controller.CommentList": [],
   "WeiQuPai.controller.Discount": [],
   "WeiQuPai.controller.Feed": [],
+  "WeiQuPai.controller.FeedBack": [],
   "WeiQuPai.controller.KillEnd": [],
   "WeiQuPai.controller.Login": [],
   "WeiQuPai.controller.Main": [],
@@ -865,6 +866,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.store.ShowUserLike": [],
   "WeiQuPai.store.SpecialSale": [],
   "WeiQuPai.store.UserAuction": [],
+  "WeiQuPai.store.UserAuctionComment": [],
   "WeiQuPai.store.UserAuctionHelper": [],
   "WeiQuPai.view.About": [],
   "WeiQuPai.view.AddConsigneeForm": [],
@@ -898,6 +900,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.ExchangeLayer": [],
   "WeiQuPai.view.ExchangeProp": [],
   "WeiQuPai.view.Feed": [],
+  "WeiQuPai.view.FeedBack": [],
   "WeiQuPai.view.FieldForm": [],
   "WeiQuPai.view.GenderList": [],
   "WeiQuPai.view.Iframe": [],
@@ -908,6 +911,8 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.ItemParam": [],
   "WeiQuPai.view.KillEnd": [],
   "WeiQuPai.view.KillHelp": [],
+  "WeiQuPai.view.KillTip": [],
+  "WeiQuPai.view.KillendTip": [],
   "WeiQuPai.view.Login": [],
   "WeiQuPai.view.Main": [],
   "WeiQuPai.view.MainCard": [],
@@ -954,8 +959,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.UserAuction": [],
   "WeiQuPai.view.UserAuctionComment": [],
   "WeiQuPai.view.VTitleBar": [],
-  "WeiQuPai.view.WebPage": [],
-  "WeiQuPai.view.WeiboShare": []
+  "WeiQuPai.view.WebPage": []
 });
 Ext.ClassManager.addNameAliasMappings({
   "Ext.AbstractComponent": [],
@@ -1917,6 +1921,7 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.controller.CommentList": [],
   "WeiQuPai.controller.Discount": [],
   "WeiQuPai.controller.Feed": [],
+  "WeiQuPai.controller.FeedBack": [],
   "WeiQuPai.controller.KillEnd": [],
   "WeiQuPai.controller.Login": [],
   "WeiQuPai.controller.Main": [],
@@ -2005,6 +2010,7 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.store.ShowUserLike": [],
   "WeiQuPai.store.SpecialSale": [],
   "WeiQuPai.store.UserAuction": [],
+  "WeiQuPai.store.UserAuctionComment": [],
   "WeiQuPai.store.UserAuctionHelper": [],
   "WeiQuPai.view.About": [
     "widget.about"
@@ -2102,6 +2108,9 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.Feed": [
     "widget.feed"
   ],
+  "WeiQuPai.view.FeedBack": [
+    "widget.feedback"
+  ],
   "WeiQuPai.view.FieldForm": [
     "widget.fieldform"
   ],
@@ -2131,6 +2140,12 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.KillHelp": [
     "widget.about"
+  ],
+  "WeiQuPai.view.KillTip": [
+    "widget.killtip"
+  ],
+  "WeiQuPai.view.KillendTip": [
+    "widget.killendtip"
   ],
   "WeiQuPai.view.Login": [
     "widget.login"
@@ -2272,9 +2287,6 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.WebPage": [
     "widget.webpage"
-  ],
-  "WeiQuPai.view.WeiboShare": [
-    "widget.weiboshare"
   ]
 });
 

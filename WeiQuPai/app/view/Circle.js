@@ -202,8 +202,8 @@ Ext.define('WeiQuPai.view.Circle', {
             me.fireEvent('helptap', me, index, record);
             return false;
         }
-        if (Ext.get(e.target).findParent('.show_btn')) {
-            me.fireEvent('showtap', me, index, record);
+        if (Ext.get(e.target).findParent('.auction_btn')) {
+            me.fireEvent('auctiontap', me, index, record);
             return false;
         }
         if (Ext.get(e.target).findParent('.kill_btn')) {

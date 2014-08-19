@@ -42,7 +42,7 @@ Ext.define('WeiQuPai.view.Category', {
     },
 
     bindEvent: function(list, index, dataItem, record, e) {
-        if (Ext.get(e.target).hasCls('btn_e7')) {
+        if (Ext.get(e.target).hasCls('cate_btn')) {
             var id = e.target.getAttribute('data-id');
             var view = Ext.create('WeiQuPai.view.CategoryItem');
             view.setCategoryId(id);

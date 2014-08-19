@@ -185,7 +185,6 @@ Ext.define('WeiQuPai.view.Today', {
         //不使用timeout获取的值有可能不对
         var scroller = this.getScrollable().getScroller();
         scroller.addListener('scroll', function(scroller, x, y) {
-            //console.log(y);
             if (y > 0) {
                 this.down('#icontop').show();
             } else {

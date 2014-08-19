@@ -138,8 +138,10 @@ Ext.define('WeiQuPai.view.Comment', {
     fetchLastest: function() {
         var me = this;
         this.getList().loadData(function() {
-            me.setState('loaded');
-            me.snapBack();
+            setTimeout(function() {
+                me.setState('loaded');
+                me.snapBack();
+            }, 100);
         });
     },
 

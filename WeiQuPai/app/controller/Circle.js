@@ -14,7 +14,7 @@ Ext.define('WeiQuPai.controller.Circle', {
                 feedtap: 'doFeedTap',
                 pictap: 'doPicTap',
                 helptap: 'doHelpTap',
-                showtap: 'doShowTap',
+                auctiontap: 'doAuctionTap',
                 killtap: 'doKillTap'
             }
         }
@@ -96,7 +96,7 @@ Ext.define('WeiQuPai.controller.Circle', {
     },
 
     //观战点击
-    doShowTap: function(list, index, record) {
+    doAuctionTap: function(list, index, record) {
         var view = Ext.create('WeiQuPai.view.UserAuction');
         view.setAuctionId(record.get('json_data').auction_id);
         WeiQuPai.navigator.push(view);

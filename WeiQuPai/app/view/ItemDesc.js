@@ -25,12 +25,12 @@ Ext.define('WeiQuPai.view.ItemDesc', {
     initialize: function() {
         this.element.onBefore('tap', function(e) {
             var tag = e.target.tagName.toLowerCase();
-            if (tag == 'img') {
+            if (tag == 'img' && e.target.src.indexOf("twxq_") == -1) {
                 WeiQuPai.app.statReport({
                     act: 'desc_pic_tap'
                 });
                 var viewer = WeiQuPai.Util.getGlobalView('WeiQuPai.view.SimpleViewer');
-                var spic = WeiQuPai.Util.getImagePath(url);
+                var spic = WeiQuPai.Util.getImagePath(e.target.src);
                 var bpic = spic;
                 viewer.setPic(spic, bpic);
                 viewer.show();

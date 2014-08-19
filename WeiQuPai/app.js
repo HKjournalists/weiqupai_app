@@ -193,7 +193,7 @@ Ext.application({
 
     handlePause: function() {
         document.addEventListener('pause', function() {
-            this.statReport({
+            WeiQuPai.app.statReport({
                 act: 'pause'
             });
         }, false);
@@ -202,7 +202,7 @@ Ext.application({
     handleResume: function() {
         document.addEventListener('resume', function() {
             //上报统计
-            this.statReport({
+            WeiQuPai.app.statReport({
                 act: 'resume'
             });
 

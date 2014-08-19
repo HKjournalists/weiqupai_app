@@ -80,8 +80,10 @@ Ext.define('WeiQuPai.view.Notice', {
         var allLoad = function() {
             loadCount++;
             if (loadCount == 3) {
-                me.setState('loaded');
-                me.snapBack();
+                setTimeout(function() {
+                    me.setState('loaded');
+                    me.snapBack();
+                }, 100);
             }
         }
         this.getList().down('noticetoday').loadData(allLoad);

@@ -13,10 +13,6 @@ Ext.define('WeiQuPai.view.StartupScreen', {
         html: "<div class='startupbtn'></div>"
     },
 
-    initialize: function() {
-        //Ext.Viewport.on('orientationchange', this.onOrientationChange, this);
-    },
-
     applyPicData: function(data) {
         this.removeAll(true);
         if (!Ext.isArray(data)) {
@@ -30,6 +26,13 @@ Ext.define('WeiQuPai.view.StartupScreen', {
             this.add(item);
         }
 
+        this.on('activeitemchange', function() {
+            if (this.getActiveIndex() == this.getMaxItemIndex()) {
+                this.element.down('.startupbtn').addCls('hidden');
+            } else {
+                this.element.down('.startupbtn').removeCls('hidden');
+            }
+        }, this);
     },
 
     doImageTap: function(img, e) {

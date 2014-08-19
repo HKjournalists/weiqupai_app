@@ -110,6 +110,7 @@ Ext.define('WeiQuPai.view.Order', {
         this.getRecord().set('item_id', data.item_id);
         this.getRecord().set('auction_id', data.id);
         this.getRecord().set('total_pay', data.curr_price)
+        this.getRecord().set('coupon', '');
         this.down('#orderInfo').setData(data);
         return data;
     },

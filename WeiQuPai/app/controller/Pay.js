@@ -71,17 +71,23 @@ Ext.define('WeiQuPai.controller.Pay', {
         var user = WeiQuPai.Cache.get('currentUser');
         var url = WeiQuPai.Config.apiUrl + "/?r=appv2/pay&id=" + order.id + '&coupon=' + order.coupon + '&payment=' + order.payment + '&token=' + user.token;
         var win = window.open(url, '_blank', 'location=no,title=支付,closebuttoncaption=返回');
-        //关闭时检查是否支付成功，如果成功跳转到订单详情
-        win.addEventListener('exit', function(e) {
+        //停止时检查页面是否是支付完成状态
+        var paySuccess = false;
+        win.addEventListener('loadstop', function(e) {
+            if (e.url.indexOf('vqupai.com') == -1) return;
             win.executeScript({
                 code: 'window.json',
-            }, function(json) {
-                if (!json || !json.success) return;
-                var main = WeiQuPai.navigator;
-                main.pop('maincard');
-                WeiQuPai.sidebar.activeTabItem('myorder');
-                WeiQuPai.mainCard.getActiveItem().loadData();
+            }, function(res) {
+                if (res[0] && res[0].success) paySuccess = true;
             });
+        }, false);
+        //关闭时检查是否支付成功，如果成功跳转到订单详情
+        win.addEventListener('exit', function(e) {
+            if (!paySuccess) return;
+            var main = WeiQuPai.navigator;
+            main.pop('maincard');
+            WeiQuPai.sidebar.activeTabItem('myorder');
+            WeiQuPai.mainCard.getActiveItem().loadData();
         }, false);
     },
 });

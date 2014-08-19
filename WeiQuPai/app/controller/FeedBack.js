@@ -31,6 +31,11 @@ Ext.define('WeiQuPai.controller.FeedBack', {
         data.content = content;
         WeiQuPai.Util.post(url, data, function(rsp) {
             view.down('textareafield').reset();
+            var imgList = view.down('#cameraArea').query('img');
+            for (var i = 0; i < imgList.length; i++) {
+                view.down('#cameraArea').remove(imgList[i]);
+            }
+            view.setPicList([]);
             WeiQuPai.Util.toast('您的意见已提交，感谢您的反馈');
         });
     },
