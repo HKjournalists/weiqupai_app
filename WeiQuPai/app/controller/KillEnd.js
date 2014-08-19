@@ -43,7 +43,13 @@ Ext.define('WeiQuPai.controller.KillEnd', {
         view.setPoolId(record.get('id'));
         WeiQuPai.navigator.push(view);
     },
-
+    showTips: function() {
+        if (!WeiQuPai.app.firstLaunch) return;
+        setTimeout(function() {
+            var view = WeiQuPai.Util.getGlobalView('WeiQuPai.view.KillTip');
+            view.show();
+        }, 500);
+    },
     //创建拍卖
     createAuction: function(list, index, dataItem, record, e) {
         var user = WeiQuPai.Util.checkLogin();
@@ -54,6 +60,7 @@ Ext.define('WeiQuPai.controller.KillEnd', {
             pool_id: poolId,
             token: user.token
         };
+        this.showTips();
         WeiQuPai.Util.post(url, data, function(rsp) {
             var view = Ext.create('WeiQuPai.view.UserAuction');
             view.setAuctionId(rsp.id);

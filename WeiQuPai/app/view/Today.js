@@ -9,8 +9,10 @@ Ext.define('WeiQuPai.view.Today', {
         loadingText: null,
         store: 'Auction',
         cls: 'bg_ef',
+        id: 'dataviewlist',
         disableSelection: true,
         scrollToTopOnRefresh: false,
+        height: 'auto',
         plugins: [{
             type: 'wpullrefresh',
             lastUpdatedText: '上次刷新：',
@@ -24,6 +26,7 @@ Ext.define('WeiQuPai.view.Today', {
         }, {
             type: 'wlistpaging',
         }],
+
         itemTpl: new Ext.XTemplate(
             '<div class="today" item_id={item_id}>',
 
@@ -158,6 +161,11 @@ Ext.define('WeiQuPai.view.Today', {
             html: '今日精选',
             scrollDock: 'top',
             cls: 'todayTitle'
+        }, {
+            xtype: 'button',
+            baseCls: 'icontop',
+            itemId: 'icontop',
+            action: 'icontop'
         }]
     },
 
@@ -165,6 +173,14 @@ Ext.define('WeiQuPai.view.Today', {
     todayData: null,
 
     initialize: function() {
+        this.down('button[action=icontop]').on('tap', function() {
+            this.getScrollable().getScroller().scrollTo(0, 0, {
+                duration: 300
+            });
+        }, this);
+
+        console.log("宽度 = " + window.innerWidth + "滚动条" + document.documentElement.scrollTop + "+" + window.scrollY);
+        console.log("高度 = " + window.innerHeight);
         this.callParent(arguments);
         this.loadData();
         this.on('activate', this.onActivate, this);
@@ -182,7 +198,16 @@ Ext.define('WeiQuPai.view.Today', {
         });
 
     },
-
+    onScrollChange: function(scroller, x, y) {
+        var t = document.documentElement.scrollTop;
+        var top_div = this.down('button[action=icontop]');
+        if (t = 0) {
+            Ext.Msg.alter("触发事件了");
+            top_div.show();
+        } else {
+            top_div.hide();
+        }
+    },
     bindEvent: function(list, index, dataItem, record, e) {
         var me = this;
         if (e.target.className == 'hallow_heart') {

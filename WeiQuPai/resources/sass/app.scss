@@ -19,10 +19,24 @@ $color_e7:#e76049;
     width: 768px!important;
   }
 }
-@media screen and (min-width:640px) and (max-width: 640px) {
+@media screen and (min-width:550px) and (max-width: 1366px) {
   body,body.x-desktop, .mx-webkit{
     width: 640px!important;
     margin:auto;
+  }
+  .dialog_tip_killend{
+   margin-top:500px!important;
+  }
+  .bar_icon {
+    background: url(../images/bar_icon.png) no-repeat;
+    background-size: 89px 96px;
+    float: right;
+    margin-right: 7px;
+    height: 96px;
+    width: 89px;
+    position: relative;
+    margin-top: -175px;
+    border: 0px;
   }
 }
 //首页吃喝玩乐按钮样式
@@ -3323,6 +3337,27 @@ html body
   height: 113px;
   width: 100%;
 }
+.dialog_tip_kill{
+  position: relative;
+  right: 10px;
+  top: 185px;
+  background: url("../images/kill_icon1.png") right no-repeat;
+  background-size: auto 83px;
+  height: 83px;
+  width: 320px;
+  margin: auto;
+  text-align: center;
+}
+.dialog_tip_killend{
+    position: relative;
+    background: url("../images/kill_icon2.png") right no-repeat;
+    background-size: 100% auto;
+    height: 50%;
+    margin: auto;
+    text-align: center;
+    margin-top: 100px;
+    margin-right: -10px;
+}
 //tips提示多了一个遮罩层
 .x-trans{
   background:transparent;
@@ -3467,4 +3502,14 @@ html body
   color:#383838;
   height:2.4em;
   overflow:hidden;
+}
+.icontop{
+  background:url(../images/icon_top.png) no-repeat;
+  background-size:contain;
+  width:40px;
+  height:40px;
+  position:fixed;
+  bottom:5px;
+  right:15px;
+  border:0px;
 }

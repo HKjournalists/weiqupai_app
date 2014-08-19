@@ -36,7 +36,7 @@
 Ext.define('WeiQuPai.plugin.PullRefresh', {
     extend: 'Ext.Component',
     alias: 'plugin.wpullrefresh',
-    requires: ['Ext.DateExtras'],
+    requires: ['Ext.DateExtras', 'WeiQuPai.view.Today'],
 
     config: {
         /**
