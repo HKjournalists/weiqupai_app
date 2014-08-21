@@ -8,11 +8,9 @@ Ext.define('WeiQuPai.view.ShowUserLike', {
         loadingText: null,
         disableSelection: true,
         scrollable: null,
+        itemCls: 'myProduct',
         itemTpl: new Ext.XTemplate(
-            '<div class="myProduct">',
-            '<div class="img">',
-            '<img src="{[WeiQuPai.Util.getImagePath(values.pic_cover, 200)]}" class="imgbase" width="100">',
-            '</div>',
+            '<div class="img" style="background-image:url({[WeiQuPai.Util.getImagePath(values.pic_cover, 200)]})">',
             '</div>'
         ),
 
@@ -34,7 +32,6 @@ Ext.define('WeiQuPai.view.ShowUserLike', {
 
     initialize: function() {
         this.callParent(arguments);
-        this.onBefore('itemtap', this.bindEvent, this);
         this.msgbox = WeiQuPai.Util.msgbox();
         this.add(this.msgbox);
 
@@ -66,14 +63,6 @@ Ext.define('WeiQuPai.view.ShowUserLike', {
                 this.setIsFullyLoaded(false);
             }
         }, this);
-    },
-
-    bindEvent: function(list, index, dataItem, record, e) {
-        var me = this;
-        if (e.target.className == 'img') {
-            me.fireEvent('liketap', me, index, dataItem, record, e);
-            return false;
-        }
     },
 
     nextPage: function(scroller) {

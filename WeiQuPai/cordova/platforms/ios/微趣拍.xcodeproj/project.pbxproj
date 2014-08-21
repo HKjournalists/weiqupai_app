@@ -14,7 +14,6 @@
 		18E6B61118E0783B00631906 /* Icon~ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E6B60D18E0783B00631906 /* Icon~ipad@2x.png */; };
 		18E6B61818E0789000631906 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E6B61218E0789000631906 /* Default-568h@2x.png */; };
 		18E6B61C18E0789000631906 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E6B61618E0789000631906 /* Default.png */; };
-		18E6B61D18E0789000631906 /* Default~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E6B61718E0789000631906 /* Default~ipad.png */; };
 		18F0144718E9B1180089C0D2 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F0144418E9B1180089C0D2 /* libWeChatSDK.a */; };
 		18F014C618ED1BC90089C0D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F014C518ED1BC90089C0D2 /* Foundation.framework */; };
 		18F014C818ED1BDF0089C0D2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F014C718ED1BDF0089C0D2 /* libz.dylib */; };
@@ -39,8 +38,6 @@
 		302D95F114D2391D003F00A1 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302D95EF14D2391D003F00A1 /* MainViewController.m */; };
 		302D95F214D2391D003F00A1 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 302D95F014D2391D003F00A1 /* MainViewController.xib */; };
 		305D5FD1115AB8F900A74A75 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 305D5FD0115AB8F900A74A75 /* MobileCoreServices.framework */; };
-		3088BBBF154F3926009F9C59 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3088BBB9154F3926009F9C59 /* Default-Portrait@2x~ipad.png */; };
-		3088BBC0154F3926009F9C59 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3088BBBA154F3926009F9C59 /* Default-Portrait~ipad.png */; };
 		308D05381370CCF300D202BF /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 308D052F1370CCF300D202BF /* icon.png */; };
 		308D05391370CCF300D202BF /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 308D05301370CCF300D202BF /* icon@2x.png */; };
 		39048E168C734F6188AA1253 /* CDVJpegHeaderWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE480EAA2D040D684EDFB7B /* CDVJpegHeaderWriter.m */; };
@@ -85,7 +82,6 @@
 		18E6B60D18E0783B00631906 /* Icon~ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon~ipad@2x.png"; sourceTree = "<group>"; };
 		18E6B61218E0789000631906 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		18E6B61618E0789000631906 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		18E6B61718E0789000631906 /* Default~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~ipad.png"; sourceTree = "<group>"; };
 		18F0144418E9B1180089C0D2 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		18F0144518E9B1180089C0D2 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		18F0144618E9B1180089C0D2 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
@@ -123,8 +119,6 @@
 		302D95EF14D2391D003F00A1 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		302D95F014D2391D003F00A1 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		305D5FD0115AB8F900A74A75 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		3088BBB9154F3926009F9C59 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
-		3088BBBA154F3926009F9C59 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		308D052F1370CCF300D202BF /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		308D05301370CCF300D202BF /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* 微趣拍-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "微趣拍-Prefix.pch"; sourceTree = "<group>"; };
@@ -354,9 +348,6 @@
 			children = (
 				18E6B61218E0789000631906 /* Default-568h@2x.png */,
 				18E6B61618E0789000631906 /* Default.png */,
-				18E6B61718E0789000631906 /* Default~ipad.png */,
-				3088BBB9154F3926009F9C59 /* Default-Portrait@2x~ipad.png */,
-				3088BBBA154F3926009F9C59 /* Default-Portrait~ipad.png */,
 			);
 			path = splash;
 			sourceTree = "<group>";
@@ -478,10 +469,7 @@
 				302D95F214D2391D003F00A1 /* MainViewController.xib in Resources */,
 				18E6B61C18E0789000631906 /* Default.png in Resources */,
 				18E6B61818E0789000631906 /* Default-568h@2x.png in Resources */,
-				18E6B61D18E0789000631906 /* Default~ipad.png in Resources */,
-				3088BBBF154F3926009F9C59 /* Default-Portrait@2x~ipad.png in Resources */,
 				A5F18E1E19A0ADB000DF1BC6 /* top.png in Resources */,
-				3088BBC0154F3926009F9C59 /* Default-Portrait~ipad.png in Resources */,
 				18F014F218EF32CC0089C0D2 /* BPushConfig.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -20,6 +20,7 @@ Ext.define('WeiQuPai.view.KillEnd', {
         }, {
             type: 'wlistpaging',
         }],
+        itemCls: 'killend-item',
         itemTpl: new Ext.XTemplate(
             '<div class="clear"></div>',
             '<img src="{[this.getPic(values.pic_url)]}"  class="barimg" />',

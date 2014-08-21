@@ -27,16 +27,13 @@ Ext.define('WeiQuPai.view.ItemDesc', {
             var tag = e.target.tagName.toLowerCase();
             if (tag == 'img' && e.target.src.indexOf("twxq_") == -1) {
                 WeiQuPai.app.statReport({
-                    act: 'desc_pic_tap'
+                    act: 'itemdesc_pic_tap'
                 });
                 var viewer = WeiQuPai.Util.getGlobalView('WeiQuPai.view.SimpleViewer');
                 var spic = WeiQuPai.Util.getImagePath(e.target.src);
                 var bpic = spic;
                 viewer.setPic(spic, bpic);
                 viewer.show();
-            } else if (tag == 'a') {
-                var title = e.target.title || '微趣拍';
-                window.open(e.target.href, '_blank', 'location=no,title=' + title);
             }
             return false;
         }, this);

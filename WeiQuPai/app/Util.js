@@ -129,7 +129,7 @@ Ext.define("WeiQuPai.Util", {
     login: function(uname, password, callback) {
         WeiQuPai.Util.mask();
         Ext.Ajax.request({
-            url: WeiQuPai.Config.apiUrl + '/?r=app/login',
+            url: WeiQuPai.Config.apiUrl + '/?r=appv2/login',
             method: 'post',
             params: {
                 uname: uname,
@@ -155,7 +155,7 @@ Ext.define("WeiQuPai.Util", {
     //登录成功后的逻辑
     onLoginSuccess: function(data, callback) {
         WeiQuPai.Cache.set('currentUser', data.user);
-        WeiQuPai.Cache.set('user_data', data.data);
+        WeiQuPai.Cache.set('user_data', data.user_data);
 
         //注册之后绑定推送
         WeiQuPai.Util.bindPush();
@@ -171,7 +171,7 @@ Ext.define("WeiQuPai.Util", {
         data.market = WeiQuPai.Config.market;
         WeiQuPai.Util.mask();
         Ext.Ajax.request({
-            url: WeiQuPai.Config.apiUrl + '/?r=app/join',
+            url: WeiQuPai.Config.apiUrl + '/?r=appv2/join',
             method: 'post',
             params: data,
             success: function(rsp) {
@@ -201,7 +201,7 @@ Ext.define("WeiQuPai.Util", {
         var user = WeiQuPai.Cache.get('currentUser');
         if (user) {
             Ext.Ajax.request({
-                url: WeiQuPai.Config.apiUrl + '/?r=app/logout&token=' + user.token,
+                url: WeiQuPai.Config.apiUrl + '/?r=appv2/logout&token=' + user.token,
                 method: 'get'
             });
             //删除用户相关的cache
@@ -318,7 +318,7 @@ Ext.define("WeiQuPai.Util", {
             //绑定成功，但用户未登录，不需要回传
             if (!user) return;
             data.os = Ext.os.name.toLowerCase();
-            var url = WeiQuPai.Config.apiUrl + '/?r=app/bindPush/&token=' + user.token;
+            var url = WeiQuPai.Config.apiUrl + '/?r=appv2/bindPush/&token=' + user.token;
             WeiQuPai.Util.post(url, data, function(rsp) {
                 //更新本地对应的缓存数据
                 user = Ext.merge(user, data);
@@ -402,7 +402,7 @@ Ext.define("WeiQuPai.Util", {
 
     showSplash: function() {
         Ext.Ajax.request({
-            url: WeiQuPai.Config.apiUrl + '/?r=app/splashScreen&ver=' + WeiQuPai.Config.version,
+            url: WeiQuPai.Config.apiUrl + '/?r=appv2/splashScreen&ver=' + WeiQuPai.Config.version,
             method: 'get',
             success: function(rsp) {
                 var data = Ext.decode(rsp.responseText);

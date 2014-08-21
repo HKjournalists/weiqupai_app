@@ -39,7 +39,7 @@ Ext.define('WeiQuPai.view.TopKiller', {
                         if (values.curr_price == values.reserve_price) {
                             value = '已到底价';
                         } else {
-                            var statusText = ['', '进行中', '已结束', '已成交', '已取消'];
+                            var statusText = ['', '进行中', '等待购买', '已成交', '已结束'];
                             value = statusText[values.status];
                         }
                         return '<input type="button" value="' + value + '" class="btn disabled"/>';

@@ -133,9 +133,6 @@ Ext.define('WeiQuPai.view.ShowUser', {
 
     applyUid: function(uid) {
         this.loadData(uid);
-        this.down('showuserlike').setUid(uid);
-        this.down('showuserdis').setUid(uid);
-        this.down('showuserfeed').setUid(uid);
         return uid;
     },
 
@@ -170,9 +167,6 @@ Ext.define('WeiQuPai.view.ShowUser', {
                 me.snapBack();
             }, 100);
         });
-        list.down('showuserlike').setUid(uid);
-        list.down('showuserdis').setUid(uid);
-        list.down('showuserfeed').setUid(uid);
     },
 
     applyData: function(data) {
@@ -190,6 +184,9 @@ Ext.define('WeiQuPai.view.ShowUser', {
         var me = this;
         WeiQuPai.Util.get(url, function(rsp) {
             me.setData(rsp);
+            me.down('showuserlike').setUid(uid);
+            me.down('showuserdis').setUid(uid);
+            me.down('showuserfeed').setUid(uid);
             Ext.isFunction(callback) && callback();
         });
 

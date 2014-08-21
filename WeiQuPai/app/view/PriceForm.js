@@ -10,11 +10,9 @@ Ext.define('WeiQuPai.view.PriceForm', {
             'align': 'center'
         },
         items: [{
-            xtype: 'numberfield',
-            name: 'price',
-            placeHolder: '输入您的期望价',
-            baseCls: 'input_text',
-            clearIcon: false,
+            xtype: 'container',
+            cls: 'input_text',
+            html: '<input type="tel" name="price" id="price" placeHolder="输入您的期望价" class="x-input-el"/>',
             flex: 1
         }, {
             xtype: 'button',
@@ -22,7 +20,6 @@ Ext.define('WeiQuPai.view.PriceForm', {
             cls: 'send_btn',
             action: 'submit',
             text: '确定',
-            disabled: true,
             style: 'margin-right:10px;'
         }]
     },
@@ -33,17 +30,10 @@ Ext.define('WeiQuPai.view.PriceForm', {
             this.getSubmitAction().call(this);
         }, this);
 
-        this.down('textfield').on('keyup', function() {
-            var disabled = this.down('textfield').getValue().trim().length == 0;
-            this.down('button[action=submit]').setDisabled(disabled);
-        }, this);
-
         var me = this;
         this.element.dom.addEventListener('submit', function(e) {
             e.preventDefault();
-            if (me.down('textfield').getValue().trim().length > 0) {
-                me.getSubmitAction().call(this);
-            }
+            me.getSubmitAction().call(this);
         });
     }
 

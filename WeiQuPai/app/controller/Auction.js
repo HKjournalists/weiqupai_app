@@ -218,10 +218,10 @@ Ext.define('WeiQuPai.controller.Auction', {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
         var form = WeiQuPai.Util.createOverlay('WeiQuPai.view.PriceForm');
-        var text = form.down('textfield');
-        text.setPlaceHolder('输入要被提醒的价格');
+        var text = form.element.down('#price');
+        text.dom.setAttribute('placeholder', '输入要被提醒的价格');
         form.setSubmitAction(function() {
-            if (!/^\d+$/.test(text.getValue())) {
+            if (isNaN(text.getValue(true))) {
                 WeiQuPai.Util.toast('请输入要被提醒的价格');
                 return;
             }
@@ -233,12 +233,13 @@ Ext.define('WeiQuPai.controller.Auction', {
             var url = WeiQuPai.Config.apiUrl + '/?r=appv2/auctionNotify';
             WeiQuPai.Util.post(url, data, function(rsp) {
                 form.reset();
+                text.dom.value = '';
                 form.hide();
                 WeiQuPai.Util.toast('设置成功，价格达到' + data.price + '的时候你会收到通知哦~');
             });
         });
         form.show();
-        text.focus();
+        text.dom.focus();
     },
 
     //设置期望价格，适用于未在拍的商品
@@ -246,10 +247,10 @@ Ext.define('WeiQuPai.controller.Auction', {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
         var form = WeiQuPai.Util.createOverlay('WeiQuPai.view.PriceForm');
-        var text = form.down('textfield');
-        text.setPlaceHolder('输入您的期望价吧');
+        var text = form.element.down('#price');
+        text.dom.setAttribute('placeholder', '输入您的期望价吧');
         form.setSubmitAction(function() {
-            if (!/^\d+$/.test(text.getValue())) {
+            if (isNaN(text.getValue(true))) {
                 WeiQuPai.Util.toast('输入您的期望价吧');
                 return;
             }
@@ -260,12 +261,13 @@ Ext.define('WeiQuPai.controller.Auction', {
             var url = WeiQuPai.Config.apiUrl + '/?r=appv2/expectPrice';
             WeiQuPai.Util.post(url, data, function(rsp) {
                 form.reset();
+                text.dom.value = '';
                 form.hide();
                 WeiQuPai.Util.toast('提交成功，我们会考虑你提交的价格哦~');
             });
         });
         form.show();
-        text.focus();
+        text.dom.focus();
     },
 
     doShare: function() {

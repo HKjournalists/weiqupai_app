@@ -60,7 +60,7 @@ Ext.define('WeiQuPai.view.MyAuction', {
         ),
         items: [{
             xtype: 'vtitlebar',
-            title: '我的拍卖',
+            title: '我的血战',
             docked: 'top',
             items: [{
                 baseCls: 'user',

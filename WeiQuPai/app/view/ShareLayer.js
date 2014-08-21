@@ -7,6 +7,7 @@ Ext.define('WeiQuPai.view.ShareLayer', {
     xtype: 'sharelayer',
     config: {
         shareData: null,
+        shareCallback: null,
         cls: 'w-poplayer share-layer',
         items: [{
             xtype: 'container',
@@ -75,9 +76,21 @@ Ext.define('WeiQuPai.view.ShareLayer', {
             searchPic: 'false',
             appkey: '269670787'
         }
+        var me = this;
         var query = Ext.Object.toQueryString(param);
         var url = 'http://service.weibo.com/share/mobile.php?' + query;
-        window.open(url, '_blank', 'location=no,title=微博分享,closebuttoncaption=关闭');
+        var win = window.open(url, '_blank', 'location=no,title=微博分享,closebuttoncaption=关闭');
+        var shareSuccess = false;
+        win.addEventListener('loadstop', function(e) {
+            if (e.url.indexOf('http://service.weibo.com/share/msuccess') >= 0) {
+                shareSuccess = true;
+            }
+        }, false);
+        win.addEventListener('exit', function(e) {
+            if (shareSuccess) {
+                Ext.isFunction(me.getShareCallback()) && me.getShareCallback().call(this);
+            }
+        });
 
         //上报统计
         WeiQuPai.app.statReport({
@@ -115,7 +128,9 @@ Ext.define('WeiQuPai.view.ShareLayer', {
             },
             scene: scene
         }
-        Wechat.share(data, function() {}, function(reason) {
+        Wechat.share(data, function() {
+            Ext.isFunction(me.getShareCallback()) && me.getShareCallback().call(this);
+        }, function(reason) {
             //WeiQuPai.Util.toast("分享失败: " + reason);
         });
     },

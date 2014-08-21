@@ -50,7 +50,7 @@ Ext.define('WeiQuPai.controller.Login', {
     },
 
     doQQLogin: function() {
-        var url = WeiQuPai.Config.apiUrl + '/?r=app/QQLogin/login';
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/QQLogin/login';
         var win = window.open(url, '_blank', 'location=no,title=QQ登录,closebuttoncaption=返回');
         var appView = window;
         win.addEventListener('loadstop', function(e) {
@@ -74,7 +74,7 @@ Ext.define('WeiQuPai.controller.Login', {
     },
 
     doWeiboLogin: function() {
-        var url = WeiQuPai.Config.apiUrl + '/?r=app/WBLogin/login';
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/WBLogin/login';
         var win = window.open(url, '_blank', 'location=no,title=新浪微博登录,closebuttoncaption=返回');
         var appView = window;
         win.addEventListener('loadstop', function(e) {

@@ -96,7 +96,7 @@ Ext.define('WeiQuPai.view.Today', {
             scrollDock: 'top',
         }, {
             xtype: 'container',
-            style: 'width:320px;margin:auto;',
+            style: 'width:320px;margin:auto;background:#fff',
             items: [{
                 xtype: 'button',
                 baseCls: 'hot',
@@ -105,6 +105,7 @@ Ext.define('WeiQuPai.view.Today', {
 
         }, {
             xtype: 'container',
+            style: 'background:#fff',
             scrollDock: 'top',
             layout: 'hbox',
             items: [{
@@ -122,6 +123,7 @@ Ext.define('WeiQuPai.view.Today', {
             }]
         }, {
             xtype: 'container',
+            style: 'background:#fff',
             scrollDock: 'top',
             layout: 'hbox',
             items: [{
@@ -276,7 +278,7 @@ Ext.define('WeiQuPai.view.Today', {
         }
         var user = WeiQuPai.Cache.get('currentUser');
         var tk = user && user.token || '';
-        var url = WeiQuPai.Config.apiUrl + '/?r=app/today/refresh&id=' + ids.join(",") + '&token=' + tk;
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/today/refresh&id=' + ids.join(",") + '&token=' + tk;
         var me = this;
         WeiQuPai.Util.get(url, function(rsp) {
             var records = store.getData();

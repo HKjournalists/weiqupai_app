@@ -12,12 +12,11 @@ Ext.define('WeiQuPai.view.NoticeTomorrow', {
             id: 'noticet',
             tpl: new Ext.XTemplate(
                 '<tpl for=".">',
-                '<div class="detailDatabot">',
                 '<div class="yugao"><div class="title">{time}</div></div>',
+                '<div class="detailDatabot">',
                 '<tpl for="items">',
-                '<div class="myProduct">',
-                '<div class="img">',
-                '<img src="{[WeiQuPai.Util.getImagePath(values.item.pic_cover, 200)]}" width="100" item_id="{item_id}" class="notice_t imgbase" >',
+                '<div class="myProduct" item_id="{item_id}">',
+                '<div class="img" style="background-image:url({[WeiQuPai.Util.getImagePath(values.item.pic_cover, 200)]})">',
                 '</div>',
                 '</div>',
                 '</tpl>',
@@ -46,8 +45,9 @@ Ext.define('WeiQuPai.view.NoticeTomorrow', {
     },
 
     bindEvent: function(e) {
-        if (Ext.get(e.target).hasCls('notice_t')) {
-            var itemId = e.target.getAttribute('item_id');
+        var item = Ext.get(e.target).findParent('.myProduct');
+        if (item) {
+            var itemId = item.getAttribute('item_id');
             WeiQuPai.Util.goItemView(itemId);
             return false;
         }

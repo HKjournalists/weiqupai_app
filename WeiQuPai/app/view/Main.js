@@ -33,6 +33,8 @@ Ext.define('WeiQuPai.view.Main', {
             data.auction_id = view.getRecord().get('auction').id;
         } else if (page == 'item') {
             data.item_id = view.getRecord().get('id');
+        } else if (page == 'specialsale') {
+            data.sale_id = view.getParam().id;
         }
         if (page != 'userauction') {
             WeiQuPai.app.statReport(data);

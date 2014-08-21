@@ -310,7 +310,7 @@ Ext.define('WeiQuPai.view.Auction', {
         this.onDestroy();
         var me = this;
         var auction = this.getRecord().get('auction');
-        var url = WeiQuPai.Config.apiUrl + '/?r=app/auction/refresh&id=' + auction.id;
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/auction/refresh&id=' + auction.id;
         WeiQuPai.Util.get(url, function(rsp) {
             auction = Ext.merge(auction, rsp);
             me.getRecord().set('auction', auction);

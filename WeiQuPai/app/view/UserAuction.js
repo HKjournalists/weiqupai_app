@@ -57,7 +57,7 @@ Ext.define('WeiQuPai.view.UserAuction', {
                 '<div class="time"><ul>',
                 '<li>当前时间<br><span id="timer">{[this.getTime()]}</span></li>',
                 '<li>{[this.getLeftTime(values)]}</li>',
-                '<li>当前战果<br><span>{curr_price}</span></li>',
+                '<li>当前战果<br><span>{curr_price}</span>{[this.isReservePrice(values)]}</li>',
                 '<div class="clear"></div></ul></div>',
                 '<div class="prop"></div>', {
                     getCover: function(pic_cover) {
@@ -70,8 +70,14 @@ Ext.define('WeiQuPai.view.UserAuction', {
                         if (values.left_time) {
                             return '剩余时间<br><span>' + values.left_time + '</span>';
                         }
-                        var text = ['', '', '已结束', '已成交', '已取消'];
+                        var text = ['', '进行中', '等待购买', '已成交', '已结束'];
                         return text[values.status];
+                    },
+                    isReservePrice: function(values) {
+                        if (values.curr_price == values.reserve_price) {
+                            return '<br/>已到底价';
+                        }
+                        return '';
                     }
                 }
             )

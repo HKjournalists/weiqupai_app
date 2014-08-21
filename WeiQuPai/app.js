@@ -284,7 +284,7 @@ Ext.application({
             ui: 'action'
         }];
         Ext.Msg.confirm(null, '亲，帮忙去给评个分吧？', function(btn) {
-            if (btn == "ok") {
+            if (btn == "yes") {
                 var url = "https://itunes.apple.com/cn/app/wei-qu-pai/id863434938?ls=1&mt=8";
                 window.open(url, '_system');
             }

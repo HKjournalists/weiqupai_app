@@ -30,7 +30,7 @@ Ext.define('WeiQuPai.view.CategoryItem', {
         itemCls: 'category-item',
         itemTpl: new Ext.XTemplate(
             '<div class="item">',
-            '<img src="{[WeiQuPai.Util.getImagePath(values.pic_cover, 200)]}">',
+            '<div class="pic" style="background-image:url({[WeiQuPai.Util.getImagePath(values.pic_cover, 200)]})"></div>',
             '<div class="title">{title}</div>',
             '</div>'
         ),

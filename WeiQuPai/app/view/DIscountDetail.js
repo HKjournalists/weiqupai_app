@@ -56,7 +56,30 @@ Ext.define('WeiQuPai.view.DiscountDetail', {
         discountRecord: null
     },
 
-    initialize: function() {},
+    initialize: function() {
+        this.element.onBefore('tap', function(e) {
+            var tag = e.target.tagName.toLowerCase();
+            if (tag == 'img' && e.target.src.indexOf("twxq_") == -1) {
+                WeiQuPai.app.statReport({
+                    act: 'discount_pic_tap'
+                });
+                var viewer = WeiQuPai.Util.getGlobalView('WeiQuPai.view.SimpleViewer');
+                var spic = WeiQuPai.Util.getImagePath(e.target.src);
+                var bpic = spic;
+                viewer.setPic(spic, bpic);
+                viewer.show();
+            }
+            return false;
+        }, this);
+        this.element.dom.addEventListener('click', function(e) {
+            var tag = e.target.tagName.toLowerCase();
+            if (tag == 'a') {
+                e.preventDefault();
+                var title = e.target.title || '微趣拍';
+                window.open(e.target.href, '_blank', 'location=no,title=' + title);
+            }
+        }, false);
+    },
 
     updateDiscountId: function(id) {
         this.loadData();

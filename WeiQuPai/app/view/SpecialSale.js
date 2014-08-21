@@ -136,7 +136,7 @@ Ext.define('WeiQuPai.view.SpecialSale', {
             ids.push(item.get('id'));
         });
         Ext.Ajax.request({
-            url: WeiQuPai.Config.apiUrl + '/?r=app/today/refresh&id=' + ids.join(","),
+            url: WeiQuPai.Config.apiUrl + '/?r=appv2/today/refresh&id=' + ids.join(","),
             method: 'get',
             success: function(rsp) {
                 rsp = Ext.decode(rsp.responseText);

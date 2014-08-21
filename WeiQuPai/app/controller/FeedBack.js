@@ -26,8 +26,8 @@ Ext.define('WeiQuPai.controller.FeedBack', {
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/feedback';
         var user = WeiQuPai.Cache.get('currentUser');
         var data = {};
-        data.uid = user && user.id || 0;
-        data.picList = view.getPicList().join("|");
+        data.token = user && user.token || '';
+        data.pic_list = view.getPicList().join("|");
         data.content = content;
         WeiQuPai.Util.post(url, data, function(rsp) {
             view.down('textareafield').reset();

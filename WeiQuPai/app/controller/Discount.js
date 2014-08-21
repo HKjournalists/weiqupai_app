@@ -35,13 +35,25 @@ Ext.define('WeiQuPai.controller.Discount', {
     },
 
     getDetailDiscount: function() {
-        var discountId = WeiQuPai.navigator.getActiveItem().getDiscountId();
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
-
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/discount/get&id=' + discountId + '&token=' + user.token;
-        WeiQuPai.Util.get(url, function(rsp) {
-            WeiQuPai.Util.toast('恭喜您成功领取了一个优惠~');
+        var data = WeiQuPai.navigator.getActiveItem().getRecord().data;
+        var layer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer');
+        layer.down('button[action=weibo]').setDisabled(false);
+        var shareData = {
+            title: data.title,
+            thumb: WeiQuPai.Util.getImagePath(data.pic_url),
+            url: 'http://www.vqupai.com/mm/?r=discount/show&id=' + data.id
+        }
+        layer.setShareData(shareData);
+        layer.setShareCallback(function() {
+            layer.setShareCallback(null);
+            var discountId = data.id;
+            var url = WeiQuPai.Config.apiUrl + '/?r=appv2/discount/get&id=' + discountId + '&token=' + user.token;
+            WeiQuPai.Util.get(url, function(rsp) {
+                WeiQuPai.Util.toast('恭喜您成功领取了一个优惠~');
+            });
         });
+        layer.show();
     }
 });

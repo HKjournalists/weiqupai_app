@@ -39,7 +39,11 @@ Ext.define('WeiQuPai.controller.TopKiller', {
         if (!user) return;
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/userAuction/help&id=' + auctionId + '&token=' + user.token;
         WeiQuPai.Util.get(url, function(rsp) {
-            WeiQuPai.Util.toast('您成功帮忙减掉了' + rsp.discount + '元');
+            var propMsg = '';
+            if (rsp.prop.indexOf("doubleDiscount") != -1) {
+                propMsg += '由于使用了双倍卡，';
+            }
+            WeiQuPai.Util.toast(propMsg + '您成功帮忙减掉了' + rsp.discount + '元');
             Ext.get(dataItem).down('.killerbar').setHtml('￥' + rsp.curr_price);
             //到的时候隐藏帮忙按钮
             if (rsp.curr_price == 0) {
