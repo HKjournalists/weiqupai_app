@@ -556,5 +556,29 @@ Ext.define("WeiQuPai.Util", {
         if (this.msgbox) {
             store.getCount() == 0 ? this.msgbox.show() : this.msgbox.hide();
         }
+    },
+
+    addTopIcon: function(container) {
+        if (!container.getScrollable()) return;
+        var topIcon = {
+            xtype: 'button',
+            baseCls: 'icontop',
+            itemId: 'icontop',
+            action: 'icontop',
+            docked: 'bottom',
+            hidden: true
+        };
+        container.add(topIcon);
+        var scroller = container.getScrollable().getScroller();
+        var topBtn = container.down('button[action=icontop]');
+        topBtn.on('tap', function() {
+            scroller.scrollTo(0, 0, {
+                duration: 300
+            });
+        }, container);
+
+        scroller.addListener('scroll', function(scroller, x, y) {
+            topBtn.setHidden(y < screen.height);
+        }, container);
     }
 })

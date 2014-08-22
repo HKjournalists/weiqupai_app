@@ -45,9 +45,9 @@ Ext.define('WeiQuPai.view.KillEnd', {
             }
         ),
         items: [{
-            xtype: 'titlebar',
+            xtype: 'vtitlebar',
             title: '血战到底',
-            cls: 'titlebar2',
+            cls: 'titlebar1',
             docked: 'top',
             items: [{
                 xtype: 'button',

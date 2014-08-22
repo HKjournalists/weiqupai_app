@@ -72,8 +72,7 @@ Ext.define('WeiQuPai.view.Today', {
                 },
 
                 displayPrice: function(values) {
-                    var auctions = WeiQuPai.Cache.get('auctions');
-                    if (auctions && auctions.indexOf(values.id) != -1) {
+                    if (WeiQuPai.Util.hasCache('auctions', parseInt(values.id))) {
                         return '已拍';
                     }
                     return '￥' + values.curr_price;
@@ -163,14 +162,6 @@ Ext.define('WeiQuPai.view.Today', {
             html: '今日精选',
             scrollDock: 'top',
             cls: 'todayTitle'
-        }, {
-            xtype: 'button',
-            baseCls: 'icontop',
-            itemId: 'icontop',
-            action: 'icontop',
-            docked: 'bottom',
-            hidden: 'true',
-            style: 'border:1px solid red!important;'
         }]
     },
 
@@ -178,22 +169,12 @@ Ext.define('WeiQuPai.view.Today', {
     todayData: null,
 
     initialize: function() {
-        this.down('button[action=icontop]').on('tap', function() {
-            this.getScrollable().getScroller().scrollTo(0, 0, {
-                duration: 300
-            });
-        }, this);
         var me = this;
-        //不使用timeout获取的值有可能不对
-        var scroller = this.getScrollable().getScroller();
-        scroller.addListener('scroll', function(scroller, x, y) {
-            if (y > 0) {
-                this.down('#icontop').show();
-            } else {
-                this.down('#icontop').hide();
-            }
-        }, this);
         this.callParent(arguments);
+
+        //添加到顶部的功能按钮
+        WeiQuPai.Util.addTopIcon(this);
+
         this.loadData();
         this.on('activate', this.onActivate, this);
         this.on('hide', this.onHide, this);

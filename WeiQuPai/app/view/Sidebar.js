@@ -192,9 +192,8 @@ Ext.define('WeiQuPai.view.Sidebar', {
         //需要登录
         if (this.getNotLogin().indexOf(xtype) == -1 && !WeiQuPai.Util.isLogin()) {
             WeiQuPai.loginReferer = xtype;
-            WeiQuPai.navigator.push({
-                xtype: 'login'
-            });
+            var view = Ext.create('WeiQuPai.view.Login');
+            WeiQuPai.navigator.push(view);
             this.close();
             return;
         }

@@ -8,8 +8,10 @@ Ext.define('WeiQuPai.view.VTitleBar', {
 
     initialize: function() {
         this.callParent(arguments);
-        var idx = Math.floor(Math.random() * 3) + 1;
-        this.addCls('titlebar' + idx);
+        if (this.getCls().indexOf('x-navigation-bar') != -1) {
+            var idx = Math.floor(Math.random() * 3) + 1;
+            this.addCls('titlebar' + idx);
+        }
         this.bindEvent();
     },
 

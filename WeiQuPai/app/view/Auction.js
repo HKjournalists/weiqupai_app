@@ -83,7 +83,7 @@ Ext.define('WeiQuPai.view.Auction', {
                 '<div class="detailData">',
                 '<div class="title_new">{title}</div>',
                 '<div class="content_new">',
-                '<div class="left"><div class="priceNew">{auction.curr_price}</div></div>',
+                '<div class="left"><div class="priceNew">{[this.displayPrice(values)]}</div></div>',
                 '<div class="detail_map" id="countdown">{[this.formatCountdown(values.auction)]}</div>',
                 '<div class="clear"></div>',
                 '</div>',
@@ -101,6 +101,12 @@ Ext.define('WeiQuPai.view.Auction', {
                             var countdown = (min < 10 ? '0' + min : min) + ":" + (sec < 10 ? '0' + sec : sec);
                             return countdown;
                         }
+                    },
+                    displayPrice: function(values) {
+                        if (WeiQuPai.Util.hasCache('auctions', parseInt(values.auction.id))) {
+                            return '已拍';
+                        }
+                        return '￥' + values.auction.curr_price;
                     }
                 }
             )

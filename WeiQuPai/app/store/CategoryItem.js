@@ -4,7 +4,7 @@ Ext.define('WeiQuPai.store.CategoryItem', {
         fields: ['id', 'title', 'pic_cover'],
         storeId: 'CategoryItem',
         autoLoad: false,
-        pageSize: 15,
+        pageSize: 16,
         proxy: {
             type: 'ajax',
             url: WeiQuPai.Config.apiUrl + '/?r=appv2/category/item',

@@ -37,6 +37,7 @@ Ext.define('WeiQuPai.view.UserAuction', {
             xtype: 'vtitlebar',
             title: '实时战况',
             docked: 'top',
+            cls: 'titlebar1',
             items: [{
                 xtype: 'button',
                 baseCls: 'arrow_left',

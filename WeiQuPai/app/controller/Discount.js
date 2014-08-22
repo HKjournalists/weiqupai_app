@@ -8,11 +8,10 @@ Ext.define('WeiQuPai.controller.Discount', {
         },
         control: {
             pageView: {
-                showdetail: 'doShowDetail',
-                getit: 'getDiscount'
+                showdetail: 'doShowDetail'
             },
             getBtn: {
-                tap: 'getDetailDiscount'
+                tap: 'getDiscount'
             }
         }
     },
@@ -23,18 +22,7 @@ Ext.define('WeiQuPai.controller.Discount', {
         WeiQuPai.navigator.push(view);
     },
 
-    getDiscount: function(list, index, dataItem, record, e) {
-        var discountId = record.get('id');
-        var user = WeiQuPai.Util.checkLogin();
-        if (!user) return;
-
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/discount/get&id=' + discountId + '&token=' + user.token;
-        WeiQuPai.Util.get(url, function(rsp) {
-            WeiQuPai.Util.toast('恭喜您成功领取了一个优惠~');
-        });
-    },
-
-    getDetailDiscount: function() {
+    getDiscount: function() {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
         var data = WeiQuPai.navigator.getActiveItem().getRecord().data;

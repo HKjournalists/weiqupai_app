@@ -52,6 +52,7 @@ Ext.define('WeiQuPai.view.TopKiller', {
             xtype: 'vtitlebar',
             title: '杀手榜',
             docked: 'top',
+            cls: 'titlebar1',
             items: [{
                 xtype: 'button',
                 baseCls: 'arrow_left',

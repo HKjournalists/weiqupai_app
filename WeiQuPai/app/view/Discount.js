@@ -25,7 +25,7 @@ Ext.define('WeiQuPai.view.Discount', {
             '<div class="right">',
             '<div class="title">{title}</div>',
             '<div class="dis">{abstract}</div>',
-            '<div class="time"><input type="button" value="分享领取" class="btn_e7 get_btn"/>有效期 {expire_time}</div>',
+            '<div class="time">有效期 {expire_time}</div>',
             '</div>',
             '<div class="clear"></div>',
             '</div>'

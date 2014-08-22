@@ -212,7 +212,7 @@ Ext.define('WeiQuPai.view.ShowUser', {
                     if (scroller.position.y > me.tabPosition) {
                         scroller.scrollTo(null, me.tabPosition, true);
                     }
-                }, 50);
+                }, 100);
             });
         }
         this.setActiveTab(btns[0]);
@@ -223,7 +223,7 @@ Ext.define('WeiQuPai.view.ShowUser', {
             //不使用timeout获取的值有可能不对
             setTimeout(function() {
                 me.tabPosition = me.down('#tabbar').element.getY() - me.down('vtitlebar').element.getHeight();
-            }, 200);
+            }, 400);
         }, this, {
             single: true
         });
