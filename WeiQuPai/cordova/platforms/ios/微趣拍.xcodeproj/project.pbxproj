@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		117BB047A3FD44119F745E3F /* CDVWechat.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C18AF085F1F44E4B6EEBC60 /* CDVWechat.m */; };
 		181D65F618FD85550006D699 /* CDVSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D65F518FD85550006D699 /* CDVSplashScreen.m */; };
@@ -44,8 +43,11 @@
 		5AEE5B35173C68D80009041E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AEE5B34173C68D80009041E /* CoreLocation.framework */; };
 		5B1594DD16A7569C00FEF299 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */; };
 		A5864BED19A78D4E0072A607 /* 120.png in Resources */ = {isa = PBXBuildFile; fileRef = A5864BEC19A78D4E0072A607 /* 120.png */; };
+		A5864BF619A7B2F30072A607 /* top6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A5864BF519A7B2F30072A607 /* top6@2x.png */; };
+		A5864BF819A860DF0072A607 /* trans.png in Resources */ = {isa = PBXBuildFile; fileRef = A5864BF719A860DF0072A607 /* trans.png */; };
+		A5864BFA19A86FDB0072A607 /* top7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A5864BF919A86FDB0072A607 /* top7@2x.png */; };
 		A5C6CF481969975A000E05BC /* NSLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6CF471969975A000E05BC /* NSLogger.m */; };
-		A5F18E1E19A0ADB000DF1BC6 /* top.png in Resources */ = {isa = PBXBuildFile; fileRef = A5F18E1D19A0ADB000DF1BC6 /* top.png */; };
+		A5F18E1E19A0ADB000DF1BC6 /* top6.png in Resources */ = {isa = PBXBuildFile; fileRef = A5F18E1D19A0ADB000DF1BC6 /* top6.png */; };
 		B3FF180385D54C60B3E995B5 /* CDVCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 95963B588F71477D84FC3A16 /* CDVCamera.m */; };
 		FCB0DB33F2164EA888278A45 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B803D6F47E8F434AB223D8C6 /* ImageIO.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -131,9 +133,12 @@
 		95963B588F71477D84FC3A16 /* CDVCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVCamera.m; path = org.apache.cordova.camera/CDVCamera.m; sourceTree = "<group>"; };
 		9C18AF085F1F44E4B6EEBC60 /* CDVWechat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVWechat.m; path = xu.li.cordova.wechat/CDVWechat.m; sourceTree = "<group>"; };
 		A5864BEC19A78D4E0072A607 /* 120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 120.png; sourceTree = "<group>"; };
+		A5864BF519A7B2F30072A607 /* top6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top6@2x.png"; sourceTree = "<group>"; };
+		A5864BF719A860DF0072A607 /* trans.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trans.png; sourceTree = "<group>"; };
+		A5864BF919A86FDB0072A607 /* top7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top7@2x.png"; sourceTree = "<group>"; };
 		A5C6CF461969975A000E05BC /* NSLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSLogger.h; path = com.pfafman.nsLogger/NSLogger.h; sourceTree = "<group>"; };
 		A5C6CF471969975A000E05BC /* NSLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSLogger.m; path = com.pfafman.nsLogger/NSLogger.m; sourceTree = "<group>"; };
-		A5F18E1D19A0ADB000DF1BC6 /* top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top.png; sourceTree = "<group>"; };
+		A5F18E1D19A0ADB000DF1BC6 /* top6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top6.png; sourceTree = "<group>"; };
 		B803D6F47E8F434AB223D8C6 /* ImageIO.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		B8DAC783CF624E69805AF132 /* CDVInAppBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVInAppBrowser.m; path = org.apache.cordova.inappbrowser/CDVInAppBrowser.m; sourceTree = "<group>"; };
 		C59F6656FFCA4D8C8133CADC /* CDVWechat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVWechat.h; path = xu.li.cordova.wechat/CDVWechat.h; sourceTree = "<group>"; };
@@ -275,7 +280,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A5F18E1D19A0ADB000DF1BC6 /* top.png */,
+				A5864BF919A86FDB0072A607 /* top7@2x.png */,
+				A5864BF719A860DF0072A607 /* trans.png */,
+				A5F18E1D19A0ADB000DF1BC6 /* top6.png */,
+				A5864BF519A7B2F30072A607 /* top6@2x.png */,
 				308D052D1370CCF300D202BF /* icons */,
 				308D05311370CCF300D202BF /* splash */,
 				8D1107310486CEB800E47090 /* 微趣拍-Info.plist */,
@@ -463,14 +471,17 @@
 			files = (
 				18E6B61118E0783B00631906 /* Icon~ipad@2x.png in Resources */,
 				A5864BED19A78D4E0072A607 /* 120.png in Resources */,
+				A5864BFA19A86FDB0072A607 /* top7@2x.png in Resources */,
 				308D05381370CCF300D202BF /* icon.png in Resources */,
 				308D05391370CCF300D202BF /* icon@2x.png in Resources */,
 				18E6B61018E0783B00631906 /* Icon~ipad.png in Resources */,
 				18F014D518EF1ABB0089C0D2 /* config.xml in Resources */,
+				A5864BF619A7B2F30072A607 /* top6@2x.png in Resources */,
 				302D95F214D2391D003F00A1 /* MainViewController.xib in Resources */,
+				A5864BF819A860DF0072A607 /* trans.png in Resources */,
 				18E6B61C18E0789000631906 /* Default.png in Resources */,
 				18E6B61818E0789000631906 /* Default-568h@2x.png in Resources */,
-				A5F18E1E19A0ADB000DF1BC6 /* top.png in Resources */,
+				A5F18E1E19A0ADB000DF1BC6 /* top6.png in Resources */,
 				18F014F218EF32CC0089C0D2 /* BPushConfig.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

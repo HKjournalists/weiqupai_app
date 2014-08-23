@@ -80,7 +80,7 @@ Ext.application({
         //bind push
         WeiQuPai.Util.bindPush();
 
-        //this.catchError();
+        this.catchError();
 
         this.hideSplash();
 

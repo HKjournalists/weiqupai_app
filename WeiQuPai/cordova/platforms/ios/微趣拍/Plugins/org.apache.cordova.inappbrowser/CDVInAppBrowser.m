@@ -222,11 +222,20 @@
     CDVInAppBrowserNavigationController* nav = [[CDVInAppBrowserNavigationController alloc]
                                                 initWithRootViewController:self.inAppBrowserViewController];
     nav.orientationDelegate = self.inAppBrowserViewController;
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"top.png"] forBarMetrics:UIBarMetricsDefault];
-    nav.navigationBar.tintColor = [UIColor whiteColor];
-    NSDictionary *dict = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:UITextAttributeTextColor];
+    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
+        UIImage* img = [UIImage imageNamed:@"top7.png"];
+        [[UINavigationBar appearance] setBackgroundImage:img forBarMetrics:UIBarMetricsDefault];
+    }else{
+        UIImage* img = [UIImage imageNamed:@"top6.png"];
+        [[UINavigationBar appearance] setBackgroundImage:img forBarMetrics:UIBarMetricsDefault];
+    }
+    NSDictionary *dict = @{UITextAttributeFont : [UIFont systemFontOfSize:16.0], UITextAttributeTextColor: [UIColor whiteColor], UITextAttributeTextShadowColor: [UIColor clearColor]};
     nav.navigationBar.titleTextAttributes = dict;
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStyleBordered target:self action:@selector(close:)];
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(close:)];
+    [backItem setTintColor:[UIColor whiteColor]];
+    [[UIBarButtonItem appearance] setBackgroundImage:[UIImage imageNamed:@"trans.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [[UIBarButtonItem appearance] setTitleTextAttributes:dict forState:UIControlStateNormal];
+    
     self.inAppBrowserViewController.navigationItem.leftBarButtonItem = backItem;
     //nav.navigationBarHidden = YES;
     // Run later to avoid the "took a long time" log message.
@@ -542,7 +551,7 @@
     self.toolbar.opaque = NO;
     self.toolbar.userInteractionEnabled = YES;
     self.toolbar.tintColor = [UIColor whiteColor];
-    self.toolbar.barTintColor = [UIColor colorWithRed:95/255.0 green:116/255.0 blue:121/255.0 alpha:1];
+    //self.toolbar.barTintColor = [UIColor colorWithRed:95/255.0 green:116/255.0 blue:121/255.0 alpha:1];
     self.toolbar.translucent = NO;
     
     CGFloat labelInset = 5.0;
