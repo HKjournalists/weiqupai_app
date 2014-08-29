@@ -1,5 +1,6 @@
 package com.vqupai.app.wxapi;
 
+import android.app.Activity;
 import com.tencent.mm.sdk.openapi.BaseReq;
 import com.tencent.mm.sdk.openapi.BaseResp;
 import com.tencent.mm.sdk.openapi.ConstantsAPI;
@@ -15,8 +16,12 @@ import android.os.Bundle;
 import android.widget.Toast;
 import com.vqupai.app.MainActivity;
 import org.apache.cordova.CordovaActivity;
+import org.apache.cordova.CordovaPlugin;
+import org.json.JSONException;
+import org.json.JSONObject;
+import xu.li.cordova.wechat.Wechat;
 
-public class WXEntryActivity extends CordovaActivity implements IWXAPIEventHandler{
+public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
 
 	// IWXAPI 是第三方app和微信通信的openapi接口
     private IWXAPI api;
@@ -72,15 +77,18 @@ public class WXEntryActivity extends CordovaActivity implements IWXAPIEventHandl
 			result = "发送返回";
 			break;
 		}
-
-        Toast.makeText(this, result, Toast.LENGTH_LONG).show();
-        /*
-		Intent intent = new Intent(this, MainActivity.class);
-		intent.putExtra("type", "onResp");
-		intent.putExtra("errCode", resp.errCode);
-		intent.putExtra("result", result);
-		startActivity(intent);
-		*/
+        CordovaPlugin plugin = MainActivity.instance.getPlugin("Wechat");
+        JSONObject message = new JSONObject();
+        try {
+            message.put("code", resp.errCode);
+            message.put("msg", result);
+        }catch (JSONException e){
+        }
+        if(resp.errCode == BaseResp.ErrCode.ERR_OK){
+            ((Wechat)plugin).currentCallbackContext.success(message);
+        }else{
+            ((Wechat)plugin).currentCallbackContext.error(message);
+        }
 		finish();
 
 	}

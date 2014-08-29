@@ -314,6 +314,7 @@ Ext.define("WeiQuPai.Util", {
         if (!window.BPush) return;
         var user = WeiQuPai.Cache.get('currentUser');
         BPush.bindChannel(function(data) {
+            if (!data.userId) return;
             WeiQuPai.Cache.set('device', data.deviceToken);
             //绑定成功，但用户未登录，不需要回传
             if (!user) return;

@@ -216,7 +216,10 @@ Ext.define('WeiQuPai.controller.Auction', {
     //设置提醒价格,适用于正在拍的商品
     doSetNoticePrice: function(view) {
         var user = WeiQuPai.Util.checkLogin();
-        if (!user) return;
+        if (!user) {
+            WeiQuPai.Util.getGlobalView('WeiQuPai.view.AuctionChart').hide();
+            return;
+        }
         var form = WeiQuPai.Util.createOverlay('WeiQuPai.view.PriceForm');
         var text = form.element.down('#price');
         text.dom.setAttribute('placeholder', '输入要被提醒的价格');

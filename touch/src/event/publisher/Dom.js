@@ -15,8 +15,9 @@ Ext.define('Ext.event.publisher.Dom', {
     idOrClassSelectorRegex: /^([#|\.])([\w\-]+)$/,
 
     handledEvents: ['focus', 'blur', 'paste', 'input', 'change',
-                    'keyup', 'keydown', 'keypress', 'submit',
-                    'transitionend', 'animationstart', 'animationend'],
+        'keyup', 'keydown', 'keypress', 'submit',
+        'transitionend', 'animationstart', 'animationend'
+    ],
 
     classNameSplitRegex: /\s+/,
 
@@ -40,7 +41,7 @@ Ext.define('Ext.event.publisher.Dom', {
 
         this.onEvent = Ext.Function.bind(this.onEvent, this);
 
-        for (i = 0,ln = eventNames.length; i < ln; i++) {
+        for (i = 0, ln = eventNames.length; i < ln; i++) {
             eventName = eventNames[i];
             vendorEventName = this.getVendorEventName(eventName);
             eventNameMap[vendorEventName] = eventName;
@@ -78,11 +79,9 @@ Ext.define('Ext.event.publisher.Dom', {
         if (Ext.browser.is.WebKit) {
             if (eventName === 'transitionend') {
                 eventName = Ext.browser.getVendorProperyName('transitionEnd');
-            }
-            else if (eventName === 'animationstart') {
+            } else if (eventName === 'animationstart') {
                 eventName = Ext.browser.getVendorProperyName('animationStart');
-            }
-            else if (eventName === 'animationend') {
+            } else if (eventName === 'animationend') {
                 eventName = Ext.browser.getVendorProperyName('animationEnd');
             }
         }
@@ -90,7 +89,7 @@ Ext.define('Ext.event.publisher.Dom', {
         return eventName;
     },
 
-    bindListeners: function (doc, bind) {
+    bindListeners: function(doc, bind) {
         var handlesEvents = this.getHandledEvents(),
             handlesEventsLength = handlesEvents.length,
             i;
@@ -100,7 +99,7 @@ Ext.define('Ext.event.publisher.Dom', {
         }
     },
 
-    bindListener: function (doc, eventName, bind) {
+    bindListener: function(doc, eventName, bind) {
         if (bind) {
             this.attachListener(eventName, doc);
         } else {
@@ -118,11 +117,9 @@ Ext.define('Ext.event.publisher.Dom', {
 
         if (Ext.os.is.iOS && Ext.os.version.getMajor() < 5) {
             document.addEventListener(eventName, this.onEvent, !this.doesEventBubble(eventName));
-        }
-        else if (defaultView && defaultView.addEventListener) {
+        } else if (defaultView && defaultView.addEventListener) {
             doc.defaultView.addEventListener(eventName, this.onEvent, !this.doesEventBubble(eventName));
-        }
-        else {
+        } else {
             doc.addEventListener(eventName, this.onEvent, !this.doesEventBubble(eventName));
         }
         return this;
@@ -137,11 +134,9 @@ Ext.define('Ext.event.publisher.Dom', {
 
         if (Ext.os.is.iOS && Ext.os.version.getMajor() < 5) {
             document.removeEventListener(eventName, this.onEvent, !this.doesEventBubble(eventName));
-        }
-        else if (defaultView && defaultView.addEventListener) {
+        } else if (defaultView && defaultView.addEventListener) {
             doc.defaultView.removeEventListener(eventName, this.onEvent, !this.doesEventBubble(eventName));
-        }
-        else {
+        } else {
             doc.removeEventListener(eventName, this.onEvent, !this.doesEventBubble(eventName));
         }
         return this;
@@ -175,8 +170,7 @@ Ext.define('Ext.event.publisher.Dom', {
 
                 idSubscribers[value] = 1;
                 idSubscribers.$length++;
-            }
-            else {
+            } else {
                 if (classNameSubscribers.hasOwnProperty(value)) {
                     classNameSubscribers[value]++;
                     return true;
@@ -185,12 +179,10 @@ Ext.define('Ext.event.publisher.Dom', {
                 classNameSubscribers[value] = 1;
                 classNameSubscribers.$length++;
             }
-        }
-        else {
+        } else {
             if (target === this.SELECTOR_ALL) {
                 subscribers.all++;
-            }
-            else {
+            } else {
                 if (selectorSubscribers.hasOwnProperty(target)) {
                     selectorSubscribers[target]++;
                     return true;
@@ -231,8 +223,7 @@ Ext.define('Ext.event.publisher.Dom', {
 
                 delete idSubscribers[value];
                 idSubscribers.$length--;
-            }
-            else {
+            } else {
                 if (!classNameSubscribers.hasOwnProperty(value) || (!all && --classNameSubscribers[value] > 0)) {
                     return true;
                 }
@@ -240,17 +231,14 @@ Ext.define('Ext.event.publisher.Dom', {
                 delete classNameSubscribers[value];
                 classNameSubscribers.$length--;
             }
-        }
-        else {
+        } else {
             if (target === this.SELECTOR_ALL) {
                 if (all) {
                     subscribers.all = 0;
-                }
-                else {
+                } else {
                     subscribers.all--;
                 }
-            }
-            else {
+            } else {
                 if (!selectorSubscribers.hasOwnProperty(target) || (!all && --selectorSubscribers[target] > 0)) {
                     return true;
                 }
@@ -301,7 +289,6 @@ Ext.define('Ext.event.publisher.Dom', {
     publish: function(eventName, targets, event) {
         var subscribers = this.getSubscribers(eventName),
             wildcardSubscribers;
-
         if (subscribers.$length === 0 || !this.doPublish(subscribers, eventName, targets, event)) {
             wildcardSubscribers = this.getSubscribers('*');
 
@@ -327,7 +314,7 @@ Ext.define('Ext.event.publisher.Dom', {
             classNameSplitRegex = this.classNameSplitRegex,
             i, ln, j, subLn, target, id, className, classNames, selector;
 
-        for (i = 0,ln = targets.length; i < ln; i++) {
+        for (i = 0, ln = targets.length; i < ln; i++) {
             target = targets[i];
             event.setDelegatedTarget(target);
 
@@ -354,7 +341,7 @@ Ext.define('Ext.event.publisher.Dom', {
                 if (className) {
                     classNames = className.split(classNameSplitRegex);
 
-                    for (j = 0,subLn = classNames.length; j < subLn; j++) {
+                    for (j = 0, subLn = classNames.length; j < subLn; j++) {
                         className = classNames[j];
 
                         if (!isClassNameHandled[className]) {
@@ -385,10 +372,10 @@ Ext.define('Ext.event.publisher.Dom', {
         }
 
         if (hasSelectorSubscribers) {
-            for (j = 0,subLn = targets.length; j < subLn; j++) {
+            for (j = 0, subLn = targets.length; j < subLn; j++) {
                 target = targets[j];
 
-                for (i = 0,ln = selectorSubscribers.length; i < ln; i++) {
+                for (i = 0, ln = selectorSubscribers.length; i < ln; i++) {
                     selector = selectorSubscribers[i];
 
                     if (this.matchesSelector(target, selector)) {
@@ -410,8 +397,8 @@ Ext.define('Ext.event.publisher.Dom', {
     matchesSelector: function() {
         var test = Element.prototype,
             matchesSelector =
-                ('webkitMatchesSelector' in test) ? 'webkitMatchesSelector' :
-                (('msMatchesSelector' in test) ? 'msMatchesSelector' : ('mozMatchesSelector' in test ? 'mozMatchesSelector' : null));
+            ('webkitMatchesSelector' in test) ? 'webkitMatchesSelector' :
+            (('msMatchesSelector' in test) ? 'msMatchesSelector' : ('mozMatchesSelector' in test ? 'mozMatchesSelector' : null));
 
         if (matchesSelector) {
             return function(element, selector) {
@@ -442,8 +429,7 @@ Ext.define('Ext.event.publisher.Dom', {
 
         if (this.doesEventBubble(eventName)) {
             targets = this.getBubblingTargets(target);
-        }
-        else {
+        } else {
             targets = [target];
         }
 
@@ -466,12 +452,10 @@ Ext.define('Ext.event.publisher.Dom', {
 
             if (type === '#') {
                 return subscribers.id.hasOwnProperty(value);
-            }
-            else {
+            } else {
                 return subscribers.className.hasOwnProperty(value);
             }
-        }
-        else {
+        } else {
             return (subscribers.selector.hasOwnProperty(target) && Ext.Array.indexOf(subscribers.selector, target) !== -1);
         }
 

@@ -77,10 +77,10 @@ Ext.application({
         var flag = WeiQuPai.Cache.get('appver');
         this.firstLaunch = !flag || flag != ver;
 
-        //bind push
-        WeiQuPai.Util.bindPush();
+        //重置message的提醒
+        this.resetMessageText();
 
-        this.catchError();
+        //this.catchError();
 
         this.hideSplash();
 
@@ -114,6 +114,10 @@ Ext.application({
         //检查消息
         WeiQuPai.Notify.checkMQ();
 
+        //3秒后绑定推送id
+        setTimeout(function() {
+            WeiQuPai.Util.bindPush();
+        }, 3000);
         //5秒后再上报,防止没有device_token
         setTimeout(function() {
             WeiQuPai.app.statReport({
@@ -187,7 +191,13 @@ Ext.application({
                 return;
             }
             var nav = Ext.Viewport.down('main');
-            nav.getInnerItems().length == 1 ? navigator.app.exitApp() : nav.pop();
+            if (nav.getInnerItems().length > 1) {
+                nav.pop();
+                return;
+            }
+            Ext.Msg.confirm(null, '确定要退出微趣拍么？', function(btn) {
+                btn == "yes" && navigator.app.exitApp();
+            });
         }, false);
     },
 
@@ -214,6 +224,7 @@ Ext.application({
 
             //处理刷新状态
             var mainCard = WeiQuPai.mainCard;
+            var main = WeiQuPai.navigator;
             var currentView = WeiQuPai.navigator.getActiveItem();
             if (currentView == mainCard) {
                 currentView = mainCard.getActiveItem();
@@ -254,6 +265,17 @@ Ext.application({
         }, false);
     },
 
+    resetMessageText: function() {
+        Ext.MessageBox.YESNO = [{
+            text: '否',
+            itemId: 'no'
+        }, {
+            text: '是',
+            itemId: 'yes',
+            ui: 'action'
+        }];
+    },
+
     //提醒评分
     tipScore: function() {
         if (!Ext.os.is.ios) return;
@@ -274,15 +296,6 @@ Ext.application({
         tipScore.lastTime = now;
         WeiQuPai.Cache.set('tipScore', tipScore);
 
-
-        Ext.MessageBox.YESNO = [{
-            text: '否',
-            itemId: 'no'
-        }, {
-            text: '是',
-            itemId: 'yes',
-            ui: 'action'
-        }];
         Ext.Msg.confirm(null, '亲，帮忙去给评个分吧？', function(btn) {
             if (btn == "yes") {
                 var url = "https://itunes.apple.com/cn/app/wei-qu-pai/id863434938?ls=1&mt=8";

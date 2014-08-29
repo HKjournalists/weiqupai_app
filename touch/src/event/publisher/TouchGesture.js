@@ -46,17 +46,13 @@ Ext.define('Ext.event.publisher.TouchGesture', {
 
         if (Ext.browser.is.Chrome && Ext.os.is.Android) {
             this.screenPositionRatio = Ext.browser.version.gt('18') ? 1 : 1 / window.devicePixelRatio;
-        }
-        else if (Ext.browser.is.AndroidStock4) {
+        } else if (Ext.browser.is.AndroidStock4) {
             this.screenPositionRatio = 1;
-        }
-        else if (Ext.os.is.BlackBerry) {
+        } else if (Ext.os.is.BlackBerry) {
             this.screenPositionRatio = 1 / window.devicePixelRatio;
-        }
-        else if (Ext.browser.engineName == 'WebKit' && Ext.os.is.Desktop) {
+        } else if (Ext.browser.engineName == 'WebKit' && Ext.os.is.Desktop) {
             this.screenPositionRatio = 1;
-        }
-        else {
+        } else {
             this.screenPositionRatio = window.innerWidth / window.screen.width;
         }
         this.initConfig(config);
@@ -100,16 +96,15 @@ Ext.define('Ext.event.publisher.TouchGesture', {
 
         if ('button' in e && e.button > 0) {
             return;
-        }
-        else {
+        } else {
             // Temporary fix for a recent Chrome bugs where events don't seem to bubble up to document
             // when the element is being animated with webkit-transition (2 mousedowns without any mouseup)
             if (type === 'mousedown' && lastEventType && lastEventType !== 'mouseup') {
                 var fixedEvent = document.createEvent("MouseEvent");
-                    fixedEvent.initMouseEvent('mouseup', e.bubbles, e.cancelable,
-                        document.defaultView, e.detail, e.screenX, e.screenY, e.clientX,
-                        e.clientY, e.ctrlKey, e.altKey, e.shiftKey, e.metaKey, e.metaKey,
-                        e.button, e.relatedTarget);
+                fixedEvent.initMouseEvent('mouseup', e.bubbles, e.cancelable,
+                    document.defaultView, e.detail, e.screenX, e.screenY, e.clientX,
+                    e.clientY, e.ctrlKey, e.altKey, e.shiftKey, e.metaKey, e.metaKey,
+                    e.button, e.relatedTarget);
 
                 this.onEvent(fixedEvent);
             }
@@ -136,7 +131,7 @@ Ext.define('Ext.event.publisher.TouchGesture', {
         recognizer.setOnRecognized(this.onRecognized);
         recognizer.setCallbackScope(this);
 
-        for (i = 0,ln = handledEvents.length; i < ln; i++) {
+        for (i = 0, ln = handledEvents.length; i < ln; i++) {
             eventName = handledEvents[i];
 
             map[eventName] = recognizer;
@@ -245,8 +240,8 @@ Ext.define('Ext.event.publisher.TouchGesture', {
             this.currentIdentifiers.push(identifier);
         }
 
-        x  = touch.pageX;
-        y  = touch.pageY;
+        x = touch.pageX;
+        y = touch.pageY;
 
         if (x === currentTouch.pageX && y === currentTouch.pageY) {
             return false;
@@ -292,7 +287,9 @@ Ext.define('Ext.event.publisher.TouchGesture', {
 
         for (i = 0; i < ln; i++) {
             touch = changedTouches[i];
-            this.publish('touchstart', touch.targets, e, {touch: touch});
+            this.publish('touchstart', touch.targets, e, {
+                touch: touch
+            });
         }
 
         if (!this.isStarted) {
@@ -338,7 +335,9 @@ Ext.define('Ext.event.publisher.TouchGesture', {
 
         for (i = 0; i < ln; i++) {
             touch = changedTouches[i];
-            this.publish('touchmove', touch.targets, e, {touch: touch});
+            this.publish('touchmove', touch.targets, e, {
+                touch: touch
+            });
         }
 
         if (ln > 0) {
@@ -375,7 +374,9 @@ Ext.define('Ext.event.publisher.TouchGesture', {
             identifier = changedTouches[i].identifier;
             touch = touchesMap[identifier];
             delete touchesMap[identifier];
-            this.publish('touchend', touch.targets, e, {touch: touch});
+            this.publish('touchend', touch.targets, e, {
+                touch: touch
+            });
         }
 
         this.invokeRecognizers('onTouchEnd', e);
@@ -441,8 +442,7 @@ Ext.define('Ext.event.publisher.TouchGesture', {
                 this.eventProcessors[type].call(this, e);
             }
         });
-    }
-    else if (!Ext.browser.is.Ripple && (Ext.os.is.ChromeOS || !Ext.feature.has.Touch)) {
+    } else if (!Ext.browser.is.Ripple && (Ext.os.is.ChromeOS || !Ext.feature.has.Touch)) {
         this.override({
             handledEvents: ['touchstart', 'touchmove', 'touchend', 'touchcancel', 'mousedown', 'mousemove', 'mouseup']
         });

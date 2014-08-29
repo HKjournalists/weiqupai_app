@@ -24,7 +24,7 @@ Ext.define('WeiQuPai.view.TopKiller', {
             '<div class="contentkill">',
             '<img src="{[this.getAvatar(values.user.avatar)]}" class="person"/>',
             '<div class="map">',
-            '<div class="progress-bar" style="width:0%"><div class="killerbar">￥{curr_price}<div class="killertip"></div></div></div>',
+            '<div class="progress-bar" style="width:{[this.getPercent(values)]}%"><div class="killerbar">￥{curr_price}<div class="killertip"></div></div></div>',
             '</div>',
             '{[this.getBtn(values)]}',
             '</div>',
@@ -32,6 +32,9 @@ Ext.define('WeiQuPai.view.TopKiller', {
             '</div>', {
                 getAvatar: function(avatar) {
                     return WeiQuPai.Util.getAvatar(avatar, 140);
+                },
+                getPercent: function(values) {
+                    return Ext.os.is.android ? values.progress : '0';
                 },
                 getBtn: function(values) {
                     var value;
@@ -109,16 +112,18 @@ Ext.define('WeiQuPai.view.TopKiller', {
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/auctionPool/view&id=' + this.getPoolId();
         WeiQuPai.Util.get(url, function(rsp) {
             me.getStore().setData(rsp.auctions);
-            setTimeout(function() {
-                me.showProgress();
-            }, 200);
             me.down('#itemInfo').setData(rsp);
+            if (Ext.os.is.ios) {
+                setTimeout(function() {
+                    me.showProgress();
+                }, 600);
+            }
             Ext.isFunction(callback) && callback();
         });
     },
 
     showProgress: function() {
-        me = this;
+        var me = this;
         this.getStore().each(function(item, index, length) {
             var dataItem = me.getViewItems()[index];
             var el = Ext.get(dataItem).down('.progress-bar');

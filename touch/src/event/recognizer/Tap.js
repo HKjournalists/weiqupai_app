@@ -39,7 +39,6 @@ Ext.define('Ext.event.recognizer.Tap', {
 
     onTouchEnd: function(e) {
         var touch = e.changedTouches[0];
-
         this.fire('tap', e, [touch], {
             touch: touch
         });

@@ -85,7 +85,7 @@ Ext.define('WeiQuPai.view.ShowUserFeed', {
         return uid;
     },
 
-    loadData: function(uid) {
+    loadData: function(uid, callback) {
         this.setLoadingText(null);
         var store = this.getStore();
         store.getProxy().setExtraParam('uid', uid);
@@ -103,6 +103,7 @@ Ext.define('WeiQuPai.view.ShowUserFeed', {
             } else {
                 this.setIsFullyLoaded(false);
             }
+            Ext.isFunction(callback) && callback();
         }, this);
     },
 

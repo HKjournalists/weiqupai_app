@@ -70,7 +70,7 @@ Ext.define('WeiQuPai.controller.Pay', {
         var order = this.getPageView().getOrderData();
         var user = WeiQuPai.Cache.get('currentUser');
         var url = WeiQuPai.Config.apiUrl + "/?r=appv2/pay&id=" + order.id + '&coupon=' + order.coupon + '&payment=' + order.payment + '&token=' + user.token;
-        var win = window.open(url, '_blank', 'location=no,title=支付,closebuttoncaption=返回');
+        var win = window.open(url, '_blank', 'location=no,title=支付,closebuttoncaption=关闭');
         //停止时检查页面是否是支付完成状态
         var paySuccess = false;
         win.addEventListener('loadstop', function(e) {

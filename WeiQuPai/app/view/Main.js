@@ -77,7 +77,7 @@ Ext.define('WeiQuPai.view.Main', {
         ani.getInAnimation().on('animationstart', function() {
             me.isAnimating = true;
         });
-        ani.on('animationend', function() {
+        ani.getOutAnimation().on('animationend', function() {
             me.isAnimating = false;
         });
     }

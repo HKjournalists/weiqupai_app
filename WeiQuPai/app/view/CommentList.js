@@ -90,21 +90,23 @@ Ext.define('WeiQuPai.view.CommentList', {
     handleItemTap: function() {
         var me = this;
         if (Ext.os.is.android) {
-            this.element.dom.addEventListener('click', this.bindEvent);
+            this.element.dom.addEventListener('click', function(e) {
+                var row = Ext.fly(e.target).findParent('.list');
+                if (!row) return;
+                var id = row.getAttribute('data-id');
+                var index = me.getStore().indexOfId(id);
+                var record = me.getStore().getAt(index);
+                me.bindEvent(index, record, e);
+            });
         } else {
             this.on('itemtap', function(list, index, dataItem, record, e) {
-                this.bindEvent(e);
+                this.bindEvent(index, record, e);
             });
         }
     },
 
-    bindEvent: function(e) {
+    bindEvent: function(index, record, e) {
         var me = this;
-        var row = Ext.fly(e.target).findParent('.list');
-        if (!row) return;
-        var id = row.getAttribute('data-id');
-        var index = me.getStore().indexOfId(id);
-        var record = me.getStore().getAt(index);
         if (e.target.tagName.toLowerCase() == 'img') {
             me.fireEvent('avatartap', index, record);
             return false;

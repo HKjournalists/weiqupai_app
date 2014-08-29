@@ -161,7 +161,10 @@ Ext.define('WeiQuPai.view.ShowUser', {
         var me = this;
         var list = this.getList();
         var uid = list.getUid();
+        var loadedCount = 0;
         list.loadData(uid, function() {
+            loadedCount++;
+            if (loadedCount < 4) return;
             setTimeout(function() {
                 me.setState('loaded');
                 me.snapBack();
@@ -182,11 +185,11 @@ Ext.define('WeiQuPai.view.ShowUser', {
         var person = this.down('#personmodel');
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/user&uid=' + uid;
         var me = this;
+        me.down('showuserlike').loadData(uid, callback);
+        me.down('showuserdis').loadData(uid, callback);
+        me.down('showuserfeed').loadData(uid, callback);
         WeiQuPai.Util.get(url, function(rsp) {
             me.setData(rsp);
-            me.down('showuserlike').setUid(uid);
-            me.down('showuserdis').setUid(uid);
-            me.down('showuserfeed').setUid(uid);
             Ext.isFunction(callback) && callback();
         });
 

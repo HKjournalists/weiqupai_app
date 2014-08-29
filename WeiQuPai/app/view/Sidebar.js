@@ -121,13 +121,15 @@ Ext.define('WeiQuPai.view.Sidebar', {
 
     bindEvent: function() {
         var buttons = this.query('button');
+        var func = function(btn) {
+            if (btn == this.activeBtn) {
+                return this.toggle();
+            }
+            this.activeTabItem(btn.getId());
+        }
+        var me = this;
         for (var i = 0; i < buttons.length; i++) {
-            buttons[i].on('tap', function(btn) {
-                if (btn == this.activeBtn) {
-                    return this.toggle();
-                }
-                this.activeTabItem(btn.getId());
-            }, this);
+            buttons[i].on('tap', func, this);
         }
 
         //跳转到个人中心
@@ -175,6 +177,8 @@ Ext.define('WeiQuPai.view.Sidebar', {
                     sidebar.toggle();
                 });
             }
+            //这里fix红米的bug
+            mask.setZIndex(1000);
             activeView.setMasked(mask);
         }
     },
@@ -191,10 +195,10 @@ Ext.define('WeiQuPai.view.Sidebar', {
     activeTabItem: function(xtype) {
         //需要登录
         if (this.getNotLogin().indexOf(xtype) == -1 && !WeiQuPai.Util.isLogin()) {
+            this.close();
             WeiQuPai.loginReferer = xtype;
             var view = Ext.create('WeiQuPai.view.Login');
             WeiQuPai.navigator.push(view);
-            this.close();
             return;
         }
         var mainCard = WeiQuPai.mainCard;

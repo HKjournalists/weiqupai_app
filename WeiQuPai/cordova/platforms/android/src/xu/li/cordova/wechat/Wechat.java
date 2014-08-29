@@ -50,7 +50,7 @@ public class Wechat extends CordovaPlugin {
 	
 
 	protected IWXAPI wxAPI;
-	protected CallbackContext currentCallbackContext;
+	public CallbackContext currentCallbackContext;
 
 	@Override
 	public boolean execute(String action, JSONArray args,

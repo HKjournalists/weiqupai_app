@@ -45,6 +45,8 @@ Ext.define('WeiQuPai.view.ShareLayer', {
     },
 
     show: function() {
+        this.setZIndex(1000);
+        this.getModal().setZIndex(999);
         WeiQuPai.Util.slideUp.call(this);
     },
 
@@ -128,8 +130,11 @@ Ext.define('WeiQuPai.view.ShareLayer', {
             },
             scene: scene
         }
-        Wechat.share(data, function() {
-            Ext.isFunction(me.getShareCallback()) && me.getShareCallback().call(this);
+        Wechat.share(data, function(res) {
+            var callback = me.getShareCallback() || function() {
+                Ext.os.is.android && WeiQuPai.Util.toast('分享成功');
+            }
+            callback.call(this);
         }, function(reason) {
             //WeiQuPai.Util.toast("分享失败: " + reason);
         });

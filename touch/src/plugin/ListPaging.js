@@ -54,10 +54,10 @@ Ext.define('Ext.plugin.ListPaging', {
          */
         loadTpl: [
             '<div class="{cssPrefix}loading-spinner" style="font-size: 180%; margin: 10px auto;">',
-                 '<span class="{cssPrefix}loading-top"></span>',
-                 '<span class="{cssPrefix}loading-right"></span>',
-                 '<span class="{cssPrefix}loading-bottom"></span>',
-                 '<span class="{cssPrefix}loading-left"></span>',
+            '<span class="{cssPrefix}loading-top"></span>',
+            '<span class="{cssPrefix}loading-right"></span>',
+            '<span class="{cssPrefix}loading-bottom"></span>',
+            '<span class="{cssPrefix}loading-left"></span>',
             '</div>',
             '<div class="{cssPrefix}list-paging-msg">{message}</div>'
         ].join(''),
@@ -111,7 +111,7 @@ Ext.define('Ext.plugin.ListPaging', {
      */
     init: function(list) {
         var scroller = list.getScrollable().getScroller(),
-            store    = list.getStore();
+            store = list.getStore();
 
         this.setList(list);
         this.setScroller(scroller);
@@ -162,13 +162,13 @@ Ext.define('Ext.plugin.ListPaging', {
      */
     disableDataViewMask: function() {
         var list = this.getList();
-            this._listMask = list.getLoadingText();
+        this._listMask = list.getLoadingText();
 
         list.setLoadingText(null);
     },
 
     enableDataViewMask: function() {
-        if(this._listMask) {
+        if (this._listMask) {
             var list = this.getList();
             list.setLoadingText(this._listMask);
             delete this._listMask;
@@ -250,9 +250,9 @@ Ext.define('Ext.plugin.ListPaging', {
      * @private
      */
     onStoreLoad: function(store) {
-        var loadCmp  = this.getLoadMoreCmp(),
+        var loadCmp = this.getLoadMoreCmp(),
             template = this.getLoadTpl(),
-            message  = this.storeFullyLoaded() ? this.getNoMoreRecordsText() : this.getLoadMoreText();
+            message = this.storeFullyLoaded() ? this.getNoMoreRecordsText() : this.getLoadMoreText();
 
         if (store.getCount()) {
             loadCmp.show();
@@ -276,7 +276,7 @@ Ext.define('Ext.plugin.ListPaging', {
     onFilter: function(store) {
         if (store.getCount() === 0) {
             this.getLoadMoreCmp().hide();
-        }else {
+        } else {
             this.getLoadMoreCmp().show();
         }
     },
@@ -288,7 +288,7 @@ Ext.define('Ext.plugin.ListPaging', {
      */
     addLoadMoreCmp: function() {
         var list = this.getList(),
-            cmp  = this.getLoadMoreCmp();
+            cmp = this.getLoadMoreCmp();
 
         if (!this.getLoadMoreCmpAdded()) {
             list.add(cmp);
@@ -326,7 +326,9 @@ Ext.define('Ext.plugin.ListPaging', {
         if (!me.storeFullyLoaded()) {
             me.disableDataViewMask();
             me.setLoading(true);
-            me.getList().getStore().nextPage({ addRecords: true });
+            me.getList().getStore().nextPage({
+                addRecords: true
+            });
         }
     }
 });

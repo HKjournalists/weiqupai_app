@@ -45,8 +45,7 @@ Ext.define('WeiQuPai.view.Discount', {
 
     initialize: function() {
         this.callParent(arguments);
-        //this.msgbox = WeiQuPai.Util.msgbox('您还没有拍到任何宝贝');
-        this.msgbox = WeiQuPai.Util.msgbox('');
+        this.msgbox = WeiQuPai.Util.msgbox();
         this.add(this.msgbox);
         this.loadData();
         this.on('itemtap', this.bindEvent, this);
@@ -56,7 +55,7 @@ Ext.define('WeiQuPai.view.Discount', {
         this.setLoadingText(null);
         var store = this.getStore();
         var user = WeiQuPai.Cache.get('currentUser');
-        store.getProxy().setExtraParam('token', user.token);
+        store.getProxy().setExtraParam('token', user && user.token || '');
         //加载数据
         store.loadPage(1, function(records, operation, success) {
             if (!success) {

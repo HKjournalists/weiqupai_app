@@ -135,22 +135,9 @@ Ext.define('WeiQuPai.view.Circle', {
     },
 
     handleItemTap: function() {
-        if (Ext.os.is.ios) {
-            this.on('itemtap', function(list, index, dataItem, record, e) {
-                this.bindEvent(index, record, e);
-            });
-        } else {
-            var me = this;
-            this.element.dom.addEventListener('click', function(e) {
-                var row = Ext.fly(e.target).up('.circle-row');
-                if (!row) return;
-                var id = row.getAttribute('data-id');
-                var index = me.getStore().indexOfId(id);
-                var record = me.getStore().getAt(index);
-                me.bindEvent(index, record, e);
-            });
-        }
-
+        this.on('itemtap', function(list, index, dataItem, record, e) {
+            this.bindEvent(index, record, e);
+        });
         //按钮的状态事件
         this.onBefore('itemtouchstart', function(list, index, dataItem, record, e) {
             if (/(help|auction|kill)_btn/.test(e.target.className)) {

@@ -5,14 +5,12 @@ Ext.define('WeiQuPai.view.Today', {
         'WeiQuPai.view.Discount', 'WeiQuPai.view.KillEnd', 'WeiQuPai.view.AuctionTip', 'WeiQuPai.view.Category'
     ],
     config: {
-        scrollable: 'vertical',
         loadingText: null,
         store: 'Auction',
         cls: 'bg_ef',
         id: 'dataviewlist',
         disableSelection: true,
         scrollToTopOnRefresh: false,
-        height: 'auto',
         plugins: [{
             type: 'wpullrefresh',
             lastUpdatedText: '上次刷新：',
@@ -95,17 +93,7 @@ Ext.define('WeiQuPai.view.Today', {
             scrollDock: 'top',
         }, {
             xtype: 'container',
-            style: 'width:320px;margin:auto;background:#fff',
-            items: [{
-                xtype: 'button',
-                baseCls: 'hot',
-                action: 'hot'
-            }]
-
-        }, {
-            xtype: 'container',
             style: 'background:#fff',
-            scrollDock: 'top',
             layout: 'hbox',
             items: [{
                 xtype: 'button',
@@ -123,7 +111,6 @@ Ext.define('WeiQuPai.view.Today', {
         }, {
             xtype: 'container',
             style: 'background:#fff',
-            scrollDock: 'top',
             layout: 'hbox',
             items: [{
 
@@ -143,7 +130,6 @@ Ext.define('WeiQuPai.view.Today', {
         }, {
             xtype: 'container',
             itemId: 'specialList',
-            scrollDock: 'top',
             layout: {
                 type: 'hbox'
             },
@@ -160,7 +146,6 @@ Ext.define('WeiQuPai.view.Today', {
         }, {
             xtype: 'container',
             html: '今日精选',
-            scrollDock: 'top',
             cls: 'todayTitle'
         }]
     },
@@ -175,7 +160,15 @@ Ext.define('WeiQuPai.view.Today', {
         //添加到顶部的功能按钮
         WeiQuPai.Util.addTopIcon(this);
 
-        this.loadData();
+        this.loadData(function() {
+            if (Ext.os.is.android) {
+                setTimeout(function() {
+                    var scroller = me.getScrollable().getScroller();
+                    scroller.refresh();
+                }, 200);
+            }
+        });
+
         this.on('activate', this.onActivate, this);
         this.on('hide', this.onHide, this);
         this.on('itemtap', this.bindEvent, this);
@@ -189,7 +182,6 @@ Ext.define('WeiQuPai.view.Today', {
             element: 'element',
             delegate: '.list-product'
         });
-
     },
     bindEvent: function(list, index, dataItem, record, e) {
         var me = this;

@@ -326,7 +326,6 @@ Ext.define('WeiQuPai.plugin.PullRefresh', {
      * Called when PullRefresh has been snapped back to the top
      */
     onSnapBackEnd: function() {
-        console.log('end');
         this.setState("pull");
         this.setIsSnappingBack(false);
     },

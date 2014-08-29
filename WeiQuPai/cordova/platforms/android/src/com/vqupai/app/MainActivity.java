@@ -19,22 +19,44 @@
 
 package com.vqupai.app;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.telephony.TelephonyManager;
 import com.baidu.android.pushservice.PushConstants;
 import com.baidu.android.pushservice.PushManager;
 import org.apache.cordova.*;
+import org.json.JSONObject;
 
 public class MainActivity extends CordovaActivity 
 {
+    public static MainActivity instance;
+
+    //获取插件的实例
+    public CordovaPlugin getPlugin(String plugin){
+        return this.appView.pluginManager.getPlugin(plugin);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
+        //保存mainActivity的实例
+        instance = this;
+
         super.onCreate(savedInstanceState);
         super.init();
         // 以apikey的方式登录，一般放在主Activity的onCreate中
         PushManager.startWork(getApplicationContext(),
                 PushConstants.LOGIN_TYPE_API_KEY,
                 Utils.getMetaValue(MainActivity.this, "api_key"));
+
+        //保存device_token
+        String sn = ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).getDeviceId();
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("device_token", sn);
+        editor.commit();
 
         // Set by <content src="index.html" /> in config.xml
         super.loadUrl(Config.getStartUrl());

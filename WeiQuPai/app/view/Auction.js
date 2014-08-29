@@ -408,6 +408,7 @@ Ext.define('WeiQuPai.view.Auction', {
         chart.setParentCmp(this);
         chart.show();
 
+        WeiQuPai.Util.saveLastView.call(chart);
         WeiQuPai.app.statReport({
             act: 'showchart'
         });
