@@ -29,7 +29,7 @@ Ext.define('WeiQuPai.controller.Discount', {
         var layer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer');
         layer.down('button[action=weibo]').setDisabled(false);
         var shareData = {
-            title: data.title,
+            title: data.share_text || data.title,
             thumb: WeiQuPai.Util.getImagePath(data.pic_url),
             url: 'http://www.vqupai.com/mm/?r=discount/show&id=' + data.id
         }

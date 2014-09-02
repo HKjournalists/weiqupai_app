@@ -42,7 +42,7 @@ Ext.define('WeiQuPai.controller.UserAuction', {
     showShareLayer: function() {
         var data = this.getPageView().getAuctionData();
         var shareData = {
-            title: data.item.title,
+            title: data.share_text,
             thumb: WeiQuPai.Util.getImagePath(data.item.pic_cover, 200),
             url: 'http://www.vqupai.com/mm/index.php?r=userAuction&id=' + data.id
         }

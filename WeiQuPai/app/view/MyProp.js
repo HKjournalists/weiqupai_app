@@ -70,6 +70,16 @@ Ext.define('WeiQuPai.view.MyProp', {
 
         this.loadData();
         this.down('button[action=exchangeProp]').on('tap', this.goExchange, this);
+        this.on('activate', this.onActivate, this);
+    },
+
+    onActivate: function() {
+        //有新消息才刷新
+        var msgType = WeiQuPai.Notify.MSG_NEW_PROP;
+        if (WeiQuPai.Notify.hasNotify(msgType)) {
+            this.loadData();
+            WeiQuPai.Notify.clearNotify(msgType);
+        }
     },
 
     goExchange: function() {
@@ -94,6 +104,9 @@ Ext.define('WeiQuPai.view.MyProp', {
         var user = WeiQuPai.Cache.get('currentUser');
         this.down('dataview').setLoadingText(null);
         var store = this.down('dataview').getStore();
+        if (store.isLoading()) {
+            return false;
+        }
         store.getProxy().setExtraParam('token', user.token);
         store.load(function(records, operation, success) {
             if (!success) {
