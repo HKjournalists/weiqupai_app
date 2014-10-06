@@ -314,10 +314,9 @@ Ext.define("WeiQuPai.Util", {
         if (!window.BPush) return;
         var user = WeiQuPai.Cache.get('currentUser');
         BPush.bindChannel(function(data) {
-            if (!data.userId) return;
             WeiQuPai.Cache.set('device', data.deviceToken);
             //绑定成功，但用户未登录，不需要回传
-            if (!user) return;
+            if (!data.userId || !user) return;
             data.os = Ext.os.name.toLowerCase();
             var url = WeiQuPai.Config.apiUrl + '/?r=appv2/bindPush/&token=' + user.token;
             WeiQuPai.Util.post(url, data, function(rsp) {
