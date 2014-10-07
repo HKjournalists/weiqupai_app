@@ -87,7 +87,7 @@ Ext.define('WeiQuPai.view.Item', {
                 '<div class="clear"></div>',
                 '</div>',
                 '<div class="price clear">',
-                '<span>原价￥{oprice}</span> 已售出:{item_stat.sold_num}',
+                '<span>原价￥{oprice}</span>',
                 '</div></div>'
             )
         }, {

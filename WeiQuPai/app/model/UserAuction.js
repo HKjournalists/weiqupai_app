@@ -4,7 +4,7 @@ Ext.define("WeiQuPai.model.UserAuction", {
     config: {
         fields: ['id', 'pool_id', 'uid', 'item_id', 'start_price', 'curr_price', 'reserve_price',
             'status', 'status_text', 'start_time', 'left_time', 'help_num', 'left_time_text', 'item', 'user',
-            'progress', 'share_text'
+            'progress', 'share_text', 'last_help_time', 'tip_msg'
         ],
         proxy: {
             type: 'ajax',

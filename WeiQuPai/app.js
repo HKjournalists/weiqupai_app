@@ -16,14 +16,15 @@ Ext.application({
         'Ext.MessageBox', 'WeiQuPai.Config', 'WeiQuPai.Util', 'WeiQuPai.Notify', 'WeiQuPai.Cache',
         'WeiQuPai.plugin.ListPaging', 'WeiQuPai.plugin.PullRefresh', 'WeiQuPai.plugin.LoadMask',
         'WeiQuPai.plugin.Toast', 'Ext.Anim', 'Ext.device.Camera', 'Ext.field.Select',
-        'Ext.form.FieldSet', 'Ext.Img', 'Ext.ux.ImageViewer', 'Ext.field.Hidden'
+        'Ext.form.FieldSet', 'Ext.Img', 'Ext.ux.ImageViewer', 'Ext.field.Hidden', 'WeiQuPai.FollowTip'
     ],
 
     controllers: [
         'Auction', 'CameraLayer', 'Circle', 'Comment', 'CommentList', 'Feed', 'Login', 'MyAuction',
         'MyConsignee', 'MyFen', 'MyFollow', 'MyMessage', 'MyOrder', 'MyOrderDetail', 'Order', 'Pay',
         'PrivateMessage', 'Profile', 'Register', 'Routes', 'Setting', 'ShowOrder', 'ShowUser', 'ShowUserDis', 'ShowUserFeed', 'ShowUserLike',
-        'Today', 'Discount', 'KillEnd', 'TopKiller', 'UserAuction', 'UserAuctionComment', 'MyDiscount', 'FeedBack'
+        'Today', 'Discount', 'KillEnd', 'TopKiller', 'UserAuction', 'UserAuctionComment', 'MyDiscount', 'FeedBack',
+        'KillDetail'
     ],
     models: [
         'Auction', 'Comment', 'Consignee', 'Feed', 'Item', 'Order', 'Profile', 'Shipment',
@@ -34,7 +35,8 @@ Ext.application({
         'Main', 'MainCard', 'StartupScreen', 'SplashScreen', 'WebPage', 'VTitleBar', 'Login', 'Register',
         'Iframe', 'SimpleViewer', 'ImageViewer', 'Sidebar', 'DisclosureItem', 'Pay', 'Order', 'Item', 'Auction', 'Item',
         'UserAuction', 'InputComment', 'CircleReplyLayer', 'CameraLayer', 'AuctionTip', 'MainTip', 'NoticeTip',
-        'AuctionTipTwo', 'PriceForm', 'DeleteButtonLayer', 'ConfirmLayer'
+        'AuctionTipTwo', 'PriceForm', 'DeleteButtonLayer', 'ConfirmLayer','UserAuctionItem', 'FollowTip',
+        'AuctionHelpLayer', 'ScoreNotEnough', 'ConfirmDialog', 'ScoreRule'
     ],
     stores: [
         'Auction', 'Comment', 'Banner', 'MyOrder', 'MyConsignee', 'Circle', 'MyProp', 'MyCoupon',
@@ -62,11 +64,7 @@ Ext.application({
     },
 
     startupScreen: [
-        'resources/images/splash1.png',
-        'resources/images/splash2.png',
-        'resources/images/splash3.png',
-        'resources/images/splash4.png',
-        'resources/images/splash5.png'
+        'resources/images/splash1.png'
     ],
 
     //是否第一次加载
@@ -80,7 +78,7 @@ Ext.application({
         //重置message的提醒
         this.resetMessageText();
 
-        //this.catchError();
+        this.catchError();
 
         this.hideSplash();
 

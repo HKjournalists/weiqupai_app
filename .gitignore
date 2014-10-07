@@ -5,3 +5,7 @@ WeiQuPai/cordova/platforms/android/ant-build/
 WeiQuPai/cordova/platforms/android/ant-gen/
 WeiQuPai/cordova/platforms/android/gen/
 WeiQuPai/cordova/platforms/android/out/
+WeiQuPai/cordova/platforms/ios/www/
+WeiQuPai/cordova/platforms/android/assets/www/
+WeiQuPai/cordova/www/
+

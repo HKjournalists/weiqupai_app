@@ -47,7 +47,8 @@ Ext.Loader.addClassPathMappings({
   "Ext.device.sqlite.SQLTransaction": "../touch/src/device/sqlite/Sencha.js",
   "Ext.draw.engine.SvgContext.Gradient": "../touch/src/draw/engine/SvgContext.js",
   "WeiQuPai": "app",
-  "WeiQuPai.view.DiscountDetail": "app/view/DIscountDetail.js"
+  "WeiQuPai.view.DiscountDetail": "app/view/DIscountDetail.js",
+  "vqp": "app"
 });
 Ext.ClassManager.addNameAlternateMappings({
   "Ext.AbstractComponent": [],
@@ -780,6 +781,7 @@ Ext.ClassManager.addNameAlternateMappings({
   ],
   "WeiQuPai.Cache": [],
   "WeiQuPai.Config": [],
+  "WeiQuPai.FollowTip": [],
   "WeiQuPai.Notify": [],
   "WeiQuPai.Util": [],
   "WeiQuPai.controller.Auction": [],
@@ -790,6 +792,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.controller.Discount": [],
   "WeiQuPai.controller.Feed": [],
   "WeiQuPai.controller.FeedBack": [],
+  "WeiQuPai.controller.KillDetail": [],
   "WeiQuPai.controller.KillEnd": [],
   "WeiQuPai.controller.Login": [],
   "WeiQuPai.controller.MyAuction": [],
@@ -872,6 +875,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.AppUpdate": [],
   "WeiQuPai.view.Auction": [],
   "WeiQuPai.view.AuctionChart": [],
+  "WeiQuPai.view.AuctionHelpLayer": [],
   "WeiQuPai.view.AuctionTip": [],
   "WeiQuPai.view.AuctionTipTwo": [],
   "WeiQuPai.view.Banner": [],
@@ -886,6 +890,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.CircleReplyLayer": [],
   "WeiQuPai.view.Comment": [],
   "WeiQuPai.view.CommentList": [],
+  "WeiQuPai.view.ConfirmDialog": [],
   "WeiQuPai.view.ConfirmLayer": [],
   "WeiQuPai.view.ConsigneePopLayer": [],
   "WeiQuPai.view.DeleteButtonLayer": [],
@@ -901,6 +906,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.Feed": [],
   "WeiQuPai.view.FeedBack": [],
   "WeiQuPai.view.FieldForm": [],
+  "WeiQuPai.view.FollowTip": [],
   "WeiQuPai.view.GenderList": [],
   "WeiQuPai.view.Iframe": [],
   "WeiQuPai.view.ImageViewer": [],
@@ -908,6 +914,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.Item": [],
   "WeiQuPai.view.ItemDesc": [],
   "WeiQuPai.view.ItemParam": [],
+  "WeiQuPai.view.KillDetail": [],
   "WeiQuPai.view.KillEnd": [],
   "WeiQuPai.view.KillHelp": [],
   "WeiQuPai.view.KillTip": [],
@@ -939,6 +946,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.Profile": [],
   "WeiQuPai.view.Register": [],
   "WeiQuPai.view.ReturnAnnounce": [],
+  "WeiQuPai.view.ScoreNotEnough": [],
   "WeiQuPai.view.Setting": [],
   "WeiQuPai.view.ShareLayer": [],
   "WeiQuPai.view.Shipment": [],
@@ -957,8 +965,10 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.TopKiller": [],
   "WeiQuPai.view.UserAuction": [],
   "WeiQuPai.view.UserAuctionComment": [],
+  "WeiQuPai.view.UserAuctionItem": [],
   "WeiQuPai.view.VTitleBar": [],
-  "WeiQuPai.view.WebPage": []
+  "WeiQuPai.view.WebPage": [],
+  "vqp.view.Situation": []
 });
 Ext.ClassManager.addNameAliasMappings({
   "Ext.AbstractComponent": [],
@@ -1911,6 +1921,7 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.viewport.WindowsPhone": [],
   "WeiQuPai.Cache": [],
   "WeiQuPai.Config": [],
+  "WeiQuPai.FollowTip": [],
   "WeiQuPai.Notify": [],
   "WeiQuPai.Util": [],
   "WeiQuPai.controller.Auction": [],
@@ -1921,6 +1932,7 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.controller.Discount": [],
   "WeiQuPai.controller.Feed": [],
   "WeiQuPai.controller.FeedBack": [],
+  "WeiQuPai.controller.KillDetail": [],
   "WeiQuPai.controller.KillEnd": [],
   "WeiQuPai.controller.Login": [],
   "WeiQuPai.controller.MyAuction": [],
@@ -1988,9 +2000,7 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.store.Coupon": [],
   "WeiQuPai.store.Discount": [],
   "WeiQuPai.store.FeedReply": [],
-  "WeiQuPai.store.KillEnd": [
-    "widget.KillEnd"
-  ],
+  "WeiQuPai.store.KillEnd": [],
   "WeiQuPai.store.MyAuction": [],
   "WeiQuPai.store.MyConsignee": [],
   "WeiQuPai.store.MyCoupon": [],
@@ -2024,6 +2034,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.AuctionChart": [
     "widget.auctionchart"
+  ],
+  "WeiQuPai.view.AuctionHelpLayer": [
+    "widget.auctionhelplayer"
   ],
   "WeiQuPai.view.AuctionTip": [
     "widget.auctiontip"
@@ -2066,6 +2079,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.CommentList": [
     "widget.commentlist"
+  ],
+  "WeiQuPai.view.ConfirmDialog": [
+    "widget.dialog"
   ],
   "WeiQuPai.view.ConfirmLayer": [
     "widget.deletebuttonlayer"
@@ -2112,6 +2128,9 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.FieldForm": [
     "widget.fieldform"
   ],
+  "WeiQuPai.view.FollowTip": [
+    "widget.followtip"
+  ],
   "WeiQuPai.view.GenderList": [
     "widget.genderlist"
   ],
@@ -2132,6 +2151,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.ItemParam": [
     "widget.itemparam"
+  ],
+  "WeiQuPai.view.KillDetail": [
+    "widget.killdetail"
   ],
   "WeiQuPai.view.KillEnd": [
     "widget.killend"
@@ -2226,6 +2248,9 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.ReturnAnnounce": [
     "widget.returnannounce"
   ],
+  "WeiQuPai.view.ScoreNotEnough": [
+    "widget.scorenotenough"
+  ],
   "WeiQuPai.view.Setting": [
     "widget.setting"
   ],
@@ -2280,11 +2305,17 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.UserAuctionComment": [
     "widget.userauctioncomment"
   ],
+  "WeiQuPai.view.UserAuctionItem": [
+    "widget.userauctionitem"
+  ],
   "WeiQuPai.view.VTitleBar": [
     "widget.vtitlebar"
   ],
   "WeiQuPai.view.WebPage": [
     "widget.webpage"
+  ],
+  "vqp.view.Situation": [
+    "widget.Situation"
   ]
 });
 

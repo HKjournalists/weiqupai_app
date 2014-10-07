@@ -42,7 +42,7 @@ Ext.define('WeiQuPai.view.WebPage', {
         };
         var href = iframe.src || this.getHref();
         var user = WeiQuPai.Cache.get('currentUser');
-        if (user) href += (href.indexOf("?") == -1 ? '?' : '&') + 'token=' + user.token;
+        if (user && href.indexOf('token') == -1) href += (href.indexOf("?") == -1 ? '?' : '&') + 'token=' + user.token;
         iframe.src = href;
     },
 

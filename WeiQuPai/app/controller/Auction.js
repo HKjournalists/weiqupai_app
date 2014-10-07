@@ -9,7 +9,8 @@ Ext.define('WeiQuPai.controller.Auction', {
             paiBtn: '#auctionBottombar button[action=pai]',
             commentForm: 'inputcomment[itemId=postComment]',
             auctionView: 'auction',
-            itemView: 'item'
+            itemView: 'item',
+            userAuctionItemView: 'userauctionitem'
         },
         control: {
             shopInfo: {
@@ -47,6 +48,12 @@ Ext.define('WeiQuPai.controller.Auction', {
                 cancelitemdislike: 'doCancelItemDislike',
                 expectprice: 'doSetExpectPrice',
                 noticetap: 'doNotice'
+            },
+            userAuctionItemView: {
+                itemlike: 'doItemLike',
+                itemdislike: 'doItemDislike',
+                cancelitemlike: 'doCancelItemLike',
+                cancelitemdislike: 'doCancelItemDislike'
             }
         }
     },
@@ -84,11 +91,11 @@ Ext.define('WeiQuPai.controller.Auction', {
     },
 
     //普通拍卖到订单页
-    showOrderView: function() {
+    showOrderView: function(auctionId) {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
         var currentView = WeiQuPai.navigator.getActiveItem();
-        var auctionId = currentView.getRecord().get('auction').id;
+        var auctionId = Ext.isObject(auctionId) ? currentView.getRecord().get('auction').id : auctionId;
         if (WeiQuPai.Util.hasAuction(auctionId)) {
             WeiQuPai.Util.toast('您已经购买过该商品，请到[我的订单]里查看吧');
             return;

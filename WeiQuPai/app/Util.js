@@ -431,12 +431,12 @@ Ext.define("WeiQuPai.Util", {
             var view, item = Ext.create('WeiQuPai.model.Item', rsp);
             if (item.get('auction')) {
                 view = Ext.create('WeiQuPai.view.Auction');
-                view.setRecord(item);
-            } else {
+            } else if (fromUserAuction) {
+                view = Ext.create('WeiQuPai.view.UserAuctionItem');
+            } else{
                 view = Ext.create('WeiQuPai.view.Item');
-                view.setRecord(item);
-                fromUserAuction && view.element.down('.noticetip').hide();
             }
+            view.setRecord(item);
             setTimeout(function() {
                 WeiQuPai.navigator.push(view);
             }, 0);

@@ -9,8 +9,7 @@ Ext.define('WeiQuPai.view.StartupScreen', {
         hideAnimation: 'fadeOut',
         direction: 'vertical',
         indicator: false,
-        style: 'background:#fffffa;z-index:1',
-        html: "<div class='startupbtn'></div>"
+        style: 'background:#fffffa;z-index:1'
     },
 
     applyPicData: function(data) {
@@ -39,8 +38,7 @@ Ext.define('WeiQuPai.view.StartupScreen', {
         //最后一张图点击消失
         if (this.getActiveIndex() == this.getMaxItemIndex()) {
             Ext.Viewport.setActiveItem('main');
-            var maintip = WeiQuPai.Util.getGlobalView('WeiQuPai.view.MainTip');
-            maintip.show();
+            WeiQuPai.FollowTip.showIndex();        
             //this.hide();
         }
     }

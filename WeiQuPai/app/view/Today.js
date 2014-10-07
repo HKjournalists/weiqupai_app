@@ -183,6 +183,7 @@ Ext.define('WeiQuPai.view.Today', {
             delegate: '.list-product'
         });
     },
+
     bindEvent: function(list, index, dataItem, record, e) {
         var me = this;
         if (e.target.className == 'hallow_heart') {
@@ -199,10 +200,14 @@ Ext.define('WeiQuPai.view.Today', {
 
     loadData: function(callback) {
         var user = WeiQuPai.Cache.get('currentUser');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/today';
-        if (user) {
-            url += '&token=' + user.token;
-        }
+        var query = {};
+        query['r'] = 'appv2/today';
+        query['market'] = WeiQuPai.Config.market;
+        query['os'] = Ext.os.name.toLowerCase();
+        query['osver'] = Ext.os.version.version;
+        if(user) query['token'] = user.token;
+        
+        var url = WeiQuPai.Config.apiUrl + '/?' + Ext.Object.toQueryString(query);
         var me = this;
         WeiQuPai.Util.get(url, function(data) {
             me.getStore().setData(data.auctions);

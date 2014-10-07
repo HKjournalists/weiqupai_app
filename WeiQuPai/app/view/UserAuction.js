@@ -43,48 +43,55 @@ Ext.define('WeiQuPai.view.UserAuction', {
                 baseCls: 'arrow_left',
                 action: 'back'
             }]
-        }, {
+        },{
             xtype: 'container',
             itemId: 'auctionInfo',
             tpl: new Ext.XTemplate(
-                '<div class="product">',
-                '<div class="top">',
-                '<img src="{[this.getCover(values.item.pic_cover)]}" class="left"/>',
-                '<div class="right">{item.title}</div>',
-                '<div class="clear"></div>',
-                '</div>',
-                '<div class="bottom">市场价：{item.oprice}&nbsp;&nbsp;&nbsp;&nbsp;开杀价：{start_price}&nbsp;&nbsp;&nbsp;&nbsp;杀底价：{reserve_price}</div>',
-                '</div>',
-                '<div class="time"><ul>',
-                '<li>当前时间<br><span id="timer">{[this.getTime()]}</span></li>',
-                '<li>{[this.getLeftTime(values)]}</li>',
-                '<li>当前战果<br><span>{curr_price}</span>{[this.isReservePrice(values)]}</li>',
-                '<div class="clear"></div></ul></div>',
-                '<div class="prop"></div>', {
+                '<div class="bar_new">',
+                '<img src="{[this.getCover(values.item.pic_cover)]}" width="100"/>',
+                '<div class="text"><ul>',
+                  '<li class="text">{item.title}</li>',
+                  '<li>{[this.getLeftTime(values)]}</li>',
+                  '<li class="red"><span class="floatleft">当前价格：{curr_price}</span>',
+                     '<span class="floatright">底价：{reserve_price}</span><br></li>',
+                  '<tpl if="this.isSelf(values)">',
+                  '<li><span class="floatleft"><input type="button" class="status orderBtn" value="立刻下单" /></span>',
+                  '<span class="floatleft"><input type="button" class="daoju" value="使用道具" /></span></li>',
+                  '</tpl>',
+                '</ul></div>',
+                '</div>', {
+                    isSelf: function(values){
+                        var user = WeiQuPai.Cache.get('currentUser');
+                        return user && user.id == values.uid;
+                    },
                     getCover: function(pic_cover) {
                         return WeiQuPai.Util.getImagePath(pic_cover, 200);
                     },
-                    getTime: function() {
-                        return Ext.Date.format(new Date, 'Y-m-d H:i:s');
-                    },
                     getLeftTime: function(values) {
                         if (values.left_time) {
-                            return '剩余时间<br><span>' + values.left_time + '</span>';
+                            return '剩余时间：' + values.left_time;
                         }
                         var text = ['', '进行中', '等待购买', '已成交', '已结束'];
                         return text[values.status];
-                    },
-                    isReservePrice: function(values) {
-                        if (values.curr_price == values.reserve_price) {
-                            return '<br/>已到底价';
-                        }
-                        return '';
                     }
                 }
             )
+        },{
+            xtype: 'container',
+            cls: 'w-tip',
+            itemId: 'tip',
+            hidden: true,
+            hideAnimation: {
+                type: 'fadeOut'
+            }
+        },{
+            xtype: 'disclosureitem',
+            title: '查看商品图文详情',
+            itemId: 'showItemBtn',
         }, {
-            xtype: 'bottombar',
-            itemId: 'userbottombar'
+            xtype: 'container',
+            html: '<div class="share_container"><div class="bar_dest">分享链接获得更多战友</div><div class="share_btn"></div></div>',
+            itemId: 'shareContainer'
         }],
 
         auctionId: null,
@@ -94,9 +101,13 @@ Ext.define('WeiQuPai.view.UserAuction', {
     initialize: function() {
         this.callParent(arguments);
 
-        this.down('#auctionInfo').on('tap', this.bindAuctionEvent, this, {
+        this.on('tap', this.bindContainerEvent, this, {
             element: 'element'
         });
+
+        this.down('#showItemBtn').on('tap', function(){
+            this.fireEvent('showitem', this);
+        }, this);
 
         this.on('itemtap', this.bindEvent, this);
 
@@ -116,14 +127,6 @@ Ext.define('WeiQuPai.view.UserAuction', {
         this.loadData();
     },
 
-    updateAuctionData: function(data) {
-        var user = WeiQuPai.Cache.get('currentUser');
-        if (!user || data.uid != user.id) {
-            this.down('bottombar').addCls('bottombarD');
-            this.down('button[action=pai]').setDisabled(true);
-        }
-    },
-
     //下拉刷新, 这里的this是pullRefresh对象
     fetchLastest: function() {
         var me = this;
@@ -133,6 +136,13 @@ Ext.define('WeiQuPai.view.UserAuction', {
                 me.snapBack();
             }, 100);
         });
+    },
+
+    hideTip: function() {
+        var me = this;
+        setTimeout(function() {
+            me && me.down('#tip') && me.down('#tip').hide();
+        }, 30000);
     },
 
     loadData: function(callback) {
@@ -146,6 +156,14 @@ Ext.define('WeiQuPai.view.UserAuction', {
         WeiQuPai.Util.get(url, function(rsp) {
             me.setAuctionData(rsp);
             me.down('#auctionInfo').setData(rsp);
+            //有提示信息则显示
+            if(rsp.tip_msg){
+                setTimeout(function(){
+                    me.down('#tip').setHtml(rsp.tip_msg);
+                    me.down('#tip').show('pop');
+                    me.hideTip();
+                }, 500);
+            }
             me.getStore().getProxy().setExtraParam('id', id);
             me.getStore().setData(rsp.helpers);
             me.getStore().currentPage = 1;
@@ -167,13 +185,17 @@ Ext.define('WeiQuPai.view.UserAuction', {
         });
     },
 
-    bindAuctionEvent: function(e) {
-        if (Ext.get(e.target).findParent('.product')) {
-            this.fireEvent('itemdetail');
+    bindContainerEvent: function(e) {
+        if (Ext.get(e.target).findParent('.daoju')) {
+            this.fireEvent('proptap');
             return false;
         }
-        if (Ext.get(e.target).findParent('.prop')) {
-            this.fireEvent('proptap');
+        if (Ext.get(e.target).findParent('.orderBtn')) {
+            this.fireEvent('ordertap');
+            return false;
+        }
+        if (Ext.get(e.target).findParent('.share_btn')) {
+            this.fireEvent('sharetap');
             return false;
         }
     },

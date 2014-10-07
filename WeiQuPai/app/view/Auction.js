@@ -88,7 +88,7 @@ Ext.define('WeiQuPai.view.Auction', {
                 '<div class="clear"></div>',
                 '</div>',
                 '<div class="price clear">',
-                '<span>原价￥{oprice}</span> 已售出:{item_stat.sold_num}',
+                '<span>原价￥{oprice}</span>',
                 '</div></div>', {
                     formatCountdown: function(auction) {
                         if (auction.status == WeiQuPai.Config.auctionStatus.STATUS_NOT_START) {
@@ -179,6 +179,7 @@ Ext.define('WeiQuPai.view.Auction', {
         setTimeout(function() {
             var view = WeiQuPai.Util.getGlobalView('WeiQuPai.view.AuctionTip');
             view.show();
+            console.log(view.getHidden());
         }, 500);
     },
 

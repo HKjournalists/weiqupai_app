@@ -10,29 +10,29 @@
 	<string>微趣拍</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>2D451A9D-553F-49F4-ADAA-70FB4EEB74D3</key>
+		<key>6BD92514418ECF31601BCF4232161B9B807DD61B</key>
 		<string>https://github.com/icesyc/weiqupai_app.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>WeiQuPai/cordova/platforms/ios/微趣拍.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>2D451A9D-553F-49F4-ADAA-70FB4EEB74D3</key>
+		<key>6BD92514418ECF31601BCF4232161B9B807DD61B</key>
 		<string>../../../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/icesyc/weiqupai_app.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>2D451A9D-553F-49F4-ADAA-70FB4EEB74D3</string>
+	<string>6BD92514418ECF31601BCF4232161B9B807DD61B</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>2D451A9D-553F-49F4-ADAA-70FB4EEB74D3</string>
+			<string>6BD92514418ECF31601BCF4232161B9B807DD61B</string>
 			<key>IDESourceControlWCCName</key>
 			<string>weiqupai_app</string>
 		</dict>

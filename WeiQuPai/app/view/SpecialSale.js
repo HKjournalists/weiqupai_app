@@ -95,8 +95,16 @@ Ext.define('WeiQuPai.view.SpecialSale', {
     },
 
     loadData: function(id, callback) {
+        var user = WeiQuPai.Cache.get('currentUser');
+        var query = {};
+        query['id'] = id;
+        query['market'] = WeiQuPai.Config.market;
+        query['os'] = Ext.os.name.toLowerCase();
+        query['osver'] = Ext.os.version.version;
+        if(user) query['token'] = user.token;
+        
         this.setLoadingText(null);
-        this.getStore().getProxy().setExtraParam('id', id);
+        this.getStore().getProxy().setExtraParams(query);
         this.getStore().load(function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');

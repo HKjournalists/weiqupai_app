@@ -1,7 +1,10 @@
 Ext.define('WeiQuPai.view.KillEnd', {
     extend: 'Ext.DataView',
     xtype: 'killend',
-    requires: ['WeiQuPai.view.KillHelp', 'WeiQuPai.view.TopKiller', 'WeiQuPai.view.UserAuction'],
+    requires: [
+        'WeiQuPai.view.KillHelp', 'WeiQuPai.view.TopKiller', 'WeiQuPai.view.UserAuction', 'WeiQuPai.view.KillDetail',
+        'WeiQuPai.view.ConfirmDialog'
+    ],
     config: {
         cls: 'bar bg_ef',
         store: 'KillEnd',
@@ -22,25 +25,31 @@ Ext.define('WeiQuPai.view.KillEnd', {
         }],
         itemCls: 'killend-item',
         itemTpl: new Ext.XTemplate(
-            '<div class="clear"></div>',
-            '<img src="{[this.getPic(values.pic_url)]}"  class="barimg" />',
-            '<input type="button" class="bar_icon"></div>',
-            '<div class="barper">',
-            '<div class="top"><div class="left">每场血战时限：{duration}小时</div><div class="right topkiller"></div>',
-            '<div class="clear"></div></div>',
-            '<div class="bottom"><ul>',
+            '<div class="bar_new" style="margin-top:7px;height:157px;">',
+            '<img src="{[this.getPic(values.item.pic_cover)]}" width="140"/>',
+            '<div class="text"><ul>',
+            '<li class="text" style="color:#3a3e3f;font-size:14px;line-height: 16px;">{item.title}</li>',
+            '<li>血战时限：{duration}小时</li>',
+            '<li>市场价：{item.oprice}</li>',
+            '<li>开杀价：{start_price}</li>',
+            '<li>底价：{reserve_price}</li>',
+            '<li><span class="floatleft"><input type="button" class="btn_create" value="{[this.getButtonText(values)]}"  style="margin-top:0px;"/></span></li>',
+            '</ul></div>',
+            '</div>',
+            '<div class="barper"><div class="bottom"><ul>',
             '<tpl for="auctions">',
             '<li><img src="{[this.getAvatar(values.user.avatar)]}" class="killer_avatar" data-uid="{user.id}"/>',
             '<span class="user_price" data-aid="{id}">￥{curr_price}</spa></li>',
             '</tpl>',
-            '<div class="clear"></div></ul></div>',
-            '</div>',
-            '</div>', {
+            '<div class="clear"></div></ul></div></div>', {
                 getAvatar: function(avatar) {
                     return WeiQuPai.Util.getAvatar(avatar, 140);
                 },
-                getPic: function(pic_url) {
-                    return WeiQuPai.Util.getImagePath(pic_url);
+                getPic: function(pic_cover) {
+                    return WeiQuPai.Util.getImagePath(pic_cover, 200);
+                },
+                getButtonText: function(values){
+                    return values.selfId > 0 ? '我的实况' : '创建血战';
                 }
             }
         ),
@@ -56,28 +65,40 @@ Ext.define('WeiQuPai.view.KillEnd', {
             }]
         }, {
             xtype: 'container',
-            html: '<div><img src="resources/images/bar_banner.png"  class="bar_banner"/></div>',
-            itemId: 'help'
+            html: [
+                '<div class="to_end">',
+                '<div><input type="button" class="btn_score" value="积分规则" /></div>',
+                '<div><input type="button" class="btn_my" value="我的战况" /></div>',
+                '<div><input type="button" class="btn_help" value="血战说明" /></div>',
+                '</div>',
+                '</div>'
+            ].join(''),
+
+            itemId: 'buttonList'
         }]
     },
 
     initialize: function() {
         this.callParent(arguments);
         this.loadData();
-
-        this.down('#help').on('tap', function() {
-            this.fireEvent('help');
-        }, this, {
-            element: 'element'
-        });
-
         this.on('itemtap', this.bindEvent, this);
+        this.down('#buttonList').element.on('tap', this.bindButtonEvent, this);
+        WeiQuPai.FollowTip.showKillEnd();
     },
 
     loadData: function() {
         var store = this.getStore();
         //加载数据
         this.setLoadingText(null);
+        var user = WeiQuPai.Cache.get('currentUser');
+        var query = {};
+        query['market'] = WeiQuPai.Config.market;
+        query['os'] = Ext.os.name.toLowerCase();
+        query['osver'] = Ext.os.version.version;
+        if(user) query['token'] = user.token;
+        
+        this.setLoadingText(null);
+        this.getStore().getProxy().setExtraParams(query);
         store.load(function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');
@@ -86,25 +107,32 @@ Ext.define('WeiQuPai.view.KillEnd', {
         }, this);
     },
 
+    bindButtonEvent: function(e){
+        if (Ext.get(e.target).findParent('.btn_score')) {
+            this.fireEvent('scoretap', this);
+            return false;
+        }
+        if (Ext.get(e.target).findParent('.btn_list')) {
+            this.fireEvent('bang', this);
+            return false;
+        }
+        if (Ext.get(e.target).findParent('.btn_my')) {
+            this.fireEvent('myauction', this);
+            return false;
+        }
+        if (Ext.get(e.target).findParent('.btn_help')) {
+            this.fireEvent('auctionhelp', this);
+            return false;
+        }
+    },
+
     bindEvent: function(list, index, dataItem, record, e) {
-        if (Ext.get(e.target).findParent('.topkiller')) {
+        if (Ext.get(e.target).findParent('.barper')) {
             this.fireEvent('topkiller', list, index, dataItem, record, e);
             return false;
         }
-        if (Ext.get(e.target).findParent('.bar_icon')) {
-            this.fireEvent('kill', list, index, dataItem, record, e);
-            return false;
-        }
-        var avatar = Ext.get(e.target).findParent('.killer_avatar');
-        if (avatar) {
-            var uid = avatar.getAttribute('data-uid');
-            this.fireEvent('avatartap', uid);
-            return false;
-        }
-        var price = Ext.get(e.target).findParent('.user_price');
-        if (price) {
-            var aid = price.getAttribute('data-aid');
-            this.fireEvent('pricetap', aid);
+        if (Ext.get(e.target).findParent('.btn_create')) {
+            this.fireEvent('create', list, index, dataItem, record, e);
             return false;
         }
         this.fireEvent('detail', list, index, dataItem, record, e);

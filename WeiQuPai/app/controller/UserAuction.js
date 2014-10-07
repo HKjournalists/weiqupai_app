@@ -2,25 +2,15 @@ Ext.define('WeiQuPai.controller.UserAuction', {
     extend: 'Ext.app.Controller',
     config: {
         refs: {
-            pageView: 'userauction',
-            paiBtn: 'userauction button[action=pai]',
-            shareBtn: 'userauction button[action=share]',
-            commentBtn: 'userauction button[action=comment]'
+            pageView: 'userauction'
         },
         control: {
-            paiBtn: {
-                tap: 'showOrderView'
-            },
-            shareBtn: {
-                tap: 'showShareLayer'
-            },
-            commentBtn: {
-                tap: 'showComment'
-            },
             pageView: {
-                itemdetail: 'showItem',
+                showitem: 'showItem',
+                ordertap: 'showOrderView',
                 avatartap: 'showUser',
-                proptap: 'showPropList'
+                proptap: 'showPropList',
+                sharetap: 'showShareLayer'
             }
         }
     },

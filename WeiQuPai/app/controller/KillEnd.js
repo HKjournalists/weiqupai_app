@@ -7,18 +7,28 @@ Ext.define('WeiQuPai.controller.KillEnd', {
         },
         control: {
             pageView: {
-                help: 'showHelp',
                 detail: 'showDetail',
-                kill: 'createAuction',
+                create: 'createAuction',
                 topkiller: 'showTopKiller',
                 avatartap: 'showUser',
-                pricetap: 'showAuction'
+                auctionhelp: 'showAuctionHelp',
+                bang: 'showBang',
+                myauction: 'showMyAuction',
+                scoretap: 'showScore'
             }
         }
     },
 
+    //显示拍卖实况，如果没有创建，显示创建拍卖的按钮
     showDetail: function(list, index, dataItem, record, e) {
-        WeiQuPai.Util.goItemView(record.get('item').id, true);
+        var selfId = record.get('selfId');
+        if(selfId > 0){
+            this.showAuction(selfId);
+        }else{
+            view = Ext.create('WeiQuPai.view.KillDetail');
+            view.setPoolId(record.get('id'));
+            WeiQuPai.navigator.push(view);
+        }
     },
 
     showAuction: function(aid) {
@@ -27,9 +37,9 @@ Ext.define('WeiQuPai.controller.KillEnd', {
         WeiQuPai.navigator.push(view);
     },
 
-    showHelp: function(list, index, dataItem, record, e) {
-        var view = Ext.create('WeiQuPai.view.KillHelp');
-        WeiQuPai.navigator.push(view);
+    showAuctionHelp: function() {
+        var view = WeiQuPai.Util.getGlobalView('WeiQuPai.view.AuctionHelpLayer');
+        view.show();
     },
 
     showUser: function(uid) {
@@ -44,28 +54,64 @@ Ext.define('WeiQuPai.controller.KillEnd', {
         WeiQuPai.navigator.push(view);
     },
 
+    showScore: function(){
+        var view = Ext.create('WeiQuPai.view.ScoreRule');
+        WeiQuPai.navigator.push(view);
+    },
+
+    showBang: function(){
+        var view = Ext.create('WeiQuPai.view.Bang');
+        WeiQuPai.navigator.push(view);
+    },
+
+    showMyAuction: function(){
+        var user = WeiQuPai.Util.checkLogin();
+        if(!user) return;
+        WeiQuPai.navigator.pop('maincard');
+        WeiQuPai.sidebar.activeTabItem('myauction');
+    },
+
     //创建拍卖
     createAuction: function(list, index, dataItem, record, e) {
+        //如果已经创建过，直接显示实况
+        var selfId = record.get('selfId');
+        if(selfId > 0){
+            return this.showAuction(selfId);
+        }
+
         var user = WeiQuPai.Util.checkLogin();
-        if (!user) return;
-        var poolId = record.get('id');
+        if(!user) return;
+
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/myScore&token=' + user.token;
+        var me = this;
+        WeiQuPai.Util.get(url, function(rsp){
+            if(rsp.canCreateAuction){
+               var view = WeiQuPai.Util.getGlobalView('WeiQuPai.view.ConfirmDialog');
+               view.setData(rsp);
+               view.setConfirmAction(me.doCreate.bind(me, record));
+               view.show();
+            }else{
+               var view = WeiQuPai.Util.getGlobalView('WeiQuPai.view.ScoreNotEnough');
+               view.setData(rsp);
+               view.show();
+            }
+        });
+    },
+
+    doCreate: function(record){ 
+        var user = WeiQuPai.Cache.get('currentUser');
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/userAuction/create';
-        data = {
-            pool_id: poolId,
+        var data = {
+            pool_id: record.get('id'),
             token: user.token
         };
         WeiQuPai.Util.post(url, data, function(rsp) {
             var view = Ext.create('WeiQuPai.view.UserAuction');
             view.setAuctionId(rsp.id);
+            record.set('selfId', parseInt(rsp.id));
             setTimeout(function() {
                 WeiQuPai.navigator.push(view);
             }, 0);
-            if (!rsp.is_new) {
-                return;
-            }
-            setTimeout(function() {
-                WeiQuPai.Util.toast('拍卖创建成功，赶快分享给朋友帮你杀价吧！');
-            }, 400);
         }, {
             mask: true
         });

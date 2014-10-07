@@ -68,19 +68,22 @@ Ext.define('WeiQuPai.view.Banner', {
 
     doImageTap: function(img) {
         var data = img.getData();
-        if (data.type == 3) {
-            WeiQuPai.Util.goItemView(data.auction.item_id);
-            return;
-        }
-        if (!data.link) return;
+        //type 1 外部链接 2 活动页面iframe 3 爆款 4 app内跳转
         if (data.type == 1) {
             window.open(data.link, '_system');
-            return;
         }
-        var view = Ext.create('WeiQuPai.view.WebPage');
-        view.setHref(data.link);
-        view.setReloadOnBack(true);
-        view.setTitle(data.title || '微趣拍');
-        Ext.Viewport.down('main').push(view);
+        else if(data.type == 2){
+            var view = Ext.create('WeiQuPai.view.WebPage');
+            view.setHref(data.link);
+            view.setReloadOnBack(true);
+            view.setTitle(data.title || '微趣拍');
+            Ext.Viewport.down('main').push(view);
+        }
+        else if (data.type == 3) {
+            WeiQuPai.Util.goItemView(data.auction.item_id);
+        }
+        else if(data.type == 4){
+            WeiQuPai.app.getHistory().fireEvent('change', data.link);
+        }
     }
 });

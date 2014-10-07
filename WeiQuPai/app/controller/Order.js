@@ -72,7 +72,9 @@ Ext.define('WeiQuPai.controller.Order', {
             rsp.item = itemData;
             var view = Ext.create('WeiQuPai.view.Pay');
             view.setOrderData(rsp);
-            WeiQuPai.navigator.push(view);
+            setTimeout(function(){
+                WeiQuPai.navigator.push(view);
+            }, 20);
         }, {
             mask: true
         });

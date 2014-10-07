@@ -50,17 +50,10 @@ Ext.define('WeiQuPai.controller.Today', {
         var detailView = Ext.create('WeiQuPai.view.Notice');
         WeiQuPai.navigator.push(detailView);
     },
-    showTips: function() {
-        if (!WeiQuPai.app.firstLaunch) return;
-        setTimeout(function() {
-            var view = WeiQuPai.Util.getGlobalView('WeiQuPai.view.KillendTip');
-            view.show();
-        }, 500);
-    },
+
     showKillEnd: function() {
         var detailView = Ext.create('WeiQuPai.view.KillEnd');
         WeiQuPai.navigator.push(detailView);
-        this.showTips();
     },
 
     goCircle: function() {
