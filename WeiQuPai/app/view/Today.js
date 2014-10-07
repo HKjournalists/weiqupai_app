@@ -204,7 +204,7 @@ Ext.define('WeiQuPai.view.Today', {
         query['r'] = 'appv2/today';
         query['market'] = WeiQuPai.Config.market;
         query['os'] = Ext.os.name.toLowerCase();
-        query['osver'] = Ext.os.version.version;
+        query['ver'] = WeiQuPai.Config.version;
         if(user) query['token'] = user.token;
         
         var url = WeiQuPai.Config.apiUrl + '/?' + Ext.Object.toQueryString(query);

@@ -33,7 +33,7 @@ Ext.define('WeiQuPai.controller.Login', {
     },
 
     doLogin: function(btn) {
-        var form = this.getLoginForm();
+        var form = WeiQuPai.navigator.down('login');
         var data = form.getValues();
         WeiQuPai.Util.login(data.uname, data.password, function(success) {
             if (WeiQuPai.loginReferer) {

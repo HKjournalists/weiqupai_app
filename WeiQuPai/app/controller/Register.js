@@ -17,7 +17,8 @@ Ext.define('WeiQuPai.controller.Register', {
         if (!this.checkForm()) {
             return false;
         }
-        var data = this.getRegForm().getValues();
+        var form = WeiQuPai.navigator.down('register');
+        var data = form.getValues();
         WeiQuPai.Util.register(data, function() {
             if (WeiQuPai.loginReferer) {
                 WeiQuPai.sidebar.activeTabItem(WeiQuPai.loginReferer);
@@ -31,7 +32,8 @@ Ext.define('WeiQuPai.controller.Register', {
     },
 
     checkForm: function() {
-        var d = this.getRegForm().getValues();
+        var form = WeiQuPai.navigator.down('register');
+        var d = form.getValues();
         var msg = null;
         if (d.uname.trim().length < 6) {
             msg = '用户名不能少于6个字符';

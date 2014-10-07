@@ -73,7 +73,7 @@ Ext.define('WeiQuPai.controller.Routes', {
             id: id,
             title: '拍卖专场'
         }
-        var view = Ext.create('WeiQuPai.view.SpecialSale', param);
+        var view = Ext.create('WeiQuPai.view.SpecialSale', {param: param});
         WeiQuPai.navigator.push(view);
     },
 
