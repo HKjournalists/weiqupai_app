@@ -947,6 +947,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.Register": [],
   "WeiQuPai.view.ReturnAnnounce": [],
   "WeiQuPai.view.ScoreNotEnough": [],
+  "WeiQuPai.view.ScoreRule": [],
   "WeiQuPai.view.Setting": [],
   "WeiQuPai.view.ShareLayer": [],
   "WeiQuPai.view.Shipment": [],
@@ -2250,6 +2251,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.ScoreNotEnough": [
     "widget.scorenotenough"
+  ],
+  "WeiQuPai.view.ScoreRule": [
+    "widget.scorerule"
   ],
   "WeiQuPai.view.Setting": [
     "widget.setting"
