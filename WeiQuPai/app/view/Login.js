@@ -81,6 +81,17 @@ Ext.define('WeiQuPai.view.Login', {
     initialize: function() {
         this.down('textfield').on('keyup', this.setButtonState, this);
         this.down('passwordfield').on('keyup', this.setButtonState, this);
+        this.down('button[action=login]').on('tap', function() {
+            this.fireEvent('login', this);
+        }, this);
+
+        var me = this;
+        this.element.dom.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (!me.down('button[action=login]').getDisabled()) {
+                me.fireEvent('login', me);
+            }
+        }, this);
     },
 
     setButtonState: function() {

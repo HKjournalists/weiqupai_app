@@ -58,6 +58,18 @@ Ext.define('WeiQuPai.view.Register', {
         this.on('painted', this.onPainted, this, {
             single: true
         });
+
+        this.down('button[action=register]').on('tap', function() {
+            this.fireEvent('register', this);
+        }, this);
+        
+        var me = this;
+        this.element.dom.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (!me.down('button[action=register]').getDisabled()) {
+                me.fireEvent('register', me);
+            }
+        }, this);
     },
 
     onPainted: function() {

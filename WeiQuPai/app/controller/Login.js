@@ -3,7 +3,6 @@ Ext.define('WeiQuPai.controller.Login', {
     config: {
         refs: {
             loginForm: 'login',
-            login: 'button[action=login]',
             register: 'button[action=goregister]',
             forgetpass: 'button[action=forgetpass]',
             goMain: 'button[action=gomain]',
@@ -11,8 +10,8 @@ Ext.define('WeiQuPai.controller.Login', {
             weibologin: 'button[itemId=weibologin]',
         },
         control: {
-            login: {
-                tap: 'doLogin'
+            loginForm: {
+                login: 'doLogin'
             },
             register: {
                 tap: 'showRegister'
