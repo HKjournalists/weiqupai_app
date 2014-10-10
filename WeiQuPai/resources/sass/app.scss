@@ -3586,6 +3586,7 @@ html body
 .btn_create{background:url("../images/btn_bar_create.jpg") no-repeat;@include btn_bar($color_fff);width:91px;height:28px;text-align: left;}
 
 .dialog-box {background: $color_fff;}
+.dialog_content img{min-width:100%;max-width:100%;}
 .dialog-box .dialog_content{text-align: center;padding:20px;font-size:14px;}
 .dialog-box .dialog_content ul{list-style-type: none;margin:0px;padding:0px;}
 .dialog-box .dialog_content ul li{color:#898294;line-height: 20px;margin-top:5px;}

@@ -90,29 +90,25 @@ Ext.define('WeiQuPai.view.ShareLayer', {
         }, false);
         win.addEventListener('exit', function(e) {
             if (shareSuccess) {
-                Ext.isFunction(me.getShareCallback()) && me.getShareCallback().call(this);
+                Ext.isFunction(me.getShareCallback()) && me.getShareCallback().call(me);
+
+                //上报统计
+                var d = me.getShareData();
+                var stat = d.stat || {};
+                stat.act = 'shareweibo';
+                WeiQuPai.app.statReport(stat);
             }
         });
 
-        //上报统计
-        WeiQuPai.app.statReport({
-            act: 'shareweibo'
-        });
     },
     shareWeixin: function() {
         this.hide();
         this.shareWechat(Wechat.Scene.SESSION);
-        WeiQuPai.app.statReport({
-            act: 'sharewechat'
-        });
     },
 
     sharePyquan: function() {
         this.hide();
         this.shareWechat(Wechat.Scene.TIMELINE);
-        WeiQuPai.app.statReport({
-            act: 'sharetimeline'
-        });
     },
 
     shareWechat: function(scene) {
@@ -134,7 +130,14 @@ Ext.define('WeiQuPai.view.ShareLayer', {
             var callback = me.getShareCallback() || function() {
                 Ext.os.is.android && WeiQuPai.Util.toast('分享成功');
             }
-            callback.call(this);
+            callback.call(me);
+
+            //上报统计 
+            var d = me.getShareData();
+            var stat = d.stat || {};
+            stat.act = 'share' + t;
+            WeiQuPai.app.statReport(stat);
+
         }, function(reason) {
             //WeiQuPai.Util.toast("分享失败: " + reason);
         });

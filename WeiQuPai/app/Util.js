@@ -310,11 +310,13 @@ Ext.define("WeiQuPai.Util", {
     },
 
     //绑定推送消息，并将deviceToken,userId等信息回传给server
-    bindPush: function() {
+    bindPush: function(callback) {
         if (!window.BPush) return;
         var user = WeiQuPai.Cache.get('currentUser');
         BPush.bindChannel(function(data) {
-            WeiQuPai.Cache.set('device', data.deviceToken);
+            //有回调
+            Ext.isFunction(callback) && callback(data);
+
             //绑定成功，但用户未登录，不需要回传
             if (!data.userId || !user) return;
             data.os = Ext.os.name.toLowerCase();
@@ -580,5 +582,23 @@ Ext.define("WeiQuPai.Util", {
         scroller.addListener('scroll', function(scroller, x, y) {
             topBtn.setHidden(y < screen.height);
         }, container);
+    },
+
+    //检查是否有全局的tips
+    checkTip: function(){
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/messageTip';
+
+        WeiQuPai.Util.get(url, function(rsp){
+            if(!rsp) return;
+
+            var tipCache = WeiQuPai.Cache.get('tips') || [];
+            if(tipCache.indexOf(rsp.id) != -1) return;
+            tipCache.push(rsp.id);
+            WeiQuPai.Cache.set('tips', tipCache);
+            
+            var box = WeiQuPai.Util.getGlobalView('WeiQuPai.view.TipBox');
+            box.setData(rsp);
+            box.show();
+        });
     }
 })

@@ -54,15 +54,15 @@ Ext.define('WeiQuPai.view.UserAuction', {
                   '<li>{[this.getLeftTime(values)]}</li>',
                   '<li class="red"><span class="floatleft">当前价格：{curr_price}</span>',
                      '<span class="floatright">底价：{reserve_price}</span><br></li>',
-                  '<tpl if="this.isSelf(values)">',
+                  '<tpl if="this.hasButton(values)">',
                   '<li><span class="floatleft"><input type="button" class="status orderBtn" value="立刻下单" /></span>',
                   '<span class="floatleft"><input type="button" class="daoju" value="使用道具" /></span></li>',
                   '</tpl>',
                 '</ul></div>',
                 '</div>', {
-                    isSelf: function(values){
+                    hasButton: function(values){
                         var user = WeiQuPai.Cache.get('currentUser');
-                        return user && user.id == values.uid;
+                        return user && user.id == values.uid && values.status < 3;
                     },
                     getCover: function(pic_cover) {
                         return WeiQuPai.Util.getImagePath(pic_cover, 200);
@@ -110,17 +110,28 @@ Ext.define('WeiQuPai.view.UserAuction', {
         }, this);
 
         this.on('itemtap', this.bindEvent, this);
-
-        this.showTips();
     },
 
 
-    showTips: function() {
-        if (!WeiQuPai.app.firstLaunch) return;
+    showTip: function() {
+        var user = WeiQuPai.Cache.get('currentUser');
+        var data = this.getAuctionData()
+        var me = this;
+        //有提示信息则显示
+        if(user && user.id == data.uid && data.tip_msg.length > 0){
+            setTimeout(function(){
+                me.down('#tip').setHtml(data.tip_msg);
+                me.down('#tip').show('pop');
+                me.hideTip();
+            }, 500);
+        }
+    },
+
+    hideTip: function() {
+        var me = this;
         setTimeout(function() {
-            var view = WeiQuPai.Util.getGlobalView('WeiQuPai.view.KillTip');
-            view.show();
-        }, 500);
+            me && me.down('#tip') && me.down('#tip').hide();
+        }, 30000);
     },
 
     updateAuctionId: function(id) {
@@ -138,13 +149,6 @@ Ext.define('WeiQuPai.view.UserAuction', {
         });
     },
 
-    hideTip: function() {
-        var me = this;
-        setTimeout(function() {
-            me && me.down('#tip') && me.down('#tip').hide();
-        }, 30000);
-    },
-
     loadData: function(callback) {
         var id = this.getAuctionId();
         var user = WeiQuPai.Cache.get('currentUser');
@@ -156,14 +160,7 @@ Ext.define('WeiQuPai.view.UserAuction', {
         WeiQuPai.Util.get(url, function(rsp) {
             me.setAuctionData(rsp);
             me.down('#auctionInfo').setData(rsp);
-            //有提示信息则显示
-            if(rsp.tip_msg){
-                setTimeout(function(){
-                    me.down('#tip').setHtml(rsp.tip_msg);
-                    me.down('#tip').show('pop');
-                    me.hideTip();
-                }, 500);
-            }
+            me.showTip();
             me.getStore().getProxy().setExtraParam('id', id);
             me.getStore().setData(rsp.helpers);
             me.getStore().currentPage = 1;

@@ -112,11 +112,11 @@
 
 - (void) registerDeviceToken:(NSData *)deviceToken
 {
-    [BPush registerDeviceToken: deviceToken];
     self.deviceToken = [[[[deviceToken description]
                       stringByReplacingOccurrencesOfString:@"<" withString:@""]
                      stringByReplacingOccurrencesOfString:@">" withString:@""]
                     stringByReplacingOccurrencesOfString:@" " withString:@""];
+    [BPush registerDeviceToken: deviceToken];
 }
 
 @end

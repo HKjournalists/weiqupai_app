@@ -39,7 +39,9 @@ Ext.define('WeiQuPai.view.StartupScreen', {
         if (this.getActiveIndex() == this.getMaxItemIndex()) {
             Ext.Viewport.setActiveItem('main');
             WeiQuPai.FollowTip.showIndex();        
-            //this.hide();
+            
+            //检查tips
+            WeiQuPai.Util.checkTip();
         }
     }
 });

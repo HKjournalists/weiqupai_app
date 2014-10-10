@@ -37,6 +37,9 @@ Ext.define('WeiQuPai.controller.ShowOrder', {
             WeiQuPai.sidebar.activeTabItem('circle');
             WeiQuPai.navigator.down('circle').loadData();
 
+            if(rsp.score){
+                WeiQuPai.Util.toast('晒单成功，获得' + rsp.score + '积分');
+            }
             WeiQuPai.app.statReport({
                 act: 'showorder'
             });

@@ -179,7 +179,6 @@ Ext.define('WeiQuPai.view.Auction', {
         setTimeout(function() {
             var view = WeiQuPai.Util.getGlobalView('WeiQuPai.view.AuctionTip');
             view.show();
-            console.log(view.getHidden());
         }, 500);
     },
 

@@ -3,6 +3,10 @@ package cordova.bpush;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import com.baidu.android.pushservice.PushConstants;
+import com.baidu.android.pushservice.PushManager;
+import com.vqupai.app.MainActivity;
+import com.vqupai.app.Utils;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.json.JSONArray;
@@ -14,7 +18,7 @@ import org.json.JSONObject;
  */
 public class BPush extends CordovaPlugin {
 
-    protected CallbackContext currentCallbackContext;
+    public CallbackContext currentCallbackContext;
 
     public static final String TAG = "cordova.plugin.bpush";
 
@@ -32,7 +36,23 @@ public class BPush extends CordovaPlugin {
     protected boolean bindChannel(JSONArray args, CallbackContext callbackContext){
         JSONObject message = new JSONObject();
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this.cordova.getActivity());
-        
+        //如果没拿到就再重新绑定, 这里的回调在MyPushMessageReceiver中
+        if(sp.getString("appid", "") == ""){
+            currentCallbackContext = callbackContext;
+            // run in background
+            cordova.getThreadPool().execute(new Runnable() {
+                @Override
+                public void run() {
+                    PushManager.startWork(BPush.this.cordova.getActivity().getApplicationContext(),
+                            PushConstants.LOGIN_TYPE_API_KEY,
+                            Utils.getMetaValue(BPush.this.cordova.getActivity(), "api_key"));
+                }
+            });
+            Log.d(TAG, "appid is empty, rebind");
+            return true;
+        }
+
+        //如果sp里有，就直接返回就可以了
         try {
             message.put("appid", sp.getString("appid", ""));
             message.put("channelId", sp.getString("channel_id", ""));
@@ -41,6 +61,7 @@ public class BPush extends CordovaPlugin {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         Log.d(TAG, message.toString());
         callbackContext.success(message);
         return true;

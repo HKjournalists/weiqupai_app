@@ -66,14 +66,11 @@ public class MainActivity extends CordovaActivity
     @Override
     public void onStart() {
         super.onStart();
-
-        PushManager.activityStarted(this);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        PushManager.activityStoped(this);
     }
 }
 

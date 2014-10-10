@@ -67,6 +67,8 @@ Ext.define('WeiQuPai.controller.Comment', {
                 }
                 pageView.getStore().add(result);
                 pageView.updateReplyData('reply_num', 1);
+                result.score && WeiQuPai.Util.toast('评论成功，获得' + result.score + '积分');
+
                 setTimeout(function() {
                     var scroller = pageView.getScrollable().getScroller();
                     scroller.scrollToEnd(true);

@@ -31,7 +31,11 @@ Ext.define('WeiQuPai.controller.Discount', {
         var shareData = {
             title: data.share_text || data.title,
             thumb: WeiQuPai.Util.getImagePath(data.pic_url),
-            url: 'http://www.vqupai.com/mm/?r=discount/show&id=' + data.id
+            url: 'http://www.vqupai.com/mm/?r=discount/show&id=' + data.id,
+            stat: {
+                type: 'discount',
+                id: data.id
+            }
         }
         layer.setShareData(shareData);
         layer.setShareCallback(function() {
@@ -39,7 +43,8 @@ Ext.define('WeiQuPai.controller.Discount', {
             var discountId = data.id;
             var url = WeiQuPai.Config.apiUrl + '/?r=appv2/discount/get&id=' + discountId + '&token=' + user.token;
             WeiQuPai.Util.get(url, function(rsp) {
-                WeiQuPai.Util.toast('恭喜您成功领取了一个优惠~');
+                var scoreInfo =  rsp.score ? ('，同时获得' + rsp.score + '积分') : '';
+                WeiQuPai.Util.toast('恭喜您成功领取了一个优惠' + scoreInfo);
             });
         });
         layer.show();

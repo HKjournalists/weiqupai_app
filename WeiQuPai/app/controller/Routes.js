@@ -21,7 +21,8 @@ Ext.define('WeiQuPai.controller.Routes', {
             'tab/:name' : 'showTab',
             'scoreInfo' : 'showScoreInfo',
             'feed/:id': 'showFeed',
-            'comment/:id': 'showComment'
+            'comment/:id': 'showComment',
+            'killend/:id' : 'showKillDetail'
         }
     },
 
@@ -97,6 +98,31 @@ Ext.define('WeiQuPai.controller.Routes', {
         var view = Ext.create('WeiQuPai.view.Comment');
         view.setCommentId(id);
         WeiQuPai.navigator.push(view);
+    },
+
+    showKillDetail: function(id){
+        var user = WeiQuPai.Cache.get('currentUser');
+        if(user){
+            var url = WeiQuPai.Config.apiUrl + '/?r=appv2/auctionPool/myAuction&pool_id=' + id + '&token=' + user.token;
+            WeiQuPai.Util.get(url, function(rsp){
+                if(rsp.auction_id > 0){
+                    var view = Ext.create('WeiQuPai.view.UserAuction');
+                    view.setAuctionId(rsp.auction_id);
+                }else{
+                    view = Ext.create('WeiQuPai.view.KillDetail');
+                    view.setPoolId(id);
+                }
+                setTimeout(function(){
+                    WeiQuPai.navigator.push(view);
+                }, 0);
+            });
+            return;
+        }
+        view = Ext.create('WeiQuPai.view.KillDetail');
+        view.setPoolId(id);
+        setTimeout(function(){
+            WeiQuPai.navigator.push(view);
+        }, 0);
     },
 
     share: function(data) {

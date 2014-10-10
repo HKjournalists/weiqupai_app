@@ -74,6 +74,7 @@ Ext.define('WeiQuPai.controller.Order', {
             view.setOrderData(rsp);
             setTimeout(function(){
                 WeiQuPai.navigator.push(view);
+                rsp.score && WeiQuPai.Util.toast('您以底价拍到商品，获得' + rsp.score + '积分');
             }, 20);
         }, {
             mask: true

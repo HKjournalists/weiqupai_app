@@ -962,6 +962,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.SpecialSale": [],
   "WeiQuPai.view.SplashScreen": [],
   "WeiQuPai.view.StartupScreen": [],
+  "WeiQuPai.view.TipBox": [],
   "WeiQuPai.view.Today": [],
   "WeiQuPai.view.TopKiller": [],
   "WeiQuPai.view.UserAuction": [],
@@ -2296,6 +2297,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.StartupScreen": [
     "widget.startupscreen"
+  ],
+  "WeiQuPai.view.TipBox": [
+    "widget.tipbox"
   ],
   "WeiQuPai.view.Today": [
     "widget.today"

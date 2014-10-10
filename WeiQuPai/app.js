@@ -36,7 +36,7 @@ Ext.application({
         'Iframe', 'SimpleViewer', 'ImageViewer', 'Sidebar', 'DisclosureItem', 'Pay', 'Order', 'Item', 'Auction', 'Item',
         'UserAuction', 'InputComment', 'CircleReplyLayer', 'CameraLayer', 'AuctionTip', 'MainTip', 'NoticeTip',
         'AuctionTipTwo', 'PriceForm', 'DeleteButtonLayer', 'ConfirmLayer','UserAuctionItem', 'FollowTip',
-        'AuctionHelpLayer', 'ScoreNotEnough', 'ConfirmDialog', 'ScoreRule'
+        'AuctionHelpLayer', 'ScoreNotEnough', 'ConfirmDialog', 'ScoreRule', 'TipBox'
     ],
     stores: [
         'Auction', 'Comment', 'Banner', 'MyOrder', 'MyConsignee', 'Circle', 'MyProp', 'MyCoupon',
@@ -70,6 +70,9 @@ Ext.application({
     //是否第一次加载
     firstLaunch: null,
 
+    //是否已经做了启动上报
+    startupReport: false,
+
     launch: function() {
         var ver = WeiQuPai.Config.version;
         var flag = WeiQuPai.Cache.get('appver');
@@ -78,7 +81,7 @@ Ext.application({
         //重置message的提醒
         this.resetMessageText();
 
-        this.catchError();
+        //this.catchError();
 
         this.hideSplash();
 
@@ -104,6 +107,10 @@ Ext.application({
             view.setPicData(this.startupScreen);
             Ext.Viewport.add(view);
             view.show();
+            //第一次有启动页，启动页关闭后再显示tips
+        }else{
+            //检查tips
+            WeiQuPai.Util.checkTip();
         }
 
         WeiQuPai.navigator = Ext.create('WeiQuPai.view.Main');
@@ -112,16 +119,30 @@ Ext.application({
         //检查消息
         WeiQuPai.Notify.checkMQ();
 
-        //3秒后绑定推送id
-        setTimeout(function() {
-            WeiQuPai.Util.bindPush();
-        }, 3000);
-        //5秒后再上报,防止没有device_token
-        setTimeout(function() {
+
+        //绑定推送id
+        var self = this;
+        WeiQuPai.Util.bindPush(function(data){
+            WeiQuPai.Cache.set('device', data.deviceToken);
+            WeiQuPai.Cache.set('push_user_id', data.userId);
+            //绑定成功后再上报
+            if(self.startupReport) return;
+            self.startupReport = true;
             WeiQuPai.app.statReport({
-                act: 'startup'
+                act: 'startup',
+                bindpush: 1
             });
-        }, 5000);
+        });
+
+        //如果bindpush没有返回，10秒后再进行一次启动上报
+        setTimeout(function(){
+            if(self.startupReport) return;
+            self.startupReport = true;
+            WeiQuPai.app.statReport({
+                act: 'startup',
+                bindpush: 0
+            });
+        }, 10000);
     },
 
     //统计上报
@@ -138,6 +159,7 @@ Ext.application({
         data['os'] = Ext.os.name.toLowerCase();
         data['osver'] = Ext.os.version.version;
         data['device'] = WeiQuPai.Cache.get('device') || '';
+        data['push_user_id'] = WeiQuPai.Cache.get('push_user_id') || '';
         data['market'] = WeiQuPai.Config.market;
         var user = WeiQuPai.Cache.get('currentUser');
         if (user) {
@@ -216,6 +238,9 @@ Ext.application({
 
             //检查消息
             WeiQuPai.Notify.checkMQ();
+
+            //检查tips
+            WeiQuPai.Util.checkTip();
 
             //处理评分
             WeiQuPai.app.tipScore();

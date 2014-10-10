@@ -142,7 +142,7 @@ Ext.define('WeiQuPai.controller.Auction', {
                 }
                 list.getStore().insert(0, result);
                 view.updateItemStat('comment_num', 1);
-
+                result.score && WeiQuPai.Util.toast('评论成功，获得' + result.score + '积分');
             },
             failure: function(form, result) {
                 WeiQuPai.Util.unmask();
@@ -283,14 +283,28 @@ Ext.define('WeiQuPai.controller.Auction', {
     doShare: function() {
         var view = WeiQuPai.navigator.getActiveItem();
         var data = view.getRecord().data;
+        var user = WeiQuPai.Cache.get('currentUser');
         var layer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer');
         layer.down('button[action=weibo]').setDisabled(false);
         var shareData = {
             title: data.title,
             thumb: WeiQuPai.Util.getImagePath(data.pic_cover, 200),
-            url: 'http://www.vqupai.com/mm/?r=item/show&id=' + data.id
+            url: 'http://www.vqupai.com/mm/?r=item/show&id=' + data.id,
+            stat: {
+                type: 'item',
+                id: data.id
+            }
         }
         layer.setShareData(shareData);
+        if(user){
+            layer.setShareCallback(function() {
+                layer.setShareCallback(null);
+                var url = WeiQuPai.Config.apiUrl + '/?r=appv2/myScore/share&token=' + user.token;
+                WeiQuPai.Util.get(url, function(rsp) {
+                    rsp.score && WeiQuPai.Util.toast('分享成功，获得' + rsp.score + '积分');
+                });
+            });
+        }
         layer.show();
     }
 });

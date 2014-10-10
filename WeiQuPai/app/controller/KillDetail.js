@@ -52,7 +52,8 @@ Ext.define('WeiQuPai.controller.KillDetail', {
             var view = Ext.create('WeiQuPai.view.UserAuction');
             view.setAuctionId(rsp.id);
             var record = Ext.getStore('KillEnd').getById(poolId);
-            record.set('selfId', parseInt(rsp.id));
+            record && record.set('selfId', parseInt(rsp.id));
+            
             //替换当前视图
             var inner = WeiQuPai.navigator.getInnerItems();
             removed = inner.splice(-1, 1, view);

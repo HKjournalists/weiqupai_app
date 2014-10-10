@@ -32,13 +32,37 @@ Ext.define('WeiQuPai.controller.UserAuction', {
     showShareLayer: function() {
         var data = this.getPageView().getAuctionData();
         var shareData = {
-            title: data.share_text,
+            title: data.status > 1 ? data.share_result_text : data.share_text,
             thumb: WeiQuPai.Util.getImagePath(data.item.pic_cover, 200),
-            url: 'http://www.vqupai.com/mm/index.php?r=userAuction&id=' + data.id
+            url: 'http://www.vqupai.com/mm/index.php?r=userAuction&id=' + data.id,
+            stat: {
+                type: 'user_auction',
+                id: data.id,
+                item_id: data.item_id
+            }
+        };
+        if(data.status > 1){
+            shareData.url += '&second_share=1';
         }
         var layer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer');
         layer.down('button[action=weibo]').setDisabled(true);
         layer.setShareData(shareData);
+        //结束状态，并且是自己的拍卖，分享成功后返还积分
+        var user = WeiQuPai.Cache.get('currentUser');
+        data.score_returned = parseInt(data.score_returned);
+        data.status = parseInt(data.status);
+        if(data.status > 1 && user && user.id == data.uid && !data.score_returned){
+            var self = this;
+            layer.setShareCallback(function() {
+                layer.setShareCallback(null);
+                var url = WeiQuPai.Config.apiUrl + '/?r=appv2/userAuction/returnScore&id=' + data.id + '&token=' + user.token;
+                WeiQuPai.Util.get(url, function(rsp) {
+                    data.score_returned = 1;
+                    self.getPageView().setAuctionData(data);
+                    WeiQuPai.Util.toast(rsp.msg);
+                });
+            });
+        }
         layer.show();
     },
 
