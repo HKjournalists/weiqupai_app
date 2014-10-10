@@ -7,7 +7,7 @@ Ext.define('WeiQuPai.view.AuctionHelpLayer', {
         showAnimation: 'fadeIn',
         hideAnimation: 'fadeOut',
         hidden: true,
-        style: 'background:rgba(0,0,0, .4)',
+        style: 'background:rgba(0,0,0, .4);z-index:1000',
     },
 
     initialize: function() {

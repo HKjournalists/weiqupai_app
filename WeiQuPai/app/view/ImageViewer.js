@@ -8,7 +8,7 @@ Ext.define('WeiQuPai.view.ImageViewer', {
         showAnimation: 'fadeIn',
         hideAnimation: 'fadeOut',
         hidden: true,
-        style: 'background:#000;z-index:1'
+        style: 'background:#000;z-index:1000'
     },
 
     initialize: function() {
