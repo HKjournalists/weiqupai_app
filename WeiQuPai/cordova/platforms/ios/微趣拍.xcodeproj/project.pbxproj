@@ -21,9 +21,7 @@
 		18F014D218EF143A0089C0D2 /* CDVBPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F014D118EF143A0089C0D2 /* CDVBPush.m */; };
 		18F014D518EF1ABB0089C0D2 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 18F014D418EF1ABB0089C0D2 /* config.xml */; };
 		18F014F218EF32CC0089C0D2 /* BPushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18F014F118EF32CC0089C0D2 /* BPushConfig.plist */; };
-		18F014F918EFF9810089C0D2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F014F818EFF9810089C0D2 /* XCTest.framework */; };
 		18F014FA18EFF9810089C0D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F014C518ED1BC90089C0D2 /* Foundation.framework */; };
-		18F014FC18EFF9820089C0D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F014FB18EFF9810089C0D2 /* UIKit.framework */; };
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
@@ -46,7 +44,10 @@
 		A59DAD7819E434EE0074EBF3 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A59DAD6F19E434EE0074EBF3 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A59DAD7919E434EE0074EBF3 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = A59DAD7119E434EE0074EBF3 /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A59DAD7A19E434EE0074EBF3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A59DAD7319E434EE0074EBF3 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		A59DAD7C19E436560074EBF3 /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A59DAD6519E434EE0074EBF3 /* libBPush.a */; };
+		A5AA869019E7C79D00301433 /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5AA868F19E7C79D00301433 /* libBPush.a */; };
+		A5AA869319E7CAD700301433 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A5AA869219E7CAD700301433 /* libc++.dylib */; };
+		A5AA869519E7CC7E00301433 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5AA869419E7CC7E00301433 /* Security.framework */; };
+		A5AA869719E7CC9D00301433 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5AA869619E7CC9D00301433 /* UIKit.framework */; };
 		A5C6CF481969975A000E05BC /* NSLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6CF471969975A000E05BC /* NSLogger.m */; };
 		A5F18E1E19A0ADB000DF1BC6 /* top6.png in Resources */ = {isa = PBXBuildFile; fileRef = A5F18E1D19A0ADB000DF1BC6 /* top6.png */; };
 		B3FF180385D54C60B3E995B5 /* CDVCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 95963B588F71477D84FC3A16 /* CDVCamera.m */; };
@@ -97,8 +98,6 @@
 		18F014D418EF1ABB0089C0D2 /* config.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = config.xml; path = "微趣拍/config.xml"; sourceTree = "<group>"; };
 		18F014F118EF32CC0089C0D2 /* BPushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = BPushConfig.plist; path = "微趣拍/BPushConfig.plist"; sourceTree = "<group>"; };
 		18F014F718EFF9810089C0D2 /* 微趣拍 Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "微趣拍 Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		18F014F818EFF9810089C0D2 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		18F014FB18EFF9810089C0D2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		1D3623240D0F684500981E51 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* 微趣拍.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "微趣拍.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,7 +124,6 @@
 		A5864BF719A860DF0072A607 /* trans.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trans.png; sourceTree = "<group>"; };
 		A5864BF919A86FDB0072A607 /* top7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top7@2x.png"; sourceTree = "<group>"; };
 		A59DAD6419E434EE0074EBF3 /* BPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPush.h; sourceTree = "<group>"; };
-		A59DAD6519E434EE0074EBF3 /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBPush.a; sourceTree = "<group>"; };
 		A59DAD6719E434EE0074EBF3 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		A59DAD6819E434EE0074EBF3 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
 		A59DAD6919E434EE0074EBF3 /* Base64Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Defines.h; sourceTree = "<group>"; };
@@ -139,6 +137,10 @@
 		A59DAD7119E434EE0074EBF3 /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 		A59DAD7219E434EE0074EBF3 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		A59DAD7319E434EE0074EBF3 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		A5AA868F19E7C79D00301433 /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBPush.a; sourceTree = "<group>"; };
+		A5AA869219E7CAD700301433 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		A5AA869419E7CC7E00301433 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A5AA869619E7CC9D00301433 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A5C6CF461969975A000E05BC /* NSLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSLogger.h; path = com.pfafman.nsLogger/NSLogger.h; sourceTree = "<group>"; };
 		A5C6CF471969975A000E05BC /* NSLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSLogger.m; path = com.pfafman.nsLogger/NSLogger.m; sourceTree = "<group>"; };
 		A5F18E1D19A0ADB000DF1BC6 /* top6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top6.png; sourceTree = "<group>"; };
@@ -154,8 +156,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18F014F918EFF9810089C0D2 /* XCTest.framework in Frameworks */,
-				18F014FC18EFF9820089C0D2 /* UIKit.framework in Frameworks */,
 				18F014FA18EFF9810089C0D2 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -164,10 +164,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A59DAD7C19E436560074EBF3 /* libBPush.a in Frameworks */,
+				A5AA869719E7CC9D00301433 /* UIKit.framework in Frameworks */,
+				A5AA869519E7CC7E00301433 /* Security.framework in Frameworks */,
+				A5AA869019E7C79D00301433 /* libBPush.a in Frameworks */,
 				18F014CC18ED1C2C0089C0D2 /* SystemConfiguration.framework in Frameworks */,
 				18F014CA18ED1C220089C0D2 /* CoreTelephony.framework in Frameworks */,
 				18F014C818ED1BDF0089C0D2 /* libz.dylib in Frameworks */,
+				A5AA869319E7CAD700301433 /* libc++.dylib in Frameworks */,
 				18F014C618ED1BC90089C0D2 /* Foundation.framework in Frameworks */,
 				18F0144718E9B1180089C0D2 /* libWeChatSDK.a in Frameworks */,
 				5B1594DD16A7569C00FEF299 /* AssetsLibrary.framework in Frameworks */,
@@ -270,6 +273,9 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A5AA869619E7CC9D00301433 /* UIKit.framework */,
+				A5AA869419E7CC7E00301433 /* Security.framework */,
+				A5AA869219E7CAD700301433 /* libc++.dylib */,
 				18F014CB18ED1C2C0089C0D2 /* SystemConfiguration.framework */,
 				18F014C918ED1C220089C0D2 /* CoreTelephony.framework */,
 				18F014C718ED1BDF0089C0D2 /* libz.dylib */,
@@ -279,8 +285,6 @@
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				305D5FD0115AB8F900A74A75 /* MobileCoreServices.framework */,
 				B803D6F47E8F434AB223D8C6 /* ImageIO.framework */,
-				18F014F818EFF9810089C0D2 /* XCTest.framework */,
-				18F014FB18EFF9810089C0D2 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -339,8 +343,8 @@
 		A59DAD6319E434EE0074EBF3 /* LibBPush */ = {
 			isa = PBXGroup;
 			children = (
+				A5AA868F19E7C79D00301433 /* libBPush.a */,
 				A59DAD6419E434EE0074EBF3 /* BPush.h */,
-				A59DAD6519E434EE0074EBF3 /* libBPush.a */,
 				A59DAD6619E434EE0074EBF3 /* opensource */,
 			);
 			path = LibBPush;
@@ -642,11 +646,10 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "微趣拍/微趣拍-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/wechatlib",
-					"$(PROJECT_DIR)/bpushlib",
 					"$(PROJECT_DIR)/LibBPush",
 				);
 				ONLY_ACTIVE_ARCH = NO;
@@ -684,11 +687,10 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "微趣拍/微趣拍-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/wechatlib",
-					"$(PROJECT_DIR)/bpushlib",
 					"$(PROJECT_DIR)/LibBPush",
 				);
 				ONLY_ACTIVE_ARCH = NO;

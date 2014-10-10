@@ -87,10 +87,19 @@
     UIApplication *app = [UIApplication sharedApplication];
     [BPush setupChannel:launchOptions]; // 必须
     [BPush setDelegate: self];
-    [app registerForRemoteNotificationTypes:
-     UIRemoteNotificationTypeAlert
-     | UIRemoteNotificationTypeBadge
-     | UIRemoteNotificationTypeSound];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        UIUserNotificationType myTypes = UIRemoteNotificationTypeBadge |
+        UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+        UIUserNotificationSettings *settings =
+        [UIUserNotificationSettings settingsForTypes:myTypes categories:nil];
+        [app registerUserNotificationSettings:settings];
+    }else{
+        [app registerForRemoteNotificationTypes:
+         UIRemoteNotificationTypeAlert
+         | UIRemoteNotificationTypeBadge
+         | UIRemoteNotificationTypeSound];
+    }
 }
 
 //receive notification

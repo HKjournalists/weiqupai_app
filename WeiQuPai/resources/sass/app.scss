@@ -3568,7 +3568,7 @@ html body
 .bar_see{width:100%;height:35px;text-align: center;font-size:14px;background: $color_fff;height:35px;padding-top:10px;cursor: pointer;margin-top:10px;}
 .bar_dest{text-align: center;color: $color_e7; width: 200px; margin: auto;height: 30px;padding-top: 10px;}
 @mixin BarBtn($color,$bgcolor,$text_color){
-  width:70px;height:25px;border:1px solid $color;background: $bgcolor;color:$text_color;border-radius: 3px;
+  width:70px;height:25px;border:1px solid $color;background: $bgcolor;color:$text_color;border-radius: 3px;-webkit-appearance:none;
 }
 .bar_new .text ul li .status{@include BarBtn(#b83a25, $color_e7,$color_fff);}
 .bar_new .text ul li .daoju{@include BarBtn(#c79100, #f9bb14,$color_fff);margin-left:15px;}

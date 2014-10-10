@@ -98,6 +98,10 @@
     [[self.viewController getCommandInstance:@"bpush"] registerDeviceToken:deviceToken];
 }
 
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{
+    //register to receive notifications
+    [application registerForRemoteNotifications];
+}
 
 //处理接收消息的函数
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
