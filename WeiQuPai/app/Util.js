@@ -320,6 +320,7 @@ Ext.define("WeiQuPai.Util", {
             //绑定成功，但用户未登录，不需要回传
             if (!data.userId || !user) return;
             data.os = Ext.os.name.toLowerCase();
+            data.market = WeiQuPai.Config.market;
             var url = WeiQuPai.Config.apiUrl + '/?r=appv2/bindPush/&token=' + user.token;
             WeiQuPai.Util.post(url, data, function(rsp) {
                 //更新本地对应的缓存数据
