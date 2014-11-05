@@ -14,7 +14,7 @@
 		<string>https://github.com/icesyc/weiqupai_app.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>WeiQuPai/cordova/platforms/ios/微趣拍.xcodeproj/project.xcworkspace</string>
+	<string>WeiQuPai/cordova/platforms/ios/微趣拍.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>6BD92514418ECF31601BCF4232161B9B807DD61B</key>
