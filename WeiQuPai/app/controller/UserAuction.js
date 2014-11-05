@@ -87,6 +87,9 @@ Ext.define('WeiQuPai.controller.UserAuction', {
         var view = this.getPageView();
         var propId = record.get('prop_id');
         var data = view.getAuctionData();
+        if(!data.can_use_prop){
+            return WeiQuPai.Util.toast('该商品不能使用道具');
+        }
         var user = WeiQuPai.Cache.get('currentUser');
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/useProp&prop_id=' + propId + '&auction_id=' + data.id + '&token=' + user.token;
         var msg = [, '您的拍卖时间延长了一倍', '您的拍卖在2小时内将获得双倍减价的效果'];

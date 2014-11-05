@@ -89,7 +89,10 @@
     [self.window makeKeyAndVisible];
 
     [[self.viewController getCommandInstance:@"bpush"] setup:launchOptions];
-    
+   
+    if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
+        [self application:application didReceiveRemoteNotification:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]];
+    }
     return YES;
 }
 
@@ -105,7 +108,7 @@
 
 //处理接收消息的函数
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    //NSLog(@"Receive Notify: %@", [userInfo JSONString]);
+    NSLog(@"Receive Notify: %@", [userInfo JSONString]);
     [[self.viewController getCommandInstance:@"bpush" ] handleNotification:userInfo];
 }
 

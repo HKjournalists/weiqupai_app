@@ -10,6 +10,7 @@ Ext.define('WeiQuPai.controller.Comment', {
                 avatartap: 'doAvatarTap',
                 feedavatartap: 'doFeedAvatarTap',
                 zanavatartap: 'doZanAvatarTap',
+                //replytap: 'activeReplyForm',
                 deletereply: 'doDeleteReply',
                 zan: 'doZan',
                 cancelzan: 'doCancelZan',
@@ -40,6 +41,21 @@ Ext.define('WeiQuPai.controller.Comment', {
         var showUser = Ext.create('WeiQuPai.view.ShowUser');
         showUser.setUid(uid);
         WeiQuPai.navigator.push(showUser);
+    },
+
+    //显示回复的表单
+    activeReplyForm: function(list, index, record) {
+        var user = WeiQuPai.Util.checkLogin();
+        if (!user) return;
+        var toNick = record.get('user').nick;
+        var toUid = record.get('uid');
+        var placeHolder = '回复' + toNick;
+        var form = list.down('inputcomment');
+        form.down('textfield[name=content]').setPlaceHolder(placeHolder);
+        form.down('hiddenfield[name=feed_id]').setValue(record.get('id'));
+        form.down('hiddenfield[name=to_uid]').setValue(toUid);
+        form.down('hiddenfield[name=to_nick]').setValue(toNick);
+        form.down('textfield[name=content]').focus();
     },
 
     //发表回复

@@ -22,7 +22,8 @@ Ext.define('WeiQuPai.controller.Routes', {
             'scoreInfo' : 'showScoreInfo',
             'feed/:id': 'showFeed',
             'comment/:id': 'showComment',
-            'killend/:id' : 'showKillDetail'
+            'killend/:id' : 'showKillDetail',
+            'discount/:id': 'showShopDiscount'
         }
     },
 
@@ -123,6 +124,12 @@ Ext.define('WeiQuPai.controller.Routes', {
         setTimeout(function(){
             WeiQuPai.navigator.push(view);
         }, 0);
+    },
+
+    showShopDiscount: function(id){
+        var view = Ext.create('WeiQuPai.view.DiscountDetail');
+        view.setDiscountId(id);
+        WeiQuPai.navigator.push(view);
     },
 
     share: function(data) {

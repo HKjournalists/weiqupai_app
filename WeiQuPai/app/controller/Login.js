@@ -22,9 +22,6 @@ Ext.define('WeiQuPai.controller.Login', {
             weibologin: {
                 tap: 'doWeiboLogin'
             },
-            logout: {
-                tap: 'doLogout'
-            },
             forgetpass: {
                 tap: 'showForgetPass'
             }

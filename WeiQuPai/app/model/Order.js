@@ -3,7 +3,8 @@ Ext.define("WeiQuPai.model.Order", {
 
     config: {
         fields: ['id', 'auction_id', 'item_id', 'price', 'item', 'auction', 'rank',
-            'total_pay', 'consignee_info', 'payment', 'delivery_time', 'ctime', 'status', 'cancel_reason', 'comment', 'coupon', 'auction_type'
+            'total_pay', 'consignee_info', 'payment', 'delivery_time', 'ctime', 'status',
+            'cancel_reason', 'comment', 'coupon', 'auction_type', 'can_use_coupon'
         ],
         proxy: {
             type: 'ajax',

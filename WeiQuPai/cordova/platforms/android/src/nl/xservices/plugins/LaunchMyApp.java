@@ -1,6 +1,7 @@
 package nl.xservices.plugins;
 
 import android.content.Intent;
+import android.util.Log;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaActivity;
 import org.apache.cordova.CordovaPlugin;
@@ -32,6 +33,7 @@ public class LaunchMyApp extends CordovaPlugin {
 
   @Override
   public void onNewIntent(Intent intent) {
+    Log.d("LaunchMyApp new intent", intent.getDataString());
     final String intentString = intent.getDataString();
     if (intent.getDataString() != null) {
       intent.setData(null);

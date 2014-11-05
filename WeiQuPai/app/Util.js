@@ -197,7 +197,7 @@ Ext.define("WeiQuPai.Util", {
         });
     },
 
-    logout: function(callback) {
+    logout: function() {
         var user = WeiQuPai.Cache.get('currentUser');
         if (user) {
             Ext.Ajax.request({
@@ -207,7 +207,15 @@ Ext.define("WeiQuPai.Util", {
             //删除用户相关的cache
             WeiQuPai.Util.clearCache();
         }
-        callback && callback();
+        var layout = WeiQuPai.mainCard.getLayout();
+        var animation = new Ext.fx.layout.Card('fade');
+        animation.setLayout(layout);
+        animation.on('animationend', function() {
+            animation.destroy();
+        });
+        WeiQuPai.sidebar.updateUserInfo();
+        WeiQuPai.sidebar.destroyLoginView();
+        WeiQuPai.sidebar.activeTabItem('today');
     },
 
     updateProfile: function(data, callback) {

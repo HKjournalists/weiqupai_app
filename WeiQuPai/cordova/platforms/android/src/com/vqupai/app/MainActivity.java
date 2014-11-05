@@ -19,15 +19,17 @@
 
 package com.vqupai.app;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import com.baidu.android.pushservice.PushConstants;
 import com.baidu.android.pushservice.PushManager;
-import org.apache.cordova.*;
-import org.json.JSONObject;
+import org.apache.cordova.Config;
+import org.apache.cordova.CordovaActivity;
+import org.apache.cordova.CordovaPlugin;
 
 public class MainActivity extends CordovaActivity 
 {
@@ -41,6 +43,7 @@ public class MainActivity extends CordovaActivity
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
+        Log.d("MainActivity", "create");
         //保存mainActivity的实例
         instance = this;
 
@@ -71,6 +74,10 @@ public class MainActivity extends CordovaActivity
     @Override
     public void onStop() {
         super.onStop();
+    }
+
+    public void onNewIntent(Intent intent){
+       super.onNewIntent(intent);
     }
 }
 

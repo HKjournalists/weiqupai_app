@@ -37,7 +37,12 @@ Ext.define('WeiQuPai.view.TipBox', {
         this.on('show', WeiQuPai.Util.saveLastView, this);
         this.down('button').on('tap', function() {
             this.hide();
-            WeiQuPai.app.getHistory().fireEvent('change', this.getData().button_link);
+            var link = this.getData().button_link;
+            if(link.indexOf('http://') != -1){
+                window.open(link, '_system');
+            }else{
+                WeiQuPai.app.getHistory().fireEvent('change', this.getData().button_link);
+            }
         }, this);
     },
 

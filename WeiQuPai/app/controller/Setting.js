@@ -51,13 +51,5 @@ Ext.define('WeiQuPai.controller.Setting', {
 
     logout: function() {
         WeiQuPai.Util.logout();
-        var layout = WeiQuPai.mainCard.getLayout();
-        var animation = new Ext.fx.layout.Card('fade');
-        animation.setLayout(layout);
-        animation.on('animationend', function() {
-            animation.destroy();
-        });
-        WeiQuPai.sidebar.updateUserInfo();
-        WeiQuPai.sidebar.activeTabItem('today');
     }
 });

@@ -31,6 +31,7 @@ Ext.define('WeiQuPai.controller.Pay', {
     },
 
     showCouponList: function() {
+        
         var view = Ext.create('WeiQuPai.view.MyCoupon', {
             selectMode: true
         });

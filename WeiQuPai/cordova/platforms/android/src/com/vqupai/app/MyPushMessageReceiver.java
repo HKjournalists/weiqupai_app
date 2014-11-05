@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.nfc.Tag;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
@@ -159,22 +160,25 @@ public class MyPushMessageReceiver extends FrontiaPushMessageReceiver {
                 + description + "\" customContent=" + customContentString;
         Log.d(TAG, notifyString);
 
-        /*
-        // 自定义内容获取方式，mykey和myvalue对应通知推送时自定义内容中设置的键和值
+        // 自定义内容获取方式
         if (!TextUtils.isEmpty(customContentString)) {
             JSONObject customJson = null;
             try {
                 customJson = new JSONObject(customContentString);
-                String myvalue = null;
-                if (customJson.isNull("mykey")) {
-                    myvalue = customJson.getString("mykey");
+                if(customJson.has("link")){
+                    String link = customJson.getString("link");
+                    Intent intent = new Intent(context, MainActivity.class);
+                    Uri data = Uri.parse("vqupai://" + link);
+                    intent.setData(data);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+                    context.startActivity(intent);
+                    //MainActivity.instance.onNewIntent(intent);
                 }
             } catch (JSONException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
-        */
     }
 
     /**

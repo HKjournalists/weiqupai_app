@@ -6,6 +6,7 @@
 //
 
 #import "CDVBPush.h"
+#import <Cordova/CDVWebViewDelegate.h>
 
 @implementation CDVBPush
 
@@ -87,36 +88,72 @@
     UIApplication *app = [UIApplication sharedApplication];
     [BPush setupChannel:launchOptions]; // 必须
     [BPush setDelegate: self];
-    [app registerForRemoteNotificationTypes:
-     UIRemoteNotificationTypeAlert
-     | UIRemoteNotificationTypeBadge
-     | UIRemoteNotificationTypeSound];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        UIUserNotificationType myTypes = UIRemoteNotificationTypeBadge |
+        UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+        UIUserNotificationSettings *settings =
+        [UIUserNotificationSettings settingsForTypes:myTypes categories:nil];
+        [app registerUserNotificationSettings:settings];
+    }else{
+        [app registerForRemoteNotificationTypes:
+         UIRemoteNotificationTypeAlert
+         | UIRemoteNotificationTypeBadge
+         | UIRemoteNotificationTypeSound];
+    }
 }
 
 //receive notification
 - (void) handleNotification:(NSDictionary *)userInfo
 {
+    self.userInfo = userInfo;
+    
     UIApplication *app = [UIApplication sharedApplication];
     NSString *alert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
     if (app.applicationState == UIApplicationStateActive) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"微趣拍新通知"
             message:[NSString stringWithFormat:@"%@", alert]
-            delegate:app.delegate
+            delegate:self
             cancelButtonTitle:@"OK"
             otherButtonTitles:nil];
         [alertView show];
+    }else{
+        NSString *link = [self.userInfo objectForKey:@"link"];
+        if(link){
+            [self handleNotificationClick:link];
+        }
     }
     [app setApplicationIconBadgeNumber:0];
     [BPush handleNotification:userInfo];
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *link = [self.userInfo objectForKey:@"link"];
+    if(link != nil){
+        [self handleNotificationClick:link];
+    }
+}
+
+- (void)handleNotificationClick: (NSString *)link
+{
+    NSLog(@"handle click %@", link);
+    CDVViewController *controller = (CDVViewController *)self.viewController;
+    NSString* jsString = [NSString stringWithFormat:@"handleOpenURL(\"vqupai://%@\");", link];
+    [controller.webView stringByEvaluatingJavaScriptFromString:jsString];
+    
+    //未启动的时候post通知给webview，通过handleOpenURL的方式
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"vqupai://%@", link]];
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CDVPluginHandleOpenURLNotification object:url]];
+}
+
 - (void) registerDeviceToken:(NSData *)deviceToken
 {
-    [BPush registerDeviceToken: deviceToken];
     self.deviceToken = [[[[deviceToken description]
                       stringByReplacingOccurrencesOfString:@"<" withString:@""]
                      stringByReplacingOccurrencesOfString:@">" withString:@""]
                     stringByReplacingOccurrencesOfString:@" " withString:@""];
+    [BPush registerDeviceToken: deviceToken];
 }
 
 @end

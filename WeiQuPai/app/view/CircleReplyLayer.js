@@ -57,6 +57,16 @@ Ext.define('WeiQuPai.view.CircleReplyLayer', {
             this.down('button[action=publish]').setDisabled(disabled);
         }, this);
 
+        //失焦时，如果没有内容，就恢复成默认状态
+        this.down('textfield').on('blur', function(){
+            var content = this.down('textfield[name=content]');
+            if(content.getValue().length == 0){
+                content.setPlaceHolder('评论');
+                this.down('hiddenfield[name=feed_id]').reset();
+                this.down('hiddenfield[name=to_uid]').reset();
+                this.down('hiddenfield[name=to_nick]').reset();
+            }
+        }, this);
 
         var me = this;
         this.element.dom.addEventListener('submit', function(e) {

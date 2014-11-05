@@ -10,7 +10,7 @@ Ext.define('WeiQuPai.controller.Feed', {
                 avatartap: 'doAvatarTap',
                 feedavatartap: 'doFeedAvatarTap',
                 zanavatartap: 'doZanAvatarTap',
-                //replytap: 'activeReplyForm',
+                replytap: 'activeReplyForm',
                 deletereply: 'showDeleteReply',
                 zan: 'doZan',
                 cancelzan: 'doCancelZan',
@@ -91,11 +91,13 @@ Ext.define('WeiQuPai.controller.Feed', {
                 WeiQuPai.Util.unmask();
                 if (!WeiQuPai.Util.invalidToken(result)) return false;
                 form.reset();
+                form.down('textfield').setPlaceHolder('评论');
                 result.user = {
                     id: user.id,
                     nick: user.nick,
                     avatar: user.avatar
                 }
+                result.to_nick = data.to_nick;
                 pageView.getStore().add(result);
                 pageView.updateReplyData('reply_num', 1);
                 result.score && WeiQuPai.Util.toast('评论成功，获得' + result.score + '积分');
