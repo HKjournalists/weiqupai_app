@@ -7,6 +7,7 @@
 //
 
 #import "CDVWechat.h"
+//#import "AFHTTPRequestOperationManager.h"
 
 @implementation CDVWechat
 
@@ -74,50 +75,72 @@
     }
 }
 
-#pragma mark "WXApiDelegate"
+- (void)login:(CDVInvokedUrlCommand *)command{
+    [WXApi registerApp:self.wechatAppId];
+    
+    CDVPluginResult *result = nil;
+    // if not installed
+    if (![WXApi isWXAppInstalled])
+    {
+        result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"未安装微信"];
+        
+        [self error:result callbackId:command.callbackId];
+        return ;
+    }
+    
+    // save the callback id
+    self.currentCallbackId = command.callbackId;
+    
+    SendAuthReq* req = [[SendAuthReq alloc ] init];
+    req.scope = @"snsapi_userinfo";
+    req.state = @"cdvwechat";
+    [WXApi sendReq: req];
+}
 
-/**
- * Not implemented
- */
-//- (void)onReq:(BaseReq *)req
-//{
-//
-//}
+#pragma mark "WXApiDelegate"
 
 - (void)onResp:(BaseResp *)resp
 {
     CDVPluginResult *result = nil;
     
     BOOL success = NO;
-    if([resp isKindOfClass:[SendMessageToWXResp class]])
+    switch (resp.errCode)
     {
-        switch (resp.errCode)
-        {
-            case WXSuccess:
+        case WXSuccess:
+            if([resp isKindOfClass:[SendAuthResp class]]){
+                SendAuthResp *rsp = (SendAuthResp *) resp;
+                NSDictionary *data = @{
+                                       @"code": rsp.code ?: @"",
+                                       @"lang": rsp.lang ?: @"",
+                                       @"country": rsp.country ?: @""
+                                       };
+                NSLog(@"wechat login: %@", data);
+                result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:data];
+            }else {
                 result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-                success = YES;
-            break;
-            
-            case WXErrCodeCommon:
-                result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"普通错误类型"];
-            break;
-            
-            case WXErrCodeUserCancel:
-                result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"用户点击取消并返回"];
-            break;
-            
-            case WXErrCodeSentFail:
-                result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"发送失败"];
-            break;
-            
-            case WXErrCodeAuthDeny:
-                result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"授权失败"];
-            break;
-            
-            case WXErrCodeUnsupport:
-                result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"微信不支持"];
-            break;
-        }
+            }
+            success = YES;
+        break;
+        
+        case WXErrCodeCommon:
+            result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"普通错误类型"];
+        break;
+        
+        case WXErrCodeUserCancel:
+            result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"用户点击取消并返回"];
+        break;
+        
+        case WXErrCodeSentFail:
+            result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"发送失败"];
+        break;
+        
+        case WXErrCodeAuthDeny:
+            result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"授权失败"];
+        break;
+        
+        case WXErrCodeUnsupport:
+            result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"微信不支持"];
+        break;
     }
     
     if (!result)
@@ -250,4 +273,52 @@
 
     return newImage;
 }
+
+/*
+- (void)getUserInfo: (NSString * ) code{
+    UIView *mask = [self maskView];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSString *apiUrl = @"https://api.weixin.qq.com/sns/oauth2/";
+    NSDictionary *param = @{
+                            @"grant_type" : @"authorization_code",
+                            @"appid" : @"wxc0d1e67c6159b69e",
+                            @"secret" : @"042f13bf72e04ec111f6b249fec3c595",
+                            @"code" : code
+                            };
+    manager.responseSerializer = [AFJSONRequestSerializer]
+    [manager GET:[NSString stringWithFormat:@"%@%@", apiUrl, @"access_token"] parameters:param
+    success:^(AFHTTPRequestOperation *operation, id responseObject){
+        NSLog(@"%@", responseObject);
+        NSDictionary *res = (NSDictionary *)responseObject;
+        NSString *url = @"https://api.weixin.qq.com/sns/userinfo";
+        NSDictionary *param = @{
+                  @"openid" : [res objectForKey:@"openid"],
+                  @"access_token" : [res objectForKey:@"access_token"]
+                  };
+        [manager GET:url parameters:param
+        success:^(AFHTTPRequestOperation *operation, id responseObject){
+            [mask removeFromSuperview];
+            NSLog(@"%@", responseObject);
+        }
+        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+        }];
+    }
+    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"Error: %@", error);
+    }];
+}
+
+- (UIView *)maskView {
+    CGRect screen = [UIScreen mainScreen].bounds;
+    UIView *mask = [[UIView alloc] initWithFrame:screen];
+    mask.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
+    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    indicator.center = CGPointMake(screen.size.width / 2, screen.size.height / 2);
+    [indicator startAnimating];
+    [mask addSubview:indicator];
+    [self.viewController.view addSubview:mask];
+    return mask;
+}
+ */
 @end

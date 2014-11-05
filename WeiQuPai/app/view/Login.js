@@ -59,9 +59,14 @@ Ext.define('WeiQuPai.view.Login', {
                 action: 'forgetpass'
             }]
         }, {
+            xtype: 'button',
+            text: '',
+            baseCls: 'log_wechat',
+            itemId: 'wechatlogin'
+        },{
             xtype: 'container',
             layout: 'hbox',
-            style: 'margin-top:20px;height:40px;',
+            style: 'margin-top:10px;height:40px;',
             cls: 'log_reg',
             items: [{
                     xtype: 'button',

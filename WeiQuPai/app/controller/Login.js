@@ -8,6 +8,7 @@ Ext.define('WeiQuPai.controller.Login', {
             goMain: 'button[action=gomain]',
             qqlogin: 'button[itemId=qqlogin]',
             weibologin: 'button[itemId=weibologin]',
+            wxlogin: 'button[itemId=wechatlogin]'
         },
         control: {
             loginForm: {
@@ -21,6 +22,12 @@ Ext.define('WeiQuPai.controller.Login', {
             },
             weibologin: {
                 tap: 'doWeiboLogin'
+            },
+            wxlogin: {
+                tap: 'doWechatLogin'
+            },
+            logout: {
+                tap: 'doLogout'
             },
             forgetpass: {
                 tap: 'showForgetPass'
@@ -60,7 +67,6 @@ Ext.define('WeiQuPai.controller.Login', {
                             WeiQuPai.loginReferer = null;
                         }
                         var main = WeiQuPai.navigator;
-                        var anim = main.getLayout().getAnimation();
                         main.pop();
                         win.close();
                     });
@@ -90,6 +96,29 @@ Ext.define('WeiQuPai.controller.Login', {
                 });
             }
         }, false);
+    },
+
+    //微信登录
+    doWechatLogin: function(){
+        if(!window.Wechat) return;
+        Wechat.login(function(data){
+            //获取到code后通过服务器进行验证获取用户信息
+            var url = WeiQuPai.Config.apiUrl + '/?r=appv2/wechatLogin&code=' + data.code;
+            WeiQuPai.Util.get(url, function(rsp){
+                WeiQuPai.Util.onLoginSuccess(rsp, function() {
+                    if (WeiQuPai.loginReferer) {
+                        WeiQuPai.sidebar.activeTabItem(WeiQuPai.loginReferer);
+                        WeiQuPai.loginReferer = null;
+                    }
+                    var main = WeiQuPai.navigator;
+                    main.pop();
+                });
+            }, {
+                mask: true
+            });
+        }, function(error){
+            console.log(error); 
+        });
     },
 
     showForgetPass: function() {

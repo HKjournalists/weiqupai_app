@@ -43,5 +43,9 @@ module.exports = {
      */
     share: function (message, onSuccess, onError) {
         exec(onSuccess, onError, "Wechat", "share", [message]);
+    },
+
+    login: function(onSuccess, onError){
+        exec(onSuccess, onError, "Wechat", "login", []);
     }
 };

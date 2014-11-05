@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import com.tencent.mm.sdk.modelmsg.*;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.json.JSONArray;
@@ -14,15 +15,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import com.tencent.mm.sdk.openapi.IWXAPI;
-import com.tencent.mm.sdk.openapi.SendMessageToWX;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
-import com.tencent.mm.sdk.openapi.WXMediaMessage;
-import com.tencent.mm.sdk.openapi.WXTextObject;
-import com.tencent.mm.sdk.openapi.WXWebpageObject;
+
+import android.util.Log;
 
 public class Wechat extends CordovaPlugin {
 
-	public static final String WXAPPID_PROPERTY_KEY = "weixinappid";
+	public static final String WXAPPID_PROPERTY_KEY = "wechatappid";
 
 	public static final String ERROR_WX_NOT_INSTALLED = "未安装微信";
 	public static final String ERROR_ARGUMENTS = "参数错误";
@@ -48,7 +47,7 @@ public class Wechat extends CordovaPlugin {
 	
 
 	protected IWXAPI wxAPI;
-	protected CallbackContext currentCallbackContext;
+	public CallbackContext currentCallbackContext;
 
 	@Override
 	public boolean execute(String action, JSONArray args,
@@ -59,23 +58,25 @@ public class Wechat extends CordovaPlugin {
 			return share(args, callbackContext);
 		}
 
+        if (action.equals("login")) {
+            return login(args, callbackContext);
+        }
+
 		return super.execute(action, args, callbackContext);
 	}
 
 	protected IWXAPI getWXAPI() {
 		if (wxAPI == null) {
 			String appId = webView.getProperty(WXAPPID_PROPERTY_KEY, "");
-			wxAPI = WXAPIFactory.createWXAPI(webView.getContext(), appId, true);
+            wxAPI = WXAPIFactory.createWXAPI(webView.getContext(), appId, true);
+            wxAPI.registerApp(appId);
 		}
-
 		return wxAPI;
 	}
 
 	protected boolean share(JSONArray args, CallbackContext callbackContext)
 			throws JSONException {
 		final IWXAPI api = getWXAPI();
-
-		api.registerApp(webView.getProperty(WXAPPID_PROPERTY_KEY, ""));
 
 		// check if installed
 		if (!api.isWXAppInstalled()) {
@@ -113,22 +114,44 @@ public class Wechat extends CordovaPlugin {
 			}
 
 		});
-
 		// save the current callback context
 		currentCallbackContext = callbackContext;
 		return true;
 	}
 
+    protected boolean login(JSONArray args, CallbackContext callbackContext){
+        final IWXAPI api = getWXAPI();
+
+        // check if installed
+        if (!api.isWXAppInstalled()) {
+            callbackContext.error(ERROR_WX_NOT_INSTALLED);
+            return false;
+        }
+
+        // run in background
+        cordova.getThreadPool().execute(new Runnable() {
+
+            @Override
+            public void run() {
+                SendAuth.Req req = new SendAuth.Req();
+                req.scope = "snsapi_userinfo";
+                req.state = "cdvwechat";
+                api.sendReq(req);
+            }
+
+        });
+        // save the current callback context
+        currentCallbackContext = callbackContext;
+        return true;
+    }
+
 	protected WXMediaMessage buildSharingMessage(JSONObject message)
 			throws JSONException {
 		URL thumbnailUrl = null;
 		Bitmap thumbnail = null;
-
 		try {
 			thumbnailUrl = new URL(message.getString(KEY_ARG_MESSAGE_THUMB));
-			thumbnail = BitmapFactory.decodeStream(thumbnailUrl
-					.openConnection().getInputStream());
-
+			thumbnail = BitmapFactory.decodeStream(thumbnailUrl.openStream());
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
 		} catch (IOException e) {
@@ -140,7 +163,9 @@ public class Wechat extends CordovaPlugin {
 		wxMediaMessage.description = message
 				.getString(KEY_ARG_MESSAGE_DESCRIPTION);
 		if (thumbnail != null) {
-			wxMediaMessage.setThumbImage(thumbnail);
+            Bitmap thumbBmp = Bitmap.createScaledBitmap(thumbnail, 150, 150, true);
+            thumbnail.recycle();
+			wxMediaMessage.setThumbImage(thumbBmp);
 		}
 
 		// media parameters

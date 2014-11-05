@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import com.tencent.mm.sdk.modelmsg.*;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.json.JSONArray;
@@ -14,11 +15,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import com.tencent.mm.sdk.openapi.IWXAPI;
-import com.tencent.mm.sdk.openapi.SendMessageToWX;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
-import com.tencent.mm.sdk.openapi.WXMediaMessage;
-import com.tencent.mm.sdk.openapi.WXTextObject;
-import com.tencent.mm.sdk.openapi.WXWebpageObject;
 
 import android.util.Log;
 
@@ -60,6 +57,10 @@ public class Wechat extends CordovaPlugin {
 			// sharing
 			return share(args, callbackContext);
 		}
+
+        if (action.equals("login")) {
+            return login(args, callbackContext);
+        }
 
 		return super.execute(action, args, callbackContext);
 	}
@@ -117,6 +118,32 @@ public class Wechat extends CordovaPlugin {
 		currentCallbackContext = callbackContext;
 		return true;
 	}
+
+    protected boolean login(JSONArray args, CallbackContext callbackContext){
+        final IWXAPI api = getWXAPI();
+
+        // check if installed
+        if (!api.isWXAppInstalled()) {
+            callbackContext.error(ERROR_WX_NOT_INSTALLED);
+            return false;
+        }
+
+        // run in background
+        cordova.getThreadPool().execute(new Runnable() {
+
+            @Override
+            public void run() {
+                SendAuth.Req req = new SendAuth.Req();
+                req.scope = "snsapi_userinfo";
+                req.state = "cdvwechat";
+                api.sendReq(req);
+            }
+
+        });
+        // save the current callback context
+        currentCallbackContext = callbackContext;
+        return true;
+    }
 
 	protected WXMediaMessage buildSharingMessage(JSONObject message)
 			throws JSONException {

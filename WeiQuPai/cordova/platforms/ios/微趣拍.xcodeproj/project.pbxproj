@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		117BB047A3FD44119F745E3F /* CDVWechat.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C18AF085F1F44E4B6EEBC60 /* CDVWechat.m */; };
 		181D65F618FD85550006D699 /* CDVSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D65F518FD85550006D699 /* CDVSplashScreen.m */; };
@@ -651,6 +652,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/wechatlib",
 					"$(PROJECT_DIR)/LibBPush",
+					"$(PROJECT_DIR)/AFNetworking",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -668,7 +670,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "微趣拍";
-				PROVISIONING_PROFILE = "a7f105a8-cbb6-41cf-806e-94337a88069a";
+				PROVISIONING_PROFILE = "5BE91B3A-F1D1-411E-9733-368B1625080C";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 			};
@@ -692,6 +694,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/wechatlib",
 					"$(PROJECT_DIR)/LibBPush",
+					"$(PROJECT_DIR)/AFNetworking",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
