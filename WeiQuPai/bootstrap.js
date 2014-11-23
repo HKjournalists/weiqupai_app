@@ -47,8 +47,7 @@ Ext.Loader.addClassPathMappings({
   "Ext.device.sqlite.SQLTransaction": "../touch/src/device/sqlite/Sencha.js",
   "Ext.draw.engine.SvgContext.Gradient": "../touch/src/draw/engine/SvgContext.js",
   "WeiQuPai": "app",
-  "WeiQuPai.view.DiscountDetail": "app/view/DIscountDetail.js",
-  "vqp": "app"
+  "WeiQuPai.view.DiscountDetail": "app/view/DIscountDetail.js"
 });
 Ext.ClassManager.addNameAlternateMappings({
   "Ext.AbstractComponent": [],
@@ -819,6 +818,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.controller.TopKiller": [],
   "WeiQuPai.controller.UserAuction": [],
   "WeiQuPai.controller.UserAuctionComment": [],
+  "WeiQuPai.controller.VerifyPhone": [],
   "WeiQuPai.model.Auction": [],
   "WeiQuPai.model.Comment": [],
   "WeiQuPai.model.Consignee": [],
@@ -841,10 +841,14 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.plugin.Sidebar": [],
   "WeiQuPai.plugin.Toast": [],
   "WeiQuPai.store.Auction": [],
+  "WeiQuPai.store.AuctionList": [],
   "WeiQuPai.store.Banner": [],
   "WeiQuPai.store.Category": [],
   "WeiQuPai.store.CategoryItem": [],
   "WeiQuPai.store.Circle": [],
+  "WeiQuPai.store.CircleFollow": [],
+  "WeiQuPai.store.CircleKillEnd": [],
+  "WeiQuPai.store.CircleSquare": [],
   "WeiQuPai.store.Comment": [],
   "WeiQuPai.store.CommentReply": [],
   "WeiQuPai.store.Coupon": [],
@@ -876,6 +880,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.Auction": [],
   "WeiQuPai.view.AuctionChart": [],
   "WeiQuPai.view.AuctionHelpLayer": [],
+  "WeiQuPai.view.AuctionList": [],
   "WeiQuPai.view.AuctionTip": [],
   "WeiQuPai.view.AuctionTipTwo": [],
   "WeiQuPai.view.Banner": [],
@@ -886,8 +891,12 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.CategoryItem": [],
   "WeiQuPai.view.ChangeAvatarLayer": [],
   "WeiQuPai.view.Circle": [],
+  "WeiQuPai.view.CircleAd": [],
+  "WeiQuPai.view.CircleFollow": [],
+  "WeiQuPai.view.CircleKillEnd": [],
   "WeiQuPai.view.CirclePost": [],
   "WeiQuPai.view.CircleReplyLayer": [],
+  "WeiQuPai.view.CircleSquare": [],
   "WeiQuPai.view.Comment": [],
   "WeiQuPai.view.CommentList": [],
   "WeiQuPai.view.ConfirmDialog": [],
@@ -905,6 +914,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.ExchangeProp": [],
   "WeiQuPai.view.Feed": [],
   "WeiQuPai.view.FeedBack": [],
+  "WeiQuPai.view.FeedList": [],
   "WeiQuPai.view.FieldForm": [],
   "WeiQuPai.view.FollowTip": [],
   "WeiQuPai.view.GenderList": [],
@@ -917,6 +927,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.KillDetail": [],
   "WeiQuPai.view.KillEnd": [],
   "WeiQuPai.view.KillHelp": [],
+  "WeiQuPai.view.KillRanking": [],
   "WeiQuPai.view.KillTip": [],
   "WeiQuPai.view.KillendTip": [],
   "WeiQuPai.view.Login": [],
@@ -948,6 +959,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.ReturnAnnounce": [],
   "WeiQuPai.view.ScoreNotEnough": [],
   "WeiQuPai.view.ScoreRule": [],
+  "WeiQuPai.view.SelectUser": [],
   "WeiQuPai.view.Setting": [],
   "WeiQuPai.view.ShareLayer": [],
   "WeiQuPai.view.Shipment": [],
@@ -969,8 +981,8 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.UserAuctionComment": [],
   "WeiQuPai.view.UserAuctionItem": [],
   "WeiQuPai.view.VTitleBar": [],
-  "WeiQuPai.view.WebPage": [],
-  "vqp.view.Situation": []
+  "WeiQuPai.view.VerifyPhone": [],
+  "WeiQuPai.view.WebPage": []
 });
 Ext.ClassManager.addNameAliasMappings({
   "Ext.AbstractComponent": [],
@@ -1961,6 +1973,7 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.controller.TopKiller": [],
   "WeiQuPai.controller.UserAuction": [],
   "WeiQuPai.controller.UserAuctionComment": [],
+  "WeiQuPai.controller.VerifyPhone": [],
   "WeiQuPai.model.Auction": [],
   "WeiQuPai.model.Comment": [],
   "WeiQuPai.model.Consignee": [],
@@ -1993,10 +2006,14 @@ Ext.ClassManager.addNameAliasMappings({
     "widget.toast"
   ],
   "WeiQuPai.store.Auction": [],
+  "WeiQuPai.store.AuctionList": [],
   "WeiQuPai.store.Banner": [],
   "WeiQuPai.store.Category": [],
   "WeiQuPai.store.CategoryItem": [],
   "WeiQuPai.store.Circle": [],
+  "WeiQuPai.store.CircleFollow": [],
+  "WeiQuPai.store.CircleKillEnd": [],
+  "WeiQuPai.store.CircleSquare": [],
   "WeiQuPai.store.Comment": [],
   "WeiQuPai.store.CommentReply": [],
   "WeiQuPai.store.Coupon": [],
@@ -2040,6 +2057,9 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.AuctionHelpLayer": [
     "widget.auctionhelplayer"
   ],
+  "WeiQuPai.view.AuctionList": [
+    "widget.auctionlist"
+  ],
   "WeiQuPai.view.AuctionTip": [
     "widget.auctiontip"
   ],
@@ -2070,11 +2090,23 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.Circle": [
     "widget.circle"
   ],
+  "WeiQuPai.view.CircleAd": [
+    "widget.circlead"
+  ],
+  "WeiQuPai.view.CircleFollow": [
+    "widget.circlefollow"
+  ],
+  "WeiQuPai.view.CircleKillEnd": [
+    "widget.circlekillend"
+  ],
   "WeiQuPai.view.CirclePost": [
     "widget.circlepost"
   ],
   "WeiQuPai.view.CircleReplyLayer": [
     "widget.circlereplylayer"
+  ],
+  "WeiQuPai.view.CircleSquare": [
+    "widget.circlesquare"
   ],
   "WeiQuPai.view.Comment": [
     "widget.comment"
@@ -2127,6 +2159,9 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.FeedBack": [
     "widget.feedback"
   ],
+  "WeiQuPai.view.FeedList": [
+    "widget.feedlist"
+  ],
   "WeiQuPai.view.FieldForm": [
     "widget.fieldform"
   ],
@@ -2162,6 +2197,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.KillHelp": [
     "widget.about"
+  ],
+  "WeiQuPai.view.KillRanking": [
+    "widget.barperson"
   ],
   "WeiQuPai.view.KillTip": [
     "widget.killtip"
@@ -2256,6 +2294,9 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.ScoreRule": [
     "widget.scorerule"
   ],
+  "WeiQuPai.view.SelectUser": [
+    "widget.selectuser"
+  ],
   "WeiQuPai.view.Setting": [
     "widget.setting"
   ],
@@ -2319,11 +2360,11 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.VTitleBar": [
     "widget.vtitlebar"
   ],
+  "WeiQuPai.view.VerifyPhone": [
+    "widget.verifyphone"
+  ],
   "WeiQuPai.view.WebPage": [
     "widget.webpage"
-  ],
-  "vqp.view.Situation": [
-    "widget.Situation"
   ]
 });
 

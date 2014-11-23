@@ -26,17 +26,13 @@ Ext.define('WeiQuPai.controller.Order', {
     },
 
     showConsigneeList: function() {
-        //先检查是否可以使用拍券
-        var record = this.getOrderView().getRecord();
-        if(!record.get('can_use_coupon')){
-            return WeiQuPai.Util.toast('该订单不能使用拍券');
-        }
         var view = Ext.create('WeiQuPai.view.MyConsignee', {
             selectMode: true
         });
         view.on('selected', this.selectConsignee, this);
         WeiQuPai.navigator.push(view);
     },
+
     showDeliveryTimeList: function() {
         this.getDeliveryTimeList().show();
     },

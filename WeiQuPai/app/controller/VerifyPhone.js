@@ -1,14 +1,14 @@
-Ext.define('WeiQuPai.controller.Register', {
+Ext.define('WeiQuPai.controller.VerifyPhone', {
     extend: 'Ext.app.Controller',
 
     config: {
         refs: {
-            regForm: 'register',
-            smsButton: 'register button[action=sendsms]'
+            pageView: 'verifyphone',
+            smsButton: 'verifyphone button[action=sendsms]'
         },
         control: {
-            regForm: {
-                register: 'doRegister'
+            pageView: {
+                verify: 'doVerify'
             },
             smsButton: {
                 tap: 'doSendSms'
@@ -23,37 +23,28 @@ Ext.define('WeiQuPai.controller.Register', {
     //计时器
     countTimer: null,
 
-    doRegister: function(btn) {
-        if (!this.checkForm()) {
-            return false;
-        }
-        var form = WeiQuPai.navigator.down('register');
+    doVerify: function(btn) {
+        var form = WeiQuPai.navigator.down('verifyphone');
         var data = form.getValues();
         data.token = this.smsToken;
-        WeiQuPai.Util.register(data, function() {
-            if (WeiQuPai.loginReferer) {
-                WeiQuPai.sidebar.activeTabItem(WeiQuPai.loginReferer);
-                WeiQuPai.loginReferer = null;
-            }
-            var prev = WeiQuPai.navigator.getPreviousItem();
-            //如果是login页面就pop2个view出去
-            var n = prev.isXType('login') ? 2 : 1;
-            WeiQuPai.navigator.pop(n);
+        var url = WeiQuPai.Config.apiUrl + "/?r=appv2/verify/";
+        var page = this.getPageView();
+        WeiQuPai.Util.post(url, data, function() {
+            var callback = page.getVerifySuccess();
+            Ext.isFunction(callback) && callback.apply(page);
         });
     },
 
     //发送短信
     doSendSms: function(btn){
-        var phone = this.getRegForm().down('textfield[name=uname]').getValue();
+        var phone = this.getPageView().down('textfield[name=phone]').getValue();
         if(!/^1[34578][0-9]{9}$/.test(phone)){
             WeiQuPai.Util.toast('请输入正确的手机号码');
             return;
         }
         btn.setDisabled(true);
-        var url = WeiQuPai.Config.apiUrl + "/?r=appv2/verify/send&phone=" + phone;
-        if(this.smsToken){
-            url += '&token=' + this.smsToken;
-        }
+        var user = WeiQuPai.Cache.get('currentUser');
+        var url = WeiQuPai.Config.apiUrl + "/?r=appv2/verify/send&token=" + user.token + '&phone=' + phone;
         var self = this;
         WeiQuPai.Util.get(url, function(rsp){
             self.smsToken = rsp.token;
@@ -78,20 +69,5 @@ Ext.define('WeiQuPai.controller.Register', {
         }
         btn.setText('重新发送(' + this.leftTime + ')');
         this.leftTime--;
-    },
-
-
-    checkForm: function() {
-        var form = WeiQuPai.navigator.down('register');
-        var d = form.getValues();
-        var msg = null;
-        if (d.password.trim().length < 6) {
-            msg = '密码不能少于6位';
-        }
-        if (msg) {
-            WeiQuPai.Util.toast(msg);
-            return false;
-        }
-        return true;
     }
 });

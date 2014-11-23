@@ -31,7 +31,12 @@ Ext.define('WeiQuPai.controller.Pay', {
     },
 
     showCouponList: function() {
-        
+        //先检查是否可以使用拍券
+        var data = this.getPageView().getOrderData();
+        if(data.can_use_coupon == "0"){
+            return WeiQuPai.Util.toast('该订单不能使用拍券');
+        }
+
         var view = Ext.create('WeiQuPai.view.MyCoupon', {
             selectMode: true
         });

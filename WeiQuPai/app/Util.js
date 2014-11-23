@@ -163,6 +163,7 @@ Ext.define("WeiQuPai.Util", {
         //更新sidebar的状态
         WeiQuPai.sidebar.updateUserInfo();
 
+        WeiQuPai.app.fireEvent('login');
         callback && callback();
     },
 
@@ -171,7 +172,7 @@ Ext.define("WeiQuPai.Util", {
         data.market = WeiQuPai.Config.market;
         WeiQuPai.Util.mask();
         Ext.Ajax.request({
-            url: WeiQuPai.Config.apiUrl + '/?r=appv2/join',
+            url: WeiQuPai.Config.apiUrl + '/?r=appv2/join/v2',
             method: 'post',
             params: data,
             success: function(rsp) {
@@ -187,6 +188,7 @@ Ext.define("WeiQuPai.Util", {
 
                 //更新sidebar的状态
                 WeiQuPai.sidebar.updateUserInfo();
+                WeiQuPai.app.fireEvent('login');
 
                 callback && callback();
             },
@@ -216,6 +218,7 @@ Ext.define("WeiQuPai.Util", {
         WeiQuPai.sidebar.updateUserInfo();
         WeiQuPai.sidebar.destroyLoginView();
         WeiQuPai.sidebar.activeTabItem('today');
+        WeiQuPai.app.fireEvent('logout');
     },
 
     updateProfile: function(data, callback) {

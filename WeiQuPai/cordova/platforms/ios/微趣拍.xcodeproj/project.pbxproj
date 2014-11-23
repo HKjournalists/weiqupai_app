@@ -669,7 +669,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "微趣拍";
-				PROVISIONING_PROFILE = "a7f105a8-cbb6-41cf-806e-94337a88069a";
+				PROVISIONING_PROFILE = "5786e44d-a5f1-4531-955a-2d245736111f";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 			};

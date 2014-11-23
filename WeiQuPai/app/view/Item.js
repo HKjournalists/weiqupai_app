@@ -125,10 +125,6 @@ Ext.define('WeiQuPai.view.Item', {
             xtype: 'commentlist',
             hidden: true
 
-        }, {
-            xtype: 'bottombar',
-            itemId: 'auctionBottombar',
-            cls: 'bottombarD'
         }],
 
         //当前激活的tab button

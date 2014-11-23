@@ -22,9 +22,9 @@ Ext.application({
     controllers: [
         'Auction', 'CameraLayer', 'Circle', 'Comment', 'CommentList', 'Feed', 'Login', 'MyAuction',
         'MyConsignee', 'MyFen', 'MyFollow', 'MyMessage', 'MyOrder', 'MyOrderDetail', 'Order', 'Pay',
-        'PrivateMessage', 'Profile', 'Register', 'Routes', 'Setting', 'ShowOrder', 'ShowUser', 'ShowUserDis', 'ShowUserFeed', 'ShowUserLike',
-        'Today', 'Discount', 'KillEnd', 'TopKiller', 'UserAuction', 'UserAuctionComment', 'MyDiscount', 'FeedBack',
-        'KillDetail'
+        'PrivateMessage', 'Profile', 'Register', 'Routes', 'Setting', 'ShowOrder', 'ShowUser', 'ShowUserDis',
+        'ShowUserFeed', 'ShowUserLike', 'Today', 'Discount', 'KillEnd', 'TopKiller', 'UserAuction',
+        'UserAuctionComment', 'MyDiscount', 'FeedBack', 'KillDetail', 'VerifyPhone'
     ],
     models: [
         'Auction', 'Comment', 'Consignee', 'Feed', 'Item', 'Order', 'Profile', 'Shipment',
@@ -36,13 +36,14 @@ Ext.application({
         'Iframe', 'SimpleViewer', 'ImageViewer', 'Sidebar', 'DisclosureItem', 'Pay', 'Order', 'Item', 'Auction', 'Item',
         'UserAuction', 'InputComment', 'CircleReplyLayer', 'CameraLayer', 'AuctionTip', 'MainTip', 'NoticeTip',
         'AuctionTipTwo', 'PriceForm', 'DeleteButtonLayer', 'ConfirmLayer','UserAuctionItem', 'FollowTip',
-        'AuctionHelpLayer', 'ScoreNotEnough', 'ConfirmDialog', 'ScoreRule', 'TipBox'
+        'AuctionHelpLayer', 'ScoreNotEnough', 'ConfirmDialog', 'ScoreRule', 'TipBox',
     ],
     stores: [
         'Auction', 'Comment', 'Banner', 'MyOrder', 'MyConsignee', 'Circle', 'MyProp', 'MyCoupon',
         'Coupon', 'Prop', 'SpecialSale', 'ShowUserLike', 'ShowUserDis', 'ShowUserFeed', 'MyFollow', 'MyAuction',
         'MyFans', 'FeedReply', 'MyMessage', 'CommentReply', 'PrivateMessage', 'Discount', 'MyDiscount',
-        'KillEnd', 'UserAuction', 'UserAuctionHelper', 'Category', 'CategoryItem', 'UserAuctionComment'
+        'KillEnd', 'UserAuction', 'UserAuctionHelper', 'Category', 'CategoryItem', 'UserAuctionComment',
+        'CircleSquare', 'CircleKillEnd', 'CircleFollow', 'AuctionList'
     ],
     icon: {
         '57': 'resources/icons/icon.png',
@@ -143,6 +144,18 @@ Ext.application({
                 bindpush: 0
             });
         }, 10000);
+
+        //右划返回
+        Ext.Viewport.element.on('swipe', function(e){
+            if(e.direction != 'right' || WeiQuPai.lastView){
+                return;
+            }
+            var nav = Ext.Viewport.down('main');
+            if (nav.getInnerItems().length > 1) {
+                nav.pop();
+                return;
+            }
+        });
     },
 
     //统计上报

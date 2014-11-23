@@ -80,6 +80,10 @@ Ext.define('WeiQuPai.view.KillEnd', {
 
     initialize: function() {
         this.callParent(arguments);
+
+        //添加到顶部的功能按钮
+        WeiQuPai.Util.addTopIcon(this);
+
         this.loadData();
         this.on('itemtap', this.bindEvent, this);
         this.down('#buttonList').element.on('tap', this.bindButtonEvent, this);

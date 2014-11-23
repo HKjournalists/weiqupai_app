@@ -23,7 +23,7 @@ if [ "$1" == "pub" ];then
 	scp adhoc/* $SERVER:$PACKAGE_DIR/
 	exit 0
 fi
-echo "starting build $BUILD_ENV $BUILD_TYPE"
+echo "starting build $BUILD_ENV $BUILD_TYPE $MARKET"
 mv app/Config.js app/Config.js.bak
 if [ "$BUILD_ENV" == "test" ];then
 	cp Config.js.test app/Config.js
@@ -34,9 +34,12 @@ else
 fi
 if [ "$BUILD_TYPE" != "market" ];then
 	sed -i '' 's/#MARKET#/appstore/' app/Config.js
+elif [ "$MARKET" != "all" ];then
+	sed -i '' "s/#MARKET#/$MARKET/" app/Config.js
 fi
 
 sencha app build native
+
 if [ "$BUILD_TYPE" == "all" ] || [ "$BUILD_TYPE" == "pkg" ];then
 	mv $BUILD_DIR/native-package-mobile/WeiQuPai/packager.json $BUILD_DIR/native-package-mobile/WeiQuPai/Payload
 	cd $BUILD_DIR/native-package-mobile/WeiQuPai/
@@ -57,9 +60,9 @@ if [ "$BUILD_TYPE" == "market" ];then
 			cordova build android --release
 			mv platforms/android/ant-build/android-release.apk ../../build/$market.apk
 		done < ../market.conf
-	else 
+	else
 		echo "build apk for market $MARKET"
-		sed  "s/#MARKET#/$MARKET/" app.js > www/app.js
+		#sed  "s/#MARKET#/$MARKET/" app.js > www/app.js
 		cordova build android --release
 		mv platforms/android/ant-build/android-release.apk ../../build/$MARKET.apk
 	fi

@@ -3,7 +3,6 @@ Ext.define('WeiQuPai.view.Discount', {
     xtype: 'discount',
     requires: ['WeiQuPai.view.DiscountDetail'],
     config: {
-        scrollable: true,
         cls: 'detail',
         scrollToTopOnRefresh: false,
         store: 'Discount',
@@ -49,6 +48,9 @@ Ext.define('WeiQuPai.view.Discount', {
         this.add(this.msgbox);
         this.loadData();
         this.on('itemtap', this.bindEvent, this);
+
+        //添加到顶部的功能按钮
+        WeiQuPai.Util.addTopIcon(this);
     },
 
     loadData: function() {

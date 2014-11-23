@@ -60,11 +60,14 @@ Ext.define('WeiQuPai.view.Feed', {
             cls: 'feed discard remess',
             tpl: new Ext.XTemplate(
                 '<div class="confirm">',
+
+                '<tpl if="this.hasCard(values)">',
                 '<div class="confirm_w"><div class="confirm_title">',
                 '<img src="{[this.getPic(values.json_data.pic_cover)]}"}" class="card-img"/>',
                 '<div class="title">{json_data.title}</div>',
                 '<div style="clear:both"></div>',
                 '</div></div>',
+                '</tpl>',
 
                 '<div class="list">',
 
@@ -85,6 +88,10 @@ Ext.define('WeiQuPai.view.Feed', {
                 '</div>',
 
                 '</div></div>', {
+                    hasCard: function(data){
+                        return data.feed_type > 0;
+                    },
+
                     isSelf: function(uid) {
                         var user = WeiQuPai.Cache.get('currentUser');
                         if (!user) return false;

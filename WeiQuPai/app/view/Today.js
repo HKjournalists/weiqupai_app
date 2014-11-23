@@ -124,9 +124,30 @@ Ext.define('WeiQuPai.view.Today', {
                 xtype: 'button',
                 baseCls: 'btn4',
                 flex: 1,
-                action: 'notice'
+                action: 'luxuries'
 
             }]
+        }, {
+            xtype: 'container',
+            itemId: 'barToday',
+            tpl: new Ext.XTemplate(
+                '<div class="barToday">',
+                '<div class="leftimg">',
+                '<img src="{[this.getCover(values.item.pic_cover)]}" width="73" height="73" />',
+                '</div>',
+                '<div>{item.title}</div>',
+                '<div><span class="">当前价：{curr_price}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>帮杀数：{help_num}</span></div>',
+                '<div>',
+                '<span class="fleft">底价：{reserve_price}</span>',
+                '<span  class="fright"><input type="button" value="我的实况" class="t_btn" /></span>',
+                '<div class="clear"></div>',
+                '</div>',
+                '</div>', {
+                    getCover: function(cover) {
+                        return WeiQuPai.Util.getImagePath(cover, '200');
+                    }
+                }
+            )
         }, {
             xtype: 'container',
             itemId: 'specialList',
@@ -172,6 +193,16 @@ Ext.define('WeiQuPai.view.Today', {
         this.on('activate', this.onActivate, this);
         this.on('hide', this.onHide, this);
         this.on('itemtap', this.bindEvent, this);
+
+        //血战的中转
+        this.down('#barToday').on('tap', function(e) {
+            var view = Ext.create('WeiQuPai.view.UserAuction');
+            view.setAuctionId(this.getData().id);
+            WeiQuPai.navigator.push(view);
+        }, null, {
+            element: 'element'
+        });
+
         this.down('#specialList').on('tap', function(e) {
             var idx = Ext.get(e.target).findParent('.list-product').getAttribute('data-idx') - 1;
             var view = Ext.create('WeiQuPai.view.SpecialSale', {
@@ -205,14 +236,20 @@ Ext.define('WeiQuPai.view.Today', {
         query['market'] = WeiQuPai.Config.market;
         query['os'] = Ext.os.name.toLowerCase();
         query['ver'] = WeiQuPai.Config.version;
-        if(user) query['token'] = user.token;
-        
+        if (user) query['token'] = user.token;
+
         var url = WeiQuPai.Config.apiUrl + '/?' + Ext.Object.toQueryString(query);
         var me = this;
         WeiQuPai.Util.get(url, function(data) {
             me.getStore().setData(data.auctions);
             me.down('#specialList').setData(data.special);
             me.down('banner').updateBanner(data.banner);
+            if(data.kill){
+                me.down('#barToday').show();
+                me.down('#barToday').setData(data.kill);
+            }else{
+                me.down('#barToday').hide();
+            }
             me.todayData = data;
             WeiQuPai.Util.resetListPaging(me);
             callback && callback();

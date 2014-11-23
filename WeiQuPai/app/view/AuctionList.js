@@ -1,10 +1,15 @@
-Ext.define('WeiQuPai.view.SpecialSale', {
+/**
+ * 分频道的拍卖列表
+ */
+
+Ext.define('WeiQuPai.view.AuctionList', {
     extend: 'Ext.DataView',
-    xtype: 'specialsale',
+    xtype: 'auctionlist',
     config: {
-        param: null,
+        loadingText: null,
+        store: 'AuctionList',
         scrollToTopOnRefresh: false,
-        store: 'SpecialSale',
+        disableSelection: true,
         plugins: [{
             type: 'wpullrefresh',
             lastUpdatedText: '上次刷新：',
@@ -14,6 +19,8 @@ Ext.define('WeiQuPai.view.SpecialSale', {
             releaseText: '释放立即刷新',
             loadedText: '下拉刷新',
             scrollerAutoRefresh: true
+        }, {
+            type: 'wlistpaging'
         }],
         itemTpl: new Ext.XTemplate(
             '<div class="today">',
@@ -39,6 +46,7 @@ Ext.define('WeiQuPai.view.SpecialSale', {
             '</div>',
 
             '</div>',
+            
             '</div>', {
                 statusImg: function(status) {
                     var img = [];
@@ -66,7 +74,7 @@ Ext.define('WeiQuPai.view.SpecialSale', {
         ),
         items: [{
             xtype: 'vtitlebar',
-            title: '专场拍卖',
+            title: '奢侈品专区',
             docked: 'top',
             items: [{
                 xtype: 'button',
@@ -74,7 +82,8 @@ Ext.define('WeiQuPai.view.SpecialSale', {
                 action: 'back'
             }]
         }],
-        firstLoad: true
+        firstLoad: true,
+        channel: 2
     },
 
     initialize: function() {
@@ -86,16 +95,14 @@ Ext.define('WeiQuPai.view.SpecialSale', {
         WeiQuPai.Util.addTopIcon(this);
     },
 
-    applyParam: function(param) {
-        this.down('titlebar').setTitle(param.title);
-        this.loadData(param.id);
-        return param;
+    updateChannel: function(channel) {
+        this.loadData();
     },
 
-    loadData: function(id, callback) {
+    loadData: function(callback) {
         var user = WeiQuPai.Cache.get('currentUser');
         var query = {};
-        query['id'] = id;
+        query['channel'] = this.getChannel();
         query['market'] = WeiQuPai.Config.market;
         query['os'] = Ext.os.name.toLowerCase();
         query['osver'] = Ext.os.version.version;
@@ -103,7 +110,7 @@ Ext.define('WeiQuPai.view.SpecialSale', {
         
         this.setLoadingText(null);
         this.getStore().getProxy().setExtraParams(query);
-        this.getStore().load(function(records, operation, success) {
+        this.getStore().loadPage(1, function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');
                 return;

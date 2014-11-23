@@ -41,7 +41,7 @@ Ext.define('WeiQuPai.controller.UserAuction', {
                 item_id: data.item_id
             }
         };
-        if(data.status > 1){
+        if (data.status > 1) {
             shareData.url += '&second_share=1';
         }
         var layer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer');
@@ -51,7 +51,7 @@ Ext.define('WeiQuPai.controller.UserAuction', {
         var user = WeiQuPai.Cache.get('currentUser');
         data.score_returned = parseInt(data.score_returned);
         data.status = parseInt(data.status);
-        if(data.status > 1 && user && user.id == data.uid && !data.score_returned){
+        if (data.status > 1 && user && user.id == data.uid && !data.score_returned) {
             var self = this;
             layer.setShareCallback(function() {
                 layer.setShareCallback(null);
@@ -87,7 +87,7 @@ Ext.define('WeiQuPai.controller.UserAuction', {
         var view = this.getPageView();
         var propId = record.get('prop_id');
         var data = view.getAuctionData();
-        if(!data.can_use_prop){
+        if (!data.can_use_prop) {
             return WeiQuPai.Util.toast('该商品不能使用道具');
         }
         var user = WeiQuPai.Cache.get('currentUser');
@@ -121,14 +121,30 @@ Ext.define('WeiQuPai.controller.UserAuction', {
         }
         //这里要重新拉一下最新的价格数据
         var id = auctionData.id;
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/userAuction/view&basic=1&id=' + id;
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/userAuction/orderInfo&id=' + id + '&token=' + user.token;
         WeiQuPai.Util.get(url, function(rsp) {
-            rsp.auction_type = 2;
-            var view = Ext.create('WeiQuPai.view.Order');
-            view.setAuctionData(rsp);
-            setTimeout(function() {
-                WeiQuPai.navigator.push(view);
-            }, 0);
+            function goToOrder() {
+                var orderView = Ext.create('WeiQuPai.view.Order');
+                rsp.auction_type = 2;
+                orderView.setAuctionData(rsp);
+                setTimeout(function() {
+                    WeiQuPai.navigator.push(orderView);
+                }, 0);
+            }
+            //需要验证手机
+            if (rsp.need_verify == 1) {
+                var view = Ext.create('WeiQuPai.view.VerifyPhone');
+                view.setVerifySuccess(function() {
+                    goToOrder();
+                });
+                setTimeout(function() {
+                    WeiQuPai.navigator.push(view);
+                }, 0);
+                return;
+            }
+            goToOrder();
+        }, {
+            mask: true
         });
     }
 });

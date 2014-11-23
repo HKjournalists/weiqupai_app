@@ -42,6 +42,9 @@ Ext.define('WeiQuPai.view.CategoryItem', {
     initialize: function() {
         this.callParent(arguments);
         this.on('itemtap', this.showItem, this);
+
+        //添加到顶部的功能按钮
+        WeiQuPai.Util.addTopIcon(this);
     },
 
     updateCategoryTitle: function(title) {

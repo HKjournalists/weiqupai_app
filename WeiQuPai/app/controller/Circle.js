@@ -2,7 +2,7 @@ Ext.define('WeiQuPai.controller.Circle', {
     extend: 'Ext.app.Controller',
     config: {
         refs: {
-            pageView: 'circle'
+            pageView: 'feedlist'
         },
         control: {
             pageView: {
