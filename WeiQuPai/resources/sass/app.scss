@@ -219,7 +219,7 @@ html body
          text-align: $al_center;;
          margin:$m_auto;
          font-size:13px;
-         margin-top:-4px;
+         margin-top:5px;
          background:white;
          display:-webkit-box;
          display:box;
@@ -3523,7 +3523,7 @@ html body
 //实时战况
 .floatleft{float:left;}
 .floatright{float:right;}
-.bar_new{padding:7px;height:115px;overflow:hidden;width:100%;background: white;}
+.bar_new{padding:7px;overflow:auto;width:100%;background: white;}
 .bar_new img{border:1px solid #fefefe;float:left;margin-right:7px;}
 .bar_new .text{font-size:12px;}
 .bar_new .text ul{ list-style-type: none;padding:0px;margin:0px;}
@@ -3585,7 +3585,7 @@ html body
 }
 
 //首页的血战
-.barToday{width:100%;margin:4px 0px 7px 0px;background: $color_fff;border-top:1px solid #eee;border-bottom:1px solid #eee;font-size:14px;}
+.barToday{width:100%;margin-top:5px;background: $color_fff;border-top:1px solid #eee;border-bottom:1px solid #eee;font-size:14px;}
 .barToday .leftimg{float:left;margin:7px;border:1px solid #eee;width:75px;height:75px;}
 .barToday div{margin-left:5px;margin-top:10px;margin-bottom:10px;}
 .fleft{float:left; color:$color_e7}

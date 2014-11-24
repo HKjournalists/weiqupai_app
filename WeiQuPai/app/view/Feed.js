@@ -22,6 +22,8 @@ Ext.define('WeiQuPai.view.Feed', {
             loadedText: '下拉刷新',
             refreshFn: 'fetchLastest',
             scrollerAutoRefresh: true
+        }, {
+            type: 'wlistpaging'
         }],
         itemTpl: new Ext.XTemplate(
             '<div class="message_new" data-id="{id}">',
@@ -134,6 +136,10 @@ Ext.define('WeiQuPai.view.Feed', {
 
     initialize: function() {
         this.callParent(arguments);
+
+        //添加到顶部的功能按钮
+        WeiQuPai.Util.addTopIcon(this);
+        
         this.handleItemTap();
         this.down('#feed').on('tap', this.bindFeedEvent, this, {
             element: 'element'
@@ -194,6 +200,8 @@ Ext.define('WeiQuPai.view.Feed', {
         var data = record.data;
         this.down('#feed').setData(data);
         this.down('#zanList').setData(data);
+        //后面翻页加载需要这个参数
+        this.getStore().getProxy().setExtraParam('id' , data.id);
         return record;
     },
 
@@ -201,6 +209,7 @@ Ext.define('WeiQuPai.view.Feed', {
         var fid = this.getFeedId();
         var user = WeiQuPai.Cache.get('currentUser');
         var feed = WeiQuPai.model.Feed;
+        var me = this;
         feed.getProxy().setExtraParam('token', user && user.token || '');
         feed.load(fid, {
             scope: this,
@@ -214,6 +223,7 @@ Ext.define('WeiQuPai.view.Feed', {
                 }
                 this.setFeedRecord(record);
                 this.getStore().setData(record.get('replies'));
+                WeiQuPai.Util.resetListPaging(me);
                 Ext.isFunction(callback) && callback();
             }
         });
