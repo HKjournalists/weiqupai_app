@@ -18,7 +18,7 @@ Ext.define('WeiQuPai.view.CircleFollow', {
 
     initialize: function(){
     	this.callParent(arguments);
-        this.on('show', this.onActivate, this);
+        this.onBefore('show', this.onActivate, this);
     	WeiQuPai.app.on('login', this.loadData, this);
     	WeiQuPai.app.on('logout', this.onLogout, this);
     },

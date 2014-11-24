@@ -83,13 +83,17 @@ Ext.define('WeiQuPai.view.Auction', {
                 '<div class="detailData">',
                 '<div class="title_new">{title}</div>',
                 '<div class="content_new">',
-                '<div class="priceNew">{[this.displayPrice(values)]} <span class="oprice">原价￥{oprice}</span></div>',
-                '</div></div>', {
-                    displayPrice: function(values) {
-                        if (WeiQuPai.Util.hasCache('auctions', parseInt(values.auction.id))) {
-                            return '已拍';
+                '<div class="detail_map">价格趋势</div>',
+                '<div class="priceNew">￥{auction.curr_price}</div>',
+                '</div>',
+                '<div class="oprice-row"><span class="oprice">原价￥{oprice}</span> <span class="discount">{[this.getDiscount(values)]}</span></div>',
+                '</div>',{
+                    getDiscount: function(values){
+                        var discount = parseFloat(values.auction.discount);
+                        if(discount > 0){
+                            return '下单立减' + discount + '元';
                         }
-                        return '￥' + values.auction.curr_price;
+                        return '';
                     }
                 }
             )

@@ -22,16 +22,16 @@ Ext.define('WeiQuPai.view.BottomBar', {
             },
             items: [{
                 xtype: 'button',
-                flex: '1',
+                width:'50px',
                 baseCls: 'dock_dis',
                 action: 'comment'
             }, {
                 xtype: 'button',
-                flex: '1',
+                width:'50px',
                 baseCls: 'dock_share',
                 action: 'share'
             }, {
-                flex: '2',
+                flex: '1',
                 xtype: "button",
                 baseCls: 'dock_btn',
                 text: '立刻购买',

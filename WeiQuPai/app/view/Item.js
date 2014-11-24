@@ -82,13 +82,11 @@ Ext.define('WeiQuPai.view.Item', {
                 '<div class="detailData">',
                 '<div class="title_new">{title}</div>',
                 '<div class="content_new">',
-                '<div class="left"></div>',
+                '<span class="oprice">原价￥{oprice}</span>',
                 '<div class="noticetip"><div class="notice_btn1">期望价</div><div class="notice_btn2">提醒我</div></div>',
                 '<div class="clear"></div>',
                 '</div>',
-                '<div class="price clear">',
-                '<span>原价￥{oprice}</span>',
-                '</div></div>'
+                '</div>'
             )
         }, {
             xtype: 'container',

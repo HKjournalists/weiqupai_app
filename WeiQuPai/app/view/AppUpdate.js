@@ -22,7 +22,7 @@ Ext.define('WeiQuPai.view.AppUpdate', {
             xtype: 'button',
             text: '前去下载最新版本',
             action: 'download',
-            cls: 'w-button',
+            baseCls: 'w-button',
             hidden: true
         }]
     },

@@ -218,6 +218,11 @@ Ext.define("WeiQuPai.Util", {
         WeiQuPai.sidebar.updateUserInfo();
         WeiQuPai.sidebar.destroyLoginView();
         WeiQuPai.sidebar.activeTabItem('today');
+        //清理用户相关的store数据
+        var storeList = ['MyAuction', 'MyOrder', 'MyMessage', 'MyDiscount', 'MyCoupon', 'MyProp', 'MyConsignee'];
+        storeList.forEach(function(store){
+            Ext.getStore(store).removeAll();
+        });
         WeiQuPai.app.fireEvent('logout');
     },
 

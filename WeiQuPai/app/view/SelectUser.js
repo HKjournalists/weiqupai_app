@@ -20,7 +20,7 @@ Ext.define('WeiQuPai.view.SelectUser', {
                 '<div class="carelist">',
                 '<tpl for=".">',
                 '<div class="ban" data-uid="{id}">',
-                '<img src="{[WeiQuPai.Util.getAvatar(values.avatar, 200)]}" class="img" />',
+                '<img src="{[WeiQuPai.Util.getAvatar(values.avatar, 140)]}" class="img" />',
                 '<div class="name">{nick}</div>',
                 '<div class="mask active"><div class="gou"></div></div><div class="clear"></div>',
                 '</div>',

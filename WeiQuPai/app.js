@@ -146,6 +146,7 @@ Ext.application({
         }, 10000);
 
         //右划返回
+        /*
         Ext.Viewport.element.on('swipe', function(e){
             if(e.direction != 'right' || WeiQuPai.lastView){
                 return;
@@ -156,6 +157,7 @@ Ext.application({
                 return;
             }
         });
+        */
     },
 
     //统计上报

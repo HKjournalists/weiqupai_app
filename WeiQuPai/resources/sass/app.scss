@@ -577,13 +577,9 @@ html body
     color:#383838;
   }
    .detailData .content_new{
-    padding:4px 0 0px 10px;
+    padding:10px 0 0 10px;
+    overflow:auto;
    }
-   .detailData .left
-   {
-     float:left;
-     width:50%;
-     }
    .detailData .priceNew
    {
     background:url('../images/detail_money.jpg') left no-repeat;
@@ -593,20 +589,19 @@ html body
     font-size: 23px;
     text-indent: 22px;
     background-position: 0px 5px;
-    padding-bottom:8px;
+   }
+   .detailData .oprice-row{
+     padding:6px 10px; 
    }
    .detailData .oprice
    {
-     marign-left:2em;
      color:#cbcbcb;
-     padding:4px 10px 5px;
-     font-size:15px!important;
-   }
-   .detailData .price span
-   {
      text-decoration:line-through;
-     font-size:15px;
-     margin-right:1em;
+     font-size:15px !important;
+   }
+   .detailData .discount{
+    color:#e76049;
+    font-size:15px !important;
    }
    .detail_map
    {
@@ -3369,6 +3364,7 @@ html body
 //精彩预告详情也提醒
 .noticetip{
   float:right;
+  padding-bottom:8px;
 }
 .noticetip .notice_btn1{
   background:#ffc600;
@@ -3621,8 +3617,8 @@ html body
 .carelist .ban .name{line-height:36px;margin-left:10px;color:black;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .carelist .ban .title{margin-top:6px;color:#858585;margin-left:10px;font-size:13px;}
 
-.carelist .ban .active{background:$color_e7;opacity:0.6;filter:alpha(opacity=60);width:47%;height:55px;border-radius: 5px;top:-10px;position: absolute;width:100%;}
-.carelist .ban .active .gou{background: url("../images/t_margin.png") no-repeat;background-size: contain;width:18px;height:14px;position: relative;margin: 20px auto;}
+.carelist .ban .active{background:$color_e7;opacity:0.3;width:47%;height:55px;border-radius: 5px;top:-10px;position: absolute;width:100%;}
+.carelist .ban .active .gou{background: url("../images/t_margin.png") no-repeat;background-size: contain;width:18px;height:14px;position:absolute;right:4px;bottom:4px;}
 
 .bar_newC{position: relative;}
 .bar_new_person{background:url("../images/bar_new_bg.jpg") no-repeat;background-size: cover;width:100%;height:295px;position: absolute;top:0px;left:0px;z-index:0;}
