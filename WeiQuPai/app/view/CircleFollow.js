@@ -11,7 +11,7 @@ Ext.define('WeiQuPai.view.CircleFollow', {
     _noFollowCfg: {
         itemId: 'noFollow',
         cls: 'itemcare',
-        html: '<div class="care_one">你的关注是空的，多关注一些人吧！</div>' +
+        html: '<div class="care_one">关注好拍友，杀价更便捷！<br/> 你还没有关注哦，多关注一些人吧！</div>' +
             '<div class="care_two">关注后，TA们的动态就会出现在这里</div>' +
             '<div><input type="button" class="care_btn" value="去关注" /></div>'
     },
