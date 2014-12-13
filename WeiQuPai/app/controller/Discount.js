@@ -3,7 +3,7 @@ Ext.define('WeiQuPai.controller.Discount', {
 
     config: {
         refs: {
-            pageView: 'discount',
+            pageView: 'discountnormal',
             getBtn: 'discountdetail button[action=getit]'
         },
         control: {

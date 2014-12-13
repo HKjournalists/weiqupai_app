@@ -33,11 +33,11 @@ Ext.define('WeiQuPai.view.KillDetail', {
                 '<div class="bar_new">',
                 '<img src="{[this.getCover(values.item.pic_cover)]}" width="100"/>',
                 '<div class="text"><ul>',
-                  '<li class="text">{item.title}</li>',
-                  '<li style="height:16px"><span class="floatleft">市场价：{item.oprice}</span>',
-                     '<span class="floatright">开杀价：{start_price}</span></li>',
-                  '<li class="red"><span class="floatright">剩余：{left_num}个</span>底价：{reserve_price}</li>',
-                  '<li><input type="button" class="status create" value="创建血战" /></span></li>',
+                '<li class="text">{item.title}</li>',
+                '<li style="height:16px"><span class="floatleft">市场价：{item.oprice}</span>',
+                '<span class="floatright">开杀价：{start_price}</span></li>',
+                '<li class="red"><span class="floatright">剩余：{left_num}个</span>底价：{reserve_price}</li>',
+                '<li><input type="button" class="status create" value="创建血战" /></span></li>',
                 '</ul></div>',
                 '</div>', {
                     getCover: function(pic_cover) {
@@ -49,6 +49,18 @@ Ext.define('WeiQuPai.view.KillDetail', {
             xtype: 'disclosureitem',
             title: '查看商品图文详情',
             itemId: 'showItemBtn',
+        }, {
+            xtype: 'container',
+            itemId: 'discountItem',
+            hidden: true,
+            tpl: new Ext.XTemplate(
+                '<div class="discount_bar">',
+                '<div class="color_e7">使用期限</div>',
+                '<div>·{item.expire_time}</div>',
+                '<div class="color_e7">使用地点</div>',
+                '<div>·{item.place}</div>',
+                '<div>'
+            )
         }, {
             xtype: 'container',
             style: 'margin-top:10px;padding:20px 40px;',
@@ -66,7 +78,7 @@ Ext.define('WeiQuPai.view.KillDetail', {
             element: 'element'
         });
 
-        this.down('#showItemBtn').on('tap', function(){
+        this.down('#showItemBtn').on('tap', function() {
             this.fireEvent('showitem', this);
         }, this);
 
@@ -98,6 +110,11 @@ Ext.define('WeiQuPai.view.KillDetail', {
         var me = this;
         WeiQuPai.Util.get(url, function(rsp) {
             me.setPoolData(rsp);
+            //惠吃惠吃的商品
+            if(rsp.item.type == 2){
+                me.down('#discountItem').setData(rsp);
+                me.down('#discountItem').setHidden(false);
+            }
             me.down('#auctionInfo').setData(rsp);
             Ext.isFunction(callback) && callback();
 
@@ -113,7 +130,7 @@ Ext.define('WeiQuPai.view.KillDetail', {
             data.pool_id = rsp.id;
             data.item_id = rsp.item_id;
             WeiQuPai.app.statReport(data);
-            
+
             WeiQuPai.FollowTip.showCreateAuction();
         });
     },

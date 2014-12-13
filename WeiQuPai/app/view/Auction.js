@@ -390,9 +390,8 @@ Ext.define('WeiQuPai.view.Auction', {
     showChart: function() {
         //显示趋势图
         var id = this.getRecord().get('auction').id;
-        var src = WeiQuPai.Config.host + '/apicv2/' + id + '.png?_dc=' + Math.random();
         var chart = WeiQuPai.Util.getGlobalView('WeiQuPai.view.AuctionChart');
-        chart.setSrc(src);
+        chart.setAuctionId(id);
         chart.setParentCmp(this);
         chart.show();
 

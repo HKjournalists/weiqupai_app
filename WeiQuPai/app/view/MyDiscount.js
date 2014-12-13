@@ -18,20 +18,19 @@ Ext.define('WeiQuPai.view.MyDiscount', {
         }],
         itemTpl: new Ext.XTemplate(
             '<div class="discount">',
-            '<div class="left"><img src="{[WeiQuPai.Util.getImagePath(values.discount.pic_url)]}" width="110"></div>',
+            '<div class="left"><img src="{[this.getPic(values)]}" width="110"></div>',
             '<div class="right">',
             '<div class="title">{discount.title}</div>',
             '<div class="dis">{discount.abstract}</div>',
-            '<div class="time">',
-            '{[this.getUsed(values.used)]}有效期 {discount.expire_time}</div>',
+            '<div class="time">有效期 {discount.expire_time}</div>',
             '</div>',
             '<div class="clear"></div>',
-            '</div>', {
-                getUsed: function(used) {
-                    if (used == 1) {
-                        return '<span class="used">已使用</span>';
-                    } else {
-                        return '<input type="button" value="使用" class="btn_e7 get_btn"/>';
+            '</div>',{
+                getPic: function(values){
+                    if(values.type == 1){
+                        return WeiQuPai.Util.getImagePath(values.discount.pic_url);
+                    }else{
+                        return WeiQuPai.Util.getImagePath(values.discount.pic_url, 200);
                     }
                 }
             }

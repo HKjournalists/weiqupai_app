@@ -1,12 +1,12 @@
-Ext.define('WeiQuPai.controller.MyFen', {
+Ext.define('WeiQuPai.controller.MyFans', {
     extend: 'Ext.app.Controller',
     config: {
         refs: {
             main: 'main',
-            myfen: 'myfen'
+            myfans: 'myfans'
         },
         control: {
-            myfen: {
+            myfans: {
                 itemtap: 'showDetail',
             },
 

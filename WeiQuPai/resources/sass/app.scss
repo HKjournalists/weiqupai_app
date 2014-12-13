@@ -572,12 +572,12 @@ html body
    }
    .detailData .title_new{
     width:100%;
-    padding:10px 10px 0;
+    padding:10px;
     font-size:15px;
     color:#383838;
   }
    .detailData .content_new{
-    padding:10px 0 0 10px;
+    padding-bottom:10px;
     overflow:auto;
    }
    .detailData .priceNew
@@ -2099,31 +2099,45 @@ html body
      text-align:center;
     }
     //我的粉丝 我的关注
-    .myfen .myfollow
+    .search{height:40px;background: $color_fff;width: 100%;}
+    .search .x-field-input{border:0px;color:#d4d4d4;}
+    .btn_search{background: url("../images/btn_search.png") no-repeat;background-size: contain;width:15px;height:15px;margin:13px;}
+    .fans_list{margin:8px 10px;}
+    .fans_tabbar{border-radius: 4px;border:1px solid $color_e7;width:100%;margin-bottom:8px;}
+    .fans_tabbar .x-button{border:0px;height:28px;padding:0px;}
+    .fans_tabbar .x-button-normal .x-button-label{color:$color_e7;}
+    .fans_tabbar .x-button{border:0px;border-radius:0px;}
+    .fans_tabbar .x-button.x-button-normal{border-radius:4px;}
+    .fans_tabbar .x-button.x-button-active{border-radius:0px;}
+    .fans_tabbar .x-button-active .x-button-label{
+      background: $color_e7;color:$color_fff!important;border:0px;height:28px;padding:0px;padding-top:6px;border-radius: 0px 0px 0px;
+    }
+    .myfen
     {
      width:100%;
-     text-align:center;
-     padding:5px 0px 5px;
-     display: -webkit-box;
-     margin-bottom:1px;
+     background:$color_fff;
+     padding:5px;
+     font-size:13px;
+     border:1px solid #efefef;
+     border-radius:4px;
+     margin-bottom:6px;
     }
-    .myfen .myfollow .img
+
+    .myfen .img
     {
+     float:left;
      width:60px;
     }
-    .myfen .myfollow .img img
-    {
-     border-radius:20px;
-    }
-    .myfen .myfollow .name
+    .myfen .name
     {
       font-size:13px;
-      -moz-box-flex:1.0;
-      -webkit-box-flex:1.0;
-      box-flex:1.0;
-      margin-top:11px;
+      margin-top:6px;
       text-align:left;
+      float:left;
+      line-height: 16px;
     }
+    .myfen .name .des{color:#858585;}
+    .myfen  .btn{border:0px;color:$color_e7;float:right;margin-right:5px;background: $color_fff;margin-top:16px;}
     //我的拍券
     .plist
     {
@@ -2430,98 +2444,142 @@ html body
      background:url('../images/list.png') no-repeat center center;
      @include user_btn;
     }
-  //我的优惠
-   @mixin discount_wenzi
-   {
-     text-overflow: ellipsis;
+    //我的优惠
+    .DiscountBarSuc{
+      margin: 13px 0px 3px;
+    }
+    .DiscountBarCode{
+      margin: 13px 10px 3px;
+      font-size: 14px;
+    }
+    @mixin discount_wenzi
+    {
+      text-overflow: ellipsis;
       word-break: break-all;
       white-space: nowrap;
       overflow: hidden;
-   }
-   .discount
-   {
-    padding:10px;
-    display:box;
-    display:-weibkit-box;
-    margin-bottom:10px;
-   }
-   .discount .left
-   {
-     width:110px;
-     float:left;
-   }
-   .discount .left img
-   {
-    border-radius:5px;
-    height:80px;
-   }
-   .discount .right
-   {
-    margin-left:120px;
-
-   }
-   .discount .right .title
-   {
-    font-size:14px;
-    word-break: break-all;
-   }
-    .discount .right .dis
-   {
-    font-size:13px;
-    word-break: break-all;
-    color:#999;
-     margin-top:7px;
-   }
+    }
+    .discount
+    {
+      margin-top:10px;
+      background:$color_fff;
+      padding:10px;
+    }
+    .discount .left
+    {
+      width:110px;
+      float:left;
+    }
+    .discount .left img
+    {
+      border-radius:5px;
+      height:80px;
+    }
+    .discount .right
+    {
+      margin-left:120px;
+      float:none!important;
+    }
+    .discount .right .title
+    {
+      font-size:14px;
+      word-break: break-all;
+    }
+    .discount .right .dis,.bottom_eat .dis
+    {
+      font-size:13px;
+      word-break: break-all;
+      color:#999;
+      margin-top:7px;
+    }
+    .bottom_eat .dis
+    {
+      color:#898294;
+      margin-top:5px;
+    }
+    .discount_bar{
+      margin-top:10px;
+      background:$color_fff;
+    }
+    .discount_bar div{
+      padding-top: 8px;
+      text-indent: 10px;
+    }
+    .bottom_eat .discolor
+    {
+      color:$color_e7;
+      margin-top:5px;
+    }
     .discount .right .time
-   {
-    font-size:12px;
-    word-break: break-all;
-    color:$color_e7;
-    margin-top:10px;
-    line-height:25px;
-   }
-   .discount .get_btn{
+    {
+      font-size:12px;
+      word-break: break-all;
+      color:$color_e7;
+      margin-top:10px;
+      line-height:25px;
+    }
+    .discount .right .text
+    {
+      font-size:12px;
+      word-break: break-all;
+      margin-top:5px;
+      line-height:15px;
+    }
+    .discount .btn_create{
+      font-size:13px!important;
+    }
+    .discount .get_btn{
       float:right;
-   }
-   .discount .used{
+    }
+    .discount .used{
       float:right;
       color:#aaa;
-   }
-   .discount .right .btn
-   {
-     float:right;
-     margin-top:10px;
-     font-size:12px;
-   }
-   .discountdetail .one
-   {
-    padding:10px;
-    font-size:14px;
-    word-break: break-all;
-    line-height:2em;
-    background:$color_fff;
-   }
-   .discountdetail .two
-   {
-    font-size:14px;
-    word-break: break-all;
-    line-height:2;
-    padding:10px;
-    background:$color_fff;
-   }
-   .discountdetail .two img, .discountdetail .one img{
-    max-width:100%;
-   }
-   .discountdetail li{
+    }
+    .discount .right .btn
+    {
+      float:right;
+      margin-top:10px;
+      font-size:12px;
+    }
+    .discount .bottom_eat{
+      border-top:1px solid #eaeaea;
+      margin-top:5px;
+      height:42px;
+    }
+    .discount .bottom_eat .mg{
+      width:33%;
+      float:left;
+    }
+    .discountdetail .one
+    {
+      padding:10px;
+      font-size:14px;
+      word-break: break-all;
+      line-height:2em;
+      background:$color_fff;
+      margin-top:10px;
+    }
+    .discountdetail .two
+    {
+      font-size:14px;
+      word-break: break-all;
+      line-height:2;
+      padding:10px;
+      background:$color_fff;
+    }
+    .discountdetail .two img, .discountdetail .one img{
+      max-width:100%;
+    }
+    .discountdetail li{
       margin-left:1.5em;
       list-style:inherit;
-   }
-   .mg_10{
-     margin-bottom:10px;
-   }
-   .my_btn .x-button:nth-last-child(1)
+    }
+    .mg_10{
+      margin-bottom:10px;
+    }
+    .my_btn .x-button:nth-last-child(1)
     {
-     border-right:0px;
+      border-right:0px;
     }
     .my_btn .x-button-active
     {
@@ -3437,18 +3495,7 @@ html body
 }
 .tip{
   text-align:center;
-  margin:10px;
-}
-.tip-title{
-  background: $color_e7;
-  color: #fff;
-  font-size: 14px;
-  border-radius: 0 0 4px 4px;
-  display: block;
-  width: 5em;
-  text-align: center;
-  padding: 2px 0;
-  margin: auto;
+  margin-bottom:10px;
 }
 .tip-btn{
   background-image:url('../images/share.png');

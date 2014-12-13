@@ -124,7 +124,7 @@ Ext.define('WeiQuPai.controller.UserAuction', {
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/userAuction/orderInfo&id=' + id + '&token=' + user.token;
         WeiQuPai.Util.get(url, function(rsp) {
             function goToOrder() {
-                var orderView = Ext.create('WeiQuPai.view.Order');
+                var orderView = Ext.create(rsp.item.type == 1 ? 'WeiQuPai.view.Order' : 'WeiQuPai.view.CouponOrder');
                 rsp.auction_type = 2;
                 orderView.setAuctionData(rsp);
                 setTimeout(function() {

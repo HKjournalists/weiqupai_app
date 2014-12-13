@@ -57,14 +57,16 @@ Ext.define('WeiQuPai.controller.Order', {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
         var order = this.getOrderView().getRecord();
-        if (!order.get('consignee_id')) {
+        //如果是普通商品必须填收货地址
+        if (order.get('item').type == 1 && !order.get('consignee_id')) {
             WeiQuPai.Util.toast('还没有选择收货地址');
             return false;
         }
         var itemData = this.getOrderView().down('#orderInfo').getData().item;
+        var tfield = this.getOrderView().down('textareafield');
         var param = WeiQuPai.Util.filterNull(order.data);
         param.token = user.token;
-        param.comment = this.getOrderView().down('textareafield').getValue();
+        param.comment = tfield && tfield.getValue() || '';
         var controller = param.auction_type == 1 ? 'order' : 'discountOrder';
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/' + controller;
         WeiQuPai.Util.post(url, param, function(rsp) {

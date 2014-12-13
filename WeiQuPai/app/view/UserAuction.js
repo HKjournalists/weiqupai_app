@@ -90,6 +90,18 @@ Ext.define('WeiQuPai.view.UserAuction', {
             itemId: 'showItemBtn',
         }, {
             xtype: 'container',
+            itemId: 'discountItem',
+            hidden: true,
+            tpl: new Ext.XTemplate(
+                '<div class="discount_bar">',
+                '<div class="color_e7">使用期限</div>',
+                '<div>·{item.expire_time}</div>',
+                '<div class="color_e7">使用地点</div>',
+                '<div>·{item.place}</div>',
+                '<div>'
+            )
+        }, {
+            xtype: 'container',
             html: '<div class="share_container"><div class="bar_dest">分享链接获得更多战友</div><div class="share_btn"></div></div>',
             itemId: 'shareContainer'
         }],
@@ -159,6 +171,11 @@ Ext.define('WeiQuPai.view.UserAuction', {
         var me = this;
         WeiQuPai.Util.get(url, function(rsp) {
             me.setAuctionData(rsp);
+            //惠吃惠吃的商品
+            if(rsp.item.type == 2){
+                me.down('#discountItem').setData(rsp);
+                me.down('#discountItem').setHidden(false);
+            }
             me.down('#auctionInfo').setData(rsp);
             me.showTip();
             me.getStore().getProxy().setExtraParam('id', id);

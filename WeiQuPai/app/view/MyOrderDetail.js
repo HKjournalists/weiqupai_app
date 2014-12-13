@@ -33,13 +33,18 @@ Ext.define('WeiQuPai.view.MyOrderDetail', {
                 '<li><span class="value">{total_pay}</span>订单金额</li>',
                 '</ul>',
                 '<ul>',
-                '<li><span class="value">{consignee_info.mobile}</span>电话</li>',
-                '<li><span class="value">{consignee_info.province}{consignee_info.city}{consignee_info.address}</span>地址</li>',
-                '<li><span class="value">{consignee_info.zip}</span>邮编</li>',
-                '</ul>',
-                '<ul>',
+                '<tpl if="this.isNormalItem(values.item)">',
+                '<li><span class="value">{mobile}</span>电话</li>',
+                '<li><span class="value">{province}{city}{address}</span>地址</li>',
+                '<li><span class="value">{zip}</span>邮编</li>',
                 '<li><span class="value">{delivery_time}</span>配送方式</li>',
                 '<li><span class="value">{payment}</span>支付方式</li>',
+                '<tpl else>',
+                '<li><span class="value">{item.expire_time}</span>使用期限</li>',
+                '<li><span class="value">{item.place}</span>使用地点</li>',
+                '</tpl>',
+                '</ul>',
+                '<ul>',
                 '<li><span class="value">{[this.getStatusText(values.status)]}</span>订单状态</li>',
                 '<li><span class="value">{ctime}</span>下单时间</li>',
                 '<li><span class="value">{comment}</span>备注</li>',
@@ -51,6 +56,10 @@ Ext.define('WeiQuPai.view.MyOrderDetail', {
 
                     getCover: function(cover) {
                         return WeiQuPai.Util.getImagePath(cover, '200');
+                    },
+
+                    isNormalItem: function(item){
+                        return item.type == 1;
                     }
                 }
             )

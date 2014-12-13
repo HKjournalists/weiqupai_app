@@ -1,7 +1,7 @@
-Ext.define('WeiQuPai.view.Order', {
+//优惠券的订单提交
+Ext.define('WeiQuPai.view.CouponOrder', {
     extend: 'Ext.Container',
     xtype: 'order',
-    requires: ['WeiQuPai.view.DeliveryTimeList', 'WeiQuPai.view.MyConsignee'],
     config: {
         auctionData: null,
         scrollable: true,
@@ -41,22 +41,32 @@ Ext.define('WeiQuPai.view.Order', {
                 '</div>'
             )
         }, {
-            xtype: 'disclosureitem',
-            itemId: 'consignee',
-            title: '收货信息',
-            contentPosition: 'bottom'
-        }, {
-            xtype: 'disclosureitem',
-            itemId: 'delivery_time',
-            title: '配送时间',
-            contentPosition: 'bottom'
-        }, {
-            xtype: 'textareafield',
-            placeHolder: '如果商品为多色，请备注您希望购买的颜色',
-            maxLength: 100,
-            name: 'comment',
-            cls: 'order_comment',
-            clearIcon: false
+            xtype: 'container',
+            cls: 'confirm',
+            style: 'margin-top:10px;padding:10px;',
+            items: [{
+                xtype: 'container',
+                html: '使用期限',
+                cls: 'color_e7'
+            }, {
+                xtype: 'container',
+                itemId: 'expireTime',
+                tpl: new Ext.XTemplate(
+                    '{item.expire_time}'
+                ),
+                cls: 'font_weight'
+            }, {
+                xtype: 'container',
+                html: '使用地点',
+                cls: 'color_e7'
+            }, {
+                xtype: 'container',
+                itemId: 'place',
+                tpl: new Ext.XTemplate(
+                    '{item.place}'
+                ),
+                cls: 'font_weight'
+            }]
         }, {
             xtype: 'button',
             text: '提交订单',
@@ -64,12 +74,6 @@ Ext.define('WeiQuPai.view.Order', {
             action: 'submitOrder'
         }]
     },
-
-
-    consigneeTpl: new Ext.XTemplate(
-        '<div><b>{name} {mobile}</b></div>',
-        '<div>{province}{city}{address}</div>'
-    ),
 
     tipTimer: null,
 
@@ -79,20 +83,6 @@ Ext.define('WeiQuPai.view.Order', {
         if (!user) return;
         var order = Ext.create('WeiQuPai.model.Order');
         this.setRecord(order);
-        this.addDeliveryTime();
-
-        //加载默认收货地址
-        var consignee = Ext.getStore('MyConsignee');
-        consignee.getProxy().setExtraParam('token', user.token);
-        consignee.load(function(records, operation, success) {
-            if (!success) return;
-            var dft = consignee.findRecord('is_default', 1, 0, null, null, true);
-            if (dft) {
-                this.getRecord().set('consignee_id', dft.get('id'));
-                var html = this.consigneeTpl.apply(dft.getData());
-                this.down('#consignee').setContent(html);
-            }
-        }, this);
         this.on('destroy', this.onDestroy, this);
     },
 
@@ -113,19 +103,9 @@ Ext.define('WeiQuPai.view.Order', {
         this.getRecord().set('coupon', '');
         this.getRecord().set('item', data.item);
         this.down('#orderInfo').setData(data);
+        this.down('#expireTime').setData(data);
+        this.down('#place').setData(data);
         return data;
-    },
-
-    addDeliveryTime: function() {
-        var deliveryTimeView = WeiQuPai.Util.createOverlay('WeiQuPai.view.DeliveryTimeList');
-        this.selectFirst('delivery_time', deliveryTimeView.down('dataview'));
-    },
-
-    selectFirst: function(itemId, list) {
-        list.select(0);
-        var title = list.getSelection()[0].get('title');
-        this.getRecord().set(itemId, title);
-        this.down('disclosureitem[itemId=' + itemId + ']').setContent(title);
     },
 
     onDestroy: function() {

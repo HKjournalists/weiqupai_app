@@ -35,12 +35,6 @@ Ext.define('WeiQuPai.view.DiscountDetail', {
             action: 'getit',
             text: '分享领取'
         }, {
-            xtype: 'button',
-            baseCls: 'w-button',
-            action: 'useit',
-            text: '使用',
-            hidden: true
-        }, {
             xtype: 'container',
             cls: 'one mg_10',
             itemId: 'intro',
@@ -92,18 +86,6 @@ Ext.define('WeiQuPai.view.DiscountDetail', {
         this.down('#title').setData(record.data);
         this.down('#intro').setData(record.data);
         this.down('#desc').setData(record.data);
-    },
-
-    updateDiscountRecord: function(record) {
-        if (record == null) {
-            return;
-        }
-        var btn = this.down('button[action=useit]');
-        if (record.get('used') == 1) {
-            btn.setText('已使用');
-            btn.setCls('disabled');
-            btn.setDisabled(true);
-        }
     },
 
     loadData: function() {

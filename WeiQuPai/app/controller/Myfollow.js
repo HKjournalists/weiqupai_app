@@ -8,8 +8,7 @@ Ext.define('WeiQuPai.controller.MyFollow', {
         control: {
             myfollow: {
                 itemtap: 'showDetail',
-            },
-
+            }
         }
     },
 

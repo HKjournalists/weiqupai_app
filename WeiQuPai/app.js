@@ -21,7 +21,7 @@ Ext.application({
 
     controllers: [
         'Auction', 'CameraLayer', 'Circle', 'Comment', 'CommentList', 'Feed', 'Login', 'MyAuction',
-        'MyConsignee', 'MyFen', 'MyFollow', 'MyMessage', 'MyOrder', 'MyOrderDetail', 'Order', 'Pay',
+        'MyConsignee', 'MyFans', 'MyFollow', 'MyMessage', 'MyOrder', 'MyOrderDetail', 'Order', 'Pay',
         'PrivateMessage', 'Profile', 'Register', 'Routes', 'Setting', 'ShowOrder', 'ShowUser', 'ShowUserDis',
         'ShowUserFeed', 'ShowUserLike', 'Today', 'Discount', 'KillEnd', 'TopKiller', 'UserAuction',
         'UserAuctionComment', 'MyDiscount', 'FeedBack', 'KillDetail', 'VerifyPhone'
@@ -43,7 +43,7 @@ Ext.application({
         'Coupon', 'Prop', 'SpecialSale', 'ShowUserLike', 'ShowUserDis', 'ShowUserFeed', 'MyFollow', 'MyAuction',
         'MyFans', 'FeedReply', 'MyMessage', 'CommentReply', 'PrivateMessage', 'Discount', 'MyDiscount',
         'KillEnd', 'UserAuction', 'UserAuctionHelper', 'Category', 'CategoryItem', 'UserAuctionComment',
-        'CircleSquare', 'CircleKillEnd', 'CircleFollow', 'AuctionList'
+        'CircleSquare', 'CircleKillEnd', 'CircleFollow', 'AuctionList', 'AuctionRound', 'DiscountKillEnd'
     ],
     icon: {
         '57': 'resources/icons/icon.png',

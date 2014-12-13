@@ -18,12 +18,15 @@ Ext.define('WeiQuPai.controller.MyDiscount', {
     },
 
     doShowDetail: function(list, index, dataItem, record, e) {
-        var view = Ext.create('WeiQuPai.view.DiscountDetail');
-        view.setDiscountId(record.get('discount_id'));
-        view.down('button[action=getit]').hide();
-        view.down('button[action=useit]').show();
-        view.setDiscountRecord(record);
-        WeiQuPai.navigator.push(view);
+        if(record.get('type') == 1){
+            var view = Ext.create('WeiQuPai.view.DiscountDetail');
+            view.setDiscountId(record.get('discount_id'));
+            view.down('button[action=getit]').hide();
+            view.setDiscountRecord(record);
+            WeiQuPai.navigator.push(view);
+        }else if(record.get('type') == 2){ //商品类型的惠吃惠喝
+            WeiQuPai.Util.goItemView(record.get('discount_id'), true);
+        }
     },
 
     useDiscount: function(list, index, dataItem, record, e) {

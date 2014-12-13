@@ -3,17 +3,73 @@ Ext.define('WeiQuPai.view.AuctionChart', {
     xtype: 'auctionchart',
     config: {
         parentCmp: null,
-        src: null,
+        auctionId: null,
         centered: true,
         modal: true,
         width: '100%',
         hideOnMaskTap: true,
         style: 'background-color:#fff',
-        tpl: new Ext.XTemplate(
-            '<div class="tip-title">价格趋势</div>',
-            '<img src="{img}" class="chart-img"/>',
-            '<div class="tip"><span class="tip-btn">设置提醒价格</span></div>'
-        )
+        items: [{
+            xtype: 'chart',
+            height: '200px',
+            store: 'AuctionRound',
+            animate: true,
+            //innerPadding:{top:8,right:8,bottom:8,left:8},
+            interactions: ['itemhighlight'],
+            legend: {},
+            series: [{
+                type: 'line',
+                xField: 'ctime',
+                yField: 'price',
+                title: '价格趋势图',
+                style: {
+                    smooth: true,
+                    stroke: '#e76049',
+                    lineWidth: 3,
+                    shadowColor: 'rgba(0,0,0,0.7)',
+                    shadowBlur: 10,
+                    shadowOffsetX: 3,
+                    shadowOffsetY: 3
+                },
+                highlightCfg: {
+                    scale: 2
+                },
+                marker: {
+                    type: 'circle',
+                    stroke: '#CA422A',
+                    fill: '#e76049',
+                    lineWidth: 2,
+                    radius: 4,
+                    shadowColor: 'rgba(0,0,0,0.7)',
+                    shadowBlur: 10,
+                    shadowOffsetX: 3,
+                    shadowOffsetY: 3,
+                    fx: {
+                        duration: 300
+                    }
+                }
+            }],
+            axes: [{
+                type: 'numeric',
+                position: 'left',
+                grid: {
+                    odd: {
+                        fill: '#fafafa'
+                    }
+                },
+                style: {
+                    axisLine: false,
+                    estStepSize: 20,
+                    stroke: '#ddd'
+                }
+            }, {
+                type: 'category',
+                position: 'bottom',
+            }]
+        }, {
+            xtype: 'container',
+            html: '<div class="tip"><span class="tip-btn">设置提醒价格</span></div>'
+        }]
     },
 
     initialize: function() {},
@@ -37,12 +93,12 @@ Ext.define('WeiQuPai.view.AuctionChart', {
         });
     },
 
-    applySrc: function(src) {
-        var d = {
-            img: src
-        }
-        this.setData(d);
+    applyAuctionId: function(id) {
+        var store = this.down('chart').getStore();
+        store.getProxy().setExtraParam('id', id);
+        store.load();
         this.bindEvent();
+        return id;
     },
 
     bindEvent: function() {

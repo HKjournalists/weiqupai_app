@@ -6,7 +6,8 @@ Ext.define('WeiQuPai.view.Sidebar', {
     xtype: 'sidebar',
     requires: ['WeiQuPai.view.Today', 'WeiQuPai.view.MyAuction', 'WeiQuPai.view.MyMessage',
         'WeiQuPai.view.MyOrder', 'WeiQuPai.view.Circle', 'WeiQuPai.view.MyDiscount', 'WeiQuPai.view.MyCoupon',
-        'WeiQuPai.view.MyProp', 'WeiQuPai.view.Profile', 'WeiQuPai.view.Setting', 'WeiQuPai.view.ShowUser'
+        'WeiQuPai.view.MyProp', 'WeiQuPai.view.Profile', 'WeiQuPai.view.Setting', 'WeiQuPai.view.ShowUser',
+        'WeiQuPai.view.MyFollowTab'
     ],
     config: {
         notLogin: ['today', 'circle', 'setting'],
@@ -72,6 +73,11 @@ Ext.define('WeiQuPai.view.Sidebar', {
             flex: 1,
             text: '我的资料',
             id: 'profile'
+        }, {
+            xtype: 'button',
+            flex: 1,
+            text: '我的关注',
+            id: 'myfollowtab'
         }, {
             xtype: 'button',
             flex: 1,
