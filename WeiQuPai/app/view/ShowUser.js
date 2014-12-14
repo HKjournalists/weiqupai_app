@@ -42,6 +42,11 @@ Ext.define('WeiQuPai.view.ShowUser', {
                 '</div>',
 
                 '</div><br>',
+                '<div>',
+                '<div class="exp">',
+                '{score}',
+                '</div>',
+                '</div>',
                 '<div class="des">',
                 '{sign}',
                 '</div>',
