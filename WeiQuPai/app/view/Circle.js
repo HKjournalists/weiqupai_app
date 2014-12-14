@@ -81,8 +81,8 @@ Ext.define('WeiQuPai.view.Circle', {
         this.down('circlead').loadData();
         var msgType = [WeiQuPai.Notify.MSG_CIRCLE, WeiQuPai.Notify.MSG_CIRCLE_REPLY, WeiQuPai.Notify.MSG_CIRCLE_ZAN];
         //刷新当前active的tab
-        this.getActiveTab().tabView.loadData();
         if (WeiQuPai.Notify.hasNotify(msgType)) {
+            this.getActiveTab().tabView.loadData();
             WeiQuPai.Notify.clearNotify(msgType);
         }
     },

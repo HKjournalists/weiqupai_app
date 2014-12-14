@@ -3,7 +3,7 @@ Ext.define('WeiQuPai.store.MyFollow', {
     config: {
         storeId: 'MyFollow',
         autoLoad: false,
-        fields: ['id', 'nick', 'avatar'],
+        fields: ['id', 'nick', 'avatar', 'sign'],
         pageSize: 100,
         proxy: {
             type: 'ajax',

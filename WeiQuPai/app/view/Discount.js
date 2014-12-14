@@ -23,12 +23,12 @@ Ext.define('WeiQuPai.view.Discount', {
                 xtype: 'button',
                 text: '血战模式',
                 cls: 'x-button-active',
-                action: 'killend'
+                action: 'discountkillend'
             }, {
                 flex: 1,
                 xtype: 'button',
                 text: '分享即得',
-                action:'normal'
+                action:'discountnormal'
             }]
         },{
             xtype: 'container',
@@ -36,11 +36,9 @@ Ext.define('WeiQuPai.view.Discount', {
             itemId: 'mainView',
             flex: 1,
             items: [{
-                xtype: 'discountkillend',
-                itemId: 'killend'
+                xtype: 'discountkillend'
             },{
-                xtype: 'discountnormal',
-                itemId: 'normal'
+                xtype: 'discountnormal'
             }]
         }]
     },
@@ -59,7 +57,7 @@ Ext.define('WeiQuPai.view.Discount', {
                     return;
                 }
                 this.addCls('x-button-active');
-                main.setActiveItem('#' + this.config.action);
+                main.setActiveItem(this.config.action);
                 self.activeTab.removeCls('x-button-active');
                 self.activeTab = this;
             });

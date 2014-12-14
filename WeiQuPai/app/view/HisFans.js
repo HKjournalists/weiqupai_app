@@ -1,12 +1,13 @@
-Ext.define('WeiQuPai.view.MyFollow', {
+Ext.define('WeiQuPai.view.HisFans', {
     extend: 'Ext.DataView',
-    xtype: 'myfollow',
+    xtype: 'hisfans',
     config: {
         uid: null,
         loadingText: null,
         disableSelection: true,
+        scrollable: true,
         cls: 'bg_ef',
-        store: 'MyFollow',
+        store: 'HisFans',
         plugins: [{
             type: 'wpullrefresh',
             lastUpdatedText: '上次刷新：',
@@ -22,7 +23,6 @@ Ext.define('WeiQuPai.view.MyFollow', {
         itemCls: 'fans_list',
         itemTpl: new Ext.XTemplate(
             '<div class="myfen">',
-            '<input type="button" class="btn" value="取消关注" />',
             '<div class="img">',
             '<img src="{[WeiQuPai.Util.getAvatar(values.avatar, 140)]}" width="40">',
             '</div>',
@@ -32,17 +32,25 @@ Ext.define('WeiQuPai.view.MyFollow', {
             '</div>',
             '<div class="clear"></div>',
             '</div>'
-        )
+        ),
+        items: [{
+            xtype: 'vtitlebar',
+            title: 'TA的粉丝',
+            docked: 'top',
+            items: [{
+                xtype: 'button',
+                baseCls: 'arrow_left',
+                action: 'back'
+            }]
+        }]
     },
 
     initialize: function() {
         this.callParent(arguments);
-        this.on('itemtap', this.bindEvent, this);
-        WeiQuPai.app.on('addfollow', this.addFollow, this);
-        WeiQuPai.app.on('cancelfollow', this.cancelFollow, this);
+        this.on('itemtap', this.doItemTap, this);
     },
 
-    updateUid: function(uid) {
+    updateUid: function(uid){
         this.loadData();
     },
 
@@ -58,20 +66,7 @@ Ext.define('WeiQuPai.view.MyFollow', {
         }, this);
     },
 
-    bindEvent: function(list, index, dataItem, record, e) {
-        if (Ext.get(e.target).findParent('.btn')) {
-            this.fireEvent('cancelfollow', this, record);
-            return false;
-        }
-        this.fireEvent('showdetail', this, index, dataItem, record, e);
-    },
-
-    addFollow: function(uid){
-        this.loadData();
-    },
-
-    cancelFollow: function(uid){
-        var record = this.getStore().getById(uid);
-        this.getStore().remove(record);
+    doItemTap: function(list, index, dataItem, record, e) {
+        WeiQuPai.User.show(record.get('id'));
     }
 })

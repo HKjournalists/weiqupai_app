@@ -99,7 +99,8 @@ Ext.define('WeiQuPai.view.SelectUser', {
             //清空选择列表
             self.selectedUid = [];
             setTimeout(function(){
-              WeiQuPai.navigator.pop();
+                WeiQuPai.app.fireEvent('addfollow');
+                WeiQuPai.navigator.pop();
             }, 100);
         }, {
             mask: true

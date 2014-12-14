@@ -18,13 +18,10 @@ Ext.define('WeiQuPai.view.CircleFollow', {
 
     initialize: function(){
     	this.callParent(arguments);
-        this.onBefore('show', this.onActivate, this);
     	WeiQuPai.app.on('login', this.loadData, this);
+        WeiQuPai.app.on('addfollow', this.loadData, this);
+        WeiQuPai.app.on('cancelfollow', this.loadData, this);
     	WeiQuPai.app.on('logout', this.onLogout, this);
-    },
-
-    onActivate: function(){
-        this.loadData();
     },
 
     getNoFollowCmp: function() {
@@ -47,23 +44,6 @@ Ext.define('WeiQuPai.view.CircleFollow', {
     loadData: function(callback) {
         var user = WeiQuPai.Cache.get('currentUser');
         var store = this.getStore();
-        /*
-        var loginContainer = this.down('#notLogin');
-        if (!user) {
-            store.removeAll();
-            if (!loginContainer) {
-                var loginContainer = Ext.create('Ext.Container', {
-                    layout: 'fit',
-                    html: '您还未登录, 请先登录',
-                    itemId: 'notLogin'
-                });
-                this.add(loginContainer);
-            }
-            loginContainer.show();
-            return;
-        }
-        loginContainer && loginContainer.hide();
-		*/
         if (this.getStore().isLoading()) {
             return false;
         }

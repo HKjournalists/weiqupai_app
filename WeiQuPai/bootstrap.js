@@ -797,7 +797,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.controller.MyAuction": [],
   "WeiQuPai.controller.MyConsignee": [],
   "WeiQuPai.controller.MyDiscount": [],
-  "WeiQuPai.controller.MyFen": [],
+  "WeiQuPai.controller.MyFans": [],
   "WeiQuPai.controller.MyFollow": [],
   "WeiQuPai.controller.MyMessage": [],
   "WeiQuPai.controller.MyOrder": [],
@@ -842,6 +842,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.plugin.Toast": [],
   "WeiQuPai.store.Auction": [],
   "WeiQuPai.store.AuctionList": [],
+  "WeiQuPai.store.AuctionRound": [],
   "WeiQuPai.store.Banner": [],
   "WeiQuPai.store.Category": [],
   "WeiQuPai.store.CategoryItem": [],
@@ -853,6 +854,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.store.CommentReply": [],
   "WeiQuPai.store.Coupon": [],
   "WeiQuPai.store.Discount": [],
+  "WeiQuPai.store.DiscountKillEnd": [],
   "WeiQuPai.store.FeedReply": [],
   "WeiQuPai.store.KillEnd": [],
   "WeiQuPai.store.MyAuction": [],
@@ -902,12 +904,15 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.ConfirmDialog": [],
   "WeiQuPai.view.ConfirmLayer": [],
   "WeiQuPai.view.ConsigneePopLayer": [],
+  "WeiQuPai.view.CouponOrder": [],
   "WeiQuPai.view.DeleteButtonLayer": [],
   "WeiQuPai.view.DeliveryTimeList": [],
   "WeiQuPai.view.DetailPicShow": [],
   "WeiQuPai.view.DisclosureItem": [],
   "WeiQuPai.view.Discount": [],
   "WeiQuPai.view.DiscountDetail": [],
+  "WeiQuPai.view.DiscountKillEnd": [],
+  "WeiQuPai.view.DiscountNormal": [],
   "WeiQuPai.view.EditConsigneeForm": [],
   "WeiQuPai.view.ExchangeCoupon": [],
   "WeiQuPai.view.ExchangeLayer": [],
@@ -939,8 +944,9 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.MyConsignee": [],
   "WeiQuPai.view.MyCoupon": [],
   "WeiQuPai.view.MyDiscount": [],
-  "WeiQuPai.view.MyFen": [],
+  "WeiQuPai.view.MyFans": [],
   "WeiQuPai.view.MyFollow": [],
+  "WeiQuPai.view.MyFollowTab": [],
   "WeiQuPai.view.MyMessage": [],
   "WeiQuPai.view.MyOrder": [],
   "WeiQuPai.view.MyOrderDetail": [],
@@ -1952,7 +1958,7 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.controller.MyAuction": [],
   "WeiQuPai.controller.MyConsignee": [],
   "WeiQuPai.controller.MyDiscount": [],
-  "WeiQuPai.controller.MyFen": [],
+  "WeiQuPai.controller.MyFans": [],
   "WeiQuPai.controller.MyFollow": [],
   "WeiQuPai.controller.MyMessage": [],
   "WeiQuPai.controller.MyOrder": [],
@@ -2007,6 +2013,7 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.store.Auction": [],
   "WeiQuPai.store.AuctionList": [],
+  "WeiQuPai.store.AuctionRound": [],
   "WeiQuPai.store.Banner": [],
   "WeiQuPai.store.Category": [],
   "WeiQuPai.store.CategoryItem": [],
@@ -2018,6 +2025,7 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.store.CommentReply": [],
   "WeiQuPai.store.Coupon": [],
   "WeiQuPai.store.Discount": [],
+  "WeiQuPai.store.DiscountKillEnd": [],
   "WeiQuPai.store.FeedReply": [],
   "WeiQuPai.store.KillEnd": [],
   "WeiQuPai.store.MyAuction": [],
@@ -2123,6 +2131,9 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.ConsigneePopLayer": [
     "widget.consigneepoplayer"
   ],
+  "WeiQuPai.view.CouponOrder": [
+    "widget.order"
+  ],
   "WeiQuPai.view.DeleteButtonLayer": [
     "widget.deletebuttonlayer"
   ],
@@ -2140,6 +2151,12 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.DiscountDetail": [
     "widget.discountdetail"
+  ],
+  "WeiQuPai.view.DiscountKillEnd": [
+    "widget.discountkillend"
+  ],
+  "WeiQuPai.view.DiscountNormal": [
+    "widget.discountnormal"
   ],
   "WeiQuPai.view.EditConsigneeForm": [
     "widget.editconsigneeform"
@@ -2234,11 +2251,14 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.MyDiscount": [
     "widget.mydiscount"
   ],
-  "WeiQuPai.view.MyFen": [
-    "widget.myfen"
+  "WeiQuPai.view.MyFans": [
+    "widget.myfans"
   ],
   "WeiQuPai.view.MyFollow": [
     "widget.myfollow"
+  ],
+  "WeiQuPai.view.MyFollowTab": [
+    "widget.myfollowtab"
   ],
   "WeiQuPai.view.MyMessage": [
     "widget.mymessage"

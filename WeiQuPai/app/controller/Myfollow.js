@@ -7,17 +7,17 @@ Ext.define('WeiQuPai.controller.MyFollow', {
         },
         control: {
             myfollow: {
-                itemtap: 'showDetail',
+                showdetail: 'showDetail',
+                cancelfollow: 'doCancelFollow'
             }
         }
     },
 
     showDetail: function(list, index, dataItem, record, e) {
-        var uid = record.get('id');
-        var detailView = Ext.create('WeiQuPai.view.ShowUser', {
-            uid: uid
-        });
-        WeiQuPai.navigator.push(detailView);
-    }
+        WeiQuPai.User.show(record.get('id'));
+    },
 
+    doCancelFollow: function(list, record) {
+        WeiQuPai.User.cancelFollow(record.get('id'));
+    }
 });

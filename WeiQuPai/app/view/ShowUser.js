@@ -3,7 +3,7 @@ Ext.define('WeiQuPai.view.ShowUser', {
     xtype: 'showuser',
     requires: [
         'WeiQuPai.view.ShowUserLike', 'WeiQuPai.view.ShowUserDis', 'WeiQuPai.view.ShowUserFeed',
-        'WeiQuPai.view.MyFollow', 'WeiQuPai.view.MyFen', 'WeiQuPai.view.ChangeAvatarLayer',
+        'WeiQuPai.view.HisFollow', 'WeiQuPai.view.HisFans', 'WeiQuPai.view.ChangeAvatarLayer',
         'WeiQuPai.view.PrivateMessage'
     ],
     config: {
@@ -24,6 +24,7 @@ Ext.define('WeiQuPai.view.ShowUser', {
         items: [{
             xtype: 'container',
             itemId: 'personmodel',
+            height:155, 
             tpl: new Ext.XTemplate(
                 '<div class="person_model"><img src="{[this.getBg(values)]}"></div>',
                 '<div class="person_zhezhao">',
@@ -50,9 +51,12 @@ Ext.define('WeiQuPai.view.ShowUser', {
                 '<div style="clear:both"></div>',
                 '<div class="two">',
                 '<tpl if="!this.isSelf(values)">',
-                '<div class="title follow_btn">+关注</div>',
+                    '<tpl if="followed">',
+                    '<div class="title j-cancel">取消关注</div>',
+                    '<tpl else>',
+                    '<div class="title j-follow">+关注</div>',
+                    '</tpl>',
                 '</tpl>',
-
                 '<span>',
                 '<label class="myfollow">关注{follow_num}</label>&nbsp;|',
                 '<label class="myfans">&nbsp;粉丝{fans_num}</label>',
@@ -145,8 +149,12 @@ Ext.define('WeiQuPai.view.ShowUser', {
             this.fireEvent('fanstap', this);
             return false;
         }
-        if (Ext.get(e.target).hasCls('follow_btn')) {
+        if (Ext.get(e.target).findParent('.j-follow')) {
             this.fireEvent('follow', this);
+            return false;
+        }
+        if (Ext.get(e.target).findParent('.j-cancel')) {
+            this.fireEvent('cancelfollow', this);
             return false;
         }
         if (e.target.className == 'email') {
@@ -184,6 +192,9 @@ Ext.define('WeiQuPai.view.ShowUser', {
         var user = WeiQuPai.Cache.get('currentUser');
         var person = this.down('#personmodel');
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/user&uid=' + uid;
+        if(user){
+            url += '&token=' + user.token;
+        }
         var me = this;
         me.down('showuserlike').loadData(uid, callback);
         me.down('showuserdis').loadData(uid, callback);
@@ -222,14 +233,11 @@ Ext.define('WeiQuPai.view.ShowUser', {
 
         //tab的悬停效果
         this.on('painted', function() {
-            var me = this;
-            //不使用timeout获取的值有可能不对
-            setTimeout(function() {
-                me.tabPosition = me.down('#tabbar').element.getY() - me.down('vtitlebar').element.getHeight();
-            }, 400);
+            this.tabPosition = me.down('#tabbar').element.getY() - me.down('vtitlebar').element.getHeight();
         }, this, {
             single: true
         });
+        
         var scroller = this.getScrollable().getScroller();
         scroller.addListener('scroll', function(scroller, x, y) {
             if (y >= this.tabPosition) {

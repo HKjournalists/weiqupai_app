@@ -1,6 +1,6 @@
-Ext.define('vqp.view.MyFollowTab', {
+Ext.define('WeiQuPai.view.MyFollowTab', {
     extend: 'Ext.Container',
-    requires: ['WeiQuPai.view.MyFollow', 'WeiQuPai.view.MyFans'],
+    requires: ['WeiQuPai.view.MyFollow', 'WeiQuPai.view.MyFans', 'WeiQuPai.view.SearchUser'],
     xtype: 'myfollowtab',
     config: {
         uid: null,
@@ -22,13 +22,20 @@ Ext.define('vqp.view.MyFollowTab', {
             items: [{
                 flex: '1',
                 xtype: 'searchfield',
-                name: 'searchText',
+                itemId: 'searchText',
                 placeHolder: '输入想要搜索的用户名',
-                style: 'border:0px;'
+                clearIcon: false
             }, {
                 width: '100',
                 xtype: 'button',
+                itemId: 'searchBtn',
                 baseCls: 'btn_search',
+            }, {
+                xtype: 'button',
+                itemId: 'cancelSearchBtn',
+                baseCls: 'text-btn',
+                text: '取消',
+                hidden: true
             }]
         }, {
             xtype: "container",
@@ -39,15 +46,13 @@ Ext.define('vqp.view.MyFollowTab', {
                 flex: 1,
                 xtype: 'button',
                 text: '我的关注',
-                action: 'tab_care',
-                itemId: 'tab_care',
+                action: 'myfollow',
                 cls: 'x-button-active'
             }, {
                 flex: 1,
                 xtype: 'button',
                 text: '我的粉丝',
-                action: 'tab_fan',
-                itemId: 'tab_fan'
+                action: 'myfans'
             }]
         }, {
             xtype: 'container',
@@ -58,6 +63,8 @@ Ext.define('vqp.view.MyFollowTab', {
                 xtype: 'myfollow'
             }, {
                 xtype: 'myfans'
+            }, {
+                xtype: 'searchuser'
             }]
         }]
     },
@@ -71,6 +78,26 @@ Ext.define('vqp.view.MyFollowTab', {
 
     initialize: function(){
         this.callParent(arguments);
+        this.setUid(WeiQuPai.Cache.get('currentUser').id);
+        this.down('#searchText').on('focus', function(){
+            this.down('#cancelSearchBtn').show();
+        }, this);
+
+        this.down('#cancelSearchBtn').on('tap', function(){
+            this.down('#searchText').reset();
+            this.down('searchuser').getStore().removeAll();
+            this.down('#tabButton').show();
+            this.down('#cancelSearchBtn').hide();
+            this.down('#mainView').setActiveItem(this.activeTab.config.action);
+        }, this);
+
+        this.down('#searchBtn').on('tap', this.doSearch, this);
+        this.down('#searchText').on('keyup', function(input, e){
+            if(e.browserEvent.keyCode == 13){
+                this.doSearch();
+            }
+        }, this);
+
         var btns = this.query('#tabButton button');
         this.activeTab = btns[0];
         var main = this.down('#mainView');
@@ -81,10 +108,22 @@ Ext.define('vqp.view.MyFollowTab', {
                     return;
                 }
                 this.addCls('x-button-active');
-                main.setActiveItem('#' + this.config.action);
+                main.setActiveItem(this.config.action);
                 self.activeTab.removeCls('x-button-active');
                 self.activeTab = this;
             });
         }
+    }, 
+
+    //搜索
+    doSearch: function(){
+        var v = this.down('#searchText').getValue().trim();
+        if(v.length == 0) return;
+        this.down('searchuser').setWord(v);
+        var me = this;
+        this.down('searchuser').loadData(function(){
+            me.down('#mainView').setActiveItem('searchuser');
+            me.down('#tabButton').hide();
+        });
     }
 })

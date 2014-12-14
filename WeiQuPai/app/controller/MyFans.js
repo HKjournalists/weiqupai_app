@@ -7,18 +7,26 @@ Ext.define('WeiQuPai.controller.MyFans', {
         },
         control: {
             myfans: {
-                itemtap: 'showDetail',
+                showdetail: 'showDetail',
+                removefans: 'doRemoveFans'
             },
 
         }
     },
 
     showDetail: function(list, index, dataItem, record, e) {
-        var uid = record.get('id');
-        var detailView = Ext.create('WeiQuPai.view.ShowUser', {
-            uid: uid
+        WeiQuPai.User.show(record.get('id'));
+    },
+
+    doRemoveFans: function(list, index, dataItem, record, e) {
+        var user = WeiQuPai.Util.checkLogin();
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/follow/removeFans&token=' + user.token;
+        var data = {
+            id: record.get('id')
+        };
+        WeiQuPai.Util.post(url, data, function(rsp) {
+            list.getStore().remove(record);
         });
-        WeiQuPai.navigator.push(detailView);
     }
 
 });

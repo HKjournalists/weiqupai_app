@@ -16,7 +16,8 @@ Ext.application({
         'Ext.MessageBox', 'WeiQuPai.Config', 'WeiQuPai.Util', 'WeiQuPai.Notify', 'WeiQuPai.Cache',
         'WeiQuPai.plugin.ListPaging', 'WeiQuPai.plugin.PullRefresh', 'WeiQuPai.plugin.LoadMask',
         'WeiQuPai.plugin.Toast', 'Ext.Anim', 'Ext.device.Camera', 'Ext.field.Select',
-        'Ext.form.FieldSet', 'Ext.Img', 'Ext.ux.ImageViewer', 'Ext.field.Hidden', 'WeiQuPai.FollowTip'
+        'Ext.form.FieldSet', 'Ext.Img', 'Ext.ux.ImageViewer', 'Ext.field.Hidden', 'WeiQuPai.FollowTip',
+        'WeiQuPai.User'
     ],
 
     controllers: [
@@ -24,7 +25,7 @@ Ext.application({
         'MyConsignee', 'MyFans', 'MyFollow', 'MyMessage', 'MyOrder', 'MyOrderDetail', 'Order', 'Pay',
         'PrivateMessage', 'Profile', 'Register', 'Routes', 'Setting', 'ShowOrder', 'ShowUser', 'ShowUserDis',
         'ShowUserFeed', 'ShowUserLike', 'Today', 'Discount', 'KillEnd', 'TopKiller', 'UserAuction',
-        'UserAuctionComment', 'MyDiscount', 'FeedBack', 'KillDetail', 'VerifyPhone'
+        'UserAuctionComment', 'MyDiscount', 'FeedBack', 'KillDetail', 'VerifyPhone', 'SearchUser'
     ],
     models: [
         'Auction', 'Comment', 'Consignee', 'Feed', 'Item', 'Order', 'Profile', 'Shipment',
@@ -36,14 +37,15 @@ Ext.application({
         'Iframe', 'SimpleViewer', 'ImageViewer', 'Sidebar', 'DisclosureItem', 'Pay', 'Order', 'Item', 'Auction', 'Item',
         'UserAuction', 'InputComment', 'CircleReplyLayer', 'CameraLayer', 'AuctionTip', 'MainTip', 'NoticeTip',
         'AuctionTipTwo', 'PriceForm', 'DeleteButtonLayer', 'ConfirmLayer','UserAuctionItem', 'FollowTip',
-        'AuctionHelpLayer', 'ScoreNotEnough', 'ConfirmDialog', 'ScoreRule', 'TipBox',
+        'AuctionHelpLayer', 'ScoreNotEnough', 'ConfirmDialog', 'ScoreRule', 'TipBox'
     ],
     stores: [
         'Auction', 'Comment', 'Banner', 'MyOrder', 'MyConsignee', 'Circle', 'MyProp', 'MyCoupon',
         'Coupon', 'Prop', 'SpecialSale', 'ShowUserLike', 'ShowUserDis', 'ShowUserFeed', 'MyFollow', 'MyAuction',
         'MyFans', 'FeedReply', 'MyMessage', 'CommentReply', 'PrivateMessage', 'Discount', 'MyDiscount',
         'KillEnd', 'UserAuction', 'UserAuctionHelper', 'Category', 'CategoryItem', 'UserAuctionComment',
-        'CircleSquare', 'CircleKillEnd', 'CircleFollow', 'AuctionList', 'AuctionRound', 'DiscountKillEnd'
+        'CircleSquare', 'CircleKillEnd', 'CircleFollow', 'AuctionList', 'AuctionRound', 'DiscountKillEnd',
+        'SearchUser', 'HisFollow', 'HisFans'
     ],
     icon: {
         '57': 'resources/icons/icon.png',

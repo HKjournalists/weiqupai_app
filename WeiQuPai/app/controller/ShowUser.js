@@ -10,6 +10,7 @@ Ext.define('WeiQuPai.controller.ShowUser', {
                 followtap: 'doFollow',
                 fanstap: 'doFans',
                 follow: 'doFollowMe',
+                cancelfollow: 'doCancelFollow',
                 pm: 'doPm',
             },
 
@@ -17,13 +18,13 @@ Ext.define('WeiQuPai.controller.ShowUser', {
     },
 
     doFollow: function(view) {
-        var detailView = Ext.create('WeiQuPai.view.MyFollow');
+        var detailView = Ext.create('WeiQuPai.view.HisFollow');
         detailView.setUid(view.getUid());
         WeiQuPai.navigator.push(detailView);
     },
 
     doFans: function(view) {
-        var detailView = Ext.create('WeiQuPai.view.MyFen');
+        var detailView = Ext.create('WeiQuPai.view.HisFans');
         detailView.setUid(view.getUid());
         WeiQuPai.navigator.push(detailView);
     },
@@ -40,12 +41,17 @@ Ext.define('WeiQuPai.controller.ShowUser', {
 
     //关注他
     doFollowMe: function(view) {
-        var user = WeiQuPai.Util.checkLogin();
-        if (!user) return;
-        var uid = view.getUid();
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/follow/follow&id=' + uid + '&token=' + user.token;
-        WeiQuPai.Util.get(url, function(rsp) {
+        WeiQuPai.User.addFollow(view.getUid(), function(){
             WeiQuPai.Util.toast('你成功关注了TA');
+            view.getData().followed = true;
+            view.setData(view.getData());
+        });
+    },
+
+    doCancelFollow: function(view){
+        WeiQuPai.User.cancelFollow(view.getUid(), function(){
+            view.getData().followed = false;
+            view.setData(view.getData());
         });
     },
 

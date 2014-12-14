@@ -1,13 +1,13 @@
-Ext.define('WeiQuPai.store.MyFans', {
+Ext.define('WeiQuPai.store.HisFollow', {
     extend: 'Ext.data.Store',
     config: {
-        storeId: 'MyFans',
+        storeId: 'HisFollow',
         autoLoad: false,
         fields: ['id', 'nick', 'avatar', 'sign'],
         pageSize: 100,
         proxy: {
             type: 'ajax',
-            url: WeiQuPai.Config.host + '/?r=appv2/follow/fans',
+            url: WeiQuPai.Config.host + '/?r=appv2/follow',
             reader: {
                 type: 'json'
             },

@@ -1030,51 +1030,56 @@ html body
     border:0px;
    }
    .personal .x-button:nth-child(3)
+  {
+    background-image:url('../images/qiandao.png');
+    @include personal_icon;
+  }
+   .personal .x-button:nth-child(4)
    {
      background-image:url('../images/icon_person_btn1.png');
      @include personal_icon;
    }
-    .personal .x-button:nth-child(4)
+    .personal .x-button:nth-child(5)
    {
      background-image:url('../images/icon-person_btn2.png');
      @include personal_icon;
    }
-   .personal .x-button:nth-child(5)
+   .personal .x-button:nth-child(6)
    {
      background-image:url('../images/icon_person_btn4.png');
      @include personal_icon;
    }
-    .personal .x-button:nth-child(6)
+    .personal .x-button:nth-child(7)
    {
      background-image:url('../images/icon_person_btn3.png');
      @include personal_icon;
    }
-    .personal .x-button:nth-child(7)
+    .personal .x-button:nth-child(8)
    {
      background-image:url('../images/icon_person_btn5.png');
      @include personal_icon;
    }
-   .personal .x-button:nth-child(8)
+   .personal .x-button:nth-child(9)
    {
      background-image:url('../images/icon_person_btn6.png');
      @include personal_icon;
    }
-    .personal .x-button:nth-child(9)
+    .personal .x-button:nth-child(10)
    {
      background-image:url('../images/daoju.png');
      @include personal_icon;
    }
-     .personal .x-button:nth-child(10)
+     .personal .x-button:nth-child(11)
    {
      background-image:url('../images/icon_person_btn7.png');
      @include personal_icon;
    }
-      .personal .x-button:nth-child(11)
+      .personal .x-button:nth-child(12)
    {
      background-image:url('../images/icon_person_btn8.png');
      @include personal_icon;
    }
-      .personal .x-button:nth-child(12)
+      .personal .x-button:nth-child(13)
    {
      background-image:url('../images/icon_person_btn8.png');
      @include personal_icon;
@@ -2099,11 +2104,11 @@ html body
      text-align:center;
     }
     //我的粉丝 我的关注
-    .search{height:40px;background: $color_fff;width: 100%;}
+    .search{height:40px;background: $color_fff;border-bottom:1px solid #eee;}
     .search .x-field-input{border:0px;color:#d4d4d4;}
-    .btn_search{background: url("../images/btn_search.png") no-repeat;background-size: contain;width:15px;height:15px;margin:13px;}
+    .btn_search{background: url("../images/btn_search.png") no-repeat center center;background-size:15px 15px;width:30px;}
     .fans_list{margin:8px 10px;}
-    .fans_tabbar{border-radius: 4px;border:1px solid $color_e7;width:100%;margin-bottom:8px;}
+    .fans_tabbar{border-radius: 4px;border:1px solid $color_e7;margin:8px 10px;}
     .fans_tabbar .x-button{border:0px;height:28px;padding:0px;}
     .fans_tabbar .x-button-normal .x-button-label{color:$color_e7;}
     .fans_tabbar .x-button{border:0px;border-radius:0px;}
@@ -2114,13 +2119,11 @@ html body
     }
     .myfen
     {
-     width:100%;
+     margin:6px 10px;
      background:$color_fff;
      padding:5px;
      font-size:13px;
-     border:1px solid #efefef;
      border-radius:4px;
-     margin-bottom:6px;
     }
 
     .myfen .img
@@ -2133,11 +2136,16 @@ html body
       font-size:13px;
       margin-top:6px;
       text-align:left;
-      float:left;
       line-height: 16px;
+      margin-right:65px;
     }
-    .myfen .name .des{color:#858585;}
-    .myfen  .btn{border:0px;color:$color_e7;float:right;margin-right:5px;background: $color_fff;margin-top:16px;}
+    .myfen .name .des{
+      color:#858585;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .myfen  .btn{border:0px;color:$color_e7;float:right;background: $color_fff;margin-top:16px;width:65px}
     //我的拍券
     .plist
     {
@@ -3709,3 +3717,4 @@ html body
 .dock_share{background: url("../images/dock_bom_share.png") no-repeat;background-size: contain;width:16px;height:16px;margin-top:8px;}
 .dock_btn{background: $color_e7;width:72px;height:29px;color:$color_fff;border:0px;border-radius: 3px;padding:7px;margin-right:10px;}
 .dock_btn .x-button-label{font-size:12px!important;}
+.text-btn{-webkit-box-align:center;color:$color_e7;padding:8px}

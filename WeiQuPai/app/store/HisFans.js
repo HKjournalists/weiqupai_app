@@ -1,7 +1,7 @@
-Ext.define('WeiQuPai.store.MyFans', {
+Ext.define('WeiQuPai.store.HisFans', {
     extend: 'Ext.data.Store',
     config: {
-        storeId: 'MyFans',
+        storeId: 'HisFans',
         autoLoad: false,
         fields: ['id', 'nick', 'avatar', 'sign'],
         pageSize: 100,
