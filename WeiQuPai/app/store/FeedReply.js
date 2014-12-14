@@ -6,13 +6,14 @@ Ext.define('WeiQuPai.store.FeedReply', {
 
         proxy: {
             type: 'ajax',
-            url: WeiQuPai.Config.host + '/?r=appv2/circle/view',
+            url: WeiQuPai.Config.host + '/?r=appv2/circle/replyList',
             reader: {
                 type: 'json'
             },
-            pageParam: false,
             startParam: false,
             limitParam: false
-        }
+        },
+        pageSize: 10
+
     }
 });

@@ -83,30 +83,17 @@ Ext.define('WeiQuPai.view.Auction', {
                 '<div class="detailData">',
                 '<div class="title_new">{title}</div>',
                 '<div class="content_new">',
-                '<div class="left"><div class="priceNew">{[this.displayPrice(values)]}</div></div>',
-                '<div class="detail_map" id="countdown">{[this.formatCountdown(values.auction)]}</div>',
-                '<div class="clear"></div>',
+                '<div class="detail_map">价格趋势</div>',
+                '<div class="priceNew">￥{auction.curr_price}</div>',
                 '</div>',
-                '<div class="price clear">',
-                '<span>原价￥{oprice}</span>',
-                '</div></div>', {
-                    formatCountdown: function(auction) {
-                        if (auction.status == WeiQuPai.Config.auctionStatus.STATUS_NOT_START) {
-                            return '等待开始';
-                        } else if (auction.status == WeiQuPai.Config.auctionStatus.STATUS_FINISH) {
-                            return '已结束';
-                        } else {
-                            var sec = auction.left_time % 60;
-                            var min = (auction.left_time - sec) / 60;
-                            var countdown = (min < 10 ? '0' + min : min) + ":" + (sec < 10 ? '0' + sec : sec);
-                            return countdown;
+                '<div class="oprice-row"><span class="oprice">原价￥{oprice}</span> <span class="discount">{[this.getDiscount(values)]}</span></div>',
+                '</div>',{
+                    getDiscount: function(values){
+                        var discount = parseFloat(values.auction.discount);
+                        if(discount > 0){
+                            return '下单立减' + discount + '元';
                         }
-                    },
-                    displayPrice: function(values) {
-                        if (WeiQuPai.Util.hasCache('auctions', parseInt(values.auction.id))) {
-                            return '已拍';
-                        }
-                        return '￥' + values.auction.curr_price;
+                        return '';
                     }
                 }
             )
@@ -267,6 +254,7 @@ Ext.define('WeiQuPai.view.Auction', {
         this.down('itemparam').setData(data);
         this.down('itemdesc').setData(data);
         this.down('commentlist').setItemId(record.get('id'));
+        this.down('bottombar').setData(data);
         this.setCountdown();
     },
 
@@ -376,10 +364,10 @@ Ext.define('WeiQuPai.view.Auction', {
         var outAnim = Ext.create('Ext.Anim', {
             autoClear: false,
             from: {
-                'background': '#e76049'
+                'color': '#e76049'
             },
             to: {
-                'background': '#f0f0f1'
+                'color': '#fff'
             },
             duration: 200,
             after: function() {
@@ -389,10 +377,10 @@ Ext.define('WeiQuPai.view.Auction', {
         var inAnim = Ext.create('Ext.Anim', {
             autoClear: false,
             from: {
-                'background': '#f0f0f1'
+                'color': '#fff'
             },
             to: {
-                'background': '#e76049'
+                'color': '#e76049'
             },
             duration: 600
         });

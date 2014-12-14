@@ -104,12 +104,12 @@ Ext.define('WeiQuPai.view.Order', {
     },
 
     applyAuctionData: function(data) {
-        data.total_pay = data.curr_price;
+        data.total_pay = data.total_pay || data.curr_price;
         this.getRecord().set('auction_type', data.auction_type);
         this.getRecord().set('price', data.curr_price);
         this.getRecord().set('item_id', data.item_id);
         this.getRecord().set('auction_id', data.id);
-        this.getRecord().set('total_pay', data.curr_price)
+        this.getRecord().set('total_pay', data.total_pay)
         this.getRecord().set('coupon', '');
         this.down('#orderInfo').setData(data);
         return data;

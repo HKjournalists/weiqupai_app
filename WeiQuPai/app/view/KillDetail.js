@@ -36,7 +36,7 @@ Ext.define('WeiQuPai.view.KillDetail', {
                   '<li class="text">{item.title}</li>',
                   '<li style="height:16px"><span class="floatleft">市场价：{item.oprice}</span>',
                      '<span class="floatright">开杀价：{start_price}</span></li>',
-                  '<li class="red">底价：{reserve_price}</li>',
+                  '<li class="red"><span class="floatright">剩余：{left_num}个</span>底价：{reserve_price}</li>',
                   '<li><input type="button" class="status create" value="创建血战" /></span></li>',
                 '</ul></div>',
                 '</div>', {

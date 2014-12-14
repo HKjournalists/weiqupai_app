@@ -102,18 +102,30 @@ Ext.define('WeiQuPai.controller.Auction', {
         }
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/reserve&id=' + auctionId + '&token=' + user.token;
         WeiQuPai.Util.get(url, function(rsp) {
+            function goToOrder(){
+                var orderView = Ext.create('WeiQuPai.view.Order');
+                rsp.auction_type = 1;
+                orderView.setAuctionData(rsp);
+                setTimeout(function() {
+                    WeiQuPai.navigator.push(orderView);
+                }, 0);
+            }
             if (rsp.status != WeiQuPai.Config.auctionStatus.STATUS_ONLINE) {
                 msgArr = ['拍卖还未开始', null, null, '对不起，拍卖已结束'];
                 msg = msgArr[rsp.status];
                 WeiQuPai.Util.toast(msg);
                 return;
             }
-            var orderView = Ext.create('WeiQuPai.view.Order');
-            rsp.auction_type = 1;
-            orderView.setAuctionData(rsp);
-            setTimeout(function() {
-                WeiQuPai.navigator.push(orderView);
-            }, 0);
+            //需要验证手机
+            if(rsp.need_verify == 1){
+                var view = Ext.create('WeiQuPai.view.VerifyPhone');
+                view.setVerifySuccess(goToOrder);
+                setTimeout(function() {
+                    WeiQuPai.navigator.push(view);
+                }, 0);
+                return;
+            }
+            goToOrder();
         }, {
             mask: true
         });

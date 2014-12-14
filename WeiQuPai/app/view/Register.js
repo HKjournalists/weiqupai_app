@@ -8,19 +8,38 @@ Ext.define('WeiQuPai.view.Register', {
             xtype: 'vtitlebar',
             title: '注册',
             docked: 'top',
-            cls: 'titlebar3',
-            docked: 'top',
             items: [{
                 baseCls: 'arrow_left',
                 action: 'back'
             }]
         }, {
-            name: 'uname',
-            xtype: 'textfield',
-            cls: 'w-input-text w-margin',
-            placeHolder: '手机/邮箱',
-            autoComplete: false
+            xtype:'container',
+            layout: 'hbox',
+            items: [{
+                flex: 1,
+                xtype: 'textfield',
+                component:{
+                    type: 'tel'
+                },
+                name: 'uname',
+                placeHolder: '输入手机号'
+            },{
+                xtype:'button',
+                width:'100px',
+                cls: 'w-button sendsms-btn',
+                text: '获取验证码',
+                action: 'sendsms'
+            }]
 
+        },  {
+            name: 'vcode',
+            xtype: 'textfield',
+            component:{
+                type: 'tel'
+            },
+            cls: 'w-input-text w-margin',
+            placeHolder: '填写手机验证码',
+            autoComplete: false
         }, {
             name: 'password',
             xtype: 'passwordfield',
@@ -55,6 +74,8 @@ Ext.define('WeiQuPai.view.Register', {
         this.down('textfield[name=uname]').on('keyup', this.setButtonState, this);
         this.down('textfield[name=nick]').on('keyup', this.setButtonState, this);
         this.down('passwordfield[name=password]').on('keyup', this.setButtonState, this);
+        this.down('textfield[name=vcode]').on('keyup', this.setButtonState, this);
+
         this.on('painted', this.onPainted, this, {
             single: true
         });
@@ -80,7 +101,10 @@ Ext.define('WeiQuPai.view.Register', {
     },
 
     setButtonState: function() {
-        var disabled = this.down('textfield[name=uname]').getValue().length == 0 || this.down('textfield[name=nick]').getValue().length == 0 || this.down('passwordfield[name=password]').getValue().length == 0;
+        var disabled = this.down('textfield[name=uname]').getValue().length == 0
+        || this.down('textfield[name=nick]').getValue().length == 0 
+        || this.down('passwordfield[name=password]').getValue().length == 0
+        || this.down('textfield[name=vcode]').getValue().length == 0;
         this.down('button[action=register]').setDisabled(disabled);
     }
 });

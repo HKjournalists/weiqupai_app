@@ -25,14 +25,14 @@ Ext.define('WeiQuPai.view.KillEnd', {
         }],
         itemCls: 'killend-item',
         itemTpl: new Ext.XTemplate(
-            '<div class="bar_new" style="margin-top:7px;height:157px;">',
+            '<div class="bar_new" style="margin-top:7px;">',
             '<img src="{[this.getPic(values.item.pic_cover)]}" width="140"/>',
             '<div class="text"><ul>',
             '<li class="text" style="color:#3a3e3f;font-size:14px;line-height: 16px;">{item.title}</li>',
             '<li>血战时限：{duration}小时</li>',
             '<li>市场价：{item.oprice}</li>',
             '<li>开杀价：{start_price}</li>',
-            '<li>底价：{reserve_price}</li>',
+            '<li>底价：{reserve_price}　剩余量：{left_num}个</li>',
             '<li><span class="floatleft"><input type="button" class="btn_create" value="{[this.getButtonText(values)]}"  style="margin-top:0px;"/></span></li>',
             '</ul></div>',
             '</div>',
@@ -75,12 +75,20 @@ Ext.define('WeiQuPai.view.KillEnd', {
             ].join(''),
 
             itemId: 'buttonList'
+        }, {
+            xtype: 'circlead'
         }]
     },
 
     initialize: function() {
         this.callParent(arguments);
+
+        //添加到顶部的功能按钮
+        WeiQuPai.Util.addTopIcon(this);
+
         this.loadData();
+        this.down('circlead').loadData();
+        
         this.on('itemtap', this.bindEvent, this);
         this.down('#buttonList').element.on('tap', this.bindButtonEvent, this);
         WeiQuPai.FollowTip.showKillEnd();

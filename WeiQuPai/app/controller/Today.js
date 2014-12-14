@@ -5,9 +5,10 @@ Ext.define('WeiQuPai.controller.Today', {
         refs: {
             pageView: 'today',
             specialView: 'specialsale',
+            auctionList: 'auctionlist',
             killend: 'today button[action=killend]',
             hot: 'today button[action=hot]',
-            notice: 'today button[action=notice]',
+            luxuries: 'today button[action=luxuries]',
             circle: 'today button[action=circle]',
             discount: 'today button[action=discount]',
             catBtn: 'button[action=category]'
@@ -23,6 +24,11 @@ Ext.define('WeiQuPai.controller.Today', {
                 liketap: 'doLike',
                 unliketap: 'doUnlike'
             },
+            auctionList: {
+                showdetail: 'showDetail',
+                liketap: 'doLike',
+                unliketap: 'doUnlike'
+            },
             specialBtn: {
                 tap: 'showSpecial'
             },
@@ -32,8 +38,8 @@ Ext.define('WeiQuPai.controller.Today', {
             hot: {
                 tap: 'showKillEnd'
             },
-            notice: {
-                tap: 'noticelist'
+            luxuries: {
+                tap: 'showLuxuries'
             },
             circle: {
                 tap: 'goCircle'
@@ -46,9 +52,9 @@ Ext.define('WeiQuPai.controller.Today', {
             }
         }
     },
-    noticelist: function() {
-        var detailView = Ext.create('WeiQuPai.view.Notice');
-        WeiQuPai.navigator.push(detailView);
+    showLuxuries: function() {
+        var view = Ext.create('WeiQuPai.view.AuctionList');
+        WeiQuPai.navigator.push(view);
     },
 
     showKillEnd: function() {

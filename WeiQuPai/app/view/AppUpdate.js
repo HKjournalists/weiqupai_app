@@ -22,7 +22,7 @@ Ext.define('WeiQuPai.view.AppUpdate', {
             xtype: 'button',
             text: '前去下载最新版本',
             action: 'download',
-            cls: 'w-button',
+            baseCls: 'w-button',
             hidden: true
         }]
     },
@@ -32,7 +32,7 @@ Ext.define('WeiQuPai.view.AppUpdate', {
         WeiQuPai.Notify.clearNotify(WeiQuPai.Notify.MSG_APP_UPDATE);
 
         this.down('button[action=download]').on('tap', function() {
-            var url = 'http://www.vqupai.com/d.php';
+            var url = 'http://www.vqupai.com/d.php?s=app';
             window.open(url, '_system');
         });
 
@@ -47,7 +47,7 @@ Ext.define('WeiQuPai.view.AppUpdate', {
 
     setContent: function(rsp) {
         if (!rsp['new']) {
-            this.down('#releaseLog').setHtml('当前已经是最新版本了.');
+            this.down('#releaseLog').setHtml('当前版本' + WeiQuPai.Config.version + ', 已经是最新版本了.');
             return;
         }
         html = ['<h2 style="margin-bottom:1em">最新版本 ' + rsp['ver'] + '</h2><p>'];

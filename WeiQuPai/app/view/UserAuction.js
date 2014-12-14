@@ -51,7 +51,7 @@ Ext.define('WeiQuPai.view.UserAuction', {
                 '<img src="{[this.getCover(values.item.pic_cover)]}" width="100"/>',
                 '<div class="text"><ul>',
                   '<li class="text">{item.title}</li>',
-                  '<li>{[this.getLeftTime(values)]}</li>',
+                  '<li><span class="floatright">剩余：{pool.left_num}个</span> {[this.getLeftTime(values)]}</li>',
                   '<li class="red"><span class="floatleft">当前价格：{curr_price}</span>',
                      '<span class="floatright">底价：{reserve_price}</span><br></li>',
                   '<tpl if="this.hasButton(values)">',

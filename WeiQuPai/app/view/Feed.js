@@ -22,6 +22,8 @@ Ext.define('WeiQuPai.view.Feed', {
             loadedText: '下拉刷新',
             refreshFn: 'fetchLastest',
             scrollerAutoRefresh: true
+        }, {
+            type: 'wlistpaging'
         }],
         itemTpl: new Ext.XTemplate(
             '<div class="message_new" data-id="{id}">',
@@ -60,11 +62,14 @@ Ext.define('WeiQuPai.view.Feed', {
             cls: 'feed discard remess',
             tpl: new Ext.XTemplate(
                 '<div class="confirm">',
+
+                '<tpl if="this.hasCard(values)">',
                 '<div class="confirm_w"><div class="confirm_title">',
                 '<img src="{[this.getPic(values.json_data.pic_cover)]}"}" class="card-img"/>',
                 '<div class="title">{json_data.title}</div>',
                 '<div style="clear:both"></div>',
                 '</div></div>',
+                '</tpl>',
 
                 '<div class="list">',
 
@@ -85,6 +90,10 @@ Ext.define('WeiQuPai.view.Feed', {
                 '</div>',
 
                 '</div></div>', {
+                    hasCard: function(data){
+                        return data.feed_type > 0;
+                    },
+
                     isSelf: function(uid) {
                         var user = WeiQuPai.Cache.get('currentUser');
                         if (!user) return false;
@@ -127,6 +136,10 @@ Ext.define('WeiQuPai.view.Feed', {
 
     initialize: function() {
         this.callParent(arguments);
+
+        //添加到顶部的功能按钮
+        WeiQuPai.Util.addTopIcon(this);
+        
         this.handleItemTap();
         this.down('#feed').on('tap', this.bindFeedEvent, this, {
             element: 'element'
@@ -187,6 +200,8 @@ Ext.define('WeiQuPai.view.Feed', {
         var data = record.data;
         this.down('#feed').setData(data);
         this.down('#zanList').setData(data);
+        //后面翻页加载需要这个参数
+        this.getStore().getProxy().setExtraParam('id' , data.id);
         return record;
     },
 
@@ -194,6 +209,7 @@ Ext.define('WeiQuPai.view.Feed', {
         var fid = this.getFeedId();
         var user = WeiQuPai.Cache.get('currentUser');
         var feed = WeiQuPai.model.Feed;
+        var me = this;
         feed.getProxy().setExtraParam('token', user && user.token || '');
         feed.load(fid, {
             scope: this,
@@ -207,6 +223,7 @@ Ext.define('WeiQuPai.view.Feed', {
                 }
                 this.setFeedRecord(record);
                 this.getStore().setData(record.get('replies'));
+                WeiQuPai.Util.resetListPaging(me);
                 Ext.isFunction(callback) && callback();
             }
         });

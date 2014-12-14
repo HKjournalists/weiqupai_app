@@ -1,15 +1,10 @@
-/**
- * 专场的view
- */
-
 Ext.define('WeiQuPai.view.SpecialSale', {
     extend: 'Ext.DataView',
     xtype: 'specialsale',
     config: {
         param: null,
-        loadingText: null,
+        scrollToTopOnRefresh: false,
         store: 'SpecialSale',
-        disableSelection: true,
         plugins: [{
             type: 'wpullrefresh',
             lastUpdatedText: '上次刷新：',
@@ -86,6 +81,9 @@ Ext.define('WeiQuPai.view.SpecialSale', {
         this.callParent(arguments);
         this.on('activate', this.onActivate, this);
         this.on('itemtap', this.bindEvent, this);
+        
+        //添加到顶部的功能按钮
+        WeiQuPai.Util.addTopIcon(this);
     },
 
     applyParam: function(param) {
