@@ -1219,6 +1219,18 @@ html body
     margin-left: 10px;
     font-size: 15px;
    }
+  .person_zhezhao .one .right .exp
+  {
+    float: left;
+    background-image: url("../images/icon_person_exp.png");
+    background-repeat: no-repeat;
+    background-size: auto 9px;
+    background-position: 5px 5px;
+    text-indent: 20px;
+    margin-left: -190px;
+    margin-top: 50px;
+    font-size: 15px;
+  }
    .person_zhezhao .two{
     position:absolute;
     bottom:10px;
@@ -1247,7 +1259,7 @@ html body
    }
    .person_zhezhao .one .right .des
    {
-    margin-top:45px;
+    margin-top:75px;
     text-shadow: 2px 1px 2px black;
    }
    .person_zhezhao .two{
