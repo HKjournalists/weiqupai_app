@@ -45,7 +45,7 @@ Ext.application({
         'MyFans', 'FeedReply', 'MyMessage', 'CommentReply', 'PrivateMessage', 'Discount', 'MyDiscount',
         'KillEnd', 'UserAuction', 'UserAuctionHelper', 'Category', 'CategoryItem', 'UserAuctionComment',
         'CircleSquare', 'CircleKillEnd', 'CircleFollow', 'AuctionList', 'AuctionRound', 'DiscountKillEnd',
-        'SearchUser', 'HisFollow', 'HisFans'
+        'SearchUser', 'HisFollow', 'HisFans','SearchItem'
     ],
     icon: {
         '57': 'resources/icons/icon.png',

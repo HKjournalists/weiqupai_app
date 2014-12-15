@@ -5,16 +5,6 @@ Ext.define('WeiQuPai.view.Category', {
     config: {
         cls: 'bg_ef listting',
         store: 'Category',
-        items: [{
-            xtype: 'vtitlebar',
-            title: '商品分类',
-            docked: 'top',
-            items: [{
-                xtype: 'button',
-                baseCls: 'arrow_left',
-                action: 'back'
-            }]
-        }],
         itemTpl: new Ext.XTemplate(
             '<div class="product">',
             '<div class="todayTitle">{title}</div>',

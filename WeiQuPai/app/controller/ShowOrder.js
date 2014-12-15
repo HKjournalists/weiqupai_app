@@ -31,6 +31,7 @@ Ext.define('WeiQuPai.controller.ShowOrder', {
             WeiQuPai.Util.toast('还是上传一张照片吧~');
             return;
         }
+        this.getPubBtn().setDisabled(true);
         var url = WeiQuPai.Config.apiUrl + '/?r=appv2/circle/post';
         WeiQuPai.Util.post(url, data, function(rsp) {
             WeiQuPai.navigator.pop('maincard');
@@ -43,6 +44,8 @@ Ext.define('WeiQuPai.controller.ShowOrder', {
             WeiQuPai.app.statReport({
                 act: 'showorder'
             });
+        }, {
+            mask: true
         });
     },
 

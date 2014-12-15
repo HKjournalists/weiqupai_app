@@ -16,17 +16,17 @@ Ext.define('WeiQuPai.view.MyFollowTab', {
                 action: 'ucenter'
             }]
         }, {
-            xtype: 'container',
+            xtype: 'formpanel',
+            scrollable: false,
             layout: 'hbox',
-            cls: 'search',
+            baseCls: 'search',
             items: [{
-                flex: '1',
+                flex: 1,
                 xtype: 'searchfield',
                 itemId: 'searchText',
                 placeHolder: '输入想要搜索的用户名',
                 clearIcon: false
             }, {
-                width: '100',
                 xtype: 'button',
                 itemId: 'searchBtn',
                 baseCls: 'btn_search',
@@ -79,9 +79,6 @@ Ext.define('WeiQuPai.view.MyFollowTab', {
     initialize: function(){
         this.callParent(arguments);
         this.setUid(WeiQuPai.Cache.get('currentUser').id);
-        this.down('#searchText').on('focus', function(){
-            this.down('#cancelSearchBtn').show();
-        }, this);
 
         this.down('#cancelSearchBtn').on('tap', function(){
             this.down('#searchText').reset();
@@ -93,7 +90,9 @@ Ext.define('WeiQuPai.view.MyFollowTab', {
 
         this.down('#searchBtn').on('tap', this.doSearch, this);
         this.down('#searchText').on('keyup', function(input, e){
+            this.down('#cancelSearchBtn')[input.getValue().trim().length > 0 ? 'show' : 'hide']();
             if(e.browserEvent.keyCode == 13){
+                e.preventDefault();
                 this.doSearch();
             }
         }, this);

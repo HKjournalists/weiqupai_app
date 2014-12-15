@@ -2118,7 +2118,7 @@ html body
     //我的粉丝 我的关注
     .search{height:40px;background: $color_fff;border-bottom:1px solid #eee;}
     .search .x-field-input{border:0px;color:#d4d4d4;}
-    .btn_search{background: url("../images/btn_search.png") no-repeat center center;background-size:15px 15px;width:30px;}
+    .btn_search{background: url("../images/btn_search.png") no-repeat center center;background-size:15px 15px;width:40px;margin-left:20px;}
     .fans_list{margin:8px 10px;}
     .fans_tabbar{border-radius: 4px;border:1px solid $color_e7;margin:8px 10px;}
     .fans_tabbar .x-button{border:0px;height:28px;padding:0px;}
@@ -2131,7 +2131,6 @@ html body
     }
     .myfen
     {
-     margin:6px 10px;
      background:$color_fff;
      padding:5px;
      font-size:13px;
@@ -2140,24 +2139,40 @@ html body
 
     .myfen .img
     {
+     width:40px;
+     height:40px;
+     margin-right:10px;
      float:left;
-     width:60px;
     }
     .myfen .name
     {
+      margin-left:50px;
+      margin-right:65px;
+      text-overflow:ellipsis;
+      overflow: hidden;
+      max-width:13em;
+      white-space:nowrap;
       font-size:13px;
       margin-top:6px;
       text-align:left;
       line-height: 16px;
-      margin-right:65px;
     }
     .myfen .name .des{
       color:#858585;
-      white-space:nowrap;
-      overflow:hidden;
       text-overflow:ellipsis;
+      overflow: hidden;
     }
-    .myfen  .btn{border:0px;color:$color_e7;float:right;background: $color_fff;margin-top:16px;width:65px}
+    .myfen  .btn{
+      float:right;
+      border:0px;
+      color:$color_e7;
+      background: $color_fff;
+      margin-top:16px;
+      display:block;
+      -webkit-appearance:none;
+      width:65px;
+    }
+
     //我的拍券
     .plist
     {

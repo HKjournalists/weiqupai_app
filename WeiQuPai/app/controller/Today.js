@@ -103,7 +103,7 @@ Ext.define('WeiQuPai.controller.Today', {
     },
 
     showCategory: function() {
-        var view = Ext.create('WeiQuPai.view.Category');
+        var view = Ext.create('WeiQuPai.view.CategoryWithSearch');
         WeiQuPai.navigator.push(view);
     }
 });

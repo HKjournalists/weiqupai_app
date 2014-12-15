@@ -782,6 +782,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.Config": [],
   "WeiQuPai.FollowTip": [],
   "WeiQuPai.Notify": [],
+  "WeiQuPai.User": [],
   "WeiQuPai.Util": [],
   "WeiQuPai.controller.Auction": [],
   "WeiQuPai.controller.CameraLayer": [],
@@ -808,6 +809,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.controller.Profile": [],
   "WeiQuPai.controller.Register": [],
   "WeiQuPai.controller.Routes": [],
+  "WeiQuPai.controller.SearchUser": [],
   "WeiQuPai.controller.Setting": [],
   "WeiQuPai.controller.ShowOrder": [],
   "WeiQuPai.controller.ShowUser": [],
@@ -856,6 +858,8 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.store.Discount": [],
   "WeiQuPai.store.DiscountKillEnd": [],
   "WeiQuPai.store.FeedReply": [],
+  "WeiQuPai.store.HisFans": [],
+  "WeiQuPai.store.HisFollow": [],
   "WeiQuPai.store.KillEnd": [],
   "WeiQuPai.store.MyAuction": [],
   "WeiQuPai.store.MyConsignee": [],
@@ -869,6 +873,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.store.NoticeToday": [],
   "WeiQuPai.store.PrivateMessage": [],
   "WeiQuPai.store.Prop": [],
+  "WeiQuPai.store.SearchUser": [],
   "WeiQuPai.store.ShowUserDis": [],
   "WeiQuPai.store.ShowUserFeed": [],
   "WeiQuPai.store.ShowUserLike": [],
@@ -923,6 +928,8 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.FieldForm": [],
   "WeiQuPai.view.FollowTip": [],
   "WeiQuPai.view.GenderList": [],
+  "WeiQuPai.view.HisFans": [],
+  "WeiQuPai.view.HisFollow": [],
   "WeiQuPai.view.Iframe": [],
   "WeiQuPai.view.ImageViewer": [],
   "WeiQuPai.view.InputComment": [],
@@ -965,6 +972,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.ReturnAnnounce": [],
   "WeiQuPai.view.ScoreNotEnough": [],
   "WeiQuPai.view.ScoreRule": [],
+  "WeiQuPai.view.SearchUser": [],
   "WeiQuPai.view.SelectUser": [],
   "WeiQuPai.view.Setting": [],
   "WeiQuPai.view.ShareLayer": [],
@@ -1943,6 +1951,7 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.Config": [],
   "WeiQuPai.FollowTip": [],
   "WeiQuPai.Notify": [],
+  "WeiQuPai.User": [],
   "WeiQuPai.Util": [],
   "WeiQuPai.controller.Auction": [],
   "WeiQuPai.controller.CameraLayer": [],
@@ -1969,6 +1978,7 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.controller.Profile": [],
   "WeiQuPai.controller.Register": [],
   "WeiQuPai.controller.Routes": [],
+  "WeiQuPai.controller.SearchUser": [],
   "WeiQuPai.controller.Setting": [],
   "WeiQuPai.controller.ShowOrder": [],
   "WeiQuPai.controller.ShowUser": [],
@@ -2027,6 +2037,8 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.store.Discount": [],
   "WeiQuPai.store.DiscountKillEnd": [],
   "WeiQuPai.store.FeedReply": [],
+  "WeiQuPai.store.HisFans": [],
+  "WeiQuPai.store.HisFollow": [],
   "WeiQuPai.store.KillEnd": [],
   "WeiQuPai.store.MyAuction": [],
   "WeiQuPai.store.MyConsignee": [],
@@ -2040,6 +2052,7 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.store.NoticeToday": [],
   "WeiQuPai.store.PrivateMessage": [],
   "WeiQuPai.store.Prop": [],
+  "WeiQuPai.store.SearchUser": [],
   "WeiQuPai.store.ShowUserDis": [],
   "WeiQuPai.store.ShowUserFeed": [],
   "WeiQuPai.store.ShowUserLike": [],
@@ -2188,6 +2201,12 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.GenderList": [
     "widget.genderlist"
   ],
+  "WeiQuPai.view.HisFans": [
+    "widget.hisfans"
+  ],
+  "WeiQuPai.view.HisFollow": [
+    "widget.hisfollow"
+  ],
   "WeiQuPai.view.Iframe": [
     "widget.iframe"
   ],
@@ -2313,6 +2332,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.ScoreRule": [
     "widget.scorerule"
+  ],
+  "WeiQuPai.view.SearchUser": [
+    "widget.searchuser"
   ],
   "WeiQuPai.view.SelectUser": [
     "widget.selectuser"
