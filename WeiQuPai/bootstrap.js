@@ -861,6 +861,8 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.store.HisFans": [],
   "WeiQuPai.store.HisFollow": [],
   "WeiQuPai.store.KillEnd": [],
+  "WeiQuPai.store.KillEndChannel": [],
+  "WeiQuPai.store.KillEndToday": [],
   "WeiQuPai.store.MyAuction": [],
   "WeiQuPai.store.MyConsignee": [],
   "WeiQuPai.store.MyCoupon": [],
@@ -873,6 +875,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.store.NoticeToday": [],
   "WeiQuPai.store.PrivateMessage": [],
   "WeiQuPai.store.Prop": [],
+  "WeiQuPai.store.SearchItem": [],
   "WeiQuPai.store.SearchUser": [],
   "WeiQuPai.store.ShowUserDis": [],
   "WeiQuPai.store.ShowUserFeed": [],
@@ -896,6 +899,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.CameraLayer": [],
   "WeiQuPai.view.Category": [],
   "WeiQuPai.view.CategoryItem": [],
+  "WeiQuPai.view.CategoryWithSearch": [],
   "WeiQuPai.view.ChangeAvatarLayer": [],
   "WeiQuPai.view.Circle": [],
   "WeiQuPai.view.CircleAd": [],
@@ -938,6 +942,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.ItemParam": [],
   "WeiQuPai.view.KillDetail": [],
   "WeiQuPai.view.KillEnd": [],
+  "WeiQuPai.view.KillEndChannel": [],
   "WeiQuPai.view.KillHelp": [],
   "WeiQuPai.view.KillRanking": [],
   "WeiQuPai.view.KillTip": [],
@@ -972,6 +977,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.ReturnAnnounce": [],
   "WeiQuPai.view.ScoreNotEnough": [],
   "WeiQuPai.view.ScoreRule": [],
+  "WeiQuPai.view.SearchItem": [],
   "WeiQuPai.view.SearchUser": [],
   "WeiQuPai.view.SelectUser": [],
   "WeiQuPai.view.Setting": [],
@@ -984,6 +990,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.ShowUserFeed": [],
   "WeiQuPai.view.ShowUserLike": [],
   "WeiQuPai.view.Sidebar": [],
+  "WeiQuPai.view.Sign": [],
   "WeiQuPai.view.SimpleViewer": [],
   "WeiQuPai.view.SpecialSale": [],
   "WeiQuPai.view.SplashScreen": [],
@@ -2040,6 +2047,8 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.store.HisFans": [],
   "WeiQuPai.store.HisFollow": [],
   "WeiQuPai.store.KillEnd": [],
+  "WeiQuPai.store.KillEndChannel": [],
+  "WeiQuPai.store.KillEndToday": [],
   "WeiQuPai.store.MyAuction": [],
   "WeiQuPai.store.MyConsignee": [],
   "WeiQuPai.store.MyCoupon": [],
@@ -2052,6 +2061,7 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.store.NoticeToday": [],
   "WeiQuPai.store.PrivateMessage": [],
   "WeiQuPai.store.Prop": [],
+  "WeiQuPai.store.SearchItem": [],
   "WeiQuPai.store.SearchUser": [],
   "WeiQuPai.store.ShowUserDis": [],
   "WeiQuPai.store.ShowUserFeed": [],
@@ -2104,6 +2114,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.CategoryItem": [
     "widget.categoryitem"
+  ],
+  "WeiQuPai.view.CategoryWithSearch": [
+    "widget.categorywithsearch"
   ],
   "WeiQuPai.view.ChangeAvatarLayer": [
     "widget.changeavatarlayer"
@@ -2231,6 +2244,9 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.KillEnd": [
     "widget.killend"
   ],
+  "WeiQuPai.view.KillEndChannel": [
+    "widget.killendchannel"
+  ],
   "WeiQuPai.view.KillHelp": [
     "widget.about"
   ],
@@ -2333,6 +2349,9 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.ScoreRule": [
     "widget.scorerule"
   ],
+  "WeiQuPai.view.SearchItem": [
+    "widget.searchitem"
+  ],
   "WeiQuPai.view.SearchUser": [
     "widget.searchuser"
   ],
@@ -2368,6 +2387,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.Sidebar": [
     "widget.sidebar"
+  ],
+  "WeiQuPai.view.Sign": [
+    "widget.sign"
   ],
   "WeiQuPai.view.SimpleViewer": [
     "widget.simpleviewer"
