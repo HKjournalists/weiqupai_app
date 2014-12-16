@@ -81,11 +81,7 @@ Ext.define('WeiQuPai.view.Item', {
             tpl: new Ext.XTemplate(
                 '<div class="detailData">',
                 '<div class="title_new">{title}</div>',
-                '<div class="content_new">',
-                '<span class="oprice">原价￥{oprice}</span>',
-                '<div class="noticetip"><div class="notice_btn1">期望价</div><div class="notice_btn2">提醒我</div></div>',
-                '<div class="clear"></div>',
-                '</div>',
+                '<div class="oprice">原价￥{oprice}</div>',
                 '</div>'
             )
         }, {

@@ -25,7 +25,7 @@ Ext.define('WeiQuPai.controller.MyDiscount', {
             view.setDiscountRecord(record);
             WeiQuPai.navigator.push(view);
         }else if(record.get('type') == 2){ //商品类型的惠吃惠喝
-            WeiQuPai.Util.goItemView(record.get('discount_id'), true);
+            WeiQuPai.Util.goItemView(record.get('discount_id'));
         }
     },
 

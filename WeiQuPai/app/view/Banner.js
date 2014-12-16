@@ -15,19 +15,11 @@ Ext.define('WeiQuPai.view.Banner', {
         '<div class="banner">',
         '<div class="price">',
         '<span class="color_e7">',
-        '￥{auction.curr_price}',
+        '￥{kill.reserve_price}',
         '</span>',
         '</div>',
         '</div>'
     ),
-
-    //更新爆款商品的价格
-    updatePrice: function(idx, price) {
-        var item = this.query('img')[idx];
-        var data = item.getData();
-        data['auction'].curr_price = price;
-        item.setData(data);
-    },
 
     updateBanner: function(data) {
         this.stopTimer();
@@ -37,7 +29,6 @@ Ext.define('WeiQuPai.view.Banner', {
                 src: WeiQuPai.Util.getImagePath(data[i].pic_url)
             });
             if (data[i].auction) {
-                //img.setSrc(WeiQuPai.Util.getImagePath(data[i].auction.item.pic_cover));
                 img.setTpl(this.bannerTpl);
             }
             img.setData(data[i]);
@@ -80,7 +71,7 @@ Ext.define('WeiQuPai.view.Banner', {
             Ext.Viewport.down('main').push(view);
         }
         else if (data.type == 3) {
-            WeiQuPai.Util.goItemView(data.auction.item_id);
+            WeiQuPai.app.getController('Routes').showKillDetail(data.kill.id);
         }
         else if(data.type == 4){
             WeiQuPai.app.getHistory().fireEvent('change', data.link);

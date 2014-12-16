@@ -15,7 +15,7 @@ Ext.define('WeiQuPai.controller.KillDetail', {
 
     doShowItem: function(){
         var data = this.getPageView().getPoolData();
-        WeiQuPai.Util.goItemView(data.item_id, true);
+        WeiQuPai.Util.goItemView(data.item_id);
     },
 
     //创建拍卖

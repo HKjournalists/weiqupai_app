@@ -23,7 +23,8 @@ Ext.define('WeiQuPai.controller.Routes', {
             'feed/:id': 'showFeed',
             'comment/:id': 'showComment',
             'killend/:id' : 'showKillDetail',
-            'discount/:id': 'showShopDiscount'
+            'discount/:id': 'showShopDiscount',
+            'killendchannel/:id': 'showKillEndChannel',
         }
     },
 
@@ -116,6 +117,8 @@ Ext.define('WeiQuPai.controller.Routes', {
                 setTimeout(function(){
                     WeiQuPai.navigator.push(view);
                 }, 0);
+            }, {
+                mask: true
             });
             return;
         }
@@ -129,6 +132,12 @@ Ext.define('WeiQuPai.controller.Routes', {
     showShopDiscount: function(id){
         var view = Ext.create('WeiQuPai.view.DiscountDetail');
         view.setDiscountId(id);
+        WeiQuPai.navigator.push(view);
+    },
+
+    showKillEndChannel: function(id){
+        var view = Ext.create('WeiQuPai.view.KillEndChannel');
+        view.setChannel(id);
         WeiQuPai.navigator.push(view);
     },
 

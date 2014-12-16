@@ -38,7 +38,7 @@ Ext.define('WeiQuPai.view.StartupScreen', {
         //最后一张图点击消失
         if (this.getActiveIndex() == this.getMaxItemIndex()) {
             Ext.Viewport.setActiveItem('main');
-            WeiQuPai.FollowTip.showIndex();        
+            //WeiQuPai.FollowTip.showIndex();        
             
             //检查tips
             WeiQuPai.Util.checkTip();

@@ -52,8 +52,11 @@ Ext.define('WeiQuPai.controller.Today', {
             }
         }
     },
+    
     showLuxuries: function() {
-        var view = Ext.create('WeiQuPai.view.AuctionList');
+        var view = Ext.create('WeiQuPai.view.KillEndChannel');
+        view.setTitle('奢侈品频道');
+        view.setChannel(2);
         WeiQuPai.navigator.push(view);
     },
 

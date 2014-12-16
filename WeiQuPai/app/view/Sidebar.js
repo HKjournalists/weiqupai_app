@@ -36,6 +36,11 @@ Ext.define('WeiQuPai.view.Sidebar', {
         }, {
             xtype: 'button',
             flex: 1,
+            text: '签到抽奖',
+            id: 'sign'
+        },{
+            xtype: 'button',
+            flex: 1,
             text: '我的血战',
             id: 'myauction'
         }, {

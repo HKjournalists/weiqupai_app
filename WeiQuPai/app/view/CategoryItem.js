@@ -66,6 +66,12 @@ Ext.define('WeiQuPai.view.CategoryItem', {
     },
 
     showItem: function(list, index, dataItem, record, e) {
-        WeiQuPai.Util.goItemView(record.get('id'));
+        var itemId = record.get('id');
+        var poolId = record.get('pool_id');
+        if(poolId > 0){
+            WeiQuPai.app.getController('Routes').showKillDetail(poolId);
+        }else{
+            WeiQuPai.Util.goItemView(itemId);
+        }
     }
 })

@@ -4,9 +4,10 @@ Ext.define("WeiQuPai.Config", {
     host: 'http://tt.vqupai.com',
     apiUrl: 'http://tt.vqupai.com',
     updateUrl: 'http://tt.vqupai.com/update',
+    webUrl: 'http://www.vqupai.com/mmtest',
 
     //app版本
-    version:"2.4.0",
+    version:"2.5.0",
     
     //订单状态
     orderStatusText : ['未付款', '处理中', '已发货', '已完成', '取消未付款', '取消已付款'],

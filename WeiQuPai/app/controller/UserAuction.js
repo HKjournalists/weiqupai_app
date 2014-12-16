@@ -18,7 +18,7 @@ Ext.define('WeiQuPai.controller.UserAuction', {
     //显示商品详情
     showItem: function() {
         var data = this.getPageView().getAuctionData();
-        WeiQuPai.Util.goItemView(data.item_id, true);
+        WeiQuPai.Util.goItemView(data.item_id);
     },
 
     //显示用户

@@ -590,11 +590,9 @@ html body
     text-indent: 22px;
     background-position: 0px 5px;
    }
-   .detailData .oprice-row{
-     padding:6px 10px; 
-   }
    .detailData .oprice
    {
+     padding:0 10px 10px;
      color:#cbcbcb;
      text-decoration:line-through;
      font-size:15px !important;

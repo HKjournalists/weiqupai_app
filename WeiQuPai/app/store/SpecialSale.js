@@ -2,15 +2,14 @@ Ext.define('WeiQuPai.store.SpecialSale', {
     extend: 'Ext.data.Store',
     requires: ['WeiQuPai.model.Auction'],
     config: {
-        storeId: 'SpecialSale',
+        fields: ['id', 'pic_url', 'start_price', 'reserve_price', 'duration', 'left_num', 'selfId', 'item', 'auctions'],
+        storeId: 'SpecialSale', 
         autoLoad: false,
-        model: 'WeiQuPai.model.Auction',
         proxy: {
             type: 'ajax',
-            url: WeiQuPai.Config.apiUrl + '/?r=appv2/SpecialSale',
+            url: WeiQuPai.Config.apiUrl + '/?r=appv2/SpecialSale/killEnd',
             reader: {
-                type: 'json',
-                rootProperty: 'auctions'
+                type: 'json'
             },
             startParam: false,
             limitParam: false,

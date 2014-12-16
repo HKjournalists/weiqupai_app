@@ -1,7 +1,7 @@
 Ext.define('WeiQuPai.store.SearchItem', {
     extend: 'Ext.data.Store',
     config: {
-        fields: ['id', 'title', 'pic_cover'],
+        fields: ['id', 'title', 'pic_cover', 'pool_id'],
         storeId: 'SearchItem',
         autoLoad: false,
         pageSize: 16,

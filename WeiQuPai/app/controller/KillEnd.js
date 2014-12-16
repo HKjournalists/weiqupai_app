@@ -4,6 +4,9 @@ Ext.define('WeiQuPai.controller.KillEnd', {
     config: {
         refs: {
             pageView: 'killend',
+            today: 'today',
+            killendchannel: 'killendchannel',
+            specialsale: 'specialsale',
             discountView: 'discountkillend'
         },
         control: {
@@ -16,6 +19,18 @@ Ext.define('WeiQuPai.controller.KillEnd', {
                 bang: 'showBang',
                 myauction: 'showMyAuction',
                 scoretap: 'showScore'
+            },
+            today: {
+                detail: 'showDetail',
+                create: 'createAuction'
+            },
+            killendchannel: {
+                detail: 'showDetail',
+                create: 'createAuction'
+            },
+            specialsale: {
+                detail: 'showDetail',
+                create: 'createAuction'
             },
             discountView: {
                 detail: 'showDetail',

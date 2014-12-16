@@ -1,12 +1,12 @@
-Ext.define('WeiQuPai.view.SpecialSale', {
+Ext.define('WeiQuPai.view.KillEndChannel', {
     extend: 'Ext.DataView',
-    xtype: 'specialsale',
+    xtype: 'killendchannel',
     requires: [
         'WeiQuPai.view.UserAuction', 'WeiQuPai.view.KillDetail', 'WeiQuPai.view.ConfirmDialog'
     ],
     config: {
         cls: 'bar bg_ef',
-        store: 'SpecialSale',
+        store: 'KillEndChannel',
         loadingText: null,
         disableSelection: true,
         scrollToTopOnRefresh: false,
@@ -47,7 +47,7 @@ Ext.define('WeiQuPai.view.SpecialSale', {
         ),
         items: [{
             xtype: 'vtitlebar',
-            title: '血战专场',
+            title: '血战频道',
             cls: 'titlebar1',
             docked: 'top',
             items: [{
@@ -56,7 +56,8 @@ Ext.define('WeiQuPai.view.SpecialSale', {
                 action: 'back'
             }]
         }],
-        param: null
+        title: null,
+        channel: null
     },
 
     initialize: function() {
@@ -68,8 +69,12 @@ Ext.define('WeiQuPai.view.SpecialSale', {
         this.on('itemtap', this.bindEvent, this);
     },
 
-    updateParam: function(param) {
-        this.down('vtitlebar').setTitle(param.title);
+    updateTitle: function(title){
+        this.down('vtitlebar').setTitle(title);
+        return title;
+    },
+
+    updateChannel: function(channel){
         this.loadData();
     },
 
@@ -79,7 +84,7 @@ Ext.define('WeiQuPai.view.SpecialSale', {
         this.setLoadingText(null);
         var user = WeiQuPai.Cache.get('currentUser');
         var query = {};
-        query['id'] = this.getParam().id;
+        query['channel'] = this.getChannel();
 
         if(user) query['token'] = user.token;
         
