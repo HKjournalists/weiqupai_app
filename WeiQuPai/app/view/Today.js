@@ -29,28 +29,23 @@ Ext.define('WeiQuPai.view.Today', {
         itemTpl: new Ext.XTemplate(
             '<div class="bar_new" style="margin-top:7px;">',
             '<img src="{[this.getPic(values.item.pic_cover)]}" width="140"/>',
-            '<div class="text"><ul>',
-            '<li class="text" style="color:#3a3e3f;font-size:14px;line-height: 16px;">{item.title}</li>',
-            '<li>血战时限：{duration}小时</li>',
-            '<li>市场价：{item.oprice}</li>',
-            '<li>开杀价：{start_price}</li>',
-            '<li>底价：{reserve_price}　剩余量：{left_num}个</li>',
-            '<li><span class="floatleft"><input type="button" class="btn_create" value="{[this.getButtonText(values)]}"  style="margin-top:0px;"/></span></li>',
-            '</ul></div>',
+            '<div class="pool-info">',
+                '<h3>{item.title}</h3>',
+                '<p>血战时限：{duration}小时</p>',
+                '<p>开杀价：{start_price}</p>',
+                '<div class="btn-info">',
+                    '<div class="reserve-row">底价：￥<span class="price">{reserve_price}</span></div>',
+                    '<div><input type="button" class="btn_create" value="{[this.getButtonText(values)]}"/></div>',
+                '</div>',
             '</div>',
-            '<div class="barper"><div class="bottom"><ul>',
-            '<tpl for="auctions">',
-            '<li><img src="{[this.getAvatar(values.user.avatar)]}" class="killer_avatar" data-uid="{user.id}"/>',
-            '<span class="user_price" data-aid="{id}">￥{curr_price}</spa></li>',
-            '</tpl>',
-            '<div class="clear"></div></ul></div></div>', {
+            '</div>', {
                 getAvatar: function(avatar) {
                     return WeiQuPai.Util.getAvatar(avatar, 140);
                 },
                 getPic: function(pic_cover) {
                     return WeiQuPai.Util.getImagePath(pic_cover, 200);
                 },
-                getButtonText: function(values){
+                getButtonText: function(values) {
                     return values.selfId > 0 ? '我的实况' : '创建血战';
                 }
             }

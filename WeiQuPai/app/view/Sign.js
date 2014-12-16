@@ -1,4 +1,4 @@
-Ext.define('WeiQuPai.view.Sign'
+Ext.define('WeiQuPai.view.Sign', {
     extend: 'Ext.Container',
     requires: ['WeiQuPai.view.Iframe'],
     xtype: 'sign',
@@ -12,8 +12,9 @@ Ext.define('WeiQuPai.view.Sign'
             title: '签到抽奖',
             docked: 'top',
             items: [{
-                baseCls: 'arrow_left',
-                action: 'back'
+                xtype: 'button',
+                baseCls: 'user',
+                action: 'ucenter'
             }]
         }, {
             xtype: 'iframe'
@@ -25,7 +26,7 @@ Ext.define('WeiQuPai.view.Sign'
         var user = WeiQuPai.Cache.get('currentUser');
         var url = WeiQuPai.Config.webUrl + '/?r=turnTable&token=' + user.token;
         this.setHref(url);
-        this.loadIfrmae();
+        this.loadIframe();
     },
 
     loadIframe: function() {

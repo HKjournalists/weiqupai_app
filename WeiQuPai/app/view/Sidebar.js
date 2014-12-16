@@ -7,7 +7,7 @@ Ext.define('WeiQuPai.view.Sidebar', {
     requires: ['WeiQuPai.view.Today', 'WeiQuPai.view.MyAuction', 'WeiQuPai.view.MyMessage',
         'WeiQuPai.view.MyOrder', 'WeiQuPai.view.Circle', 'WeiQuPai.view.MyDiscount', 'WeiQuPai.view.MyCoupon',
         'WeiQuPai.view.MyProp', 'WeiQuPai.view.Profile', 'WeiQuPai.view.Setting', 'WeiQuPai.view.ShowUser',
-        'WeiQuPai.view.MyFollowTab'
+        'WeiQuPai.view.MyFollowTab', 'WeiQuPai.view.Sign'
     ],
     config: {
         notLogin: ['today', 'circle', 'setting'],

@@ -49,20 +49,33 @@ Ext.define('WeiQuPai.view.UserAuction', {
             tpl: new Ext.XTemplate(
                 '<div class="bar_new">',
                 '<img src="{[this.getCover(values.item.pic_cover)]}" width="100"/>',
-                '<div class="text"><ul>',
-                  '<li class="text">{item.title}</li>',
-                  '<li><span class="floatright">剩余：{pool.left_num}个</span> {[this.getLeftTime(values)]}</li>',
-                  '<li class="red"><span class="floatleft">当前价格：{curr_price}</span>',
-                     '<span class="floatright">底价：{reserve_price}</span><br></li>',
-                  '<tpl if="this.hasButton(values)">',
-                  '<li><span class="floatleft"><input type="button" class="status orderBtn" value="立刻下单" /></span>',
-                  '<span class="floatleft"><input type="button" class="daoju" value="使用道具" /></span></li>',
-                  '</tpl>',
-                '</ul></div>',
+                '<div class="pool-detail-info">',
+                    '<h3>{item.title}</h3>',
+                    '<div class="row">',
+                        '<p>市场价：{item.oprice}</p>',
+                        '<p>开杀价：{start_price}</p>',
+                    '</div>',
+                    '<div class="row red">',
+                        '<p>底价：{reserve_price}</p>',
+                        '<p>剩余：{pool.left_num}个</p>',
+                    '</div>',
+                    '<div class="row">',
+                        '<tpl if="this.hasButton(values)">',
+                        '<p><input type="button" class="status orderBtn" value="立刻下单"/></p>',
+                        '<p><input type="button" class="daoju" value="使用道具"/></p>',
+                        '<tpl elseif="this.hasHelpButton(values)">',
+                        '<p><input type="button" class="status j-help" value="帮 拍"/></p>',
+                        '</tpl>',
+                    '</div>',
+                '</div>',
                 '</div>', {
                     hasButton: function(values){
                         var user = WeiQuPai.Cache.get('currentUser');
                         return user && user.id == values.uid && values.status < 3;
+                    },
+                    hasHelpButton: function(values){
+                        var user = WeiQuPai.Cache.get('currentUser');
+                        return user && user.id != values.uid && values.status < 3;
                     },
                     getCover: function(pic_cover) {
                         return WeiQuPai.Util.getImagePath(pic_cover, 200);
@@ -210,6 +223,10 @@ Ext.define('WeiQuPai.view.UserAuction', {
         }
         if (Ext.get(e.target).findParent('.share_btn')) {
             this.fireEvent('sharetap');
+            return false;
+        }
+        if (Ext.get(e.target).findParent('.j-help')) {
+            this.fireEvent('helptap');
             return false;
         }
     },

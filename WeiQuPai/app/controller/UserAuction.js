@@ -10,7 +10,8 @@ Ext.define('WeiQuPai.controller.UserAuction', {
                 ordertap: 'showOrderView',
                 avatartap: 'showUser',
                 proptap: 'showPropList',
-                sharetap: 'showShareLayer'
+                sharetap: 'showShareLayer',
+                helptap: 'doHelp',
             }
         }
     },
@@ -64,6 +65,31 @@ Ext.define('WeiQuPai.controller.UserAuction', {
             });
         }
         layer.show();
+    },
+
+    doHelp: function(){
+        var data = this.getPageView().getAuctionData();
+        var store = this.getPageView().getStore();
+        var user = WeiQuPai.Util.checkLogin();
+        if (!user) return;
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/userAuction/help&id=' + data.id + '&token=' + user.token;
+        WeiQuPai.Util.get(url, function(rsp) {
+            var propMsg = '';
+            if (rsp.prop.indexOf("doubleDiscount") != -1) {
+                propMsg += '由于使用了双倍卡，';
+            }
+            WeiQuPai.Util.toast(propMsg + '您成功帮忙减掉了' + rsp.discount + '元');
+            var data = {
+                discount: rsp.discount,
+                ctime: '刚刚',
+                user: {
+                    id: user.id,
+                    avatar: user.avatar,
+                    nick: user.nick,
+                } 
+            }
+            store.insert(0, data);
+        });
     },
 
     showComment: function() {

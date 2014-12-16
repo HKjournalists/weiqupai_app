@@ -32,13 +32,18 @@ Ext.define('WeiQuPai.view.KillDetail', {
             tpl: new Ext.XTemplate(
                 '<div class="bar_new">',
                 '<img src="{[this.getCover(values.item.pic_cover)]}" width="100"/>',
-                '<div class="text"><ul>',
-                '<li class="text">{item.title}</li>',
-                '<li style="height:16px"><span class="floatleft">市场价：{item.oprice}</span>',
-                '<span class="floatright">开杀价：{start_price}</span></li>',
-                '<li class="red"><span class="floatright">剩余：{left_num}个</span>底价：{reserve_price}</li>',
-                '<li><input type="button" class="status create" value="创建血战" /></span></li>',
-                '</ul></div>',
+                '<div class="pool-detail-info">',
+                    '<h3>{item.title}</h3>',
+                    '<div class="row">',
+                        '<p>市场价：{item.oprice}</p>',
+                        '<p>开杀价：{start_price}</p>',
+                    '</div>',
+                    '<div class="row red">',
+                        '<p>底价：{reserve_price}</p>',
+                        '<p>剩余：{left_num}个</p>',
+                    '</div>',
+                    '<div class="row"><input type="button" class="status create" value="创建血战" /></div>',
+                '</div>',
                 '</div>', {
                     getCover: function(pic_cover) {
                         return WeiQuPai.Util.getImagePath(pic_cover, 200);
