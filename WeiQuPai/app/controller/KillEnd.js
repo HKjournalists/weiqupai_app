@@ -101,8 +101,8 @@ Ext.define('WeiQuPai.controller.KillEnd', {
 
         var user = WeiQuPai.Util.checkLogin();
         if(!user) return;
-
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/myScore&token=' + user.token;
+        var pool_id = record.get('id');
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/myScore&pool_id=' + pool_id + '&token=' + user.token;
         var me = this;
         WeiQuPai.Util.get(url, function(rsp){
             if(rsp.canCreateAuction){
