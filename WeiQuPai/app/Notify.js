@@ -31,7 +31,8 @@ Ext.define('WeiQuPai.Notify', {
     MSG_AUCTION_CHANGE_PRICE: 18,
     //有人帮拍
     MSG_USER_AUCTION_HELP: 19,
-
+    //签到
+    MSG_SIGN : 20,
     //保存消息
     msg: {},
 
@@ -193,6 +194,22 @@ Ext.define('WeiQuPai.Notify', {
         this.msg[this.MSG_AUCTION_RESERVE_PRICE] = null;
         WeiQuPai.sidebar.clearBadge('myauction');
     },
+    //关注
+    followNotify: function(){
+        WeiQuPai.sidebar.setBadge('myfollowtab');
+    },
+    followClear: function(){
+       this.msg[this.MSG_FOLLOW] = null; 
+       WeiQuPai.sidebar.clearBadge('myfollowtab');
+    },
+    //签到
+    signNotify: function(){
+       WeiQuPai.sidebar.setBadge('sign'); 
+    },
+    signClear: function(){
+        this.msg[this.MSG_SIGN] = null;
+        WeiQuPai.sidebar.clearBadge('sign');
+    },
 });
 
 WeiQuPai.Notify.notifier[WeiQuPai.Notify.MSG_MESSAGE] = WeiQuPai.Notify.msgNotify;
@@ -208,6 +225,8 @@ WeiQuPai.Notify.notifier[WeiQuPai.Notify.MSG_SPLASH] = WeiQuPai.Notify.flashNoti
 WeiQuPai.Notify.notifier[WeiQuPai.Notify.MSG_USER_AUCTION_HELP] = WeiQuPai.Notify.auctionHelpNotify;
 WeiQuPai.Notify.notifier[WeiQuPai.Notify.MSG_AUCTION_FINISH] = WeiQuPai.Notify.auctionFinishNotify;
 WeiQuPai.Notify.notifier[WeiQuPai.Notify.MSG_AUCTION_RESERVE_PRICE] = WeiQuPai.Notify.auctionReservePriceNotify;
+WeiQuPai.Notify.notifier[WeiQuPai.Notify.MSG_FOLLOW] = WeiQuPai.Notify.followNotify;
+WeiQuPai.Notify.notifier[WeiQuPai.Notify.MSG_SIGN] = WeiQuPai.Notify.signNotify;
 
 //取消红点的notifier
 WeiQuPai.Notify.clearNotifier[WeiQuPai.Notify.MSG_MESSAGE] = WeiQuPai.Notify.msgClear;
@@ -223,3 +242,8 @@ WeiQuPai.Notify.clearNotifier[WeiQuPai.Notify.MSG_SPLASH] = WeiQuPai.Notify.flas
 WeiQuPai.Notify.clearNotifier[WeiQuPai.Notify.MSG_USER_AUCTION_HELP] = WeiQuPai.Notify.auctionHelpClear;
 WeiQuPai.Notify.clearNotifier[WeiQuPai.Notify.MSG_AUCTION_FINISH] = WeiQuPai.Notify.auctionFinishClear;
 WeiQuPai.Notify.clearNotifier[WeiQuPai.Notify.MSG_AUCTION_RESERVE_PRICE] = WeiQuPai.Notify.auctionReservePriceClear;
+WeiQuPai.Notify.clearNotifier[WeiQuPai.Notify.MSG_FOLLOW] = WeiQuPai.Notify.followClear;
+WeiQuPai.Notify.clearNotifier[WeiQuPai.Notify.MSG_SIGN] = WeiQuPai.Notify.signClear;
+
+
+

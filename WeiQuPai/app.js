@@ -37,7 +37,7 @@ Ext.application({
         'Iframe', 'SimpleViewer', 'ImageViewer', 'Sidebar', 'DisclosureItem', 'Pay', 'Order', 'Item', 'Auction', 'Item',
         'UserAuction', 'InputComment', 'CircleReplyLayer', 'CameraLayer', 'AuctionTip', 'MainTip', 'NoticeTip',
         'AuctionTipTwo', 'PriceForm', 'DeleteButtonLayer', 'ConfirmLayer','UserAuctionItem', 'FollowTip',
-        'AuctionHelpLayer', 'ScoreNotEnough', 'ConfirmDialog', 'ScoreRule', 'TipBox'
+        'AuctionHelpLayer', 'ScoreNotEnough', 'ConfirmDialog', 'ScoreRule', 'TipBox', 'CouponOrder'
     ],
     stores: [
         'Comment', 'Banner', 'MyOrder', 'MyConsignee', 'Circle', 'MyProp', 'MyCoupon',
@@ -261,29 +261,6 @@ Ext.application({
 
             //处理评分
             WeiQuPai.app.tipScore();
-
-            //处理刷新状态
-            var mainCard = WeiQuPai.mainCard;
-            var main = WeiQuPai.navigator;
-            var currentView = WeiQuPai.navigator.getActiveItem();
-            if (currentView == mainCard) {
-                currentView = mainCard.getActiveItem();
-            }
-            var today = mainCard.down('today');
-            var auction = main.down('auction');
-            var userAuction = main.down('userauction');
-            var special = main.down('specialsale');
-
-            if (currentView == auction) {
-                currentView.softRefresh();
-            } else if (currentView == special) {
-                currentView.fireEvent('activate');
-            } else if (currentView == today) {
-                currentView.fireEvent('activate');
-            } else if (currentView == userAuction) {
-                currentView.loadData();
-            }
-
 
         }, false);
 

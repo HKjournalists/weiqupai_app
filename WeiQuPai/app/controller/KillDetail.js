@@ -22,8 +22,8 @@ Ext.define('WeiQuPai.controller.KillDetail', {
     createAuction: function(e) {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
-
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/myScore&token=' + user.token;
+        var pool_id = this.getPageView().getPoolId();
+        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/myScore&pool_id=' + pool_id + '&token=' + user.token;
         var me = this;
         WeiQuPai.Util.get(url, function(rsp){
             if(rsp.canCreateAuction){
@@ -51,8 +51,11 @@ Ext.define('WeiQuPai.controller.KillDetail', {
         WeiQuPai.Util.post(url, data, function(rsp) {
             var view = Ext.create('WeiQuPai.view.UserAuction');
             view.setAuctionId(rsp.id);
-            var record = Ext.getStore('KillEnd').getById(poolId);
-            record && record.set('selfId', parseInt(rsp.id));
+            var stores = ['KillEnd', 'KillEndToday', 'KillEndChannel', 'SpecialSale'];
+            Ext.Array.each(stores, function(store){
+                var record = Ext.getStore(store).getById(poolId);
+                record && record.set('selfId', parseInt(rsp.id));
+            });
             
             //替换当前视图
             var inner = WeiQuPai.navigator.getInnerItems();

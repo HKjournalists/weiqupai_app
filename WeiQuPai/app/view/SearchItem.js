@@ -22,6 +22,12 @@ Ext.define('WeiQuPai.view.SearchItem', {
     initialize: function() {
         this.callParent(arguments);
         this.on('itemtap', this.showItem, this);
+
+        this.msgbox = WeiQuPai.Util.msgbox();
+        this.add(this.msgbox);
+        this.getStore().on('load', WeiQuPai.Util.onStoreLoad, this);
+        this.getStore().on('latestfetched', WeiQuPai.Util.onStoreLoad, this);
+
     },
 
     loadData: function(callback) {
@@ -32,10 +38,6 @@ Ext.define('WeiQuPai.view.SearchItem', {
         this.getScrollable().getScroller().scrollToTop(false);
         this.setLoadingText(null);
         store.loadPage(1, function(records, operation, success) {
-            if (!success) {
-                WeiQuPai.Util.toast('数据加载失败');
-                return false;
-            }
             Ext.isFunction(callback) && callback();
         }, this);
     },

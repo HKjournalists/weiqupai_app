@@ -33,6 +33,12 @@ Ext.define('WeiQuPai.view.SearchUser', {
     initialize: function() {
         this.callParent(arguments);
         this.on('itemtap', this.bindEvent, this);
+
+        this.msgbox = WeiQuPai.Util.msgbox();
+        this.add(this.msgbox);
+        this.getStore().on('load', WeiQuPai.Util.onStoreLoad, this);
+        this.getStore().on('latestfetched', WeiQuPai.Util.onStoreLoad, this);
+
         WeiQuPai.app.on('addfollow', this.addFollow, this);
         WeiQuPai.app.on('cancelfollow', this.cancelFollow, this);
     },
@@ -51,9 +57,6 @@ Ext.define('WeiQuPai.view.SearchUser', {
         store.getProxy().setExtraParam('word', word);
         store.getProxy().setExtraParam('token', user.token);
         store.loadPage(1, function(records, operation, success) {
-            if (!success) {
-                WeiQuPai.Util.toast('数据加载失败');
-            }
             Ext.isFunction(callback) && callback();
         }, this);
     },

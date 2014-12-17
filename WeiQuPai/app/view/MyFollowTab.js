@@ -80,6 +80,13 @@ Ext.define('WeiQuPai.view.MyFollowTab', {
         this.callParent(arguments);
         this.setUid(WeiQuPai.Cache.get('currentUser').id);
 
+        //显示的时候检查红点
+        this.on('activate', function(){
+            if(WeiQuPai.Notify.hasNotify(WeiQuPai.Notify.MSG_FOLLOW)){
+                WeiQuPai.Notify.clearNotify(WeiQuPai.Notify.MSG_FOLLOW);
+            }
+        }, this);
+
         this.down('#cancelSearchBtn').on('tap', function(){
             this.down('#searchText').reset();
             this.down('searchuser').getStore().removeAll();

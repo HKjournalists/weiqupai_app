@@ -48,22 +48,6 @@ Ext.define('WeiQuPai.controller.UserAuction', {
         var layer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ShareLayer');
         layer.down('button[action=weibo]').setDisabled(true);
         layer.setShareData(shareData);
-        //结束状态，并且是自己的拍卖，分享成功后返还积分
-        var user = WeiQuPai.Cache.get('currentUser');
-        data.score_returned = parseInt(data.score_returned);
-        data.status = parseInt(data.status);
-        if (data.status > 1 && user && user.id == data.uid && !data.score_returned) {
-            var self = this;
-            layer.setShareCallback(function() {
-                layer.setShareCallback(null);
-                var url = WeiQuPai.Config.apiUrl + '/?r=appv2/userAuction/returnScore&id=' + data.id + '&token=' + user.token;
-                WeiQuPai.Util.get(url, function(rsp) {
-                    data.score_returned = 1;
-                    self.getPageView().setAuctionData(data);
-                    WeiQuPai.Util.toast(rsp.msg);
-                });
-            });
-        }
         layer.show();
     },
 

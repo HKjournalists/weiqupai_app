@@ -22,7 +22,10 @@ Ext.define('WeiQuPai.controller.Item', {
         if(form.down('textfield[name=content]').getValue().trim().length == 0){
             return;
         }
-        var user = WeiQuPai.Cache.get('currentUser');
+        var user = WeiQuPai.Util.checkLogin();
+        if(!user){
+            return;
+        }
         var view = WeiQuPai.navigator.getActiveItem();
         var self = this;
         WeiQuPai.Util.mask();

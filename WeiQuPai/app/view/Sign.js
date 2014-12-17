@@ -21,15 +21,19 @@ Ext.define('WeiQuPai.view.Sign', {
         }]
     },
 
-
     initialize: function() {
         var user = WeiQuPai.Cache.get('currentUser');
         var url = WeiQuPai.Config.webUrl + '/?r=turnTable&token=' + user.token;
         this.setHref(url);
-        this.loadIframe();
+        this.on('activate', this.loadIframe, this);
     },
 
     loadIframe: function() {
+        //清红点
+        if(WeiQuPai.Notify.hasNotify(WeiQuPai.Notify.MSG_SIGN)){
+            WeiQuPai.Notify.clearNotify(WeiQuPai.Notify.MSG_SIGN);
+        }
+
         this.setMasked({
             xtype: 'wloadmask'
         });
