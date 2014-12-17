@@ -13,7 +13,6 @@ Ext.define('WeiQuPai.view.Sidebar', {
         notLogin: ['today', 'circle', 'setting'],
         scrollable: true,
         cls: 'personal',
-        layout: 'vbox',
         items: [{
             xtype: 'container',
             items: [{
@@ -29,63 +28,51 @@ Ext.define('WeiQuPai.view.Sidebar', {
             }]
         }, {
             xtype: 'button',
-            flex: 1,
             text: '首页',
             id: 'today',
             cls: 'button_active',
         }, {
             xtype: 'button',
-            flex: 1,
             text: '签到抽奖',
             id: 'sign'
         },{
             xtype: 'button',
-            flex: 1,
             text: '我的血战',
             id: 'myauction'
         }, {
             xtype: 'button',
-            flex: 1,
-            text: '我的消息',
-            id: 'mymessage'
-        }, {
-            xtype: 'button',
-            flex: 1,
-            text: '我的订单',
-            id: 'myorder'
-        }, {
-            xtype: 'button',
-            flex: 1,
-            text: '拍圈',
-            id: 'circle'
-        }, {
-            xtype: 'button',
-            flex: 1,
-            text: '我的优惠',
-            id: 'mydiscount'
-        }, {
-            xtype: 'button',
-            flex: 1,
-            text: '我的拍券',
-            id: 'mycoupon'
-        }, {
-            xtype: 'button',
-            flex: 1,
-            text: '我的道具',
-            id: 'myprop'
-        }, {
-            xtype: 'button',
-            flex: 1,
-            text: '我的资料',
-            id: 'profile'
-        }, {
-            xtype: 'button',
-            flex: 1,
             text: '我的关注',
             id: 'myfollowtab'
         }, {
             xtype: 'button',
-            flex: 1,
+            text: '我的消息',
+            id: 'mymessage'
+        }, {
+            xtype: 'button',
+            text: '我的订单',
+            id: 'myorder'
+        }, {
+            xtype: 'button',
+            text: '拍圈',
+            id: 'circle'
+        }, {
+            xtype: 'button',
+            text: '我的优惠',
+            id: 'mydiscount'
+        }, {
+            xtype: 'button',
+            text: '我的拍券',
+            id: 'mycoupon'
+        }, {
+            xtype: 'button',
+            text: '我的道具',
+            id: 'myprop'
+        }, {
+            xtype: 'button',
+            text: '我的资料',
+            id: 'profile'
+        }, {
+            xtype: 'button',
             text: '系统设置',
             id: 'setting'
         }]

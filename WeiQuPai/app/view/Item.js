@@ -119,6 +119,11 @@ Ext.define('WeiQuPai.view.Item', {
             xtype: 'commentlist',
             hidden: true
 
+        }, {
+            xtype: 'inputcomment',
+            itemId: 'reply',
+            docked: 'bottom',
+            hidden: true
         }],
 
         //当前激活的tab button
@@ -134,22 +139,8 @@ Ext.define('WeiQuPai.view.Item', {
             element: 'element'
         });
 
-        var me = this;
-        this.down('#price_data').element.dom.addEventListener('click', function(e) {
-            me.bindEvent(e);
-        });
-
-        this.showTips();
         //初始化tab
         this.initTab();
-    },
-
-    showTips: function() {
-        if (!WeiQuPai.app.firstLaunch) return;
-        setTimeout(function() {
-            var view = WeiQuPai.Util.getGlobalView('WeiQuPai.view.NoticeTip');
-            view.show();
-        }, 500);
     },
 
     initTab: function() {
@@ -161,6 +152,11 @@ Ext.define('WeiQuPai.view.Item', {
             btns[i].on('tap', function() {
                 var tab = me.getActiveTab();
                 if (tab == this) return;
+                if(this.tabView.isXType('commentlist')){
+                    me.down('inputcomment').show();
+                }else{
+                    me.down('inputcomment').hide();
+                }
                 tab.removeCls('x-button-active');
                 tab.tabView.hide();
                 this.addCls('x-button-active');
@@ -259,6 +255,7 @@ Ext.define('WeiQuPai.view.Item', {
             return null;
         }
         this.down('commentlist').setItemId(record.get('id'));
+        this.down('inputcomment').down('hiddenfield[name=item_id]').setValue(record.get('id'));
 
         var data = record.data;
         this.down('detailpicshow').setPicData(data.pic_top);

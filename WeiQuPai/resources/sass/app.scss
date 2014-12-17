@@ -1013,7 +1013,7 @@ html body
      border:0px;
      font-weight:100;
      text-indent:35px;
-     height:44px;
+     height:40px;
      line-height:40px;
      margin:0px;
      padding:0px;
@@ -3165,7 +3165,6 @@ html body
 }
 .barper .bottom .user_price{
   line-height:30px;
-  margin-left:6px;
 }
 .bar_icon{
   background: url(../images/bar_icon.png) no-repeat;
@@ -3593,10 +3592,10 @@ html body
 .floatleft{float:left;}
 .floatright{float:right;}
 .bar_new{padding:7px;overflow:auto;width:100%;background: white;font-size:12px;}
-.bar_new img{border:1px solid #fefefe;float:left;margin-right:7px;}
+.bar_new img{border:1px solid #fefefe;float:left;}
 .bar_new .pool-info{margin-left:150px;height:140px;overflow:hidden;position:relative;}
 .bar_new .pool-info h3{font-size:14px;line-height:18px;height:36px;color:#3a3e3f;overflow:hidden;}
-.bar_new .pool-info p{color:#898294;line-height:18px;}
+.bar_new .pool-info p{color:#898294;line-height:16px;}
 .bar_new .btn-info{position:absolute;bottom:0;}
 .bar_new .reserve-row{color:$color_e7;margin-bottom:3px;}
 .bar_new .price{font-size:24px;}
@@ -3749,3 +3748,4 @@ html body
 .dock_btn{background: $color_e7;width:72px;height:29px;color:$color_fff;border:0px;border-radius: 3px;padding:7px;margin-right:10px;}
 .dock_btn .x-button-label{font-size:12px!important;}
 .text-btn{-webkit-box-align:center;color:$color_e7;padding:8px}
+.score-rule{margin-left:10px;color:$color_e7;}

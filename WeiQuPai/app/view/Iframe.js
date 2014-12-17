@@ -7,7 +7,7 @@ Ext.define('WeiQuPai.view.Iframe', {
 	xtype: 'iframe',
 
 	config: {
-		style: '-webkit-overflow-scrolling:touch;height:600px;overflow:auto;',
+		style: '-webkit-overflow-scrolling:touch;height:100%;overflow:auto;',
 		href: false
 	},
 

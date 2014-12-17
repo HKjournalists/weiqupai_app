@@ -3,7 +3,7 @@ Ext.define('WeiQuPai.controller.Comment', {
     config: {
         refs: {
             pageView: 'comment',
-            reply: 'inputcomment[itemId=reply]',
+            reply: 'comment inputcomment[itemId=reply]',
         },
         control: {
             pageView: {

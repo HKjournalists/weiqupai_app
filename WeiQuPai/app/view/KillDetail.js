@@ -42,7 +42,7 @@ Ext.define('WeiQuPai.view.KillDetail', {
                         '<p>底价：{reserve_price}</p>',
                         '<p>剩余：{left_num}个</p>',
                     '</div>',
-                    '<div class="row"><input type="button" class="status create" value="创建血战" /></div>',
+                    '<div class="row"><input type="button" class="status create" value="我要杀价" /></div>',
                 '</div>',
                 '</div>', {
                     getCover: function(pic_cover) {

@@ -44,7 +44,7 @@ Ext.define('WeiQuPai.view.DiscountKillEnd', {
                     return WeiQuPai.Util.getImagePath(pic_cover, 200);
                 },
                 getButtonText: function(values) {
-                    return values.selfId > 0 ? '我的实况' : '创建血战';
+                    return values.selfId > 0 ? '我的实况' : '我要杀价';
                 }
             }
         )

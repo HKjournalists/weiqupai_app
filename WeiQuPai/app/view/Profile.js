@@ -1,7 +1,7 @@
 Ext.define('WeiQuPai.view.Profile', {
     extend: 'Ext.Container',
     xtype: 'profile',
-    requires: ['WeiQuPai.view.GenderList', 'WeiQuPai.view.MyConsignee'],
+    requires: ['WeiQuPai.view.GenderList', 'WeiQuPai.view.MyConsignee', 'WeiQuPai.view.ScoreRule'],
     config: {
         scrollable: true,
         cls: 'bg_ef',
@@ -49,7 +49,6 @@ Ext.define('WeiQuPai.view.Profile', {
                 xtype: 'disclosureitem',
                 title: '积分',
                 itemId: 'score',
-                disclosureItem: false
             }]
         }, {
             xtype: 'container',
@@ -66,11 +65,11 @@ Ext.define('WeiQuPai.view.Profile', {
                 xtype: 'disclosureitem',
                 title: '联系电话',
                 itemId: 'phone',
+            }, {
+                xtype: 'disclosureitem',
+                title: '个性签名',
+                itemId: 'sign',
             }]
-        }, {
-            xtype: 'disclosureitem',
-            title: '个性签名',
-            itemId: 'sign',
         }, {
             xtype: 'disclosureitem',
             title: '收货信息',
@@ -119,12 +118,13 @@ Ext.define('WeiQuPai.view.Profile', {
         var data = record.data;
         this.setAvatar(data.avatar);
         this.addGenderList(data.gender);
-        var fields = ['uname', 'nick', 'real_name', 'email', 'phone', 'sign', 'score'];
+        var fields = ['uname', 'nick', 'real_name', 'email', 'phone', 'sign'];
         var self = this;
         Ext.each(fields, function(f) {
             var value = Ext.String.htmlEncode(data[f]);
             self.down('#' + f).setContent(value);
         });
+        self.down('#score').setContent(data.score + '<span class="score-rule">说明</span>');
         return record;
     },
 

@@ -21,14 +21,14 @@ Ext.application({
     ],
 
     controllers: [
-        'Auction', 'CameraLayer', 'Circle', 'Comment', 'CommentList', 'Feed', 'Login', 'MyAuction',
+        'Item', 'CameraLayer', 'Circle', 'Comment', 'CommentList', 'Feed', 'Login', 'MyAuction',
         'MyConsignee', 'MyFans', 'MyFollow', 'MyMessage', 'MyOrder', 'MyOrderDetail', 'Order', 'Pay',
         'PrivateMessage', 'Profile', 'Register', 'Routes', 'Setting', 'ShowOrder', 'ShowUser', 'ShowUserDis',
         'ShowUserFeed', 'ShowUserLike', 'Today', 'Discount', 'KillEnd', 'TopKiller', 'UserAuction',
         'UserAuctionComment', 'MyDiscount', 'FeedBack', 'KillDetail', 'VerifyPhone', 'SearchUser'
     ],
     models: [
-        'Auction', 'Comment', 'Consignee', 'Feed', 'Item', 'Order', 'Profile', 'Shipment',
+        'Comment', 'Consignee', 'Feed', 'Item', 'Order', 'Profile', 'Shipment',
         'SpecialSale', 'UserAuction', 'ShowUserDis', 'ShowUserLike', 'ShowUserFeed', 'Message',
         'Discount'
     ],
@@ -40,7 +40,7 @@ Ext.application({
         'AuctionHelpLayer', 'ScoreNotEnough', 'ConfirmDialog', 'ScoreRule', 'TipBox'
     ],
     stores: [
-        'Auction', 'Comment', 'Banner', 'MyOrder', 'MyConsignee', 'Circle', 'MyProp', 'MyCoupon',
+        'Comment', 'Banner', 'MyOrder', 'MyConsignee', 'Circle', 'MyProp', 'MyCoupon',
         'Coupon', 'Prop', 'SpecialSale', 'ShowUserLike', 'ShowUserDis', 'ShowUserFeed', 'MyFollow', 'MyAuction',
         'MyFans', 'FeedReply', 'MyMessage', 'CommentReply', 'PrivateMessage', 'Discount', 'MyDiscount',
         'KillEnd', 'UserAuction', 'UserAuctionHelper', 'Category', 'CategoryItem', 'UserAuctionComment',

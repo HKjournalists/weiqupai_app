@@ -64,7 +64,7 @@ Ext.define('WeiQuPai.view.UserAuction', {
                         '<p><input type="button" class="status orderBtn" value="立刻下单"/></p>',
                         '<p><input type="button" class="daoju" value="使用道具"/></p>',
                         '<tpl elseif="this.hasHelpButton(values)">',
-                        '<p><input type="button" class="status j-help" value="帮 拍"/></p>',
+                        '<p><input type="button" class="status j-help" value="帮 杀"/></p>',
                         '</tpl>',
                     '</div>',
                 '</div>',

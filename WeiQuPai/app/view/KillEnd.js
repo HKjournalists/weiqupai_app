@@ -31,6 +31,7 @@ Ext.define('WeiQuPai.view.KillEnd', {
                 '<h3>{item.title}</h3>',
                 '<p>血战时限：{duration}小时</p>',
                 '<p>开杀价：{start_price}</p>',
+                '<p>剩余：{left_num}个</p>',
                 '<div class="btn-info">',
                     '<div class="reserve-row">底价：￥<span class="price">{reserve_price}</span></div>',
                     '<div><input type="button" class="btn_create" value="{[this.getButtonText(values)]}"/></div>',
@@ -49,7 +50,7 @@ Ext.define('WeiQuPai.view.KillEnd', {
                     return WeiQuPai.Util.getImagePath(pic_cover, 200);
                 },
                 getButtonText: function(values){
-                    return values.selfId > 0 ? '我的实况' : '创建血战';
+                    return values.selfId > 0 ? '我的实况' : '我要杀价';
                 }
             }
         ),
@@ -63,18 +64,6 @@ Ext.define('WeiQuPai.view.KillEnd', {
                 baseCls: 'arrow_left',
                 action: 'back'
             }]
-        }, {
-            xtype: 'container',
-            html: [
-                '<div class="to_end">',
-                '<div><input type="button" class="btn_score" value="积分规则" /></div>',
-                '<div><input type="button" class="btn_my" value="我的战况" /></div>',
-                '<div><input type="button" class="btn_help" value="血战说明" /></div>',
-                '</div>',
-                '</div>'
-            ].join(''),
-
-            itemId: 'buttonList'
         }, {
             xtype: 'circlead'
         }]
@@ -90,7 +79,6 @@ Ext.define('WeiQuPai.view.KillEnd', {
         this.down('circlead').loadData();
         
         this.on('itemtap', this.bindEvent, this);
-        this.down('#buttonList').element.on('tap', this.bindButtonEvent, this);
         WeiQuPai.FollowTip.showKillEnd();
     },
 

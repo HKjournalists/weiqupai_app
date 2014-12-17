@@ -33,6 +33,7 @@ Ext.define('WeiQuPai.view.Today', {
                 '<h3>{item.title}</h3>',
                 '<p>血战时限：{duration}小时</p>',
                 '<p>开杀价：{start_price}</p>',
+                '<p>剩余：{left_num}个</p>',
                 '<div class="btn-info">',
                     '<div class="reserve-row">底价：￥<span class="price">{reserve_price}</span></div>',
                     '<div><input type="button" class="btn_create" value="{[this.getButtonText(values)]}"/></div>',
@@ -46,7 +47,7 @@ Ext.define('WeiQuPai.view.Today', {
                     return WeiQuPai.Util.getImagePath(pic_cover, 200);
                 },
                 getButtonText: function(values) {
-                    return values.selfId > 0 ? '我的实况' : '创建血战';
+                    return values.selfId > 0 ? '我的实况' : '我要杀价';
                 }
             }
         ),

@@ -11,6 +11,7 @@ Ext.define('WeiQuPai.controller.Profile', {
             email: 'disclosureitem[itemId=email]',
             phone: 'disclosureitem[itemId=phone]',
             sign: 'disclosureitem[itemId=sign]',
+            score: 'disclosureitem[itemId=score]',
             realName: 'disclosureitem[itemId=real_name]',
             avatar: 'disclosureitem[itemId=avatar]',
             consignee: 'profile disclosureitem[itemId=consignee]'
@@ -52,6 +53,9 @@ Ext.define('WeiQuPai.controller.Profile', {
             },
             consignee: {
                 tap: 'showConsignee'
+            },
+            score: {
+                tap: 'showScoreRule'
             }
         }
     },
@@ -64,6 +68,11 @@ Ext.define('WeiQuPai.controller.Profile', {
         this.showCameraLayer();
     },
 
+    showScoreRule: function(){
+        var view = Ext.create('WeiQuPai.view.ScoreRule');
+        WeiQuPai.navigator.push(view);
+    },
+    
     showConsignee: function() {
         var view = Ext.create('WeiQuPai.view.MyConsignee');
         WeiQuPai.navigator.push(view);
