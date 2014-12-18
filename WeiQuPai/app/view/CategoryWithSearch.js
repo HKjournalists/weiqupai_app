@@ -74,6 +74,11 @@ Ext.define('WeiQuPai.view.CategoryWithSearch', {
         var v = this.down('#searchText').getValue().trim();
         if(v.length == 0) return;
         this.down('searchitem').setWord(v);
+        //上报统计
+        WeiQuPai.app.statReport({
+           page: 'searchitem',
+           word: v 
+        });
         var me = this;
         this.down('searchitem').loadData(function(){
             me.down('#mainView').setActiveItem('searchitem');

@@ -126,6 +126,11 @@ Ext.define('WeiQuPai.view.MyFollowTab', {
         var v = this.down('#searchText').getValue().trim();
         if(v.length == 0) return;
         this.down('searchuser').setWord(v);
+        //上报统计
+        WeiQuPai.app.statReport({
+           page: 'searchuser',
+           word: v 
+        });
         var me = this;
         this.down('searchuser').loadData(function(){
             me.down('#mainView').setActiveItem('searchuser');
