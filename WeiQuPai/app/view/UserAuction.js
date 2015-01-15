@@ -19,7 +19,7 @@ Ext.define('WeiQuPai.view.UserAuction', {
             refreshFn: 'fetchLastest',
             scrollerAutoRefresh: true
         }, {
-            type: 'wlistpaging',
+            type: 'wlistpaging'
         }],
         itemTpl: new Ext.XTemplate(
             '<div class="helper">',
@@ -52,12 +52,12 @@ Ext.define('WeiQuPai.view.UserAuction', {
                 '<div class="pool-detail-info">',
                     '<h3>{item.title}</h3>',
                     '<div class="row">',
-                        '<p>市场价：{item.oprice}</p>',
-                        '<p>开杀价：{start_price}</p>',
+                        '<p>京东价：{start_price}</p>',
+                        '<p>计时：{start_price}</p>',
                     '</div>',
-                    '<div class="row red">',
-                        '<p>底价：{reserve_price}</p>',
-                        '<p>剩余：{pool.left_num}个</p>',
+                    '<div class="row">',
+                        '<p>当前价格：{curr_price}</p>',
+                        '<p>剩余数量：{pool.left_num}个</p>',
                     '</div>',
                     '<div class="row">',
                         '<tpl if="this.hasButton(values)">',
@@ -100,7 +100,7 @@ Ext.define('WeiQuPai.view.UserAuction', {
         },{
             xtype: 'disclosureitem',
             title: '查看商品图文详情',
-            itemId: 'showItemBtn',
+            itemId: 'showItemBtn'
         }, {
             xtype: 'container',
             itemId: 'discountItem',
