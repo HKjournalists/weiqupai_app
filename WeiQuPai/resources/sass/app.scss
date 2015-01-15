@@ -305,7 +305,7 @@ html body
       width:100%;
       font-size:17px;
       color:$color_e7;
-      margin-top:14px;
+      margin-top:18px;
     }
 
     .priceNew img
@@ -3596,11 +3596,11 @@ html body
 .bar_new{padding:7px;overflow:auto;width:100%;background: white;font-size:12px;}
 .bar_new img{border:1px solid #fefefe;float:left;}
 .bar_new .pool-info{margin-left:150px;height:140px;position:relative;}
-.bar_new .pool-info h3{font-size:14px;line-height:18px;height:36px;color:#3a3e3f;overflow:hidden;}
-.bar_new .pool-info p{color:#898294;line-height:16px;}
+.bar_new .pool-info h3{font-size:14px;line-height:18px;height:36px;color:#3a3e3f;overflow:hidden;margin-bottom:8px;}
+.bar_new .pool-info p{color:#898294;line-height:19px;}
 .bar_new .btn-info{position:absolute;bottom:0;}
 .bar_new .reserve-row{color:$color_e7;margin-bottom:3px;}
-.bar_new .price{font-size:24px;}
+.bar_new .price{font-size:24px;text-decoration: line-through;}
 .bar_new .pool-detail-info{margin-left:110px;height:100px;color:#898294;}
 .bar_new .pool-detail-info h3{line-height:18px;height:36px;overflow:hidden;}
 .bar_new .row{line-height:18px;}
