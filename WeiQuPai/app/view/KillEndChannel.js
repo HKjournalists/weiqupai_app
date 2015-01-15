@@ -20,7 +20,7 @@ Ext.define('WeiQuPai.view.KillEndChannel', {
             loadedText: '下拉刷新',
             scrollerAutoRefresh: true
         }, {
-            type: 'wlistpaging',
+            type: 'wlistpaging'
         }],
         itemCls: 'killend-item',
         itemTpl: new Ext.XTemplate(
@@ -28,11 +28,12 @@ Ext.define('WeiQuPai.view.KillEndChannel', {
             '<img src="{[this.getPic(values.item.pic_cover)]}" width="140"/>',
             '<div class="pool-info">',
                 '<h3>{item.title}</h3>',
+                '<p>京东价：{start_price}</p>',
                 '<p>血战时限：{duration}小时</p>',
-                '<p>开杀价：{start_price}</p>',
-                '<p>剩余：{left_num}个</p>',
+               // '<p>开杀价：{start_price}</p>',
+                '<p>剩余量：{left_num}个</p>',
                 '<div class="btn-info">',
-                    '<div class="reserve-row">底价：￥<span class="price">{reserve_price}</span></div>',
+                 //   '<div class="reserve-row">底价：￥<span class="price">{reserve_price}</span></div>',
                     '<div><input type="button" class="btn_create" value="{[this.getButtonText(values)]}"/></div>',
                 '</div>',
             '</div>',
