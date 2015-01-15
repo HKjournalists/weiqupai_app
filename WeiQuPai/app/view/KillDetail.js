@@ -35,12 +35,12 @@ Ext.define('WeiQuPai.view.KillDetail', {
                 '<div class="pool-detail-info">',
                     '<h3>{item.title}</h3>',
                     '<div class="row">',
-                        '<p>市场价：{item.oprice}</p>',
-                        '<p>开杀价：{start_price}</p>',
+                        '<p>京东价：{start_price}</p>',
+                        '<p>血战时限：{duration}</p>',
                     '</div>',
-                    '<div class="row red">',
-                        '<p>底价：{reserve_price}</p>',
-                        '<p>剩余：{left_num}个</p>',
+                    '<div class="row">',
+//                        '<p>当前价格：{reserve_price}</p>',
+                        '<p>剩余数量：{left_num}个</p>',
                     '</div>',
                     '<div class="row"><input type="button" class="status create" value="我要杀价" /></div>',
                 '</div>',
@@ -53,7 +53,7 @@ Ext.define('WeiQuPai.view.KillDetail', {
         }, {
             xtype: 'disclosureitem',
             title: '查看商品图文详情',
-            itemId: 'showItemBtn',
+            itemId: 'showItemBtn'
         }, {
             xtype: 'container',
             itemId: 'discountItem',
@@ -69,7 +69,7 @@ Ext.define('WeiQuPai.view.KillDetail', {
         }, {
             xtype: 'container',
             style: 'margin-top:10px;padding:20px 40px;',
-            html: '<img src="resources/images/create_auction_pic.png" style="min-width:100%;max-width:100%"/>',
+            html: '<img src="resources/images/create_auction_pic.png" style="min-width:100%;max-width:100%"/>'
         }],
 
         poolId: null,
