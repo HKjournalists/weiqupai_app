@@ -46,6 +46,12 @@ Ext.define('WeiQuPai.view.Pay', {
             contentPosition: 'bottom'
         }, {
             xtype: 'disclosureitem',
+            title: '输入优惠码',
+            itemId: 'code',
+            contentPosition: 'bottom'
+        },
+            {
+            xtype: 'disclosureitem',
             title: '还需支付',
             contentPosition: 'right',
             disclosureItem: false,

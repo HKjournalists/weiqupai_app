@@ -6,6 +6,7 @@ Ext.define('WeiQuPai.controller.Pay', {
             couponPanel: 'disclosureitem[itemId=coupon]',
             umpayPanel: 'disclosureitem[itemId=umpay]',
             alipayPanel: 'disclosureitem[itemId=alipay]',
+            codePanel: 'disclosureitem[itemId=code]',
             couponList: 'mycoupon',
             pageView: 'pay',
             payBtn: 'button[action=pay]'
@@ -18,11 +19,14 @@ Ext.define('WeiQuPai.controller.Pay', {
             paymentList: {
                 itemtap: 'selectPayment'
             },
+            codePanel:{
+              tap:'inputCode'
+            },
             alipayPanel: {
-                tap: 'doSelectAlipay',
+                tap: 'doSelectAlipay'
             },
             umpayPanel: {
-                tap: 'doSelectUmpay',
+                tap: 'doSelectUmpay'
             },
             payBtn: {
                 tap: 'doPay'
@@ -59,7 +63,13 @@ Ext.define('WeiQuPai.controller.Pay', {
         order.total_pay = total_pay;
         this.getPageView().down('#needPay').setContent(order.total_pay.toFixed(2), 'color_e7');
     },
-
+    inputCode: function() {
+        //先检查是否可以使用拍券
+        var view = Ext.create('WeiQuPai.view.OrderCode', {
+            selectMode: true
+        });
+        WeiQuPai.navigator.push(view);
+    },
     doSelectUmpay: function() {
         this.getPageView().getOrderData().payment = 'umpay';
         this.getUmpayPanel().detailNode.addCls('radio_check');
