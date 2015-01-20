@@ -36,7 +36,7 @@ Ext.application({
         'Main', 'MainCard', 'StartupScreen', 'SplashScreen', 'WebPage', 'VTitleBar', 'Login', 'Register',
         'Iframe', 'SimpleViewer', 'ImageViewer', 'Sidebar', 'DisclosureItem', 'Pay', 'Order', 'Item', 'Auction', 'Item',
         'UserAuction', 'InputComment', 'CircleReplyLayer', 'CameraLayer', 'AuctionTip', 'MainTip', 'NoticeTip',
-        'AuctionTipTwo', 'PriceForm', 'DeleteButtonLayer', 'ConfirmLayer','UserAuctionItem', 'FollowTip',
+        'AuctionTipTwo', 'PriceForm', 'DeleteButtonLayer', 'ConfirmLayer', 'FollowTip',
         'AuctionHelpLayer', 'ScoreNotEnough', 'ConfirmDialog', 'ScoreRule', 'TipBox', 'CouponOrder'
     ],
     stores: [
@@ -45,7 +45,7 @@ Ext.application({
         'MyFans', 'FeedReply', 'MyMessage', 'CommentReply', 'PrivateMessage', 'Discount', 'MyDiscount',
         'KillEnd', 'UserAuction', 'UserAuctionHelper', 'Category', 'CategoryItem', 'UserAuctionComment',
         'CircleSquare', 'CircleKillEnd', 'CircleFollow', 'AuctionList', 'AuctionRound', 'DiscountKillEnd',
-        'SearchUser', 'HisFollow', 'HisFans','SearchItem', 'KillEndToday', 'KillEndChannel'
+        'SearchUser', 'HisFollow', 'HisFans','SearchItem', 'KillEndToday', 'KillEndChannel', 'SpecialSaleAuction'
     ],
     icon: {
         '57': 'resources/icons/icon.png',

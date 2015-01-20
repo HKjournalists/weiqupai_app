@@ -33,7 +33,7 @@ Ext.define('WeiQuPai.controller.MyOrder', {
         var confirmLayer = WeiQuPai.Util.createOverlay('WeiQuPai.view.ConfirmLayer');
         confirmLayer.setConfirmAction(function() {
             var user = WeiQuPai.Cache.get('currentUser');
-            var url = WeiQuPai.Config.apiUrl + '/?r=appv2/MyOrder/confirm';
+            var url = WeiQuPai.Util.apiUrl('r=appv2/MyOrder/confirm');
             var param = {
                 id: record.get('id'),
                 token: user.token

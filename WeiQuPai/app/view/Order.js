@@ -17,15 +17,6 @@ Ext.define('WeiQuPai.view.Order', {
             }]
         }, {
             xtype: 'container',
-            html: '请在15分钟内提交订单，不然价格就变了哦',
-            cls: 'w-tip',
-            docked: 'top',
-            itemId: 'tip',
-            hideAnimation: {
-                type: 'fadeOut'
-            }
-        }, {
-            xtype: 'container',
             itemId: 'orderInfo',
             tpl: new Ext.XTemplate(
                 '<div class="confirm">',
@@ -71,10 +62,8 @@ Ext.define('WeiQuPai.view.Order', {
         '<div>{province}{city}{address}</div>'
     ),
 
-    tipTimer: null,
 
     initialize: function() {
-        this.hideTip();
         var user = WeiQuPai.Cache.get('currentUser');
         if (!user) return;
         var order = Ext.create('WeiQuPai.model.Order');
@@ -83,7 +72,8 @@ Ext.define('WeiQuPai.view.Order', {
 
         //加载默认收货地址
         var consignee = Ext.getStore('MyConsignee');
-        consignee.getProxy().setExtraParam('token', user.token);
+        var query = WeiQuPai.Util.getDefaultParam();
+        consignee.getProxy().setExtraParams(query);
         consignee.load(function(records, operation, success) {
             if (!success) return;
             var dft = consignee.findRecord('is_default', 1, 0, null, null, true);
@@ -94,13 +84,6 @@ Ext.define('WeiQuPai.view.Order', {
             }
         }, this);
         this.on('destroy', this.onDestroy, this);
-    },
-
-    hideTip: function() {
-        var me = this;
-        this.tipTimer = setTimeout(function() {
-            me.down('#tip').hide();
-        }, 30000);
     },
 
     applyAuctionData: function(data) {

@@ -107,7 +107,8 @@ Ext.define('WeiQuPai.view.MyProp', {
         if (store.isLoading()) {
             return false;
         }
-        store.getProxy().setExtraParam('token', user.token);
+        var query = WeiQuPai.Util.getDefaultParam();
+        store.getProxy().setExtraParams(query);
         store.load(function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');

@@ -129,7 +129,7 @@ Ext.define("WeiQuPai.Util", {
     login: function(uname, password, callback) {
         WeiQuPai.Util.mask();
         Ext.Ajax.request({
-            url: WeiQuPai.Config.apiUrl + '/?r=appv2/login',
+            url: WeiQuPai.Util.apiUrl('r=appv2/login'),
             method: 'post',
             params: {
                 uname: uname,
@@ -172,7 +172,7 @@ Ext.define("WeiQuPai.Util", {
         data.market = WeiQuPai.Config.market;
         WeiQuPai.Util.mask();
         Ext.Ajax.request({
-            url: WeiQuPai.Config.apiUrl + '/?r=appv2/join/v2',
+            url: WeiQuPai.Util.apiUrl('r=appv2/join/v2'),
             method: 'post',
             params: data,
             success: function(rsp) {
@@ -203,7 +203,7 @@ Ext.define("WeiQuPai.Util", {
         var user = WeiQuPai.Cache.get('currentUser');
         if (user) {
             Ext.Ajax.request({
-                url: WeiQuPai.Config.apiUrl + '/?r=appv2/logout&token=' + user.token,
+                url: WeiQuPai.Util.apiUrl('r=appv2/logout'),
                 method: 'get'
             });
             //删除用户相关的cache
@@ -239,7 +239,7 @@ Ext.define("WeiQuPai.Util", {
         }
         if (!changed) return;
 
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/profile/update&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/profile/update');
         WeiQuPai.Util.post(url, data, function(rsp) {
             //更新本地的用户设置缓存
             user = Ext.merge(user, data);
@@ -337,7 +337,7 @@ Ext.define("WeiQuPai.Util", {
             if (!data.userId || !user) return;
             data.os = Ext.os.name.toLowerCase();
             data.market = WeiQuPai.Config.market;
-            var url = WeiQuPai.Config.apiUrl + '/?r=appv2/bindPush/&token=' + user.token;
+            var url = WeiQuPai.Util.apiUrl('r=appv2/bindPush');
             WeiQuPai.Util.post(url, data, function(rsp) {
                 //更新本地对应的缓存数据
                 user = Ext.merge(user, data);
@@ -421,7 +421,7 @@ Ext.define("WeiQuPai.Util", {
 
     showSplash: function() {
         Ext.Ajax.request({
-            url: WeiQuPai.Config.apiUrl + '/?r=appv2/splashScreen&ver=' + WeiQuPai.Config.version,
+            url: WeiQuPai.Util.apiUrl('r=appv2/splashScreen'),
             method: 'get',
             success: function(rsp) {
                 var data = Ext.decode(rsp.responseText);
@@ -442,10 +442,15 @@ Ext.define("WeiQuPai.Util", {
      * 跳转到拍品详情
      */
     goItemView: function(item_id) {
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/item&id=' + item_id;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/item&id=' + item_id);
         WeiQuPai.Util.get(url, function(rsp) {
-            var view, item = Ext.create('WeiQuPai.model.Item', rsp);
-            view = Ext.create('WeiQuPai.view.Item');
+            var view,item;
+            item = Ext.create('WeiQuPai.model.Item', rsp);
+            if(rsp.auction){
+                view = Ext.create('WeiQuPai.view.AuctionV2');
+            }else{
+                view = Ext.create('WeiQuPai.view.Item');
+            }
             view.setRecord(item);
             setTimeout(function() {
                 WeiQuPai.navigator.push(view);
@@ -594,8 +599,7 @@ Ext.define("WeiQuPai.Util", {
 
     //检查是否有全局的tips
     checkTip: function(){
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/messageTip';
-
+        var url = WeiQuPai.Util.apiUrl('r=appv2/messageTip');
         WeiQuPai.Util.get(url, function(rsp){
             if(!rsp) return;
 
@@ -608,5 +612,29 @@ Ext.define("WeiQuPai.Util", {
             box.setData(rsp);
             box.show();
         });
+    },
+
+    getDefaultParam: function(){
+        var q = {};
+        q['ver'] = WeiQuPai.Config.version;
+        q['os'] = Ext.os.name.toLowerCase();
+        q['osver'] = Ext.os.version.version;
+        q['market'] = WeiQuPai.Config.market;
+        var user = WeiQuPai.Cache.get('currentUser');
+        if(user){
+            q['token'] = user.token;
+            q['cuid'] = user.id;
+        }
+        return q;
+    },
+
+    apiUrl: function(query){
+        var q = WeiQuPai.Util.getDefaultParam();
+        if(Ext.isString(query)){
+           query =  query + '&' + Ext.Object.toQueryString(q);
+        }else{
+           query = Ext.Object.toQueryString(Ext.merge(query, q));
+        }
+        return WeiQuPai.Config.apiUrl + '/?' + query;
     }
 })

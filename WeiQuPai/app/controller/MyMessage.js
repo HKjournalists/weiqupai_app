@@ -48,7 +48,7 @@ Ext.define('WeiQuPai.controller.MyMessage', {
         var user = WeiQuPai.Cache.get('currentUser');
         var self = this;
         var list = this.getPageView();
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/message/delete&id=' + id + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/message/delete&id=' + id);
         WeiQuPai.Util.get(url, function(rsp) {
             list.getStore().remove(record);
         });

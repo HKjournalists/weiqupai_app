@@ -191,8 +191,9 @@ Ext.define('WeiQuPai.view.Comment', {
     loadData: function(callback) {
         var cid = this.getCommentId();
         var user = WeiQuPai.Cache.get('currentUser');
+        var query = WeiQuPai.Util.getDefaultParam();
         var cmt = WeiQuPai.model.Comment;
-        cmt.getProxy().setExtraParam('token', user && user.token || '');
+        cmt.getProxy().setExtraParams(query);
         cmt.load(cid, {
             scope: this,
             failure: function(record, operation) {

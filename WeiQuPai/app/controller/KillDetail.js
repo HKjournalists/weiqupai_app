@@ -23,7 +23,7 @@ Ext.define('WeiQuPai.controller.KillDetail', {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
         var pool_id = this.getPageView().getPoolId();
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/myScore&pool_id=' + pool_id + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/myScore&pool_id=' + pool_id);
         var me = this;
         WeiQuPai.Util.get(url, function(rsp){
             if(rsp.canCreateAuction){
@@ -43,7 +43,7 @@ Ext.define('WeiQuPai.controller.KillDetail', {
     doCreate: function(){
         var user = WeiQuPai.Cache.get('currentUser');
         var poolId = this.getPageView().getPoolId();
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/userAuction/create';
+        var url = WeiQuPai.Util.apiUrl('r=appv2/userAuction/create');
         data = {
             pool_id: poolId,
             token: user.token

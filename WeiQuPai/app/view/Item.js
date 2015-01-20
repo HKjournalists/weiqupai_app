@@ -81,7 +81,7 @@ Ext.define('WeiQuPai.view.Item', {
             tpl: new Ext.XTemplate(
                 '<div class="detailData">',
                 '<div class="title_new">{title}</div>',
-                '<div class="oprice">原价￥{oprice}</div>',
+                '<div class="price"><span class="oprice">原价￥{oprice}</span></div>',
                 '</div>'
             )
         }, {
@@ -121,7 +121,7 @@ Ext.define('WeiQuPai.view.Item', {
 
         }, {
             xtype: 'inputcomment',
-            itemId: 'reply',
+            itemId: 'itemCommentForm',
             docked: 'bottom',
             hidden: true
         }],

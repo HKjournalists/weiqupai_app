@@ -10,7 +10,6 @@ Ext.define('WeiQuPai.controller.Pay', {
             couponList: 'mycoupon',
             pageView: 'pay',
             payBtn: 'button[action=pay]'
-
         },
         control: {
             couponPanel: {
@@ -51,25 +50,48 @@ Ext.define('WeiQuPai.controller.Pay', {
     //选择使用拍券
     selectCoupon: function(list, index, dataItem, record, e) {
         if (record.get('expired')) {
-            Ext.toast('该拍券已经过期，不能使用');
+            WeiQuPai.Util.toast('该拍券已经过期，不能使用');
             return;
         }
         WeiQuPai.navigator.pop();
         var order = this.getPageView().getOrderData();
         this.getCouponPanel().setContent(record.get('coupon').name);
-        var curr_price = parseFloat(order.price);
-        var total_pay = Math.max(0, curr_price - parseFloat(record.get('coupon').value));
         order.coupon = record.get('id');
-        order.total_pay = total_pay;
-        this.getPageView().down('#needPay').setContent(order.total_pay.toFixed(2), 'color_e7');
+        order.couponValue = parseFloat(record.get('coupon').value);
+        this.updateNeedPay();
     },
+
+    //更新还需支付
+    updateNeedPay: function(){
+        var page = this.getPageView();
+        var order = page.getOrderData();
+        var curr_price = parseFloat(order.price);
+        var couponValue = order.couponValue || 0;
+        var codeValue = order.couponCodeValue || 0;
+        order.total_pay = Math.max(0, curr_price - couponValue - codeValue);
+        page.down('#needPay').setContent(order.total_pay.toFixed(2), 'color_e7');
+    },
+
+    //输入优惠码 
     inputCode: function() {
-        //先检查是否可以使用拍券
-        var view = Ext.create('WeiQuPai.view.OrderCode', {
-            selectMode: true
-        });
+        var self = this;
+        var view = Ext.create('WeiQuPai.view.OrderCode');
+        var order = this.getPageView().getOrderData();
+        var code = order.couponCode;
+        code && view.setCode(code);
+        var page = this.getPageView();
+        var codePanel = this.getCodePanel();
+        view.on('confirm', function(rsp){
+            WeiQuPai.navigator.pop();
+            codePanel.setTitle('已优惠￥' + rsp.price);
+            codePanel.setContent('优惠券码：' + rsp.code);
+            order.couponCode = rsp.code;
+            order.couponCodeValue = parseFloat(rsp.price);
+            self.updateNeedPay();
+        }, this);
         WeiQuPai.navigator.push(view);
     },
+
     doSelectUmpay: function() {
         this.getPageView().getOrderData().payment = 'umpay';
         this.getUmpayPanel().detailNode.addCls('radio_check');
@@ -84,8 +106,13 @@ Ext.define('WeiQuPai.controller.Pay', {
 
     doPay: function() {
         var order = this.getPageView().getOrderData();
-        var user = WeiQuPai.Cache.get('currentUser');
-        var url = WeiQuPai.Config.apiUrl + "/?r=appv2/pay&id=" + order.id + '&coupon=' + order.coupon + '&payment=' + order.payment + '&token=' + user.token;
+        var query = {};
+        query['r'] = 'appv2/pay';
+        query['id'] = order.id;
+        query['coupon'] = order.coupon || '';
+        query['payment'] = order.payment;
+        query['code'] = order.couponCode || '';
+        var url = WeiQuPai.Util.apiUrl(query);
         var win = window.open(url, '_blank', 'location=no,title=支付,closebuttoncaption=关闭');
         //停止时检查页面是否是支付完成状态
         var paySuccess = false;

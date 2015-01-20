@@ -73,7 +73,8 @@ Ext.define('WeiQuPai.view.MyConsignee', {
         var user = WeiQuPai.Cache.get('currentUser');
         var store = this.down('dataview').getStore();
         this.down('dataview').setLoadingText(null);
-        store.getProxy().setExtraParam('token', user.token);
+        var query = WeiQuPai.Util.getDefaultParam();
+        store.getProxy().setExtraParams(query);
         store.load(function(records, operation, success) {
             Ext.isFunction(callback) && callback();
             if (!success) {

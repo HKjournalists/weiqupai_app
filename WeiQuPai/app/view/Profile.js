@@ -83,7 +83,7 @@ Ext.define('WeiQuPai.view.Profile', {
 
     loadData: function(callback) {
         var user = WeiQuPai.Cache.get('currentUser');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/profile&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/profile');
         var self = this;
         WeiQuPai.Util.get(url, function(rsp) {
             var record = Ext.create('WeiQuPai.model.Profile');

@@ -35,12 +35,12 @@ Ext.define('WeiQuPai.view.KillDetail', {
                 '<div class="pool-detail-info">',
                     '<h3>{item.title}</h3>',
                     '<div class="row">',
-                        '<p>京东价：{start_price}</p>',
-                        '<p>血战时限：{duration}</p>',
+                        '<p>市场价：{item.oprice}</p>',
+                        '<p>开杀价：{start_price}</p>',
                     '</div>',
-                    '<div class="row">',
-//                        '<p>当前价格：{reserve_price}</p>',
-                        '<p>剩余数量：{left_num}个</p>',
+                    '<div class="row red">',
+                        '<p>底价：{reserve_price}</p>',
+                        '<p>剩余：{left_num}个</p>',
                     '</div>',
                     '<div class="row"><input type="button" class="status create" value="我要杀价" /></div>',
                 '</div>',
@@ -108,10 +108,7 @@ Ext.define('WeiQuPai.view.KillDetail', {
     loadData: function(callback) {
         var id = this.getPoolId();
         var user = WeiQuPai.Cache.get('currentUser');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/auctionPool/detail&id=' + id;
-        if (user) {
-            url += '&token=' + user.token;
-        }
+        var url = WeiQuPai.Util.apiUrl('r=appv2/auctionPool/detail&id=' + id);
         var me = this;
         WeiQuPai.Util.get(url, function(rsp) {
             me.setPoolData(rsp);

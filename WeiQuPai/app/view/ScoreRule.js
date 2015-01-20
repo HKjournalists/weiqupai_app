@@ -24,7 +24,7 @@ Ext.define('WeiQuPai.view.ScoreRule', {
     initialize: function() {
         var user = WeiQuPai.Cache.get('currentUser');
         var token = user && user.token || '';
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/scoreRule' + '&token=' + token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/scoreRule');
         var me = this;
         WeiQuPai.Util.get(url, function(rsp) {
             me.setContent(rsp);

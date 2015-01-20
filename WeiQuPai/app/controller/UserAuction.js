@@ -56,7 +56,7 @@ Ext.define('WeiQuPai.controller.UserAuction', {
         var store = this.getPageView().getStore();
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/userAuction/help&id=' + data.id + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/userAuction/help&id=' + data.id);
         WeiQuPai.Util.get(url, function(rsp) {
             var propMsg = '';
             if (rsp.prop.indexOf("doubleDiscount") != -1) {
@@ -101,7 +101,7 @@ Ext.define('WeiQuPai.controller.UserAuction', {
             return WeiQuPai.Util.toast('该商品不能使用道具');
         }
         var user = WeiQuPai.Cache.get('currentUser');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/useProp&prop_id=' + propId + '&auction_id=' + data.id + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/useProp&prop_id=' + propId + '&auction_id=' + data.id);
         var msg = [, '您的拍卖时间延长了一倍', '您的拍卖在2小时内将获得双倍减价的效果'];
         WeiQuPai.Util.get(url, function(rsp) {
             //数量-1
@@ -131,7 +131,7 @@ Ext.define('WeiQuPai.controller.UserAuction', {
         }
         //这里要重新拉一下最新的价格数据
         var id = auctionData.id;
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/userAuction/orderInfo&id=' + id + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/userAuction/orderInfo&id=' + id);
         WeiQuPai.Util.get(url, function(rsp) {
             function goToOrder() {
                 var orderView = Ext.create(rsp.item.type == 1 ? 'WeiQuPai.view.Order' : 'WeiQuPai.view.CouponOrder');

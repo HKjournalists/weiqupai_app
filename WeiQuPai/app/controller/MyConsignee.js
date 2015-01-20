@@ -53,7 +53,7 @@ Ext.define('WeiQuPai.controller.MyConsignee', {
         var dataView = pageView.down('dataview');
         var record = dataView.getSelection()[0];
         var id = record.get('id');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/myConsignee/del&id=' + id + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/myConsignee/del&id=' + id);
         WeiQuPai.Util.get(url, function() {
             pageView.popLayer.hide();
             dataView.getStore().remove(record);
@@ -71,7 +71,7 @@ Ext.define('WeiQuPai.controller.MyConsignee', {
         var dataView = pageView.down('dataview');
         var record = dataView.getSelection()[0];
         var id = record.get('id');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/myConsignee/default&id=' + id + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/myConsignee/default&id=' + id);
         WeiQuPai.Util.get(url, function() {
             pageView.popLayer.hide();
             var oldRecord = dataView.getStore().findRecord('is_default', 1, 0, null, null, true);
@@ -107,7 +107,7 @@ Ext.define('WeiQuPai.controller.MyConsignee', {
         var dataView = this.getMyConsignee().down('dataview');
         WeiQuPai.Util.mask();
         form.submit({
-            url: WeiQuPai.Config.apiUrl + '/?r=appv2/myConsignee/create&token=' + user.token,
+            url: WeiQuPai.Util.apiUrl('r=appv2/myConsignee/create'),
             method: 'post',
             success: function(form, result) {
                 WeiQuPai.Util.unmask();
@@ -138,7 +138,7 @@ Ext.define('WeiQuPai.controller.MyConsignee', {
         var dataView = this.getMyConsignee().down('dataview');
         WeiQuPai.Util.mask();
         form.submit({
-            url: WeiQuPai.Config.apiUrl + '/?r=appv2/myConsignee/update&token=' + user.token,
+            url: WeiQuPai.Util.apiUrl('r=appv2/myConsignee/update'),
             method: 'post',
             success: function(form, result) {
                 WeiQuPai.Util.unmask();

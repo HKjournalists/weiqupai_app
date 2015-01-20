@@ -58,7 +58,9 @@ Ext.define('WeiQuPai.view.HisFollow', {
         var uid = this.getUid();
         this.setLoadingText(null);
         var store = this.getStore();
-        store.getProxy().setExtraParam('uid', uid);
+        var query = WeiQuPai.Util.getDefaultParam();
+        query['uid'] = uid;
+        store.getProxy().setExtraParams(query);
         store.load(function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');

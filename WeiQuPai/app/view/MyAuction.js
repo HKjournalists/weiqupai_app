@@ -116,11 +116,10 @@ Ext.define('WeiQuPai.view.MyAuction', {
         if (!user) {
             return false;
         }
-        //fix 出现loading的bug
         this.setLoadingText(null);
         var store = this.getStore();
-        //加载数据
-        store.getProxy().setExtraParam('token', user.token);
+        var query = WeiQuPai.Util.getDefaultParam();
+        store.getProxy().setExtraParams(query);
         store.on('load', this.onStoreLoad, this);
         store.on('latestfetched', this.onStoreLoad, this);
         store.loadPage(1);

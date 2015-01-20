@@ -20,7 +20,7 @@ Ext.define('WeiQuPai.controller.MyFans', {
 
     doRemoveFans: function(list, index, dataItem, record, e) {
         var user = WeiQuPai.Util.checkLogin();
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/follow/removeFans&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/follow/removeFans');
         var data = {
             id: record.get('id')
         };

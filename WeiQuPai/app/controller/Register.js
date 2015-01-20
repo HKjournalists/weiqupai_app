@@ -50,7 +50,7 @@ Ext.define('WeiQuPai.controller.Register', {
             return;
         }
         btn.setDisabled(true);
-        var url = WeiQuPai.Config.apiUrl + "/?r=appv2/verify/send&phone=" + phone;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/verify/send&phone=' + phone);
         if(this.smsToken){
             url += '&token=' + this.smsToken;
         }

@@ -75,7 +75,7 @@ Ext.define('WeiQuPai.view.Pay', {
             text: '去支付',
             baseCls: 'w-button',
             action: 'pay'
-        }]
+        }],
     },
 
     tipTimer: null,

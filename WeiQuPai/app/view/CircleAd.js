@@ -10,7 +10,7 @@ Ext.define('WeiQuPai.view.CircleAd', {
     timer: null,
 
     loadData: function(){
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/banner/circle';
+        var url = WeiQuPai.Util.apiUrl('r=appv2/banner/circle');
         var self = this;
         WeiQuPai.Util.get(url, function(rsp){
             if(rsp.length == 0){

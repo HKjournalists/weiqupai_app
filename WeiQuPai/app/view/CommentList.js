@@ -133,8 +133,10 @@ Ext.define('WeiQuPai.view.CommentList', {
     loadData: function(itemId) {
         this.setLoadingText(null);
         var store = this.getStore();
+        var query = WeiQuPai.Util.getDefaultParam();
+        query['item_id'] = itemId;
         store.removeAll(true);
-        store.getProxy().setExtraParam('item_id', itemId);
+        store.getProxy().setExtraParams(query);
         store.loadPage(1, function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('评论加载失败');

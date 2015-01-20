@@ -36,7 +36,7 @@ Ext.define('WeiQuPai.view.NoticeAfter', {
 
     loadData: function(callback) {
         var person = this.down('#noticeafter');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/auctionNotice&day=' + 3;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/auctionNotice&day=3');
         var me = this;
         WeiQuPai.Util.get(url, function(rsp) {
             person.setData(rsp);

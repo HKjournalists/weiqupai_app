@@ -112,7 +112,8 @@ Ext.define('WeiQuPai.view.MyOrderDetail', {
         var user = WeiQuPai.Cache.get('currentUser');
         var orderId = this.getOrderId();
         var model = WeiQuPai.model.Order;
-        model.getProxy().setExtraParam('token', user.token);
+        var query = WeiQuPai.Util.getDefaultParam();
+        model.getProxy().setExtraParams(query);
         model.load(orderId, {
             scope: this,
             success: function(record, operation) {

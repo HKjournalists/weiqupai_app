@@ -37,7 +37,7 @@ Ext.define('WeiQuPai.controller.TopKiller', {
         var auctionId = record.get('id');
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/userAuction/help&id=' + auctionId + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/userAuction/help&id=' + auctionId);
         WeiQuPai.Util.get(url, function(rsp) {
             var propMsg = '';
             if (rsp.prop.indexOf("doubleDiscount") != -1) {

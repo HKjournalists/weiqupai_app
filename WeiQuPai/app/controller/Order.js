@@ -67,8 +67,8 @@ Ext.define('WeiQuPai.controller.Order', {
         var param = WeiQuPai.Util.filterNull(order.data);
         param.token = user.token;
         param.comment = tfield && tfield.getValue() || '';
-        var controller = param.auction_type == 1 ? 'order' : 'discountOrder';
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/' + controller;
+        var controller = param.auction_type == 1 ? 'normalOrder' : 'discountOrder';
+        var url = WeiQuPai.Util.apiUrl('r=appv2/' + controller);
         WeiQuPai.Util.post(url, param, function(rsp) {
             //将拍过的商品保存到cache中
             WeiQuPai.Util.setCache('auctions', parseInt(order.get('auction_id')));

@@ -53,7 +53,7 @@ Ext.define('WeiQuPai.view.ExchangeCoupon', {
     loadData: function(callback) {
         var me = this;
         var user = WeiQuPai.Cache.get('currentUser');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/myScore&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/myScore');
         WeiQuPai.Util.get(url, function(rsp) {
             me.down('button').setText(rsp.score);
         });
@@ -73,7 +73,7 @@ Ext.define('WeiQuPai.view.ExchangeCoupon', {
         var me = this;
         var coupon_id = this.getSelection()[0].get('id');
         var user = WeiQuPai.Cache.get('currentUser');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/exchange/coupon';
+        var url = WeiQuPai.Util.apiUrl('r=appv2/exchange/coupon');
         var data = {
             token: user.token,
             coupon_id: coupon_id,

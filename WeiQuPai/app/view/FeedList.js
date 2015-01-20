@@ -118,8 +118,8 @@ Ext.define('WeiQuPai.view.FeedList', {
             return false;
         }
         this.setLoadingText(null);
-        var user = WeiQuPai.Cache.get('currentUser');
-        this.getStore().getProxy().setExtraParam('token', user && user.token || null);
+        var query = WeiQuPai.Util.getDefaultParam();
+        this.getStore().getProxy().setExtraParams(query);
         this.getStore().loadPage(1, function(records, operation, success){
             callback && callback.apply(null, arguments);
         });

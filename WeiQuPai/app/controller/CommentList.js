@@ -29,7 +29,7 @@ Ext.define('WeiQuPai.controller.CommentList', {
         if (WeiQuPai.Util.hasCache('comment_zan', id)) return;
         WeiQuPai.Util.setCache('comment_zan', id);
 
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/comment/zan&token=' + user.token + '&id=' + id;
+        var url = WeiQuPai.Util.apiUrl('?r=appv2/comment/zan&id=' + id);
         WeiQuPai.Util.get(url);
         //异步请求的同时，给数量加1
         record.set('zan_num', parseInt(record.get('zan_num')) + 1);
@@ -40,7 +40,7 @@ Ext.define('WeiQuPai.controller.CommentList', {
         if (!user) return;
         var id = parseInt(record.get('id'));
         WeiQuPai.Util.delCache('comment_zan', id);
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/comment/cancelZan&token=' + user.token + '&id=' + id;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/comment/cancelZan&id=' + id);
         WeiQuPai.Util.get(url);
         //异步请求的同时，给数量加1
         record.set('zan_num', parseInt(record.get('zan_num')) - 1);
@@ -53,7 +53,7 @@ Ext.define('WeiQuPai.controller.CommentList', {
         deleteLayer.setDeleteAction(function() {
             var id = record.get('id');
             var user = WeiQuPai.Cache.get('currentUser');
-            var url = WeiQuPai.Config.apiUrl + '/?r=appv2/comment/delete&id=' + id + '&token=' + user.token;
+            var url = WeiQuPai.Util.apiUrl('r=appv2/comment/delete&id=' + id);
             WeiQuPai.Util.get(url, function(rsp) {
                 list.getStore().remove(record);
             });

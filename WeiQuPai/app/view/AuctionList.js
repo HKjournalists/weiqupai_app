@@ -100,14 +100,8 @@ Ext.define('WeiQuPai.view.AuctionList', {
     },
 
     loadData: function(callback) {
-        var user = WeiQuPai.Cache.get('currentUser');
-        var query = {};
+        var query = WeiQuPai.Util.getDefaultParam();
         query['channel'] = this.getChannel();
-        query['market'] = WeiQuPai.Config.market;
-        query['os'] = Ext.os.name.toLowerCase();
-        query['osver'] = Ext.os.version.version;
-        if(user) query['token'] = user.token;
-        
         this.setLoadingText(null);
         this.getStore().getProxy().setExtraParams(query);
         this.getStore().loadPage(1, function(records, operation, success) {
@@ -149,7 +143,7 @@ Ext.define('WeiQuPai.view.AuctionList', {
             ids.push(item.get('id'));
         });
         Ext.Ajax.request({
-            url: WeiQuPai.Config.apiUrl + '/?r=appv2/today/refresh&id=' + ids.join(","),
+            url: WeiQuPai.Util.apiUrl('r=appv2/today/refresh&id=' + ids.join(",")),
             method: 'get',
             success: function(rsp) {
                 rsp = Ext.decode(rsp.responseText);

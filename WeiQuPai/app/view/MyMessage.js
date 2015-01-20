@@ -85,7 +85,8 @@ Ext.define('WeiQuPai.view.MyMessage', {
         var user = WeiQuPai.Cache.get('currentUser');
         this.setLoadingText(null);
         var store = this.getStore();
-        store.getProxy().setExtraParam('token', user && user.token || null);
+        var query = WeiQuPai.Util.getDefaultParam();
+        store.getProxy().setExtraParams(query);
         store.on('load', WeiQuPai.Util.onStoreLoad, this);
         store.on('latestfetched', WeiQuPai.Util.onStoreLoad, this);
         store.loadPage(1);

@@ -1,9 +1,8 @@
-Ext.define('WeiQuPai.store.SpecialSale', {
+Ext.define('WeiQuPai.store.SpecialSaleAuction', {
     extend: 'Ext.data.Store',
-    requires: ['WeiQuPai.model.Auction'],
     config: {
-        fields: ['id', 'pic_url', 'start_price', 'reserve_price', 'duration', 'left_num', 'selfId', 'item', 'auctions'],
-        storeId: 'SpecialSale', 
+        model: 'WeiQuPai.model.Auction',
+        storeId: 'SpecialSaleAuction', 
         autoLoad: false,
         pageSize: 10,
         proxy: {
@@ -14,7 +13,7 @@ Ext.define('WeiQuPai.store.SpecialSale', {
                 rootProperty: 'auctions'
             },
             startParam: false,
-            limitParam: false
+            limitParam: false,
         }
     }
 });

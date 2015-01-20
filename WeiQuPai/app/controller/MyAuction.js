@@ -37,7 +37,7 @@ Ext.define('WeiQuPai.controller.MyAuction', {
 
     goOrder: function(list, index, dataItem, record, e) {
         var id = record.get('id');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/userAuction/view&basic=1&id=' + id;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/userAuction/view&basic=1&id=' + id);
         WeiQuPai.Util.get(url, function(rsp) {
             rsp.auction_type = 2;
             var view = Ext.create('WeiQuPai.view.Order');

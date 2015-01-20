@@ -73,8 +73,9 @@ Ext.define('WeiQuPai.view.UserAuctionComment', {
         }
         var user = WeiQuPai.Cache.get('currentUser');
         var store = this.getStore();
-        store.getProxy().setExtraParam('token', user && user.token || null);
-        store.getProxy().setExtraParam('auction_id', this.getAuctionId());
+        var query = WeiQuPai.Util.getDefaultParam();
+        query['auction_id'] = this.getAuctionId();
+        store.getProxy().setExtraParams(query);
         this.setLoadingText(null);
         store.on('load', WeiQuPai.Util.onStoreLoad, this);
         store.loadPage(1);

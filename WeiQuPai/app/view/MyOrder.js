@@ -129,9 +129,8 @@ Ext.define('WeiQuPai.view.MyOrder', {
         }
         this.setLoadingText(null);
         var store = this.getStore();
-        //加载数据
-        store.getProxy().setExtraParam('token', user.token);
-        //加载数据
+        var query = WeiQuPai.Util.getDefaultParam();
+        store.getProxy().setExtraParams(query);
         store.on('load', WeiQuPai.Util.onStoreLoad, this);
         store.on('latestfetched', WeiQuPai.Util.onStoreLoad, this);
         store.loadPage(1);

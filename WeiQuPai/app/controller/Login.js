@@ -53,7 +53,7 @@ Ext.define('WeiQuPai.controller.Login', {
     },
 
     doQQLogin: function() {
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/QQLogin/login';
+        var url = WeiQuPai.Util.apiUrl('r=appv2/QQLogin/login');
         var win = window.open(url, '_blank', 'location=no,title=QQ登录,closebuttoncaption=关闭');
         var appView = window;
         win.addEventListener('loadstop', function(e) {
@@ -76,7 +76,7 @@ Ext.define('WeiQuPai.controller.Login', {
     },
 
     doWeiboLogin: function() {
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/WBLogin/login';
+        var url = WeiQuPai.Util.apiUrl('r=appv2/WBLogin/login');
         var win = window.open(url, '_blank', 'location=no,title=新浪微博登录,closebuttoncaption=关闭');
         var appView = window;
         win.addEventListener('loadstop', function(e) {
@@ -103,7 +103,7 @@ Ext.define('WeiQuPai.controller.Login', {
         if(!window.Wechat) return;
         Wechat.login(function(data){
             //获取到code后通过服务器进行验证获取用户信息
-            var url = WeiQuPai.Config.apiUrl + '/?r=appv2/wechatLogin&code=' + data.code;
+            var url = WeiQuPai.Util.apiUrl('r=appv2/wechatLogin&code=' + data.code);
             WeiQuPai.Util.get(url, function(rsp){
                 WeiQuPai.Util.onLoginSuccess(rsp, function() {
                     if (WeiQuPai.loginReferer) {

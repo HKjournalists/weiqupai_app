@@ -47,7 +47,7 @@ Ext.define('WeiQuPai.controller.Routes', {
     },
 
     showSubmitOrder: function(auctionId){
-        WeiQuPai.app.getController('Auction').showOrderView(auctionId);
+        WeiQuPai.app.getController('Item').showOrderView(auctionId);
     },
 
     showScoreInfo: function(){
@@ -105,7 +105,7 @@ Ext.define('WeiQuPai.controller.Routes', {
     showKillDetail: function(id){
         var user = WeiQuPai.Cache.get('currentUser');
         if(user){
-            var url = WeiQuPai.Config.apiUrl + '/?r=appv2/auctionPool/myAuction&pool_id=' + id + '&token=' + user.token;
+            var url = WeiQuPai.Util.apiUrl('r=appv2/auctionPool/myAuction&pool_id=' + id);
             WeiQuPai.Util.get(url, function(rsp){
                 if(rsp.auction_id > 0){
                     var view = Ext.create('WeiQuPai.view.UserAuction');

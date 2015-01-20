@@ -48,7 +48,7 @@ Ext.define('WeiQuPai.controller.CameraLayer', {
         var user = WeiQuPai.Cache.get('currentUser');
         WeiQuPai.Util.mask();
         Ext.Ajax.request({
-            url: WeiQuPai.Config.apiUrl + '/?r=appv2/upload&token=' + user.token + '&w=' + width + '&h=' + height + '&crop=' + crop,
+            url: WeiQuPai.Util.apiUrl('r=appv2/upload&w=' + width + '&h=' + height + '&crop=' + crop),
             method: 'post',
             params: {
                 imgData: imgData

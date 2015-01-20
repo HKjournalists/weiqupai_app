@@ -38,7 +38,7 @@ Ext.define('WeiQuPai.view.AppUpdate', {
 
         var user = WeiQuPai.Cache.get('currentUser');
         var token = user && user.token || '';
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/appUpdate&ver=' + WeiQuPai.Config.version + '&token=' + token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/appUpdate');
         var me = this;
         WeiQuPai.Util.get(url, function(rsp) {
             me.setContent(rsp);

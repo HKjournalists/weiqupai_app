@@ -210,7 +210,8 @@ Ext.define('WeiQuPai.view.Feed', {
         var user = WeiQuPai.Cache.get('currentUser');
         var feed = WeiQuPai.model.Feed;
         var me = this;
-        feed.getProxy().setExtraParam('token', user && user.token || '');
+        var query = WeiQuPai.Util.getDefaultParam();
+        feed.getProxy().setExtraParams(query);
         feed.load(fid, {
             scope: this,
             failure: function(record, operation) {

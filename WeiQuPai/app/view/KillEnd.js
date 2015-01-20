@@ -29,11 +29,11 @@ Ext.define('WeiQuPai.view.KillEnd', {
             '<img src="{[this.getPic(values.item.pic_cover)]}" width="140"/>',
             '<div class="pool-info">',
                 '<h3>{item.title}</h3>',
-                '<p>京东价：<span class="price">{start_price}</span></p>',
                 '<p>血战时限：{duration}小时</p>',
-                '<p>剩余量：{left_num}个</p>',
+                '<p>开杀价：{start_price}</p>',
+                '<p>剩余：{left_num}个</p>',
                 '<div class="btn-info">',
-//                    '<div class="reserve-row">底价：￥<span class="price">{reserve_price}</span></div>',
+                    '<div class="reserve-row">底价：￥<span class="price">{reserve_price}</span></div>',
                     '<div><input type="button" class="btn_create" value="{[this.getButtonText(values)]}"/></div>',
                 '</div>',
             '</div>',
@@ -86,14 +86,7 @@ Ext.define('WeiQuPai.view.KillEnd', {
         var store = this.getStore();
         //加载数据
         this.setLoadingText(null);
-        var user = WeiQuPai.Cache.get('currentUser');
-        var query = {};
-        query['market'] = WeiQuPai.Config.market;
-        query['os'] = Ext.os.name.toLowerCase();
-        query['osver'] = Ext.os.version.version;
-        if(user) query['token'] = user.token;
-        
-        this.setLoadingText(null);
+        var query = WeiQuPai.Util.getDefaultParam();
         this.getStore().getProxy().setExtraParams(query);
         store.load(function(records, operation, success) {
             if (!success) {

@@ -36,7 +36,7 @@ Ext.define('WeiQuPai.controller.Circle', {
         var list = this.getPageView();
         deleteLayer.setDeleteAction(function() {
             var feed_id = record.get('id');
-            var url = WeiQuPai.Config.apiUrl + '/?r=appv2/circle/delete&id=' + feed_id + '&token=' + user.token;
+            var url = WeiQuPai.Util.apiUrl('r=appv2/circle/delete&id=' + feed_id);
             WeiQuPai.Util.get(url, function(rsp) {
                 list.getStore().remove(record);
             });
@@ -49,7 +49,7 @@ Ext.define('WeiQuPai.controller.Circle', {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
         var feed_id = record.get('id');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/circle/zan&id=' + feed_id + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/circle/zan&id=' + feed_id);
         WeiQuPai.Util.get(url, function(rsp) {
             var zan = parseInt(record.get('zan_num'));
             WeiQuPai.Util.setCache('circle_zan', feed_id);
@@ -64,7 +64,7 @@ Ext.define('WeiQuPai.controller.Circle', {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
         var feed_id = record.get('id');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/circle/cancelZan&id=' + feed_id + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/circle/cancelZan&id=' + feed_id);
         WeiQuPai.Util.get(url, function(rsp) {
             var zan = parseInt(record.get('zan_num'));
             WeiQuPai.Util.delCache('circle_zan', feed_id);
@@ -89,7 +89,7 @@ Ext.define('WeiQuPai.controller.Circle', {
         var auctionId = record.get('json_data').auction_id;
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/userAuction/help&id=' + auctionId + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/userAuction/help&id=' + auctionId);
         WeiQuPai.Util.get(url, function(rsp) {
             var propMsg = '';
             if (rsp.prop.indexOf("doubleDiscount") != -1) {

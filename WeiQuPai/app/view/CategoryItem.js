@@ -56,7 +56,9 @@ Ext.define('WeiQuPai.view.CategoryItem', {
     },
 
     loadData: function() {
-        this.getStore().getProxy().setExtraParam('id', this.getCategoryId());
+        var query = WeiQuPai.Util.getDefaultParam();
+        query['id'] = this.getCategoryId();
+        this.getStore().getProxy().setExtraParams(query);
         this.getStore().loadPage(1, function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');

@@ -70,7 +70,7 @@ Ext.define('WeiQuPai.controller.Comment', {
         form.down('hiddenfield[name=reply_id]').setValue(cid);
         var data = form.getValues();
         form.submit({
-            url: WeiQuPai.Config.apiUrl + '/?r=appv2/comment/post&token=' + user.token,
+            url: WeiQuPai.Util.apiUrl('r=appv2/comment/post'),
             method: 'post',
             success: function(form, result) {
                 WeiQuPai.Util.unmask();
@@ -105,7 +105,7 @@ Ext.define('WeiQuPai.controller.Comment', {
         deleteLayer.setDeleteAction(function() {
             var id = record.get('id');
             var user = WeiQuPai.Cache.get('currentUser');
-            var url = WeiQuPai.Config.apiUrl + '/?r=appv2/comment/delete&id=' + id + '&token=' + user.token;
+            var url = WeiQuPai.Util.apiUrl('r=appv2/comment/delete&id=' + id);
             WeiQuPai.Util.get(url, function(rsp) {
                 list.getStore().remove(record);
                 list.updateReplyData('reply_num', -1);
@@ -128,7 +128,7 @@ Ext.define('WeiQuPai.controller.Comment', {
         if (!user) return;
         var record = view.getCommentRecord();
         var cid = parseInt(record.get('id'));
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/comment/zan&id=' + cid + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/comment/zan&id=' + cid);
         WeiQuPai.Util.get(url, function(rsp) {
             WeiQuPai.Util.setCache('comment_zan', cid);
             view.updateZanData(1);
@@ -140,7 +140,7 @@ Ext.define('WeiQuPai.controller.Comment', {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
         var cid = parseInt(view.getCommentRecord().get('id'));
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/comment/cancelZan&id=' + cid + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/comment/cancelZan&id=' + cid);
         WeiQuPai.Util.get(url, function(rsp) {
             WeiQuPai.Util.delCache('comment_zan', cid);
             view.updateZanData(-1);

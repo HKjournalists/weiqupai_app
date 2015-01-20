@@ -100,7 +100,7 @@ Ext.define('WeiQuPai.controller.Auction', {
             WeiQuPai.Util.toast('您已经购买过该商品，请到[我的订单]里查看吧');
             return;
         }
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/reserve&id=' + auctionId + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('/?r=appv2/reserve&id=' + auctionId);
         WeiQuPai.Util.get(url, function(rsp) {
             function goToOrder(){
                 var orderView = Ext.create('WeiQuPai.view.Order');
@@ -137,7 +137,7 @@ Ext.define('WeiQuPai.controller.Auction', {
         var self = this;
         WeiQuPai.Util.mask();
         form.submit({
-            url: WeiQuPai.Config.apiUrl + '/?r=appv2/comment/post&token=' + user.token,
+            url: WeiQuPai.Util.apiUrl('r=appv2/comment/post'),
             method: 'post',
             success: function(form, result) {
                 WeiQuPai.Util.unmask();
@@ -173,7 +173,7 @@ Ext.define('WeiQuPai.controller.Auction', {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
         var itemId = view.getRecord().get('id');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/itemLike&item_id=' + itemId + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/itemLike&item_id=' + itemId);
         WeiQuPai.Util.get(url, function(rsp) {
             WeiQuPai.Util.setCache('item_like', parseInt(itemId));
             view.updateItemStat('like_num', 1);
@@ -185,7 +185,7 @@ Ext.define('WeiQuPai.controller.Auction', {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
         var itemId = view.getRecord().get('id');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/itemDislike&item_id=' + itemId + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/itemDislike&item_id=' + itemId);
         WeiQuPai.Util.get(url, function(rsp) {
             WeiQuPai.Util.setCache('item_dislike', parseInt(itemId));
             view.updateItemStat('dislike_num', 1);
@@ -198,7 +198,7 @@ Ext.define('WeiQuPai.controller.Auction', {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
         var itemId = view.getRecord().get('id');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/itemLike/cancel/&item_id=' + itemId + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/itemLike/cancel&item_id=' + itemId);
         WeiQuPai.Util.get(url, function(rsp) {
             WeiQuPai.Util.delCache('item_like', parseInt(itemId));
             view.updateItemStat('like_num', -1);
@@ -209,7 +209,7 @@ Ext.define('WeiQuPai.controller.Auction', {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
         var itemId = view.getRecord().get('id');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/itemDislike/cancel&item_id=' + itemId + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=ppv2/itemDislike/cancel&item_id=' + itemId);
         WeiQuPai.Util.get(url, function(rsp) {
             WeiQuPai.Util.delCache('item_dislike', parseInt(itemId));
             view.updateItemStat('dislike_num', -1);
@@ -221,7 +221,7 @@ Ext.define('WeiQuPai.controller.Auction', {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
         var itemId = view.getRecord().get('id');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/auctionNotify';
+        var url = WeiQuPai.Util.apiUrl('r=appv2/auctionNotify');
         var data = {
             type: 1,
             notify_id: itemId,
@@ -252,7 +252,7 @@ Ext.define('WeiQuPai.controller.Auction', {
             data.type = 2;
             data.notify_id = view.getRecord().get('auction').id;
             data.token = user.token;
-            var url = WeiQuPai.Config.apiUrl + '/?r=appv2/auctionNotify';
+            var url = WeiQuPai.Util.apiUrl('r=appv2/auctionNotify');
             WeiQuPai.Util.post(url, data, function(rsp) {
                 form.reset();
                 text.dom.value = '';
@@ -280,7 +280,7 @@ Ext.define('WeiQuPai.controller.Auction', {
             data.price = text.getValue();
             data.item_id = view.getRecord().get('id');
             data.token = user.token;
-            var url = WeiQuPai.Config.apiUrl + '/?r=appv2/expectPrice';
+            var url = WeiQuPai.Util.apiUrl('r=appv2/expectPrice');
             WeiQuPai.Util.post(url, data, function(rsp) {
                 form.reset();
                 text.dom.value = '';
@@ -311,7 +311,7 @@ Ext.define('WeiQuPai.controller.Auction', {
         if(user){
             layer.setShareCallback(function() {
                 layer.setShareCallback(null);
-                var url = WeiQuPai.Config.apiUrl + '/?r=appv2/myScore/share&token=' + user.token;
+                var url = WeiQuPai.Util.apiUrl('r=appv2/myScore/share');
                 WeiQuPai.Util.get(url, function(rsp) {
                     rsp.score && WeiQuPai.Util.toast('分享成功，获得' + rsp.score + '积分');
                 });

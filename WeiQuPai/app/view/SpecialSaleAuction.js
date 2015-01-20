@@ -1,12 +1,12 @@
-Ext.define('WeiQuPai.view.SpecialSale', {
+Ext.define('WeiQuPai.view.SpecialSaleAuction', {
     extend: 'Ext.DataView',
-    xtype: 'specialsale',
+    xtype: 'specialsaleauction',
     requires: [
-        'WeiQuPai.view.UserAuction', 'WeiQuPai.view.KillDetail', 'WeiQuPai.view.ConfirmDialog'
+        'WeiQuPai.view.Item'
     ],
     config: {
         cls: 'bar bg_ef',
-        store: 'SpecialSale',
+        store: 'SpecialSaleAuction',
         loadingText: null,
         disableSelection: true,
         scrollToTopOnRefresh: false,
@@ -24,30 +24,28 @@ Ext.define('WeiQuPai.view.SpecialSale', {
         }],
         itemCls: 'killend-item',
         itemTpl: new Ext.XTemplate(
-            '<div class="bar_new" style="margin-top:7px;">',
+            '<div class="bar_new special-sale" style="margin-top:7px;">',
             '<img src="{[this.getPic(values.item.pic_cover)]}" width="140"/>',
             '<div class="pool-info">',
                 '<h3>{item.title}</h3>',
-                '<p>血战时限：{duration}小时</p>',
-                '<p>开杀价：{start_price}</p>',
-                '<p>剩余：{left_num}个</p>',
+                '<p>原价：￥{item.oprice}</p>',
                 '<div class="btn-info">',
-                    '<div class="reserve-row">底价：￥<span class="price">{reserve_price}</span></div>',
-                    '<div><input type="button" class="btn_create" value="{[this.getButtonText(values)]}"/></div>',
+                    '<div class="reserve-row">现价：<tpl if="this.isPostage(values)"><span class="price">付邮领用</span><tpl else>￥<span class="price">{curr_price}</span></tpl></div>',
+                    '<div><input type="button" class="btn_create buy_btn" value="立即购买"/></div>',
                 '</div>',
             '</div>',
             '</div>', {
                 getPic: function(pic_cover) {
                     return WeiQuPai.Util.getImagePath(pic_cover, 200);
                 },
-                getButtonText: function(values){
-                    return values.selfId > 0 ? '我的实况' : '我要杀价';
+                isPostage: function(values){
+                    return values.postage == 1;
                 }
             }
         ),
         items: [{
             xtype: 'vtitlebar',
-            title: '血战专场',
+            title: '拍卖专场',
             docked: 'top',
             items: [{
                 xtype: 'button',
@@ -70,11 +68,12 @@ Ext.define('WeiQuPai.view.SpecialSale', {
         this.down('vtitlebar').setTitle(data.title);
     },
 
+
     bindEvent: function(list, index, dataItem, record, e) {
-        if (Ext.get(e.target).findParent('.btn_create')) {
-            this.fireEvent('create', list, index, dataItem, record, e);
+        if (Ext.get(e.target).findParent('.buy_btn')) {
+            WeiQuPai.app.getController('Item').showOrderView(record.get('id'));
             return false;
         }
-        this.fireEvent('detail', list, index, dataItem, record, e);
+        WeiQuPai.Util.goItemView(record.get('item_id'));
     }
 })

@@ -90,6 +90,8 @@ Ext.define('WeiQuPai.view.DiscountDetail', {
 
     loadData: function() {
         var dis = WeiQuPai.model.Discount;
+        var query = WeiQuPai.Util.getDefaultParam();
+        dis.getProxy().setExtraParams(query);
         dis.load(this.getDiscountId(), {
             scope: this,
             success: function(record, operation) {

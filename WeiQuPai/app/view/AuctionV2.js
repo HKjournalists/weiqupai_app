@@ -1,6 +1,6 @@
-Ext.define('WeiQuPai.view.UserAuctionItem', {
+Ext.define('WeiQuPai.view.AuctionV2', {
     extend: 'Ext.Container',
-    xtype: 'userauctionitem',
+    xtype: 'auctionv2',
     requires: [
         'WeiQuPai.view.CommentList', 'WeiQuPai.view.ItemParam', 'WeiQuPai.view.ItemDesc',
         'WeiQuPai.view.Shop', 'WeiQuPai.view.Brand', 'WeiQuPai.view.DetailPicShow',
@@ -81,8 +81,18 @@ Ext.define('WeiQuPai.view.UserAuctionItem', {
             tpl: new Ext.XTemplate(
                 '<div class="detailData">',
                 '<div class="title_new">{title}</div>',
-                '<div class="price clear">',
-                '</div></div>'
+                '<div class="price">',
+                    '<div class="buy_btn btn_e7">立即购买</div>',
+                    '<span class="oprice">原价￥{oprice}</span><span class="curr_price">',
+                    '<tpl if="this.isPostage(values)">付邮领用<tpl else>￥{auction.curr_price}</tpl>',
+                    '</span>',
+                '</div>',
+                '</div>',
+                {
+                    isPostage: function(values){
+                        return values.auction.postage ==  1;
+                    }
+                }
             )
         }, {
             xtype: 'container',
@@ -103,11 +113,26 @@ Ext.define('WeiQuPai.view.UserAuctionItem', {
                 text: '商品参数',
                 action: 'tab_itemparam',
                 itemId: 'tab_itemparam'
+            }, {
+                flex: 1,
+                xtype: 'button',
+                action: 'tab_commentlist',
+                itemId: 'tab_commentlist',
+                text: '大家评论'
             }]
         }, {
             xtype: 'itemdesc'
         }, {
             xtype: 'itemparam',
+            hidden: true
+        }, {
+            xtype: 'commentlist',
+            hidden: true
+
+        }, {
+            xtype: 'inputcomment',
+            itemId: 'itemCommentForm',
+            docked: 'bottom',
             hidden: true
         }],
 
@@ -124,9 +149,11 @@ Ext.define('WeiQuPai.view.UserAuctionItem', {
             element: 'element'
         });
 
-        var me = this;
-        this.down('#price_data').element.dom.addEventListener('click', function(e) {
-            me.bindEvent(e);
+        this.down('#price_data').on('tap', function(){
+            this.fireEvent('buy', this);
+        }, this, {
+            element: 'element',
+            delegate: '.buy_btn'
         });
 
         //初始化tab
@@ -142,6 +169,11 @@ Ext.define('WeiQuPai.view.UserAuctionItem', {
             btns[i].on('tap', function() {
                 var tab = me.getActiveTab();
                 if (tab == this) return;
+                if(this.tabView.isXType('commentlist')){
+                    me.down('inputcomment').show();
+                }else{
+                    me.down('inputcomment').hide();
+                }
                 tab.removeCls('x-button-active');
                 tab.tabView.hide();
                 this.addCls('x-button-active');
@@ -222,6 +254,7 @@ Ext.define('WeiQuPai.view.UserAuctionItem', {
 
     loadData: function(callback) {
         var item = this.getRecord();
+        this.down('commentlist').setItemId(item.get('id'));
         WeiQuPai.model.Item.load(item.get('id'), {
             scope: this,
             success: function(record, operation) {
@@ -238,6 +271,8 @@ Ext.define('WeiQuPai.view.UserAuctionItem', {
         if (record == null) {
             return null;
         }
+        this.down('commentlist').setItemId(record.get('id'));
+        this.down('inputcomment').down('hiddenfield[name=item_id]').setValue(record.get('id'));
 
         var data = record.data;
         this.down('detailpicshow').setPicData(data.pic_top);

@@ -55,11 +55,13 @@ Ext.define('WeiQuPai.view.ExchangeProp', {
     loadData: function(callback) {
         var me = this;
         var user = WeiQuPai.Cache.get('currentUser');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/myScore&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/myScore');
         WeiQuPai.Util.get(url, function(rsp) {
             me.down('button').setText(rsp.score);
         });
         this.setLoadingText(null);
+        var query = WeiQuPai.Util.getDefaultParam();
+        this.getStore().getProxy().setExtraParams(query);
         this.getStore().load(function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');
@@ -76,7 +78,7 @@ Ext.define('WeiQuPai.view.ExchangeProp', {
         var record = this.getSelection()[0];
         var prop_id = record.get('id');
         var user = WeiQuPai.Cache.get('currentUser');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/exchange/prop';
+        var url = WeiQuPai.Util.apiUrl('r=appv2/exchange/prop');
         var data = {
             token: user.token,
             prop_id: prop_id,

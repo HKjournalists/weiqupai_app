@@ -31,8 +31,10 @@ Ext.define('WeiQuPai.view.SearchItem', {
     },
 
     loadData: function(callback) {
-        this.getStore().getProxy().setExtraParam('word', this.getWord());
+        var query = WeiQuPai.Util.getDefaultParam();
+        query['word'] = this.getWord();
         var store = this.getStore();
+        store.getProxy().setExtraParams(query);
         store.removeAll();
         this.getPlugins()[0].setIsFullyLoaded(false);
         this.getScrollable().getScroller().scrollToTop(false);

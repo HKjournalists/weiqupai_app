@@ -20,7 +20,7 @@ Ext.define('WeiQuPai.controller.PrivateMessage', {
             return;
         }
         var user = WeiQuPai.Cache.get('currentUser');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/message/send';
+        var url = WeiQuPai.Util.apiUrl('r=appv2/message/send');
         var data = {
             receiver: receiver,
             content: content,

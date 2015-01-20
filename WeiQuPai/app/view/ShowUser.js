@@ -191,7 +191,7 @@ Ext.define('WeiQuPai.view.ShowUser', {
     loadData: function(uid, callback) {
         var user = WeiQuPai.Cache.get('currentUser');
         var person = this.down('#personmodel');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/user&uid=' + uid;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/user&uid=' + uid);
         if(user){
             url += '&token=' + user.token;
         }

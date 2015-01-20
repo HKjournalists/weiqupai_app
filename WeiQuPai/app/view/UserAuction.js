@@ -52,11 +52,15 @@ Ext.define('WeiQuPai.view.UserAuction', {
                 '<div class="pool-detail-info">',
                     '<h3>{item.title}</h3>',
                     '<div class="row">',
-                        '<p>京东价：{start_price}</p>',
-                        '<p>计时：{start_price}</p>',
+                        '<p>市场价：{item.oprice}</p>',
+                        '<p>开杀价：{start_price}</p>',
                     '</div>',
-                    '<div class="row">',
+                    '<div class="row red">',
                         '<p>当前价格：{curr_price}</p>',
+                        '<p>底价：{reserve_price}个</p>',
+                    '</div>',
+                    '<div class="row red">',
+                        '<p>剩余时间：{left_time}</p>',
                         '<p>剩余数量：{pool.left_num}个</p>',
                     '</div>',
                     '<div class="row">',
@@ -177,7 +181,7 @@ Ext.define('WeiQuPai.view.UserAuction', {
     loadData: function(callback) {
         var id = this.getAuctionId();
         var user = WeiQuPai.Cache.get('currentUser');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/userAuction/view&id=' + id;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/userAuction/view&id=' + id);
         if (user) {
             url += '&token=' + user.token;
         }
@@ -191,7 +195,9 @@ Ext.define('WeiQuPai.view.UserAuction', {
             }
             me.down('#auctionInfo').setData(rsp);
             me.showTip();
-            me.getStore().getProxy().setExtraParam('id', id);
+            var query = WeiQuPai.Util.getDefaultParam();
+            query['id'] = id;
+            me.getStore().getProxy().setExtraParams(query);
             me.getStore().setData(rsp.helpers);
             me.getStore().currentPage = 1;
             WeiQuPai.Util.resetListPaging(me);

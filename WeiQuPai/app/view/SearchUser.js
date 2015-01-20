@@ -48,14 +48,14 @@ Ext.define('WeiQuPai.view.SearchUser', {
         if(!word){
             return;
         }
-        var user = WeiQuPai.Cache.get('currentUser');
         var store = this.getStore();
         store.removeAll();
         this.getPlugins()[0].setIsFullyLoaded(false);
         this.getScrollable().getScroller().scrollToTop(false);
         this.setLoadingText(null);
-        store.getProxy().setExtraParam('word', word);
-        store.getProxy().setExtraParam('token', user.token);
+        var query = WeiQuPai.Util.getDefaultParam();
+        query['word'] = word;
+        store.getProxy().setExtraParams(query);
         store.loadPage(1, function(records, operation, success) {
             Ext.isFunction(callback) && callback();
         }, this);

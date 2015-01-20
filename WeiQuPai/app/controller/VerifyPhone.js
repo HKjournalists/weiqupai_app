@@ -27,7 +27,7 @@ Ext.define('WeiQuPai.controller.VerifyPhone', {
         var form = WeiQuPai.navigator.down('verifyphone');
         var data = form.getValues();
         data.token = this.smsToken;
-        var url = WeiQuPai.Config.apiUrl + "/?r=appv2/verify/";
+        var url = WeiQuPai.Util.apiUrl('r=appv2/verify/');
         var page = this.getPageView();
         WeiQuPai.Util.post(url, data, function() {
             var callback = page.getVerifySuccess();
@@ -44,7 +44,7 @@ Ext.define('WeiQuPai.controller.VerifyPhone', {
         }
         btn.setDisabled(true);
         var user = WeiQuPai.Cache.get('currentUser');
-        var url = WeiQuPai.Config.apiUrl + "/?r=appv2/verify/send&token=" + user.token + '&phone=' + phone;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/verify/send&phone=' + phone);
         var self = this;
         WeiQuPai.Util.get(url, function(rsp){
             self.smsToken = rsp.token;

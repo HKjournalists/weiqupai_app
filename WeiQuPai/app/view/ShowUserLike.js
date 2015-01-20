@@ -48,7 +48,9 @@ Ext.define('WeiQuPai.view.ShowUserLike', {
     loadData: function(uid, callback) {
         var store = this.getStore();
         this.setLoadingText(null);
-        store.getProxy().setExtraParam('uid', uid);
+        var query = WeiQuPai.Util.getDefaultParam();
+        query['uid'] = uid;
+        store.getProxy().setExtraParams(query);
         store.loadPage(1, function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');

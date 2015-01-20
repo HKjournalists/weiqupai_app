@@ -48,7 +48,8 @@ Ext.define('WeiQuPai.view.CircleFollow', {
             return false;
         }
         this.setLoadingText(null);
-        this.getStore().getProxy().setExtraParam('token', user && user.token || '');
+        var query = WeiQuPai.Util.getDefaultParam();
+        this.getStore().getProxy().setExtraParams(query);
         this.getStore().loadPage(1, function() {
             this.onStoreLoad.apply(this, arguments);
             Ext.isFunction(callback) && callback.apply(arguments);

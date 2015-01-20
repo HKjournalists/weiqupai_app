@@ -70,8 +70,8 @@ Ext.define('WeiQuPai.view.MyDiscount', {
     loadData: function() {
         this.setLoadingText(null);
         var store = this.getStore();
-        var user = WeiQuPai.Cache.get('currentUser');
-        store.getProxy().setExtraParam('token', user.token);
+        var query = WeiQuPai.Util.getDefaultParam();
+        store.getProxy().setExtraParams(query);
         //加载数据
         store.loadPage(1);
     },

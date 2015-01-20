@@ -25,14 +25,13 @@ Ext.define('WeiQuPai.controller.ShowOrder', {
         data.content = view.down('textareafield').getValue();
         data.picList = view.getPicList().join("|");
         data.item_id = view.getRecord().get('item').id;
+        data.order_id = view.getRecord().get('id');
         data.pic_cover = view.getRecord().get('item').pic_cover;
-        data.token = user.token;
         if (data.picList.length == 0) {
             WeiQuPai.Util.toast('还是上传一张照片吧~');
             return;
         }
-        this.getPubBtn().setDisabled(true);
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/circle/post';
+        var url = WeiQuPai.Util.apiUrl('r=appv2/circle/post');
         WeiQuPai.Util.post(url, data, function(rsp) {
             WeiQuPai.navigator.pop('maincard');
             WeiQuPai.sidebar.activeTabItem('circle');

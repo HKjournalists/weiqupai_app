@@ -2,8 +2,9 @@ Ext.define('WeiQuPai.controller.Item', {
     extend: 'Ext.app.Controller',
     config: {
         refs: {
-            commentForm: 'item inputcomment',
+            commentForm: 'inputcomment[itemId=itemCommentForm]',
             itemView: 'item',
+            auctionView: 'auctionv2'
         },
         control: {
             commentForm: {
@@ -14,6 +15,13 @@ Ext.define('WeiQuPai.controller.Item', {
                 itemdislike: 'doItemDislike',
                 cancelitemlike: 'doCancelItemLike',
                 cancelitemdislike: 'doCancelItemDislike'
+            },
+            auctionView: {
+                itemlike: 'doItemLike',
+                itemdislike: 'doItemDislike',
+                cancelitemlike: 'doCancelItemLike',
+                cancelitemdislike: 'doCancelItemDislike',
+                buy: 'showOrderView'
             }
         }
     },
@@ -30,7 +38,7 @@ Ext.define('WeiQuPai.controller.Item', {
         var self = this;
         WeiQuPai.Util.mask();
         form.submit({
-            url: WeiQuPai.Config.apiUrl + '/?r=appv2/comment/post&token=' + user.token,
+            url: WeiQuPai.Util.apiUrl('r=appv2/comment/post'),
             method: 'post',
             success: function(form, result) {
                 WeiQuPai.Util.unmask();
@@ -65,7 +73,7 @@ Ext.define('WeiQuPai.controller.Item', {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
         var itemId = view.getRecord().get('id');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/itemLike&item_id=' + itemId + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/itemLike&item_id=' + itemId);
         WeiQuPai.Util.get(url, function(rsp) {
             WeiQuPai.Util.setCache('item_like', parseInt(itemId));
             view.updateItemStat('like_num', 1);
@@ -77,7 +85,7 @@ Ext.define('WeiQuPai.controller.Item', {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
         var itemId = view.getRecord().get('id');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/itemDislike&item_id=' + itemId + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/itemDislike&item_id=' + itemId);
         WeiQuPai.Util.get(url, function(rsp) {
             WeiQuPai.Util.setCache('item_dislike', parseInt(itemId));
             view.updateItemStat('dislike_num', 1);
@@ -90,7 +98,7 @@ Ext.define('WeiQuPai.controller.Item', {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
         var itemId = view.getRecord().get('id');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/itemLike/cancel/&item_id=' + itemId + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/itemLike/cancel&item_id=' + itemId);
         WeiQuPai.Util.get(url, function(rsp) {
             WeiQuPai.Util.delCache('item_like', parseInt(itemId));
             view.updateItemStat('like_num', -1);
@@ -101,11 +109,48 @@ Ext.define('WeiQuPai.controller.Item', {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
         var itemId = view.getRecord().get('id');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/itemDislike/cancel&item_id=' + itemId + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/itemDislike/cancel&item_id=' + itemId);
         WeiQuPai.Util.get(url, function(rsp) {
             WeiQuPai.Util.delCache('item_dislike', parseInt(itemId));
             view.updateItemStat('dislike_num', -1);
         });
     },
+
+    //普通拍卖到订单页
+    showOrderView: function(auctionId) {
+        var user = WeiQuPai.Util.checkLogin();
+        if (!user) return;
+        var currentView = WeiQuPai.navigator.getActiveItem();
+        var auctionId = Ext.isObject(auctionId) ? currentView.getRecord().get('auction').id : auctionId;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/reserve&id=' + auctionId);
+        WeiQuPai.Util.get(url, function(rsp) {
+            function goToOrder(){
+                var orderView = Ext.create('WeiQuPai.view.Order');
+                rsp.auction_type = 1;
+                orderView.setAuctionData(rsp);
+                setTimeout(function() {
+                    WeiQuPai.navigator.push(orderView);
+                }, 0);
+            }
+            if (rsp.status != WeiQuPai.Config.auctionStatus.STATUS_ONLINE) {
+                msgArr = ['拍卖还未开始', null, null, '对不起，拍卖已结束'];
+                msg = msgArr[rsp.status];
+                WeiQuPai.Util.toast(msg);
+                return;
+            }
+            //需要验证手机
+            if(rsp.need_verify == 1){
+                var view = Ext.create('WeiQuPai.view.VerifyPhone');
+                view.setVerifySuccess(goToOrder);
+                setTimeout(function() {
+                    WeiQuPai.navigator.push(view);
+                }, 0);
+                return;
+            }
+            goToOrder();
+        }, {
+            mask: true
+        });
+    }
 
 });

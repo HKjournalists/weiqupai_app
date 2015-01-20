@@ -103,7 +103,7 @@ Ext.define('WeiQuPai.view.PrivateMessage', {
         store = list.getStore();
         var nextPage = ++store.currentPage;
         var user = WeiQuPai.Cache.get('currentUser');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/message/pm&sender=' + list.getUid() + '&page=' + nextPage + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/message/pm&sender=' + list.getUid() + '&page=' + nextPage);
         WeiQuPai.Util.get(url, function(rsp) {
             if (rsp.length == 0) {
                 me.setState('loaded');
@@ -127,9 +127,9 @@ Ext.define('WeiQuPai.view.PrivateMessage', {
 
     loadData: function() {
         var uid = this.getUid();
-        var user = WeiQuPai.Cache.get('currentUser');
-        this.getStore().getProxy().setExtraParam('token', user && user.token || null);
-        this.getStore().getProxy().setExtraParam('sender', uid);
+        var query = WeiQuPai.Util.getDefaultParam();
+        query['sender'] = uid;
+        this.getStore().getProxy().setExtraParams(query);
         this.setLoadingText(null);
         this.getStore().loadPage(1, function(records, operation, success) {
             if (!success) {

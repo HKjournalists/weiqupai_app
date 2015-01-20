@@ -41,7 +41,7 @@ Ext.define('WeiQuPai.controller.Discount', {
         layer.setShareCallback(function() {
             layer.setShareCallback(null);
             var discountId = data.id;
-            var url = WeiQuPai.Config.apiUrl + '/?r=appv2/discount/get&id=' + discountId + '&token=' + user.token;
+            var url = WeiQuPai.Util.apiUrl('r=appv2/discount/get&id=' + discountId);
             WeiQuPai.Util.get(url, function(rsp) {
                 var scoreInfo =  rsp.score ? ('，同时获得' + rsp.score + '积分') : '';
                 WeiQuPai.Util.toast('恭喜您成功领取了一个优惠' + scoreInfo);

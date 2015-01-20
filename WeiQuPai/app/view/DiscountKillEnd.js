@@ -67,8 +67,8 @@ Ext.define('WeiQuPai.view.DiscountKillEnd', {
         if (store.isLoading()) {
             return;
         }
-        var user = WeiQuPai.Cache.get('currentUser');
-        store.getProxy().setExtraParam('token', user && user.token || '');
+        var query = WeiQuPai.Util.getDefaultParam();
+        store.getProxy().setExtraParams(query);
         //加载数据
         store.loadPage(1, function(records, operation, success) {
             if (!success) {

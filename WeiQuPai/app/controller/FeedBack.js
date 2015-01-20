@@ -23,7 +23,7 @@ Ext.define('WeiQuPai.controller.FeedBack', {
         if (content.length == 0) {
             return false;
         }
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/feedback';
+        var url = WeiQuPai.Util.apiUrl('r=appv2/feedback');
         var user = WeiQuPai.Cache.get('currentUser');
         var data = {};
         data.token = user && user.token || '';

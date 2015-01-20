@@ -109,7 +109,7 @@ Ext.define('WeiQuPai.view.TopKiller', {
 
     loadData: function(callback) {
         var me = this;
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/auctionPool/view&id=' + this.getPoolId();
+        var url = WeiQuPai.Util.apiUrl('/?r=appv2/auctionPool/view&id=' + this.getPoolId());
         WeiQuPai.Util.get(url, function(rsp) {
             me.getStore().setData(rsp.auctions);
             me.down('#itemInfo').setData(rsp);

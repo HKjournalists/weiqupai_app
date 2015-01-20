@@ -65,7 +65,7 @@ Ext.define('WeiQuPai.controller.Feed', {
         var func = function(buttonId) {
             if (buttonId != 'yes') return;
             var feed_id = record.get('id');
-            var url = WeiQuPai.Config.apiUrl + '/?r=appv2/circle/delete&id=' + feed_id + '&token=' + user.token;
+            var url = WeiQuPai.Util.apiUrl('r=appv2/circle/delete&id=' + feed_id);
             WeiQuPai.Util.get(url, function(rsp) {
                 list.getStore().remove(record);
             });
@@ -85,7 +85,7 @@ Ext.define('WeiQuPai.controller.Feed', {
         form.down('hiddenfield[name=feed_id]').setValue(fid);
         var data = form.getValues();
         form.submit({
-            url: WeiQuPai.Config.apiUrl + '/?r=appv2/circle/reply&token=' + user.token,
+            url: WeiQuPai.Util.apiUrl('r=appv2/circle/reply'),
             method: 'post',
             success: function(form, result) {
                 WeiQuPai.Util.unmask();
@@ -131,7 +131,7 @@ Ext.define('WeiQuPai.controller.Feed', {
         var user = WeiQuPai.Cache.get('currentUser');
         var self = this;
         var list = this.getPageView();
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/circle/deleteReply&id=' + id + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/circle/deleteReply&id=' + id);
         WeiQuPai.Util.get(url, function(rsp) {
             list.getStore().remove(record);
             list.updateReplyData('reply_num', -1);
@@ -152,7 +152,7 @@ Ext.define('WeiQuPai.controller.Feed', {
         if (!user) return;
         var record = view.getFeedRecord();
         var feed_id = record.get('id');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/circle/zan&id=' + feed_id + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/circle/zan&id=' + feed_id);
         WeiQuPai.Util.get(url, function(rsp) {
             WeiQuPai.Util.setCache('circle_zan', feed_id);
             view.updateZanData(1);
@@ -164,7 +164,7 @@ Ext.define('WeiQuPai.controller.Feed', {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
         var feed_id = view.getFeedRecord().get('id');
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/circle/cancelZan&id=' + feed_id + '&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/circle/cancelZan&id=' + feed_id);
         WeiQuPai.Util.get(url, function(rsp) {
             WeiQuPai.Util.delCache('circle_zan', feed_id);
             view.updateZanData(-1);

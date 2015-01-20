@@ -29,7 +29,7 @@ Ext.define('WeiQuPai.view.MyCoupon', {
             itemTpl: new Ext.XTemplate(
                 '<div class="plist">',
                 '<div class="m{coupon.value}">{coupon.name}</div>',
-                '<div class="right" >过期时间：{expire_time} <tpl if="expired">[已过期]</tpl></div>',
+                '<div class="right"><tpl if="expired">[已过期]<tpl else>过期时间：{expire_time} </tpl></div>',
                 '<div style="clear:both"></div>',
                 '</div>'
             ),
@@ -110,7 +110,8 @@ Ext.define('WeiQuPai.view.MyCoupon', {
         if (store.isLoading()) {
             return false;
         }
-        store.getProxy().setExtraParam('token', user.token);
+        var query = WeiQuPai.Util.getDefaultParam();
+        store.getProxy().setExtraParams(query);
         store.load(function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');

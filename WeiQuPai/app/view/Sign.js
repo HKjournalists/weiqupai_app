@@ -23,7 +23,9 @@ Ext.define('WeiQuPai.view.Sign', {
 
     initialize: function() {
         var user = WeiQuPai.Cache.get('currentUser');
-        var url = WeiQuPai.Config.webUrl + '/?r=turnTable&token=' + user.token;
+        var query = WeiQuPai.Util.getDefaultParam();
+        query['r'] = 'turnTable';
+        var url = WeiQuPai.Config.webUrl + '/?' + Ext.Object.toQueryString(query);
         this.setHref(url);
         this.on('activate', this.loadIframe, this);
     },

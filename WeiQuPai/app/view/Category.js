@@ -23,6 +23,8 @@ Ext.define('WeiQuPai.view.Category', {
     },
 
     loadData: function() {
+        var query = WeiQuPai.Util.getDefaultParam();
+        this.getStore().getProxy().setExtraParams(query);
         this.getStore().load(function(records, operation, success) {
             if (!success) {
                 WeiQuPai.Util.toast('数据加载失败');

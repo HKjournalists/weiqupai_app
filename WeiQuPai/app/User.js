@@ -11,7 +11,7 @@ Ext.define("WeiQuPai.User", {
     addFollow: function(uid, callback) {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/follow/follow&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/follow/follow');
         var data = {
             id: uid
         };
@@ -24,7 +24,7 @@ Ext.define("WeiQuPai.User", {
     cancelFollow: function(uid, callback) {
         var user = WeiQuPai.Util.checkLogin();
         if (!user) return;
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/follow/cancel&token=' + user.token;
+        var url = WeiQuPai.Util.apiUrl('r=appv2/follow/cancel');
         var data = {
             id: uid
         };

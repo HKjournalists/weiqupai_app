@@ -46,7 +46,7 @@ Ext.define('WeiQuPai.view.SelectUser', {
     },
 
     loadData: function() {
-        var url = WeiQuPai.Config.apiUrl + '/?r=appv2/follow/select&page=' + this.getPage();
+        var url = WeiQuPai.Util.apiUrl('r=appv2/follow/select&page=' + this.getPage());
         var me = this;
         WeiQuPai.Util.get(url, function(rsp) {
             me.selectedUid = [];
@@ -89,7 +89,7 @@ Ext.define('WeiQuPai.view.SelectUser', {
             return;
         }
         var user = WeiQuPai.Cache.get('currentUser');
-        var url = WeiQuPai.Config.apiUrl + '?r=appv2/follow/multiFollow';
+        var url = WeiQuPai.Util.apiUrl('r=appv2/follow/multiFollow');
         var data = {
             token: user.token,
             id: this.selectedUid.join(",")
