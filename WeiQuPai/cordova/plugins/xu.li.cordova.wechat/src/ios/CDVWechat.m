@@ -22,8 +22,7 @@
     if (![WXApi isWXAppInstalled])
     {
         result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"未安装微信"];
-
-        [self error:result callbackId:command.callbackId];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
         return ;
     }
 
@@ -32,8 +31,7 @@
     if (!params)
     {
         result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"参数错误"];
-
-        [self error:result callbackId:command.callbackId];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
         return ;
     }
     
@@ -83,8 +81,7 @@
     if (![WXApi isWXAppInstalled])
     {
         result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"未安装微信"];
-        
-        [self error:result callbackId:command.callbackId];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
         return ;
     }
     
@@ -148,15 +145,7 @@
         result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Unknown"];
     }
     
-    if (success)
-    {
-        [self success:result callbackId:self.currentCallbackId];
-    }
-    else
-    {
-        [self error:result callbackId:self.currentCallbackId];
-    }
-    
+    [self.commandDelegate sendPluginResult:result callbackId:self.currentCallbackId];
     self.currentCallbackId = nil;
 }
 

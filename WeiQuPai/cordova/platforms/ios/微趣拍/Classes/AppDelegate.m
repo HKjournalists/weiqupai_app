@@ -27,7 +27,7 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
-#import "CDVBPush.h"
+
 #import <Cordova/CDVPlugin.h>
 
 @implementation AppDelegate
@@ -88,41 +88,18 @@
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
 
-    [[self.viewController getCommandInstance:@"bpush"] setup:launchOptions];
-   
-    if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
-        [self application:application didReceiveRemoteNotification:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]];
-    }
     return YES;
-}
-
-//向服务商注册device token
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    [[self.viewController getCommandInstance:@"bpush"] registerDeviceToken:deviceToken];
-}
-
-- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{
-    //register to receive notifications
-    [application registerForRemoteNotifications];
-}
-
-//处理接收消息的函数
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    NSLog(@"Receive Notify: %@", [userInfo JSONString]);
-    [[self.viewController getCommandInstance:@"bpush" ] handleNotification:userInfo];
 }
 
 // this happens while we are running ( in the background, or from within our own app )
 // only valid if 微趣拍-Info.plist specifies a protocol to handle
-- (BOOL)application:(UIApplication*)application handleOpenURL:(NSURL*)url
+- (BOOL)application:(UIApplication*)application openURL:(NSURL*)url sourceApplication:(NSString*)sourceApplication annotation:(id)annotation
 {
     if (!url) {
         return NO;
     }
 
-    // calls into javascript global function 'handleOpenURL'
-    NSString* jsString = [NSString stringWithFormat:@"handleOpenURL(\"%@\");", url];
-    [self.viewController.webView stringByEvaluatingJavaScriptFromString:jsString];
+    [self.viewController processOpenUrl:url];
 
     // all plugins will get the notification, and their handlers will be called
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CDVPluginHandleOpenURLNotification object:url]];
@@ -130,12 +107,31 @@
     return YES;
 }
 
-// repost the localnotification using the default NSNotificationCenter so multiple plugins may respond
+// repost all remote and local notification using the default NSNotificationCenter so multiple plugins may respond
 - (void)            application:(UIApplication*)application
     didReceiveLocalNotification:(UILocalNotification*)notification
 {
     // re-post ( broadcast )
     [[NSNotificationCenter defaultCenter] postNotificationName:CDVLocalNotification object:notification];
+}
+
+- (void)                                 application:(UIApplication*)application
+    didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+{
+    // re-post ( broadcast )
+    NSString* token = [[[[deviceToken description]
+        stringByReplacingOccurrencesOfString:@"<" withString:@""]
+        stringByReplacingOccurrencesOfString:@">" withString:@""]
+        stringByReplacingOccurrencesOfString:@" " withString:@""];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:CDVRemoteNotification object:token];
+}
+
+- (void)                                 application:(UIApplication*)application
+    didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+{
+    // re-post ( broadcast )
+    [[NSNotificationCenter defaultCenter] postNotificationName:CDVRemoteNotificationError object:error];
 }
 
 - (NSUInteger)application:(UIApplication*)application supportedInterfaceOrientationsForWindow:(UIWindow*)window

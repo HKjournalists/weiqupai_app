@@ -95,6 +95,8 @@ Ext.define('WeiQuPai.view.Pay', {
         this.down('#orderInfo').setData(data);
         this.down('#needPay').setContent(data.total_pay, 'color_e7');
         data.payment = 'umpay';
+        data.can_use_coupon == 0 && this.down('#coupon').setHidden(true);
+        data.can_use_code == 0 && this.down('#code').setHidden(true);
         return data;
     },
 

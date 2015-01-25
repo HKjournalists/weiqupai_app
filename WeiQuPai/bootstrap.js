@@ -882,6 +882,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.store.ShowUserFeed": [],
   "WeiQuPai.store.ShowUserLike": [],
   "WeiQuPai.store.SpecialSale": [],
+  "WeiQuPai.store.SpecialSaleAuction": [],
   "WeiQuPai.store.UserAuction": [],
   "WeiQuPai.store.UserAuctionComment": [],
   "WeiQuPai.store.UserAuctionHelper": [],
@@ -894,6 +895,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.AuctionList": [],
   "WeiQuPai.view.AuctionTip": [],
   "WeiQuPai.view.AuctionTipTwo": [],
+  "WeiQuPai.view.AuctionV2": [],
   "WeiQuPai.view.Banner": [],
   "WeiQuPai.view.BottomBar": [],
   "WeiQuPai.view.Brand": [],
@@ -970,6 +972,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.NoticeToday": [],
   "WeiQuPai.view.NoticeTomorrow": [],
   "WeiQuPai.view.Order": [],
+  "WeiQuPai.view.OrderCode": [],
   "WeiQuPai.view.Pay": [],
   "WeiQuPai.view.PriceForm": [],
   "WeiQuPai.view.PrivateMessage": [],
@@ -994,6 +997,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.Sign": [],
   "WeiQuPai.view.SimpleViewer": [],
   "WeiQuPai.view.SpecialSale": [],
+  "WeiQuPai.view.SpecialSaleAuction": [],
   "WeiQuPai.view.SplashScreen": [],
   "WeiQuPai.view.StartupScreen": [],
   "WeiQuPai.view.TipBox": [],
@@ -1001,7 +1005,6 @@ Ext.ClassManager.addNameAlternateMappings({
   "WeiQuPai.view.TopKiller": [],
   "WeiQuPai.view.UserAuction": [],
   "WeiQuPai.view.UserAuctionComment": [],
-  "WeiQuPai.view.UserAuctionItem": [],
   "WeiQuPai.view.VTitleBar": [],
   "WeiQuPai.view.VerifyPhone": [],
   "WeiQuPai.view.WebPage": []
@@ -2069,6 +2072,7 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.store.ShowUserFeed": [],
   "WeiQuPai.store.ShowUserLike": [],
   "WeiQuPai.store.SpecialSale": [],
+  "WeiQuPai.store.SpecialSaleAuction": [],
   "WeiQuPai.store.UserAuction": [],
   "WeiQuPai.store.UserAuctionComment": [],
   "WeiQuPai.store.UserAuctionHelper": [],
@@ -2098,6 +2102,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.AuctionTipTwo": [
     "widget.auctiontiptwo"
+  ],
+  "WeiQuPai.view.AuctionV2": [
+    "widget.auctionv2"
   ],
   "WeiQuPai.view.Banner": [
     "widget.banner"
@@ -2327,6 +2334,9 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.Order": [
     "widget.order"
   ],
+  "WeiQuPai.view.OrderCode": [
+    "widget.ordercode"
+  ],
   "WeiQuPai.view.Pay": [
     "widget.pay"
   ],
@@ -2399,6 +2409,9 @@ Ext.ClassManager.addNameAliasMappings({
   "WeiQuPai.view.SpecialSale": [
     "widget.specialsale"
   ],
+  "WeiQuPai.view.SpecialSaleAuction": [
+    "widget.specialsaleauction"
+  ],
   "WeiQuPai.view.SplashScreen": [
     "widget.splashscreen"
   ],
@@ -2419,9 +2432,6 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "WeiQuPai.view.UserAuctionComment": [
     "widget.userauctioncomment"
-  ],
-  "WeiQuPai.view.UserAuctionItem": [
-    "widget.userauctionitem"
   ],
   "WeiQuPai.view.VTitleBar": [
     "widget.vtitlebar"

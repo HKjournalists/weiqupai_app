@@ -27,7 +27,6 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import com.baidu.android.pushservice.PushConstants;
 import com.baidu.android.pushservice.PushManager;
-import org.apache.cordova.Config;
 import org.apache.cordova.CordovaActivity;
 import org.apache.cordova.CordovaPlugin;
 
@@ -62,7 +61,7 @@ public class MainActivity extends CordovaActivity
         editor.commit();
 
         // Set by <content src="index.html" /> in config.xml
-        super.loadUrl(Config.getStartUrl());
+        super.loadUrl(launchUrl);
         //super.loadUrl("file:///android_asset/www/index.html");
     }
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 BUILD_ENV=test
 BUILD_TYPE=local
-SERVER=root@115.28.134.105
+SERVER=root@123.57.73.43
 APP_NAME=vqupai.ipa
 BUILD_DIR=cordova/
 REMOTE_DIR="/alidata/www/m.vqupai.com/webroot/m/"
@@ -58,20 +58,20 @@ if [ "$BUILD_TYPE" == "market" ];then
 			echo "build apk for market $market"
 			sed  "s/#MARKET#/$market/" app.js > www/app.js
 			cordova build android --release
-			mv platforms/android/ant-build/android-release.apk ../../build/$market.apk
+			mv platforms/android/ant-build/MainActivity-release.apk ../../build/$market.apk
 		done < ../market.conf
 	else
 		echo "build apk for market $MARKET"
 		#sed  "s/#MARKET#/$MARKET/" app.js > www/app.js
 		cordova build android --release
-		mv platforms/android/ant-build/android-release.apk ../../build/$MARKET.apk
+		mv platforms/android/ant-build/MainActivity-release.apk ../../build/$MARKET.apk
 	fi
 	rm app.js
 	cd -
 fi
 
 if [ "$BUILD_TYPE" == "run" ];then
-	adb install cordova/platforms/android/ant-build/android-release.apk
+	adb install cordova/platforms/android/ant-build/MainActivity-release.apk
 fi
 if [ "$BUILD_TYPE" == "all" ] || [ "$BUILD_TYPE" == "web" ];then
 	echo "scp to remote => $SERVER:$REMOTE_DIR"

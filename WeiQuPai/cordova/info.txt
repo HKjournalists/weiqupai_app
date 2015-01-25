@@ -1,0 +1,49 @@
+Node version: v0.10.29
+
+Cordova version: 4.2.0
+
+Config.xml file: 
+
+<?xml version='1.0' encoding='utf-8'?>
+<widget 
+    id="com.vqupai.app"
+    version="2.6.0"
+    android-versionCode="260"
+    xmlns="http://www.w3.org/ns/widgets"
+    xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>微趣拍</name>
+    <description>
+        微趣拍
+    </description>
+    <author email="shiyancao@vqupai.com" href="http://www.vqupai.com">
+        微趣拍开发组
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <preference name="wechatappid" value="wxc0d1e67c6159b69e"/>
+    <preference name="SplashScreen" value="splash"/>    
+    <preference name="SplashScreenDelay" value="4000"/>
+</widget>
+
+
+Plugins: 
+
+cordova.bpush,org.apache.cordova.camera,org.apache.cordova.inappbrowser,org.apache.cordova.splashscreen,xu.li.cordova.wechat
+
+Android platform:
+
+Available Android targets:
+----------
+id: 1 or "android-19"
+     Name: Android 4.4.2
+     Type: Platform
+     API level: 19
+     Revision: 3
+     Skins: HVGA, QVGA, WQVGA400, WQVGA432, WSVGA, WVGA800 (default), WVGA854, WXGA720, WXGA800, WXGA800-7in
+ Tag/ABIs : no ABIs.
+
+iOS platform:
+
+Xcode 6.1.1
+Build version 6A2008a
+

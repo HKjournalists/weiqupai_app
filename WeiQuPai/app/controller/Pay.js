@@ -84,8 +84,8 @@ Ext.define('WeiQuPai.controller.Pay', {
         view.on('confirm', function(rsp){
             WeiQuPai.navigator.pop();
             codePanel.setTitle('已优惠￥' + rsp.price);
-            codePanel.setContent('优惠券码：' + rsp.code);
-            order.couponCode = rsp.code;
+            codePanel.setContent('优惠券码：' + rsp.coupon_code);
+            order.couponCode = rsp.coupon_code;
             order.couponCodeValue = parseFloat(rsp.price);
             self.updateNeedPay();
         }, this);

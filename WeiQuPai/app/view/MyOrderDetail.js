@@ -129,6 +129,7 @@ Ext.define('WeiQuPai.view.MyOrderDetail', {
 
     updateButtonStatus: function() {
         var status = this.getRecord().get('status');
+        var published = this.getRecord().get('published');
         this.down('#pay_btn').setHidden(status != WeiQuPai.Config.orderStatus.STATUS_TOPAY);
         this.down('#confirm_btn').setHidden(WeiQuPai.Config.orderStatus.STATUS_SHIPMENT);
         this.down('#shipment_btn').setHidden(
@@ -139,6 +140,6 @@ Ext.define('WeiQuPai.view.MyOrderDetail', {
             status != WeiQuPai.Config.orderStatus.STATUS_TODEAL &&
             status != WeiQuPai.Config.orderStatus.STATUS_SHIPMENT
         );
-        this.down('#show_order_btn').setHidden(status != WeiQuPai.Config.orderStatus.STATUS_FINISH);
+        this.down('#show_order_btn').setHidden(status != WeiQuPai.Config.orderStatus.STATUS_FINISH || published == 1);
     }
 });

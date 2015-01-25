@@ -1,27 +1,20 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="250" id="com.vqupai.app" version="2.5.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="260" id="com.vqupai.app" version="2.6.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <preference name="loglevel" value="DEBUG" />
-    <preference name="AndroidLaunchMode" value="singleTop" />
-    <feature name="App">
-        <param name="android-package" value="org.apache.cordova.App" />
+    <feature name="BPush">
+        <param name="android-package" value="cordova.bpush.BPush" />
     </feature>
     <feature name="Camera">
         <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
     </feature>
-    <feature name="Wechat">
-        <param name="android-package" value="xu.li.cordova.wechat.Wechat" />
+    <feature name="InAppBrowser">
+        <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
     </feature>
     <feature name="SplashScreen">
         <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
     </feature>
-    <feature name="BPush">
-        <param name="android-package" value="cordova.bpush.BPush" />
-    </feature>
-    <feature name="InAppBrowser">
-        <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
-    </feature>
-    <feature name="LaunchMyApp">
-        <param name="android-package" value="nl.xservices.plugins.LaunchMyApp" />
+    <feature name="Wechat">
+        <param name="android-package" value="xu.li.cordova.wechat.Wechat" />
     </feature>
     <name>微趣拍</name>
     <description>

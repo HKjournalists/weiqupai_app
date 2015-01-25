@@ -9,19 +9,11 @@
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Wechat\"><param name=\"android-package\" value=\"xu.li.cordova.wechat.Wechat\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"BPush\"><param name=\"android-package\" value=\"cordova.bpush.BPush\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
                             "count": 1
                         },
                         {
@@ -29,7 +21,11 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"LaunchMyApp\"><param name=\"android-package\" value=\"nl.xservices.plugins.LaunchMyApp\" /></feature>",
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Wechat\"><param name=\"android-package\" value=\"xu.li.cordova.wechat.Wechat\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -42,38 +38,25 @@
                             "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
                             "count": 1
                         }
-                    ],
-                    "/*/application/activity": [
-                        {
-                            "xml": "<intent-filter><data android:scheme=\"vqupai\" /><action android:name=\"android.intent.action.VIEW\" /><category android:name=\"android.intent.category.DEFAULT\" /><category android:name=\"android.intent.category.BROWSABLE\" /></intent-filter>",
-                            "count": 1
-                        }
                     ]
                 }
             }
         }
     },
     "installed_plugins": {
-        "org.apache.cordova.camera": {
-            "PACKAGE_NAME": "com.vqupai.app"
-        },
-        "xu.li.cordova.wechat": {
-            "PACKAGE_NAME": "com.vqupai.app"
-        },
-        "org.apache.cordova.splashscreen": {
-            "PACKAGE_NAME": "com.vqupai.app"
-        },
         "cordova.bpush": {
+            "PACKAGE_NAME": "com.vqupai.app"
+        },
+        "org.apache.cordova.camera": {
             "PACKAGE_NAME": "com.vqupai.app"
         },
         "org.apache.cordova.inappbrowser": {
             "PACKAGE_NAME": "com.vqupai.app"
         },
-        "nl.x-services.plugins.launchmyapp": {
-            "URL_SCHEME": "vqupai",
+        "org.apache.cordova.splashscreen": {
             "PACKAGE_NAME": "com.vqupai.app"
         },
-        "com.pfafman.nsLogger": {
+        "xu.li.cordova.wechat": {
             "PACKAGE_NAME": "com.vqupai.app"
         }
     },

@@ -37,7 +37,8 @@ Ext.application({
         'Iframe', 'SimpleViewer', 'ImageViewer', 'Sidebar', 'DisclosureItem', 'Pay', 'Order', 'Item', 'Auction', 'Item',
         'UserAuction', 'InputComment', 'CircleReplyLayer', 'CameraLayer', 'AuctionTip', 'MainTip', 'NoticeTip',
         'AuctionTipTwo', 'PriceForm', 'DeleteButtonLayer', 'ConfirmLayer', 'FollowTip',
-        'AuctionHelpLayer', 'ScoreNotEnough', 'ConfirmDialog', 'ScoreRule', 'TipBox', 'CouponOrder'
+        'AuctionHelpLayer', 'ScoreNotEnough', 'ConfirmDialog', 'ScoreRule', 'TipBox', 'CouponOrder',
+        'SpecialSaleAuction'
     ],
     stores: [
         'Comment', 'Banner', 'MyOrder', 'MyConsignee', 'Circle', 'MyProp', 'MyCoupon',
@@ -67,7 +68,7 @@ Ext.application({
     },
 
     startupScreen: [
-        'resources/images/splash1.png'
+        //'resources/images/splash1.png'
     ],
 
     //是否第一次加载
@@ -84,7 +85,7 @@ Ext.application({
         //重置message的提醒
         this.resetMessageText();
 
-        //this.catchError();
+        this.catchError();
 
         this.hideSplash();
 
@@ -104,7 +105,7 @@ Ext.application({
         }
 
         //startup screen
-        if (this.firstLaunch) {
+        if (this.firstLaunch && this.startupScreen.length > 0) {
             WeiQuPai.Cache.set('appver', ver);
             var view = Ext.create('WeiQuPai.view.StartupScreen');
             view.setPicData(this.startupScreen);
